@@ -1,0 +1,24 @@
+# ToE fifth-force mapping parameter card (Mode D)
+# This is a minimal, versionable "freeze file" so conventions can't silently drift.
+
+conventions:
+  planck_mass: "reduced"        # M_plbar = 1/sqrt(8*pi*G)
+  f_N: 0.30                     # effective nucleon scalar form factor used in alpha(theta)
+  higgs_vev_v_GeV: 246.0
+  higgs_mass_m_h_GeV: 125.0
+
+toe_mapping:
+  # Eq (13)-style small-mixing bridge (as implemented):
+  # theta_hc ≈ (kappa_cH * v * v_c) / (m_c^2 - m_h^2)
+  theta_formula: "theta = kappa_cH * v * v_c / (m_c^2 - m_h^2)"
+  alpha_formula: "alpha = 2*f_N^2*(M_plbar/v)^2 * sin(theta)^2"
+
+constants:
+  M_plbar_GeV: 2.435e18
+  K_ToE: 1.7641645445725947e31  # 2*f_N^2*(M_plbar/v)^2 using the above numbers
+  hbarc_GeV_m: 1.973269804e-16  # GeV*m  (used for m_c = hbarc / lambda)
+
+notes:
+  - "alpha is the standard Yukawa strength in V(r) = -G m1 m2 / r * (1 + alpha * exp(-r/lambda))."
+  - "For fifth-force ranges (lambda ~ microns–mm), m_c << m_h so (m_c^2 - m_h^2) ≈ -m_h^2."
+  - "If you ever scan m_c near m_h, you must switch to the exact 2x2 mixing relation or hard-gate that region."
