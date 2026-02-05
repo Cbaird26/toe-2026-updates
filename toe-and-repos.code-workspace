@@ -1,0 +1,9 @@
+{
+  "folders": [
+    { "name": "TOE", "path": "." },
+    { "name": "repos", "path": "../repos" },
+    { "name": "toe_fifth_force_constraints_pack", "path": "../toe_fifth_force_constraints_pack" },
+    { "name": "mqgt_scf_reissue", "path": "../mqgt_scf_reissue_2026-01-20_010939UTC" }
+  ],
+  "settings": {}
+}
