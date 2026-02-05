@@ -1,0 +1,44 @@
+{
+  "dataset_id": "EOTWASH_PRL2016",
+  "raw_files": [
+    {
+      "path": "data/raw/fifth_force/eotwash_prl2016_digitized_contract.csv",
+      "sha256": "",
+      "bytes": null
+    }
+  ],
+  "source": {
+    "type": "paper",
+    "title": "",
+    "authors": "",
+    "venue": "",
+    "year": null,
+    "doi": "",
+    "url": "",
+    "figure": "",
+    "notes": ""
+  },
+  "digitization": {
+    "tool": "",
+    "tool_version": "",
+    "axis_scale_x": "log",
+    "axis_scale_y": "log",
+    "calibration_points": [],
+    "click_count": null,
+    "export_format": "csv",
+    "notes": ""
+  },
+  "processing": {
+    "script": "",
+    "command": "",
+    "git_commit": "",
+    "timestamp_utc": "",
+    "outputs": [
+      {
+        "path": "data/processed/fifth_force/eotwash_prl2016_curve_validated.csv",
+        "sha256": ""
+      }
+    ],
+    "notes": ""
+  }
+}
