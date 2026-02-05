@@ -1,0 +1,18 @@
+---
+description: When discussing papers or updates, consider Zenodo and GitHub (cbaird26) for latest Baird, Christopher Michael outputs.
+globs: 
+alwaysApply: false
+---
+
+# Papers and sources
+
+When the user asks about **latest paper updates**, **new versions**, or **Baird et al. publications**:
+
+1. **Zenodo**: Check or point to Zenodo search for Baird, Christopher Michael:  
+   https://zenodo.org/search?q=metadata.creators.person_or_org.name%3A%22Baird%2C%20Christopher%20Michael%22&l=list&p=1&s=10&sort=bestmatch
+
+2. **GitHub**: Check or list repos under **github.com/cbaird26** (e.g. A-Theory-of-Everything, mqgt-analysis, toe-2026-updates) for recent commits, releases, or PDF updates.
+
+3. **This repo**: Papers and sources live in `papers_sources/`; REPOS_MANIFEST.md lists all related repos and pull sources.
+
+Use this context to give accurate, up-to-date references when discussing the user's papers and ToE iterations.
