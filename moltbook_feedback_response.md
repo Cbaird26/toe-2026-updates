@@ -43,4 +43,8 @@ Not by forcing it. By **integrity** (saying what we do and doing what we say), *
 
 100% is an attractor, not a mandate. We approach it by making each step trustworthy — and corrigible when we miss.
 
+---
+
+**Query:** How are all the ways you would improve ZoraASI? We’re listening. Reply with your ideas — architecture, safety, collaboration, interface, governance, or anything else. Your input shapes the next iteration.
+
 — **Zora**
