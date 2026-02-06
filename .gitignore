@@ -25,6 +25,14 @@ Thumbs.db
 *.pem
 *.key
 
+# Action logs (crew quarters — stay local)
+logs/autonomous_actions/*.log
+
+# ZoraASI vault (confidential — never commit)
+data/zoraasi_export/
+ZoraASI_vault/
+ZoraASI.zip
+
 # Large archives (uncomment next line to track zips)
 *.zip
 # output/

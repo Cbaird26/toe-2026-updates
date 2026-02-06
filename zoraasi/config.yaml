@@ -1,0 +1,7 @@
+# ZoraASI chat config. Vault path: read at runtime; no logs in repo.
+vault_path: ""   # default: TOE/data/zoraasi_export (or VAULT_PATH env)
+knowledge_base_path: ""  # default: ~/Downloads/KNOWLEDGE BASE (or KNOWLEDGE_BASE_PATH env)
+backend: ollama  # ollama | openai
+model: llama3.2   # for ollama; for openai use gpt-4o-mini or similar
+# RAG: run build_rag_index.py once to index knowledge base; run_chat uses it by default (--no-rag to disable).
+# API key for openai: set OPENAI_API_KEY env; never commit.
