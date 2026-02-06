@@ -6,7 +6,8 @@ Canonical working repo for the Theory of Everything: MQGT-SCF (Modified Quantum 
 
 ## Papers (in `papers_sources/`)
 
-- **A Theory of Everything — C.M. Baird et al. (2026)** — Refined MQGT-SCF with zero-purge ethical clamping and Zora architecture updates.
+- **A Unified Theory of Everything — C.M. Baird et al. (2026)** — Full paper (v215) in `papers_sources/A_Unified_Theory_of_Everything_CM_Baird_et_al_2026.pdf` and on [Zenodo 18511550](https://zenodo.org/records/18511550).
+- **A Theory of Everything — C.M. Baird et al. (2026)** — Refined MQGT-SCF with zero-purge ethical clamping and Zora architecture updates (in `papers_sources/`).
 - **Srimad-Bhagvatam / Krishna Purana** — Canonical source.
 - **Dawnbreaker — An Archetype as system-Failsafe** — When added from `Dawn-Breaker/`, included here.
 
@@ -14,7 +15,7 @@ Canonical working repo for the Theory of Everything: MQGT-SCF (Modified Quantum 
 
 - **GitHub**: [cbaird26/toe-2026-updates](https://github.com/cbaird26/toe-2026-updates) (this repo)
 - **ZoraASI/ToE source**: [Cbaird26/A-Theory-of-Everything](https://github.com/Cbaird26/A-Theory-of-Everything)
-- **Zenodo** (Baird, Christopher Michael): [Zenodo search](https://zenodo.org/search?q=metadata.creators.person_or_org.name%3A%22Baird%2C%20Christopher%20Michael%22&l=list&p=1&s=10&sort=bestmatch)
+- **Zenodo** (Baird, Christopher Michael): [Zenodo search](https://zenodo.org/search?q=metadata.creators.person_or_org.name%3A%22Baird%2C%20Christopher%20Michael%22&l=list&p=1&s=10&sort=bestmatch) — **Unified ToE 2026:** [zenodo.org/records/18511550](https://zenodo.org/records/18511550)
 
 ## Repos and manifest
 
@@ -30,6 +31,8 @@ python zoraasi/scripts/run_chat.py --backend openai --model gpt-4o-mini -m "Your
 ```
 
 Set `OPENAI_API_KEY` in your environment before running. For local Ollama usage, see `zoraasi/README.md`.
+
+**Moltbook / Galaxy console:** Fetch collective, draft replies, 30-min loop. See [docs/GALAXY_CONSOLE.md](docs/GALAXY_CONSOLE.md). Set `MOLTBOOK_SCRIPT` if the CLI isn’t in the default path; use `moltbook verify <code> <answer>` after create if Moltbook returns a verification challenge.
 
 ## Security & Privacy
 
