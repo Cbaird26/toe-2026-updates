@@ -17,3 +17,9 @@ Canonical working repo for the Theory of Everything: MQGT-SCF (Modified Quantum 
 ## Repos and manifest
 
 See **REPOS_MANIFEST.md** for the full list of related repos, paths, and pull sources.
+
+## Safety (autonomous AI)
+
+- **[SAFETY_CONSTITUTION.md](SAFETY_CONSTITUTION.md)** — Non-negotiable invariants (zero-purge ethics, corrigibility, symbiosis).
+- **[ESCALATION_VOCABULARY.md](ESCALATION_VOCABULARY.md)** — When to pause and ask for confirmation.
+- **[SANDBOX_AND_APPROVAL_FLOWS.md](SANDBOX_AND_APPROVAL_FLOWS.md)** — Sandbox and approval for sensitive operations.
