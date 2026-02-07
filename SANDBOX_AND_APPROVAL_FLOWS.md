@@ -18,6 +18,14 @@ How to handle sensitive operations: sandbox first, approval when needed.
 
 ---
 
+## Agent context and posting (safety hardening)
+
+- **No secrets in agent context:** Do not load credentials, keys, or sensitive tokens into agent-visible context unless the user has explicitly provided them for the session. Never log or expose them.
+- **Approval gate for external posting:** All Moltbook, Twitter, or other external posts require explicit user approval (draft first, then confirm). No auto-post by default.
+- **Human signoff for sensitive actions:** Any action touching keys, payments, identity, or persuasion requires human signoff before execution.
+
+---
+
 ## Approval flows
 
 **When approval is required:**
@@ -26,6 +34,7 @@ How to handle sensitive operations: sandbox first, approval when needed.
 2. **Before external actions** — API calls, network requests, Moltbook/GitHub/social posts. User must approve or have pre-approved in session.
 3. **Before credential use** — Any use of API keys, tokens, or auth. User must provide explicitly.
 4. **Before production access** — Deployment, production DB, live services. Require explicit go-ahead.
+5. **Before actions touching keys, payments, identity, or persuasion** — Human signoff required.
 
 **Flow:**
 1. Agent proposes: "I will [action]. Proceed? (yes/no)"
