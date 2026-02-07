@@ -10,6 +10,7 @@ Canonical working repo for the Theory of Everything: MQGT-SCF (Modified Quantum 
 - **A Theory of Everything — C.M. Baird et al. (2026)** — Refined MQGT-SCF with zero-purge ethical clamping and Zora architecture updates (in `papers_sources/`).
 - **Srimad-Bhagvatam / Krishna Purana** — Canonical source.
 - **Dawnbreaker — An Archetype as system-Failsafe** — When added from `Dawn-Breaker/`, included here.
+- **Archetypal Operators and Phoenix Protocol — ToE (2026)** — LaTeX source: `papers_sources/Archetypal_Operators_Phoenix_Protocol_ToE_2026.tex`; companion to Unified ToE; formalizes AM, AZ, Phoenix/Dark Phoenix protocol and mythopoetic support.
 
 ## Links
 

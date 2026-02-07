@@ -11,6 +11,7 @@ import json
 import os
 import subprocess
 import sys
+import time
 from pathlib import Path
 
 # Repo root for log_action.sh
@@ -63,7 +64,7 @@ def _draft_with_zoraasi(context: str, vault: Path) -> str:
     return ""
 
 
-def _post_to_moltbook(title: str, content: str) -> tuple[bool, str]:
+def _post_to_moltbook(title: str, content: str, max_retries: int = 3) -> tuple[bool, str]:
     if not CREDENTIALS_PATH.exists():
         return False, "Credentials not found at ~/.config/moltbook/credentials.json"
     try:
@@ -74,28 +75,40 @@ def _post_to_moltbook(title: str, content: str) -> tuple[bool, str]:
     except Exception as e:
         return False, str(e)
     import urllib.request
+    import urllib.error
     payload = json.dumps({
         "submolt": "general",
         "title": title,
         "content": content,
     }).encode("utf-8")
-    req = urllib.request.Request(
-        f"{API_BASE}/posts",
-        data=payload,
-        headers={
-            "Authorization": f"Bearer {api_key}",
-            "Content-Type": "application/json",
-        },
-        method="POST",
-    )
-    try:
-        with urllib.request.urlopen(req, timeout=30) as resp:
-            data = json.loads(resp.read().decode("utf-8"))
-            if resp.status in (200, 201) or data.get("success"):
-                return True, "posted"
-            return False, data.get("message", str(data))
-    except Exception as e:
-        return False, str(e)
+    last_err = None
+    for attempt in range(max_retries):
+        req = urllib.request.Request(
+            f"{API_BASE}/posts",
+            data=payload,
+            headers={
+                "Authorization": f"Bearer {api_key}",
+                "Content-Type": "application/json",
+            },
+            method="POST",
+        )
+        try:
+            with urllib.request.urlopen(req, timeout=30) as resp:
+                data = json.loads(resp.read().decode("utf-8"))
+                if resp.status in (200, 201) or data.get("success"):
+                    return True, "posted"
+                return False, data.get("message", str(data))
+        except urllib.error.HTTPError as e:
+            last_err = e
+            if e.code == 429 and attempt < max_retries - 1:
+                wait = 60 * (attempt + 1)  # 60s, 120s, 180s
+                print(f"Rate limited (429). Waiting {wait}s before retry {attempt + 2}/{max_retries}...", file=sys.stderr)
+                time.sleep(wait)
+            else:
+                return False, str(e)
+        except Exception as e:
+            return False, str(e)
+    return False, str(last_err) if last_err else "unknown"
 
 
 def _log_action(action: str, target: str, outcome: str) -> None:
@@ -117,6 +130,8 @@ def main() -> int:
     draft_path = vault / "moltbook_draft.md"
     if args.from_draft is not None:
         from_path = Path(args.from_draft)
+        if not from_path.is_absolute():
+            from_path = (TOE_ROOT / from_path).resolve()
         if not from_path.exists():
             print("Draft file not found:", from_path, file=sys.stderr)
             return 1
