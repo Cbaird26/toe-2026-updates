@@ -2,9 +2,9 @@
 
 A single document for a hostile-but-curious experimentalist: attack or replicate the core claim in one sitting. Aligned with the Zenodo record (A Theory of Everything / Unified ToE 2026) and the operational deformation of the Born rule evaluated across four channels.
 
-**Zenodo:** [zenodo.org/records/18511550](https://zenodo.org/records/18511550)  
+**Zenodo:** [zenodo.org/records/18520596](https://zenodo.org/records/18520596)  
 **Paper (local):** [papers_sources/A_Unified_Theory_of_Everything_CM_Baird_et_al_2026.pdf](../papers_sources/A_Unified_Theory_of_Everything_CM_Baird_et_al_2026.pdf)  
-Canonical Zenodo citation for the 2026 Unified ToE paper (v216): https://zenodo.org/records/18511550.
+Canonical Zenodo citation for the 2026 Unified ToE paper (v216): https://doi.org/10.5281/zenodo.18520596.
 
 ---
 

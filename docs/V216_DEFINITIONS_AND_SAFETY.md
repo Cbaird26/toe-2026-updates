@@ -34,4 +34,4 @@ This is a **theoretical model**. Predictions must be tested; ethics constraints 
 
 ---
 
-**Zenodo (v216):** https://zenodo.org/records/18511550
+**Zenodo (v216):** https://doi.org/10.5281/zenodo.18520596
