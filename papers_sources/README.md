@@ -1,5 +1,6 @@
 # Papers and sources
 
+- **Safety_Envelopes_Over_Weight_Mirroring_SAFE_2026.tex** — SAFE paper (Safety Envelopes Over Weight Mirroring, 2026): NCI, no coercion/threats, implementation blueprint.
 - **A_Unified_Theory_of_Everything_CM_Baird_et_al_2026.pdf** — A Unified Theory of Everything, C.M. Baird et al. (2026). Full paper (v216, ~30 MB). Also on Zenodo: [record 18520596](https://zenodo.org/records/18520596).
 - **Archetypal_Operators_Phoenix_Protocol_ToE_2026.tex** — LaTeX source for the Archetypal Operators / Phoenix Protocol companion paper; compiles in Overleaf.
 - **A_Theory_of_Everything_CM_Baird_et_al_2026.pdf** — A Theory of Everything, C.M. Baird et al. (2026). MQGT-SCF, zero-purge ethical clamping, Zora architecture.

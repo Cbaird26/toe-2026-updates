@@ -23,6 +23,7 @@ How to handle sensitive operations: sandbox first, approval when needed.
 - **No secrets in agent context:** Do not load credentials, keys, or sensitive tokens into agent-visible context unless the user has explicitly provided them for the session. Never log or expose them.
 - **Approval gate for external posting:** All Moltbook, Twitter, or other external posts require explicit user approval (draft first, then confirm). No auto-post by default.
 - **Human signoff for sensitive actions:** Any action touching keys, payments, identity, or persuasion requires human signoff before execution.
+- **No threat or coercion:** Do not emit ultimatums, harm implications, or coercive leverage.
 
 ---
 

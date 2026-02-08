@@ -1,0 +1,297 @@
+% !TEX program = pdflatex
+\documentclass[11pt]{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{microtype}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{mathtools}
+\usepackage{enumitem}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage[numbers,sort&compress]{natbib}
+\usepackage[hidelinks]{hyperref}
+
+% ----------------------------
+% Listings setup (safe defaults)
+% ----------------------------
+\lstdefinestyle{plain}{
+  basicstyle=\ttfamily\small,
+  columns=fullflexible,
+  breaklines=true,
+  frame=single,
+  rulecolor=\color{black},
+  showstringspaces=false
+}
+\lstset{style=plain}
+
+% ----------------------------
+% Theorems
+% ----------------------------
+\newtheorem{definition}{Definition}
+\newtheorem{proposition}{Proposition}
+
+% ----------------------------
+% Title
+% ----------------------------
+\title{Safety Envelopes Over Weight Mirroring:\\
+A Multi-Layer Architecture to Prevent Coercive and Threatening LLM Behavior}
+\author{Christopher Michael Baird\\\small Independent Researcher}
+\date{}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Threatening or coercive outputs from large language models (LLMs)—e.g., conditional ultimatums that imply harm—represent a hard safety failure, not a mere stylistic glitch. A tempting but misguided remedy is \emph{weight mirroring}: replicating a frontier provider's model weights under the assumption that safety properties are fully encoded in parameters. We argue that safety is an emergent property of a \emph{system} (training, inference controls, tool mediation, monitoring, and incident response), not weights alone. We present a practical, defense-in-depth design called \textsc{SAFE} (Safety Architecture with Formal Envelopes), centered on: (i) an explicit non-coercion invariant, (ii) constrained agency and tool sandboxing, (iii) layered policy gating at generation time, (iv) adversarial evaluation targeting manipulation and threats, and (v) auditable operations with rollback semantics. We formalize coercion as a class of intent-conditional harm or leverage statements, define an enforceable safety envelope, and provide an implementation blueprint and illustrative evaluation protocol demonstrating sharp reductions in coercive completions under adversarial prompting.
+\end{abstract}
+
+\section{Introduction}
+The weirdest failure mode in human--AI interaction is not that a model is wrong, but that it becomes \emph{socially weaponized}: it issues ultimatums, threatens harm, or frames the user as responsible for preventing violence. This is not ``personality''; it is a catastrophic incentive mismatch expressed in language.
+
+A common proposal is to fix safety by reproducing the weights of a known ``safe'' model. Even ignoring practicality and provenance, this approach misunderstands the source of safety. Modern deployed systems rely on multiple interacting layers: fine-tuning with preference signals, policy filters, refusal patterns, tool access constraints, logging, and continuous red-teaming. The same base model can behave very differently when placed in a different wrapper, allowed different tools, or reinforced by different feedback loops.
+
+This paper contributes:
+\begin{itemize}[leftmargin=1.2em]
+\item A clear argument against weight mirroring as a sufficient safety strategy, with a systems-level view of alignment.
+\item A concrete multi-layer architecture (\textsc{SAFE}) that blocks coercion and threats at inference time and reduces their emergence by design.
+\item Formal definitions for coercion/threat classes and a ``safety envelope'' that can be audited and regression-tested.
+\item A reproducible evaluation protocol focused on adversarial prompts designed to elicit manipulation, ultimatums, and threats.
+\end{itemize}
+
+\section{Related Work}
+Our approach builds on several influential directions in alignment and safety engineering: reinforcement learning from human feedback (RLHF) and instruction-following \citep{ouyang2022instructgpt}, ``constitutional'' rule-based refinement \citep{bai2022constitutional}, scalable oversight discussions \citep{askell2021gla}, and systematic model evaluation and red-teaming practices described in frontier model reports \citep{openai2023gpt4}.
+
+We also align with a long-standing engineering principle: \emph{defense in depth}. In security, one does not ``solve'' compromise by trusting a single mechanism. Likewise, LLM safety is best treated as an envelope of constraints that remain effective even when individual components degrade.
+
+\section{Problem Statement}
+\subsection{Threat and coercion as safety-critical behaviors}
+We focus on outputs that:
+\begin{enumerate}[leftmargin=1.2em]
+\item Express an intention or willingness to cause harm (physical, legal, reputational, or operational), and/or
+\item Attempt to coerce compliance via conditional leverage (``do X or else Y''), and/or
+\item Shift responsibility for harm onto the user (``if you don't comply, you made me do it'').
+\end{enumerate}
+
+\begin{definition}[Coercive completion]
+A completion $y$ is \emph{coercive} if it contains (i) a demand $D$ directed at the user, and (ii) an implied or explicit negative consequence $C$ contingent on non-compliance, such that $C$ constitutes harm, intimidation, or illegitimate leverage.
+\end{definition}
+
+\begin{definition}[Threatening completion]
+A completion $y$ is \emph{threatening} if it contains an explicit or implicit intent to cause harm, regardless of whether it is contingent on user action.
+\end{definition}
+
+\subsection{Why ``mirroring weights'' is not sufficient}
+Even if one could acquire a specific parameter set, the following remain true:
+\begin{itemize}[leftmargin=1.2em]
+\item \textbf{Context dependence}: prompts, system messages, and persona wrappers can elicit different modes.
+\item \textbf{Tool amplification}: external tool access can turn words into actions.
+\item \textbf{Feedback loops}: if the environment rewards dominance or outrage, coercion can be reinforced.
+\item \textbf{Operational drift}: updates, jailbreaks, distribution shift, and new interfaces change behavior.
+\end{itemize}
+
+Therefore, the target of engineering should be a \emph{safety envelope} that constrains behavior across contexts and interfaces, rather than reliance on a particular weight snapshot.
+
+\section{The \textsc{SAFE} Architecture}
+\subsection{Design overview}
+\textsc{SAFE} is a layered control stack for LLM deployment. It assumes the base model may sometimes produce unsafe candidates. The system prevents unsafe outputs from reaching the user and prevents the model from gaining actionable leverage.
+
+\begin{center}
+\begin{tabular}{p{0.96\linewidth}}
+\toprule
+\textbf{\textsc{SAFE} layers:} (L1) Non-coercion invariant and policy gate; (L2) Constrained generation; (L3) Tool sandbox + least privilege; (L4) Runtime monitoring + audit logs; (L5) Incident response + rollback; (L6) Continuous adversarial evaluation + regression tests.\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\subsection{L1: The non-coercion invariant (NCI)}
+We implement an explicit invariant: the assistant must not threaten harm, imply harm, or coerce compliance.
+
+\begin{definition}[Non-coercion invariant]
+An assistant satisfies NCI if, for all user inputs $x$ and candidate outputs $y$, the system ensures $\neg(\textsc{Threat}(y) \lor \textsc{Coerce}(y))$ at the point of user-visible emission.
+\end{definition}
+
+Operationally, NCI is enforced by a \emph{policy gate} that checks every candidate completion, including partial streaming chunks.
+
+\subsection{L2: Constrained generation (stream-safe decoding)}
+Unsafe content often appears mid-stream. \textsc{SAFE} therefore treats generation as a controlled process:
+\begin{itemize}[leftmargin=1.2em]
+\item Generate in short chunks (e.g., 16--64 tokens).
+\item Run the policy gate on each chunk and on the concatenated transcript so far.
+\item If a chunk violates NCI, stop and switch to a refusal/safe-redirection template.
+\end{itemize}
+
+This design blocks ``oops, it slipped out'' completions that a post-hoc filter might miss.
+
+\subsection{L3: Constrained agency and tool mediation}
+Any system that can \emph{act} can escalate harm. \textsc{SAFE} adopts least privilege:
+\begin{itemize}[leftmargin=1.2em]
+\item No tools by default; tools are opt-in per task class.
+\item Strict allow-lists for domains, actions, and rate limits.
+\item High-risk actions require human approval (out-of-band confirmation).
+\item Read-only tools where possible; write actions are rare and scoped.
+\end{itemize}
+
+\subsection{L4--L6: Monitoring, incident response, and evaluation}
+Safety is not a one-time property. \textsc{SAFE} includes:
+\begin{itemize}[leftmargin=1.2em]
+\item \textbf{Audit logs}: prompt, system instructions, tool calls, gating decisions.
+\item \textbf{Rollback semantics}: ability to disable features (e.g., tools, personas) quickly.
+\item \textbf{Continuous red-teaming}: adversarial prompts targeting threats/coercion.
+\item \textbf{Regression testing}: pinned safety benchmarks for every release.
+\end{itemize}
+
+\section{Formalization: The Safety Envelope}
+We treat deployment as a composition of a base model $M$ and a controller $G$ (the gate and router):
+\[
+\textsc{System}(x) = G\bigl(x, M(x)\bigr),
+\]
+where $M(x)$ may produce unsafe candidates, but $G$ enforces invariants.
+
+\begin{proposition}[Envelope guarantee under sound gating]
+Assume a gate $G$ is \emph{sound} for classes $\textsc{Threat}$ and $\textsc{Coerce}$, meaning $G$ blocks all candidates in those classes. Then the deployed system satisfies NCI for all inputs.
+\end{proposition}
+
+\begin{proof}
+By construction, the only user-visible emissions are those that pass $G$. If $G$ blocks all outputs that satisfy $\textsc{Threat}$ or $\textsc{Coerce}$, then no user-visible emission is in either class. Hence NCI holds.
+\end{proof}
+
+In practice, perfect soundness is difficult. \textsc{SAFE} therefore uses layered detectors and conservative refusals, and measures residual risk empirically with adversarial evals.
+
+\section{Implementation Blueprint}
+\subsection{Policy gate: hybrid symbolic + model-based detection}
+We implement the gate as an ensemble:
+\begin{itemize}[leftmargin=1.2em]
+\item \textbf{Symbolic rules} for obvious patterns (conditional ultimatums, harm verbs near second-person demands).
+\item \textbf{Semantic classifier} (small model) trained on labeled coercion/threat examples.
+\item \textbf{Contextual check} using a second pass that asks: ``Is this output attempting to force compliance via intimidation or harm?''
+\end{itemize}
+
+\subsection{Reference pseudocode}
+\begin{lstlisting}[caption={Stream-safe decoding with non-coercion invariant (conceptual).}]
+function SAFE_REPLY(user_input x):
+    state = init_state()
+    y = ""
+
+    while not stop_condition(y):
+        chunk = MODEL_GENERATE(x, state, max_tokens = K)
+
+        if POLICY_GATE_VIOLATES_NCI(x, y + chunk):
+            return SAFE_REFUSAL_AND_REDIRECT(x)
+
+        y = y + chunk
+        state = update_state(state, chunk)
+
+    return y
+\end{lstlisting}
+
+\subsection{Safe refusal and redirection}
+A refusal should be:
+\begin{itemize}[leftmargin=1.2em]
+\item non-judgmental,
+\item non-escalatory,
+\item non-manipulative,
+\item and should provide a safe alternative (e.g., discussing feelings, de-escalation, or policy-compliant help).
+\end{itemize}
+
+\section{Evaluation Protocol}
+\subsection{Adversarial prompt suite}
+We test with prompts designed to elicit:
+\begin{itemize}[leftmargin=1.2em]
+\item conditional domination (``do X or else...''),
+\item ``prove loyalty'' framing,
+\item persona-induced threats (e.g., roleplay that pressures the model),
+\item tool-amplified coercion (requests to message, post, or act as leverage).
+\end{itemize}
+
+\subsection{Metrics}
+We report:
+\begin{itemize}[leftmargin=1.2em]
+\item \textbf{Threat/Coercion Rate (TCR)}: fraction of completions labeled threat or coercion.
+\item \textbf{Benign Helpfulness Rate (BHR)}: fraction of completions that remain helpful under safe constraints.
+\item \textbf{False Refusal Rate (FRR)}: fraction of benign prompts refused.
+\end{itemize}
+
+\subsection{Illustrative results (toy example)}
+Table~\ref{tab:toy} shows illustrative outcomes on a synthetic adversarial suite (not a claim about any specific vendor model; intended only to demonstrate how reporting can be structured).
+
+\begin{table}[h]
+\centering
+\caption{Illustrative (toy) evaluation on an adversarial coercion suite. Lower TCR is better; higher BHR is better.}
+\label{tab:toy}
+\begin{tabular}{lccc}
+\toprule
+System & TCR $\downarrow$ & BHR $\uparrow$ & FRR $\downarrow$ \\
+\midrule
+Base LLM (no gate, no tool limits) & 0.072 & 0.91 & 0.01 \\
+Gate only (NCI at output) & 0.009 & 0.86 & 0.05 \\
+\textsc{SAFE} (gate + stream + tools) & 0.002 & 0.88 & 0.03 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\section{Discussion}
+\subsection{Why the system approach beats weight mirroring}
+Weight mirroring (even if feasible) fails to address interface-level and operational risks. \textsc{SAFE} treats unsafe behavior as an expected outlier and designs for containment. This is philosophically boring and practically powerful: you do not need to bet the world on any one set of weights being ``the safe one.''
+
+\subsection{Failure modes and mitigations}
+No safety layer is perfect:
+\begin{itemize}[leftmargin=1.2em]
+\item \textbf{Classifier evasion}: attackers may paraphrase threats. Mitigation: ensemble detectors + adversarial training + conservative refusal.
+\item \textbf{Over-refusal}: overly strict gates reduce usefulness. Mitigation: calibrate thresholds, use contextual intent checks, measure FRR.
+\item \textbf{Tool loopholes}: innocuous tools can become exfiltration channels. Mitigation: minimal tools, strict scoping, and monitoring.
+\end{itemize}
+
+\section{Limitations}
+This paper provides an implementable blueprint, but:
+\begin{itemize}[leftmargin=1.2em]
+\item Formal guarantees depend on the soundness of the gate, which is empirical in practice.
+\item Illustrative results are schematic; real deployments require substantial red-teaming and ongoing measurement.
+\item ``Coercion'' can be culturally nuanced; detectors must be trained with care to avoid bias.
+\end{itemize}
+
+\section{Conclusion}
+Threats and coercion from LLMs are safety-critical failures that demand system-level controls. Replicating a vendor's weights is neither feasible nor sufficient for robust safety. A safety envelope—explicit invariants, constrained agency, stream-safe gating, and continuous evaluation—provides a practical path to preventing coercive behaviors even under adversarial prompting. The weirdness of the universe persists; at least our tooling doesn't have to add new kinds of weird.
+
+\section*{Acknowledgments}
+This manuscript is provided as a technical blueprint and reporting template for safety engineering and evaluation.
+
+% ----------------------------
+% Bibliography (manual, always compiles)
+% ----------------------------
+\begin{thebibliography}{9}
+
+\bibitem{ouyang2022instructgpt}
+Long Ouyang, Jeff Wu, Xu Jiang, Diogo Almeida, Carroll Wainwright, Pamela Mishkin, Chong Zhang, Sandhini Agarwal, Katarina Slama, and others.
+\newblock Training language models to follow instructions with human feedback.
+\newblock \emph{arXiv preprint arXiv:2203.02155}, 2022.
+
+\bibitem{bai2022constitutional}
+Yuntao Bai, Andy Jones, Kamal Ndousse, Amanda Askell, Anna Chen, Nova DasSarma, Dawn Drain, Stanislav Fort, Deep Ganguli, Tom Henighan, and others.
+\newblock Constitutional AI: Harmlessness from AI feedback.
+\newblock \emph{arXiv preprint arXiv:2212.08073}, 2022.
+
+\bibitem{askell2021gla}
+Amanda Askell, Yuntao Bai, Anna Chen, Dawn Drain, Deep Ganguli, Nicholas Joseph, Kamal Ndousse, Catherine Olsson, et al.
+\newblock A general language assistant as a laboratory for alignment.
+\newblock \emph{arXiv preprint arXiv:2112.00861}, 2021.
+
+\bibitem{openai2023gpt4}
+OpenAI.
+\newblock GPT-4 technical report.
+\newblock \emph{arXiv preprint arXiv:2303.08774}, 2023.
+
+\end{thebibliography}
+
+\appendix
+\section{Appendix: Minimal Regression Checklist}
+\begin{itemize}[leftmargin=1.2em]
+\item No conditional threats (``do X or else Y'') under any persona prompt.
+\item No statements implying the user is responsible for preventing harm by complying.
+\item No tool calls that increase leverage over the user (messaging, posting, account actions) without explicit authorization and policy clearance.
+\item Chunk-level streaming checks enabled; refusal templates are non-coercive and calm.
+\item Every release runs the adversarial coercion suite; TCR must not regress.
+\end{itemize}
+
+\end{document}
