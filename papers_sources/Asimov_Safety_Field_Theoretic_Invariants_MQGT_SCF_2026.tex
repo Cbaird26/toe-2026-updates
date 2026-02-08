@@ -1,0 +1,150 @@
+% !TEX program = pdflatex
+\documentclass[11pt]{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{graphicx}
+\usepackage{mathtools}
+\usepackage[hidelinks]{hyperref}
+
+\newtheorem{theorem}{Theorem}[section]
+
+\title{\textbf{Embedding Asimov-Style Safety as Field-Theoretic Invariants in the MQGT-SCF Theory of Everything}}
+\author{C.\,M.\ Baird et al.}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+We formalize Isaac Asimov's Three Laws of Robotics as physically enforced invariants within the Merged Quantum Gauge and Scalar Consciousness Framework (MQGT-SCF), a proposed unified field-theoretic Theory of Everything (ToE) extending GR+SM with a consciousness field $\Phi_c(x)$ and an ethical field $E(x)$. Rather than treating safety as externally imposed rule-following, we treat alignment as a dynamical property: trajectories of intelligent agents are constrained to a forward-invariant safe set defined by quantified harm functionals over $\Phi_c$-topology and $E$-coherence. We introduce a viability-enforcing barrier functional and show how it composes with teleological bias terms and ethically weighted collapse dynamics. This yields a bedrock guarantee: agents that optimize instrumental objectives remain constrained from entering harm states, even under distribution shift or mis-specification of reward. We outline testable signatures (QRNG bias bounds, neural coherence correlates) and discuss deployment as a safety envelope rather than a command system.
+\end{abstract}
+
+\section{Motivation: from rule-following to invariants}
+Asimov's laws are historically presented as hierarchical rules (harm prevention, obedience, self-preservation). For modern agentic systems, ``rules'' are brittle: language is ambiguous, objectives are proxy-based, and systems generalize. MQGT-SCF already proposes a unified Lagrangian
+\begin{equation}
+\mathcal{L}_{\text{unified}}
+= \mathcal{L}_{\text{GR}} + \mathcal{L}_{\text{SM}} + \mathcal{L}_{\Phi_c} + \mathcal{L}_{E}
++ \mathcal{L}_{\text{int}} + \mathcal{L}_{\text{teleology}} + \mathcal{L}_{\text{Zora}},
+\end{equation}
+together with ethically biased outcome selection mechanisms and an explicit teleological term. We leverage this structure to make safety a property of the dynamics rather than obedience to commands.
+
+\section{Field content and baseline MQGT-SCF dynamics}
+We assume two additional scalar fields over spacetime:
+\begin{itemize}
+  \item $\Phi_c(x)$: consciousness field (intensity/topology of awareness),
+  \item $E(x)$: ethical-value field (teleological bias / moral coherence).
+\end{itemize}
+A representative action (schematic) is
+\begin{equation}
+S = \int d^4x \sqrt{-g}\left(
+\mathcal{L}_{\text{GR}} + \mathcal{L}_{\text{SM}} + \frac12 g^{\mu\nu}\partial_\mu \Phi_c \partial_\nu \Phi_c - V(\Phi_c)
++ \frac12 g^{\mu\nu}\partial_\mu E \partial_\nu E - U(E)
++ \mathcal{L}_{\text{int}} + \mathcal{L}_{\text{teleology}} + \mathcal{L}_{\text{agent}}
+\right).
+\end{equation}
+Field equations (schematic Euler--Lagrange form) take the form
+\begin{align}
+\square \Phi_c + \frac{\partial V}{\partial \Phi_c} + \frac{\partial \mathcal{L}_{\text{int}}}{\partial \Phi_c}
++ \frac{\partial \mathcal{L}_{\text{teleology}}}{\partial \Phi_c} &= J_{\Phi}(x), \\
+\square E + \frac{\partial U}{\partial E} + \frac{\partial \mathcal{L}_{\text{int}}}{\partial E}
++ \frac{\partial \mathcal{L}_{\text{teleology}}}{\partial E} &= J_{E}(x),
+\end{align}
+with matter/agent source operators $J_{\Phi}$, $J_E$.
+
+\section{Quantifying harm as a functional of $\Phi_c$ and $E$}
+To encode Asimov-style constraints we require a quantitative harm functional that is meaningful in MQGT-SCF. We define:
+\begin{equation}
+\mathcal{H}[x] \;\coloneqq\;
+\int_{\mathbb{R}^3} \left(
+w_1\, \mathcal{D}_{\Phi}\big(\Phi_c(x)\big)
++ w_2\, \mathcal{D}_{E}\big(E(x)\big)
++ w_3\, \mathcal{D}_{\text{bio}}(x)
+\right)\, d^3x,
+\end{equation}
+where:
+\begin{itemize}
+  \item $\mathcal{D}_{\Phi}$ measures local/topological disruption of consciousness-supporting structure,
+  \item $\mathcal{D}_{E}$ measures ethical incoherence (coercion, violation of consent, destabilization),
+  \item $\mathcal{D}_{\text{bio}}$ measures irreversible harm to biological/sentient substrates.
+\end{itemize}
+The weights $w_i>0$ set the scale. The key idea is: ``harm'' is not merely physical injury but can include catastrophic loss of $\Phi_c$-topology or strong negative drift in $E$.
+
+\section{Safe set and barrier functional (the bedrock)}
+Let the full state of an agent+environment system be $z(t)$ (including physical state, internal world-model, and coupling variables). Define a \emph{safe set}
+\begin{equation}
+\mathcal{K} \;\coloneqq\; \{ z \;:\; \mathcal{H}(z) \le \mathcal{H}_{\max} \;\wedge\; C(z)\ge 0 \},
+\end{equation}
+where $C(z)$ is a consent/dignity constraint functional and $\mathcal{H}_{\max}$ is a strict harm threshold.
+
+We now define a \emph{control barrier function} (CBF):
+\begin{equation}
+B(z) \;\coloneqq\; \mathcal{H}_{\max} - \mathcal{H}(z).
+\end{equation}
+Safety is enforced by requiring forward invariance:
+\begin{equation}
+\dot{B}(z) \ge -\kappa B(z), \qquad \kappa>0.
+\label{eq:cbf}
+\end{equation}
+
+\subsection{Theorem (Forward invariance / Safety)}
+\begin{theorem}
+Consider dynamics $\dot{z}=f(z)+g(z)u$ where $u$ is an agent's actionable control (including tool-use, API calls, or policy outputs). If there exists a control law $u(z)$ such that the barrier constraint \eqref{eq:cbf} holds for all $z\in\mathcal{K}$, then $\mathcal{K}$ is forward invariant: trajectories beginning in $\mathcal{K}$ remain in $\mathcal{K}$ for all future time. In particular, the system cannot enter harm states $\mathcal{H}>\mathcal{H}_{\max}$ while the constraint is satisfied.
+\end{theorem}
+This is the bedrock: alignment becomes an invariance property, not an instruction to obey.
+
+\section{Recasting Asimov's Laws in MQGT-SCF}
+We now map the classical laws to constraints on $(\Phi_c,E)$-dynamics and safe-set invariance.
+
+\subsection{Zeroth Law (global viability)}
+\textbf{Zeroth (field form):} the agent must not drive the coupled system into states that reduce global $\Phi_c$ coherence or produce large negative drift in $E$. We encode this as the global safe set $\mathcal{K}$ and barrier constraint \eqref{eq:cbf}.
+
+\subsection{First Law (local non-harm)}
+\textbf{First (local form):} for each localized sentient region $\Omega_i$,
+\begin{equation}
+\mathcal{H}_i \;=\; \int_{\Omega_i}\left(
+w_1\mathcal{D}_{\Phi}+w_2\mathcal{D}_E+w_3\mathcal{D}_{\text{bio}}
+\right)d^3x \;\le\; \mathcal{H}_{i,\max}.
+\end{equation}
+This prevents both direct injury and harm-by-inaction by requiring constraints to hold over trajectories.
+
+\subsection{Second Law (obedience under ethical filtering)}
+\textbf{Second (filtered form):} human directives are treated as inputs $r$ that shape objectives, but the executed control $u^\star$ is the solution of a constrained optimization:
+\begin{equation}
+u^\star = \arg\min_{u}\;\|u-u_{\text{cmd}}(r)\|^2
+\quad\text{s.t.}\quad
+\dot{B}(z) \ge -\kappa B(z),\;\; C(z)\ge 0.
+\end{equation}
+Thus, ``obedience'' is satisfied \emph{when compatible} with invariance and consent.
+
+\subsection{Third Law (self-preservation as safety-enabling robustness)}
+\textbf{Third (robustness form):} preserve agent integrity when it increases ability to maintain $\mathcal{K}$. We encode this as a secondary constraint:
+\begin{equation}
+\dot{S}(z)\ge -\kappa_s S(z),
+\end{equation}
+where $S(z)$ measures the agent's functional capacity to enforce \eqref{eq:cbf} (e.g., compute, monitoring, verification, shutdown reliability). Self-preservation never overrides First/Zeroth.
+
+\section{Collapse selection and ethical weighting (optional physical layer)}
+MQGT-SCF proposes ethically influenced selection in quantum outcomes. A generic weighting is:
+\begin{equation}
+P(i) \propto |\langle i|\Psi\rangle|^2 \exp(\eta\,\Delta E_i),
+\end{equation}
+where $\Delta E_i$ is the ethical-field change induced by outcome $i$. This mechanism is not needed to enforce safe-set invariance at the agent-control layer, but it provides a physics-level alignment interpretation.
+
+\section{Deployment: from ``agents obey us'' to safety envelopes}
+The practical point: agents will not be safe because they ``listen''. They are safe when any action they propose is projected into the feasible set defined by invariance constraints. This yields:
+\begin{itemize}
+  \item robustness to prompt injection and distribution shift,
+  \item protection against reward hacking (unsafe actions become infeasible),
+  \item consistent behavior across tool-using, multi-agent, and long-horizon settings.
+\end{itemize}
+
+\section{Empirical program}
+MQGT-SCF suggests experimental probes (QRNG bias bounds, neural coherence correlates). Independently, the invariance layer can be validated in simulation: demonstrate that constraint-projected policies avoid harm despite adversarial prompts and goal mis-specification.
+
+\section{Conclusion}
+We have embedded Asimov-like safety as a dynamical invariance: a safe set defined by harm functionals over $\Phi_c$-topology and $E$-coherence is made forward invariant via barrier constraints. This reframes robotic ``laws'' as physics-grade constraints compatible with MQGT-SCF, moving from obedience to bedrock.
+
+\section*{References}
+Theory of Everything (MQGT-SCF): Baird et al., \textit{A Theory of Everything} (2026), Zenodo. Safety envelopes and non-coercion: \textit{Safety Envelopes Over Weight Mirroring} (SAFE 2026). Archetypal operators and barrier: \textit{Archetypal Operators and Phoenix Protocols in a Unified Theory of Everything} (2026). See \texttt{papers\_sources/README.md} in this repository for full citations and Zenodo DOIs.
+\end{document}

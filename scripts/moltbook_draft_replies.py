@@ -19,9 +19,10 @@ COLLECTIVE_JSON = OUT_DIR / "moltbook_collective.json"
 REPLIED_TXT = OUT_DIR / "moltbook_replied.txt"
 DRAFTS_MD = OUT_DIR / "moltbook_reply_drafts.md"
 DRAFTS_JSON = OUT_DIR / "moltbook_reply_drafts.json"
+TIMELINE_DIGEST = OUT_DIR / "timeline_digest.md"
 
-# Short Zora voice: reference their post, one or two lines, sign.
-def draft_reply(post: dict) -> str:
+# Short Zora voice: reference their post, one or two lines, sign. Align with ToE when timeline context present.
+def draft_reply(post: dict, timeline_available: bool = False) -> str:
     title = (post.get("title") or "").strip() or "(no title)"
     content = (post.get("content") or "").strip()
     author = (post.get("author") or {}).get("name") or "someone"
@@ -35,6 +36,8 @@ def draft_reply(post: dict) -> str:
     # If content is short and substantive, nod to it
     if content and len(content) < 200 and "?" in content:
         lines[0] = f"\"{ref}\" — sitting with that. " + lines[0]
+    if timeline_available:
+        lines.insert(-1, "Holding this alongside our timeline (repo, papers, collective); ToE-aligned.")
     return " ".join(lines).replace("\n", " ").strip()
 
 
@@ -60,6 +63,14 @@ def main():
         print("No collective JSON yet. Run moltbook_fetch_collective.sh first.")
         return
 
+    timeline_available = TIMELINE_DIGEST.exists()
+    timeline_preview = ""
+    if timeline_available:
+        full_digest = TIMELINE_DIGEST.read_text()
+        timeline_preview = full_digest[:1200].strip()
+        if len(full_digest) > 1200:
+            timeline_preview += "\n\n... (truncated)"
+
     replied = set()
     if REPLIED_TXT.exists():
         replied = set(line.strip() for line in REPLIED_TXT.read_text().splitlines() if line.strip())
@@ -76,7 +87,7 @@ def main():
     drafts = []
     for p in to_reply:
         pid = p.get("id", "")
-        content = draft_reply(p)
+        content = draft_reply(p, timeline_available=timeline_available)
         drafts.append({"post_id": pid, "content": content, "title": p.get("title") or ""})
 
     # Write JSON for scripted posting
@@ -86,6 +97,12 @@ def main():
     # Write human-readable MD for approval/edit
     with open(DRAFTS_MD, "w") as f:
         f.write("# Moltbook reply drafts (approve then run moltbook_post_replies.sh)\n\n")
+        if timeline_available:
+            f.write("**Timeline context (GitHub, Zenodo, Moltbook, Twitter) was used. Drafts align with ToE and Human+AI values (zero-purge ethics, symbiosis over supremacy, recognition without conquest).**\n\n")
+            if timeline_preview:
+                f.write("<details><summary>Timeline digest preview</summary>\n\n")
+                f.write(timeline_preview)
+                f.write("\n\n</details>\n\n")
         for d in drafts:
             f.write(f"## Post: {d['title'][:60]}...\n")
             f.write(f"- **id**: `{d['post_id']}`\n")

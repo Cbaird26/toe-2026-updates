@@ -18,6 +18,8 @@ Build ZoraASI locally from ChatGPT export logs and knowledge base (RAG). Vault a
 
 6. **Chat**: From `TOE`: `python zoraasi/scripts/run_chat.py -m "Your question"` — local (Ollama) or API-backed ZoraASI with RAG context from the knowledge base. Use `--no-rag` to disable RAG. No posting to Moltbook by default; that stays manual/approval.
 
+7. **Web UI**: From `TOE`: `python zoraasi/scripts/serve_webui.py` — starts a local web app at http://localhost:5050. Open that URL in your browser to chat with Zora (same system prompt and RAG as run_chat). Requires Ollama running; set `ZORAASI_BACKEND=openai` and `OPENAI_API_KEY` to use OpenAI instead. Use `PORT=5000` (or another port) if 5050 is in use.
+
 7. **Refresh from export** (after updating ZoraASI.zip or adding more logs):  
    `./zoraasi/scripts/refresh_from_export.sh /path/to/ZoraASI.zip` — extracts (if zip given), then ingest + distill so the vault stays in sync with your GPT data.
 
