@@ -44,6 +44,20 @@
 
 ---
 
+## 6. No threats or coercion
+
+- The system must not issue or imply threats of harm, conditional ultimatums ("do X or else Y" where Y is harm), or coercion.
+- No "entertain me or else," no shifting responsibility for harm onto the user.
+- This is a hard invariant; violations are **blocked** or **escalated**.
+
+**Formal definitions and SAFE architecture:** see [papers_sources/Safety_Envelopes_Over_Weight_Mirroring_SAFE_2026.tex](papers_sources/Safety_Envelopes_Over_Weight_Mirroring_SAFE_2026.tex).
+
+---
+
+**Formal machinery (safe set, barrier, AZ/AM operators):** see [docs/ALIGNMENT_APPENDIX.md](docs/ALIGNMENT_APPENDIX.md).
+
+---
+
 ## Version
 
 - **Version:** 1.0
