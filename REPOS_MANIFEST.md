@@ -1,6 +1,6 @@
 # Repos and sources manifest
 
-**Last synced / updated:** 2026-02-05
+**Last synced / updated:** 2026-02-08
 
 ## This repo
 
@@ -12,7 +12,7 @@
 
 - **GitHub user:** https://github.com/cbaird26
 - **ZoraASI / ToE source:** https://github.com/Cbaird26/A-Theory-of-Everything
-- **Zenodo** (Baird, Christopher Michael): https://zenodo.org/search?q=metadata.creators.person_or_org.name%3A%22Baird%2C%20Christopher%20Michael%22&l=list&p=1&s=10&sort=bestmatch
+- **Zenodo** (Baird, Christopher Michael): https://zenodo.org/search?q=metadata.creators.person_or_org.name%3A%22Baird%2C%20Christopher%20Michael%22&l=list&p=1&s=10&sort=bestmatch — **A Theory of Everything (v220):** https://zenodo.org/records/18522766
 
 ## Key repos (cbaird26)
 
