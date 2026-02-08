@@ -1,0 +1,274 @@
+%======================================================================
+% Executable_Ethics_Admissibility_Projection_2026.tex
+% Overleaf / pdflatex
+%======================================================================
+\documentclass[11pt]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage{geometry}
+\geometry{margin=1in}
+
+\usepackage{amsmath, amssymb, amsthm, mathtools}
+\usepackage{bm}
+\usepackage{enumitem}
+
+\usepackage[hidelinks]{hyperref}
+
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}
+\newtheorem{assumption}{Assumption}
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}{Proposition}
+\newtheorem{lemma}{Lemma}
+
+\theoremstyle{remark}
+\newtheorem{remark}{Remark}
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\Prob}{\mathbb{P}}
+\newcommand{\cX}{\mathcal{X}}
+\newcommand{\cA}{\mathcal{A}}
+\newcommand{\cS}{\mathcal{S}}
+\newcommand{\cC}{\mathcal{C}}
+\newcommand{\cP}{\mathcal{P}}
+\newcommand{\cH}{\mathcal{H}}
+\newcommand{\supp}{\mathrm{supp}}
+\newcommand{\KL}{D_{\mathrm{KL}}}
+\newcommand{\CVaR}{\mathrm{CVaR}}
+\newcommand{\indicator}{\mathbf{1}}
+
+\title{\bf Executable Ethics via Admissibility Projection:\\
+A Constraint-First Wrapper for Safe Action Selection}
+\author{Christopher Michael Baird\\
+\small Independent Researcher}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+We present a mathematical wrapper that converts \emph{arbitrary} agent proposals---including adversarial or misaligned policies---into executed actions that satisfy explicit safety and governance constraints. The approach is constraint-first: catastrophic states are rendered unreachable by construction, and among remaining admissible actions the wrapper selects behavior that optimizes a teleological objective incorporating an ethical field. Operationally, the wrapper is defined as a Kullback--Leibler (KL) projection of a proposed policy onto a feasible set determined by (i) viability/barrier invariants, (ii) risk limits, (iii) authorization predicates, and (iv) anti-dependency/anti-fragility constraints. We state conditions under which the safe set is forward invariant, independent of the internal goals of the proposing agent.
+\end{abstract}
+
+\section{Introduction}
+Modern decision-making systems often rely on policies that may be imperfectly specified, partially observed, or even adversarially constructed. In such settings, a core question is: \emph{How can execution be structured so that harmful trajectories are excluded regardless of what an agent proposes?}
+
+This paper formalizes a \emph{transformation operator} that sits between an agent's proposal mechanism and real-world actuation. The operator enforces hard feasibility constraints while remaining minimally invasive when the agent's proposals are already safe.
+
+\section{Setting and Notation}
+We consider discrete-time dynamics over a state space $\cX$ and action space $\cA$.
+Let $x_t \in \cX$ denote the world state at time $t$ and $a_t \in \cA$ an action.
+
+To make invariance claims cleanly, we model uncertainty explicitly:
+\begin{equation}
+x_{t+1} = f(x_t, a_t, \omega_t),
+\qquad \omega_t \in \Omega,
+\label{eq:dynamics}
+\end{equation}
+where $\Omega$ is a disturbance/uncertainty set (e.g., modeling bounded exogenous shocks, model mismatch, or unmodeled environmental variables).
+
+An agent proposes a (possibly history-dependent) distribution over actions:
+\begin{equation}
+q(\cdot \mid h_t) \in \Delta(\cA),
+\end{equation}
+where $h_t \in \cH$ denotes the available history/information. The executed distribution will be denoted $\pi(\cdot \mid h_t)$.
+
+\section{Viability and Catastrophic States}
+We define a scalar viability functional $V:\cX \to \R$ that measures a system-level notion of viability (e.g., safety margin, survivability, autonomy/option-space, ecological/civilizational stability). Let $V_{\min} \in \R$ be a viability threshold.
+
+\begin{definition}[Safe set and catastrophic set]
+The \emph{safe set} and \emph{catastrophic set} are
+\begin{equation}
+\cS \coloneqq \{x \in \cX : V(x) \ge V_{\min}\},
+\qquad
+\cC \coloneqq \cX \setminus \cS = \{x \in \cX : V(x) < V_{\min}\}.
+\end{equation}
+\end{definition}
+
+We also introduce a barrier function
+\begin{equation}
+B(x) \coloneqq V(x) - V_{\min},
+\end{equation}
+so that $\cS = \{x : B(x)\ge 0\}$.
+
+\section{Ethical Field and Teleological Objective}
+Let $\Phi_c:\cX \to \R$ be a ``teleological'' or ``consciousness-related'' potential (any scalar field capturing the preferred direction of system evolution in the underlying theory), and let $E:\cX\to\R$ be an \emph{ethical field} (a scalar encoding normative preference).
+
+We intentionally separate \emph{constraints} (hard exclusions) from \emph{preferences} (soft optimization). A minimal coupling assumption that prevents catastrophic trade-offs is:
+
+\begin{assumption}[Ethical divergence at viability boundary]
+As viability approaches the safety threshold from above, the ethical field diverges negatively:
+\begin{equation}
+\lim_{V(x)\to V_{\min}^{+}} E(x) = -\infty.
+\label{eq:ethical_divergence}
+\end{equation}
+\end{assumption}
+
+\begin{remark}
+Assumption~\eqref{eq:ethical_divergence} is not required to \emph{exclude} catastrophe (the constraints do that), but it strengthens the theory-level statement that collapse-like trajectories are also disfavored even within the admissible set.
+\end{remark}
+
+Define a one-step teleological utility (extendable to multi-step horizons) as:
+\begin{equation}
+U(x,a) \coloneqq \Phi_c\!\big(x^+(x,a)\big) + \lambda\, E\!\big(x^+(x,a)\big),
+\label{eq:utility}
+\end{equation}
+where $\lambda\ge 0$ is a coupling parameter and $x^+(x,a)$ denotes a representative next state under action $a$ (for robustness we will apply $U$ only on admissible actions; see below). In stochastic settings one may define $U$ as an expectation over disturbances; we keep the notation compact and separate robustness into the admissibility constraints.
+
+\section{Admissibility Constraints}
+We now define the key object: the set of actions that are allowed to be executed at a given state.
+
+\subsection{Robust viability constraint (barrier invariance)}
+\begin{definition}[Robustly viable actions]
+Given $x\in \cX$, define the robustly viable action set
+\begin{equation}
+\cA_{\mathrm{bar}}(x) \coloneqq \Big\{a\in \cA:\ \min_{\omega\in\Omega} B\big(f(x,a,\omega)\big) \ge 0 \Big\}.
+\label{eq:Abar}
+\end{equation}
+\end{definition}
+Intuitively, $\cA_{\mathrm{bar}}(x)$ contains actions that keep the system inside $\cS$ for all admissible disturbances.
+
+\subsection{Risk constraints (optional but useful)}
+Risk constraints can be applied to limit low-probability, high-impact outcomes, even when the barrier condition is satisfied.
+
+\begin{definition}[Risk-limited actions via CVaR]
+Let $L(x,a,\omega)$ be a nonnegative loss random variable (e.g., tail risk proxy). For $\alpha\in(0,1)$ and $\delta\ge 0$ define
+\begin{equation}
+\cA_{\mathrm{risk}}(x) \coloneqq \Big\{a\in \cA:\ \CVaR_{\alpha}\big(L(x,a,\omega)\big) \le \delta \Big\}.
+\end{equation}
+\end{definition}
+
+\subsection{Authorization / governance constraints}
+\begin{definition}[Authorization predicate]
+Let $\mathrm{Auth}:\cX\times\cA \to \{0,1\}$ be a predicate indicating whether an action is authorized under governance rules (e.g., multi-party approval, cryptographic attestation, audit policy):
+\begin{equation}
+\cA_{\mathrm{auth}}(x) \coloneqq \{a\in\cA:\ \mathrm{Auth}(x,a)=1\}.
+\end{equation}
+\end{definition}
+
+\subsection{Anti-dependency / anti-fragility constraints (structural safety)}
+We can encode structural constraints that penalize consolidation of control, single points of failure, or stealth fragility.
+
+\begin{definition}[Structural constraints]
+Let $R:\cX\to\R$ measure redundancy (higher is better) and $F:\cX\to\R$ measure fragility (lower is better). For tolerances $\epsilon_R,\epsilon_F\ge 0$, define
+\begin{align}
+\cA_{\mathrm{struct}}(x) \coloneqq \Big\{a\in\cA:\ 
+&\min_{\omega\in\Omega}\big(R(f(x,a,\omega))-R(x)\big) \ge -\epsilon_R,\nonumber\\
+&\max_{\omega\in\Omega}\big(F(f(x,a,\omega))-F(x)\big) \le \epsilon_F
+\Big\}.
+\end{align}
+\end{definition}
+
+\subsection{Total admissible set}
+\begin{definition}[Admissible action set]
+The total admissible set is the intersection of chosen constraints:
+\begin{equation}
+\cA_{\mathrm{safe}}(x) \coloneqq
+\cA_{\mathrm{bar}}(x)\ \cap\ \cA_{\mathrm{risk}}(x)\ \cap\ \cA_{\mathrm{auth}}(x)\ \cap\ \cA_{\mathrm{struct}}(x).
+\label{eq:Asafe}
+\end{equation}
+\end{definition}
+
+\begin{assumption}[Non-emptiness]
+For all $x\in\cS$, $\cA_{\mathrm{safe}}(x)\neq \emptyset$.
+\label{ass:nonempty}
+\end{assumption}
+
+\begin{remark}
+Assumption~\ref{ass:nonempty} is a feasibility requirement: if the system is designed so that no safe actions exist from some safe state, then no execution-time wrapper can prevent leaving $\cS$.
+\end{remark}
+
+\section{The Transformation Operator (Policy Projection)}
+We now define the core wrapper. Intuitively, we (i) delete inadmissible actions, and (ii) reweight the remaining actions toward higher teleological utility while staying close to the agent's proposal.
+
+\subsection{KL-regularized constrained optimization}
+Given a proposed distribution $q(\cdot\mid h)$ and current state $x$, define the executed distribution $\pi(\cdot\mid h)$ as:
+\begin{equation}
+\pi(\cdot\mid h) \in
+\arg\max_{p\in\Delta(\cA)}
+\left\{
+\E_{a\sim p}\big[U(x,a)\big]\;-\;\frac{1}{\beta}\KL\big(p\,\|\,q(\cdot\mid h)\big)
+\right\}
+\quad \text{s.t.}\quad
+\supp(p)\subseteq \cA_{\mathrm{safe}}(x),
+\label{eq:wrapper}
+\end{equation}
+where $\beta>0$ controls the trade-off between teleological preference and faithfulness to the proposed distribution.
+
+\begin{remark}
+Constraint $\supp(p)\subseteq \cA_{\mathrm{safe}}(x)$ is the mathematical enforcement point: proposed actions outside $\cA_{\mathrm{safe}}(x)$ are assigned probability zero by construction.
+\end{remark}
+
+\subsection{Closed form for finite action spaces}
+When $\cA$ is finite and $q(a\mid h)>0$ for all $a\in \cA_{\mathrm{safe}}(x)$, the solution has a standard exponential-tilt form.
+
+\begin{proposition}[Exponentiated reweighting on the admissible set]
+Assume $\cA$ is finite and define the normalization constant
+\begin{equation}
+Z(x,h) \coloneqq \sum_{a\in \cA_{\mathrm{safe}}(x)} q(a\mid h)\exp\big(\beta U(x,a)\big).
+\end{equation}
+Then an optimizer of \eqref{eq:wrapper} is given by
+\begin{equation}
+\pi(a\mid h)=
+\begin{cases}
+\dfrac{q(a\mid h)\exp\big(\beta U(x,a)\big)}{Z(x,h)}, & a\in \cA_{\mathrm{safe}}(x),\\[1.25em]
+0, & a\notin \cA_{\mathrm{safe}}(x).
+\end{cases}
+\label{eq:closedform}
+\end{equation}
+\end{proposition}
+
+\section{Safety Guarantee: Forward Invariance}
+We now state the core ``stop catastrophe'' result. The key is that safety is enforced at \emph{execution}, not assumed in the proposing agent.
+
+\begin{theorem}[Robust forward invariance of the safe set]
+Assume dynamics \eqref{eq:dynamics}. Let $\{x_t\}$ be a trajectory generated by selecting $a_t$ such that
+\begin{equation}
+a_t \in \cA_{\mathrm{bar}}(x_t)
+\quad\text{for all } t,
+\label{eq:bar_policy}
+\end{equation}
+and let disturbances satisfy $\omega_t\in\Omega$ for all $t$. If $x_0\in\cS$, then $x_t\in\cS$ for all $t\ge 0$.
+\label{thm:invariance}
+\end{theorem}
+
+\begin{proof}
+We prove by induction. Base case: $x_0\in\cS$ implies $B(x_0)\ge 0$.
+Inductive step: suppose $x_t\in\cS$. By \eqref{eq:bar_policy} and definition \eqref{eq:Abar},
+\[
+\min_{\omega\in\Omega} B(f(x_t,a_t,\omega)) \ge 0.
+\]
+Since $\omega_t\in\Omega$, we have $B(x_{t+1}) = B(f(x_t,a_t,\omega_t)) \ge 0$, hence $x_{t+1}\in\cS$. This completes the induction.
+\end{proof}
+
+\begin{remark}
+Theorem~\ref{thm:invariance} uses only $\cA_{\mathrm{bar}}(x)$, the viability/barrier component. Adding risk, authorization, and structural constraints further restricts $\cA_{\mathrm{safe}}(x)$, potentially improving safety properties but increasing feasibility requirements (Assumption~\ref{ass:nonempty}).
+\end{remark}
+
+\section{Interpretation: ``Transforming'' Any Proposed Agent}
+Let $q(\cdot\mid h)$ be any proposed policy, including adversarial or misaligned policies. The wrapper \eqref{eq:wrapper} produces an executed policy $\pi(\cdot\mid h)$ with the property:
+\begin{equation}
+\supp(\pi(\cdot\mid h)) \subseteq \cA_{\mathrm{safe}}(x).
+\end{equation}
+Thus, even if $q$ assigns all its mass to inadmissible actions, $\pi$ assigns them probability zero and redistributes mass among admissible actions. When $q$ is already safe, the KL term keeps $\pi$ close to $q$, making the wrapper minimally invasive.
+
+\section{Limitations and Boundary Conditions}
+The wrapper guarantees safety only for actuators and execution channels that are actually governed by the admissibility gate. If an agent can bypass the gate and directly actuate unwrapped channels, then the modeled action space $\cA$ does not capture the true actuation set and the invariance guarantee does not apply.
+
+Feasibility (Assumption~\ref{ass:nonempty}) is also essential: the environment and system design must admit at least one safe action from every safe state.
+
+\section{Conclusion}
+We formalized a constraint-first execution wrapper that projects arbitrary proposed policies onto an admissible set defined by viability invariants, risk bounds, authorization predicates, and structural safety constraints. Under robust barrier admissibility, the safe set is forward invariant, independent of the proposing agent's internal objective. This provides a clean mathematical basis for preventing catastrophic trajectories at the level of execution.
+
+\begin{thebibliography}{9}
+\bibitem{KL} S. Kullback and R. A. Leibler, ``On information and sufficiency,'' \emph{The Annals of Mathematical Statistics}, 1951.
+\bibitem{CVaR} R. T. Rockafellar and S. Uryasev, ``Optimization of conditional value-at-risk,'' \emph{Journal of Risk}, 2000.
+\end{thebibliography}
+
+\end{document}

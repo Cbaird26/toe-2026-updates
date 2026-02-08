@@ -2,7 +2,7 @@
 
 A short formal layer for safety: the safety objective as an invariant, archetypal operators as explicit operators, and what the architecture cannot guarantee. Policy and process live in [SAFETY_CONSTITUTION.md](../SAFETY_CONSTITUTION.md) and [SANDBOX_AND_APPROVAL_FLOWS.md](../SANDBOX_AND_APPROVAL_FLOWS.md); this document is the mathematical and operational layer.
 
-**Companion paper:** [papers_sources/Archetypal_Operators_Phoenix_Protocol_ToE_2026.tex](../papers_sources/Archetypal_Operators_Phoenix_Protocol_ToE_2026.tex) (AM, AZ, Phoenix/Dark Phoenix, barrier, safe set).
+**Companion papers:** [papers_sources/Archetypal_Operators_Phoenix_Protocol_ToE_2026.tex](../papers_sources/Archetypal_Operators_Phoenix_Protocol_ToE_2026.tex) (AM, AZ, Phoenix/Dark Phoenix, barrier, safe set); execution wrapper (admissibility projection): [papers_sources/Executable_Ethics_Admissibility_Projection_2026.tex](../papers_sources/Executable_Ethics_Admissibility_Projection_2026.tex).
 
 ---
 
@@ -57,4 +57,4 @@ A short formal layer for safety: the safety objective as an invariant, archetypa
 ## Version
 
 - **Repo:** toe-2026-updates (TOE)  
-- **Cross-link:** [SAFETY_CONSTITUTION.md](../SAFETY_CONSTITUTION.md) — "Formal machinery: see [ALIGNMENT_APPENDIX.md](ALIGNMENT_APPENDIX.md)."
+- **Cross-link:** [SAFETY_CONSTITUTION.md](../SAFETY_CONSTITUTION.md) — "Formal machinery: see [ALIGNMENT_APPENDIX.md](ALIGNMENT_APPENDIX.md)." Execution-layer guarantee (admissibility projection): see [papers_sources/Executable_Ethics_Admissibility_Projection_2026.tex](../papers_sources/Executable_Ethics_Admissibility_Projection_2026.tex).
