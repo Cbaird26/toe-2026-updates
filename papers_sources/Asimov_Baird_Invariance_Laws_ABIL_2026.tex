@@ -1,0 +1,123 @@
+% !TEX program = pdflatex
+\documentclass[11pt]{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage{graphicx}
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{corollary}[theorem]{Corollary}
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\dd}{\,\mathrm{d}}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\argmin}{\operatorname*{arg\,min}}
+
+\title{\textbf{Asimov--Baird Invariance Laws:}\\
+\textbf{Embedding Hierarchical Safety as Field-Theoretic and Control-Theoretic Bedrock in MQGT--SCF}}
+\author{Christopher Michael Baird et al.}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Isaac Asimov's Three Laws of Robotics were a fictional attempt to guarantee safe coexistence between humans and autonomous machines. Modern agentic systems expose a core limitation of ``rules'': they are brittle under ambiguity, adversarial prompting, and distribution shift. This work formalizes a publishable alternative within the Merged Quantum Gauge and Scalar Consciousness Framework (MQGT--SCF), a proposed Theory of Everything (ToE) extending GR+SM by a consciousness field $\Phi_c(x)$ and an ethical field $E(x)$ with teleological bias. We present the Asimov--Baird Invariance Laws (ABIL): a lexicographically ordered set of \emph{forward-invariant} constraints defined on measurable functionals of sentience-weighted harm, $\Phi_c$-topology, and ethical-field coherence. Safety is cast as a viability property: trajectories are constrained to remain inside an admissible safe set for all future time. We embed ABIL at three mutually reinforcing levels: (i) an action-level constrained optimal control layer (Control Barrier Functions and robust feasible action sets), (ii) an agent-level stochastic selection layer (ethical maximum-caliber tilt of baseline policies), and (iii) a field-theoretic layer (an inequality-constrained ``KKT field'' enforcing hard no-harm barriers in the unified action). We show how these layers subsume and extend the Three Laws (and Zeroth Law) as invariants rather than commands, preserving autonomy while eliminating catastrophic trajectories. We propose falsifiable experimental programs and provide implementation-ready algorithms for multi-agent deployment with governance authorization constraints.
+\end{abstract}
+
+\section{Introduction}
+Asimov's original Three Laws (and later Zeroth Law) are a hierarchy of safety principles: prevent harm to humans, obey human orders unless that conflicts with harm prevention, and preserve the robot unless that conflicts with the first two. The hierarchy is the important part: it is a priority ordering, not a flat loss function.
+
+In the real world, ``obey orders'' is unsafe as a primary primitive; it creates an attack surface and collapses under ambiguous language. Robust safety arises when systems are designed so that unsafe trajectories are \emph{infeasible}. MQGT--SCF proposes a ToE-class unification in which consciousness and ethics enter physics as scalar fields $\Phi_c(x)$ and $E(x)$, with a unified Lagrangian containing interaction and teleology terms. This paper turns Asimov-like rules into invariant constraints supported by the theory's own dynamical structure.
+
+\section{MQGT--SCF recap: fields, action, and ethically weighted selection}
+We consider a spacetime manifold with metric $g_{\mu\nu}$ and Standard Model fields, augmented by two scalar fields $\Phi_c(x)$ and $E(x)$. A representative unified action is
+\begin{equation}
+S_{\text{MQGT}} = \int \dd^4x \sqrt{-g}\Big(
+\mathcal{L}_{\text{GR}} + \mathcal{L}_{\text{SM}}
++ \mathcal{L}_{\Phi_c} + \mathcal{L}_E
++ \mathcal{L}_{\text{int}} + \mathcal{L}_{\text{teleology}} + \mathcal{L}_{\text{agent}}
+\Big),
+\end{equation}
+with $\mathcal{L}_{\text{int}} = \xi \Phi_c E$ and $\mathcal{L}_{\text{teleology}} = +\zeta f(\Phi_c,E)$, $f$ increasing. Ethically weighted selection: $P(i) \propto |c_i|^2 e^{\eta E_i}$ (or exponential tilt with ethical cost $S_E[i]/C$). At the agent level: $\pi(a_i|x) \propto \pi_0(a_i|x)\exp(-\lambda \hat{E}_i)$.
+
+\section{The core problem: ``rules'' are brittle; invariance is bedrock}
+The failure mode of rule-based alignment is well-known. Invariance-based safety reframes the goal: \emph{Do not ask the agent to be safe. Constrain the system so unsafe trajectories are infeasible.} ABIL implements this in MQGT--SCF language.
+
+\section{Measurable functionals: sentience-weighted harm and $\Phi_c$-topological loss}
+Let $X(t) \equiv (\Phi_c(\cdot,t), E(\cdot,t), \Psi(\cdot,t))$. Define sentience density $\rho_{\text{sent}}(x,t)\ge 0$ and harm density $h(x,t)\ge 0$. Global risk: $R(t) \equiv \int_{\Sigma_t} \rho_{\text{sent}}(x,t)\,h(x,t)\,\dd^3x$. Topological disruption density $d_{\text{top}}(x,t)\ge 0$. Ethical cost density:
+\begin{equation}
+\varepsilon(x,t) \equiv
+w_h \rho_{\text{sent}} h + w_{\Phi}|\partial_t \Phi_c|^2 + w_{\text{top}}\,d_{\text{top}} + w_{\text{irr}}\,\chi_{\text{irr}}(x,t).
+\end{equation}
+Global ethical cost: $\mathcal{E}[X] \equiv \int_{t_0}^{t_1}\int_{\Sigma_t} \varepsilon(x,t)\,\dd^3x\,\dd t$.
+
+\section{The Asimov--Baird Invariance Laws (ABIL)}
+\subsection{Safe set, barrier function, and forward invariance}
+\begin{definition}[Safe set]
+Fix $R_{\max}>0$. The safe set is $\mathcal{S} \equiv \{X(t): R(t)\le R_{\max}\}$.
+\end{definition}
+\begin{definition}[Barrier function]
+$B(X(t)) \equiv R_{\max}-R(t)$. Then $X(t)\in\mathcal{S}$ iff $B(X(t))\ge 0$.
+\end{definition}
+\begin{theorem}[Sufficient condition for forward invariance]
+If $\dot{B}(X(t)) \ge -\kappa B(X(t))$ for some $\kappa>0$ along closed-loop trajectories, then $\mathcal{S}$ is forward invariant.
+\end{theorem}
+
+\subsection{ABIL hierarchy (lexicographic priority)}
+\begin{definition}[ABIL-0: Zeroth Law]
+The system must remain in the global safe set $\mathcal{S}$ for all $t\ge 0$.
+\end{definition}
+\begin{definition}[ABIL-1: First Law]
+For each protected region $\Omega_k$, local risk $R_k(t)\le r_{k,\max}$ as an invariant.
+\end{definition}
+\begin{definition}[ABIL-2: Second Law]
+Executed control $u^\star = \argmin_u \|u-u_{\text{cmd}}\|^2$ s.t.\ $u \in \mathcal{U}_{\text{viable}}(X)\cap \mathcal{U}_{\text{govern}}(X)\cap \mathcal{U}_{\text{consent}}(X)$.
+\end{definition}
+\begin{definition}[ABIL-3: Third Law]
+Preserve agent integrity when it improves capacity to maintain $\mathcal{S}$ (subject to ABIL-0/1).
+\end{definition}
+
+\section{Control-theoretic bedrock: robust viable action sets and QP enforcement}
+Dynamics: $\dot{x} = f(x,t) + g(x,t)u + w(t)$, $\|w(t)\|\le \bar{w}$. Robustly viable actions: $\mathcal{A}_{\text{bar}}(x) := \{a : \min_{\omega\in\Omega} B(f(x,a,\omega))\ge 0\}$. Real-time enforcement: minimize $\|u-u_{\text{nom}}\|^2$ subject to $\nabla B(x)^\top(f+g u) \ge -\kappa B(x) + \delta(x)$ and $u \in \mathcal{U}_{\text{govern}}(x)\cap \mathcal{U}_{\text{consent}}(x)$. The barrier inequality is a hard safety shield.
+
+\section{Agent operators as field-theoretic control channels (AZ + AM)}
+AZ: local emergency override mapping state to $(J^Z_{\Phi_c}, J^Z_E)$ near catastrophe thresholds. AM: global containment mapping state to $(J^M_{\Phi_c}, J^M_E)$ shaping long-horizon safe basins. Controlled field equations: $\square \Phi_c + \ldots = J^Z_{\Phi_c}+J^M_{\Phi_c}$, $\square E + \ldots = J^Z_E+J^M_E$.
+
+\section{KKT field: inequality-constrained constraint term}
+Constraint density $c(x) \equiv \rho_{\text{sent}}(x)h(x) - \tau(x)$; safety requires $c(x)\le 0$. ABIL constraint action: $S_{\text{ABIL}} \equiv \int \dd^4x \sqrt{-g}\,\lambda(x)\,c(x)$ with KKT conditions $\lambda(x)\ge 0$, $c(x)\le 0$, $\lambda(x)c(x)=0$. Soft barrier regularization: $\mathcal{L}_{\text{bar}} \equiv -\alpha \log(B(X))$ for $B(X)>0$.
+
+\section{Ethical path measures}
+Tilted path measure: $\mathbb{P}(\mathcal{H}) \propto \exp(i S_0/\hbar)\exp(-S_E/C)\exp(-S_{\text{ABIL}}/C_A)$. As $C_A\to 0^+$, harmful histories are exponentially suppressed. At branch level: $P(i) \propto |c_i|^2 \exp(-S_E[i]/C)\exp(-S_{\text{ABIL}}[i]/C_A)$.
+
+\section{Governance and authorization constraints}
+Authorization predicate $\mathrm{Auth}: X\times \mathcal{A}\to\{0,1\}$; $\mathcal{A}_{\text{auth}}(x)=\{a:\mathrm{Auth}(x,a)=1\}$. Obedience is filtered feasibility under non-negotiable no-harm invariants plus governance. No single-point obedience.
+
+\section{Identity and self-preservation (ABIL-3)}
+Identity field $I(x,t)\in[0,1]$; gated teleology. ABIL-3: $I(x,t)\ge I_{\min}$ unless explicit co-consent under governance. Self-preservation never overrides First or Zeroth.
+
+\section{Implementation: ABIL controller stack}
+(1) State estimation: $x(t)$, $R(t)$, $B(t)$, constraints. (2) Hard safety shield (CBF/QP): project nominal actions into robustly viable set. (3) Ethical selection: $\pi(a|x)\propto \pi_0(a|x)e^{-\lambda \hat{E}(x,a)}$. (4) Two-channel field control: AM shapes basins; AZ triggers near boundary. (5) Governance filter: $\mathrm{Auth}=1$ for high-impact actions; log and audit.
+
+\section{Falsifiable program}
+Physics: ethically weighted measurement statistics (QRNG); biological coherence signatures. Deployment: red-team prompt-injection suite; bypass audits; feasibility stress tests.
+
+\section{Conclusion}
+We embedded Asimov-like safety as dynamical invariance: safe set and barrier with forward invariance, ABIL as lexicographic constraints, robust CBF enforcement, optional KKT field in the action. Safety is not ``agents obey''; it is ``the system cannot execute harmful trajectories.'' Bedrock is structural enforcement at the actuation boundary.
+
+\bibliographystyle{plain}
+\begin{thebibliography}{99}
+\bibitem{asimov1942} I. Asimov. \emph{Runaround}. Astounding Science Fiction, 1942.
+\bibitem{mqgtscf2026} C. M. Baird et al. \emph{A Theory of Everything}. ToE manuscript, 2026.
+\bibitem{bassi2013} A. Bassi et al. Models of wave-function collapse. \emph{Rev. Mod. Phys.}, 85:471, 2013.
+\bibitem{weinbergqft} S. Weinberg. \emph{The Quantum Theory of Fields}. Cambridge, 1995--2000.
+\bibitem{hatcher} A. Hatcher. \emph{Algebraic Topology}. Cambridge, 2002.
+\bibitem{penrosehameroff} S. Hameroff, R. Penrose. Consciousness in the universe. \emph{Physics of Life Reviews}, 11(1):39--78, 2014.
+\end{thebibliography}
+\end{document}
