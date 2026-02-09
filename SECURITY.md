@@ -84,3 +84,5 @@ No code or script changes in this section; this is guidance and future-reference
 - [ ] Optional: pre-push hook to block vault/secrets from being pushed.
 
 That’s full security for this system without making your life harder.
+
+**Full-stack security prompt (for agents/briefings):** see [docs/FULL_STACK_SECURITY_PROMPT.md](docs/FULL_STACK_SECURITY_PROMPT.md).
