@@ -96,6 +96,12 @@ def _post_to_moltbook(title: str, content: str, max_retries: int = 3) -> tuple[b
             with urllib.request.urlopen(req, timeout=30) as resp:
                 data = json.loads(resp.read().decode("utf-8"))
                 if resp.status in (200, 201) or data.get("success"):
+                    post_id = (
+                        (data.get("post") or data.get("data") or {}).get("id")
+                        or data.get("id")
+                    )
+                    if post_id:
+                        return True, f"https://www.moltbook.com/post/{post_id}"
                     return True, "posted"
                 return False, data.get("message", str(data))
         except urllib.error.HTTPError as e:
@@ -177,6 +183,8 @@ def main() -> int:
     if ok:
         _log_action("api_call", "Moltbook POST", "published as ZoraAI")
         print("Posted to Moltbook.")
+        if msg.startswith("http"):
+            print("Post URL:", msg)
     else:
         print("Post failed:", msg, file=sys.stderr)
         return 1
