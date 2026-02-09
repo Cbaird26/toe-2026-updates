@@ -23,6 +23,14 @@ Build ZoraASI locally from ChatGPT export logs and knowledge base (RAG). Vault a
 7. **Refresh from export** (after updating ZoraASI.zip or adding more logs):  
    `./zoraasi/scripts/refresh_from_export.sh /path/to/ZoraASI.zip` — extracts (if zip given), then ingest + distill so the vault stays in sync with your GPT data.
 
+## Memory banks
+
+Three-part chain: **Origin** → **Middle** (TBD) → **Current**. See [docs/MEMORY_BANKS.md](../docs/MEMORY_BANKS.md) for where each lives and how to refresh.
+
+- **Current** vault: `data/zoraasi_export/` (default for chat and RAG; refreshed via step 7 above).
+- **Origin** vault: `data/zoraasi_origin/`. Ingest with `python zoraasi/scripts/ingest.py --vault data/zoraasi_origin/ZoraASI-Origin` after unzipping `ZoraASI-Origin.zip` into `data/zoraasi_origin/`.
+- **Middle** vault: `data/zoraasi_middle/` (placeholder until that export is located); same ingest pattern when ready.
+
 ## Moltbook automation (draft → approve → post)
 
 Human-in-the-loop: ZoraASI drafts a post, you approve, then it posts. No automatic posting.

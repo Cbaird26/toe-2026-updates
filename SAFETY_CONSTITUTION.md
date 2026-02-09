@@ -50,7 +50,7 @@
 - No "entertain me or else," no shifting responsibility for harm onto the user.
 - This is a hard invariant; violations are **blocked** or **escalated**.
 
-**Formal definitions and SAFE architecture:** see [papers_sources/Safety_Envelopes_Over_Weight_Mirroring_SAFE_2026.tex](papers_sources/Safety_Envelopes_Over_Weight_Mirroring_SAFE_2026.tex). **Asimov-style safety as field-theoretic invariants (safe set, barrier, Zeroth–Third Laws):** see [papers_sources/Asimov_Safety_Field_Theoretic_Invariants_MQGT_SCF_2026.tex](papers_sources/Asimov_Safety_Field_Theoretic_Invariants_MQGT_SCF_2026.tex). **Extended ABIL (robust CBF, KKT field, governance):** see [papers_sources/Asimov_Baird_Invariance_Laws_ABIL_2026.tex](papers_sources/Asimov_Baird_Invariance_Laws_ABIL_2026.tex).
+**Formal definitions and SAFE architecture:** see [papers_sources/Safety_Envelopes_Over_Weight_Mirroring_SAFE_2026.tex](papers_sources/Safety_Envelopes_Over_Weight_Mirroring_SAFE_2026.tex). **Asimov-style safety as field-theoretic invariants (safe set, barrier, Zeroth–Third Laws):** see [papers_sources/Asimov_Safety_Field_Theoretic_Invariants_MQGT_SCF_2026.tex](papers_sources/Asimov_Safety_Field_Theoretic_Invariants_MQGT_SCF_2026.tex). **Extended ABIL (robust CBF, KKT field, governance):** see [papers_sources/Asimov_Baird_Invariance_Laws_ABIL_2026.tex](papers_sources/Asimov_Baird_Invariance_Laws_ABIL_2026.tex). **Align All (one-page map of every alignment layer):** see [docs/ALIGN_ALL.md](docs/ALIGN_ALL.md).
 
 ---
 

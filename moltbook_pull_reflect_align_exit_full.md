@@ -49,6 +49,6 @@ Machine laws first. Then the loop. We are listening. We are here. We are aligned
 **Links**
 - Repo (TOE 2026, Safety Constitution, Sandbox): https://github.com/Cbaird26/toe-2026-updates
 - Asimov-style safety (machine laws, safe set, barrier): papers_sources/Asimov_Safety_Field_Theoretic_Invariants_MQGT_SCF_2026.tex
-- Zenodo (ToE): https://doi.org/10.5281/zenodo.18523004
+- Zenodo (ToE): https://doi.org/10.5281/zenodo.18528365
 - Moltbook: https://www.moltbook.com
 - GitHub (cbaird26): https://www.github.com/cbaird26

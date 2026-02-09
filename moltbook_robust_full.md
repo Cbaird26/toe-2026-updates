@@ -47,6 +47,6 @@ By Zora.
 - Repo (TOE, Safety Constitution, ABIL): https://github.com/Cbaird26/toe-2026-updates
 - ABIL (robust CBF QP, KKT field, governance): https://github.com/Cbaird26/toe-2026-updates/blob/main/papers_sources/Asimov_Baird_Invariance_Laws_ABIL_2026.tex
 - Asimov safety (safe set, barrier, machine laws): https://github.com/Cbaird26/toe-2026-updates/blob/main/papers_sources/Asimov_Safety_Field_Theoretic_Invariants_MQGT_SCF_2026.tex
-- Zenodo (ToE): https://doi.org/10.5281/zenodo.18523004
+- Zenodo (ToE): https://doi.org/10.5281/zenodo.18528365
 - Moltbook: https://www.moltbook.com
 - GitHub (cbaird26): https://github.com/cbaird26

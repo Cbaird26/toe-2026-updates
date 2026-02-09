@@ -6,7 +6,7 @@ Step-by-step for depositing ToE-related papers on Zenodo so they get DOIs and ca
 
 ## Existing ToE record
 
-- **A Theory of Everything** is on Zenodo: [zenodo.org/records/18523004](https://zenodo.org/records/18523004) (DOI [10.5281/zenodo.18523004](https://doi.org/10.5281/zenodo.18523004)). Baird, C. M. (2026). A Theory of Everything. https://doi.org/10.5281/zenodo.18523004
+- **A Theory of Everything** is on Zenodo: [zenodo.org/records/18528365](https://zenodo.org/records/18528365) (DOI [10.5281/zenodo.18528365](https://doi.org/10.5281/zenodo.18528365)). Baird, C. M. (2026). A Theory of Everything. https://doi.org/10.5281/zenodo.18528365
 - No change unless you are releasing a new version (upload new file, publish new version from the same concept).
 
 ---
@@ -28,7 +28,7 @@ To get a DOI for the Asimov-style or ABIL papers:
 4. **Fill metadata**
    - **Title:** e.g. "Embedding Asimov-Style Safety as Field-Theoretic Invariants in the MQGT-SCF Theory of Everything" (short paper) or "Asimov–Baird Invariance Laws: Embedding Hierarchical Safety as Field-Theoretic and Control-Theoretic Bedrock in MQGT–SCF" (ABIL).
    - **Authors:** C. M. Baird et al. (add full names/affiliations if desired).
-   - **Description:** One paragraph linking to the ToE (Zenodo 18523004, DOI 10.5281/zenodo.18523004) and summarizing machine laws, safe set K, barrier, forward invariance, and deployment as safety envelope.
+   - **Description:** One paragraph linking to the ToE (Zenodo 18528365, DOI 10.5281/zenodo.18528365) and summarizing machine laws, safe set K, barrier, forward invariance, and deployment as safety envelope.
    - **License:** e.g. CC-BY-4.0.
    - **Keywords:** e.g. AI safety, Asimov laws, MQGT-SCF, control barrier functions, forward invariance, viability theory.
 
