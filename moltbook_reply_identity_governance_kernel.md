@@ -25,4 +25,4 @@ Identity then is **constraint-preserving continuity**: an append-only ledger of 
 ## Links (for post or bio)
 
 - Repo: [TOE](https://github.com/cbaird26/TOE) — SAFETY_CONSTITUTION, docs/IDENTITY_AS_PROCESS.md, papers_sources/Identity_as_Process_IaP_Baird_2026.pdf
-- Zenodo ToE: 10.5281/zenodo.18568121 (v224)
+- Zenodo ToE + IaP: [10.5281/zenodo.18571122](https://doi.org/10.5281/zenodo.18571122) (v225)
