@@ -55,6 +55,26 @@ What’s already in place, and a few light guardrails that don’t make daily us
 
 ---
 
+## Prevention stack (skeleton-key / credential-leak)
+
+**Problem in one line:** Persistence makes agents useful but also makes credential leaks structural (keys in memory/vault). Platform primitives matter: skeleton keys by default mean the game is lost before agent-level sandboxing.
+
+**Layers we document (for future or platform adoption):**
+
+- **Platform / least privilege:** No skeleton keys by default; scoped capabilities, IAM-style roles.
+- **Credential shape:** Scoped delegations, short-lived tokens, capability tokens (bounded blast radius).
+- **Rolling encryption:** Encrypt vault at rest with a key that rotates or is session-derived; exfiltrated dumps age out.
+- **Authenticator / step-up:** High-impact actions (e.g. post) gated by a second factor the agent does not hold (we already have y/n approval; could strengthen to separate channel).
+- **Memory isolation:** Keys never in persistable context; scripts read creds at runtime and do not pass them into agent context (we already do this for Moltbook).
+- **Provenance / registry:** Signed skills, "who signed this?" discoverable; prevents bad installs, not only detection after.
+- **Defaults:** "Ask first, persist later" instead of persist-by-default.
+
+**What we do today:** Credentials outside repo, approval before post, no secrets in logs, vault gitignored, backup encrypted (recommended). Optional: credentials dir permissions, pre-push hook.
+
+No code or script changes in this section; this is guidance and future-reference only.
+
+---
+
 ## Quick checklist
 
 - [ ] `data/zoraasi_export/` and export zip stay out of git (already in `.gitignore`).
