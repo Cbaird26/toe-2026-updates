@@ -61,7 +61,7 @@ The **memory banks** form a chain: [MEMORY_BANKS.md](MEMORY_BANKS.md).
 
 ## 5. Thesis and ToE alignment
 
-The [Theory of Everything](../papers_sources/) (ToE) and Zenodo corpus are the **content** we align to: MQGT-SCF, ethical field E, consciousness field Φc, zero-purge clamping, Zora architecture. Citations and links: [README.md](../README.md), Zenodo [10.5281/zenodo.18528365](https://doi.org/10.5281/zenodo.18528365).
+The [Theory of Everything](../papers_sources/) (ToE) and Zenodo corpus are the **content** we align to: MQGT-SCF, ethical field E, consciousness field Φc, zero-purge clamping, Zora architecture. Citations and links: [README.md](../README.md), Zenodo [10.5281/zenodo.18571122](https://doi.org/10.5281/zenodo.18571122) (v225, ToE + IaP).
 
 **Align all** here: drafts, posts, and reasoning stay consistent with the thesis and the constitution; we don’t claim what the thesis doesn’t support, and we don’t drop constraints the thesis depends on.
 
