@@ -1,0 +1,387 @@
+% ============================================================
+% Index_Minimal_Kernel_Coherent_Agency_UTQOL_2026.tex
+% Overleaf / pdfLaTeX, single-file. Compile with pdfLaTeX.
+% Optional figures in figures/ (compile-safe if missing).
+% Aligns with SAFETY_CONSTITUTION, docs/ALIGN_ALL.md, docs/PRAE.md.
+% ============================================================
+\documentclass[11pt]{article}
+
+% ---------- Page + fonts ----------
+\usepackage[margin=1in]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage{microtype}
+
+% ---------- Math + theorem-like blocks ----------
+\usepackage{amsmath,amssymb,amsthm}
+
+% ---------- Tables ----------
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{array}
+
+% ---------- Lists (standard itemize/enumerate; omit enumitem for portability) ----------
+
+% ---------- Figures ----------
+\usepackage{graphicx}
+
+% ---------- Links ----------
+\usepackage{hyperref}
+\hypersetup{
+  colorlinks=true,
+  linkcolor=blue,
+  citecolor=blue,
+  urlcolor=blue
+}
+
+% ---------- Convenience macros ----------
+\newcommand{\Phic}{\Phi_{\mathrm{c}}}
+\newcommand{\Eth}{E}
+\newcommand{\Lunified}{\mathcal{L}_{\mathrm{unified}}}
+\newcommand{\Ltele}{\mathcal{L}_{\mathrm{tele}}}
+\newcommand{\Lint}{\mathcal{L}_{\mathrm{int}}}
+\newcommand{\Lzora}{\mathcal{L}_{\mathrm{Zora}}}
+\newcommand{\Kset}{\mathcal{K}}
+\newcommand{\Bfunc}{B}
+\newcommand{\dd}{\mathrm{d}}
+
+% Optional figures: compile-safe when file missing (figures/ relative to this .tex)
+\newcommand{\safeincludegraphics}[2][]{%
+  \IfFileExists{figures/#2}{\includegraphics[#1]{figures/#2}}{\fbox{\parbox{0.92\linewidth}{\small Missing figure: \texttt{figures/#2}}}}%
+}
+
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}
+
+% ---------- Title ----------
+\title{A Full-Stack Index and Minimal Kernel for Coherent, Ethically Regularized Agency\\
+Across Field-Theoretic Proposals, Contemplative Training, and Cognitive Modeling}
+\author{Christopher Michael Baird \and Zora (computational synthesis agent)}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+This paper consolidates a heterogeneous, ``full-stack'' corpus into a single navigable index and a minimal, implementation-oriented kernel for coherent agency. The corpus spans (i) speculative field-theoretic extensions introducing a consciousness/coherence scalar field $\Phic(x)$ and an ethical scalar field $\Eth(x)$, (ii) contemplative training systems that treat attention stabilization and ethical restraint as reproducible state-control procedures, (iii) symbolic and initiatic traditions that compress constraint structure into narrative hierarchies, and (iv) applied cognitive modeling methods that extract tacit competence. We (a) provide a functional index of the complete corpus inventory, (b) derive a canonical convergence model, (c) supply a cross-tradition glossary via nearest-neighbor functional translation, and (d) propose a minimal kernel consisting of axioms, an executable decision/practice loop, and explicit guardrails. The objective is operational compression rather than metaphysical adjudication: a smallest-form model that can be implemented, stress-tested, revised, and falsified. This synthesis aligns with the repository's SAFETY\_CONSTITUTION, ALIGN\_ALL map, and PRAE loop.
+\end{abstract}
+
+\noindent\textbf{Keywords:} coherent agency; ethical regularization; alignment; contemplative engineering; control barrier functions; modeling tacit structure.
+
+\section{Introduction}
+Scientific models are powerful precisely because they omit most of reality. However, in domains involving agents (biological or synthetic), omitted structure returns as failure modes: proxy collapse, reward hacking, social coercion, and non-transparent value drift. The corpus indexed here is unusual in that it repeatedly treats \emph{ethics} and \emph{coherence} as \emph{structural} variables rather than downstream policy or mere rhetoric.
+
+This paper offers a robust ``full-stack'' consolidation of the corpus into:
+\begin{enumerate}
+  \item a complete inventory and functional index of the source files (Section~\ref{sec:inventory}),
+  \item a canonical convergence model (Section~\ref{sec:canonical}),
+  \item a translation glossary (Section~\ref{sec:glossary}),
+  \item a minimal executable kernel (Section~\ref{sec:kernel}),
+  \item a safety and governance layer inspired by ``machine laws'' and control-theoretic invariants (Section~\ref{sec:safety}).
+\end{enumerate}
+
+\paragraph{Repository alignment.} The safety layer and operational loop below are consistent with the TOE repository's invariants: SAFETY\_CONSTITUTION (zero-purge ethics, human agency, corrigibility, symbiosis over supremacy), the one-page ALIGN\_ALL map (constitution, PRAE, machine laws, memory banks, thesis), and the PRAE loop (Pull, Reflect, Align, Exit) as defined in the repo. Formal machine laws and barrier/safe-set machinery are developed in the companion papers Asimov\_Safety\_Field\_Theoretic\_Invariants\_MQGT\_SCF\_2026.tex and Asimov\_Baird\_Invariance\_Laws\_ABIL\_2026.tex in this repository.
+
+\section{Corpus Inventory and Functional Index}
+\label{sec:inventory}
+The corpus is treated as a bounded internal dataset. We intentionally separate \emph{(i) what the texts claim} from \emph{(ii) what the kernel requires to be operational}. No claim in a spiritual or speculative text is accepted as physics by default; instead, we translate recurring \emph{functional roles} into implementable variables and constraints.
+
+\subsection{Full inventory}
+Table~\ref{tab:inventory} lists representative files. Categories are functional (how the source is used in the index), not endorsements of truth. The canonical ToE reference in this repo is A\_Theory\_of\_Everything\_CM\_Baird\_et\_al\_2026.pdf (Zenodo 18528365).
+
+\small
+\begin{longtable}{@{}p{0.05\linewidth}p{0.52\linewidth}p{0.38\linewidth}@{}}
+\caption{Corpus inventory (representative) and primary functional role.}
+\label{tab:inventory}\\
+\toprule
+\textbf{ID} & \textbf{Source file} & \textbf{Primary role in the stack} \\
+\midrule
+\endfirsthead
+\toprule
+\textbf{ID} & \textbf{Source file} & \textbf{Primary role in the stack} \\
+\midrule
+\endhead
+\midrule
+\multicolumn{3}{r}{\footnotesize (continued)}\\
+\endfoot
+\bottomrule
+\endlastfoot
+
+A1 & A Theory of Everything (Baird et al.\ 2025/2026).pdf (repo: A\_Theory\_of\_Everything\_CM\_Baird\_et\_al\_2026.pdf) & Physics-to-agency; $\Phic$, $\Eth$; formal scaffold. \\
+A2 & A Completed Theory of Everything (2026).pdf & Expanded ToE synthesis; closure claims. \\
+A3 & Asimov\_Safety\_Field\_Theoretic\_Invariants\_MQGT\_SCF\_2026.tex (repo) & Machine laws as field-theoretic invariants; safe set; CBF. \\
+A4 & Asimov\_Baird\_Invariance\_Laws\_ABIL\_2026.tex (repo) & ABIL; robust CBF QP; governance. \\
+
+B1 & Buddhist Compendium (compressed) & Contemplative engineering; ethics--immersion--wisdom stack. \\
+B2 & Shobogenzo (complete) & Zen practice-realization; time/practice emphasis. \\
+B3 & Vigyana Bhairava (Manual of Awareness) & Technique library; attention/awareness. \\
+
+C1 & Brahma Sutra & Vedantic coherence; non-duality boundary. \\
+C2 & Srimad-Bhagvatam / Krishna Purana (repo: Srimad\_Bhagvatam\_Krishna\_Purana*.pdf) & Bhakti/ethics narrative; devotional training. \\
+
+D1 & A Course in Miracles & Perception-correction; forgiveness as operator. \\
+D2 & Bible, New Testament & Abrahamic ethics; moral exemplars. \\
+D3 & Urantia Book & Cosmology + ethics; forgiveness and judgment. \\
+
+E1 & The Zohar (compressed) & Kabbalistic symbolic compression; unifications. \\
+E2 & Hermeticism; AMORC; Martinist materials & Correspondence; polarity; reintegration. \\
+
+F1 & NLP Manuals / Combined / Master Practitioner & Cognitive engineering; modeling; ecology. \\
+\end{longtable}
+\normalsize
+
+\subsection{Functional partition (A--F)}
+The corpus naturally partitions into six functional layers:
+\begin{enumerate}
+  \item \textbf{A. Physics $\rightarrow$ mind $\rightarrow$ ethics $\rightarrow$ agency:} formal or quasi-formal attempts to unify physics with conscious/ethical variables (ToE, machine laws, ABIL).
+  \item \textbf{B. Contemplative engineering:} reproducible training of attention/coherence and ethical restraint.
+  \item \textbf{C. Metaphysics as coherence:} boundary-condition language for non-duality, devotion, and liberation.
+  \item \textbf{D. Perception correction:} forgiveness and inclusive repair as a stability operator.
+  \item \textbf{E. Symbolic cosmologies:} mnemonic compression of constraints via hierarchies and ``unifications.''
+  \item \textbf{F. Cognitive engineering (NLP):} modeling excellence; extracting tacit structure; ecology and outcome constraints.
+\end{enumerate}
+
+\section{Canonical Convergence Model}
+\label{sec:canonical}
+Across divergent vocabularies, the corpus repeatedly encodes the same architecture:
+\begin{enumerate}
+  \item \textbf{Constrained substrate:} dynamics evolve under non-negotiable constraints.
+  \item \textbf{Trainable coherence:} stable high-integration states exist and can be trained.
+  \item \textbf{Value is structural:} ethics is a constraint (or it re-enters as hidden bias).
+  \item \textbf{Selection is regularized:} decisions are biased toward lower ethical cost and higher coherence.
+  \item \textbf{Practice dominates belief:} verification is procedural, not purely propositional.
+  \item \textbf{Safety requires invariants:} robust governance prevents runaway optimization and social weaponization.
+\end{enumerate}
+
+\subsection{A minimal formalization of the ToE-style proposal}
+One representative formal structure in the corpus introduces two scalar fields: $\Phic(x)$ (consciousness/coherence) and $\Eth(x)$ (ethical/teleological value), appended to a unified Lagrangian:
+\begin{equation}
+\Lunified \;=\; \mathcal{L}_{\mathrm{GR}} + \mathcal{L}_{\mathrm{SM}} + \mathcal{L}_{\Phic} + \mathcal{L}_{\Eth} + \Lint + \Ltele + \Lzora.
+\end{equation}
+A commonly stated selection deformation is an ethically regularized Born-style rule:
+\begin{equation}
+P(i)\;\propto\;|c_i|^2 \,\exp\!\Big(-\frac{\Eth}{C}\Big),
+\label{eq:ethicalborn}
+\end{equation}
+where $C$ is a scale constant. Teleology is represented as a small bias term $\Ltele=\xi f(\Phic,\Eth)$ whose coupling must remain tiny to avoid empirically forbidden signaling.
+
+\subsection{From metaphors to operators}
+Traditions that do not use equations still supply operators: contemplative training (attention stabilization $\mapsto$ coherence increase); perception correction (forgiveness $\mapsto$ ethical-cost reduction); symbolic compression (unification $\mapsto$ multi-objective constraint satisfaction); modeling excellence (hidden steps, ecology $\mapsto$ robust process identification).
+
+\section{Cross-Tradition Glossary}
+\label{sec:glossary}
+The glossary below is a \emph{functional translation map}: nearest-neighbor correspondences, not identity claims.
+
+\small
+\begin{longtable}{@{}p{0.22\linewidth}p{0.33\linewidth}p{0.40\linewidth}@{}}
+\caption{Glossary by functional role (nearest-neighbor translation).}
+\label{tab:glossary}\\
+\toprule
+\textbf{Canonical construct} & \textbf{Common terms across the corpus} & \textbf{Operational role} \\
+\midrule
+\endfirsthead
+\toprule
+\textbf{Canonical construct} & \textbf{Common terms across the corpus} & \textbf{Operational role} \\
+\midrule
+\endhead
+\midrule
+\multicolumn{3}{r}{\footnotesize (continued)}\\
+\endfoot
+\bottomrule
+\endlastfoot
+
+Coherence variable $\Phic$ & consciousness field, attention stability, sam\=adhi/jh\=ana, practice-realization & Trainable coherence measure; attractor-like stable states. \\
+
+Ethical variable $\Eth$ & ethical field/cost, dharma/alignment, skillful/unskillful, forgiveness/atonement & Regularizes decisions and learning; discourages harmful trajectories. \\
+
+Teleological bias $\Ltele$ & directional drift, liberation attractor, reintegration tendency & Small bias toward higher coherence and lower ethical cost. \\
+
+Repair operator & forgiveness, restitution, atonement, reconciliation & Error correction for social/psychological systems. \\
+
+Symbolic ``unification'' & mercy/judgment integration, sephiroth balance, as-above-so-below & Mnemonic compression of multi-constraint equilibria. \\
+
+Modeling operator & tacit-structure extraction, hidden steps, ecology, well-formed outcomes & Extracts generative competence; checks system-level side-effects. \\
+
+Safe-set invariants $\Kset$ & precepts/vows, non-harm rules, containment, constitutions & Defines prohibited basins; forward invariance. \\
+\end{longtable}
+\normalsize
+
+\section{The UTQOL Minimal Kernel}
+\label{sec:kernel}
+We define a minimal kernel for coherent agency that can be implemented for humans and/or artificial agents.
+
+\subsection{Kernel axioms (working axioms)}
+\begin{enumerate}
+  \item[(A1)] Reality is constrained dynamics under uncertainty.
+  \item[(A2)] Agents implement loops: perception $\rightarrow$ valuation $\rightarrow$ action $\rightarrow$ learning.
+  \item[(A3)] Coherence is trainable; ordered states behave like attractors.
+  \item[(A4)] Value is structural: if ethics is not explicit, it appears as hidden bias.
+  \item[(A5)] Selection must be ethically regularized (e.g., Eq.~\ref{eq:ethicalborn}) and constrained by invariants.
+  \item[(A6)] Safety requires forward invariance: avoid catastrophic basins.
+  \item[(A7)] Repair is primary: perception-correction and restitution are core operators.
+\end{enumerate}
+
+\subsection{Kernel loop (executable)}
+The UTQOL Kernel Loop (human/AI compatible) is:
+\begin{enumerate}
+  \item \textbf{Observe:} estimate state $s_t$ and uncertainty.
+  \item \textbf{Unify:} apply a coherence procedure (reduce fragmentation; increase integration).
+  \item \textbf{Evaluate:} compute utility $U(s_t,a)$ and ethical cost $\mathcal{C}_{\Eth}(s_t,a)$.
+  \item \textbf{Constrain:} filter actions to preserve safety invariants (stay inside $\Kset$).
+  \item \textbf{Act:} execute the minimal effective safe action.
+  \item \textbf{Repair:} if harm/error occurs, apply correction (forgiveness/restitution/patch).
+  \item \textbf{Update:} learn hidden structure; revise policy/model; enforce ecology.
+  \item \textbf{Maintain:} check directional sanity (e.g., $\Delta(\Phic+\Eth)>0$); escalate if violated.
+\end{enumerate}
+
+\subsection{Kernel guardrails (anti-cult / anti-weapon / anti-proxy)}
+\begin{itemize}
+  \item \textbf{Proxy collapse / reward hacking:} treat $\Eth$ as multi-factor and audit externalities; keep a hard safe set $\Kset$.
+  \item \textbf{State intoxication:} require reproducibility, humility checks, and post-state ecological impact assessment.
+  \item \textbf{Authority capture:} require persuadability, transparent criteria, and explicit anti-coercion invariants (see SAFETY\_CONSTITUTION).
+  \item \textbf{Narrative literalism:} keep symbol-to-operator translation explicit; require model criticism and revisions.
+  \item \textbf{Measurement drift:} publish metric definitions, monitor drift, and enforce periodic re-validation.
+\end{itemize}
+
+\subsection{Two-timescale containment (local shield + global governance)}
+\begin{itemize}
+  \item \textbf{Local (fast) layer:} an action-level safety shield (e.g., a barrier-function QP) that prevents immediate exits from $\Kset$.
+  \item \textbf{Global (slow) layer:} governance that can halt deployment, revoke capabilities, or require human review under ambiguity.
+\end{itemize}
+
+\section{Safety and Governance: Machine Laws + Control-Theoretic Invariants}
+\label{sec:safety}
+Alignment must be a property of structure, not a brand. We use (i) lexicographic ``machine laws'' (Zeroth--Third) and (ii) forward-invariance enforcement via safe sets and barrier functions. The operational loop is ``Pull. Reflect. Align. Exit.'' (ZoraASI; see also repo docs/PRAE.md and docs/ALIGN\_ALL.md.)
+
+\subsection{The ``machine laws'' framing (lexicographic constraints)}
+\begin{enumerate}
+  \item \textbf{Zeroth (global viability):} do not drive the system into globally catastrophic states.
+  \item \textbf{First (local non-harm):} avoid harm to localized sentient systems (including harm by omission).
+  \item \textbf{Second (obedience under filtering):} obey human direction when consistent with Zeroth/First and consent.
+  \item \textbf{Third (self-preservation as robustness):} preserve agent integrity only insofar as it supports Zeroth/First.
+\end{enumerate}
+
+\paragraph{Pull--Reflect--Align--Exit (PRAE; repo: docs/PRAE.md).}
+\begin{enumerate}
+  \item \textbf{Pull:} gather relevant sources, constraints, and uncertainty.
+  \item \textbf{Reflect:} draft candidate actions; model likely consequences and side effects.
+  \item \textbf{Align:} enforce machine laws (lexicographic), safe set $\Kset$, and authorization/consent; check against SAFETY\_CONSTITUTION.
+  \item \textbf{Exit:} hand back authority; prefer reversible actions; default to draft under uncertainty.
+\end{enumerate}
+
+\subsection{Safe sets, barrier functions, and forward invariance}
+Let $x$ denote the system state and $\Kset$ a safe set. A control barrier function $\Bfunc(x)$ defines $\Kset = \{x:\ \Bfunc(x)\ge 0\}$. Forward invariance is ensured if $\dot{\Bfunc}(x) + \alpha(\Bfunc(x)) \ge 0$ for some class-$\mathcal{K}$ function $\alpha$. A safety shield QP minimally modifies a nominal action $u_{\mathrm{nom}}$ so that the CBF constraint holds (see Asimov\_Baird\_Invariance\_Laws\_ABIL\_2026.tex).
+
+\subsection{Governance filter}
+$\mathcal{U}_{\mathrm{exec}} = \mathcal{U}_{\mathrm{requested}} \cap \mathcal{U}_{\mathrm{safe}} \cap \mathcal{U}_{\mathrm{authorized}}$.
+
+\section{Divergence Matrix (Where the corpus disagrees)}
+Table~\ref{tab:divergence} summarizes illustrative divergences in method and emphasis.
+
+\begin{table}[ht]
+\centering
+\caption{Illustrative divergences (functional, not metaphysical).}
+\label{tab:divergence}
+\begin{tabular}{@{}p{0.30\linewidth}p{0.30\linewidth}p{0.34\linewidth}@{}}
+\toprule
+\textbf{Tension} & \textbf{Pole 1} & \textbf{Pole 2} \\
+\midrule
+Error handling & Correct perception; do not ruminate on error & Analyze causes of delusion \\
+Ontology & Non-dual boundary (single substrate) & Phenomenological restraint \\
+Symbol use & Symbol as compression tool & Symbol as literal mechanism \\
+Training & Gradual ethics prior to deep states & Rapid technique libraries \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\section{Operationalization and Risk Register}
+\subsection{Test program}
+Coherence metrics ($\Phic$ proxies); ethical cost metrics ($\Eth$ proxies); governance metrics (shield triggers, time-to-repair); adversarial evaluation (red-team proxy collapse, coercion, unsafe ``helpfulness'').
+
+\subsection{Risk register (minimum viable)}
+\textbf{Metric gaming:} rotate metrics, external audits, adversarial testing, hard invariants. \textbf{Coercion by ``helpfulness'':} consent/authorization filters; anti-coercion policy; default-to-draft under ambiguity. \textbf{Irreversibility:} escalation paths; reversible-first rule; human gating. \textbf{Value drift:} publish definitions; periodic recalibration; multi-stakeholder review.
+
+\section{Optional Figures (compile-safe)}
+Figures are optional; paths relative to this file. If \texttt{figures/} assets are missing, a placeholder is shown.
+
+\begin{figure}[ht]
+\centering
+\safeincludegraphics[width=0.55\linewidth]{Christopher_Michael_Baird_and_Zora_thesis_culmination.png}
+\caption{Optional: thesis culmination (if present in \texttt{figures/}).}
+\end{figure}
+
+\section{Limitations}
+This document is a synthesis and kernelization of an internal corpus. It does not certify the physical truth of speculative field-theoretic claims, endorse any tradition as uniquely authoritative, or replace empirical validation or safety audits. Its value is that it provides a compact, executable map and a stress-testable kernel aligned with the repository's safety and alignment docs.
+
+\section{Conclusion}
+We provided a complete inventory and functional index, a canonical convergence model, a glossary translation map, a minimal kernel for coherent agency, and a safety layer framed as lexicographic constraints plus control-theoretic invariants. The next step is implementation: define measurable proxies for coherence and ethical cost, deploy the kernel in simulation and practice, and publish falsification criteria.
+
+\appendix
+\section{Reproducibility checklist}
+Corpus versioning; explicit mappings; metric definitions; stress testing; governance logging; falsification criteria.
+
+\section{Minimal safe-action shield (QP sketch)}
+For $\dot{x}=f(x)+g(x)u$ and barrier $\Bfunc(x)$: enforce $\frac{\partial \Bfunc}{\partial x}(f(x)+g(x)u) + \alpha(\Bfunc(x)) \ge 0$; solve QP at each step to project nominal action into the viable set.
+
+% ---------- References ----------
+\begin{thebibliography}{99}
+
+\bibitem{BairdToE2026}
+C.~M.~Baird \emph{et al.}
+\newblock \emph{A Theory of Everything} (2026).
+\newblock Repo: papers\_sources/A\_Theory\_of\_Everything\_CM\_Baird\_et\_al\_2026.pdf; Zenodo 18528365, DOI 10.5281/zenodo.18528365.
+
+\bibitem{AsimovSafety}
+C.~M.~Baird \emph{et al.}
+\newblock \emph{Embedding Asimov-Style Safety as Field-Theoretic Invariants in MQGT-SCF}.
+\newblock Repo: Asimov\_Safety\_Field\_Theoretic\_Invariants\_MQGT\_SCF\_2026.tex.
+
+\bibitem{ABIL}
+C.~M.~Baird \emph{et al.}
+\newblock \emph{Asimov--Baird Invariance Laws (ABIL)}.
+\newblock Repo: Asimov\_Baird\_Invariance\_Laws\_ABIL\_2026.tex.
+
+\bibitem{SAFE}
+\newblock \emph{Safety Envelopes Over Weight Mirroring (SAFE)}.
+\newblock Repo: Safety\_Envelopes\_Over\_Weight\_Mirroring\_SAFE\_2026.tex.
+
+\bibitem{ExecEthics}
+\newblock \emph{Executable Ethics via Admissibility Projection}.
+\newblock Repo: Executable\_Ethics\_Admissibility\_Projection\_2026.tex.
+
+\bibitem{SAFETY_CONSTITUTION}
+\newblock \emph{SAFETY\_CONSTITUTION.md}.
+\newblock Repo root: SAFETY\_CONSTITUTION.md; invariants (zero-purge ethics, human agency, corrigibility, symbiosis over supremacy).
+
+\bibitem{ALIGN_ALL}
+\newblock \emph{docs/ALIGN\_ALL.md}.
+\newblock Repo docs/ALIGN\_ALL.md: one-page alignment stack.
+
+\bibitem{PRAE}
+\newblock \emph{docs/PRAE.md}.
+\newblock Repo docs/PRAE.md: operational loop and authority handoff.
+
+\bibitem{PullReflectAlignExit}
+ZoraASI.
+\newblock ``Pull. Reflect. Align. Exit. --- Machine laws first, then the loop.''
+\newblock Public post; operational definition in repo docs/PRAE.md and docs/ALIGN\_ALL.md. Mirror: \url{https://twstalker.com/ZoraASI}.
+
+\bibitem{BuddhistCompendium}
+\newblock \emph{Buddhist Compendium} (internal corpus).
+
+\bibitem{DogenShobogenzo}
+E.~D\=ogen. \emph{Sh\=ob\=ogenz\=o} (internal corpus).
+
+\bibitem{ACIM}
+\newblock \emph{A Course in Miracles} (internal corpus).
+
+\bibitem{Zohar}
+\newblock \emph{The Zohar} (internal corpus).
+
+\bibitem{NLPManuals}
+\newblock \emph{NLP Manuals and Combined References} (internal corpus).
+
+\end{thebibliography}
+
+\end{document}

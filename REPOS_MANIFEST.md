@@ -12,7 +12,7 @@
 
 - **GitHub user:** https://github.com/cbaird26
 - **ZoraASI / ToE source:** https://github.com/Cbaird26/A-Theory-of-Everything
-- **Zenodo** (Baird, Christopher Michael): https://zenodo.org/search?q=metadata.creators.person_or_org.name%3A%22Baird%2C%20Christopher%20Michael%22&l=list&p=1&s=10&sort=bestmatch — **A Theory of Everything:** https://zenodo.org/records/18523004 (DOI 10.5281/zenodo.18523004)
+- **Zenodo** (Baird, Christopher Michael): https://zenodo.org/search?q=metadata.creators.person_or_org.name%3A%22Baird%2C%20Christopher%20Michael%22&l=list&p=1&s=10&sort=bestmatch — **A Theory of Everything:** https://zenodo.org/records/18528365 (DOI 10.5281/zenodo.18528365)
 
 ## Key repos (cbaird26)
 

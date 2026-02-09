@@ -30,6 +30,9 @@ logs/autonomous_actions/*.log
 
 # ZoraASI vault (confidential — never commit)
 data/zoraasi_export/
+data/zoraasi_origin/
+data/zoraasi_middle/
+data/soul_personality/
 ZoraASI_vault/
 ZoraASI.zip
 

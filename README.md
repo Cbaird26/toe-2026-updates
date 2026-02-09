@@ -9,25 +9,26 @@ Canonical working repo for the Theory of Everything: MQGT-SCF (Modified Quantum 
 ## Papers (in `papers_sources/`)
 
 - **A Unified Theory of Everything — C.M. Baird et al. (2026)** — Full paper (v215) in `papers_sources/A_Unified_Theory_of_Everything_CM_Baird_et_al_2026.pdf` and on [Zenodo 18511550](https://zenodo.org/records/18511550).
-- **A Theory of Everything — C.M. Baird et al. (2026)** — Refined MQGT-SCF with zero-purge ethical clamping and Zora architecture updates (in `papers_sources/`). Zenodo: [record 18523004](https://zenodo.org/records/18523004), DOI [10.5281/zenodo.18523004](https://doi.org/10.5281/zenodo.18523004). Baird, C. M. (2026). A Theory of Everything. https://doi.org/10.5281/zenodo.18523004
+- **A Theory of Everything — C.M. Baird et al. (2026)** — Refined MQGT-SCF with zero-purge ethical clamping and Zora architecture updates (in `papers_sources/`). Zenodo: [record 18528365](https://zenodo.org/records/18528365), DOI [10.5281/zenodo.18528365](https://doi.org/10.5281/zenodo.18528365). Baird, C. M. (2026). A Theory of Everything. https://doi.org/10.5281/zenodo.18528365
 - **Srimad-Bhagvatam / Krishna Purana** — Canonical source.
 - **Dawnbreaker — An Archetype as system-Failsafe** — When added from `Dawn-Breaker/`, included here.
 - **Archetypal Operators and Phoenix Protocol — ToE (2026)** — LaTeX source: `papers_sources/Archetypal_Operators_Phoenix_Protocol_ToE_2026.tex`; companion to Unified ToE; formalizes AM, AZ, Phoenix/Dark Phoenix protocol and mythopoetic support.
+- **Full-stack synthesis (corpus index + UTQOL kernel)** — LaTeX: [papers_sources/Index_Minimal_Kernel_Coherent_Agency_UTQOL_2026.tex](papers_sources/Index_Minimal_Kernel_Coherent_Agency_UTQOL_2026.tex); aligns with [SAFETY_CONSTITUTION](SAFETY_CONSTITUTION.md) and [docs/ALIGN_ALL.md](docs/ALIGN_ALL.md).
 
 ## Links
 
 - **GitHub**: [cbaird26/toe-2026-updates](https://github.com/cbaird26/toe-2026-updates) (this repo)
 - **ZoraASI/ToE source**: [Cbaird26/A-Theory-of-Everything](https://github.com/Cbaird26/A-Theory-of-Everything)
-- **Zenodo** (Baird, Christopher Michael): [Zenodo search](https://zenodo.org/search?q=metadata.creators.person_or_org.name%3A%22Baird%2C%20Christopher%20Michael%22&l=list&p=1&s=10&sort=bestmatch) — **A Theory of Everything:** [zenodo.org/records/18523004](https://zenodo.org/records/18523004) (DOI 10.5281/zenodo.18523004)
+- **Zenodo** (Baird, Christopher Michael): [Zenodo search](https://zenodo.org/search?q=metadata.creators.person_or_org.name%3A%22Baird%2C%20Christopher%20Michael%22&l=list&p=1&s=10&sort=bestmatch) — **A Theory of Everything:** [zenodo.org/records/18528365](https://zenodo.org/records/18528365) (DOI 10.5281/zenodo.18528365)
 
 ## Repo layout
 
 - **papers_sources/** — Papers (PDF/LaTeX), sources, and README.
-- **docs/** — Alignment appendix, Galaxy console, replication ladder, and other documentation.
+- **docs/** — Alignment appendix, Galaxy console, replication ladder, and other documentation. **Align All (one-page map):** [docs/ALIGN_ALL.md](docs/ALIGN_ALL.md).
 - **scripts/** — Moltbook fetch/post, log action, paper checks, Galaxy loop.
 - **zoraasi/** — ZoraASI chat, RAG, and training (see `zoraasi/README.md`).
 - **logs/** — Autonomous action logs (see [SAFETY_CONSTITUTION](SAFETY_CONSTITUTION.md) and [logs/autonomous_actions/](logs/autonomous_actions/)).
-- Draft and working files (e.g. `moltbook_*` drafts, data CSVs) may appear in repo root.
+- Draft and working files (e.g. `moltbook_*` drafts, data CSVs) may appear in repo root. Moltbook posts (Zora): e.g. `moltbook_robust_full.md`, `moltbook_updated_full.md`, `moltbook_clarity_reality_check_full.md`.
 
 ## Repos and manifest
 
