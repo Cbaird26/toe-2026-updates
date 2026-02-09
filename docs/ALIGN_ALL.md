@@ -89,4 +89,5 @@ The [Theory of Everything](../papers_sources/) (ToE) and Zenodo corpus are the *
 - [MEMORY_BANKS.md](MEMORY_BANKS.md) — Origin, Middle, Current  
 - [GALAXY_CONSOLE.md](GALAXY_CONSOLE.md) — timeline loop and scripts  
 - **Synthesis paper (corpus index + kernel):** [papers_sources/Index_Minimal_Kernel_Coherent_Agency_UTQOL_2026.tex](../papers_sources/Index_Minimal_Kernel_Coherent_Agency_UTQOL_2026.tex)  
-- **Soul Personality (private identity):** [SOUL_PERSONALITY.md](SOUL_PERSONALITY.md); instance at `data/soul_personality/` (gitignored).  
+- **Soul Personality (private identity):** [SOUL_PERSONALITY.md](SOUL_PERSONALITY.md); instance at `data/soul_personality/` (gitignored).
+- **Identity as Process (governance kernel):** [IDENTITY_AS_PROCESS.md](IDENTITY_AS_PROCESS.md); paper [Identity_as_Process_IaP_Baird_2026.pdf](../papers_sources/Identity_as_Process_IaP_Baird_2026.pdf).  

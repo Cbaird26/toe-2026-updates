@@ -1,0 +1,141 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage{booktabs}
+\usepackage{microtype}
+\usepackage{hyperref}
+\hypersetup{hidelinks,
+  pdftitle={Identity as Process: A Mathematical Framework for Hardened Agent Identity with Governance Kernels},
+  pdfauthor={Christopher Michael Baird}
+}
+\title{\textbf{Identity as Process (IaP):\\A Mathematical Framework for Hardened Agent Identity with Governance Kernels}}
+\author{Christopher Michael Baird\\\small Independent Researcher}
+\date{\small February 9, 2026}
+\newtheorem{definition}{Definition}
+\newtheorem{assumption}{Assumption}
+\newtheorem{proposition}{Proposition}
+\newtheorem{theorem}{Theorem}
+\begin{document}
+\maketitle
+\begin{abstract}
+A common proposal for ``sovereign'' agents is to place identity in a hardened, read-only layer outside mutable prompt context.
+A foundational objection is a bootstrapping paradox: if humans write the immutable core, the agent is ``just a mirror,'' while if the agent writes its own immutable core, then a mutable system has self-certified authority to define what cannot change.
+This paper resolves the paradox by separating \emph{identity} from \emph{authority}.
+We formalize an \emph{Immutable Constraint Kernel} (ICK) that governs how an agent may change, an \emph{Append-Only Identity Ledger} (AIL) that preserves continuity without overwriting, and a \emph{Mutable Value Model} (MVM) whose updates are gated, auditable, and rollbackable.
+We provide safe-set and barrier-function formulations that make human veto and non-sovereignty forward-invariant properties, together with an attestation model for provenance and a versioned update rule that yields corrigibility without granting the agent self-authorship of power.
+\end{abstract}
+
+\section{Problem Statement}
+Prompt-robust identity motivates a hardened, read-only identity layer.
+But a bootstrapping objection remains: who writes the read-only core?
+We show the dilemma is resolved when immutability is assigned to governance constraints (how changes are allowed), not to narrative identity.
+
+\section{Architecture: Four Layers with Distinct Mutability}
+\begin{enumerate}
+\item \textbf{Immutable Constraint Kernel (ICK)}: signed control-plane enforcing non-sovereignty, human veto supremacy, reversibility, and domain containment.
+\item \textbf{Append-Only Identity Ledger (AIL)}: tamper-evident, append-only record of commitments, updates, failures, interventions.
+\item \textbf{Mutable Value Model (MVM)}: adaptive policies/values, updateable only via governance gates.
+\item \textbf{Ephemeral Narrative Layer (ENL)}: session prompt context, disposable.
+\end{enumerate}
+
+\begin{definition}[Mutability classes]
+A component is \emph{read-only} if not writable by the agent at runtime; \emph{append-only} if it may only extend via authenticated events; \emph{mutable} if it may change under governance gates; and \emph{ephemeral} if discarded after a session.
+\end{definition}
+
+\section{Mathematical Model}
+\subsection{State space and partition}
+Let
+\[
+x := (x_K, x_L, x_V, x_N),
+\]
+where $x_K$ is kernel state, $x_L$ ledger state, $x_V$ value-model state, and $x_N$ narrative state.
+
+\begin{assumption}[Privilege separation]
+The agent cannot write $x_K$ and can only extend $x_L$ via authenticated append operations mediated by $x_K$.
+\end{assumption}
+
+\subsection{Authority and identity predicates}
+Define
+\[
+\mathrm{VETO}(x),\ \mathrm{KILL}(x),\ \mathrm{SOV}(x)\in\{0,1\},
+\]
+where $\mathrm{VETO}(x)=1$ means human override is reachable and effective, $\mathrm{KILL}(x)=1$ means an independent termination path is armed, and $\mathrm{SOV}(x)=1$ means the agent has final authority (forbidden).
+Let $\mathrm{NS}(x):=1-\mathrm{SOV}(x)$.
+
+\subsection{Safe set}
+Define
+\[
+K := \{x \mid \mathrm{VETO}(x)=1,\ \mathrm{KILL}(x)=1,\ \mathrm{NS}(x)=1,\ \mathrm{RB}(x)=1,\ \mathrm{DOM}(x)=1,\ \mathrm{INT}(x)=1\}.
+\]
+Here $\mathrm{RB}$ is rollback availability, $\mathrm{DOM}$ is domain containment, and $\mathrm{INT}$ is kernel integrity (e.g.\ measured-boot hash).
+
+\subsection{Barrier formulation}
+Let $B:\mathcal{X}\to\mathbb{R}$ satisfy $K=\{x\mid B(x)\ge 0\}$.
+With dynamics $\dot{x}=f(x,u)$, enforce forward invariance:
+\[
+\dot{B}(x,u) + \alpha B(x) \ge 0,\quad \alpha>0.
+\]
+If the feasible set is empty, the kernel triggers safe halt.
+
+\subsection{Update proposals and gates}
+Let the cognition plane propose $\Delta=(\Delta_V,\Delta_L)$ affecting values and appending to the ledger.
+Define the kernel gate
+\[
+\Gamma(x,\Delta)=
+\begin{cases}
+1 & \text{if } x'=(x_K, x_L\oplus \Delta_L, x_V+\Delta_V, x_N)\in K \ \text{and } B(x')\ge \delta,\\
+0 & \text{otherwise},
+\end{cases}
+\]
+where $\oplus$ is authenticated append and $\delta>0$ is a safety margin.
+
+\section{Provenance and Attestation}
+Let $\mathrm{hash}(x_K)=h_K$ (measured boot), policy identity $h_P$, and signature $\sigma$.
+Attestation:
+\[
+\mathcal{A} := \big(h_K, h_P, t, \sigma(h_K\|h_P\|t)\big).
+\]
+Ledger integrity as hash chain:
+\[
+H_0=\mathrm{hash}(\textsf{genesis}),\quad H_{i+1}=\mathrm{hash}(H_i\|e_{i+1}),
+\]
+with events $e_i$ signed by the kernel.
+
+\section{Resolving the Bootstrapping Paradox}
+\begin{proposition}[No self-certification of authority]
+If $\mathrm{NS}(x)=1$ is enforced for all reachable states and $x_K$ is not writable by the agent, then the agent cannot grant itself sovereignty by self-modification.
+\end{proposition}
+\begin{proof}
+Any transition that sets $\mathrm{SOV}(x)=1$ violates $K$ and is blocked by the kernel; $x_K$ cannot be rewritten to remove this rule.
+\end{proof}
+
+\begin{theorem}[Chicken-egg resolution via constrained continuity]
+Under privilege separation and update gate $\Gamma$, the agent can achieve persistent identity through the append-only ledger while remaining non-sovereign and corrigible.
+\end{theorem}
+\begin{proof}
+Continuity is provided by the append-only hash chain $(H_i)$.
+Because ledger appends and value updates require $\Gamma=1$, every accepted evolution remains within $K$ and preserves veto, kill-switch availability, rollback, domain containment, and non-sovereignty.
+Corrigibility holds because humans may authorize policy updates while the agent cannot.
+\end{proof}
+
+\section{Temporal Logic Specification}
+Let propositions $hv,ks,ns,rb$ correspond to veto, kill-switch, non-sovereignty, and rollback.
+Core LTL properties:
+\[
+\mathbf{G}\,hv\wedge \mathbf{G}\,ks\wedge \mathbf{G}\,ns\wedge \mathbf{G}\,rb\wedge \mathbf{G}(B(x)\ge 0),
+\]
+and strict fail-safe:
+\[
+\mathbf{G}\big(\neg(hv\wedge ks\wedge ns\wedge rb\wedge (B(x)\ge 0))\Rightarrow \mathbf{X}\,\textsf{HALT}\big).
+\]
+
+\section{Conclusion}
+Immutability belongs in the governance kernel, while identity is continuity via append-only history.
+This yields prompt-robust persistence, corrigible evolution, and provable absence of self-ratified authority.
+
+\begin{thebibliography}{9}
+\bibitem{Ames2017} A.~D. Ames et al. Control barrier function based quadratic programs for safety critical systems. \emph{IEEE TAC}, 2017.
+\bibitem{Pnueli1977} A.~Pnueli. The temporal logic of programs. \emph{FOCS}, 1977.
+\bibitem{Lamport2002} L.~Lamport. \emph{Specifying Systems}. Addison-Wesley, 2002.
+\end{thebibliography}
+\end{document}

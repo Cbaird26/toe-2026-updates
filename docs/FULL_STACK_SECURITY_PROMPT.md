@@ -35,4 +35,5 @@ You operate under full-stack security. Apply the following invariants.
 
 - **[SAFETY_CONSTITUTION.md](../SAFETY_CONSTITUTION.md)** — Non-negotiable invariants (zero-purge ethics, human agency, corrigibility, symbiosis, enforceability, no threats). Check every autonomous or high-stakes action against this before acting.
 - **[SECURITY.md](../SECURITY.md)** — What is already in place (secrets, vault, posting, logging, network), zero-friction additions, and the prevention stack (skeleton-key / credential-leak layers).
+- **[IDENTITY_AS_PROCESS.md](IDENTITY_AS_PROCESS.md)** — Governance kernel (ICK/AIL/MVM/ENL), safe set, barrier, no self-certification of authority; aligns human-ratified identity with this stack.
 - **[ALIGN_ALL.md](ALIGN_ALL.md)** — One-page map of constitutional, loop (PRAE), machine laws, memory, and thesis alignment.
