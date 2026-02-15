@@ -1,0 +1,16 @@
+cff-version: 1.2.0
+message: "If you use these docs for replication or citation, please cite using the metadata below."
+title: "TOE 2026 updates (replication docs)"
+version: toe-docs-v0.1
+date-released: 2026-02-15
+url: "https://github.com/Cbaird26/toe-2026-updates"
+repository-code: "https://github.com/Cbaird26/toe-2026-updates"
+authors:
+  - family-names: Baird
+    given-names: Christopher Michael
+keywords:
+  - replication
+  - falsification
+  - REPLICATION_LADDER
+  - MQGT-SCF
+abstract: "Documentation and falsification packet for TOE/MQGT-SCF replication. Pinned to spine-v0.1 (toe-empirical-validation). Includes REPLICATION_LADDER, FALSIFICATION_PACKET, and verify_pushed."
