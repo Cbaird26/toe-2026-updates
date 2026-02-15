@@ -11,7 +11,7 @@ When the user asks about **latest paper updates**, **new versions**, or **Baird 
 1. **Zenodo**: Check or point to Zenodo search for Baird, Christopher Michael:  
    https://zenodo.org/search?q=metadata.creators.person_or_org.name%3A%22Baird%2C%20Christopher%20Michael%22&l=list&p=1&s=10&sort=bestmatch
 
-2. **GitHub**: Check or list repos under **github.com/cbaird26** (e.g. A-Theory-of-Everything, mqgt-analysis, toe-2026-updates) for recent commits, releases, or PDF updates.
+2. **GitHub**: Prefer the in-repo list **cbaird26_github_repos_replication.md** when listing or referring to cbaird26 repos (it has the full list). Check or list repos under **github.com/cbaird26** (e.g. A-Theory-of-Everything, mqgt-analysis, toe-2026-updates) for recent commits, releases, or PDF updates. If calling the GitHub API directly, use `per_page=100` and follow all pages (or use `gh repo list cbaird26 --limit 200`) so all repos are returned.
 
 3. **This repo**: Papers and sources live in `papers_sources/`; REPOS_MANIFEST.md lists all related repos and pull sources.
 

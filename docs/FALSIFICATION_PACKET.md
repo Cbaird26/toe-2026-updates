@@ -47,9 +47,14 @@ Canonical Zenodo citation for the 2026 Unified ToE paper (v216): https://doi.org
 
 ## 5. One-command reproduction and hash
 
-- **Intended path:** Run the reproducibility package associated with the Zenodo record (scripts, likelihoods, priors, sampling). If the package lives in a sibling repo (e.g. **toe-empirical-validation** or **mqgt-analysis**), the one-command path and README will be linked here.
-- **Current status:** Reproduction path and manifest are described in the Zenodo record. Code and manifests are included for re-run and audit. For a single command or script that runs the full analysis and produces figures, see the Zenodo deposit files or the repo [Cbaird26/toe-empirical-validation](https://github.com/Cbaird26/toe-empirical-validation) (if applicable).
-- **Hash verifies everything:** When a fixed artifact (tarball, repo commit, or manifest) is provided, a checksum (e.g. SHA-256) verifies that the analysis has not been altered post hoc. The Zenodo record provides a fixed DOI and version; use the Zenodo file checksums for the deposited materials. For repo-based reproduction, pin to a specific commit and document the hash in the replication report.
-
-**Placeholder (if not yet automated):**  
-*"One-command reproduction: TBD. See Zenodo record and toe-empirical-validation (or mqgt-analysis) for scripts. Hash: document the commit or Zenodo version used."*
+- **Intended path:** Run the reproducibility package associated with the Zenodo record (scripts, likelihoods, priors, sampling). The package lives in the spine repo [Cbaird26/toe-empirical-validation](https://github.com/Cbaird26/toe-empirical-validation) (or [Cbaird26/mqgt-analysis](https://github.com/Cbaird26/mqgt-analysis)); a single entrypoint runs one channel (QRNG or fifth-force + cosmology), produces figures/constraints, and supports a checksum or pinned artifact.
+- **One-command reproduction (pin commit before running):**
+  1. Clone and enter the repo:  
+     `git clone https://github.com/Cbaird26/toe-empirical-validation.git && cd toe-empirical-validation`
+  2. Pin the artifact: record the commit hash with `git rev-parse HEAD` (run before any pull; document this hash in your replication report).
+  3. Run the analysis for one channel:  
+     `./run_all.sh`  
+     or, if the repo uses a different entrypoint, follow the README in that repo for the single command that runs the analysis and produces figures. For QRNG channel only, use the script or command documented in the repo README.
+  4. Compare outputs to Zenodo-supplied materials or to the figures in the Evidence paper; document any deviation.
+- **Hash verifies everything:** When a fixed artifact (tarball, repo commit, or manifest) is provided, a checksum (e.g. SHA-256) verifies that the analysis has not been altered post hoc. The Zenodo record provides a fixed DOI and version; use the Zenodo file checksums for the deposited materials. **For repo-based reproduction, always pin to a specific commit (e.g. `git checkout <SHA>`) and document that commit hash in the replication report.**
+- **Replication ladder:** For the full step-by-step ladder (clone → run → compare → “it lives or dies here” criterion), see [REPLICATION_LADDER.md](REPLICATION_LADDER.md).

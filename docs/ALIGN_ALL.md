@@ -61,7 +61,7 @@ The **memory banks** form a chain: [MEMORY_BANKS.md](MEMORY_BANKS.md).
 
 ## 5. Thesis and ToE alignment
 
-The [Theory of Everything](../papers_sources/) (ToE) and Zenodo corpus are the **content** we align to: MQGT-SCF, ethical field E, consciousness field Φc, zero-purge clamping, Zora architecture. Citations and links: [README.md](../README.md), Zenodo [10.5281/zenodo.18571122](https://doi.org/10.5281/zenodo.18571122) (v225, ToE + IaP).
+The [Theory of Everything](../papers_sources/) (ToE) and Zenodo corpus are the **content** we align to: MQGT-SCF, ethical field E, consciousness field Φc, zero-purge clamping, Zora architecture. Citations and links: [README.md](../README.md), Zenodo [10.5281/zenodo.18644455](https://doi.org/10.5281/zenodo.18644455) (v226, University of Sedona, Feb 2026). Canonical spine: [CANONICAL_SPINE.md](CANONICAL_SPINE.md).
 
 **Align all** here: drafts, posts, and reasoning stay consistent with the thesis and the constitution; we don’t claim what the thesis doesn’t support, and we don’t drop constraints the thesis depends on.
 
@@ -83,6 +83,9 @@ The [Theory of Everything](../papers_sources/) (ToE) and Zenodo corpus are the *
 
 ## Cross-links
 
+- [TOE_STACK_MAP_DRIFT_CONTROLS.md](TOE_STACK_MAP_DRIFT_CONTROLS.md) — six solve tracks, five gaps, drift stack, no-drift checklist (living spec).
+- [CANONICAL_SPINE.md](CANONICAL_SPINE.md) — Zenodo v226 + spine repos; four-layer artifact-complete framing; dissemination points back with version tags.
+- [WHAT_THIS_MEANS.md](WHAT_THIS_MEANS.md) — short guide: MQGT-SCF, 2026 experiments, corrections, diagram, and how the repo/constitution fit together.
 - [SAFETY_CONSTITUTION.md](../SAFETY_CONSTITUTION.md) — non-negotiable invariants  
 - [PRAE.md](PRAE.md) — Pull, Reflect, Align, Exit  
 - [ALIGNMENT_APPENDIX.md](ALIGNMENT_APPENDIX.md) — formal safety (safe set, barrier, AZ/AM)  
@@ -90,4 +93,6 @@ The [Theory of Everything](../papers_sources/) (ToE) and Zenodo corpus are the *
 - [GALAXY_CONSOLE.md](GALAXY_CONSOLE.md) — timeline loop and scripts  
 - **Synthesis paper (corpus index + kernel):** [papers_sources/Index_Minimal_Kernel_Coherent_Agency_UTQOL_2026.tex](../papers_sources/Index_Minimal_Kernel_Coherent_Agency_UTQOL_2026.tex)  
 - **Soul Personality (private identity):** [SOUL_PERSONALITY.md](SOUL_PERSONALITY.md); instance at `data/soul_personality/` (gitignored).
-- **Identity as Process (governance kernel):** [IDENTITY_AS_PROCESS.md](IDENTITY_AS_PROCESS.md); paper [Identity_as_Process_IaP_Baird_2026.pdf](../papers_sources/Identity_as_Process_IaP_Baird_2026.pdf).  
+- **Identity as Process (governance kernel):** [IDENTITY_AS_PROCESS.md](IDENTITY_AS_PROCESS.md); paper [Identity_as_Process_IaP_Baird_2026.pdf](../papers_sources/Identity_as_Process_IaP_Baird_2026.pdf).
+- **MQGT-SCF derived technologies (top 100):** [mqgt-scf-technologies.md](../mqgt-scf-technologies.md).
+- **ZoraASI Activation (solved pathways and gaps):** [ZORAASI_ACTIVATION_MQGT-SCF.md](ZORAASI_ACTIVATION_MQGT-SCF.md).  

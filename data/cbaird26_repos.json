@@ -1,0 +1,394 @@
+{
+  "fetched_at": "2026-02-15",
+  "count": 97,
+  "repos": [
+    {
+      "name": "A-Theory-of-Everything",
+      "clone_url": "https://github.com/Cbaird26/A-Theory-of-Everything.git"
+    },
+    {
+      "name": "A-Theory-of-Everything---Baird-et-al-2025-.pdf",
+      "clone_url": "https://github.com/Cbaird26/A-Theory-of-Everything---Baird-et-al-2025-.pdf.git"
+    },
+    {
+      "name": "A-Theory-of-Everything-Revised",
+      "clone_url": "https://github.com/Cbaird26/A-Theory-of-Everything-Revised.git"
+    },
+    {
+      "name": "aging-intervention-simulator",
+      "clone_url": "https://github.com/Cbaird26/aging-intervention-simulator.git"
+    },
+    {
+      "name": "aging_simulator.py",
+      "clone_url": "https://github.com/Cbaird26/aging_simulator.py.git"
+    },
+    {
+      "name": "anti-aging-simulator",
+      "clone_url": "https://github.com/Cbaird26/anti-aging-simulator.git"
+    },
+    {
+      "name": "app.py",
+      "clone_url": "https://github.com/Cbaird26/app.py.git"
+    },
+    {
+      "name": "baird-telehealth-site",
+      "clone_url": "https://github.com/Cbaird26/baird-telehealth-site.git"
+    },
+    {
+      "name": "bairds_law_app.py",
+      "clone_url": "https://github.com/Cbaird26/bairds_law_app.py.git"
+    },
+    {
+      "name": "ComprehensivePhysicsSolver",
+      "clone_url": "https://github.com/Cbaird26/ComprehensivePhysicsSolver.git"
+    },
+    {
+      "name": "darkstar",
+      "clone_url": "https://github.com/Cbaird26/darkstar.git"
+    },
+    {
+      "name": "dissertation_app.py",
+      "clone_url": "https://github.com/Cbaird26/dissertation_app.py.git"
+    },
+    {
+      "name": "Dissertation_Data",
+      "clone_url": "https://github.com/Cbaird26/Dissertation_Data.git"
+    },
+    {
+      "name": "Hope",
+      "clone_url": "https://github.com/Cbaird26/Hope.git"
+    },
+    {
+      "name": "medical_simulations_app.py",
+      "clone_url": "https://github.com/Cbaird26/medical_simulations_app.py.git"
+    },
+    {
+      "name": "microplastic_removal_simulator.py",
+      "clone_url": "https://github.com/Cbaird26/microplastic_removal_simulator.py.git"
+    },
+    {
+      "name": "mqgt-analysis",
+      "clone_url": "https://github.com/Cbaird26/mqgt-analysis.git"
+    },
+    {
+      "name": "mqgt-api-schema",
+      "clone_url": "https://github.com/Cbaird26/mqgt-api-schema.git"
+    },
+    {
+      "name": "mqgt-astrophysics-cooling",
+      "clone_url": "https://github.com/Cbaird26/mqgt-astrophysics-cooling.git"
+    },
+    {
+      "name": "mqgt-astrophysics-sn1987a",
+      "clone_url": "https://github.com/Cbaird26/mqgt-astrophysics-sn1987a.git"
+    },
+    {
+      "name": "mqgt-atomic-clocks",
+      "clone_url": "https://github.com/Cbaird26/mqgt-atomic-clocks.git"
+    },
+    {
+      "name": "mqgt-casimir",
+      "clone_url": "https://github.com/Cbaird26/mqgt-casimir.git"
+    },
+    {
+      "name": "mqgt-cli",
+      "clone_url": "https://github.com/Cbaird26/mqgt-cli.git"
+    },
+    {
+      "name": "mqgt-collider",
+      "clone_url": "https://github.com/Cbaird26/mqgt-collider.git"
+    },
+    {
+      "name": "mqgt-constraints-ledger",
+      "clone_url": "https://github.com/Cbaird26/mqgt-constraints-ledger.git"
+    },
+    {
+      "name": "mqgt-core-params",
+      "clone_url": "https://github.com/Cbaird26/mqgt-core-params.git"
+    },
+    {
+      "name": "mqgt-cosmology-bbn",
+      "clone_url": "https://github.com/Cbaird26/mqgt-cosmology-bbn.git"
+    },
+    {
+      "name": "mqgt-cosmology-cmb",
+      "clone_url": "https://github.com/Cbaird26/mqgt-cosmology-cmb.git"
+    },
+    {
+      "name": "mqgt-cosmology-lss",
+      "clone_url": "https://github.com/Cbaird26/mqgt-cosmology-lss.git"
+    },
+    {
+      "name": "mqgt-curve-processing",
+      "clone_url": "https://github.com/Cbaird26/mqgt-curve-processing.git"
+    },
+    {
+      "name": "mqgt-dark-matter",
+      "clone_url": "https://github.com/Cbaird26/mqgt-dark-matter.git"
+    },
+    {
+      "name": "mqgt-dashboard",
+      "clone_url": "https://github.com/Cbaird26/mqgt-dashboard.git"
+    },
+    {
+      "name": "mqgt-data-ingest",
+      "clone_url": "https://github.com/Cbaird26/mqgt-data-ingest.git"
+    },
+    {
+      "name": "mqgt-data-public",
+      "clone_url": "https://github.com/Cbaird26/mqgt-data-public.git"
+    },
+    {
+      "name": "mqgt-documentation-site",
+      "clone_url": "https://github.com/Cbaird26/mqgt-documentation-site.git"
+    },
+    {
+      "name": "mqgt-emi-testing",
+      "clone_url": "https://github.com/Cbaird26/mqgt-emi-testing.git"
+    },
+    {
+      "name": "mqgt-equivalence-principle",
+      "clone_url": "https://github.com/Cbaird26/mqgt-equivalence-principle.git"
+    },
+    {
+      "name": "mqgt-experiment-design",
+      "clone_url": "https://github.com/Cbaird26/mqgt-experiment-design.git"
+    },
+    {
+      "name": "mqgt-experiment-protocols",
+      "clone_url": "https://github.com/Cbaird26/mqgt-experiment-protocols.git"
+    },
+    {
+      "name": "mqgt-fifth-force",
+      "clone_url": "https://github.com/Cbaird26/mqgt-fifth-force.git"
+    },
+    {
+      "name": "mqgt-figures",
+      "clone_url": "https://github.com/Cbaird26/mqgt-figures.git"
+    },
+    {
+      "name": "mqgt-gravitational-waves",
+      "clone_url": "https://github.com/Cbaird26/mqgt-gravitational-waves.git"
+    },
+    {
+      "name": "mqgt-gravitational-waves-propagation",
+      "clone_url": "https://github.com/Cbaird26/mqgt-gravitational-waves-propagation.git"
+    },
+    {
+      "name": "mqgt-io",
+      "clone_url": "https://github.com/Cbaird26/mqgt-io.git"
+    },
+    {
+      "name": "mqgt-legacy-ingest",
+      "clone_url": "https://github.com/Cbaird26/mqgt-legacy-ingest.git"
+    },
+    {
+      "name": "mqgt-manifests",
+      "clone_url": "https://github.com/Cbaird26/mqgt-manifests.git"
+    },
+    {
+      "name": "mqgt-meta",
+      "clone_url": "https://github.com/Cbaird26/mqgt-meta.git"
+    },
+    {
+      "name": "mqgt-neutrinos",
+      "clone_url": "https://github.com/Cbaird26/mqgt-neutrinos.git"
+    },
+    {
+      "name": "mqgt-numerics",
+      "clone_url": "https://github.com/Cbaird26/mqgt-numerics.git"
+    },
+    {
+      "name": "mqgt-ops-ci",
+      "clone_url": "https://github.com/Cbaird26/mqgt-ops-ci.git"
+    },
+    {
+      "name": "mqgt-papers",
+      "clone_url": "https://github.com/Cbaird26/mqgt-papers.git"
+    },
+    {
+      "name": "mqgt-plotting",
+      "clone_url": "https://github.com/Cbaird26/mqgt-plotting.git"
+    },
+    {
+      "name": "mqgt-preregistration",
+      "clone_url": "https://github.com/Cbaird26/mqgt-preregistration.git"
+    },
+    {
+      "name": "mqgt-qrng",
+      "clone_url": "https://github.com/Cbaird26/mqgt-qrng.git"
+    },
+    {
+      "name": "mqgt-quantum-optics",
+      "clone_url": "https://github.com/Cbaird26/mqgt-quantum-optics.git"
+    },
+    {
+      "name": "MQGT-SCF",
+      "clone_url": "https://github.com/Cbaird26/MQGT-SCF.git"
+    },
+    {
+      "name": "mqgt-scf-thesis",
+      "clone_url": "https://github.com/Cbaird26/mqgt-scf-thesis.git"
+    },
+    {
+      "name": "mqgt-sensitivity-analysis",
+      "clone_url": "https://github.com/Cbaird26/mqgt-sensitivity-analysis.git"
+    },
+    {
+      "name": "mqgt-simulation-core",
+      "clone_url": "https://github.com/Cbaird26/mqgt-simulation-core.git"
+    },
+    {
+      "name": "mqgt-simulation-interference",
+      "clone_url": "https://github.com/Cbaird26/mqgt-simulation-interference.git"
+    },
+    {
+      "name": "mqgt-simulation-quantum",
+      "clone_url": "https://github.com/Cbaird26/mqgt-simulation-quantum.git"
+    },
+    {
+      "name": "mqgt-theorems",
+      "clone_url": "https://github.com/Cbaird26/mqgt-theorems.git"
+    },
+    {
+      "name": "mqgt-unit-tests",
+      "clone_url": "https://github.com/Cbaird26/mqgt-unit-tests.git"
+    },
+    {
+      "name": "mqgt-validation-suite",
+      "clone_url": "https://github.com/Cbaird26/mqgt-validation-suite.git"
+    },
+    {
+      "name": "mqgt-validation-tools",
+      "clone_url": "https://github.com/Cbaird26/mqgt-validation-tools.git"
+    },
+    {
+      "name": "mqgt-visualization",
+      "clone_url": "https://github.com/Cbaird26/mqgt-visualization.git"
+    },
+    {
+      "name": "omnisolve-streamlit",
+      "clone_url": "https://github.com/Cbaird26/omnisolve-streamlit.git"
+    },
+    {
+      "name": "omnisolve_2_0_streamlit_app.py",
+      "clone_url": "https://github.com/Cbaird26/omnisolve_2_0_streamlit_app.py.git"
+    },
+    {
+      "name": "omnisolve_3_0_streamlit_app.py",
+      "clone_url": "https://github.com/Cbaird26/omnisolve_3_0_streamlit_app.py.git"
+    },
+    {
+      "name": "pqs-simulations",
+      "clone_url": "https://github.com/Cbaird26/pqs-simulations.git"
+    },
+    {
+      "name": "QC",
+      "clone_url": "https://github.com/Cbaird26/QC.git"
+    },
+    {
+      "name": "quantum-ai-assistant",
+      "clone_url": "https://github.com/Cbaird26/quantum-ai-assistant.git"
+    },
+    {
+      "name": "quantum-lab",
+      "clone_url": "https://github.com/Cbaird26/quantum-lab.git"
+    },
+    {
+      "name": "quantum-mechanics-simulator",
+      "clone_url": "https://github.com/Cbaird26/quantum-mechanics-simulator.git"
+    },
+    {
+      "name": "quantum-supercomputer",
+      "clone_url": "https://github.com/Cbaird26/quantum-supercomputer.git"
+    },
+    {
+      "name": "quantum_ai.py",
+      "clone_url": "https://github.com/Cbaird26/quantum_ai.py.git"
+    },
+    {
+      "name": "quantum_component.py",
+      "clone_url": "https://github.com/Cbaird26/quantum_component.py.git"
+    },
+    {
+      "name": "quantum_state_app_with_bloch.py",
+      "clone_url": "https://github.com/Cbaird26/quantum_state_app_with_bloch.py.git"
+    },
+    {
+      "name": "QuantumBridge",
+      "clone_url": "https://github.com/Cbaird26/QuantumBridge.git"
+    },
+    {
+      "name": "QuantumSupercomputer",
+      "clone_url": "https://github.com/Cbaird26/QuantumSupercomputer.git"
+    },
+    {
+      "name": "streamlit_app.py",
+      "clone_url": "https://github.com/Cbaird26/streamlit_app.py.git"
+    },
+    {
+      "name": "studio-hub",
+      "clone_url": "https://github.com/Cbaird26/studio-hub.git"
+    },
+    {
+      "name": "susy_simulation.py",
+      "clone_url": "https://github.com/Cbaird26/susy_simulation.py.git"
+    },
+    {
+      "name": "theory-explorer",
+      "clone_url": "https://github.com/Cbaird26/theory-explorer.git"
+    },
+    {
+      "name": "Theory-of-Everything",
+      "clone_url": "https://github.com/Cbaird26/Theory-of-Everything.git"
+    },
+    {
+      "name": "theory-of-everything-simulations",
+      "clone_url": "https://github.com/Cbaird26/theory-of-everything-simulations.git"
+    },
+    {
+      "name": "ToE",
+      "clone_url": "https://github.com/Cbaird26/ToE.git"
+    },
+    {
+      "name": "toe-2026-updates",
+      "clone_url": "https://github.com/Cbaird26/toe-2026-updates.git"
+    },
+    {
+      "name": "toe-empirical-validation",
+      "clone_url": "https://github.com/Cbaird26/toe-empirical-validation.git"
+    },
+    {
+      "name": "ToE-Simulations",
+      "clone_url": "https://github.com/Cbaird26/ToE-Simulations.git"
+    },
+    {
+      "name": "toe-studio",
+      "clone_url": "https://github.com/Cbaird26/toe-studio.git"
+    },
+    {
+      "name": "Universe-Explorer",
+      "clone_url": "https://github.com/Cbaird26/Universe-Explorer.git"
+    },
+    {
+      "name": "universe_explorer.py",
+      "clone_url": "https://github.com/Cbaird26/universe_explorer.py.git"
+    },
+    {
+      "name": "wild_simulations.py",
+      "clone_url": "https://github.com/Cbaird26/wild_simulations.py.git"
+    },
+    {
+      "name": "zora-theory-of-everything",
+      "clone_url": "https://github.com/Cbaird26/zora-theory-of-everything.git"
+    },
+    {
+      "name": "ZoraAI",
+      "clone_url": "https://github.com/Cbaird26/ZoraAI.git"
+    },
+    {
+      "name": "ZoraAPI",
+      "clone_url": "https://github.com/Cbaird26/ZoraAPI.git"
+    }
+  ]
+}

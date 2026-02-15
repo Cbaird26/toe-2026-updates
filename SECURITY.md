@@ -17,6 +17,12 @@ What’s already in place, and a few light guardrails that don’t make daily us
 
 ---
 
+## Moltbook as platform
+
+Moltbook has been reported to have had major security incidents: misconfiguration exposing user and API data, and a high-risk environment for agents (spam, phishing, prompt injection, credential/key abuse). **Do not connect autonomous agents to Moltbook** without sandboxing, read-only scraping where possible, and prompt-injection hardening. Human-in-the-loop posting remains the rule (already in place). Existing controls—credentials outside repo, approval before post, no secrets in logs; optional credentials dir permissions and pre-push hook—are the minimum. Operational security is the engineering translation of the ethics field: treat the platform as hostile until proven otherwise.
+
+---
+
 ## Zero-friction additions
 
 1. **Credentials directory permissions** (one-time)  

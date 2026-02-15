@@ -7,6 +7,21 @@ A public checklist to make replication **social**, not just technical. Don't bel
 
 ---
 
+## One-command replication ladder (single channel)
+
+Use this for a minimal “run once and compare” replication. The primary channel for this ladder is **QRNG** (or fifth-force + cosmology if the spine repo supports it).
+
+1. **Clone repo:**  
+   `git clone https://github.com/Cbaird26/toe-empirical-validation.git && cd toe-empirical-validation`
+2. **Pin and run:**  
+   Record `git rev-parse HEAD`, then run the one-command entrypoint (e.g. `./run_all.sh` or the command in the repo README). The run should produce figures/constraints and, if available, a checksum or artifact.
+3. **Compare:**  
+   Compare output to Zenodo deposit files or to figures in the Evidence paper. Document the commit hash and any deviation.
+
+**It lives or dies here (QRNG channel):** If a well-powered, pre-registered QRNG experiment under the same operational definition of E finds no deviation from standard randomness, the deformation is excluded at the stated confidence level (see [FALSIFICATION_PACKET.md](FALSIFICATION_PACKET.md) §4). Reproduction confirms that the analysis pipeline and constraints match the paper; independent replication of the experiment is the falsification test.
+
+---
+
 ## Five rungs (in order)
 
 **(a) Run the scripts.**  

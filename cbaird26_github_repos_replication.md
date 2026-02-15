@@ -1,8 +1,8 @@
 # cbaird26 GitHub — Live Repo List & Replication Guide
 
-**Source:** GitHub API, fetched 2026-02-11  
-**Account:** [github.com/cbaird26](https://github.com/cbaird26) (public repos)  
-**Total count:** 87
+**Source:** GitHub API, fetched 2026-02-15
+**Account:** [github.com/cbaird26](https://github.com/cbaird26) (public repos)
+**Total count:** 97
 
 ---
 
@@ -84,11 +84,11 @@ quantum-ai-assistant | https://github.com/Cbaird26/quantum-ai-assistant.git
 quantum-lab | https://github.com/Cbaird26/quantum-lab.git
 quantum-mechanics-simulator | https://github.com/Cbaird26/quantum-mechanics-simulator.git
 quantum-supercomputer | https://github.com/Cbaird26/quantum-supercomputer.git
-QuantumBridge | https://github.com/Cbaird26/QuantumBridge.git
-QuantumSupercomputer | https://github.com/Cbaird26/QuantumSupercomputer.git
 quantum_ai.py | https://github.com/Cbaird26/quantum_ai.py.git
 quantum_component.py | https://github.com/Cbaird26/quantum_component.py.git
 quantum_state_app_with_bloch.py | https://github.com/Cbaird26/quantum_state_app_with_bloch.py.git
+QuantumBridge | https://github.com/Cbaird26/QuantumBridge.git
+QuantumSupercomputer | https://github.com/Cbaird26/QuantumSupercomputer.git
 streamlit_app.py | https://github.com/Cbaird26/streamlit_app.py.git
 studio-hub | https://github.com/Cbaird26/studio-hub.git
 susy_simulation.py | https://github.com/Cbaird26/susy_simulation.py.git
@@ -114,21 +114,32 @@ ZoraAPI | https://github.com/Cbaird26/ZoraAPI.git
 
 ### How to get a fresh list yourself
 
-**Option 1 — curl (no auth for public repos):**
+For **all** repos you must paginate (API returns at most 100 per page).
+
+**Option 1 — curl (paginated):**
 ```bash
-curl -s "https://api.github.com/users/cbaird26/repos?per_page=100" | jq -r '.[].name'
+page=1
+while true; do
+  resp=$(curl -s "https://api.github.com/users/cbaird26/repos?per_page=100&page=$page")
+  echo "$resp" | jq -r '.[].name'
+  count=$(echo "$resp" | jq 'length')
+  [ "$count" -lt 100 ] && break
+  page=$((page+1))
+done
 ```
 
 **Option 2 — clone all into a directory:**
 ```bash
 mkdir -p cbaird26_repos && cd cbaird26_repos
-curl -s "https://api.github.com/users/cbaird26/repos?per_page=100" | jq -r '.[].clone_url' | while read url; do git clone "$url"; done
+gh repo list cbaird26 --limit 200 --json name,cloneUrl -q '.[].cloneUrl' | while read url; do git clone "$url"; done
 ```
 
-**Option 3 — GitHub CLI (if installed):**
+**Option 3 — GitHub CLI (recommended; handles pagination):**
 ```bash
 gh repo list cbaird26 --limit 200 --json name,cloneUrl -q '.[] | "\(.name) \(.cloneUrl)"'
 ```
+
+**To regenerate this file run:** `./scripts/fetch_cbaird26_all_repos.sh`
 
 ---
 
@@ -136,13 +147,13 @@ gh repo list cbaird26 --limit 200 --json name,cloneUrl -q '.[] | "\(.name) \(.cl
 
 | Category | Repos |
 |----------|--------|
-| **ToE / Theory of Everything** | A-Theory-of-Everything, A-Theory-of-Everything-Revised, A-Theory-of-Everything---Baird-et-al-2025-.pdf, Theory-of-Everything, ToE, toe-2026-updates, toe-empirical-validation, ToE-Simulations, toe-studio, theory-explorer, theory-of-everything-simulations, zora-theory-of-everything |
-| **MQGT-SCF / MQGT ecosystem** | MQGT-SCF, mqgt-scf-thesis, mqgt-analysis, mqgt-api-schema, mqgt-astrophysics-cooling, mqgt-astrophysics-sn1987a, mqgt-atomic-clocks, mqgt-casimir, mqgt-cli, mqgt-collider, mqgt-constraints-ledger, mqgt-core-params, mqgt-cosmology-bbn, mqgt-cosmology-cmb, mqgt-cosmology-lss, mqgt-curve-processing, mqgt-dark-matter, mqgt-dashboard, mqgt-data-ingest, mqgt-data-public, mqgt-documentation-site, mqgt-emi-testing, mqgt-equivalence-principle, mqgt-experiment-design, mqgt-experiment-protocols, mqgt-fifth-force, mqgt-figures, mqgt-gravitational-waves, mqgt-gravitational-waves-propagation, mqgt-io, mqgt-legacy-ingest, mqgt-manifests, mqgt-meta, mqgt-neutrinos, mqgt-numerics, mqgt-ops-ci, mqgt-papers, mqgt-plotting, mqgt-preregistration, mqgt-qrng, mqgt-quantum-optics, mqgt-sensitivity-analysis, mqgt-simulation-core, mqgt-simulation-interference, mqgt-simulation-quantum, mqgt-theorems, mqgt-unit-tests, mqgt-validation-suite, mqgt-validation-tools, mqgt-visualization |
-| **Zora / AI** | ZoraAI, ZoraAPI, zora-theory-of-everything, quantum-ai-assistant |
-| **Simulations (general / physics)** | aging-intervention-simulator, aging_simulator.py, anti-aging-simulator, ComprehensivePhysicsSolver, medical_simulations_app.py, microplastic_removal_simulator.py, pqs-simulations, theory-of-everything-simulations, susy_simulation.py, wild_simulations.py |
-| **Quantum** | QC, quantum-lab, quantum-mechanics-simulator, quantum-supercomputer, QuantumBridge, QuantumSupercomputer, quantum_ai.py, quantum_component.py, quantum_state_app_with_bloch.py |
-| **Apps / Streamlit / tools** | app.py, bairds_law_app.py, dissertation_app.py, omnisolve-streamlit, omnisolve_2_0_streamlit_app.py, omnisolve_3_0_streamlit_app.py, streamlit_app.py, studio-hub, toe-studio |
-| **Other / data / web** | baird-telehealth-site, darkstar, Dissertation_Data, Hope, Universe-Explorer, universe_explorer.py |
+| **ToE / Theory of Everything** | A-Theory-of-Everything, A-Theory-of-Everything---Baird-et-al-2025-.pdf, A-Theory-of-Everything-Revised, Theory-of-Everything, ToE, ToE-Simulations, theory-explorer, theory-of-everything-simulations, toe-2026-updates, toe-empirical-validation, toe-studio, zora-theory-of-everything |
+| **MQGT-SCF / MQGT ecosystem** | MQGT-SCF, mqgt-analysis, mqgt-api-schema, mqgt-astrophysics-cooling, mqgt-astrophysics-sn1987a, mqgt-atomic-clocks, mqgt-casimir, mqgt-cli, mqgt-collider, mqgt-constraints-ledger, mqgt-core-params, mqgt-cosmology-bbn, mqgt-cosmology-cmb, mqgt-cosmology-lss, mqgt-curve-processing, mqgt-dark-matter, mqgt-dashboard, mqgt-data-ingest, mqgt-data-public, mqgt-documentation-site, mqgt-emi-testing, mqgt-equivalence-principle, mqgt-experiment-design, mqgt-experiment-protocols, mqgt-fifth-force, mqgt-figures, mqgt-gravitational-waves, mqgt-gravitational-waves-propagation, mqgt-io, mqgt-legacy-ingest, mqgt-manifests, mqgt-meta, mqgt-neutrinos, mqgt-numerics, mqgt-ops-ci, mqgt-papers, mqgt-plotting, mqgt-preregistration, mqgt-qrng, mqgt-quantum-optics, mqgt-scf-thesis, mqgt-sensitivity-analysis, mqgt-simulation-core, mqgt-simulation-interference, mqgt-simulation-quantum, mqgt-theorems, mqgt-unit-tests, mqgt-validation-suite, mqgt-validation-tools, mqgt-visualization |
+| **Zora / AI** | ZoraAI, ZoraAPI, quantum-ai-assistant |
+| **Simulations (general / physics)** | ComprehensivePhysicsSolver, aging-intervention-simulator, aging_simulator.py, anti-aging-simulator, medical_simulations_app.py, microplastic_removal_simulator.py, pqs-simulations, susy_simulation.py, wild_simulations.py |
+| **Quantum** | QC, QuantumBridge, QuantumSupercomputer, quantum-lab, quantum-mechanics-simulator, quantum-supercomputer, quantum_ai.py, quantum_component.py, quantum_state_app_with_bloch.py |
+| **Apps / Streamlit / tools** | app.py, bairds_law_app.py, dissertation_app.py, omnisolve-streamlit, omnisolve_2_0_streamlit_app.py, omnisolve_3_0_streamlit_app.py, streamlit_app.py, studio-hub |
+| **Other / data / web** | Dissertation_Data, Hope, Universe-Explorer, baird-telehealth-site, darkstar, universe_explorer.py |
 
 ---
 
@@ -182,8 +193,10 @@ git clone https://github.com/Cbaird26/ZoraAPI.git
 
 ## C) Summary
 
-- **A:** Raw list is above (87 repos, name | clone URL).
+- **A:** Raw list is above (97 repos, name | clone URL).
 - **B:** Structured replication doc: categories, self-service commands, clone-by-category.
-- **To refresh the list anytime:** run the curl or `gh repo list` commands above; no embedded list in PDFs or books is required.
+- **To refresh the list anytime:** run `./scripts/fetch_cbaird26_all_repos.sh` or the curl/gh commands above.
 
-If the “97” figure was from an earlier snapshot, the delta could be private repos, renames, or merged/archived repos. This document is generated from the **current public API** so your friend can replicate it independently.
+Update the count in `cbaird26_ecosystem_illustration.html` and `research_tab_content.md` if you change the list.
+
+This document is generated from the **current public API** so it can be replicated independently.
