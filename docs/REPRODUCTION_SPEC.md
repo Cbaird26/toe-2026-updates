@@ -35,3 +35,23 @@ The spine repo must support this **exact** command (or document the single equiv
 - In README.md, add a "One-command reproduction" section with the canonical command above and a note to pin the commit hash before running.
 
 Once this exists, [FALSIFICATION_PACKET.md](FALSIFICATION_PACKET.md) §5 and [REPLICATION_LADDER.md](REPLICATION_LADDER.md) already reference it; no change needed in this repo unless the repo URL or command name changes.
+
+---
+
+## Verification (no guessing: is GitHub aligned?)
+
+From the TOE repo root, run:
+
+```bash
+./scripts/verify_pushed.sh
+```
+
+This script: runs `git fetch origin`, checks that `HEAD == origin/main`, and greps `origin/main:docs/REPLICATION_LADDER.md` for the canonical command string and the `qrng-falsification-claim` anchor. If all checks pass, the GitHub version matches the doc contract. If the working tree is clean and the script exits 0, GitHub has the current state.
+
+---
+
+## Spine repo: CI, null fixture, and comparison
+
+- **Replication contract (CI):** The replication contract is tested in CI in [toe-empirical-validation](https://github.com/Cbaird26/toe-empirical-validation): a workflow runs the canonical command and asserts that expected artifact files exist. If CI fails, the ladder and code have drifted.
+- **Null fixture:** Rung (e) of the ladder uses `--null-fixture`; details (generator or bundled null dataset) are in the toe-empirical-validation README.
+- **Automated comparison:** For automated comparison of a run to a reference set, run `./scripts/compare_artifacts.sh artifacts/ reference_artifacts/` in the spine repo (see spine README for tolerances).

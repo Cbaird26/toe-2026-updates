@@ -15,6 +15,8 @@ Canonical Zenodo citation for the 2026 Unified ToE paper (v216): https://doi.org
   **P(i) ∝ |cᵢ|² · exp(−E/C)**  
   where outcome *i* has amplitude cᵢ, E is the ethical-weight field evaluated for that outcome, and C is a scale constant. Standard QM is recovered when E → 0 or C → ∞.
 - **How E is assigned, measured, or proxied:** Defined operationally in the paper (see sections on outcome labeling, scalar structure, and constraint channels). E is not a free narrative label; it is tied to observable or protocol-defined quantities in each channel (QRNG, Higgs invisible, fifth-force, cosmology). Exact mapping: see paper and Zenodo supplementary materials.
+- **QRNG channel (concrete):** In the spine repo [toe-empirical-validation](https://github.com/Cbaird26/toe-empirical-validation), E is assigned by the function **`label_E`** in **`code/e_labeling.py`** (e.g. `label_E(bits: np.ndarray) -> float`). When replicating, pin the commit hash (or Zenodo version) of that repo so the E-labeling implementation is fixed.
+- **Pinned spine commit (this packet):** `56578d50f81071b21d4278b4bba4ceefe238b575` — toe-empirical-validation at this SHA provides the canonical `run_all.sh`, null fixture, CI, and E-labeling; use `git checkout 56578d50f81071b21d4278b4bba4ceefe238b575` (or the full SHA) for replication.
 - **Φc and E as dynamical fields:** See paper for the Lagrangian/field formulation; the deformation is expressed so that both are part of the dynamics, not ad hoc.
 
 ---

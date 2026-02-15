@@ -10,7 +10,7 @@ We will test whether the distribution of QRNG outcomes deviates from standard (u
 
 ## 2. Operational definition of E
 
-- **E-labeling rule:** [Describe exactly how each outcome is assigned an E value. Example: "Each block of N bits is mapped to E via the function documented in toe-empirical-validation repo, file `e_labeling.py`, version X."]
+- **E-labeling rule:** Each block of N bits is mapped to E via the function **`label_E`** in **`code/e_labeling.py`** in the [toe-empirical-validation](https://github.com/Cbaird26/toe-empirical-validation) repo. Pin the commit hash (or Zenodo version) when replicating; see [FALSIFICATION_PACKET.md](FALSIFICATION_PACKET.md) §1.
 - **If you change E labeling, you are running a different experiment.** Replication of the ladder uses the same E definition as in the FALSIFICATION_PACKET and the spine repo.
 
 ## 3. Design
