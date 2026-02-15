@@ -12,13 +12,26 @@ This doc specifies what the TOE/MQGT-SCF replication pipeline expects from the s
 
 ---
 
+## Canonical command (required for replication ladder)
+
+The spine repo must support this **exact** command (or document the single equivalent in README):
+
+```bash
+./scripts/run_all.sh --channel qrng --seed 0 --out artifacts/
+```
+
+- `--channel qrng`: run QRNG channel only (or document the channel name the repo uses).
+- `--seed 0`: fixed RNG seed for reproducibility (replicators may try other seeds for rung (c)).
+- `--out artifacts/`: write all outputs (figures, constraint files, posterior samples) here. No other path for "official" replication.
+
 ## Suggested implementation (toe-empirical-validation)
 
-- Add a top-level script `run_all.sh` (or `run_qrng.sh` for QRNG-only) that:
+- Add a script `scripts/run_all.sh` (or top-level `run_all.sh` that forwards to it) that:
+  - Accepts `--channel qrng`, `--seed 0`, `--out artifacts/` (or equivalent).
   - Installs or checks for required environment (e.g. Python, key packages).
   - Runs the analysis scripts for the chosen channel.
-  - Writes figures/constraints to a known directory (e.g. `output/` or `figures/`).
+  - Writes figures/constraints to the specified output directory (e.g. `artifacts/`).
   - Exits 0 on success.
-- In README.md, add a "One-command reproduction" section with the exact clone-and-run steps and a note to pin the commit hash before running.
+- In README.md, add a "One-command reproduction" section with the canonical command above and a note to pin the commit hash before running.
 
 Once this exists, [FALSIFICATION_PACKET.md](FALSIFICATION_PACKET.md) §5 and [REPLICATION_LADDER.md](REPLICATION_LADDER.md) already reference it; no change needed in this repo unless the repo URL or command name changes.
