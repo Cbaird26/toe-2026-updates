@@ -70,6 +70,12 @@ Set `OPENAI_API_KEY` in your environment before running. For local Ollama usage,
 - **[SANDBOX_AND_APPROVAL_FLOWS.md](SANDBOX_AND_APPROVAL_FLOWS.md)** — Sandbox and approval for sensitive operations.
 - **Formal alignment** (safe set, execution wrapper): [docs/ALIGNMENT_APPENDIX.md](docs/ALIGNMENT_APPENDIX.md).
 
+## Cite (replication docs)
+
+- **Tag:** `toe-docs-v0.1` (pinned to spine) or `toe-docs-v0.1.1` (metadata + CITATION.cff)
+- **Commit:** `67730e2` (v0.1) / `7acc536edb45a2f18499dc4f861302164bb2581e` (v0.1.1)
+- **DOI:** (to be minted via Zenodo on release; add here once available)
+
 ## License
 
 [LICENSE](LICENSE)
