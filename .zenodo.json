@@ -1,0 +1,13 @@
+{
+  "creators": [
+    {
+      "name": "Baird, Christopher Michael",
+      "affiliation": "University of Sedona",
+      "type": "Researcher"
+    }
+  ],
+  "title": "TOE 2026 updates (replication docs)",
+  "description": "Documentation and falsification packet for TOE/MQGT-SCF replication. Pinned to spine-v0.1. Includes REPLICATION_LADDER, FALSIFICATION_PACKET, and verify_pushed.",
+  "license": "MIT",
+  "keywords": ["replication", "falsification", "REPLICATION_LADDER", "MQGT-SCF", "Theory of Everything"]
+}

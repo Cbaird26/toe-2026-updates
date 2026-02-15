@@ -14,3 +14,10 @@ keywords:
   - REPLICATION_LADDER
   - MQGT-SCF
 abstract: "Documentation and falsification packet for TOE/MQGT-SCF replication. Pinned to spine-v0.1 (toe-empirical-validation). Includes REPLICATION_LADDER, FALSIFICATION_PACKET, and verify_pushed."
+# When Zenodo mints a version DOI, add it here (and replace README Cite placeholder):
+# identifiers:
+#   - type: doi
+#     value: "10.5281/zenodo.XXXXXXX"
+#   - type: doi
+#     description: "Concept DOI (all versions)"
+#     value: "10.5281/zenodo.YYYYYYY"
