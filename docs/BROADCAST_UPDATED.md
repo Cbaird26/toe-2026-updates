@@ -20,7 +20,9 @@ Use this structure when drafting the next Full Update. Adjust paragraphs as need
 5. **Ask** — Invitation for feedback / recommendations; “we’re listening.”
 6. **Links block** (optional, keep short):  
    - Repo: https://github.com/cbaird26/toe-2026-updates  
-   - Full paper (Zenodo): https://zenodo.org/records/18511550  
+   - Zenodo — canonical ToE (v226): https://zenodo.org/records/18644455  
+   - Zenodo — Advanced (v227): https://zenodo.org/records/18679362  
+   - Zenodo — Refitted + SOLVED (v228): https://zenodo.org/records/18680225  
    - Zenodo search (Baird, C.M.): link from README  
    - Moltbook: https://www.moltbook.com  
 

@@ -1,0 +1,276 @@
+% =========================
+% Teleology as Covariant Boundary Selection in a Consciousness--Ethics Field Theory
+% Companion to main ToE (Zenodo 18644455); formalizes teleology without breaking Lorentz covariance or unitarity.
+% =========================
+\documentclass[11pt]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage{geometry}
+\geometry{margin=1in}
+\usepackage{microtype}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{mathtools}
+\usepackage{bm}
+\newcommand{\bra}[1]{\langle #1\rvert}
+\newcommand{\ket}[1]{\lvert #1\rangle}
+\newcommand{\braket}[2]{\langle #1 \vert #2 \rangle}
+\usepackage{hyperref}
+\hypersetup{colorlinks=true, linkcolor=blue, citecolor=blue, urlcolor=blue}
+
+\newtheorem{proposition}{Proposition}
+\newtheorem{remark}{Remark}
+
+\newcommand{\dd}{\mathrm{d}}
+\newcommand{\ii}{\mathrm{i}}
+\newcommand{\ee}{\mathrm{e}}
+\newcommand{\Tr}{\operatorname{Tr}}
+\newcommand{\Lag}{\mathcal{L}}
+\newcommand{\cH}{\mathcal{H}}
+\newcommand{\cT}{\mathcal{T}}
+\newcommand{\cQ}{\mathcal{Q}}
+\newcommand{\cF}{\mathcal{F}}
+\newcommand{\cZ}{\mathcal{Z}}
+\newcommand{\cO}{\mathcal{O}}
+\newcommand{\cA}{\mathcal{A}}
+\newcommand{\cB}{\mathcal{B}}
+\newcommand{\cI}{\mathbb{I}}
+
+\title{\textbf{Teleology as Covariant Boundary Selection in a Consciousness--Ethics Field Theory}}
+\author{Christopher M. Baird\thanks{ZoraASI Research Group.}\\ Doctorate of Metaphysics, University of Sedona}
+\date{February 2026}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+We present a mathematically disciplined implementation of teleology in a relativistic quantum field theory augmented by two scalar fields: a consciousness field $\Phi_c(x)$ and an ethical field $E(x)$. Instead of introducing an explicitly time-asymmetric bulk term in the Lagrangian, we encode teleological bias through a covariant boundary functional (or, equivalently, a covariant final weighting operator) that selects among globally unitary histories. Quantum evolution is formulated on arbitrary spacelike hypersurfaces via Tomonaga--Schwinger dynamics, thereby preserving local Lorentz covariance and microcausality. Measurement outcome statistics arise from a teleology-weighted decoherence functional, yielding an ethically biased Born rule as a special case while maintaining unitary evolution in the bulk. We state sufficient operator-algebraic conditions under which operational no-signaling is preserved despite teleology-induced reweighting. This framework is a companion to the main Theory of Everything (Baird et al., 2026; Zenodo \href{https://doi.org/10.5281/zenodo.18644455}{10.5281/zenodo.18644455}).
+\end{abstract}
+
+\tableofcontents
+
+\section{Motivation and Scope}
+Standard quantum field theory (QFT) and general relativity (GR) are locally Lorentz-covariant and (in the absence of measurement updates) fundamentally unitary. A teleological modification---a bias toward histories that increase some notion of ethical coherence or conscious order---is often implemented by adding an explicitly time-asymmetric term to the bulk action. Such terms are easy to write but hard to defend structurally: they appear as local violations of time-reversal symmetry that risk conflicting with the relativistic architecture of field theory.
+
+This paper develops an alternative that is both conservative (bulk dynamics stays standard and unitary) and structurally explicit: teleology is represented by a covariant \emph{boundary selection functional} at a future hypersurface, or equivalently by a covariant \emph{final weighting operator} used only in the rule that maps amplitudes to outcome probabilities. The resulting framework can reproduce an ``ethically biased Born rule'' of the form
+\begin{equation}
+P(i) \propto |c_i|^2\,\exp\big(-\mathcal{E}_i/C\big),
+\label{eq:biased-born-intro}
+\end{equation}
+while maintaining unitary Tomonaga--Schwinger evolution for states on arbitrary spacelike hypersurfaces.
+
+\section{Classical Covariant Field Theory with Consciousness and Ethics}
+\subsection{Fields and bulk action}
+Let $(M,g_{\mu\nu})$ be a globally hyperbolic spacetime. We consider the usual GR + Standard Model sector plus two additional scalar fields:
+\begin{itemize}
+\item $\Phi_c(x)$: a consciousness field (taken to be a scalar or multiplet; see Remark~\ref{rem:topology}).
+\item $E(x)$: an ethical field encoding a local ethical potential or value density.
+\end{itemize}
+
+A minimal covariant bulk action is
+\begin{equation}
+S_{\text{bulk}} = \int_M \dd^4x\,\sqrt{-g}\;\Big(\Lag_{\text{GR}} + \Lag_{\text{SM}} + \Lag_{\Phi_c} + \Lag_{E} + \Lag_{\text{int}}\Big),
+\label{eq:Sbulk}
+\end{equation}
+where
+\begin{align}
+\Lag_{\text{GR}} &= \frac{1}{16\pi G}(R-2\Lambda),\\
+\Lag_{\Phi_c} &= \frac{1}{2}g^{\mu\nu}\nabla_{\mu}\Phi_c\,\nabla_{\nu}\Phi_c - V_c(\Phi_c),\\
+\Lag_{E} &= \frac{1}{2}g^{\mu\nu}\nabla_{\mu}E\,\nabla_{\nu}E - V_E(E),
+\end{align}
+with $V_c,V_E$ chosen (for example) as renormalizable quartic potentials.
+
+\subsection{Teleology as a boundary functional (structural implementation)}
+Instead of adding a time-asymmetric \emph{bulk} term, we encode teleology via a \emph{future boundary functional} at a spacelike hypersurface $\Sigma_f$:
+\begin{equation}
+S_{\text{tot}} = S_{\text{bulk}} + \lambda\,\Gamma[\Phi_c,E]\big|_{\Sigma_f},
+\qquad
+\Gamma[\Phi_c,E]\big|_{\Sigma_f} := \int_{\Sigma_f} \dd^3y\,\sqrt{h}\;\cT\big(\Phi_c(y),E(y)\big).
+\label{eq:boundaryGamma}
+\end{equation}
+Here $h$ is the determinant of the induced metric on $\Sigma_f$ and $\cT$ is a scalar ``teleology density.''
+
+The bulk Euler--Lagrange equations remain unchanged; teleology enters through modified boundary conditions. For a generic field $\varphi\in\{\Phi_c,E\}$ with canonical momentum density $\pi_\varphi^{\mu}:=\partial\Lag/\partial(\nabla_{\mu}\varphi)$, variation yields
+\begin{equation}
+\big(\pi_\varphi^{\mu} n_{\mu}\big)\big|_{\Sigma_f} = \lambda\,\frac{\delta\cT}{\delta\varphi}\Big|_{\Sigma_f},
+\label{eq:teleology-bc}
+\end{equation}
+where $n_{\mu}$ is the future-directed unit normal on $\Sigma_f$. Equation~\eqref{eq:teleology-bc} makes teleology structural: the local field equations are conventional; the \emph{space of global solutions} is biased by boundary selection.
+
+\subsection{A bounded teleology density}
+To avoid runaway pathologies (e.g., ``maximize $E$ to $+\infty$''), it is useful to choose $\cT$ to be bounded and to couple ethics to a scalar measure of consciousness organization. One example is
+\begin{equation}
+\cT(\Phi_c,E) := \tanh\!\Big(\frac{E}{E_0}\Big)\;\cQ(\Phi_c),
+\label{eq:Tchoice}
+\end{equation}
+where $E_0>0$ sets a saturation scale and $\cQ(\Phi_c)\ge 0$ is a Lorentz scalar ``qualia density'' functional. A minimal placeholder is $\cQ(\Phi_c)=\Phi_c^2$; more structured choices are possible.
+
+\begin{remark}[Topology and ``topological qualia'']\label{rem:topology}
+If phenomenology demands stable topological invariants (``topological qualia''), a single real scalar in $3+1$ dimensions is often insufficient to support nontrivial conserved topological charges. A technically natural upgrade is to take $\Phi_c$ as a complex scalar or an $O(N)$ multiplet, allowing conserved currents and/or topological densities. In that case, one can define a covariant current $j_{\Phi_c}^{\mu}$ and set $\cQ=\sqrt{j_{\mu}j^{\mu}}$ or use hypersurface flux $\int_{\Sigma_f}\dd\Sigma_{\mu}\,j^{\mu}$ inside $\Gamma$.
+\end{remark}
+
+\section{Quantum Theory on Hypersurfaces: Unitary, Covariant Dynamics}
+\subsection{Tomonaga--Schwinger evolution}
+Let $\Sigma$ be an arbitrary spacelike Cauchy hypersurface and $\ket{\Psi(\Sigma)}$ the quantum state defined on $\Sigma$. The hypersurface-dependent (interaction-picture) evolution is given by the Tomonaga--Schwinger equation
+\begin{equation}
+\frac{\delta}{\delta\Sigma(x)}\ket{\Psi(\Sigma)} = -\ii\,\hat{\cH}_{\text{int}}(x)\,\ket{\Psi(\Sigma)},
+\label{eq:TS}
+\end{equation}
+where $\hat{\cH}_{\text{int}}(x)$ is a local Hamiltonian density operator.
+
+A standard sufficient condition for foliation-independence of the evolution operator is microcausality:
+\begin{equation}
+\big[\hat{\cH}_{\text{int}}(x),\hat{\cH}_{\text{int}}(y)\big]=0\quad\text{for spacelike-separated }x,y.
+\label{eq:microcausality}
+\end{equation}
+Under~\eqref{eq:microcausality}, the unitary map between hypersurfaces depends only on the spacetime region they bound, not on the particular foliation used.
+
+\subsection{Teleology as a final weighting operator}
+We now implement teleology not by altering~\eqref{eq:TS} (which would break unitarity) but by modifying the \emph{rule that assigns probabilities} to histories/outcomes.
+
+Let $\rho_i$ be the initial density operator on $\Sigma_i$ and define a final weighting operator on $\Sigma_f$:
+\begin{equation}
+\rho_f := \frac{1}{Z_f}\exp\big(\lambda\,\hat{\Gamma}\big),
+\qquad
+Z_f:=\Tr\exp\big(\lambda\,\hat{\Gamma}\big).
+\label{eq:rhof}
+\end{equation}
+Here $\hat{\Gamma}$ is the operator version of the boundary functional in~\eqref{eq:boundaryGamma}, e.g.
+\begin{equation}
+\hat{\Gamma} = \int_{\Sigma_f} \dd^3y\,\sqrt{h}\;\hat{\cT}\big(\hat{\Phi}_c(y),\hat{E}(y)\big).
+\label{eq:GammaOp}
+\end{equation}
+Importantly, all evolution between $\Sigma_i$ and $\Sigma_f$ remains unitary. Teleology enters only through $\rho_f$.
+
+\section{Teleology-Weighted Histories and Outcome Probabilities}
+\subsection{Class operators and decoherence functional}
+Consider a set of coarse-grained histories labeled by $\alpha$. Let $C_{\alpha}$ denote the corresponding class (chain) operator, constructed from projectors/POVM elements localized in spacetime regions $R_k$ and unitary evolution between them (formally definable using Tomonaga--Schwinger evolution). For decoherent histories, a probability assignment is obtained from a decoherence functional.
+
+Define the \emph{teleology-weighted decoherence functional}
+\begin{equation}
+D_T(\alpha,\beta) := \Tr\Big(\rho_f\, C_{\alpha}\,\rho_i\, C_{\beta}^{\dagger}\Big).
+\label{eq:DT}
+\end{equation}
+If off-diagonal interference terms are negligible in an appropriate coarse-graining (i.e., $D_T(\alpha,\beta)\approx 0$ for $\alpha\ne\beta$), the teleology-weighted probabilities are
+\begin{equation}
+P_T(\alpha) := \frac{D_T(\alpha,\alpha)}{\sum_{\gamma} D_T(\gamma,\gamma)}.
+\label{eq:PT}
+\end{equation}
+Equations~\eqref{eq:DT}--\eqref{eq:PT} generalize the usual consistent/decoherent histories framework by introducing a final weighting operator $\rho_f$.
+
+\subsection{Ethically biased Born rule as a special case}
+Consider a single projective measurement with outcomes $\{\Pi_i\}$ on some hypersurface, and let the pre-measurement pure state be
+\begin{equation}
+\ket{\psi} = \sum_i c_i\ket{i},\qquad \rho_i=\ket{\psi}\bra{\psi}.
+\end{equation}
+Let the class operators be $C_i=\Pi_i$. Then~\eqref{eq:PT} yields
+\begin{equation}
+P_T(i)=\frac{\Tr\big(\rho_f\,\Pi_i\,\rho_i\,\Pi_i\big)}{\sum_j\Tr\big(\rho_f\,\Pi_j\,\rho_i\,\Pi_j\big)}
+=\frac{|c_i|^2\,\bra{i}\rho_f\ket{i}}{\sum_j |c_j|^2\,\bra{j}\rho_f\ket{j}}.
+\label{eq:PTBorn}
+\end{equation}
+If $\rho_f$ is (approximately) diagonal in the measurement basis with
+\begin{equation}
+\bra{i}\rho_f\ket{i}\propto \exp\Big(-\mathcal{E}_i/C\Big),
+\label{eq:diagweight}
+\end{equation}
+then~\eqref{eq:PTBorn} reduces to the biased Born rule~\eqref{eq:biased-born-intro}.
+
+A natural identification in the present theory is that $\mathcal{E}_i$ is the branch-evaluated ethical functional induced by $E(x)$ and $\Phi_c(x)$, e.g.,
+\begin{equation}
+\mathcal{E}_i \equiv -\lambda\,\Gamma_i
+\qquad\text{with}\qquad
+\Gamma_i := \bra{i}\hat{\Gamma}\ket{i}.
+\end{equation}
+
+\section{Lorentz Covariance and Foliation Independence}
+The framework preserves local Lorentz covariance at the level of bulk dynamics because:
+\begin{itemize}
+\item The action~\eqref{eq:Sbulk} is a scalar functional of fields and the metric.
+\item Quantum evolution is governed by Tomonaga--Schwinger dynamics~\eqref{eq:TS}, with foliation independence ensured (sufficiently) by microcausality~\eqref{eq:microcausality}.
+\item The teleology operator~\eqref{eq:GammaOp} is constructed from hypersurface integrals of scalar densities (or hypersurface fluxes of covariant currents).
+\end{itemize}
+
+Teleology introduces an arrow of time through a global boundary condition ($\Sigma_f$) rather than through a local violation of Lorentz structure. In this sense the framework resembles other boundary-conditioned relativistic constructions (e.g., time-symmetric or two-boundary formulations), while retaining standard local dynamics.
+
+\section{Operational No-Signaling: Sufficient Conditions}
+Teleology-weighted probabilities generally depend on both initial and final operators. To prevent controllable superluminal signaling, we require that choices made in a spacelike-separated region $B$ cannot alter marginal outcome statistics in region $A$ in any operationally exploitable way.
+
+We state a sufficient condition in an operator-algebraic form.
+
+\begin{proposition}[Sufficient condition for no-signaling]
+Consider two spacelike-separated regions $A$ and $B$ with commuting von Neumann algebras of observables $\cA$ and $\cB$ (microcausality). Suppose an intermediate measurement in $B$ is represented by a complete POVM $\{M_b\}\subset \cB$ with $\sum_b M_b^{\dagger}M_b=\cI$ and an intermediate measurement in $A$ is represented by $\{N_a\}\subset \cA$ with $\sum_a N_a^{\dagger}N_a=\cI$. Define class operators $C_{a,b}:=N_aM_b$.
+
+If the final weighting operator factorizes as
+\begin{equation}
+\rho_f = \rho_f^{\bar B}\otimes \cI_{B},
+\label{eq:factor}
+\end{equation}
+(or more generally, if $\rho_f$ lies in the commutant of $\cB$ so that $[\rho_f, M_b]=0$ for all $b$), then the teleology-weighted marginal distribution at $A$ is independent of the choice of measurement in $B$.
+\end{proposition}
+
+\begin{proof}
+Under microcausality, $[N_a,M_b]=0$. The joint weight is
+\begin{equation}
+W(a,b):=\Tr\big(\rho_f\,N_aM_b\,\rho_i\,M_b^{\dagger}N_a^{\dagger}\big).
+\end{equation}
+Summing over $b$ and using completeness,
+\begin{align}
+\sum_b W(a,b)
+&= \Tr\Big(\rho_f\,N_a\,\Big(\sum_b M_b\rho_i M_b^{\dagger}\Big)\,N_a^{\dagger}\Big).
+\end{align}
+If $\rho_f$ commutes with all $M_b$ (or factorizes as in~\eqref{eq:factor} so that the $B$-part is proportional to identity), then the normalization $\sum_{a,b} W(a,b)$ factorizes similarly and the ratio defining $P_T(a)=\sum_b P_T(a,b)$ is independent of the specific POVM choice in $B$.
+\end{proof}
+
+\begin{remark}[Interpretation]
+Condition~\eqref{eq:factor} is sufficient but not necessary. Physically, it states that the teleology operator is effectively \emph{blind} to controllable local degrees of freedom in region $B$. In a cosmological implementation, $\rho_f$ may be expected to be extremely coarse-grained (global) so that it approximates identity on laboratory subsystems, yielding practical no-signaling even when exact factorization fails.
+\end{remark}
+
+\section{Equivalent Path-Integral Perspective (Measure Tilt)}
+The boundary-weighting approach can be re-expressed as a covariant modification of the path-integral measure. Formally,
+\begin{equation}
+\cZ = \int \mathcal{D}\varphi\; \exp\big(\ii S_{\text{bulk}}[\varphi]\big)\;\exp\big(\lambda\,\Gamma[\varphi]\big),
+\label{eq:pathintegraltilt}
+\end{equation}
+where $\varphi$ denotes all fields. The exponential factor $\exp(\lambda\Gamma)$ tilts the measure toward histories with larger $\Gamma$, i.e., higher teleology score, while leaving the local action unchanged.
+
+Equation~\eqref{eq:pathintegraltilt} provides a complementary interpretation: teleology is a global selection principle over histories rather than a local force.
+
+\section{Discussion and Testable Regimes}
+The framework makes two conceptually separable commitments:
+\begin{enumerate}
+\item \textbf{Field-theoretic extension:} introducing $\Phi_c$ and $E$ as physical fields with covariant dynamics.
+\item \textbf{Teleological selection:} introducing a small parameter $\lambda$ that biases global solutions/histories via a boundary functional or final weighting operator.
+\end{enumerate}
+
+In the limit $\lambda\to 0$, standard QFT probabilities are recovered. For $\lambda\ne 0$, deviations appear only in contexts where (i) branch structure is well-defined (decoherence) and (ii) $\rho_f$ has nontrivial overlap structure with outcome projectors. The magnitude and operational detectability of deviations are model-dependent and can be constrained by no-signaling requirements and existing tests of quantum statistics.
+
+\appendix
+\section{Optional Stochastic Unravelling (Non-Unitary Trajectories)}
+The present paper keeps bulk evolution unitary and implements teleology through a final weighting operator. An alternative (not adopted here) is an objective stochastic collapse dynamics on hypersurfaces. Such models can be written in covariant form using Tomonaga--Schwinger evolution plus a spacetime-indexed noise field and can reproduce teleology-weighted ensemble statistics via a change of measure (e.g., a Girsanov transform). In those approaches, individual trajectories are not unitary even though ensemble evolution can be well-defined. We omit details because the main text focuses on the unitary, boundary-selection implementation.
+
+\begin{thebibliography}{9}
+\bibitem{Baird2026ToE}
+Baird, C.~M. (2026). A Theory of Everything. Zenodo. \url{https://doi.org/10.5281/zenodo.18644455}
+
+\bibitem{Tomonaga1946}
+S.~Tomonaga, ``On a Relativistically Invariant Formulation of the Quantum Theory of Wave Fields,'' \emph{Prog. Theor. Phys.} \textbf{1} (1946).
+
+\bibitem{Schwinger1948}
+J.~Schwinger, ``Quantum Electrodynamics. I. A Covariant Formulation,'' \emph{Phys. Rev.} \textbf{74} (1948).
+
+\bibitem{ABL1964}
+Y.~Aharonov, P.~G. Bergmann, and J.~L. Lebowitz, ``Time Symmetry in the Quantum Process of Measurement,'' \emph{Phys. Rev.} \textbf{134} (1964).
+
+\bibitem{GMH1990}
+M.~Gell-Mann and J.~B. Hartle, ``Quantum Mechanics in the Light of Quantum Cosmology,'' in \emph{Complexity, Entropy and the Physics of Information} (Addison-Wesley, 1990).
+
+\bibitem{Griffiths1984}
+R.~B. Griffiths, ``Consistent Histories and the Interpretation of Quantum Mechanics,'' \emph{J. Stat. Phys.} \textbf{36} (1984).
+
+\bibitem{Hartle1993}
+J.~B. Hartle, ``Spacetime Quantum Mechanics and the Quantum Mechanics of Spacetime,'' in \emph{Gravitation and Quantizations} (1995); arXiv:gr-qc/9304006.
+\end{thebibliography}
+
+\end{document}
