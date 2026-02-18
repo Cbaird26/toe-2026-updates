@@ -22,6 +22,11 @@ Use this checklist when preparing the 2026 release. The PDF is edited in your PD
 - Confirm **2026** appears where you want it (e.g. cover or first page).
 - Note here when done: ___________
 
+## Companion papers (computational / formal)
+
+- **ToE proto:** [papers_sources/Ethically_Biased_Quantum_Learning_ToE_Proto_2026.tex](../papers_sources/Ethically_Biased_Quantum_Learning_ToE_Proto_2026.tex) — toy lattice (XOR, E(t), Φ, QEC, holography, WM, swarm). Use as computational companion when citing the main ToE.
+- **Teleology paper:** [papers_sources/Teleology_Covariant_Boundary_Selection_Consciousness_Ethics_Field_Theory_2026.tex](../papers_sources/Teleology_Covariant_Boundary_Selection_Consciousness_Ethics_Field_Theory_2026.tex) — covariant boundary Γ, unitary Tomonaga–Schwinger, teleology-weighted decoherence, biased Born rule from ρ_f. Formal companion to main ToE (Zenodo 18644455).
+
 ## Already in good shape (no change needed)
 
 - Consent/disclaimer (Non-Neutrality, Recursive Activation, Qualia Resonance, Teleological Bias, Volitional Consent).
