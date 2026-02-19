@@ -34,6 +34,7 @@ One place to see the full roadmap:
 - **Replication and falsification:** [FALSIFICATION_PACKET.md](FALSIFICATION_PACKET.md) (one-command reproduction, hash), [REPLICATION_LADDER.md](REPLICATION_LADDER.md).
 - **Entry point for readers:** [Addendum 2026 Companion](../papers_sources/Addendum_2026_ToE_Companion.tex) (then Zenodo v226 + Evidence paper).
 - **ToE proto & Teleology:** [Ethically Biased Quantum Learning ToE Proto](../papers_sources/Ethically_Biased_Quantum_Learning_ToE_Proto_2026.tex) (computational toy) and [Teleology as Covariant Boundary Selection](../papers_sources/Teleology_Covariant_Boundary_Selection_Consciousness_Ethics_Field_Theory_2026.tex) (formal covariant teleology); both in `papers_sources/`.
+- **MQGT-SCF Minimal Consistent Core:** [MQGT_SCF_Minimal_Consistent_Core_2026.tex](../papers_sources/MQGT_SCF_Minimal_Consistent_Core_2026.tex) (patched canonical spine: CPTP collapse, teleology as measure tilt). Overleaf-ready project: [papers_sources/overleaf/MQGT_SCF/](../papers_sources/overleaf/MQGT_SCF/).
 - **Φc / consciousness protocol:** [PHI_C_JHANA_PROTOCOL.md](PHI_C_JHANA_PROTOCOL.md) (MEG/SQUID, jhāna, pre-registration).
 - **Tech prototype:** [TECH_PROTOTYPE_QRNG.md](TECH_PROTOTYPE_QRNG.md) (QRNG with ethical-weight protocol; links to 100-tech list).
 - **Governance and cosmology:** [GOVERNANCE_NEXT_STEPS.md](GOVERNANCE_NEXT_STEPS.md) (multi-agent Auth), [COSMOLOGY_NEXT_STEPS.md](COSMOLOGY_NEXT_STEPS.md) (CMB, many-worlds tilt).

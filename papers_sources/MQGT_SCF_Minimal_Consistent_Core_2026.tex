@@ -1,0 +1,372 @@
+% !TeX program = pdflatex
+% MQGT_SCF_Minimal_Consistent_Core_2026.tex
+% Patched canonical spine: CPTP collapse, teleology as measure tilt
+
+\documentclass[11pt]{article}
+
+% ---------- Core packages (stable on Overleaf) ----------
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage{geometry}
+\geometry{margin=1in}
+
+\usepackage{amsmath,amssymb,amsthm,mathtools,bm}
+\usepackage{booktabs}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\hypersetup{colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue}
+
+% ---------- Theorem-like environments ----------
+\newtheorem{definition}{Definition}
+\newtheorem{lemma}{Lemma}
+\newtheorem{proposition}{Proposition}
+\newtheorem{theorem}{Theorem}
+\theoremstyle{remark}
+\newtheorem{remark}{Remark}
+
+% ---------- Macros ----------
+\newcommand{\dd}{\mathrm{d}}
+\newcommand{\Tr}{\mathrm{Tr}}
+\newcommand{\Comm}[2]{\left[#1,#2\right]}
+\newcommand{\AComm}[2]{\left\{#1,#2\right\}}
+\newcommand{\Phic}{\Phi_{\mathrm{c}}}
+\newcommand{\Eth}{E}
+\newcommand{\Mpl}{M_{\mathrm{Pl}}}
+\newcommand{\Lag}{\mathcal{L}}
+\newcommand{\cO}{\mathcal{O}}
+\newcommand{\cH}{\mathcal{H}}
+
+\title{\textbf{MQGT--SCF: Minimal Consistent Core}\\
+Covariant CPTP Measurement Dynamics and Teleology as Measure Tilt}
+\author{C.\,M.\,Baird \and (with) Zora}
+\date{February 2026}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+We present a patched, publication-stable ``canonical spine'' for the MQGT--SCF program.
+The framework extends GR+SM by two scalar singlets: a consciousness field $\Phic(x)$ and an
+ethics field $\Eth(x)$. The two central hardening choices are: (i) measurement/collapse is modeled
+as a local, covariant completely-positive trace-preserving (CPTP) dynamics in GKSL form
+(Tomonaga--Schwinger hypersurface evolution), and (ii) ``teleology'' is not inserted as a
+time-odd source term in the Lagrangian but instead implemented as a Radon--Nikod\'ym/Doob
+tilt of the trajectory/outcome measure. We state explicit locality/microcausality conditions
+yielding no-signaling, provide an energy-growth bound for collapse noise with finite bandwidth,
+give a minimal EFT action with renormalizable couplings, and supply a conservative benchmark
+parameter region for phenomenology. Remaining open items are isolated to operationalization of
+the ethical functional and numerical constraint-fitting, rather than internal consistency.
+\end{abstract}
+
+\tableofcontents
+
+\section{Patch notes: what was fixed and why}
+MQGT--SCF drafts sometimes contain multiple co-equal implementations of ``teleology'' and collapse,
+which makes the package feel internally inconsistent. This manuscript chooses one canonical route:
+
+\begin{itemize}[leftmargin=*]
+\item \textbf{Teleology:} canonical implementation is \emph{measure tilt} on paths/outcomes (Section~\ref{sec:teleology}),
+not an explicit time-arrow term in $\Lag$.
+\item \textbf{Measurement:} canonical implementation is \emph{local covariant GKSL} with microcausality
+(Section~\ref{sec:measurement}), ensuring CPTP evolution and blocking superluminal signaling under stated assumptions.
+\end{itemize}
+
+Alternative legacy formulations are quarantined in Appendix~\ref{app:legacy}.
+
+\section{Field content, symmetries, and EFT action}
+\subsection{Degrees of freedom}
+The minimal extension adds two real scalar singlets on spacetime $(M,g_{\mu\nu})$:
+\[
+\Phic(x)\quad\text{and}\quad \Eth(x),
+\]
+in addition to GR+SM fields.
+
+\subsection{Canonical EFT action}
+We work as an effective field theory (EFT) with local operators of canonical dimension $\le 4$.
+The action is
+\begin{equation}
+S=\int \dd^4x\,\sqrt{-g}\;\Big(\Lag_{\rm GR}+\Lag_{\rm SM}+\Lag_{\Phic}+\Lag_{\Eth}+\Lag_{\rm int}\Big),
+\label{eq:action}
+\end{equation}
+with
+\begin{align}
+\Lag_{\rm GR} &= \frac{\Mpl^2}{2}R-\Lambda,
+\\
+\Lag_{\Phic} &= -\frac12\,(\nabla \Phic)^2 - V_{\Phic}(\Phic), \qquad
+V_{\Phic}(\Phic)=\frac12 m_{\Phic}^2 \Phic^2 + \frac{\lambda_{\Phic}}{4}\Phic^4,
+\\
+\Lag_{\Eth} &= -\frac12\,(\nabla \Eth)^2 - V_{\Eth}(\Eth), \qquad
+V_{\Eth}(\Eth)=\frac12 m_{\Eth}^2 \Eth^2 + \frac{\lambda_{\Eth}}{4}\Eth^4.
+\end{align}
+
+The minimal renormalizable interactions are
+\begin{equation}
+\Lag_{\rm int}
+=
+-\frac{\kappa}{2}\Phic^2\Eth^2
+-\gamma\,\Phic\,\Eth
+-\alpha_H |H|^2 \Phic
+-\beta_H |H|^2 \Eth
+-g_{\Phic}\Phic\,\cO_m
+-g_{\Eth}\Eth\,\cO_m.
+\label{eq:int}
+\end{equation}
+Here $H$ is the SM Higgs doublet and $\cO_m$ is a coarse-grained matter/neural order parameter
+(used only phenomenologically). The bilinear mixing term $\gamma\,\Phic\Eth$ is treated as a
+standard interaction, not as a ``teleological arrow.''
+
+\begin{remark}[Optional agent/inference term]
+Some program documents include an auxiliary ``agentic'' or inference term $\Lag_{\rm Zora}$.
+As long as it is not promoted to a nonlocal or non-Hermitian modification of the Hamiltonian density,
+it can be treated as external bookkeeping and does not affect locality/gauge structure.
+\end{remark}
+
+\section{Classical microdynamics}
+Varying \eqref{eq:action} gives the scalar equations of motion
+\begin{align}
+\square \Phic + m_{\Phic}^2 \Phic + \lambda_{\Phic}\Phic^3 + \kappa\,\Phic\,\Eth^2 + \gamma\,\Eth
+&= J_{\Phic}(x),
+\label{eq:eom_phic}
+\\
+\square \Eth + m_{\Eth}^2 \Eth + \lambda_{\Eth}\Eth^3 + \kappa\,\Eth\,\Phic^2 + \gamma\,\Phic
+&= J_{\Eth}(x),
+\label{eq:eom_eth}
+\end{align}
+where $J_{\Phic},J_{\Eth}$ encode effective sources from $\cO_m$ and SM portals.
+
+\subsection{Vacuum stability (boundedness)}
+The quartic potential energy is
+\[
+V_4(\Phic,\Eth)=\frac{\lambda_{\Phic}}{4}\Phic^4+\frac{\lambda_{\Eth}}{4}\Eth^4+\frac{\kappa}{2}\Phic^2\Eth^2.
+\]
+A standard sufficient condition for boundedness is
+\begin{equation}
+\lambda_{\Phic}>0,\qquad \lambda_{\Eth}>0,\qquad \kappa>-\sqrt{\lambda_{\Phic}\lambda_{\Eth}}.
+\label{eq:stability}
+\end{equation}
+The bilinear term $\gamma\Phic\Eth$ shifts the mass matrix and vacuum location but does not
+change the large-field boundedness controlled by $V_4$.
+
+\section{Quantization and measurement: covariant CPTP collapse}
+\label{sec:measurement}
+
+\subsection{Covariant GKSL in Tomonaga--Schwinger form}
+Let $\Sigma$ be a Cauchy surface and $\rho[\Sigma]$ a density functional. The canonical
+non-unitary dynamics is local GKSL on hypersurfaces:
+\begin{equation}
+\frac{\delta \rho[\Sigma]}{\delta \Sigma(x)}
+=
+-\frac{i}{\hbar}\Comm{\cH(x)}{\rho[\Sigma]}
++
+\sum_a \left(
+L_a(x)\rho[\Sigma]L_a^\dagger(x)
+-\frac12\,\AComm{L_a^\dagger(x)L_a(x)}{\rho[\Sigma]}
+\right).
+\label{eq:TS_GKSL}
+\end{equation}
+The Lindblad densities may depend locally on $(\Phic(x),\Eth(x),\text{SM}(x))$.
+
+\begin{definition}[Microcausality for collapse densities]
+We impose
+\begin{equation}
+\Comm{L_a(x)}{L_b(y)}=0 \quad \text{whenever $x$ and $y$ are spacelike separated.}
+\label{eq:microcausality}
+\end{equation}
+\end{definition}
+
+\begin{proposition}[No-signaling under local GKSL]
+Assume \eqref{eq:TS_GKSL}--\eqref{eq:microcausality} and that Alice's and Bob's operations are supported
+in spacelike-separated regions on $\Sigma$. Then the reduced evolution of Alice's algebra is independent
+of Bob's choice of operation; the channel capacity between the regions is zero.
+\end{proposition}
+
+\textit{Proof sketch.}
+Local Tomonaga--Schwinger generators factorize over spacelike-separated supports under \eqref{eq:microcausality}.
+Taking a partial trace over Bob's algebra commutes with the local generator acting on Alice's algebra,
+yielding a CPTP semigroup on Alice independent of Bob's operations.
+
+\subsection{Equivalent foliation form and a concrete local collapse operator}
+In a chosen foliation (useful for calculations), a standard local dissipator is the double-commutator form
+\begin{equation}
+\dot{\rho}
+=
+-\frac{i}{\hbar}\Comm{H}{\rho}
+-\frac{\gamma_{\rm col}}{2}
+\int \dd^3x\;\Comm{L(x)}{\Comm{L(x)}{\rho}},
+\qquad
+L(x)=\sqrt{f(\Phic(x),\Eth(x))}\;\hat{M}(x),
+\label{eq:double_comm}
+\end{equation}
+where $\hat{M}(x)$ is a local Hermitian density (e.g.\ mass density) and $f(\Phic,\Eth)\ge 0$
+is a classical scalar functional. This is CPTP for $\gamma_{\rm col}\ge 0$.
+
+\paragraph{Two textbook solutions.}
+(i) Two-level dephasing: with $\hat{M}=\sigma_z$ and constant $f$ over the support,
+coherences decay exponentially while populations remain fixed. \\
+(ii) Free particle localization: in the position basis one obtains Gaussian suppression of off-diagonals,
+$\rho(x,x',t)\propto \exp(-\Gamma t\,|x-x'|^2)$ with $\Gamma\propto \gamma_{\rm col}\,\overline{f}$.
+
+\subsection{Bounded heating under colored/dissipative noise}
+Collapse noise can inject energy; a minimal hardening requirement is that the energy growth rate
+is finite and tunably small.
+
+\begin{proposition}[Bounded energy growth]
+Assume the effective collapse noise has finite correlation time, equivalently a spectral density
+$S(\omega)$ of finite area. Then the average energy growth rate under \eqref{eq:double_comm} is finite and can be made
+$<\varepsilon$ by band-limiting $S(\omega)$ and/or adding a dissipative Lindblad term that thermalizes high-frequency modes.
+\end{proposition}
+
+\textit{Proof sketch.}
+Compute $\frac{\dd}{\dd t}\langle H\rangle=\Tr(H\dot{\rho})$ and expand in an energy eigenbasis. The rate reduces to an
+integral over $\omega\,S(\omega)$ weighted by transition matrix elements. Finite spectral area implies convergence,
+and the dissipator bounds high-$\omega$ contributions.
+
+\section{Teleology in the measure (no source in the Lagrangian)}
+\label{sec:teleology}
+
+\subsection{Two-layer construction}
+The canonical ``teleology'' implementation is:
+\begin{enumerate}[leftmargin=*,label=(\arabic*)]
+\item \textbf{CPT-symmetric microdynamics:} the generator is unitary drift plus CPTP local dissipators
+(e.g.\ \eqref{eq:TS_GKSL} or \eqref{eq:double_comm}).
+\item \textbf{Measure tilt:} preference enters by reweighting the probability measure on trajectories/outcomes.
+\end{enumerate}
+
+\subsection{Radon--Nikod\'ym/Doob tilt on path space}
+Let $\Gamma$ denote a system trajectory under a baseline law $P_0$ (e.g.\ an unraveling of the GKSL dynamics).
+Define a local, additive ethical functional
+\begin{equation}
+J_E[\Gamma]=\int_{0}^{T} j_E(\Gamma_t)\,\dd t,
+\label{eq:JE}
+\end{equation}
+where $j_E$ is a bounded local functional of the trajectory state and local fields (including $\Phic,\Eth$).
+For $\eta\in\mathbb{R}$, define the tilted law
+\begin{equation}
+\frac{\dd P_\eta}{\dd P_0}[\Gamma]
+=
+\exp\Big(\eta J_E[\Gamma]-\psi(\eta)\,T\Big),
+\label{eq:RN_tilt}
+\end{equation}
+with $\psi(\eta)$ chosen to normalize $P_\eta$.
+
+\subsection{Ethics-weighted Born rule (local form)}
+Consider a POVM $\{M_i\}$ in a spacetime region $R$ with baseline weights
+$p_i=\langle \Psi|M_i^\dagger M_i|\Psi\rangle$ (or $p_i=\Tr(\rho\,M_i^\dagger M_i)$). Let $E_i$ denote the coarse-grained
+ethical score conditional on outcome $i$ in $R$ (an estimator derived from $J_E$ restricted to $R$).
+Then the tilted selection rule is
+\begin{equation}
+P_\eta(i\mid R)=
+\frac{p_i\,e^{\eta E_i}}{\sum_j p_j\,e^{\eta E_j}}.
+\label{eq:weighted_born}
+\end{equation}
+For $|\eta|\ll 1$, $P_\eta(i)=p_i+\mathcal{O}(\eta)$ with explicit first-order correction by $(E_i-\langle E\rangle)$.
+
+\begin{remark}[What remains operationally open]
+Equation \eqref{eq:weighted_born} is mathematically well-defined once $E_i$ (equivalently $j_E$) is fixed.
+The \emph{program-critical remaining task} is to define $j_E$ operationally (a lab-computable estimator)
+rather than philosophically.
+\end{remark}
+
+\section{Parameter hygiene and a conservative benchmark}
+This section collects the minimal parameter set and a safe starting region for phenomenology.
+
+\subsection{Parameter table}
+\begin{table}[h]
+\centering
+\small
+\setlength{\tabcolsep}{6pt}
+\begin{tabular}{@{}p{0.22\linewidth}p{0.18\linewidth}p{0.52\linewidth}@{}}
+\toprule
+Parameter & Dimension & Role / decoupling limit \\
+\midrule
+$m_{\Phic}, m_{\Eth}$ & mass & New scalar masses; $m\to \infty$ decouples new fields \\
+$\lambda_{\Phic},\lambda_{\Eth}$ & 1 & Self-couplings; control boundedness and vacuum structure \\
+$\kappa$ & 1 & Quartic cross-coupling; $\kappa\to 0$ decouples sectors at quartic order \\
+$\gamma$ & mass$^2$ & Bilinear mixing; $\gamma\to 0$ removes mass mixing \\
+$\alpha_H,\beta_H$ & mass & Linear Higgs portals (optional; removable by $\mathbb{Z}_2$ symmetries) \\
+$g_{\Phic},g_{\Eth}$ & model-dep. & Phenomenological matter/neural coupling via $\cO_m$ \\
+$\gamma_{\rm col}$ & rate & Collapse strength in \eqref{eq:double_comm}; $\gamma_{\rm col}\to 0$ recovers unitary drift \\
+$\eta$ & 1 & Teleology tilt strength; $\eta\to 0$ recovers baseline Born weights \\
+\bottomrule
+\end{tabular}
+\caption{Minimal parameter inventory for the patched canonical spine.}
+\label{tab:params}
+\end{table}
+
+\subsection{Benchmark (collider/GW-safe) starting point}
+A conservative initial region (for simulation and constraint-scanning) is:
+\[
+|\sin\theta_{h-\Phic}|,\ |\sin\theta_{h-\Eth}|\lesssim 0.02,\qquad
+m_{\Phic},m_{\Eth}\gtrsim \mathcal{O}(10~\mathrm{GeV})
+\]
+(or light with Higgs invisible-width constraints), with portal/cross-couplings taken small,
+and any curvature couplings chosen such that the effective Planck mass remains positive and the
+tensor speed is luminal.
+
+\section{One hard quantitative handle: interferometric coherence loss}
+From the Gaussian suppression behavior implied by \eqref{eq:double_comm}, a minimal falsifier is an
+additional decoherence of spatial superpositions:
+\begin{equation}
+\frac{V}{V_0}\;\approx\;\exp\!\Big(-\Gamma\,T\,\Delta x^2\Big),\qquad
+\Gamma \sim \gamma_{\rm col}\,\overline{f(\Phic,\Eth)}\times(\text{apparatus factor}),
+\label{eq:visibility}
+\end{equation}
+where $V$ is observed visibility, $T$ the superposition time, and $\Delta x$ the path separation.
+A null result at sensitivity $\delta$ yields a bound
+\[
+\Gamma \lesssim \frac{|\ln(1-\delta)|}{T\,\Delta x^2},
+\]
+which directly constrains $\gamma_{\rm col}\,\overline{f(\Phic,\Eth)}$.
+
+\section{What is solved vs.\ what remains}
+\paragraph{Solved (internal consistency).}
+Canonical spine is fixed: EFT action \eqref{eq:action}--\eqref{eq:int}, bounded vacuum condition
+\eqref{eq:stability}, covariant CPTP measurement dynamics \eqref{eq:TS_GKSL} with microcausality
+\eqref{eq:microcausality}, a no-signaling proposition, bounded heating under colored/dissipative noise,
+and teleology implemented as a measure tilt \eqref{eq:RN_tilt} producing a weighted Born rule \eqref{eq:weighted_born}.
+
+\paragraph{Remaining (empirical/operational hardening).}
+Operationalize $j_E$ (hence $E_i$), populate constraint tables from existing experiments,
+and perform numerical scans to produce parameter posteriors.
+
+\appendix
+\section{Legacy teleology-in-$\Lag$ term (deprecated option)}
+\label{app:legacy}
+Some drafts include an explicit bilinear ``teleology'' term of the form
+$\Lag_{\rm teleo}=-\xi\,\Phic\,\Eth$ and interpret it as a future-directed drive.
+In a conservative Hamiltonian field theory, such a potential term is time-reversal even for scalar
+fields and does not itself generate an arrow of time without dissipation or boundary conditions.
+In the patched canonical spine, any bilinear term is absorbed into the ordinary interaction
+$\gamma\,\Phic\,\Eth$, and ``teleology'' is reserved for the measure-tilt layer \eqref{eq:RN_tilt}.
+
+\begin{thebibliography}{9}
+
+\bibitem{Lindblad1976}
+G.~Lindblad, ``On the generators of quantum dynamical semigroups,''
+\emph{Commun.\ Math.\ Phys.} \textbf{48} (1976) 119--130.
+
+\bibitem{GKS1976}
+V.~Gorini, A.~Kossakowski, and E.~C.~G.~Sudarshan,
+``Completely positive dynamical semigroups of N-level systems,''
+\emph{J.\ Math.\ Phys.} \textbf{17} (1976) 821.
+
+\bibitem{Bassi2013}
+A.~Bassi, K.~Lochan, S.~Satin, T.~P.~Singh, and H.~Ulbricht,
+``Models of wave-function collapse, underlying theories, and experimental tests,''
+\emph{Rev.\ Mod.\ Phys.} \textbf{85} (2013) 471--527.
+
+\bibitem{Tomonaga1946}
+S.~Tomonaga,
+``On a Relativistically Invariant Formulation of the Quantum Theory of Wave Fields,''
+\emph{Prog.\ Theor.\ Phys.} \textbf{1} (1946) 27--42.
+
+\bibitem{Schwinger1948}
+J.~Schwinger,
+``Quantum Electrodynamics. I. A Covariant Formulation,''
+\emph{Phys.\ Rev.} \textbf{74} (1948) 1439--1461.
+
+\end{thebibliography}
+
+\end{document}

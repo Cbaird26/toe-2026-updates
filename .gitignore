@@ -40,3 +40,12 @@ ZoraASI.zip
 *.zip
 # output/
 # out/
+
+# LaTeX build artifacts
+*.aux
+*.log
+*.out
+*.toc
+*.bbl
+*.blg
+*.synctex.gz

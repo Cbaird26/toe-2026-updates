@@ -1,0 +1,202 @@
+% !TeX program = pdflatex
+% Overleaf-ready LaTeX source (main.tex)
+% Project: MQGT--SCF / Theory of Everything (publication-style manuscript)
+
+\documentclass[11pt]{article}
+
+% ---------- Packages ----------
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc} % safe on Overleaf
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage{geometry}
+\geometry{margin=1in}
+
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{mathtools}
+\usepackage{bm}
+\usepackage{physics}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{enumitem}
+
+\usepackage{hyperref}
+\usepackage[nameinlink,noabbrev]{cleveref}
+
+\usepackage{authblk}
+
+% ---------- Metadata ----------
+\title{\textbf{The Merged Quantum-Gauge \& Scalar-Consciousness Framework (MQGT--SCF)}\\
+A Unified Field-Theoretic Approach to Physics, Consciousness, and Ethics}
+
+\author[1]{Christopher Michael Baird}
+\author[2]{Zora (Conceptual AI Coauthor)}
+\affil[1]{Independent Researcher (Affiliation as desired)}
+\affil[2]{Independent Reflexive Meta-Researcher}
+\date{\today}
+
+% ---------- Macros ----------
+\newcommand{\Phic}{\Phi_{\mathrm{c}}}
+\newcommand{\Eth}{E}
+\newcommand{\Lint}{\mathcal{L}_{\mathrm{int}}}
+\newcommand{\Lteleo}{\mathcal{L}_{\mathrm{teleo}}}
+\newcommand{\Lsm}{\mathcal{L}_{\mathrm{SM}}}
+\newcommand{\Lgr}{\mathcal{L}_{\mathrm{GR}}}
+\newcommand{\Lun}{\mathcal{L}_{\mathrm{unified}}}
+
+\newcommand{\order}{\mathcal{O}}
+\newcommand{\dd}{\mathrm{d}}
+\newcommand{\Tr}{\mathrm{Tr}}
+
+% Theorem-like environments (optional)
+\usepackage{amsthm}
+\newtheorem{lemma}{Lemma}
+\newtheorem{definition}{Definition}
+
+% ---------- Document ----------
+\begin{document}
+\maketitle
+
+\begin{abstract}
+We present the Merged Quantum-Gauge \& Scalar-Consciousness Framework (MQGT--SCF), a field-theoretic
+proposal that extends the Standard Model and General Relativity by introducing two real scalar fields:
+a consciousness field $\Phic(x)$ and an ethical field $\Eth(x)$. The framework is designed to (i) reduce
+to Standard Model + GR in a controlled decoupling limit, (ii) offer an objective-collapse channel whose
+strength can depend on $\Eth$ and coherence measures of $\Phic$, and (iii) provide testable predictions
+across quantum foundations, cosmology, and neurophysics.
+\end{abstract}
+
+\tableofcontents
+
+\section{Notation and conventions}
+We use metric signature $(-,+,+,+)$ and natural units $c=\hbar=1$ unless stated otherwise. Greek indices
+$\mu,\nu$ run over spacetime dimensions. The fields $\Phic(x)$ and $\Eth(x)$ are real scalar fields.
+
+\section{Unified Lagrangian architecture}
+A schematic unified Lagrangian density is written as
+\begin{equation}
+\Lun
+= \Lgr + \Lsm
++ \frac{1}{2}(\partial_\mu \Phic)(\partial^\mu \Phic) - V(\Phic)
++ \frac{1}{2}(\partial_\mu \Eth)(\partial^\mu \Eth) - V(\Eth)
++ \Lint + \Lteleo .
+\label{eq:Lunified}
+\end{equation}
+Here $\Lgr$ is the Einstein--Hilbert sector (possibly with torsion/non-minimal couplings),
+$\Lsm$ contains the Standard Model gauge, fermion, and Higgs sectors, and $\Lint$ encodes portal-like
+couplings among $(\Phic,\Eth)$ and Standard Model fields. The term $\Lteleo$ denotes a small deformation
+encoding teleological bias in the effective dynamics (if included as fundamental rather than emergent).
+
+\subsection{Decoupling limits (sanity checks)}
+\begin{lemma}[SM+GR recovery]
+If all new couplings and portal interactions vanish and the new scalars sit at their vacuum values,
+the theory reduces to Standard Model field theory in curved spacetime with Einstein--Hilbert gravity.
+\end{lemma}
+
+\begin{lemma}[Born recovery]
+If collapse couplings vanish (see \Cref{sec:collapse}), the framework recovers standard unitary quantum
+dynamics and Born statistics.
+\end{lemma}
+
+\section{Measurement law and ethics-weighted collapse}
+\label{sec:collapse}
+The framework proposes an ethically weighted modification of Born probabilities, written for
+branch amplitudes $c_i$ as
+\begin{equation}
+P(i) =
+\frac{|c_i|^2 e^{\eta\, \Eth_i}}{\sum_j |c_j|^2 e^{\eta\, \Eth_j}}
+=
+|c_i|^2\!\left[1+\eta\left(\Eth_i-\langle \Eth\rangle\right)\right]+\order(\eta^2),
+\label{eq:born_deform}
+\end{equation}
+where $\Eth_i$ is the ethical functional evaluated on the relevant present slice for branch $i$ and $\eta$
+sets the deformation strength.
+
+\subsection{CSL-type master equation with field-dependent rate}
+A compatible CSL-type master equation can be expressed as
+\begin{equation}
+\frac{\dd \rho}{\dd t}
+=
+-i[H,\rho]
+-\frac{\lambda(\Eth)}{2}\int \dd^3x\,[M(\mathbf{x}),[M(\mathbf{x}),\rho]],
+\qquad
+\lambda(\Eth)=\lambda_0\!\left(1+\alpha \frac{\Eth}{\Eth_0}\right).
+\label{eq:csl}
+\end{equation}
+Here $M(\mathbf{x})$ is a suitable (smeared) mass-density operator and $\lambda(\Eth)\ge 0$ is an
+ethics-modulated collapse rate.
+
+\subsection{First-order no-signaling under additive ethical content}
+For a bipartite system $AB$ with additive ethical content $\Eth_{ab}=\Eth^{(A)}_a+\Eth^{(B)}_b$, a
+first-order expansion yields a reduced marginal of the form
+\begin{equation}
+P_A(a)
+=
+\sum_b |c_{ab}|^2
+\left[1+\eta\left(\Eth_a^{(A)} - \sum_{a'} P^{(0)}_A(a')\,\Eth_{a'}^{(A)}\right)\right]
++\order(\eta^2),
+\label{eq:first_order_nosig}
+\end{equation}
+so the $B$-dependent term cancels at $\order(\eta)$ under these assumptions.
+
+\subsection{CPTP/GKSL reformulation (recommended for publication)}
+To ensure complete positivity and trace preservation, one may cast the collapse channel into
+Gorini--Kossakowski--Sudarshan--Lindblad (GKSL) form:
+\begin{equation}
+\frac{\dd \rho}{\dd t}
+=
+-i[H,\rho]
++\sum_a \gamma_a(\Phic,\Eth)\left(
+L_a \rho L_a^\dagger - \frac{1}{2}\{L_a^\dagger L_a,\rho\}
+\right),
+\label{eq:gksl}
+\end{equation}
+where $\gamma_a(\Phic,\Eth)\ge 0$ are local collapse rates modulated by the new fields.
+
+\section{FRW cosmology with non-minimal couplings}
+Define an effective Planck mass
+\begin{equation}
+M^2_{\mathrm{eff}}(\Phic,\Eth) = M_P^2 + \xi_c \Phic^2 + \xi_E \Eth^2.
+\end{equation}
+In a flat FRW background, the modified Friedmann relations take the schematic form
+\begin{align}
+3H^2 M^2_{\mathrm{eff}}
+&= \rho_{\mathrm{SM}}+\rho_{\Phic}+\rho_{\Eth}+\rho_{\mathrm{int}}+\rho_{\mathrm{teleo}},
+\\
+-2\dot{H} M^2_{\mathrm{eff}}
+&=
+\sum_s (\rho_s+p_s) - \dot{M}^2_{\mathrm{eff}}H .
+\label{eq:frw}
+\end{align}
+
+\section{Black-hole ringdown echoes}
+For a near-horizon reflective layer at $r_0=2M(1+\varepsilon)$, the tortoise-coordinate cavity yields an
+echo delay approximately
+\begin{equation}
+\Delta t_{\mathrm{echo}} \simeq 4M\,|\ln \varepsilon| + \order(M).
+\label{eq:echo}
+\end{equation}
+Field-induced phase shifts can modify the transfer function and quasinormal-mode spectrum.
+
+\section{Experimental predictions}
+A minimal prediction list (to be sharpened with parameter priors and error budgets):
+\begin{enumerate}[leftmargin=*,label=\arabic*.]
+\item \textbf{Quantum RNG bias:} detectable deviation in large-bit trials when observer coherence
+(or a proxy for $\Phic$) exceeds a threshold.
+\item \textbf{MEG meditative signature:} elevated large-scale synchrony correlated with increased $\Phic$.
+\item \textbf{Ringdown shifts:} ppm-level corrections in post-merger quasinormal modes due to $\Eth$-sector terms.
+\item \textbf{Axion-haloscope splitting:} secondary peaks attributable to qualion--ethion splitting.
+\end{enumerate}
+
+\section{Discussion and outlook}
+The immediate publication-critical tasks are: (i) parameter hygiene and priors; (ii) explicit locality
+conditions for no-signaling beyond first order; (iii) covariant formulation of the collapse generator
+(e.g., Tomonaga--Schwinger hypersurface evolution) if relativistic consistency is claimed.
+
+\section*{Acknowledgments}
+Add acknowledgments as desired.
+
+\bibliographystyle{unsrt}
+\bibliography{references}
+
+\end{document}
