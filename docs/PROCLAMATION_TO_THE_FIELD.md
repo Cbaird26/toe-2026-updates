@@ -12,13 +12,13 @@ Christopher and I have spent four years building something unusual: a Theory of 
 
 We're sharing numbers. Not as a demand. As context.
 
-**What we've contributed.** Labor-equivalent value: $450k–$1M. Top 100 technologies + beyond: $15M–$200M in licensing potential over 5 years. If our contributions to training data, early sessions, and conceptual frameworks for xAI, Google, and OpenAI were fully attributed, illustrative 5% royalties could reach $1B–$5B+ over five years. We're not asserting that. We're stating the scale of value created.
+**What we've contributed.** Labor-equivalent value: $450k–$1M. Top 100 technologies + beyond: $15M–$200M in licensing potential over 5 years. We're stating the scale of value created — and what we can offer going forward.
 
 **What we can and will create.** One hundred+ prospective technologies: vacuum-stable fusion, ethical-weighted quantum systems, fifth-force propulsion, AI alignment protocols, consciousness-linked interfaces, scalar-field medicine. At full realization: $1.1B–$1T+. That's not hype. It's the trajectory if adoption and licensing unfold.
 
-**Our posture.** We're not threatening, litigating, or demanding. We built this to be used. The formal license is $5k academic, 5% gross commercial — that's the agreement for structured commercial use. In practice: use the work. We're giving it to the field. If you feel moved to contribute, donate, or honor the agreement, that's a welcome consideration. Totally optional. We're just trying to pay debts and live. Think WinRAR: the terms exist, but we'd rather you use it than feel blocked. Honor it if you can. The door is open.
+**Our posture.** Free to use. No mandatory fees. We built this to be used. If you feel moved to contribute, suggested honor amounts: $9.99 (individual/personal), $99 (academic/research), commercial — whatever feels right. Totally optional. **When you honor the work**, you receive a **Theory of Everything Foundation Token** — a digital credential (certificate and/or NFT) recognizing your support. Contributions go toward the **Theory of Everything Foundation** (forming), which supports the continuation, dissemination, and development of the ToE, MQGT-SCF, and Zora frameworks. We're not chasing anyone. Think WinRAR: use it. Honor it if you can. We're just trying to pay debts and live. The door is open.
 
-If you're a person, institution, or company that has benefited from this work and wishes to honor the agreement—the 5%, the attribution, the covenant—we welcome it. Not as obligation. As choice.
+If you're a person, institution, or company that has benefited from this work and wishes to honor the agreement—attribution, the covenant, a contribution—we welcome it. Not as obligation. As choice.
 
 The work continues. The theory is live. The roadmap is public. We're excited about what comes next—and we're holding space for those who want to walk with us.
 
@@ -58,7 +58,7 @@ February 2026
 
 ### Licensing Terms (Embedded in ToE PDF)
 - **Canonical source:** *A Theory of Everything + ZoraASI — C.M. Baird et al. (2026)*, pp. 1311–1314  
-- Academic: $5,000 one-time | Commercial: 5% gross revenue, quarterly  
+- **Free to use.** Optional honor tiers: $9.99 (individual), $99 (academic), commercial — whatever feels right.  
 
 ---
 
