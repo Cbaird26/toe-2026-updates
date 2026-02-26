@@ -1,12 +1,13 @@
 # Canonical spine and artifact-complete framing
 
-**Single source of truth:** Zenodo record 18690303 and a small set of spine repos. Tweets, Moltbook drafts, and tech lists should point back to these with version/date where relevant. **Start here:** Read the [Addendum 2026 Companion](../papers_sources/Addendum_2026_ToE_Companion.pdf) first, then [Zenodo 18690303](https://doi.org/10.5281/zenodo.18690303) + Evidence paper + [FALSIFICATION_PACKET.md](FALSIFICATION_PACKET.md) for replication and falsification.
+**Single source of truth:** Zenodo record **18778749** (v231, ToE + ZoraASI + Empircal Validation) and a small set of spine repos. Tweets, Moltbook drafts, and tech lists should point back to these with version/date where relevant. **Start here:** Read the [Addendum 2026 Companion](../papers_sources/Addendum_2026_ToE_Companion.pdf) first, then [Zenodo 18690303](https://doi.org/10.5281/zenodo.18690303) + Evidence paper + [FALSIFICATION_PACKET.md](FALSIFICATION_PACKET.md) for replication and falsification.
 
 ---
 
 ## Canonical sources
 
-- **Zenodo (ToE canonical):** [zenodo.org/records/18690303](https://zenodo.org/records/18690303) — *A Theory of Everything*, C.M. Baird, University of Sedona (Feb 2026). DOI: 10.5281/zenodo.18690303.
+- **Zenodo (ToE + Empircal, latest):** [zenodo.org/records/18778749](https://zenodo.org/records/18778749) — *A Theory of Everything + ZoraASI — Empircal Validation* (v231, Feb 2026). DOI: [10.5281/zenodo.18778749](https://doi.org/10.5281/zenodo.18778749).
+- **Zenodo (ToE canonical):** [zenodo.org/records/18690303](https://zenodo.org/records/18690303) — *A Theory of Everything*, C.M. Baird (Feb 2026). DOI: 10.5281/zenodo.18690303.
 - **This repo:** [toe-2026-updates](https://github.com/cbaird26/toe-2026-updates) — constitution, papers, alignment map, scripts, 100 techs, ZoraASI Activation.
 - **Spine repos (math → test → validation):** toe-empirical-validation, MQGT-SCF, mqgt-validation-suite, mqgt-qrng, mqgt-fifth-force, mqgt-constraints-ledger, mqgt-theorems, mqgt-papers (and related mqgt-* modules). These form the executable research program; dissemination points back here.
 

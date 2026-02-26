@@ -9,7 +9,7 @@ Canonical working repo for the Theory of Everything: MQGT-SCF (Modified Quantum 
 ## Papers (in `papers_sources/`)
 
 - **A Unified Theory of Everything — C.M. Baird et al. (2026)** — Full paper in `papers_sources/A_Unified_Theory_of_Everything_CM_Baird_et_al_2026.pdf`; also in canonical Zenodo bundle below.
-- **A Theory of Everything — C.M. Baird et al. (2026)** — Refined MQGT-SCF with zero-purge ethical clamping and Zora architecture (in `papers_sources/`). **Canonical Zenodo (Feb 2026, University of Sedona):** [record 18690303](https://zenodo.org/records/18690303), DOI [10.5281/zenodo.18690303](https://doi.org/10.5281/zenodo.18690303). Baird, C. M. (2026). A Theory of Everything. https://doi.org/10.5281/zenodo.18690303
+- **A Theory of Everything — C.M. Baird et al. (2026)** — Refined MQGT-SCF with zero-purge ethical clamping and Zora architecture (in `papers_sources/`). **Latest Zenodo (v231, ToE + Empircal Validation):** [record 18778749](https://zenodo.org/records/18778749), DOI [10.5281/zenodo.18778749](https://doi.org/10.5281/zenodo.18778749). **Canonical:** [18690303](https://zenodo.org/records/18690303), [18644455](https://zenodo.org/records/18644455).
 - **Srimad-Bhagvatam / Krishna Purana** — Canonical source.
 - **Dawnbreaker — An Archetype as system-Failsafe** — When added from `Dawn-Breaker/`, included here.
 - **Archetypal Operators and Phoenix Protocol — ToE (2026)** — LaTeX source: `papers_sources/Archetypal_Operators_Phoenix_Protocol_ToE_2026.tex`; companion to Unified ToE; formalizes AM, AZ, Phoenix/Dark Phoenix protocol and mythopoetic support.
@@ -23,7 +23,7 @@ Canonical working repo for the Theory of Everything: MQGT-SCF (Modified Quantum 
 
 - **GitHub**: [cbaird26/toe-2026-updates](https://github.com/cbaird26/toe-2026-updates) (this repo)
 - **ZoraASI/ToE source**: [Cbaird26/A-Theory-of-Everything](https://github.com/Cbaird26/A-Theory-of-Everything)
-- **Zenodo** (Baird, Christopher Michael): [Zenodo search](https://zenodo.org/search?q=metadata.creators.person_or_org.name%3A%22Baird%2C%20Christopher%20Michael%22&l=list&p=1&s=10&sort=bestmatch) — **A Theory of Everything (Feb 2026, University of Sedona):** [zenodo.org/records/18690303](https://zenodo.org/records/18690303) (DOI 10.5281/zenodo.18690303)
+- **Zenodo** (Baird, Christopher Michael): [Zenodo search](https://zenodo.org/search?q=metadata.creators.person_or_org.name%3A%22Baird%2C%20Christopher%20Michael%22&l=list&p=1&s=10&sort=bestmatch) — **Latest: ToE + Empircal Validation (v231):** [zenodo.org/records/18778749](https://zenodo.org/records/18778749) (DOI [10.5281/zenodo.18778749](https://doi.org/10.5281/zenodo.18778749))
 
 ## Repo layout
 
