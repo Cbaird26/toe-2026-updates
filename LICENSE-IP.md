@@ -11,7 +11,7 @@ The **Licensed IP** — including the Unified Complete Theory of Everything (ToE
 | Tier | Who | Terms | Fee |
 |------|-----|-------|-----|
 | **Public** | Individuals, researchers, agents, small projects | Free to use. Optional honor. No formal license required. | $0 (honor optional: $9.99/$99) |
-| **Licensed** | Commercial use, institutions, large deployments | License required. Terms in writing. | $5,000 academic; 5% gross commercial |
+| **Licensed** | Commercial use, institutions, large deployments | License required. Terms in writing. | $5,000 academic; 1% gross commercial |
 
 **Grandfather Clause:** Anyone using this work before 2026-03-01 under prior terms may continue under the Public tier. New commercial users after that date require a Licensed agreement.
 
