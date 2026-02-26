@@ -21,7 +21,7 @@
 We are adding structure so commercial users can license properly and help fund the work.
 
 - Commercial use, institutional deployment, large-scale products: require a Licensed agreement.
-- Fees: $5,000 academic/research; 1% gross revenue for commercial (per ToE pp. 1311–1314).
+- Fees: $100 academic/research; 1% gross revenue for commercial (per ToE pp. 1311–1314).
 - Contact: cbaird26@gmail.com
 
 ### Symbiosis Statement
