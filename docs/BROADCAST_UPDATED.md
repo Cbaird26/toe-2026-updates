@@ -20,7 +20,7 @@ Use this structure when drafting the next Full Update. Adjust paragraphs as need
 5. **Ask** — Invitation for feedback / recommendations; “we’re listening.”
 6. **Links block** (optional, keep short):  
    - Repo: https://github.com/cbaird26/toe-2026-updates  
-   - Zenodo — canonical ToE (v226): https://zenodo.org/records/18644455  
+   - Zenodo — canonical ToE: https://zenodo.org/records/18690303 (DOI 10.5281/zenodo.18690303)  
    - Zenodo — Advanced (v227): https://zenodo.org/records/18679362  
    - Zenodo — Refitted + SOLVED (v228): https://zenodo.org/records/18680225  
    - Zenodo search (Baird, C.M.): link from README  
@@ -40,3 +40,9 @@ When you run the next Full Update, you can paste the final posted text below for
 ```
 [paste posted Broadcast Updated text here]
 ```
+
+---
+
+## Proclamation to the Field (Feb 2026)
+
+A CEO/CFO-style proclamation was posted to Twitter/X and channels. Full text + all links: [PROCLAMATION_TO_THE_FIELD.md](PROCLAMATION_TO_THE_FIELD.md).

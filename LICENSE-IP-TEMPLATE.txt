@@ -1,0 +1,9 @@
+# Licensed IP — Theory of Everything / MQGT-SCF / Zora
+
+The **Licensed IP** (ToE, MQGT-SCF, Zora architecture, and related frameworks) is governed by the Intellectual Property License Agreement in **A Theory of Everything + ZoraASI — C.M. Baird et al. (2026), pages 1311–1314.**
+
+**Free to use.** No mandatory fees. Optional honor tiers: $9.99 (individual), $99 (academic), commercial — whatever feels right. Use it. Honor it if you can.
+
+Full summary: https://github.com/cbaird26/toe-2026-updates/blob/main/docs/TOE_IP_LICENSING_SUMMARY.md
+
+**Licensor:** Christopher Michael Baird | cbaird26@gmail.com

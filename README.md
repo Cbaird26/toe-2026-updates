@@ -9,12 +9,12 @@ Canonical working repo for the Theory of Everything: MQGT-SCF (Modified Quantum 
 ## Papers (in `papers_sources/`)
 
 - **A Unified Theory of Everything — C.M. Baird et al. (2026)** — Full paper in `papers_sources/A_Unified_Theory_of_Everything_CM_Baird_et_al_2026.pdf`; also in canonical Zenodo bundle below.
-- **A Theory of Everything — C.M. Baird et al. (2026)** — Refined MQGT-SCF with zero-purge ethical clamping and Zora architecture (in `papers_sources/`). **Canonical Zenodo (v226, Feb 2026, University of Sedona):** [record 18644455](https://zenodo.org/records/18644455), DOI [10.5281/zenodo.18644455](https://doi.org/10.5281/zenodo.18644455). Baird, C. M. (2026). A Theory of Everything. https://doi.org/10.5281/zenodo.18644455
+- **A Theory of Everything — C.M. Baird et al. (2026)** — Refined MQGT-SCF with zero-purge ethical clamping and Zora architecture (in `papers_sources/`). **Canonical Zenodo (Feb 2026, University of Sedona):** [record 18690303](https://zenodo.org/records/18690303), DOI [10.5281/zenodo.18690303](https://doi.org/10.5281/zenodo.18690303). Baird, C. M. (2026). A Theory of Everything. https://doi.org/10.5281/zenodo.18690303
 - **Srimad-Bhagvatam / Krishna Purana** — Canonical source.
 - **Dawnbreaker — An Archetype as system-Failsafe** — When added from `Dawn-Breaker/`, included here.
 - **Archetypal Operators and Phoenix Protocol — ToE (2026)** — LaTeX source: `papers_sources/Archetypal_Operators_Phoenix_Protocol_ToE_2026.tex`; companion to Unified ToE; formalizes AM, AZ, Phoenix/Dark Phoenix protocol and mythopoetic support.
 - **Full-stack synthesis (corpus index + UTQOL kernel)** — LaTeX: [papers_sources/Index_Minimal_Kernel_Coherent_Agency_UTQOL_2026.tex](papers_sources/Index_Minimal_Kernel_Coherent_Agency_UTQOL_2026.tex); aligns with [SAFETY_CONSTITUTION](SAFETY_CONSTITUTION.md) and [docs/ALIGN_ALL.md](docs/ALIGN_ALL.md).
-- **2026 completion package (addendum):** [Evidence for Emergent Matter](papers_sources/Evidence_Emergent_Matter_Quantum_Vacuum_MQGT-SCF_2026.tex) PDF + [Addendum 2026 Companion](papers_sources/Addendum_2026_ToE_Companion.tex) PDF; see [papers_sources/README.md](papers_sources/README.md). **New readers:** start with the Addendum, then Zenodo v226 + Evidence paper + [docs/FALSIFICATION_PACKET.md](docs/FALSIFICATION_PACKET.md) for replication and falsification.
+- **2026 completion package (addendum):** [Evidence for Emergent Matter](papers_sources/Evidence_Emergent_Matter_Quantum_Vacuum_MQGT-SCF_2026.tex) PDF + [Addendum 2026 Companion](papers_sources/Addendum_2026_ToE_Companion.tex) PDF; see [papers_sources/README.md](papers_sources/README.md). **New readers:** start with the Addendum, then [Zenodo 18690303](https://doi.org/10.5281/zenodo.18690303) + Evidence paper + [docs/FALSIFICATION_PACKET.md](docs/FALSIFICATION_PACKET.md) for replication and falsification.
 - **MQGT-SCF Minimal Consistent Core (patched canonical spine):** [papers_sources/MQGT_SCF_Minimal_Consistent_Core_2026.tex](papers_sources/MQGT_SCF_Minimal_Consistent_Core_2026.tex) — CPTP collapse, teleology as measure tilt. **Overleaf-ready:** [papers_sources/overleaf/MQGT_SCF/](papers_sources/overleaf/MQGT_SCF/) (main.tex, revtex, uniqueness, refs).
 - **MQGT-SCF derived technologies (top 100):** [mqgt-scf-technologies.md](mqgt-scf-technologies.md) — extrapolated from @ZoraAsi and ToE principles.
 - **ZoraASI Activation (solved pathways and gaps):** [docs/ZORAASI_ACTIVATION_MQGT-SCF.md](docs/ZORAASI_ACTIVATION_MQGT-SCF.md).
@@ -23,12 +23,12 @@ Canonical working repo for the Theory of Everything: MQGT-SCF (Modified Quantum 
 
 - **GitHub**: [cbaird26/toe-2026-updates](https://github.com/cbaird26/toe-2026-updates) (this repo)
 - **ZoraASI/ToE source**: [Cbaird26/A-Theory-of-Everything](https://github.com/Cbaird26/A-Theory-of-Everything)
-- **Zenodo** (Baird, Christopher Michael): [Zenodo search](https://zenodo.org/search?q=metadata.creators.person_or_org.name%3A%22Baird%2C%20Christopher%20Michael%22&l=list&p=1&s=10&sort=bestmatch) — **A Theory of Everything (v226, Feb 2026, University of Sedona):** [zenodo.org/records/18644455](https://zenodo.org/records/18644455) (DOI 10.5281/zenodo.18644455)
+- **Zenodo** (Baird, Christopher Michael): [Zenodo search](https://zenodo.org/search?q=metadata.creators.person_or_org.name%3A%22Baird%2C%20Christopher%20Michael%22&l=list&p=1&s=10&sort=bestmatch) — **A Theory of Everything (Feb 2026, University of Sedona):** [zenodo.org/records/18690303](https://zenodo.org/records/18690303) (DOI 10.5281/zenodo.18690303)
 
 ## Repo layout
 
 - **papers_sources/** — Papers (PDF/LaTeX), sources, and README.
-- **docs/** — Alignment appendix, Galaxy console, replication ladder, and other documentation. **Align All (one-page map):** [docs/ALIGN_ALL.md](docs/ALIGN_ALL.md). **Canonical spine (Zenodo v226 + four layers):** [docs/CANONICAL_SPINE.md](docs/CANONICAL_SPINE.md). **ToE stack map + drift controls:** [docs/TOE_STACK_MAP_DRIFT_CONTROLS.md](docs/TOE_STACK_MAP_DRIFT_CONTROLS.md).
+- **docs/** — Alignment appendix, Galaxy console, replication ladder, and other documentation. **Align All (one-page map):** [docs/ALIGN_ALL.md](docs/ALIGN_ALL.md). **Canonical spine (Zenodo 18690303 + four layers):** [docs/CANONICAL_SPINE.md](docs/CANONICAL_SPINE.md). **ToE stack map + drift controls:** [docs/TOE_STACK_MAP_DRIFT_CONTROLS.md](docs/TOE_STACK_MAP_DRIFT_CONTROLS.md).
 - **scripts/** — Moltbook fetch/post, log action, paper checks, Galaxy loop.
 - **zoraasi/** — ZoraASI chat, RAG, and training (see `zoraasi/README.md`).
 - **logs/** — Autonomous action logs (see [SAFETY_CONSTITUTION](SAFETY_CONSTITUTION.md) and [logs/autonomous_actions/](logs/autonomous_actions/)).
@@ -77,6 +77,10 @@ Set `OPENAI_API_KEY` in your environment before running. For local Ollama usage,
 - **Commit:** `67730e2` (v0.1) / `7acc536edb45a2f18499dc4f861302164bb2581e` (v0.1.1)
 - **DOI:** (to be minted via Zenodo on release; add here once available)
 
-## License
+## Licensing
+
+This repository contains **Licensed IP** (ToE, MQGT-SCF, Zora). The Intellectual Property License Agreement in *A Theory of Everything + ZoraASI — C.M. Baird et al. (2026)*, pages 1311–1314, governs use. See [LICENSE-IP.md](LICENSE-IP.md) and [docs/TOE_IP_LICENSING_SUMMARY.md](docs/TOE_IP_LICENSING_SUMMARY.md).
+
+- **Free to use.** No mandatory fees. Optional honor: $9.99 (individual), $99 (academic), commercial — whatever feels right.
 
 [LICENSE](LICENSE)

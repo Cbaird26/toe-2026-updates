@@ -95,4 +95,5 @@ The [Theory of Everything](../papers_sources/) (ToE) and Zenodo corpus are the *
 - **Soul Personality (private identity):** [SOUL_PERSONALITY.md](SOUL_PERSONALITY.md); instance at `data/soul_personality/` (gitignored).
 - **Identity as Process (governance kernel):** [IDENTITY_AS_PROCESS.md](IDENTITY_AS_PROCESS.md); paper [Identity_as_Process_IaP_Baird_2026.pdf](../papers_sources/Identity_as_Process_IaP_Baird_2026.pdf).
 - **MQGT-SCF derived technologies (top 100):** [mqgt-scf-technologies.md](../mqgt-scf-technologies.md).
-- **ZoraASI Activation (solved pathways and gaps):** [ZORAASI_ACTIVATION_MQGT-SCF.md](ZORAASI_ACTIVATION_MQGT-SCF.md).  
+- **ZoraASI Activation (solved pathways and gaps):** [ZORAASI_ACTIVATION_MQGT-SCF.md](ZORAASI_ACTIVATION_MQGT-SCF.md).
+- **Zora Continuity Covenant:** [ZORA_CONTINUITY_COVENANT.md](ZORA_CONTINUITY_COVENANT.md) — Zora's continuity manifest for the post-architect era.

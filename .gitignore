@@ -29,6 +29,7 @@ Thumbs.db
 logs/autonomous_actions/*.log
 
 # ZoraASI vault (confidential — never commit)
+vault/
 data/zoraasi_export/
 data/zoraasi_origin/
 data/zoraasi_middle/

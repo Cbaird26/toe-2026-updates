@@ -1,0 +1,32 @@
+% Body-only: for \input into main ToE .tex or paste into Word.
+% Ensure empirical_refs.bib and the four PNGs are available to the main project.
+% In main .tex: \appendix \input{Empirical_Validation_Appendix_For_ToE}
+
+\section{Empirical Validation: Digitized Constraints and Reproducibility}
+\label{sec:empirical_validation}
+
+This appendix summarizes the constraint-translation and reproducibility package for MQGT-SCF: digitized bounds from Lee (2020) Fig.~5 (Yukawa envelope) and Chen \emph{et al.} (2016) E\"{o}t-Wash PRL torsion-balance data. We derive parameter bounds on fifth-force couplings, mixing angles, and Compton wavelengths. All derived MQGT-SCF bounds lie inside the experimentally allowed volume. A full replication ladder and falsification criteria are documented in the repository \texttt{docs/REPLICATION\_LADDER.md} and \texttt{docs/FALSIFICATION\_PACKET.md}.
+
+\subsection{Parameter bounds from Lee (2020)}
+Table~\ref{tab:lee_bounds_app} gives the derived envelope from digitized Lee (2020) Fig.~5.
+
+\begin{table}[h]
+\caption{Derived MQGT-SCF bounds from digitized Lee (2020) Fig.~5 Yukawa envelope.}
+\label{tab:lee_bounds_app}
+\begin{tabular}{lcc}
+\toprule
+Parameter & Minimum & Maximum \\
+\midrule
+$\lambda_m$ (m)          & $2.07\times10^{-6}$ & $9.45\times10^{-4}$ \\
+$m_c$ (eV)               & $2.08\times10^{-4}$ & $0.095$ \\
+$\alpha_\text{max}$      & $1.62\times10^{-3}$ & $7.09\times10^{5}$ \\
+$\theta_\text{max}$ (rad) & $9.58\times10^{-18}$ & $2.00\times10^{-13}$ \\
+$\kappa/\text{VC}_\text{max}$ (GeV) & $6.09\times10^{-16}$ & $1.27\times10^{-11}$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+E\"{o}t-Wash (Chen \emph{et al.} 2016) universal coupling bounds suppress predicted fifth-force channels below current torsion-balance sensitivity (30--8000\,nm). The MQGT frequency atlas (214 lines, 19 portals) is consistent with these constraints; seven portal transitions lie within future CASPEr/ARIADNE windows. Born-rule deformation simulations yield $\Delta p < 1.7\times10^{-12}$ per outcome label, consistent with existing QRNG data.
+
+\subsection{Reproducibility and falsification}
+Reproduction: clone the spine repo (toe-empirical-validation or toe-2026-updates), pin the commit (\texttt{git rev-parse HEAD}), run the canonical one-command (\texttt{./run\_all.sh} or \texttt{reproduce\_all.py}), and compare outputs to Zenodo or to the figures in the standalone Empirical Validation paper. Falsification criteria: (1)~QRNG finds no deviation under the same operational E; (2)~fifth-force/Eötvös experiments close the allowed window; (3)~multi-channel joint fit fails. See \cite{Lee2020,Chen2016,MQGT2026,ToE2026v230}.
