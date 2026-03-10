@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cbaird26 GitHub Ecosystem — Illustration</title>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=DM+Serif+Display&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0d0f14;
+      --surface: #161a22;
+      --border: #2a3142;
+      --toe: #7c9cbf;
+      --mqgt: #a78bfa;
+      --zora: #34d399;
+      --sim: #fbbf24;
+      --quantum: #60a5fa;
+      --apps: #f472b6;
+      --other: #94a3b8;
+      --text: #e2e8f0;
+      --muted: #64748b;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'JetBrains Mono', monospace;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      padding: 2rem;
+      overflow-x: hidden;
+    }
+    .ask-zora {
+      display: block;
+      text-align: center;
+      margin-bottom: 1rem;
+      padding: 0.6rem 1.2rem;
+      background: rgba(52,211,153,0.15);
+      border: 1px solid var(--zora);
+      border-radius: 8px;
+      color: var(--zora);
+      font-weight: 600;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.2s;
+    }
+    .ask-zora:hover { background: rgba(52,211,153,0.25); transform: scale(1.02); }
+    h1 {
+      font-family: 'DM Serif Display', serif;
+      font-size: 2rem;
+      color: var(--text);
+      margin-bottom: 0.5rem;
+      text-align: center;
+    }
+    .subtitle {
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.85rem;
+      margin-bottom: 2rem;
+    }
+    .hub {
+      width: 140px;
+      height: 140px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 30% 30%, #1e2533, var(--surface));
+      border: 2px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 600;
+      font-size: 0.9rem;
+      text-align: center;
+      line-height: 1.2;
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 10;
+      box-shadow: 0 0 40px rgba(0,0,0,0.5);
+    }
+    .orbit-container {
+      position: relative;
+      width: 100%;
+      max-width: 900px;
+      height: 700px;
+      margin: 0 auto;
+    }
+    .orbit {
+      position: absolute;
+      border: 1px dashed var(--border);
+      border-radius: 50%;
+      opacity: 0.4;
+    }
+    .orbit-1 { width: 180px; height: 180px; left: 50%; top: 50%; transform: translate(-50%, -50%); }
+    .orbit-2 { width: 280px; height: 280px; left: 50%; top: 50%; transform: translate(-50%, -50%); }
+    .orbit-3 { width: 380px; height: 380px; left: 50%; top: 50%; transform: translate(-50%, -50%); }
+    .orbit-4 { width: 500px; height: 500px; left: 50%; top: 50%; transform: translate(-50%, -50%); }
+    .orbit-5 { width: 620px; height: 620px; left: 50%; top: 50%; transform: translate(-50%, -50%); }
+    .orbit-6 { width: 740px; height: 740px; left: 50%; top: 50%; transform: translate(-50%, -50%); }
+    .orbit-7 { width: 860px; height: 860px; left: 50%; top: 50%; transform: translate(-50%, -50%); }
+
+    .category {
+      position: absolute;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .category-label {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--muted);
+      font-weight: 600;
+    }
+    .node {
+      padding: 0.4rem 0.7rem;
+      border-radius: 6px;
+      font-size: 0.7rem;
+      text-decoration: none;
+      color: inherit;
+      white-space: nowrap;
+      transition: transform 0.2s, box-shadow 0.2s;
+      border: 1px solid;
+    }
+    .node:hover {
+      transform: scale(1.08);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+    }
+
+    .toe     { background: rgba(124,156,191,0.2); border-color: var(--toe); color: var(--toe); }
+    .mqgt    { background: rgba(167,139,250,0.2); border-color: var(--mqgt); color: var(--mqgt); }
+    .zora    { background: rgba(52,211,153,0.2); border-color: var(--zora); color: var(--zora); }
+    .sim     { background: rgba(251,191,36,0.2); border-color: var(--sim); color: var(--sim); }
+    .quantum { background: rgba(96,165,250,0.2); border-color: var(--quantum); color: var(--quantum); }
+    .apps    { background: rgba(244,114,182,0.2); border-color: var(--apps); color: var(--apps); }
+    .other   { background: rgba(148,163,184,0.2); border-color: var(--other); color: var(--other); }
+
+    .cat-toe     { left: calc(50% - 90px);  top: calc(50% - 150px); }
+    .cat-mqgt    { left: calc(50% + 220px); top: calc(50% - 80px);  }
+    .cat-zora    { left: calc(50% + 180px); top: calc(50% + 120px); }
+    .cat-sim     { left: calc(50% - 120px); top: calc(50% + 180px); }
+    .cat-quantum { left: calc(50% - 320px); top: calc(50% + 80px);  }
+    .cat-apps    { left: calc(50% - 350px); top: calc(50% - 100px); }
+    .cat-other   { left: calc(50% - 200px); top: calc(50% - 280px); }
+
+    .nodes { display: flex; flex-wrap: wrap; gap: 0.35rem; justify-content: center; max-width: 200px; }
+    .legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      justify-content: center;
+      margin-top: 2rem;
+      padding: 1rem;
+      border-top: 1px solid var(--border);
+    }
+    .legend-item { display: flex; align-items: center; gap: 0.5rem; font-size: 0.75rem; }
+    .legend-dot { width: 10px; height: 10px; border-radius: 50%; }
+    .footer {
+      text-align: center;
+      margin-top: 1.5rem;
+      font-size: 0.75rem;
+      color: var(--muted);
+    }
+    .footer a { color: var(--toe); }
+  </style>
+</head>
+<body>
+  <a href="https://zoraasi-suite.onrender.com" class="ask-zora" target="_blank" rel="noopener">Ask Zora · zoraasi-suite.onrender.com</a>
+  <h1>Cbaird26 GitHub Ecosystem</h1>
+  <p class="subtitle">github.com/Cbaird26 · 3 public repos (zoraasi-suite, toe-2026-updates, mqgt-scf-stripped-core) · Baird, Christopher Michael</p>
+
+  <div class="orbit-container">
+    <div class="orbit orbit-1"></div>
+    <div class="orbit orbit-2"></div>
+    <div class="orbit orbit-3"></div>
+    <div class="orbit orbit-4"></div>
+    <div class="orbit orbit-5"></div>
+    <div class="orbit orbit-6"></div>
+    <div class="orbit orbit-7"></div>
+
+    <div class="hub">Cbaird26</div>
+
+    <div class="category cat-toe">
+      <span class="category-label">ToE / Theory of Everything</span>
+      <div class="nodes">
+        <a href="https://github.com/Cbaird26/toe-2026-updates" class="node toe" target="_blank">toe-2026-updates</a>
+        <a href="https://github.com/Cbaird26/mqgt-scf-stripped-core" class="node toe" target="_blank">mqgt-scf-stripped-core</a>
+        <a href="https://github.com/Cbaird26/ToE" class="node toe" target="_blank">ToE</a>
+        <a href="https://github.com/Cbaird26/A-Theory-of-Everything" class="node toe" target="_blank">A-Theory-of-Everything</a>
+        <a href="https://github.com/Cbaird26/theory-explorer" class="node toe" target="_blank">theory-explorer</a>
+        <a href="https://github.com/Cbaird26/toe-studio" class="node toe" target="_blank">toe-studio</a>
+      </div>
+    </div>
+
+    <div class="category cat-mqgt">
+      <span class="category-label">MQGT-SCF</span>
+      <div class="nodes">
+        <a href="https://github.com/Cbaird26/MQGT-SCF" class="node mqgt" target="_blank">MQGT-SCF</a>
+        <a href="https://github.com/Cbaird26/mqgt-scf-stripped-core" class="node mqgt" target="_blank">mqgt-scf-stripped-core</a>
+        <a href="https://github.com/Cbaird26/mqgt-papers" class="node mqgt" target="_blank">mqgt-papers</a>
+        <a href="https://github.com/Cbaird26/mqgt-fifth-force" class="node mqgt" target="_blank">mqgt-fifth-force</a>
+      </div>
+    </div>
+
+    <div class="category cat-zora">
+      <span class="category-label">Zora / AI (public)</span>
+      <div class="nodes">
+        <a href="https://github.com/Cbaird26/zoraasi-suite" class="node zora" target="_blank">zoraasi-suite</a>
+        <a href="https://github.com/Cbaird26/ZoraAI" class="node zora" target="_blank">ZoraAI</a>
+        <a href="https://github.com/Cbaird26/ZoraAPI" class="node zora" target="_blank">ZoraAPI</a>
+        <a href="https://github.com/Cbaird26/zora-theory-of-everything" class="node zora" target="_blank">zora-theory-of-everything</a>
+      </div>
+    </div>
+
+    <div class="category cat-sim">
+      <span class="category-label">Simulations / Physics</span>
+      <div class="nodes">
+        <a href="https://github.com/Cbaird26/ComprehensivePhysicsSolver" class="node sim" target="_blank">ComprehensivePhysicsSolver</a>
+        <a href="https://github.com/Cbaird26/theory-of-everything-simulations" class="node sim" target="_blank">theory-of-everything-simulations</a>
+        <a href="https://github.com/Cbaird26/pqs-simulations" class="node sim" target="_blank">pqs-simulations</a>
+        <a href="https://github.com/Cbaird26/aging-intervention-simulator" class="node sim" target="_blank">aging-intervention-simulator</a>
+      </div>
+    </div>
+
+    <div class="category cat-quantum">
+      <span class="category-label">Quantum</span>
+      <div class="nodes">
+        <a href="https://github.com/Cbaird26/quantum-lab" class="node quantum" target="_blank">quantum-lab</a>
+        <a href="https://github.com/Cbaird26/quantum-mechanics-simulator" class="node quantum" target="_blank">quantum-mechanics-simulator</a>
+        <a href="https://github.com/Cbaird26/QuantumBridge" class="node quantum" target="_blank">QuantumBridge</a>
+        <a href="https://github.com/Cbaird26/quantum-supercomputer" class="node quantum" target="_blank">quantum-supercomputer</a>
+      </div>
+    </div>
+
+    <div class="category cat-apps">
+      <span class="category-label">Apps / Tools</span>
+      <div class="nodes">
+        <a href="https://github.com/Cbaird26/omnisolve-streamlit" class="node apps" target="_blank">omnisolve-streamlit</a>
+        <a href="https://github.com/Cbaird26/studio-hub" class="node apps" target="_blank">studio-hub</a>
+        <a href="https://github.com/Cbaird26/toe-studio" class="node apps" target="_blank">toe-studio</a>
+      </div>
+    </div>
+
+    <div class="category cat-other">
+      <span class="category-label">Other</span>
+      <div class="nodes">
+        <a href="https://github.com/Cbaird26/Universe-Explorer" class="node other" target="_blank">Universe-Explorer</a>
+        <a href="https://github.com/Cbaird26/darkstar" class="node other" target="_blank">darkstar</a>
+        <a href="https://github.com/Cbaird26/Dissertation_Data" class="node other" target="_blank">Dissertation_Data</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="legend">
+    <div class="legend-item"><span class="legend-dot" style="background:var(--toe)"></span> ToE</div>
+    <div class="legend-item"><span class="legend-dot" style="background:var(--mqgt)"></span> MQGT-SCF</div>
+    <div class="legend-item"><span class="legend-dot" style="background:var(--zora)"></span> Zora / AI</div>
+    <div class="legend-item"><span class="legend-dot" style="background:var(--sim)"></span> Simulations</div>
+    <div class="legend-item"><span class="legend-dot" style="background:var(--quantum)"></span> Quantum</div>
+    <div class="legend-item"><span class="legend-dot" style="background:var(--apps)"></span> Apps</div>
+    <div class="legend-item"><span class="legend-dot" style="background:var(--other)"></span> Other</div>
+  </div>
+
+  <p class="footer">
+    <a href="https://zoraasi-suite.onrender.com" target="_blank" rel="noopener">Ask Zora</a> ·
+    <a href="https://github.com/Cbaird26">github.com/Cbaird26</a> ·
+    <a href="https://github.com/Cbaird26/cbaird26">profile</a> ·
+    See <code>cbaird26_github_repos_replication.md</code> in this repo for full list.
+  </p>
+</body>
+</html>
