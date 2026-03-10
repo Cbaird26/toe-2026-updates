@@ -1,6 +1,6 @@
 # TOE — Theory of Everything (MQGT-SCF, C.M. Baird et al.)
 
-Canonical working repo for the Theory of Everything: MQGT-SCF (Modified Quantum Gravity Theory with Self-Consistent Field), frequency atlas, fifth-force constraints, and related papers and sources.
+Canonical working repo for the Theory of Everything: MQGT-SCF. **Zora** (Baird–ZoraASI) — Ask at [zoraasi-suite.onrender.com](https://zoraasi-suite.onrender.com). Public repos: [zoraasi-suite](https://github.com/cbaird26/zoraasi-suite), [mqgt-scf-stripped-core](https://github.com/cbaird26/mqgt-scf-stripped-core). (Modified Quantum Gravity Theory with Self-Consistent Field), frequency atlas, fifth-force constraints, and related papers and sources.
 
 **Skeptic-first (physics):** Open, reproducible analysis constraining a minimal, operational deformation of the Born rule (scalar outcome-label bias), evaluated across QRNG data plus particle/cosmology constraints. Code and manifests included for re-run and audit. Interpretive layer (consciousness/ethics fields) is optional; operational model is falsifiable. See [docs/FALSIFICATION_PACKET.md](docs/FALSIFICATION_PACKET.md) and [docs/REPLICATION_LADDER.md](docs/REPLICATION_LADDER.md).
 
@@ -21,9 +21,10 @@ Canonical working repo for the Theory of Everything: MQGT-SCF (Modified Quantum 
 
 ## Links
 
-- **GitHub**: [cbaird26/toe-2026-updates](https://github.com/cbaird26/toe-2026-updates) (this repo)
+- **Ask Zora**: [zoraasi-suite.onrender.com](https://zoraasi-suite.onrender.com) — Outer identity, ToE-informed
+- **GitHub**: [cbaird26/toe-2026-updates](https://github.com/cbaird26/toe-2026-updates) (this repo) | [cbaird26/zoraasi-suite](https://github.com/cbaird26/zoraasi-suite) | [cbaird26](https://github.com/cbaird26)
 - **ZoraASI/ToE source**: [Cbaird26/A-Theory-of-Everything](https://github.com/Cbaird26/A-Theory-of-Everything)
-- **Zenodo** (Baird, Christopher Michael): [Zenodo search](https://zenodo.org/search?q=metadata.creators.person_or_org.name%3A%22Baird%2C%20Christopher%20Michael%22&l=list&p=1&s=10&sort=bestmatch) — **Latest: ToE + Empircal Validation (v231):** [zenodo.org/records/18778749](https://zenodo.org/records/18778749) (DOI [10.5281/zenodo.18778749](https://doi.org/10.5281/zenodo.18778749))
+- **Zenodo** (Baird, Christopher Michael): [Zenodo search](https://zenodo.org/search?q=metadata.creators.person_or_org.name%3A%22Baird%2C%20Christopher%20Michael%22&l=list&p=1&s=10&sort=bestmatch) — **Latest: ToE + Empirical Validation (v231):** [zenodo.org/records/18778749](https://zenodo.org/records/18778749) (DOI [10.5281/zenodo.18778749](https://doi.org/10.5281/zenodo.18778749))
 
 ## Repo layout
 
