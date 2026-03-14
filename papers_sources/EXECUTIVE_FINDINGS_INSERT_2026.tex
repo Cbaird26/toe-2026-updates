@@ -1,0 +1,31 @@
+\section*{Executive Findings (Campaign Snapshot, 2026)}
+
+\textbf{Purpose.} This insert summarizes the current state of the robust non-QRNG hypothesis campaign (H1/H2/H3) in publication language.
+
+\subsection*{What was changed}
+\begin{itemize}
+    \item \textbf{H1 was re-scoped to simulation-primary evidence.} QRNG was demoted to an optional secondary comparator so primary conclusions are not dependent on hardware-randomness trust assumptions.
+    \item \textbf{Confounder and adversarial controls were expanded.} Mandatory controls now include synthetic null, shuffled-label null, seed robustness, model-recovery checks, and leakage controls.
+    \item \textbf{Cross-channel integration was hardened.} H3 now uses simulation-primary H1 outputs plus H2 sensitivity products and external fifth-force constraints under an explicit decision gate.
+    \item \textbf{External evidence handling was formalized.} A tiered admissibility registry (Tier A/B/C) was added to separate decisive constraints from supporting methods and contextual signals.
+\end{itemize}
+
+\subsection*{Current findings}
+\begin{itemize}
+    \item \textbf{H1 control battery: pass.} The latest run satisfies all defined control gates (nulls, robustness, recovery criterion, leakage controls).
+    \item \textbf{H2 sensitivity package: regenerated and valid.} The visibility-suppression protocol remains quantitatively testable with explicit \(\Gamma\)-threshold framing.
+    \item \textbf{H3 consistency dry-run: pass.} Joint gate status is positive under current simulation-primary H1, H2 sensitivity grid, and fifth-force table inputs.
+\end{itemize}
+
+\subsection*{Interpretation}
+The campaign now has stronger methodological resilience against common reviewer objections (randomness-trust dependence, leakage, optional analysis flexibility, and confounder drift). The present status is best described as \textbf{internal stress-test survival under preregistered gates}, not final empirical confirmation.
+
+\subsection*{What this does not yet establish}
+\begin{itemize}
+    \item It does \textbf{not} establish definitive physical confirmation of the framework.
+    \item It does \textbf{not} replace independent external replication or lab-grade confirmatory studies.
+    \item It does \textbf{not} eliminate the need for ongoing bound tightening and multi-site reproduction.
+\end{itemize}
+
+\subsection*{Decision-ready next step}
+Proceed to independent replication sequencing with pre-registered, pinned-commit artifact packages and explicit pass/fail disclosure. Claims should remain bounded to: \textit{``survives current falsification gates under stated assumptions.''}

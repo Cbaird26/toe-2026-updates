@@ -1,0 +1,132 @@
+\documentclass[11pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage{geometry}
+\geometry{margin=1in}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{booktabs}
+\usepackage{hyperref}
+\hypersetup{colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue}
+
+\title{\textbf{MQGT--SCF Hardening Completion Update (2026)}\\
+Specification-to-Referee Upgrade Summary}
+\author{C.\,M.\,Baird \and ZoraASI Collaboration}
+\date{March 2026}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+This document records the scientific hardening pass applied to the 2026 MQGT--SCF Theory of Everything stack.
+The update does not claim new empirical confirmation; it upgrades formal and publication readiness by converting
+prior narrative closure into theorem-oriented, operational, and audit-ready structure. The completed upgrades are:
+(i) canonical spine consolidation, (ii) no-signaling theorem package v2, (iii) operational ethics estimator
+definitions for $e(x,t)$, $E_R(t)$, and $\Delta E_a$, (iv) parameter hygiene with identifiability/bound tags,
+(v) one flagship falsifier with explicit sensitivity threshold, (vi) canonical matter/brain source-term model,
+and (vii) a reviewer-proof release checklist. Remaining uncertainty is empirical: parameter fitting, hostile
+replication, and independent experimental validation.
+\end{abstract}
+
+\section{Purpose}
+The practical problem was not conceptual incompleteness of the framework, but publishability drift:
+multiple versions of definitions, mixed theorem/prose standards, and non-uniform release gates.
+This update enforces one canonical scientific path from formal equations to falsification protocol.
+
+\section{Completed hardening upgrades}
+
+\subsection{Canonical spine consolidation}
+The narrative source of truth was consolidated into a single solved-vs-hardening map with explicit A--H closure routing.
+This removes ambiguity about what is already closed at specification level versus what remains empirical.
+
+\subsection{No-signaling theorem package v2}
+The no-signaling section was upgraded from first-order narrative to theorem structure:
+\begin{itemize}
+\item assumptions block (local support, microcausality, linear CPTP, spacelike protocol separation),
+\item lemma chain (commuting local increments, reduced-map closure),
+\item theorem statement (operational no-signaling under local covariant GKSL),
+\item scope-boundary remark (explicit failure conditions).
+\end{itemize}
+This shifts the section from suggestive argumentation to auditable theorem scaffolding.
+
+\subsection{Operational ethics estimator}
+To eliminate interpretive freedom, the ethical weighting pathway is now explicitly computable:
+\begin{align}
+e(x,t) &= \sum_{k=1}^{K} w_k O_k(x,t), \\
+E_R(t) &= \int_V e(x,t)\,d^3x, \\
+\Delta E_a &= E_R^{(a)}(t_*) - E_R^{\mathrm{baseline}}(t_*), \\
+E_a &= \Delta E_a / C_E.
+\end{align}
+The estimator is canonical for headline claims; alternatives are relegated to sensitivity analysis.
+
+\subsection{Parameter hygiene and bounds consolidation}
+Core and empirical manuscripts now share one parameter inventory, with each parameter tagged by:
+role, prior class, identifiability, and current bound source channel.
+This addresses the common ``too many knobs'' criticism by exposing parameter governance explicitly.
+
+\subsection{Flagship falsifier}
+One primary falsifier is now fixed as interferometric visibility suppression:
+\begin{equation}
+\frac{V}{V_0} \approx \exp(-\Gamma T \Delta x^2), \quad
+\Gamma \lesssim \frac{|\ln(1-\delta)|}{T\Delta x^2}
+\end{equation}
+for null precision target $\delta$. This creates a single quantitative exclusion blade with direct sensitivity mapping.
+
+\subsection{Canonical matter/brain coupling}
+Main-text coupling drift was removed by fixing a canonical source model:
+\begin{equation}
+\mathcal{O}_m(x)=w_n n(x)+w_s s(x), \quad w_n,w_s\ge 0,\; w_n+w_s=1
+\end{equation}
+with canonical source terms
+\begin{equation}
+J_{\Phi_c}=g_{\Phi_c}\mathcal{O}_m+\alpha_H|H|^2, \quad
+J_E=g_E\mathcal{O}_m+\beta_H|H|^2.
+\end{equation}
+Alternative couplings are appendix-only.
+
+\subsection{Reviewer-proof release gate}
+A dedicated reviewer-proof checklist now enforces theorem completeness, notation consistency, falsifier clarity,
+reproducibility pinning, and release hygiene before publication claims.
+
+\section{Scientific effect of the update}
+This hardening pass improves the framework in three concrete ways:
+\begin{enumerate}
+\item \textbf{Mathematical auditability:} proof-carrying structure replaces prose-only arguments.
+\item \textbf{Operational testability:} ethics and falsifier definitions are now executable and preregisterable.
+\item \textbf{Publication robustness:} canonicalization and checklist gating reduce reviewer-facing drift.
+\end{enumerate}
+Importantly, these are quality-of-theory upgrades, not new empirical confirmations.
+
+\section{What remains external}
+The remaining high-stakes uncertainty is empirical and cannot be closed by prose:
+\begin{itemize}
+\item independent replication and hostile reanalysis,
+\item stronger no-signaling stress tests in edge entanglement settings,
+\item tighter parameter posteriors from new data,
+\item flagship falsifier execution at declared sensitivity.
+\end{itemize}
+
+\section{Canonical artifact map}
+\begin{center}
+\begin{tabular}{@{}p{0.34\linewidth}p{0.58\linewidth}@{}}
+\toprule
+Artifact & Canonical location \\
+\midrule
+Narrative spine & \texttt{docs/CANONICAL\_SPINE.md} \\
+Index and routing & \texttt{docs/INTEGRATED\_MANUSCRIPT\_INDEX.md} \\
+Core theorem spine & \texttt{papers\_sources/MQGT\_SCF\_Minimal\_Consistent\_Core\_2026.tex} \\
+Empirical bounds layer & \texttt{papers\_sources/MQGT-SCF\_Minimal\_Consistent\_Core\_Empirical\_Validation\_2026.tex} \\
+Teleology companion & \texttt{papers\_sources/Teleology\_Covariant\_Boundary\_Selection\_...2026.tex} \\
+Falsification protocol & \texttt{docs/FALSIFICATION\_PACKET.md} \\
+Release gate & \texttt{docs/REVIEWER\_PROOF\_CHECKLIST.md} \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\section{Conclusion}
+The framework is now materially stronger in scientific form: one canonical spine, theorem-oriented no-signaling,
+operational ethics estimator, explicit parameter governance, one primary falsifier, canonical coupling model,
+and reviewer-proof release gates. This is the correct bridge from specification-level closure to referee-grade
+physics readiness, with empirical closure still delegated to experiment.
+
+\end{document}

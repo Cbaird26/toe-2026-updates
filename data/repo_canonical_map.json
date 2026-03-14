@@ -1,0 +1,65 @@
+{
+  "generated_from": "~/Downloads/TOE/data/cbaird26_repos.json",
+  "repos": [
+    {
+      "repo": "toe-2026-updates",
+      "clone_url": "https://github.com/Cbaird26/toe-2026-updates.git",
+      "tier": "1-primary",
+      "status": "active",
+      "purpose": "Public entry point, canonical releases",
+      "duplicate_of": null,
+      "merge_target": null,
+      "archive": false
+    },
+    {
+      "repo": "zoraasi-suite",
+      "clone_url": "https://github.com/Cbaird26/zoraasi-suite.git",
+      "tier": "1-primary",
+      "status": "active",
+      "purpose": "Zora agents, API, deployment (unified ZoraAI + ZoraAPI)",
+      "duplicate_of": null,
+      "merge_target": null,
+      "archive": false
+    },
+    {
+      "repo": "ToE",
+      "clone_url": "https://github.com/Cbaird26/ToE.git",
+      "tier": "3-duplicate",
+      "status": "duplicate",
+      "purpose": "Duplicate of toe-2026-updates",
+      "duplicate_of": "toe-2026-updates",
+      "merge_target": null,
+      "archive": "toe-2026-updates"
+    },
+    {
+      "repo": "cbaird26",
+      "clone_url": "https://github.com/Cbaird26/cbaird26.git",
+      "tier": "3-other",
+      "status": "other",
+      "purpose": "Support",
+      "duplicate_of": null,
+      "merge_target": null,
+      "archive": false
+    },
+    {
+      "repo": "mqgt-scf-stripped-core",
+      "clone_url": "https://github.com/Cbaird26/mqgt-scf-stripped-core.git",
+      "tier": "3-other",
+      "status": "other",
+      "purpose": "MQGT support module",
+      "duplicate_of": null,
+      "merge_target": null,
+      "archive": false
+    },
+    {
+      "repo": "baird-telehealth-site",
+      "clone_url": "https://github.com/Cbaird26/baird-telehealth-site.git",
+      "tier": "4-archive",
+      "status": "archive",
+      "purpose": "Archive candidate",
+      "duplicate_of": null,
+      "merge_target": null,
+      "archive": true
+    }
+  ]
+}

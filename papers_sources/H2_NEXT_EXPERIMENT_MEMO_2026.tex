@@ -1,0 +1,77 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{hyperref}
+
+\title{H2 Next Experiment Memo (2026)}
+\author{C.M. Baird et al.}
+\date{March 2026}
+
+\begin{document}
+\maketitle
+
+\section*{Recommendation}
+The single strongest next experimental move is a \textbf{Phase-0 benchtop optical visibility pilot} for H2. This is not the final decisive flagship platform; it is the shortest honest bridge from protocol/simulation to real hardware.
+
+\section*{Why H2 first}
+\begin{itemize}
+    \item It is the cleanest physics-native falsifier in the package.
+    \item It does not rely on QRNG trust assumptions.
+    \item It maps directly to one measurable parameter, $\Gamma$.
+    \item A null result is still scientifically valuable because it sets a real instrument-bounded floor.
+\end{itemize}
+
+\section*{Observable and decision quantity}
+The target observable is interferometric visibility:
+\[
+\frac{V}{V_0} = \exp(-\Gamma T \Delta x^2).
+\]
+The key quantity to report is the achieved exclusion floor
+\[
+\Gamma_{\mathrm{floor}} = \frac{|\ln(1-\delta_{\mathrm{total}})|}{T\Delta x^2},
+\]
+where $\delta_{\mathrm{total}}$ is the full nuisance-budget precision floor.
+
+\section*{Recommended first implementation}
+\begin{itemize}
+    \item Instrument class: benchtop optical interferometer (Mach-Zehnder or equivalent)
+    \item Role: validate drift accounting, nuisance budgeting, and operator discipline
+    \item Claim boundary: do not treat the pilot as a final flagship discovery test
+\end{itemize}
+
+\section*{Reference planning profile}
+\begin{itemize}
+    \item $T = 10^{-6}\,\mathrm{s}$
+    \item $\Delta x = 10^{-3}\,\mathrm{m}$
+    \item $\delta_{\mathrm{meas}} = 10^{-4}$
+    \item timing fraction $=10^{-4}$
+    \item path-separation fraction $=5\times10^{-4}$
+    \item vibration fraction $=5\times10^{-4}$
+    \item EM fraction $=10^{-4}$
+    \item thermal fraction $=2\times10^{-4}$
+\end{itemize}
+
+Using the current reference budget, the derived pilot floor is approximately:
+\[
+\delta_{\mathrm{total}} \approx 1.15\times 10^{-3},
+\qquad
+\Gamma_{\mathrm{floor}} \approx 1.15\times 10^9\,\mathrm{s}^{-1}\mathrm{m}^{-2}.
+\]
+
+\section*{What success looks like}
+\begin{itemize}
+    \item Baseline-before and baseline-after remain stable within preregistered tolerance.
+    \item Nuisance regressors do not explain away the inferred $\Gamma$.
+    \item The run yields a transparent achieved $\Gamma_{\mathrm{floor}}$ under real instrument conditions.
+\end{itemize}
+
+\section*{Interpretation}
+\begin{itemize}
+    \item \textbf{Positive pilot:} escalate immediately to a more decisive flagship platform.
+    \item \textbf{Null but stable pilot:} still a win, because it validates the real-world H2 chain.
+    \item \textbf{Messy pilot:} also a win, because it reveals where the protocol is too fragile.
+\end{itemize}
+
+\section*{Bottom line}
+If the question is ``what should we physically do next?'', the answer is: run the H2 benchtop optical pilot, publish the full nuisance budget and deviation log, and use that result to decide whether escalation to the flagship platform is warranted.
+
+\end{document}

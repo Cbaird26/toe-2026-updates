@@ -1,0 +1,65 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{hyperref}
+
+\title{H3 Result Memo (2026)}
+\author{C.M. Baird et al.}
+\date{March 2026}
+
+\begin{document}
+\maketitle
+
+\section*{Purpose}
+This memo summarizes the current H3 executable joint posterior / model-comparison package in publication-facing language, with explicit interpretation boundaries.
+
+\section*{Hypothesis}
+H3 asks whether one shared parameter vector remains viable across:
+\begin{itemize}
+    \item H1 simulation-primary branch-selection constraints,
+    \item H2 interferometric visibility sensitivity outputs,
+    \item fifth-force bound tables.
+\end{itemize}
+
+\section*{Current executable status}
+The current H3 package is no longer only a validity scaffold. It now includes:
+\begin{itemize}
+    \item a prototype joint posterior sampler,
+    \item a null-model comparison score,
+    \item leave-one-channel-out diagnostics.
+\end{itemize}
+
+\section*{Current outputs}
+Using the present implemented channel set, the prototype returns:
+\begin{itemize}
+    \item posterior mean $\eta \approx 1.66\times 10^{-2}$,
+    \item posterior mean $\gamma \approx 2.43\times 10^{5}$,
+    \item posterior mean $\lambda_{\phi} \approx 2.07\times 10^{-12}$,
+    \item posterior mean $m_{\phi} \approx 9.61\times 10^{3}$,
+    \item log-evidence-like advantage over null of approximately $15.38$ in the current prototype scoring convention.
+\end{itemize}
+
+\section*{Interpretation}
+This result means the \emph{currently implemented} H1+H2+fifth-force package admits a nontrivial jointly weighted region under the present prototype assumptions. It does \textbf{not} yet mean that nature prefers the theory, nor that the full collider/cosmology channel set has been incorporated at publication-grade level.
+
+\section*{Boundaries}
+The current H3 result should be stated only as:
+\begin{itemize}
+    \item an executable multi-channel inference prototype,
+    \item a positive internal consistency result under the current implemented channels,
+    \item a basis for next-stage joint-fit strengthening.
+\end{itemize}
+
+It should \textbf{not} yet be stated as:
+\begin{itemize}
+    \item decisive external evidence for MQGT-SCF,
+    \item a finished global posterior over all intended channels,
+    \item a replacement for independent external replication.
+\end{itemize}
+
+\section*{Next scientific step}
+The immediate next move is to extend the H3 posterior package to include the missing collider/cosmology tables and maintain the same bounded claim style.
+
+\section*{Bottom line}
+H3 has advanced from a narrative consistency claim to a real executable inference layer. That is scientifically meaningful progress, but it is still an internal inference milestone rather than a final empirical verdict.
+
+\end{document}

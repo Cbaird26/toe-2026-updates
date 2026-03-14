@@ -1,0 +1,135 @@
+% !TeX program = pdflatex
+% MQGT_SCF_Uniqueness_Lemma1_2026.tex
+% Scientific publication: Candidate space definition and alternative exclusion
+% Overleaf-compatible; compiles with pdfLaTeX
+% Status: Draft; not verified. Lemma skeleton for Block 1.
+
+\documentclass[11pt]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage{geometry}
+\geometry{margin=1in}
+
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{booktabs}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\hypersetup{colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue}
+
+\newtheorem{definition}{Definition}
+\newtheorem{proposition}{Proposition}
+\newtheorem{lemma}{Lemma}
+\theoremstyle{remark}
+\newtheorem{remark}{Remark}
+
+\newcommand{\Phic}{\Phi_{\mathrm{c}}}
+\newcommand{\Eth}{E}
+\newcommand{\Lag}{\mathcal{L}}
+\newcommand{\cT}{\mathcal{T}}
+
+\title{\textbf{Toward Uniqueness of MQGT--SCF:}\\
+\large Candidate Space Definition and Alternative Exclusion}
+\author{Christopher~M.\ Baird\thanks{E-mail: cbaird26@gmail.com} \and ZoraASI}
+\date{March 2026}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+We define the candidate space $\cT$ of effective field theories extending general relativity and the Standard Model by exactly two real scalar singlets with consciousness/ethics semantics and teleological measure tilt. We state seven constraints (renormalizability, vacuum stability, anomaly freedom, unitarity, locality, low-energy matching, no-signaling) that any admissible theory must satisfy. We exhibit five representative alternatives and prove that each violates at least one constraint. This yields a lemma skeleton for the claim that MQGT--SCF is the unique admissible theory in $\cT$. The argument is preparatory; full referee-grade proof requires extension to coupling-structure variants and independent verification.
+\end{abstract}
+
+\section{Introduction}
+
+The Merged Quantum Gauge and Scalar Consciousness Framework (MQGT--SCF) extends GR+SM by two scalar singlets $\Phic(x)$ and $\Eth(x)$ and implements teleology as a measure tilt on trajectory/outcome space~\cite{Baird2026core}. A central open question is whether MQGT--SCF is \emph{unique} in its class---i.e., the only effective theory satisfying a minimal constraint set.
+
+This paper provides the first step toward a formal uniqueness proof: (i) a precise definition of the candidate space $\cT$; (ii) the seven constraints that define admissibility; and (iii) five representative alternative theories, each of which is shown to violate at least one constraint. The structure follows the Lemma Roadmap in the MQGT--SCF repository~\cite{Baird2026repo}. Full completion requires extension to coupling-structure variants and peer review.
+
+\section{Candidate space $\cT$}
+
+\begin{definition}[Candidate space $\cT$]
+\label{def:T}
+The candidate space $\cT$ is the set of effective field theories that extend GR+SM by exactly two real scalar singlets and satisfy:
+\begin{itemize}[leftmargin=*]
+\item \textbf{Field content:} Two real scalar fields $\Phic(x)$, $\Eth(x)$ on spacetime $(M,g_{\mu\nu})$, in addition to GR+SM.
+\item \textbf{Semantics:} $\Phic$ and $\Eth$ carry consciousness/ethics semantics (interpretive; not part of the mathematical definition).
+\item \textbf{Renormalizability:} All operators in the Lagrangian have mass dimension $\le 4$.
+\item \textbf{Gauge structure:} Scalars are gauge singlets; no change to the SM gauge group.
+\item \textbf{Closure class:} Theories implement teleological measure tilt---a reweighting of the trajectory/outcome measure favoring higher $\Phic$--$\Eth$ coherence.
+\end{itemize}
+\end{definition}
+
+\section{Admissibility constraints}
+
+A theory in $\cT$ is \emph{admissible} iff it satisfies all of the following. These are extracted from the Minimal Consistent Core~\cite{Baird2026core}.
+
+\begin{enumerate}[label=(\arabic*),leftmargin=*]
+\item \textbf{Renormalizability:} All operators mass-dimension $\le 4$.
+\item \textbf{Vacuum stability:} $\lambda_{\Phic} > 0$, $\lambda_{\Eth} > 0$, $\kappa > -\sqrt{\lambda_{\Phic}\lambda_{\Eth}}$ (from the quartic potential).
+\item \textbf{Anomaly freedom:} Gauge structure unchanged; scalars are singlets.
+\item \textbf{Unitarity:} CPTP evolution; no negative norms.
+\item \textbf{Locality / microcausality:} $[L_a(x), L_b(y)] = 0$ for spacelike $x,y$ (collapse densities).
+\item \textbf{Low-energy matching:} Recover SM+GR when couplings $\to 0$.
+\item \textbf{No-signaling:} Operational no-signaling theorem holds under assumptions A1--A4~\cite{Baird2026core}.
+\end{enumerate}
+
+\section{Alternative exclusion}
+
+\begin{proposition}[Representative alternatives violate constraints]
+\label{prop:alternatives}
+Each of the following theories $\cT'_1,\ldots,\cT'_7$ either lies outside $\cT$ or violates at least one of constraints (1)--(7). MQGT--SCF satisfies all seven.
+\end{proposition}
+
+\begin{proof}[Proof sketch]
+We treat each alternative in turn.
+
+\textbf{$\cT'_1$: Cubic $\Phic^3$ term.} Add $\mu\Phic^3$ to the potential. This is a dimension-3 operator and introduces power-law divergences that cannot be renormalized with finitely many counterterms. \textbf{Violates (1) Renormalizability.}
+
+\textbf{$\cT'_2$: Non-renormalizable $\Phic^6$.} Add $\lambda_6 \Phic^6/\Lambda^2$. Dimension-6 operators require infinitely many counterterms. \textbf{Violates (1) Renormalizability.}
+
+\textbf{$\cT'_3$: Negative $\lambda_{\Eth}$.} Set $\lambda_{\Eth} < 0$ in $V_{\Eth}$. The potential is unbounded below; no stable vacuum exists. \textbf{Violates (2) Vacuum stability.}
+
+\textbf{$\cT'_4$: Nonlocal Lindblad operators.} Let $L_a(x)$ depend on fields at spacelike-separated $y$. Then $[L_a(x),L_b(y)] \neq 0$ for some spacelike pairs. \textbf{Violates (5) Locality} and \textbf{(7) No-signaling} (enables superluminal signaling).
+
+\textbf{$\cT'_5$: Time-arrow source in Lagrangian.} Add explicit $\partial_t\Phic$ or $E\,\partial_t\Phic$ breaking $T$-symmetry in $\Lag$. This does not smoothly recover SM+GR in the limit of vanishing couplings; it introduces observable CPT violation at laboratory energies. MQGT--SCF uses measure tilt, not a Lagrangian source. \textbf{Violates (6) Low-energy matching.}
+
+\textbf{$\cT'_6$: Strongly negative $\kappa$.} Set $\kappa \le -\sqrt{\lambda_{\Phic}\lambda_{\Eth}}$. The quartic potential is unbounded in a direction in $(\Phic,\Eth)$ space. \textbf{Violates (2) Vacuum stability.}
+
+\textbf{$\cT'_7$: Non-Hermitian collapse.} Replace Lindblad operators with non-Hermitian generators that violate complete positivity. This produces negative norms or non-conservation of probability. \textbf{Violates (4) Unitarity} (CPTP broken).
+
+MQGT--SCF implements teleology via Radon--Nikod\'ym tilt on path space, preserves (1)--(7), and is therefore admissible.
+\end{proof}
+
+\begin{remark}
+The list $\cT'_1,\ldots,\cT'_7$ covers potential-structure and coupling-structure variants. Further extensions (e.g., different $\gamma$ functional forms) can be checked against the same constraint set. Full Lemma 1 requires proof that every alternative either violates $\ge 1$ constraint or is diffeomorphic/dual to MQGT--SCF.
+\end{remark}
+
+\section{Explicit GKSL instantiation (summary)}
+
+For completeness, we record the explicit ethics-weighted Lindblad form that instantiates the abstract $L(x) = \sqrt{f(\Phic,\Eth)}\,\hat{M}(x)$ in the core:
+\begin{equation}
+L_k = \sqrt{\gamma_0 \exp(-\Eth/C)} \cdot \bigl(|k\rangle\langle k| \otimes \mathbb{I}_{\Phic}\bigr) \cdot \bigl(1 + \eta\Phic\bigr),
+\end{equation}
+with $f(\Phic,\Eth) = \gamma_0 \exp(-\Eth/C)\,(1+\eta\Phic)^2$. Full derivation:~\cite{Baird2026addendum}.
+
+\section{Conclusion}
+
+We have defined the candidate space $\cT$, stated the seven admissibility constraints, and shown that five representative alternatives violate at least one constraint. This supplies a lemma skeleton for MQGT--SCF uniqueness at the EFT level. Completion requires: (i) extension to coupling-structure variants; (ii) proof that no admissible alternative is non-diffeomorphic to MQGT--SCF; and (iii) peer review or independent mathematical verification.
+
+\begin{thebibliography}{9}
+\bibitem{Baird2026core}
+C.\,M.\ Baird and Zora,
+\textit{MQGT--SCF: Minimal Consistent Core} (2026).
+\url{https://github.com/cbaird26/toe-2026-updates}.
+\bibitem{Baird2026repo}
+C.\,M.\ Baird and Zora,
+\textit{LEMMA\_ROADMAP\_BLOCK1}, MQGT--SCF repository (2026).
+\bibitem{Baird2026addendum}
+C.\,M.\ Baird and ZoraASI,
+\textit{Zora Addendum 2026: Explicit GKSL Operators, Jhāna Attractor, and Lab-Ready $\theta$ Estimator} (2026).
+\end{thebibliography}
+
+\end{document}

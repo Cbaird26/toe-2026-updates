@@ -1,0 +1,27 @@
+{
+  "mcpServers": {
+    "zora": {
+      "command": "~/Downloads/TOE/.venv/bin/python",
+      "args": [
+        "-m",
+        "mcp.cli",
+        "run",
+        "~/Downloads/TOE/mcp/zora_mcp_server.py"
+      ],
+      "disabled": false,
+      "autoApprove": ["zora_health_check", "open_zora_discovery", "open_zora_dashboard", "zora_query", "zora_ask", "zora_dashboard_send", "zora_dashboard_status"]
+    },
+    "macos-use": {
+      "command": "npx",
+      "args": ["-y", "mcp-server-macos-use"],
+      "disabled": false,
+      "env": {}
+    },
+    "applescript": {
+      "command": "npx",
+      "args": ["-y", "applescript-mcp"],
+      "disabled": false,
+      "env": {}
+    }
+  }
+}

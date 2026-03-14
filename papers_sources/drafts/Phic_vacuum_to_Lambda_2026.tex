@@ -1,0 +1,40 @@
+% !TeX program = pdflatex
+% Phic_vacuum_to_Lambda_2026.tex
+% DRAFT: Contribution of Phi_c vacuum expectation to cosmological constant
+% Block 7 UV/cosmology closure. Unverified.
+
+\documentclass[11pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath,amssymb}
+\usepackage{hyperref}
+
+\newcommand{\Phic}{\Phi_{\mathrm{c}}}
+\newcommand{\Eth}{E}
+\newcommand{\Lag}{\mathcal{L}}
+
+\begin{document}
+
+\section*{$\langle\Phic\rangle \to \Lambda$ contribution (draft)}
+
+\textbf{Status:} Draft; Block 7. Requires verification against $\Lambda_{\mathrm{obs}} \sim 10^{-120}$ in Planck units.
+
+\subsection*{Setup}
+
+The vacuum expectation value $\langle\Phic\rangle = v$ (from the double-well potential) contributes to the effective cosmological constant via the potential at the minimum:
+
+\[
+V_{\mathrm{eff}}(\langle\Phic\rangle, \langle\Eth\rangle) \sim \frac{\lambda_c}{4}v^4 + \frac{\lambda_E}{4}\langle\Eth\rangle^4 + \frac{\kappa}{2}v^2\langle\Eth\rangle^2 + \text{mixing}.
+\]
+
+\subsection*{Order-of-magnitude}
+
+For $v \sim \mathcal{O}(\mathrm{TeV})$ and $\lambda_c \sim 0.1$, $V_{\mathrm{eff}} \sim \mathcal{O}(\mathrm{TeV}^4) \sim 10^{-60}$ in Planck units. This is many orders of magnitude larger than $\Lambda_{\mathrm{obs}} \sim 10^{-120}$.
+
+\subsection*{Conclusion}
+
+The naive $\langle\Phic\rangle$ contribution would overclose cosmology unless: (a) fine-tuned cancellation with other sectors; (b) $v$ is much smaller (e.g., sub-eV); or (c) the UV embedding (Block 7 moduli identification) provides a different scaling. A full computation requires the complete vacuum structure including $\langle\Eth\rangle$ and any Goldstone/dilaton contributions.
+
+\textbf{Next action:} Compute full $V_{\mathrm{eff}}$ at minimum; compare to $\Lambda_{\mathrm{obs}}$; document tension or resolution.
+
+\end{document}

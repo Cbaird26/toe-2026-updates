@@ -1,0 +1,79 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\title{MQGT-SCF Exhaustive Hypothesis Campaign 2026}
+\author{C.M. Baird et al.}
+\date{March 2026}
+
+\begin{document}
+\maketitle
+
+\section*{Abstract}
+This report defines and executes a staged falsification campaign for three hypotheses: H1 (simulation-primary ethical-label modulation), H2 (interferometric visibility suppression), and H3 (joint multi-channel consistency). The campaign delivers preregistration-ready protocols, dry-run outputs, operator/lab/integration runbooks with safeguards, an external evidence admissibility registry, and canon integration links for publication gating.
+
+\section{Hypotheses}
+\begin{itemize}
+    \item \textbf{H1 (simulation-primary modulation):} Ethical-label-linked modulation changes block statistics in the simulation-primary campaign beyond preregistered null thresholds.
+    \item \textbf{H2 (Visibility suppression):} Interferometric visibility obeys an extra suppression term consistent with $\Gamma$-based scaling.
+    \item \textbf{H3 (Joint consistency):} A single shared parameter set remains viable across H1 simulation-primary + fifth-force + collider/cosmology channels.
+\end{itemize}
+
+\section{Methods and Deliverables}
+\subsection{H1 rescope and adversarial battery}
+H1 was re-scoped so primary conclusions do not depend on QRNG trust. Protocol + SAP and fixed decision rule were updated to simulation-primary evidence. The null/adversarial battery includes synthetic null, shuffled-label null, seed robustness, model-recovery, and leakage controls.
+
+\subsection{H2 protocol and sensitivity budget}
+The interferometric flagship equation
+\[
+\frac{V}{V_0} = \exp(-\Gamma T \Delta x^2)
+\]
+was converted into a lab-facing protocol and simulation harness using
+\[
+\Gamma_{\max} = \frac{|\ln(1-\delta)|}{T\Delta x^2}.
+\]
+A benchtop optical pilot profile was also fixed as the recommended first physical implementation for validating nuisance budgets and operator discipline before any more ambitious flagship platform.
+
+\subsection{H3 joint-fit specification}
+A shared parameter vector and cross-channel adapter specification were formalized, with simulation-primary H1 adapters, a preregistered overconstraint rejection rule, and reproducibility command set.
+
+\subsection{Real-world execution runbooks}
+Three runbooks (H1 operator, H2 lab, H3 integration) were produced, with safeguard templates for consent, non-medical claim boundaries, and protocol deviation logging.
+
+\subsection{External evidence ingestion}
+A tiered evidence registry (Tier A/B/C admissibility) and ingest memo were added. Tier A/B can inform decision gates when explicitly cited; Tier C remains context-only and non-decisive.
+
+\section{Dry-Run Evidence Snapshot}
+H1 simulation-primary dry-run battery executed locally:
+\begin{itemize}
+    \item synthetic null: no effect detected;
+    \item shuffled-label null: no effect detected;
+    \item seed robustness: passed;
+    \item model-recovery and leakage controls: passed.
+\end{itemize}
+H2 sensitivity grid was generated for representative $(\delta, T, \Delta x)$ configurations.
+H3 consistency dry-run passed joint gate using H1/H2 outputs and fifth-force bound tables.
+
+\section{Decision Gates}
+\begin{itemize}
+    \item \textbf{H1 gate:} simulation-primary preregistered primary test plus mandatory null/adversarial battery pass.
+    \item \textbf{H2 gate:} $\Gamma$ bound must be consistent with instrument precision and systematics envelope.
+    \item \textbf{H3 gate:} reject if jointly feasible posterior mass falls below preregistered threshold.
+\end{itemize}
+
+\section{QRNG Role Clarification}
+QRNG is retained only as an optional secondary comparator in this campaign. Primary H1 conclusions are non-QRNG-dependent.
+
+\section{Canonical Integration}
+Campaign artifacts are linked into the integrated manuscript index and PDF release checklist to ensure reviewer-proof tracking from protocol design through publication packaging.
+
+\section*{Artifact Locations}
+See:
+\begin{itemize}
+    \item \texttt{../docs/HYPOTHESIS\_CAMPAIGN\_ARTIFACT\_MANIFEST\_2026.md}
+    \item \texttt{../docs/EVIDENCE\_REGISTRY\_2026.md}
+    \item \texttt{../docs/INTEGRATED\_MANUSCRIPT\_INDEX.md}
+    \item \texttt{../docs/TOE\_PDF\_2026\_CHECKLIST.md}
+\end{itemize}
+
+\end{document}

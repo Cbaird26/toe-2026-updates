@@ -1,0 +1,84 @@
+{
+  "generated_utc": "2026-03-03T00:00:00Z",
+  "tiers": {
+    "A": "peer-reviewed experimental/lab constraints",
+    "B": "preprints/method papers",
+    "C": "open-source contextual signals (non-decisive)"
+  },
+  "entries": [
+    {
+      "id": "EV-A-001",
+      "tier": "A",
+      "topic": "Fifth-force bounds from neutron star cooling",
+      "url": "https://repo.scoap3.org/records/102777",
+      "campaign_use": "H3 external coupling exclusion envelope",
+      "retrieved_utc": "2026-03-05T00:00:00Z",
+      "local_archive": "docs/evidence_archive/EV-A-001.md",
+      "sha256": "685e8037a43dd042bcb9f7bd4aa3948abfc71f242a070a7c5de41aee27e45aa7"
+    },
+    {
+      "id": "EV-A-002",
+      "tier": "A",
+      "topic": "Solar-system fifth-force constraints",
+      "url": "https://epjc.epj.org/articles/epjc/abs/2024/04/10052_2024_Article_12723/10052_2024_Article_12723.html",
+      "campaign_use": "H3 prior and bound calibration",
+      "retrieved_utc": "2026-03-05T00:00:00Z",
+      "local_archive": "docs/evidence_archive/EV-A-002.md",
+      "sha256": "93d0a5ca8f12d5c8dddd53a9467962c4dfcb8fe464712894bc0c1bacca3d2981"
+    },
+    {
+      "id": "EV-B-001",
+      "tier": "B",
+      "topic": "Bayesian design for near-field collapse tests",
+      "url": "https://cronfa.swan.ac.uk/Record/cronfa66604/Download/66604__30904__ad355ba4fa3b4c638b22b3e08466d3c2.pdf",
+      "campaign_use": "H2 detectability and sample-size planning",
+      "retrieved_utc": "2026-03-05T00:00:00Z",
+      "local_archive": "docs/evidence_archive/EV-B-001.md",
+      "sha256": "0d8462c56cf7fff12e61025a143c256b8342297290265f646eea443d88cc4355"
+    },
+    {
+      "id": "EV-B-002",
+      "tier": "B",
+      "topic": "Timing noise and visibility thresholds",
+      "url": "https://www.arxiv.org/pdf/2511.11879",
+      "campaign_use": "H2 confounder controls"
+    },
+    {
+      "id": "EV-B-003",
+      "tier": "B",
+      "topic": "NIST randomness testing suite",
+      "url": "https://www.nist.gov/publications/statistical-test-suite-random-and-pseudorandom-number-generators-cryptographic",
+      "campaign_use": "H1 methodology hardening",
+      "retrieved_utc": "2026-03-05T00:00:00Z",
+      "local_archive": "docs/evidence_archive/EV-B-003.md",
+      "sha256": "5178b70f058a6115d4e35a01097b621f222cb9848e9c9c9cb02e370e40848f7a"
+    },
+    {
+      "id": "EV-B-004",
+      "tier": "B",
+      "topic": "Data leakage in predictive studies",
+      "url": "https://www.nature.com/articles/s41380-025-03336-y",
+      "campaign_use": "H1 and H3 leakage controls",
+      "retrieved_utc": "2026-03-05T00:00:00Z",
+      "local_archive": "docs/evidence_archive/EV-B-004.md",
+      "sha256": "ad5e641d1670c9f725c90ef2f07938a7803bc0e3d6d800739fbd94fc72589107"
+    },
+    {
+      "id": "EV-B-005",
+      "tier": "B",
+      "topic": "OSF prereg templates",
+      "url": "https://help.osf.io/article/229-select-a-registration-template",
+      "campaign_use": "Preregistration completeness",
+      "retrieved_utc": "2026-03-05T00:00:00Z",
+      "local_archive": "docs/evidence_archive/EV-B-005.md",
+      "sha256": "bb7b6c9cdcffacd346c64065963c0d3fc338fd54fbc23da9f57635df8da845a1"
+    },
+    {
+      "id": "EV-C-001",
+      "tier": "C",
+      "topic": "Open contextual sources",
+      "url": "internal-notes",
+      "campaign_use": "Context only, non-decisive"
+    }
+  ]
+}

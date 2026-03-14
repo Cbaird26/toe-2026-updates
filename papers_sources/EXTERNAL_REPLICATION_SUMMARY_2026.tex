@@ -1,0 +1,57 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{hyperref}
+
+\title{External Replication Summary (2026)}
+\author{C.M. Baird et al.}
+\date{March 2026}
+
+\begin{document}
+\maketitle
+
+\section*{Purpose}
+This memo defines the outsider-ready replication bundle for the current concrete science package.
+
+\section*{Frozen contract}
+\begin{itemize}
+    \item TOE commit: \texttt{69f952d07e9cddca4fb898e46bb1a0f0336d32b1}
+    \item toe-empirical-validation commit: \texttt{163418b9ff5410825133cffd75a5e0d37fbc1ce4}
+\end{itemize}
+
+\section*{Replication order}
+\begin{enumerate}
+    \item Verify frozen contract and artifact manifest.
+    \item Reproduce the H1 simulation-primary battery.
+    \item Reproduce the H2 benchtop reference budget.
+    \item Reproduce the H3 executable posterior summary.
+\end{enumerate}
+
+\section*{Canonical commands}
+\begin{verbatim}
+git clone https://github.com/Cbaird26/toe-empirical-validation.git
+cd toe-empirical-validation
+git checkout 163418b9ff5410825133cffd75a5e0d37fbc1ce4
+
+./.venv/bin/python experiments/h1_null_battery.py --out artifacts_h1_sim_primary --n-seeds 20 --n-model-seeds 20
+./.venv/bin/python experiments/h2_instrument_budget.py --out artifacts_h2_benchtop_optical --delta-meas 1e-4 --T-s 1e-6 --delta-x-m 1e-3 --sigma-T-frac 1e-4 --sigma-dx-frac 5e-4 --vibration-frac 5e-4 --em-frac 1e-4 --thermal-frac 2e-4
+./.venv/bin/python experiments/h3_joint_posterior.py --out artifacts_h3_joint
+\end{verbatim}
+
+\section*{Expected outputs}
+\begin{itemize}
+    \item \texttt{artifacts\_h1\_sim\_primary/null\_battery\_summary.json}
+    \item \texttt{artifacts\_h2\_benchtop\_optical/h2\_instrument\_budget.json}
+    \item \texttt{artifacts\_h3\_joint/jointfit\_summary.json}
+\end{itemize}
+
+\section*{Claim boundary}
+\begin{itemize}
+    \item H1 is a simulation-primary stress-test result, not a hardware detection claim.
+    \item H2 is a benchtop pilot floor and operator-discipline bridge, not a final flagship discovery.
+    \item H3 is an executable prototype posterior/model-comparison layer, not a final global posterior over all intended channels.
+\end{itemize}
+
+\section*{Bottom line}
+The current package is reproducible enough for an outsider to test the internal scientific chain. The next stage is external execution and comparison, not broader unbounded claims.
+
+\end{document}

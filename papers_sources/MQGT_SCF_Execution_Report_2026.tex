@@ -1,0 +1,130 @@
+\documentclass[11pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage{geometry}
+\geometry{margin=1in}
+\usepackage{amsmath}
+\usepackage{booktabs}
+\usepackage{hyperref}
+\hypersetup{colorlinks=true,linkcolor=blue,urlcolor=blue}
+
+\title{\textbf{MQGT--SCF Execution Report (2026)}\\
+Local Replication Runs, Null Test, and Protocol Upgrades}
+\author{C.\,M.\,Baird \and ZoraASI Collaboration}
+\date{March 2026}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+This report documents executed replication commands, produced artifacts, and test outcomes after upgrading the QRNG channel from a placeholder contract pipeline to a statistical hypothesis-testing pipeline. The run set includes a canonical run, a null-fixture adversarial control, and deterministic rerun checks. We also record protocol-level upgrades (operational $E$-label estimator, permutation-test significance, OSF-ready preregistration pack, and reproducible TeX build notes) and summarize immediate interpretation boundaries.
+\end{abstract}
+
+\section{Execution scope}
+The following items were executed:
+\begin{itemize}
+\item Canonical QRNG pipeline run.
+\item Null-fixture adversarial run.
+\item Deterministic rerun and artifact comparison.
+\item Pipeline upgrades for statistical validity and preregistration readiness.
+\end{itemize}
+
+\section{Repository and environment}
+\begin{itemize}
+\item Repo: \texttt{toe-empirical-validation}
+\item Commit: \texttt{163418b9ff5410825133cffd75a5e0d37fbc1ce4}
+\item Contract status: current external campaign baseline; earlier \texttt{spine-v0.1} and \texttt{spine-v0.1.1} tags are legacy-only.
+\item Python: \texttt{3.14.1}
+\item Channel: \texttt{qrng}
+\end{itemize}
+
+\section{Executed commands}
+\begin{verbatim}
+./scripts/run_all.sh --channel qrng --seed 0 --out artifacts/
+./scripts/run_all.sh --channel qrng --null-fixture --seed 0 --out artifacts_null/
+./scripts/run_all.sh --channel qrng --seed 0 --out artifacts_repeat/
+./scripts/compare_artifacts.sh artifacts/ artifacts_repeat/
+\end{verbatim}
+
+\section{Statistical pipeline upgrades}
+\subsection{Primary test}
+The QRNG pipeline now computes:
+\[
+T = \frac{1}{N}\sum_{b=1}^{N}\left(\overline{x}_b-\frac{1}{2}\right)E_b
+\]
+where $\overline{x}_b$ is block mean and $E_b=\texttt{label\_E(bits)}$.
+Significance is estimated via a two-sided permutation test (default \texttt{n\_perm}=5000), with decision rule:
+\[
+\texttt{effect\_detected} = (\texttt{p\_value}<\alpha), \quad \alpha=0.05.
+\]
+
+\subsection{Operational E-label estimator}
+The canonical block estimator combines:
+\begin{itemize}
+\item bias magnitude $\left|\overline{x}_b-0.5\right|$,
+\item run-length variability,
+\item edge-flip rate,
+\end{itemize}
+with fixed default weights $(0.5,0.3,0.2)$.
+
+\section{Observed outputs}
+\subsection{Canonical run (\texttt{artifacts/constraints.json})}
+\begin{center}
+\begin{tabular}{ll}
+\toprule
+Field & Value \\
+\midrule
+\texttt{effect\_detected} & \texttt{false} \\
+\texttt{p\_value} & 0.3843231353729254 \\
+\texttt{alpha} & 0.05 \\
+\texttt{test\_statistic} & -0.00015285982327467018 \\
+\texttt{eta} & 0.02 \\
+\texttt{n\_perm} & 5000 \\
+\texttt{n\_blocks} & 100 \\
+\texttt{block\_size} & 64 \\
+\texttt{seed} & 0 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\subsection{Null fixture (\texttt{artifacts\_null/constraints.json})}
+\begin{center}
+\begin{tabular}{ll}
+\toprule
+Field & Value \\
+\midrule
+\texttt{effect\_detected} & \texttt{false} \\
+\texttt{p\_value} & 1.0 \\
+\texttt{alpha} & 0.05 \\
+\texttt{test\_statistic} & 0.0 \\
+\texttt{eta} & 0.02 \\
+\texttt{n\_perm} & 5000 \\
+\texttt{n\_blocks} & 100 \\
+\texttt{block\_size} & 64 \\
+\texttt{seed} & 0 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\subsection{Determinism check}
+The repeat run for seed 0 passed \texttt{compare\_artifacts.sh} on \texttt{constraints.json} (within configured EPS) and required artifact presence checks.
+
+\section{Interpretation (current)}
+Current executed runs do not detect an effect at the preregistered threshold ($\alpha=0.05$), and the null fixture correctly returns no effect. This is a pipeline-validity result, not a final empirical verdict. The framework remains in the stage where preregistered hardware acquisition and independent replication determine scientific closure.
+
+\section{Protocol artifacts added}
+\begin{itemize}
+\item OSF-ready prereg template: \texttt{experiments/OSF\_PREREG\_QRNG\_FLAGSHIP\_V1.md}
+\item TeX build reproducibility notes: \texttt{TOE/papers\_sources/BUILD\_REPRODUCIBLE\_2026.md}
+\end{itemize}
+
+\section{Next execution gates}
+\begin{enumerate}
+\item Run preregistered hardware QRNG acquisition under fixed estimator and decision rule.
+\item Publish artifact bundle (raw data, checksums, commands, commit hash, outputs).
+\item Execute independent replication at one external lab/group.
+\item Integrate result into canonical falsification packet and manuscript update.
+\end{enumerate}
+
+\end{document}
