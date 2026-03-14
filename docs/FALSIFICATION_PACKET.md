@@ -26,6 +26,7 @@ Canonical Zenodo citation for the 2026 Unified ToE paper (v216): https://doi.org
 - **Free knobs:** Coupling(s) governing the deformation strength; scale C; any channel-specific parameters (e.g. QRNG threshold, fifth-force range). Listed explicitly in the paper and in the reproducibility package.
 - **Priors:** Stated in the likelihood/prior setup in the Zenodo package (likelihoods, priors, sampling). Reproducible runs use the same priors unless explicitly varied.
 - **Limit that recovers standard QM:** As the deformation coupling(s) → 0 (or C → ∞), the theory reduces to standard quantum mechanics (Born rule without the exp(−E/C) factor). No new physics in that limit; new effects decouple.
+- **Scale translation note:** For cross-channel communication only, see [frequency_atlas.md](frequency_atlas.md). In the live Eot-Wash digitized window, `λ ≈ 30 μm to 0.93 mm` maps to `f_eq ≈ 5.14×10^10 to 1.59×10^12 Hz` via `f_eq = c / (2πλ)`. That is an equivalent mediator scale, not a literal apparatus oscillation.
 
 ---
 
