@@ -4,6 +4,7 @@ A public checklist to make replication **social**, not just technical. Don't bel
 
 **Zenodo:** [zenodo.org/records/18511550](https://zenodo.org/records/18511550)  
 **Falsification Packet:** [FALSIFICATION_PACKET.md](FALSIFICATION_PACKET.md)
+**Frozen external bundle:** [EXTERNAL_REPLICATION_BUNDLE_2026.md](EXTERNAL_REPLICATION_BUNDLE_2026.md)
 
 ---
 
@@ -39,6 +40,12 @@ Use this for a minimal "run once and compare" replication. The primary channel f
 **It lives or dies here (QRNG channel):** If a well-powered, pre-registered QRNG experiment under the same operational definition of E finds no deviation from standard randomness, the deformation is excluded at the stated confidence level (see [FALSIFICATION_PACKET.md](FALSIFICATION_PACKET.md#qrng-falsification-claim)). Reproduction confirms that the analysis pipeline and constraints match the paper; independent replication of the experiment is the falsification test.
 
 **E is fixed for this ladder:** The operational definition of E (outcome labeling) is given in [FALSIFICATION_PACKET.md](FALSIFICATION_PACKET.md) and implemented in this repo (toe-empirical-validation). If you change E labeling, you are running a different experiment; the "it lives or dies here" criterion applies only when E is defined as in the packet and repo.
+
+---
+
+## Intervention Protocol Track (Separate)
+
+A **block-randomized intervention protocol** (control vs. meditation/intervention) uses the ANU QRNG API directly. This is a separate track from the E-labeling ladder above. See [ANU_QRNG_INTERVENTION_PIPELINE.md](ANU_QRNG_INTERVENTION_PIPELINE.md) for cost model, artifact schema, and relationship to toe-empirical-validation. March 2026 runs: [QRNG_MEDITATION_INTERVENTION_REPORT_MARCH_2026.md](QRNG_MEDITATION_INTERVENTION_REPORT_MARCH_2026.md).
 
 ---
 

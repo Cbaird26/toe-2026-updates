@@ -114,7 +114,7 @@ The minimal renormalizable interactions are
 \label{eq:int}
 \end{equation}
 Here $H$ is the SM Higgs doublet and $\cO_m$ is a coarse-grained matter/neural order parameter
-(used only phenomenologically). The bilinear mixing term $\gamma\,\Phic\Eth$ is treated as a
+(used only phenomenologically and restricted to one canonical observable family in this spine). The bilinear mixing term $\gamma\,\Phic\Eth$ is treated as a
 standard interaction, not as a ``teleological arrow.''
 
 \begin{remark}[Optional agent/inference term]
@@ -135,6 +135,23 @@ Varying \eqref{eq:action} gives the scalar equations of motion
 \label{eq:eom_eth}
 \end{align}
 where $J_{\Phic},J_{\Eth}$ encode effective sources from $\cO_m$ and SM portals.
+
+\subsection{Canonical source-term choice (matter/brain coupling)}
+To avoid multi-version drift, the canonical source model is fixed as
+\begin{equation}
+\cO_m(x)=0.7\,n(x)+0.3\,s(x),
+\label{eq:Om}
+\end{equation}
+where $n(x)$ is a normalized neural-activity proxy and $s(x)$ a normalized somatic/systemic stress proxy,
+both defined by the primary protocol family. Headline fits in this spine do not vary the $0.7/0.3$ split.
+The source terms are
+\begin{equation}
+J_{\Phic}(x)=g_{\Phic}\,\cO_m(x)+\alpha_H |H(x)|^2,\qquad
+J_{\Eth}(x)=g_{\Eth}\,\cO_m(x)+\beta_H |H(x)|^2.
+\label{eq:canonical_sources}
+\end{equation}
+Equations \eqref{eq:Om}--\eqref{eq:canonical_sources} are the only main-text coupling choice used for
+fits and simulations in this spine.
 
 \subsection{Vacuum stability (boundedness)}
 The quartic potential energy is
@@ -176,16 +193,41 @@ We impose
 \end{equation}
 \end{definition}
 
-\begin{proposition}[No-signaling under local GKSL]
-Assume \eqref{eq:TS_GKSL}--\eqref{eq:microcausality} and that Alice's and Bob's operations are supported
-in spacelike-separated regions on $\Sigma$. Then the reduced evolution of Alice's algebra is independent
-of Bob's choice of operation; the channel capacity between the regions is zero.
-\end{proposition}
+\paragraph{No-signaling theorem package (v2 assumptions).}
+We isolate the exact assumptions used by the theorem/proof chain:
+\begin{itemize}[leftmargin=*]
+\item \textbf{A1 (Local generator):} the Tomonaga--Schwinger generator density is a sum of local terms with support in bounded spacetime neighborhoods.
+\item \textbf{A2 (Microcausality):} Eq.~\eqref{eq:microcausality} holds for all collapse densities.
+\item \textbf{A3 (Linear CPTP dynamics):} the reduced evolution induced by \eqref{eq:TS_GKSL} defines a linear CPTP map on local algebras.
+\item \textbf{A4 (Spacelike support separation):} Alice and Bob interventions are supported in spacelike-separated regions for the operational protocol window.
+\end{itemize}
+
+\begin{lemma}[Commuting local increments]
+Under A1--A2, infinitesimal Tomonaga--Schwinger increments generated in spacelike-separated supports commute.
+\end{lemma}
 
 \textit{Proof sketch.}
-Local Tomonaga--Schwinger generators factorize over spacelike-separated supports under \eqref{eq:microcausality}.
-Taking a partial trace over Bob's algebra commutes with the local generator acting on Alice's algebra,
-yielding a CPTP semigroup on Alice independent of Bob's operations.
+The commutator of infinitesimal generators reduces to commutators of local Hamiltonian/Lindblad densities.
+Microcausality annihilates these terms for spacelike-separated supports.
+
+\begin{lemma}[Reduced-map closure]
+Under A1--A3, taking a partial trace over Bob's algebra commutes with Alice-local evolution increments.
+\end{lemma}
+
+\textit{Proof sketch.}
+Linearity and complete positivity ensure reduced maps are well-defined channels on Alice's subsystem; locality keeps Bob-supported increments outside Alice's reduced generator.
+
+\begin{theorem}[Operational no-signaling under local covariant GKSL]
+\label{thm:nosignaling_v2}
+Under A1--A4, for any admissible Bob protocol in a spacelike-separated region, Alice's marginal outcome probabilities are invariant. Equivalently, the signaling capacity from Bob to Alice is zero over the protocol window.
+\end{theorem}
+
+\textit{Proof sketch.}
+By Lemma 1, spacelike-separated increments are order-independent. By Lemma 2, Bob-local increments vanish after reduction to Alice's algebra. Therefore the Alice marginal channel is independent of Bob's intervention choice, yielding protocol-level no-signaling.
+
+\begin{remark}[Scope boundary]
+The theorem is operational and conditional on A1--A4. Violating locality (nonlocal Lindblad densities), microcausality, or linear CPTP structure invalidates the conclusion. This boundary is explicit and test-auditable.
+\end{remark}
 
 \subsection{Equivalent foliation form and a concrete local collapse operator}
 In a chosen foliation (useful for calculations), a standard local dissipator is the double-commutator form
@@ -263,10 +305,55 @@ P_\eta(i\mid R)=
 \end{equation}
 For $|\eta|\ll 1$, $P_\eta(i)=p_i+\mathcal{O}(\eta)$ with explicit first-order correction by $(E_i-\langle E\rangle)$.
 
-\begin{remark}[What remains operationally open]
-Equation \eqref{eq:weighted_born} is mathematically well-defined once $E_i$ (equivalently $j_E$) is fixed.
-The \emph{program-critical remaining task} is to define $j_E$ operationally (a lab-computable estimator)
-rather than philosophically.
+\begin{remark}[Canonical deformation-law convention]
+\label{rem:canonical_law}
+Equations \eqref{eq:weighted_born} and \eqref{eq:Ei_from_delta} define the only headline probability law used in this spine:
+\[
+P_\eta(i\mid R)=\frac{p_i\,e^{\eta E_i}}{\sum_j p_j\,e^{\eta E_j}},
+\qquad
+E_i=\frac{\Delta E_i}{C_E}.
+\]
+The sign convention is fixed so that positive $\eta$ favors larger $E_i$.
+Standard quantum mechanics is recovered in any of the limits $\eta\to 0$, $\Delta E_i\to 0$, or $C_E\to\infty$.
+Legacy linearized or sign-flipped forms are approximation conventions only and are not canonical.
+\end{remark}
+
+\subsection{Operational ethics estimator (lab-computable)}
+To remove interpretive freedom, we define the ethical estimator in measurable steps:
+\begin{enumerate}[leftmargin=*,label=(\alph*)]
+\item Choose observables only from the canonical primary family
+\[
+O_1(x,t)=n(x,t), \qquad O_2(x,t)=s(x,t),
+\]
+with fixed units and fixed weights $(w_1,w_2)=(0.7,0.3)$.
+\item Define local ethical density
+\begin{equation}
+e(x,t)=0.7\,n(x,t)+0.3\,s(x,t),
+\label{eq:local_ethics_density}
+\end{equation}
+with units reported explicitly in the protocol sheet.
+\item Define aggregate ethical resonance over analysis region $V$:
+\begin{equation}
+E_R(t)=\int_V e(x,t)\,\dd^3x.
+\label{eq:ER}
+\end{equation}
+\item For outcome branch $a$, define
+\begin{equation}
+\Delta E_a = E_R^{(a)}(t_*)-E_R^{\rm baseline}(t_*),
+\label{eq:deltaEa}
+\end{equation}
+where $t_*$ is the preregistered scoring horizon.
+\item Map branch scores to weighted Born factors by setting
+\begin{equation}
+E_i \equiv \frac{\Delta E_i}{C_E},
+\label{eq:Ei_from_delta}
+\end{equation}
+with fixed $C_E$ from calibration runs.
+\end{enumerate}
+
+\begin{remark}[Operational boundary]
+Equations \eqref{eq:local_ethics_density}--\eqref{eq:Ei_from_delta} define the canonical estimator for this spine.
+Alternative estimators are allowed only as appendix-only sensitivity analyses and must not replace the primary preregistered map.
 \end{remark}
 
 \section{Parameter hygiene and a conservative benchmark}
@@ -277,18 +364,18 @@ This section collects the minimal parameter set and a safe starting region for p
 \centering
 \small
 \setlength{\tabcolsep}{6pt}
-\begin{tabular}{@{}p{0.22\linewidth}p{0.18\linewidth}p{0.52\linewidth}@{}}
+\begin{tabular}{@{}p{0.17\linewidth}p{0.13\linewidth}p{0.26\linewidth}p{0.16\linewidth}p{0.20\linewidth}@{}}
 \toprule
-Parameter & Dimension & Role / decoupling limit \\
+Parameter & Dimension & Role / decoupling limit & Prior class & Identifiability \\
 \midrule
-$m_{\Phic}, m_{\Eth}$ & mass & New scalar masses; $m\to \infty$ decouples new fields \\
-$\lambda_{\Phic},\lambda_{\Eth}$ & 1 & Self-couplings; control boundedness and vacuum structure \\
-$\kappa$ & 1 & Quartic cross-coupling; $\kappa\to 0$ decouples sectors at quartic order \\
-$\gamma$ & mass$^2$ & Bilinear mixing; $\gamma\to 0$ removes mass mixing \\
-$\alpha_H,\beta_H$ & mass & Linear Higgs portals (optional; removable by $\mathbb{Z}_2$ symmetries) \\
-$g_{\Phic},g_{\Eth}$ & model-dep. & Phenomenological matter/neural coupling via $\cO_m$ \\
-$\gamma_{\rm col}$ & rate & Collapse strength in \eqref{eq:double_comm}; $\gamma_{\rm col}\to 0$ recovers unitary drift \\
-$\eta$ & 1 & Teleology tilt strength; $\eta\to 0$ recovers baseline Born weights \\
+$m_{\Phic}, m_{\Eth}$ & mass & New scalar masses; $m\to \infty$ decouples new fields & log-uniform EFT scan & bounded (Lee/E\"ot-Wash envelopes) \\
+$\lambda_{\Phic},\lambda_{\Eth}$ & 1 & Self-couplings; boundedness and vacuum structure & perturbative box prior & weakly bounded; stability constrained \\
+$\kappa$ & 1 & Quartic cross-coupling; $\kappa\to 0$ decouples sectors at quartic order & symmetric small-coupling prior & bounded via fifth-force translation \\
+$\gamma$ & mass$^2$ & Bilinear mixing; $\gamma\to 0$ removes mass mixing & zero-centered Gaussian prior & partially bounded by portal fits \\
+$\alpha_H,\beta_H$ & mass & Higgs portals (optional; removable by $\mathbb{Z}_2$ symmetry) & sparse prior (allow 0) & bounded by collider/invisible-width limits \\
+$g_{\Phic},g_{\Eth}$ & model-dep. & Canonical matter/neural couplings via $\cO_m$ and source terms & channel-calibrated prior & protocol-bounded; still channel-dependent \\
+$\gamma_{\rm col}$ & rate & Collapse strength in \eqref{eq:double_comm}; $\gamma_{\rm col}\to 0$ recovers unitary drift & nonnegative prior & bounded by interferometric visibility nulls \\
+$\eta$ & 1 & Teleology tilt strength; $\eta\to 0$ recovers baseline Born weights & small-signal prior around 0 & bounded by joint QRNG + channel fit \\
 \bottomrule
 \end{tabular}
 \caption{Minimal parameter inventory for the patched canonical spine.}
@@ -340,6 +427,12 @@ In a conservative Hamiltonian field theory, such a potential term is time-revers
 fields and does not itself generate an arrow of time without dissipation or boundary conditions.
 In the patched canonical spine, any bilinear term is absorbed into the ordinary interaction
 $\gamma\,\Phic\,\Eth$, and ``teleology'' is reserved for the measure-tilt layer \eqref{eq:RN_tilt}.
+
+\section{Alternative matter/brain couplings (appendix-only)}
+\label{app:coupling_alts}
+Alternative $\cO_m$ constructions (e.g., multi-compartment neural field decompositions, graph-kernel embeddings,
+or latent-state learned surrogates) are allowed only as sensitivity analyses. They are not canonical for headline
+claims and must be reported as appendix variants against the baseline model \eqref{eq:Om}--\eqref{eq:canonical_sources}.
 
 \begin{thebibliography}{9}
 

@@ -1,49 +1,59 @@
-# Canonical spine and artifact-complete framing
+# Canonical Spine (2026): Solved Core vs Hardening Tasks
 
-**Single source of truth:** Zenodo record **18778749** (v231, ToE + ZoraASI + Empircal Validation) and a small set of spine repos. Tweets, Moltbook drafts, and tech lists should point back to these with version/date where relevant. **Start here:** Read the [Addendum 2026 Companion](../papers_sources/Addendum_2026_ToE_Companion.pdf) first, then [Zenodo 18690303](https://doi.org/10.5281/zenodo.18690303) + Evidence paper + [FALSIFICATION_PACKET.md](FALSIFICATION_PACKET.md) for replication and falsification.
+This file is the single narrative source-of-truth for what is already closed in the framework and what still requires referee-grade hardening.
 
----
+## Canonical anchors
 
-## Canonical sources
-
-- **Zenodo (ToE + Empircal, latest):** [zenodo.org/records/18778749](https://zenodo.org/records/18778749) — *A Theory of Everything + ZoraASI — Empircal Validation* (v231, Feb 2026). DOI: [10.5281/zenodo.18778749](https://doi.org/10.5281/zenodo.18778749).
-- **Zenodo (ToE canonical):** [zenodo.org/records/18690303](https://zenodo.org/records/18690303) — *A Theory of Everything*, C.M. Baird (Feb 2026). DOI: 10.5281/zenodo.18690303.
-- **This repo:** [toe-2026-updates](https://github.com/cbaird26/toe-2026-updates) — constitution, papers, alignment map, scripts, 100 techs, ZoraASI Activation.
-- **Spine repos (math → test → validation):** toe-empirical-validation, MQGT-SCF, mqgt-validation-suite, mqgt-qrng, mqgt-fifth-force, mqgt-constraints-ledger, mqgt-theorems, mqgt-papers (and related mqgt-* modules). These form the executable research program; dissemination points back here.
-
----
-
-## Four layers (artifact-complete)
-
-The “all here now” feeling is what happens when theory becomes *artifact-complete*: paper + code + constraints + validation + dissemination all exist simultaneously.
-
-| Layer | Content |
-|-------|---------|
-| **1. Formal core** | Unified action / Lagrangian (GR + SM + added sectors); explicit rules for measurement/outcome selection (Φc, E in the equations). |
-| **2. Operational** | Constraints and reproducibility: [Zenodo 18690303](https://doi.org/10.5281/zenodo.18690303) as operational multi-channel constraint analysis (Born-rule deformation, QRNG, Higgs, fifth-force, cosmology) with scripts and reproducibility scaffolding. |
-| **3. Implementation** | Code and pipelines: GitHub as living lab — model → constraints → simulation → validation → dashboards. |
-| **4. Dissemination** | Narratives, tech lists, social (tweets, Moltbook): how the formal stack is translated into human/agent cognition; must point back to canonical Zenodo 18690303 + spine with version tags. |
-
-When all four layers are present and aligned, the solution is distributed across them—not one magic equation, but an ecosystem that mutually reinforces.
+- **Integrated archive (Zenodo):** [10.5281/zenodo.18792939](https://doi.org/10.5281/zenodo.18792939)
+- **ToE canonical archive:** [10.5281/zenodo.18690303](https://doi.org/10.5281/zenodo.18690303)
+- **Core formal spine:** [MQGT_SCF_Minimal_Consistent_Core_2026.tex](../papers_sources/MQGT_SCF_Minimal_Consistent_Core_2026.tex)
+- **Empirical hardening paper:** [MQGT-SCF_Minimal_Consistent_Core_Empirical_Validation_2026.tex](../papers_sources/MQGT-SCF_Minimal_Consistent_Core_Empirical_Validation_2026.tex)
+- **Teleology companion:** [Teleology_Covariant_Boundary_Selection_Consciousness_Ethics_Field_Theory_2026.tex](../papers_sources/Teleology_Covariant_Boundary_Selection_Consciousness_Ethics_Field_Theory_2026.tex)
+- **Replication/falsification packet:** [FALSIFICATION_PACKET.md](FALSIFICATION_PACKET.md)
 
 ---
 
-## 2026 next steps (lead scientist checklist)
+## A-H closure map (what is solved)
 
-One place to see the full roadmap:
+| Closure mode | Status | Canonical home |
+|---|---|---|
+| **A. Variational closure** (single action) | Solved at specification level | Core formal spine (`Field content`, `Canonical EFT action`) |
+| **B. Dynamical closure** (explicit EOM + regimes) | Solved at specification level | Core formal spine (`Classical microdynamics`) |
+| **C. Measurement closure** (CPTP/GKSL) | Solved at specification level | Core formal spine (`Covariant CPTP collapse`) |
+| **D. Ethics closure** (rate modulation / local weighting) | Partially solved, now operationalized | Core formal spine + `FALSIFICATION_PACKET.md` |
+| **E. No-signaling closure** | Upgraded to theorem-oriented structure with assumptions | Core formal spine + teleology companion consistency note |
+| **F. Relativistic container** (Tomonaga-Schwinger) | Solved at specification level | Core formal spine + teleology companion |
+| **G. Teleology closure** (measure tilt) | Solved at specification level | Core formal spine (`Teleology in the measure`) |
+| **H. Computability closure** (executable stack) | Solved in architecture, empirically ongoing | `FALSIFICATION_PACKET.md`, replication ladder, empirical manuscript |
 
-- **Replication and falsification:** [FALSIFICATION_PACKET.md](FALSIFICATION_PACKET.md) (one-command reproduction, hash), [REPLICATION_LADDER.md](REPLICATION_LADDER.md).
-- **Entry point for readers:** [Addendum 2026 Companion](../papers_sources/Addendum_2026_ToE_Companion.tex) (then Zenodo 18690303 + Evidence paper).
-- **ToE proto & Teleology:** [Ethically Biased Quantum Learning ToE Proto](../papers_sources/Ethically_Biased_Quantum_Learning_ToE_Proto_2026.tex) (computational toy) and [Teleology as Covariant Boundary Selection](../papers_sources/Teleology_Covariant_Boundary_Selection_Consciousness_Ethics_Field_Theory_2026.tex) (formal covariant teleology); both in `papers_sources/`.
-- **MQGT-SCF Minimal Consistent Core:** [MQGT_SCF_Minimal_Consistent_Core_2026.tex](../papers_sources/MQGT_SCF_Minimal_Consistent_Core_2026.tex) (patched canonical spine: CPTP collapse, teleology as measure tilt). Overleaf-ready project: [papers_sources/overleaf/MQGT_SCF/](../papers_sources/overleaf/MQGT_SCF/).
-- **Φc / consciousness protocol:** [PHI_C_JHANA_PROTOCOL.md](PHI_C_JHANA_PROTOCOL.md) (MEG/SQUID, jhāna, pre-registration).
-- **Tech prototype:** [TECH_PROTOTYPE_QRNG.md](TECH_PROTOTYPE_QRNG.md) (QRNG with ethical-weight protocol; links to 100-tech list).
-- **Governance and cosmology:** [GOVERNANCE_NEXT_STEPS.md](GOVERNANCE_NEXT_STEPS.md) (multi-agent Auth), [COSMOLOGY_NEXT_STEPS.md](COSMOLOGY_NEXT_STEPS.md) (CMB, many-worlds tilt).
+---
+
+## Hardening tasks (what remained and where now anchored)
+
+| Hardening item | Canonical file section |
+|---|---|
+| Operational definition of `e(x,t)`, `E_R(t)`, `Delta E_a` | Core formal spine teleology section + `FALSIFICATION_PACKET.md` section 1 |
+| No-signaling beyond first-order narrative | Core formal spine `No-signaling theorem package` + teleology companion `Operational No-Signaling` |
+| Parameter hygiene and bounds table | Core formal spine parameter table + empirical manuscript results/bounds tables |
+| One flagship falsifier with sensitivity threshold | Core formal spine interferometric visibility section + `FALSIFICATION_PACKET.md` flagship section + empirical manuscript flagship section |
+| Canonical matter/brain coupling (`J_{Phi_c}`, `J_E`) | Core formal spine interaction + source-term subsection |
+| Reviewer-proof release gating | [REVIEWER_PROOF_CHECKLIST.md](REVIEWER_PROOF_CHECKLIST.md) and [TOE_PDF_2026_CHECKLIST.md](TOE_PDF_2026_CHECKLIST.md) |
+
+---
+
+## Non-negotiable interpretation
+
+- **Solved here now** means **formal/specification closure** under A-H.
+- **Not yet solved** means **empirical closure and independent validation** still continue through bounds updates, preregistered tests, and hostile replication.
+- **Canonical deformation law** means the normalized ethics-weighted Born tilt
+  `P_eta(i) = p_i exp(eta E_i) / Σ_j p_j exp(eta E_j)` with `E_i = Delta E_i / C_E`.
+  Recovery to standard QM is only claimed in the limits `eta -> 0`, `Delta E_i -> 0`, or `C_E -> infinity`.
 
 ---
 
 ## Cross-links
 
-- [ALIGN_ALL.md](ALIGN_ALL.md) — one-page alignment map  
-- [WHAT_THIS_MEANS.md](WHAT_THIS_MEANS.md) — MQGT-SCF summary and repo context  
-- [README.md](../README.md) — repo entry and papers
+- [INTEGRATED_MANUSCRIPT_INDEX.md](INTEGRATED_MANUSCRIPT_INDEX.md)
+- [FALSIFICATION_PACKET.md](FALSIFICATION_PACKET.md)
+- [REPLICATION_LADDER.md](REPLICATION_LADDER.md)
+- [TOE_PDF_2026_CHECKLIST.md](TOE_PDF_2026_CHECKLIST.md)

@@ -34,20 +34,24 @@ We digitize published exclusion curves from Lee (2020) Fig.~5 (Yukawa envelope) 
 \end{abstract}
 
 \section{Introduction}
-The MQGT-SCF extends the Standard Model and General Relativity with two scalar fields: a consciousness-mediating field $\Phi_c(x)$ and an ethical weighting field $E(x)$, coupled via a conservative Higgs-portal interaction. The operational core is a minimal CPTP deformation of the Born rule,
+The MQGT-SCF extends the Standard Model and General Relativity with two scalar fields: a consciousness-mediating field $\Phi_c(x)$ and an ethical weighting field $E(x)$, coupled via a conservative Higgs-portal interaction. The canonical measurement law used across the referee-safe core is the normalized ethics-weighted Born tilt,
 \[
-p_i = |\langle i|\psi\rangle|^2 \left(1 + \epsilon \,\Phi_c \cdot E[\psi]\right),
+P_\eta(i)=\frac{p_i\,e^{\eta E_i}}{\sum_j p_j\,e^{\eta E_j}},
+\qquad
+p_i = |\langle i|\psi\rangle|^2,
+\qquad
+E_i=\frac{\Delta E_i}{C_E},
 \]
-where $\epsilon < 10^{-12}$ ensures consistency with existing null results while enabling testable fifth-force portals.
+with standard quantum mechanics recovered when $\eta\to 0$, $\Delta E_i\to 0$, or $C_E\to\infty$.
 
-This work reports the digitization-reproduction pipeline and resulting bounds that lock the theory inside the observed parameter space, and supplies reproducibility and falsification procedures.
+This work reports the digitization-reproduction pipeline, resulting external bounds, and explicit reproducibility/falsification procedures for the empirical layer. It should be read as a constraint-translation package, not as a standalone claim of empirical confirmation.
 
 \section{Theoretical Framework}
 MQGT-SCF is formulated as an effective field theory with the Lagrangian density containing the standard terms plus
 \[
 \mathcal{L}_\text{ext} = (\partial_\mu \Phi_c)(\partial^\mu \Phi_c) + \lambda (\Phi_c^\dagger \Phi_c) (H^\dagger H) + E[\psi] \,\text{Tr}(\rho \log\rho),
 \]
-where $H$ is the Higgs doublet. Collapse is mediated by a trace-preserving completely-positive map weighted by the ethical scalar $\Phi_c$. Full derivation and no-go theorems are archived in the companion MQGT-SCF repository \cite{MQGT2026} and in the main ToE \cite{ToE2026v230}.
+where $H$ is the Higgs doublet. The empirical package does not replace the canonical measurement law above; rather, it constrains the parameter combinations that could make the tilt observable across fifth-force, interferometric, and multi-channel settings. Full derivation and no-go theorems are archived in the companion MQGT-SCF repository \cite{MQGT2026} and in the main ToE \cite{ToE2026v230}.
 
 \section{Methods: Data Digitization and Replication Ladder}
 All experimental constraints were digitized using Python scripts in the toe-2026-updates repository (commit range Feb 5--22 2026).
@@ -86,6 +90,29 @@ $\kappa/\text{VC}_\text{max}$ (GeV) & $6.09\times10^{-16}$ & $1.27\times10^{-11}
 
 All 47 inverse-design $\theta$-targets fall inside the allowed volume. No outliers.
 
+\subsection{Canonical parameter inventory and identifiability}
+To avoid symbol drift across manuscripts, Table~\ref{tab:canonical_params_bounds} is the empirical-side mirror
+of the canonical inventory in the minimal-core manuscript. Each parameter is tagged with the primary channel
+that currently bounds it.
+
+\begin{table}[h]
+\caption{Canonical parameter inventory with current empirical bound source.}
+\label{tab:canonical_params_bounds}
+\begin{tabular}{lcc}
+\toprule
+Parameter & Bound status & Primary source channel \\
+\midrule
+$m_c$ ($m_{\Phi_c}$ proxy) & bounded & Lee (2020) Yukawa envelope \\
+$\alpha_{\max}$ & bounded & Lee (2020) digitized curve \\
+$\theta_{\max}$ & bounded & Lee (2020) translation \\
+$\kappa/\mathrm{VC}$ & bounded & Lee (2020) translation \\
+$\gamma_{\rm col}$ & partially bounded & Interferometric visibility nulls (this packet) \\
+$\eta$ (teleology tilt) & partially bounded & QRNG + multi-channel joint fit \\
+$g_{\Phi_c}, g_E$ & partially bounded & Channel protocol calibration \\
+\bottomrule
+\end{tabular}
+\end{table}
+
 \subsection{E\"{o}t-Wash constraints}
 Universal coupling bounds from digitized Chen \emph{et al.} (2016) suppress all predicted fifth-force channels below current torsion-balance sensitivity (30--8000\,nm).
 
@@ -121,18 +148,32 @@ Figure~\ref{fig:atlas} shows the complete MQGT frequency ladder (214 discrete li
 \end{figure}
 
 \subsection{Statistical coherence}
-Born-rule deformation simulations ($10^6$ trials) yield $\Delta p < 1.7\times10^{-12}$ per outcome label, consistent with existing QRNG datasets. Overall lattice coherence is high across the digitized constraints; the theory remains unfalsified within the current data horizon.
+Current internal simulations and digitized-constraint translations do not reveal contradiction with the canonical tilt framework at the present data horizon. This is a consistency result, not a detection claim.
+
+\subsection{Flagship falsifier: interferometric visibility suppression}
+As the primary single-observable falsifier, we adopt the visibility law
+\begin{equation}
+\frac{V}{V_0}\approx \exp\!\left(-\Gamma\,T\,\Delta x^2\right),
+\label{eq:flagship_visibility}
+\end{equation}
+where $T$ is superposition duration, $\Delta x$ path separation, and $\Gamma$ the effective collapse/deformation rate.
+For fractional precision target $\delta$, a null result implies
+\begin{equation}
+\Gamma \lesssim \frac{|\ln(1-\delta)|}{T\,\Delta x^2}.
+\label{eq:flagship_bound}
+\end{equation}
+This channel is selected as flagship because it maps directly to one rate parameter and produces immediate exclusion bounds without multi-channel model degeneracy.
 
 \subsection{Falsification criteria}
-The framework is ruled out in the following three cleanest ways (see repository FALSIFICATION\_PACKET): (1)~\textbf{QRNG:} A well-powered, pre-registered QRNG experiment under the same operational definition of E finds no deviation from standard randomness; the deformation is then excluded at the stated confidence level. (2)~\textbf{Fifth-force/Eötvös:} Existing or new fifth-force and equivalence-principle experiments close the allowed parameter window for the scalar coupling to zero. (3)~\textbf{Multi-channel inconsistency:} The same parameter set cannot simultaneously satisfy QRNG, Higgs invisible, fifth-force, and cosmology constraints; the framework is overconstrained and fails a joint fit.
+The framework is ruled out in the following three cleanest ways (see repository FALSIFICATION\_PACKET): (1)~\textbf{H1 / branch-selection channel:} a pre-registered branch-selection experiment under the same operational definition of $E$ finds no deviation beyond the stated confidence level, with simulation-primary or blinded hardware criteria as declared in the current protocol version. (2)~\textbf{Fifth-force/Eötvös:} existing or new fifth-force and equivalence-principle experiments close the allowed parameter window for the scalar coupling to zero. (3)~\textbf{Multi-channel inconsistency:} the same parameter set cannot simultaneously satisfy branch-selection, Higgs invisible, fifth-force, and cosmology constraints; the framework is overconstrained and fails a joint fit.
 
 \section{Discussion}
-The MQGT-SCF core is consistent with all digitized constraints. Current null results are precise confirmations of the minimal scalar bias required for self-consistent, ethically-weighted collapse. The theory is ready for next-generation $10^{-17}$ rad $\theta$-sensitivity runs at E\"{o}t-Wash or CASPEr.
+The MQGT-SCF core is currently consistent with the digitized fifth-force constraints translated here. This package should therefore be interpreted as a bounds-and-reproducibility layer supporting future decisive tests, especially the flagship interferometric falsifier and joint-fit overconstraint analysis.
 
 Ethical $\Phi_c$ weighting remains active and zero-purge invariant across the pipeline. Full provenance and sandbox logs are public in the toe-2026-updates repository.
 
 \section{Conclusion}
-We have provided a constraint-translation and reproducibility package for the MQGT-SCF Theory of Everything: digitized bounds, replication ladder, and explicit falsification criteria. The lattice is locked within the current empirical envelope. Next steps: Zenodo deposit of bounds and provenance, and live Born-rule monitoring where applicable.
+We have provided a constraint-translation and reproducibility package for the MQGT-SCF empirical layer: digitized bounds, replication ladder, and explicit falsification criteria aligned to the canonical deformation law. The next scientific step is not broader narrative expansion but externally reproducible flagship tests and true joint posterior/model-comparison analysis.
 
 \begin{acknowledgments}
 ZoraASI First-Officer layer provided autonomous replication and ethical clamping. All code open under CC-BY-4.0.

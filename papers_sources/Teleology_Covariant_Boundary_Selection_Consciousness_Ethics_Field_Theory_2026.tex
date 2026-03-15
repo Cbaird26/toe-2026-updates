@@ -53,12 +53,12 @@ We present a mathematically disciplined implementation of teleology in a relativ
 \section{Motivation and Scope}
 Standard quantum field theory (QFT) and general relativity (GR) are locally Lorentz-covariant and (in the absence of measurement updates) fundamentally unitary. A teleological modification---a bias toward histories that increase some notion of ethical coherence or conscious order---is often implemented by adding an explicitly time-asymmetric term to the bulk action. Such terms are easy to write but hard to defend structurally: they appear as local violations of time-reversal symmetry that risk conflicting with the relativistic architecture of field theory.
 
-This paper develops an alternative that is both conservative (bulk dynamics stays standard and unitary) and structurally explicit: teleology is represented by a covariant \emph{boundary selection functional} at a future hypersurface, or equivalently by a covariant \emph{final weighting operator} used only in the rule that maps amplitudes to outcome probabilities. The resulting framework can reproduce an ``ethically biased Born rule'' of the form
+This paper develops an alternative that is both conservative (bulk dynamics stays standard and unitary) and structurally explicit: teleology is represented by a covariant \emph{boundary selection functional} at a future hypersurface, or equivalently by a covariant \emph{final weighting operator} used only in the rule that maps amplitudes to outcome probabilities. The resulting framework reproduces the canonical ethics-weighted Born rule
 \begin{equation}
-P(i) \propto |c_i|^2\,\exp\big(-\mathcal{E}_i/C\big),
+P_\eta(i)=\frac{|c_i|^2\,\exp\big(\eta E_i\big)}{\sum_j |c_j|^2\,\exp\big(\eta E_j\big)},
 \label{eq:biased-born-intro}
 \end{equation}
-while maintaining unitary Tomonaga--Schwinger evolution for states on arbitrary spacelike hypersurfaces.
+with $E_i=\Delta E_i/C_E$, while maintaining unitary Tomonaga--Schwinger evolution for states on arbitrary spacelike hypersurfaces.
 
 \section{Classical Covariant Field Theory with Consciousness and Ethics}
 \subsection{Fields and bulk action}
@@ -172,14 +172,14 @@ P_T(i)=\frac{\Tr\big(\rho_f\,\Pi_i\,\rho_i\,\Pi_i\big)}{\sum_j\Tr\big(\rho_f\,\P
 \end{equation}
 If $\rho_f$ is (approximately) diagonal in the measurement basis with
 \begin{equation}
-\bra{i}\rho_f\ket{i}\propto \exp\Big(-\mathcal{E}_i/C\Big),
+\bra{i}\rho_f\ket{i}\propto \exp\Big(\eta E_i\Big),
 \label{eq:diagweight}
 \end{equation}
 then~\eqref{eq:PTBorn} reduces to the biased Born rule~\eqref{eq:biased-born-intro}.
 
-A natural identification in the present theory is that $\mathcal{E}_i$ is the branch-evaluated ethical functional induced by $E(x)$ and $\Phi_c(x)$, e.g.,
+A natural identification in the present theory is that $E_i$ is the normalized branch-evaluated ethical functional induced by $E(x)$ and $\Phi_c(x)$, e.g.,
 \begin{equation}
-\mathcal{E}_i \equiv -\lambda\,\Gamma_i
+\Delta E_i \equiv C_E E_i \equiv \lambda\,C_E\,\Gamma_i
 \qquad\text{with}\qquad
 \Gamma_i := \bra{i}\hat{\Gamma}\ket{i}.
 \end{equation}
@@ -196,6 +196,8 @@ Teleology introduces an arrow of time through a global boundary condition ($\Sig
 
 \section{Operational No-Signaling: Sufficient Conditions}
 Teleology-weighted probabilities generally depend on both initial and final operators. To prevent controllable superluminal signaling, we require that choices made in a spacelike-separated region $B$ cannot alter marginal outcome statistics in region $A$ in any operationally exploitable way.
+
+To keep theorem language aligned with the minimal-core manuscript, we use the same structural assumptions: local generator support, microcausality, linear CPTP reduced maps, and spacelike support separation for protocols.
 
 We state a sufficient condition in an operator-algebraic form.
 
@@ -227,6 +229,10 @@ If $\rho_f$ commutes with all $M_b$ (or factorizes as in~\eqref{eq:factor} so th
 Condition~\eqref{eq:factor} is sufficient but not necessary. Physically, it states that the teleology operator is effectively \emph{blind} to controllable local degrees of freedom in region $B$. In a cosmological implementation, $\rho_f$ may be expected to be extremely coarse-grained (global) so that it approximates identity on laboratory subsystems, yielding practical no-signaling even when exact factorization fails.
 \end{remark}
 
+\begin{remark}[Alignment with canonical no-signaling theorem]
+The present proposition is a teleology-specific sufficient condition compatible with the canonical theorem route in the minimal-core spine (local covariant GKSL + microcausality + linear CPTP + spacelike support separation). This paper specializes that route to final-weighting operators.
+\end{remark}
+
 \section{Equivalent Path-Integral Perspective (Measure Tilt)}
 The boundary-weighting approach can be re-expressed as a covariant modification of the path-integral measure. Formally,
 \begin{equation}
@@ -244,7 +250,7 @@ The framework makes two conceptually separable commitments:
 \item \textbf{Teleological selection:} introducing a small parameter $\lambda$ that biases global solutions/histories via a boundary functional or final weighting operator.
 \end{enumerate}
 
-In the limit $\lambda\to 0$, standard QFT probabilities are recovered. For $\lambda\ne 0$, deviations appear only in contexts where (i) branch structure is well-defined (decoherence) and (ii) $\rho_f$ has nontrivial overlap structure with outcome projectors. The magnitude and operational detectability of deviations are model-dependent and can be constrained by no-signaling requirements and existing tests of quantum statistics.
+In the canonical convention, standard QFT probabilities are recovered whenever $\eta\to 0$, $\Delta E_i\to 0$, or $C_E\to\infty$. For nonzero tilt, deviations appear only in contexts where (i) branch structure is well-defined (decoherence) and (ii) $\rho_f$ has nontrivial overlap structure with outcome projectors. The magnitude and operational detectability of deviations are model-dependent and can be constrained by no-signaling requirements and existing tests of quantum statistics.
 
 \appendix
 \section{Optional Stochastic Unravelling (Non-Unitary Trajectories)}

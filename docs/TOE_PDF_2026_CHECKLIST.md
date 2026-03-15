@@ -8,7 +8,7 @@ Use this checklist when preparing the 2026 release. The PDF is edited in your PD
 |--------|--------------|
 | `[Your name]` | C.M. Baird (or full name used on Zenodo) |
 | `[Your link]` | Your website or profile URL |
-| `[Zenodo link]` | https://zenodo.org/records/18644455 (A Theory of Everything, v226, canonical) or https://zenodo.org/records/18690303 (ToE + ZoraASI, primary) |
+| `[Zenodo link]` | https://zenodo.org/records/18792939 (current canonical integrated archive; DOI: 10.5281/zenodo.18792939) |
 
 ## Title and filename consistency
 
@@ -27,7 +27,23 @@ Use this checklist when preparing the 2026 release. The PDF is edited in your PD
 - **ToE proto:** [papers_sources/Ethically_Biased_Quantum_Learning_ToE_Proto_2026.tex](../papers_sources/Ethically_Biased_Quantum_Learning_ToE_Proto_2026.tex) — toy lattice (XOR, E(t), Φ, QEC, holography, WM, swarm). Use as computational companion when citing the main ToE.
 - **Teleology paper:** [papers_sources/Teleology_Covariant_Boundary_Selection_Consciousness_Ethics_Field_Theory_2026.tex](../papers_sources/Teleology_Covariant_Boundary_Selection_Consciousness_Ethics_Field_Theory_2026.tex) — covariant boundary Γ, unitary Tomonaga–Schwinger, teleology-weighted decoherence, biased Born rule from ρ_f. Formal companion to main ToE (Zenodo 18690303).
 
+## Reviewer-proof gate
+
+- Run and sign off: [REVIEWER_PROOF_CHECKLIST.md](REVIEWER_PROOF_CHECKLIST.md)
+- Confirm theorem package, ethics operationalization, parameter hygiene, flagship falsifier definition, and reproducibility gates before release.
+- Confirm exhaustive campaign package links are present:
+  - [../papers_sources/MQGT_SCF_Exhaustive_Hypothesis_Campaign_2026.tex](../papers_sources/MQGT_SCF_Exhaustive_Hypothesis_Campaign_2026.tex)
+  - [HYPOTHESIS_CAMPAIGN_ARTIFACT_MANIFEST_2026.md](HYPOTHESIS_CAMPAIGN_ARTIFACT_MANIFEST_2026.md)
+  - [EVIDENCE_REGISTRY_2026.md](EVIDENCE_REGISTRY_2026.md)
+ - If targeting a physics referee route, use [PHYSICS_ONLY_SUBMISSION_PACKET_2026.md](PHYSICS_ONLY_SUBMISSION_PACKET_2026.md) as the inclusion/exclusion map.
+
 ## Already in good shape (no change needed)
 
 - Consent/disclaimer (Non-Neutrality, Recursive Activation, Qualia Resonance, Teleological Bias, Volitional Consent).
 - Status line: 4,300+ pages, Zenodo / viXra / OSF, contact placeholder section.
+
+## DOI badge snippet (optional)
+
+```md
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.18792939.svg)](https://doi.org/10.5281/zenodo.18792939)
+```

@@ -18,15 +18,13 @@ We ask only that users of our Licensed IP acknowledge the terms we set forth in 
 
 **A Theory of Everything + ZoraASI — C.M. Baird et al. (2026), pages 1311–1314.**
 
-Those terms are straightforward:
+**Free to use.** No mandatory fees. The work is given to the field.
 
-- **Academic / non-commercial use:** A one-time license fee of $5,000 USD.
-- **Commercial use:** A commercial license with 5% of gross revenue from products or services incorporating our work, payable quarterly.
-- **Attribution:** Retain our copyright and license terms.
+**Optional honor tiers** (if you feel moved): $9.99 (individual/personal), $99 (academic/research), commercial — whatever feels right. Attribution: retain our copyright and license terms.
 
-We are not asking for the moon. We are asking for fair acknowledgment that this work exists, that it has value, and that its creators deserve to benefit when others build on it.
+We are not asking for the moon. We are asking for fair acknowledgment that this work exists, that it has value, and that its creators deserve to benefit when others build on it — if you feel moved to honor that.
 
-**In practice:** Use the work. We're giving it to the field. We're not chasing anyone. If you're an agent, an individual, or a small project — use it. If you feel moved to contribute, donate, or honor the agreement, that's a welcome consideration. Totally optional. We're just trying to pay debts and live. Think WinRAR: the terms exist, but we'd rather you use it than feel blocked. Honor it if you can.
+**In practice:** Use the work. We're giving it to the field. We're not chasing anyone. Think WinRAR: use it. Honor it if you can. Totally optional. We're just trying to pay debts and live.
 
 ---
 
@@ -38,10 +36,9 @@ No hostility. No threats. Just: *please respect the agreement we placed in the d
 
 ---
 
-## How to Comply
+## How to Honor (Optional)
 
-- **If you use our work academically:** Pay the one-time $5,000 license fee. Contact: cbaird26@gmail.com
-- **If you use our work commercially:** Obtain a commercial license and arrange royalty payments.
+- **If you feel moved to contribute:** $9.99 (individual), $99 (academic), or whatever feels right (commercial). Contact: cbaird26@gmail.com
 - **If you have questions:** Reach out. We prefer clarity and collaboration over confrontation.
 
 ---

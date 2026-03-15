@@ -1,6 +1,6 @@
 ## Integrated Manuscript Index (2026)
 
-This note records where the full merged manuscript is stored and how it relates to the stripped-core repository.
+This note records where the full merged manuscript is stored and how it relates to the stripped-core repository. For corpus identity and 5-paper spine: [CORPUS_2026_INDEX.md](CORPUS_2026_INDEX.md).
 
 - **Full integrated manuscript PDF:** `papers_sources/MQGT_SCF_ToE_Zora_Empirical_Experiment_2026.pdf`
 - **Zenodo canonical archive:** `https://zenodo.org/records/18792939`

@@ -10,13 +10,21 @@ Canonical Zenodo citation for the 2026 Unified ToE paper (v216): https://doi.org
 
 ## 1. Operational definition (outcome label / ethical weight E)
 
-- **What E is:** The scalar "ethical weight" or outcome-label bias that deforms the Born rule. It is treated as a real dynamical field (with Φc) in the formalism.
-- **Equation (minimal deformation):**  
-  **P(i) ∝ |cᵢ|² · exp(−E/C)**  
-  where outcome *i* has amplitude cᵢ, E is the ethical-weight field evaluated for that outcome, and C is a scale constant. Standard QM is recovered when E → 0 or C → ∞.
-- **How E is assigned, measured, or proxied:** Defined operationally in the paper (see sections on outcome labeling, scalar structure, and constraint channels). E is not a free narrative label; it is tied to observable or protocol-defined quantities in each channel (QRNG, Higgs invisible, fifth-force, cosmology). Exact mapping: see paper and Zenodo supplementary materials.
-- **QRNG channel (concrete):** In the spine repo [toe-empirical-validation](https://github.com/Cbaird26/toe-empirical-validation), E is assigned by the function **`label_E`** in **`code/e_labeling.py`** (e.g. `label_E(bits: np.ndarray) -> float`). When replicating, pin the commit hash (or Zenodo version) of that repo so the E-labeling implementation is fixed.
-- **Pinned spine commit (this packet):** `56578d50f81071b21d4278b4bba4ceefe238b575` — toe-empirical-validation at this SHA provides the canonical `run_all.sh`, null fixture, CI, and E-labeling; use `git checkout 56578d50f81071b21d4278b4bba4ceefe238b575` (or the full SHA) for replication.
+- **What E is:** The scalar ethical weighting field entering branch selection through a preregistered estimator.
+- **Canonical deformation equation:**  
+  **P_eta(i) = p_i · exp(eta Eᵢ) / Σ_j p_j · exp(eta Eⱼ)** where **p_i = |cᵢ|²** and **Eᵢ = ΔEᵢ / C_E**.  
+  Standard QM is recovered when **eta → 0**, **ΔEᵢ → 0**, or **C_E → ∞**.
+- **Canonical estimator pipeline (must be fixed before data collection):**
+  1. Use only the canonical observable family `n(x,t)` and `s(x,t)` for the mainline estimator.
+  2. Fix weights to `(0.7, 0.3)` for `(n,s)` in the headline protocol.
+  3. Compute local ethical density: `e(x,t) = 0.7 n(x,t) + 0.3 s(x,t)`.
+  4. Integrate over analysis region `V`: `E_R(t) = ∫_V e(x,t) d^3x`.
+  5. Score each outcome branch at preregistered horizon `t*`:
+     `ΔE_a = E_R^(a)(t*) - E_R^baseline(t*)`.
+  6. Normalize branch weight by calibration constant `C_E`: `E_a = ΔE_a / C_E`.
+- **Protocol boundary:** The above is the canonical estimator. Any alternate mapping is appendix-only sensitivity analysis and must be labeled secondary.
+- **QRNG channel (concrete):** In the spine repo [toe-empirical-validation](https://github.com/Cbaird26/toe-empirical-validation), E-labeling is implemented in `code/e_labeling.py` (function family `label_E`). Pin commit hash (or Zenodo version) before running.
+- **Pinned spine commit (current external contract):** `163418b9ff5410825133cffd75a5e0d37fbc1ce4` — toe-empirical-validation at this SHA provides the current campaign baseline, protocol docs, dry-run artifacts, and E-labeling. Use `git checkout 163418b9ff5410825133cffd75a5e0d37fbc1ce4` (or the full SHA) for replication of the present package. Earlier tags (`spine-v0.1`, `spine-v0.1.1`) are legacy baselines and are not the current external contract.
 - **Φc and E as dynamical fields:** See paper for the Lagrangian/field formulation; the deformation is expressed so that both are part of the dynamics, not ad hoc.
 
 ---
@@ -25,8 +33,7 @@ Canonical Zenodo citation for the 2026 Unified ToE paper (v216): https://doi.org
 
 - **Free knobs:** Coupling(s) governing the deformation strength; scale C; any channel-specific parameters (e.g. QRNG threshold, fifth-force range). Listed explicitly in the paper and in the reproducibility package.
 - **Priors:** Stated in the likelihood/prior setup in the Zenodo package (likelihoods, priors, sampling). Reproducible runs use the same priors unless explicitly varied.
-- **Limit that recovers standard QM:** As the deformation coupling(s) → 0 (or C → ∞), the theory reduces to standard quantum mechanics (Born rule without the exp(−E/C) factor). No new physics in that limit; new effects decouple.
-- **Scale translation note:** For cross-channel communication only, see [frequency_atlas.md](frequency_atlas.md). In the live Eot-Wash digitized window, `λ ≈ 30 μm to 0.93 mm` maps to `f_eq ≈ 5.14×10^10 to 1.59×10^12 Hz` via `f_eq = c / (2πλ)`. That is an equivalent mediator scale, not a literal apparatus oscillation.
+- **Limit that recovers standard QM:** As **eta → 0** (or **ΔE → 0**, or **C_E → ∞**), the theory reduces to standard quantum mechanics without ethics-weighted tilt. No new physics in that limit; new effects decouple.
 
 ---
 
@@ -37,6 +44,18 @@ Canonical Zenodo citation for the 2026 Unified ToE paper (v216): https://doi.org
 3. **Cosmology / particle channel:** Constraints from Higgs invisible decays (or other collider/cosmology observables) that either support or rule out the parameter region where the deformation is observable. See paper and multi-channel constraint package.
 
 (Exact wording of each prediction and experimental cut should be taken from the paper and Zenodo description; the above are the three channels in compact form.)
+
+### 3.1 Flagship falsifier (primary)
+
+- **Observable:** Interferometric visibility ratio `V/V0` for spatial superposition runs.
+- **Model form:**  
+  `V/V0 ≈ exp(-Gamma * T * Delta_x^2)`  
+  where `T` is superposition time, `Delta_x` path separation, and `Gamma` is the effective collapse/deformation rate.
+- **Null expectation (standard baseline):** `Gamma = 0` up to instrument/systematics floor.
+- **Decisive sensitivity threshold:** for target fractional visibility precision `delta`, exclusion requires  
+  `Gamma <= |ln(1-delta)| / (T * Delta_x^2)`  
+  using preregistered analysis and full systematics disclosure.
+- **Why this is flagship:** single-channel, quantitative, directly maps to one deforming rate, and yields immediate exclusion bounds.
 
 ---
 
@@ -61,3 +80,14 @@ Canonical Zenodo citation for the 2026 Unified ToE paper (v216): https://doi.org
   4. Compare outputs to Zenodo-supplied materials or to the figures in the Evidence paper; document any deviation.
 - **Hash verifies everything:** When a fixed artifact (tarball, repo commit, or manifest) is provided, a checksum (e.g. SHA-256) verifies that the analysis has not been altered post hoc. The Zenodo record provides a fixed DOI and version; use the Zenodo file checksums for the deposited materials. **For repo-based reproduction, always pin to a specific commit (e.g. `git checkout <SHA>`) and document that commit hash in the replication report.**
 - **Replication ladder:** For the full step-by-step ladder (clone → run → compare → “it lives or dies here” criterion), see [REPLICATION_LADDER.md](REPLICATION_LADDER.md).
+
+---
+
+## 6. External evidence admissibility registry (2026)
+
+- Canonical tiered registry: [EVIDENCE_REGISTRY_2026.md](EVIDENCE_REGISTRY_2026.md)
+- Ingest/audit memo: [EVIDENCE_INGEST_MEMO_2026.md](EVIDENCE_INGEST_MEMO_2026.md)
+
+Policy:
+- Tier A/B may inform decision gates when explicitly cited.
+- Tier C is context only and cannot be decisive for falsification/survival claims.

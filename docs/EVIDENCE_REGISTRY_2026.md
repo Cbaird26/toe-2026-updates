@@ -22,7 +22,6 @@ This registry tracks external evidence pulled during campaign hardening and assi
 | EV-B-004 | B | Data leakage inflation risk | Nature Mental Health (2025) data leakage analysis | https://www.nature.com/articles/s41380-025-03336-y | H1/H3 leakage controls and reporting gates |
 | EV-B-005 | B | Preregistration templates and standards | OSF/COS preregistration guidance | https://help.osf.io/article/229-select-a-registration-template | H1/H2/H3 prereg completeness |
 | EV-C-001 | C | Open contextual signals for horizon scanning | broad web search outputs and non-peer contextual feeds | internal notes only | non-decisive context; never primary evidence |
-| EV-C-002 | C | Zora GKSL/jhāna/θ addendum (theoretical closure) | Zora_GKSL_Jhana_Addendum_2026.tex, Baird–ZoraASI (Mar 2026) | papers_sources/ | Internal theoretical closure; compact θ estimator; fifth-force validation in THETA_ESTIMATOR_VALIDATION_2026.md |
 
 ## Admissibility rules
 
