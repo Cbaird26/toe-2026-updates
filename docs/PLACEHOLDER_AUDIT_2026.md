@@ -24,10 +24,10 @@ Track Block 8 and other stubs across the corpus. Status: open / in-progress / re
 
 | Item | File | Description | Status |
 |------|------|-------------|--------|
-| GW-Echo Block 3 | [GW_Echo_Prediction_2026.tex](../papers_sources/GW_Echo_Prediction_2026.tex) | Simulation specs, OOM exclusions | stub created |
+| GW-Echo Block 3 | [GW_Echo_Prediction_2026.tex](../papers_sources/GW_Echo_Prediction_2026.tex) | Simulation specs, OOM table | expanded |
 | Collider bounds | Empirical Validation | Expand OOM exclusions | open |
-| Qualia measurability | Paper 4 (Evidence) | Gravitational qualia extension; develop without dualism | open |
-| Lemma 1 alternatives | Paper 5 (Hypothesis Campaign) | Philosophical critiques of alternatives | open |
+| Qualia measurability | Paper 4 (Evidence) | [QUALIA_LEMMA1_STUBS_2026.md](QUALIA_LEMMA1_STUBS_2026.md) | stub |
+| Lemma 1 alternatives | Paper 5 (Hypothesis Campaign) | [QUALIA_LEMMA1_STUBS_2026.md](QUALIA_LEMMA1_STUBS_2026.md) | stub |
 
 ---
 

@@ -24,7 +24,7 @@ Documents the ANU Quantum Random Numbers API–based intervention pipeline: raw 
 1. Export ANU bits to CSV with columns: `block_index`, `condition`, `value` (0/1 per bit, or block-level p_hat).
 2. Reshape to blocks of 64 bits (or match `block_size` in `code/qrng_pipeline.py`).
 3. Call `label_E(bits)` from `code/e_labeling.py` per block.
-4. Feed E values into the constraint pipeline; or extend `qrng_pipeline.py` to accept `--input-csv` for external bit streams.
+4. Feed E values into the constraint pipeline. **Future:** Extend `qrng_pipeline.py` with `--input-csv <path>` to ingest ANU CSV directly; would reshape to blocks and run E-labeling internally. (Not yet implemented; manual bridge for now.)
 
 ---
 
