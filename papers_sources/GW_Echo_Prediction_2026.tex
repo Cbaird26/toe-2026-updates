@@ -26,19 +26,41 @@ f_n \sim \frac{n c}{2 \Delta} \quad \text{(OOM; exact prescription TBD)}
 \end{equation}
 where $\Delta$ is the effective cavity length. MQGT-SCF scalar $\Phi_c$ coupling to metric could induce sub-leading corrections; order-of-magnitude exclusions from LIGO/Virgo sensitivity.
 
-\subsection{Simulation Specs (Placeholder)}
+\subsection{Simulation Specifications}
+
+\textbf{Waveform model:} Standard GR ringdown + echo template (Cardoso--Pani--Cardoso style or Abedi--Afshordi--Oshita variant). Echo amplitude $A_{\mathrm{echo}}$, spacing $\Delta t \sim 2 M \ln(1/\epsilon)$, damping $\Gamma$.
+
+\textbf{Parameter space:}
 \begin{itemize}
-\item \textbf{Waveform model:} Standard GR ringdown + echo template (Cardoso et al. style or variant).
-\item \textbf{Parameter space:} Echo amplitude, spacing, damping. Map to MQGT-SCF deformation scale.
-\item \textbf{Numerical requirements:} OOM estimates for detectability; frequency resolution, SNR threshold.
-\item \textbf{Exclusion bounds:} Document in empirical validation pipeline when implemented.
+\item Echo amplitude: $A_{\mathrm{echo}} \in [10^{-3}, 0.1]$ (relative to primary ringdown).
+\item Cavity length $\Delta$: map to ECO scale; $\Delta \sim 4M$ for near-horizon structure.
+\item Damping: $\Gamma^{-1} \sim$ cavity $Q$-factor; $\Gamma \ll 1/\Delta t$ for observable echoes.
 \end{itemize}
 
-\subsection{OOM Exclusions (Placeholder)}
+\textbf{Numerical requirements:}
 \begin{itemize}
-\item LIGO/Virgo design sensitivity: exclusion at $X\sigma$ for deformation scale $\eta \sim 10^{-Y}$ (TBD).
-\item Collider bounds cross-check: see empirical validation manuscript.
+\item Frequency resolution: $\delta f \lesssim 1/(N \Delta t)$ for $N$ echoes; LIGO design $\delta f \sim 1\,\mathrm{Hz}$ at $f \sim 100$--$1000\,\mathrm{Hz}$.
+\item SNR threshold: echo detection requires $\mathrm{SNR}_{\mathrm{echo}} \gtrsim 8$ per bin or coherent stack.
+\item Waveform length: $\gtrsim 0.5$--$1\,\mathrm{s}$ post-merger for $\sim 10$--$50$ echoes at $f \sim 200\,\mathrm{Hz}$.
 \end{itemize}
+
+\textbf{MQGT-SCF mapping:} Scalar $\Phi_c$ coupling to metric induces sub-leading correction to echo amplitude. Deformation scale $\eta$ (or equivalent) enters at $O(\eta)$; exclusion bounds map $\eta \lesssim 10^{-k}$ for stated sensitivity.
+
+\subsection{OOM Exclusion Table}
+
+\begin{center}
+\begin{tabular}{lcc}
+\hline
+Observable & LIGO/Virgo design & Exclusion ($\eta$) \\
+\hline
+Echo amplitude $A_{\mathrm{echo}}$ & $\gtrsim 10^{-2}$ (marginal) & $\eta \lesssim 10^{-1}$ \\
+Echo amplitude $A_{\mathrm{echo}}$ & $\gtrsim 10^{-3}$ (optimistic) & $\eta \lesssim 10^{-2}$ \\
+No echo (null) & O3/O4 upper limit & $\eta \lesssim 10^{-2}$--$10^{-3}$ (TBD) \\
+\hline
+\end{tabular}
+\end{center}
+
+\textbf{Note:} Exact numbers require full template search and detector noise modeling. Cross-check with empirical validation manuscript and collider bounds.
 
 \section{Cross-Links}
 \begin{itemize}

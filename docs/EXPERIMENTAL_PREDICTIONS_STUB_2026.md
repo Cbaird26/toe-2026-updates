@@ -28,7 +28,8 @@ Links to experimental channels: QRNG, fifth-force, cosmology. Stub for expansion
 | QRNG intervention | [QRNG_MEDITATION_INTERVENTION_REPORT_MARCH_2026.md](QRNG_MEDITATION_INTERVENTION_REPORT_MARCH_2026.md) | ANU pipeline artifacts |
 | Fifth-force | Empirical validation .tex | digitized bounds, exclusion plots |
 | Cosmology | Empirical validation, Evidence paper | phase-space diagram |
-| GW echoes | GW_Echo_Prediction_2026.tex (stub) | Block 3 in progress |
+| GW echoes | [GW_Echo_Prediction_2026.tex](../papers_sources/GW_Echo_Prediction_2026.tex) | Block 3: simulation specs, OOM table |
+| Collider bounds | Empirical validation .tex | Expand OOM exclusions; see [PLACEHOLDER_AUDIT_2026.md](PLACEHOLDER_AUDIT_2026.md) |
 
 ---
 

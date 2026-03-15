@@ -36,8 +36,18 @@ Derivation roadmap for B8-01 (metric closure) and B8-02 (Φc→Λ). Anchors for 
 
 ---
 
+## Execution Notes
+
+**B8-01 anchor:** Add subsection `\subsection{Metric closure (g̃\_μν)}` in core spine [MQGT_SCF_Minimal_Consistent_Core_2026.tex](../papers_sources/MQGT_SCF_Minimal_Consistent_Core_2026.tex) after the field-content / action section. Placeholder: "Metric ansatz g̃ = g + δg(Φc,E); variational derivation; assumption hierarchy (linearized, no backreaction, full nonlinear)."
+
+**B8-02 anchor:** Add subsection `\subsection{Effective potential and Λ\_eff}` in core spine or teleology companion. Placeholder: "V_eff(Φc) expansion; constant term → Λ_eff; relation to C_E, η; comparison with Λ_obs."
+
+**Order:** Execute B8-01 first (metric feeds into dynamics); then B8-02 (vacuum structure).
+
+---
+
 ## Cross-Links
 
 - [PLACEHOLDER_AUDIT_2026.md](PLACEHOLDER_AUDIT_2026.md)
 - [CANONICAL_SPINE.md](CANONICAL_SPINE.md)
-- Core formal spine: `papers_sources/MQGT_SCF_Minimal_Consistent_Core_2026.tex`
+- Core formal spine: [MQGT_SCF_Minimal_Consistent_Core_2026.tex](../papers_sources/MQGT_SCF_Minimal_Consistent_Core_2026.tex)
