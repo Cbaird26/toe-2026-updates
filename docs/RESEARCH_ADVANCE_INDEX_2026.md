@@ -39,6 +39,8 @@
 | [ANU_QRNG_INTERVENTION_PIPELINE.md](ANU_QRNG_INTERVENTION_PIPELINE.md) | ANU API; bridge to toe-empirical-validation |
 | [QRNG_PHASE_II_100K_PILOT_RUNBOOK_2026.md](QRNG_PHASE_II_100K_PILOT_RUNBOOK_2026.md) | Exact Pilot 0–3 runbook, block presets, and runnable commands |
 | [PHASE_II_QRNG_PILOT_CLOSEOUT_2026.md](PHASE_II_QRNG_PILOT_CLOSEOUT_2026.md) | Phase II 100k swarm pilots closed: results, non-replication, decision rule |
+| [LESSONS_LEARNED_QRNG_EXPERIMENTS_2026.md](LESSONS_LEARNED_QRNG_EXPERIMENTS_2026.md) | Cross-phase lessons: pipeline, discipline, stop rules, and what to carry forward |
+| [QRNG_SWARM_PROTOCOL_AUDIT_2026.md](QRNG_SWARM_PROTOCOL_AUDIT_2026.md) | Audit for future redesign: what worked, noise sources, redesign principles |
 | [REPLICATION_LADDER.md](REPLICATION_LADDER.md) | One-command replication; pre-reg template |
 
 ---
