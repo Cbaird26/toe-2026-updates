@@ -6,7 +6,7 @@
 
 ## Definition
 
-**TOE_Corpus_2026** = Zenodo integrated archive + selected LaTeX sources in this repository. The corpus is the set of canonical manuscripts constituting the MQGT-SCF Theory of Everything, empirical validation, teleology, and related frameworks.
+**TOE_Corpus_2026** = Zenodo integrated archive + selected LaTeX sources in this repository. The corpus is the set of canonical manuscripts constituting the MQGT-SCF Theory of Everything, empirical validation, teleology, and related frameworks. The 2026 master volume is the integrated PDF **MQGT–SCF Research Corpus — Project Zora (2026)** (filename: `MQGT_SCF_Unified_Field_Theory_and_Experimental_Program_2026.pdf`), containing core theory, extensions, empirical constraints, QRNG reports, and Project Zora Phase I close-out and agent architecture.
 
 **Canonical Zenodo:** [10.5281/zenodo.18792939](https://doi.org/10.5281/zenodo.18792939)
 
@@ -28,7 +28,7 @@
 
 | Component | Location | Role |
 |-----------|----------|------|
-| Main ToE PDF | A_Theory_of_Everything_CM_Baird_et_al_2026.pdf | Omnibus narrative |
+| Research corpus volume (master PDF) | MQGT_SCF_Unified_Field_Theory_and_Experimental_Program_2026.pdf | MQGT–SCF Research Corpus — Project Zora: theory, experiments, QRNG, Zora architecture (2026) |
 | Addendum | Addendum_2026_ToE_Companion.pdf | Completion package guide |
 | CORE_FORMALISM | CORE_FORMALISM_1_0_2026.tex | Compact physics-safe statement |
 | RANKED_EXPERIMENT | RANKED_EXPERIMENT_PROGRAM_2026.tex | Experiment hierarchy |

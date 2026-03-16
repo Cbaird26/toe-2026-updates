@@ -2,7 +2,7 @@
 
 This note records where the full merged manuscript is stored and how it relates to the stripped-core repository. For corpus identity and 5-paper spine: [CORPUS_2026_INDEX.md](CORPUS_2026_INDEX.md).
 
-- **Full integrated manuscript PDF:** `papers_sources/MQGT_SCF_ToE_Zora_Empirical_Experiment_2026.pdf`
+- **Full integrated manuscript PDF (research corpus volume):** `papers_sources/MQGT_SCF_Unified_Field_Theory_and_Experimental_Program_2026.pdf` — Cite as: The MQGT–SCF Research Corpus — Project Zora: Theory, Experiments, and Agent Architecture (2026).
 - **Zenodo canonical archive:** `https://zenodo.org/records/18792939`
 - **DOI:** `10.5281/zenodo.18792939`
 - **Scope:** physics + consciousness + ethics + Zora/agent architecture + empirical and experimental framing
