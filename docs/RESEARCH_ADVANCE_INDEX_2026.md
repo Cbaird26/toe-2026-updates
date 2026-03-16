@@ -28,11 +28,17 @@
 
 ## QRNG / Experimental
 
+**Phase I close-out: complete.** Trace map, results summary, and Phase II pilot closure are linked here.
+
 | Doc | Purpose |
 |-----|---------|
+| [PHASE_I_QRNG_TRACE_MAP_2026.md](PHASE_I_QRNG_TRACE_MAP_2026.md) | Single map: graduated ladder, designs vs runs, decision rules, and recommendations |
+| [PHASE_I_RESULTS_SUMMARY_2026.md](PHASE_I_RESULTS_SUMMARY_2026.md) | Short Phase I close-out summary for corpus or Zenodo |
 | [QRNG_PREREG_OSF_DRAFT_2026.md](QRNG_PREREG_OSF_DRAFT_2026.md) | Filled Appendix A; ready for OSF paste |
 | [NEXT_QRNG_RUN_50M_2026.md](NEXT_QRNG_RUN_50M_2026.md) | 50M–100M bit run; cost, timeline, decision rule |
 | [ANU_QRNG_INTERVENTION_PIPELINE.md](ANU_QRNG_INTERVENTION_PIPELINE.md) | ANU API; bridge to toe-empirical-validation |
+| [QRNG_PHASE_II_100K_PILOT_RUNBOOK_2026.md](QRNG_PHASE_II_100K_PILOT_RUNBOOK_2026.md) | Exact Pilot 0–3 runbook, block presets, and runnable commands |
+| [PHASE_II_QRNG_PILOT_CLOSEOUT_2026.md](PHASE_II_QRNG_PILOT_CLOSEOUT_2026.md) | Phase II 100k swarm pilots closed: results, non-replication, decision rule |
 | [REPLICATION_LADDER.md](REPLICATION_LADDER.md) | One-command replication; pre-reg template |
 
 ---
