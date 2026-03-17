@@ -24,6 +24,23 @@ Map of Phase II manuscripts, sources, and outputs across local and Zenodo.
 
 ---
 
+## Corpus REVTeX Status (March 2026)
+
+All papers in `papers_sources/` now use REVTeX (`revtex4-2`):
+
+| File | REVTeX |
+|------|--------|
+| MQGT-SCF_Phase_II_Submission_2026.tex | Yes |
+| MQGT-SCF_Minimal_Consistent_Core_Empirical_Validation_2026.tex | Yes |
+| MQGT_SCF_Minimal_Consistent_Core_2026.tex | Yes (converted) |
+| Teleology_Covariant_Boundary_Selection_Consciousness_Ethics_Field_Theory_2026.tex | Yes (converted) |
+| QRNG_Experiments_Phase_I_Phase_II_Report_2026.tex | Yes (converted) |
+| CORE_FORMALISM_1_0_2026.tex | Yes (converted) |
+| RANKED_EXPERIMENT_PROGRAM_2026.tex | Yes (converted) |
+| Queens_Source_Synthesis_Appendix_2026.tex | Includable fragment; standalone: Queens_Source_Synthesis_Appendix_2026_standalone.tex |
+
+---
+
 ## Local Downloads (Phase II family)
 
 | File | Role | Cross-ref |
