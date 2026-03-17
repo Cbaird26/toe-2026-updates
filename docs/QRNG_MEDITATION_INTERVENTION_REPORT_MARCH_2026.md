@@ -64,6 +64,10 @@ Three independent runs of a block-randomized QRNG meditation intervention experi
 
 ---
 
+## Method (do not change)
+
+The exact process and scripts used for this experiment are documented in [QRNG_METHOD_MARCH_2026_DO_NOT_CHANGE.md](QRNG_METHOD_MARCH_2026_DO_NOT_CHANGE.md). Replication and any further ladder runs must use the same method.
+
 ## Related
 
 - [REPLICATION_LADDER.md](REPLICATION_LADDER.md) — QRNG pre-registration template

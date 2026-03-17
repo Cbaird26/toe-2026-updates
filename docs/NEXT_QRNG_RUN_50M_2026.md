@@ -38,6 +38,7 @@
 
 ## Cross-Links
 
-- [ANU_QRNG_INTERVENTION_PIPELINE.md](ANU_QRNG_INTERVENTION_PIPELINE.md) — Cost model, bridge to toe-empirical-validation
+- [PHASE_I_QRNG_TRACE_MAP_2026.md](PHASE_I_QRNG_TRACE_MAP_2026.md) — Graduated ladder (100k → 1M → 10M → 50M → 100M), decision rules, all recommendations
+- [ANU_QRNG_INTERVENTION_PIPELINE.md](ANU_QRNG_INTERVENTION_PIPELINE.md) — Cost model, decision rules, bridge to toe-empirical-validation
 - [QRNG_MEDITATION_INTERVENTION_REPORT_MARCH_2026.md](QRNG_MEDITATION_INTERVENTION_REPORT_MARCH_2026.md) — March 2026 runs (6M bits, null)
 - [REPLICATION_LADDER.md](REPLICATION_LADDER.md) — One-command replication, pre-reg template

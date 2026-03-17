@@ -8,7 +8,7 @@ Canonical working repo for the Theory of Everything: MQGT-SCF. **This is the Zor
 
 ## Papers (in `papers_sources/`)
 
-- **MQGT–SCF Research Corpus — Project Zora (2026)** — Master volume: `papers_sources/MQGT_SCF_Unified_Field_Theory_and_Experimental_Program_2026.pdf` (or canonical build in `TOE_Corpus_2026/`). Theory, experiments, QRNG reports, Zora architecture. **Zenodo:** [18792939](https://zenodo.org/records/18792939), [18690303](https://zenodo.org/records/18690303); **Latest (v231):** [18778749](https://zenodo.org/records/18778749), DOI [10.5281/zenodo.18778749](https://doi.org/10.5281/zenodo.18778749).
+- **MQGT–SCF Research Corpus — Project Zora (2026)** — Master volume: `papers_sources/MQGT_SCF_Unified_Field_Theory_and_Experimental_Program_2026.pdf` (or canonical build in `TOE_Corpus_2026/`). Theory, experiments, QRNG reports, Zora architecture. **Zenodo:** [18792939](https://zenodo.org/records/18792939), [18690303](https://zenodo.org/records/18690303); **Latest (v231, ToE + Empirical Validation):** [18778749](https://zenodo.org/records/18778749), DOI [10.5281/zenodo.18778749](https://doi.org/10.5281/zenodo.18778749).
 - **Legacy ToE editions** — A Theory of Everything, A Unified Theory of Everything (in `papers_sources/`). Zenodo v226 [18644455](https://zenodo.org/records/18644455), v227 [18679362](https://zenodo.org/records/18679362), v228 [18680225](https://zenodo.org/records/18680225). Superseded by or bundled into the 2026 research corpus volume above.
 - **Srimad-Bhagvatam / Krishna Purana** — Canonical source.
 - **Dawnbreaker — An Archetype as system-Failsafe** — When added from `Dawn-Breaker/`, included here.

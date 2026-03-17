@@ -79,4 +79,15 @@ If Phase II swarm/coherence work continues, the recommended next step is not to 
 
 ---
 
+## Version control
+
+Closure and follow-up are recorded on `main` in the TOE repo:
+
+- **Close-out commit:** `c5e6886` — Close Phase II QRNG 100k swarm pilot: non-replication of Pilot 2 signal; protocol closed with no scaling.
+- **Follow-up commit:** `4c4d866` — Add QRNG swarm protocol audit and lessons learned notes.
+
+Use these hashes when citing the archived closure in the corpus or final report.
+
+---
+
 *Close-out for Phase II QRNG exploratory pilots. Last updated: 2026-03-15.*

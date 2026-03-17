@@ -10,17 +10,22 @@
 
 **Canonical Zenodo:** [10.5281/zenodo.18792939](https://doi.org/10.5281/zenodo.18792939)
 
+**Phase II Zenodo:** [10.5281/zenodo.19060024](https://doi.org/10.5281/zenodo.19060024) — MQGT_SCF_Unified_Field_Theory_and_Experimental_Program_2026_Phase_II-v1.pdf + reproducibility package
+
+**Phase II cross-reference:** [PHASE_II_CROSS_REFERENCE.md](PHASE_II_CROSS_REFERENCE.md) — Map of Phase II sources (Downloads, Overleaf, TOE)
+
 ---
 
-## Core Papers (5-Paper Spine)
+## Core Papers (6-Paper Spine)
 
 | Paper | File | Scope |
 |-------|------|-------|
 | 1. Core formal spine | [MQGT_SCF_Minimal_Consistent_Core_2026.tex](../papers_sources/MQGT_SCF_Minimal_Consistent_Core_2026.tex) | CPTP/GKSL, no-signaling, teleology measure tilt |
-| 2. Empirical validation | [MQGT-SCF_Minimal_Consistent_Core_Empirical_Validation_2026.tex](../papers_sources/MQGT-SCF_Minimal_Consistent_Core_Empirical_Validation_2026.tex) | Digitized bounds, replication ladder, falsification |
-| 3. Teleology companion | [Teleology_Covariant_Boundary_Selection_Consciousness_Ethics_Field_Theory_2026.tex](../papers_sources/Teleology_Covariant_Boundary_Selection_Consciousness_Ethics_Field_Theory_2026.tex) | Boundary functional, ethically biased Born rule |
-| 4. Evidence | Evidence_Emergent_Matter_Quantum_Vacuum_MQGT-SCF_2026.tex (.pdf) | RHIC/STAR, tetraquark, vacuum stability |
-| 5. Hypothesis campaign | MQGT_SCF_Exhaustive_Hypothesis_Campaign_2026.tex | H1/H2/H3 falsification, protocol design |
+| 2. Phase II submission | [MQGT-SCF_Phase_II_Submission_2026.tex](../papers_sources/MQGT-SCF_Phase_II_Submission_2026.tex) | Scalar-singlet EFT, GKSL, H2 flagship, Claim Ledger, Attack Matrix |
+| 3. Empirical validation | [MQGT-SCF_Minimal_Consistent_Core_Empirical_Validation_2026.tex](../papers_sources/MQGT-SCF_Minimal_Consistent_Core_Empirical_Validation_2026.tex) | Digitized bounds, replication ladder, falsification |
+| 4. Teleology companion | [Teleology_Covariant_Boundary_Selection_Consciousness_Ethics_Field_Theory_2026.tex](../papers_sources/Teleology_Covariant_Boundary_Selection_Consciousness_Ethics_Field_Theory_2026.tex) | Boundary functional, ethically biased Born rule |
+| 5. Evidence | Evidence_Emergent_Matter_Quantum_Vacuum_MQGT-SCF_2026.tex (.pdf) | RHIC/STAR, tetraquark, vacuum stability |
+| 6. Hypothesis campaign | MQGT_SCF_Exhaustive_Hypothesis_Campaign_2026.tex | H1/H2/H3 falsification, protocol design |
 
 ---
 
@@ -35,6 +40,11 @@
 | IaP | Identity_as_Process_IaP_Baird_2026.tex | Governance kernel |
 | ABIL | Asimov_Baird_Invariance_Laws_ABIL_2026.tex | Safety invariants |
 | SAFE | Safety_Envelopes_Over_Weight_Mirroring_SAFE_2026.tex | Admissibility projection |
+| Queen's Source Synthesis | [Queens_Source_Synthesis_Appendix_2026.tex](../papers_sources/Queens_Source_Synthesis_Appendix_2026.tex), [WISDOM_SOURCES_QUEENS_SYNTHESIS_2026.md](WISDOM_SOURCES_QUEENS_SYNTHESIS_2026.md) | Thirteen traditions, cross-cutting themes; ToE appendix + doc |
+| Primary sources inventory | [SOURCES_INVENTORY_2026.md](SOURCES_INVENTORY_2026.md), [primary_sources_manifest.json](../data/primary_sources_manifest.json) | Canonical paths for wisdom/ToE files; agent training and resourcing |
+| Phase II submission README | [README_Phase_II_Submission.md](../papers_sources/README_Phase_II_Submission.md) | Compile instructions, Overleaf import |
+| Phase II cross-reference | [PHASE_II_CROSS_REFERENCE.md](PHASE_II_CROSS_REFERENCE.md) | Map of Phase II PDFs, tex, Overleaf, Zenodo |
+| QRNG Phase I and Phase II report | [QRNG_Experiments_Phase_I_Phase_II_Report_2026.tex](../papers_sources/QRNG_Experiments_Phase_I_Phase_II_Report_2026.tex) | Phase I and Phase II QRNG experiments; null and non-replication; closure and citation anchors |
 
 ---
 
@@ -50,6 +60,8 @@
 
 ## Cross-Links
 
+- [PHASE_II_CROSS_REFERENCE.md](PHASE_II_CROSS_REFERENCE.md) — Phase II PDFs, tex, Overleaf, Zenodo map
+- [SOURCES_INVENTORY_2026.md](SOURCES_INVENTORY_2026.md) — primary sources manifest (Queen's Source Synthesis; canon/sources paths)
 - [INTEGRATED_MANUSCRIPT_INDEX.md](INTEGRATED_MANUSCRIPT_INDEX.md) — Zenodo and hardening map
 - [CANONICAL_SPINE.md](CANONICAL_SPINE.md) — A–H closure
 - [FALSIFICATION_PACKET.md](FALSIFICATION_PACKET.md) — Operational E definition
