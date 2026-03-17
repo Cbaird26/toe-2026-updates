@@ -33,6 +33,18 @@ Links to experimental channels: QRNG, fifth-force, cosmology. Stub for expansion
 
 ---
 
+## Collider Bounds OOM Note
+
+MQGT-SCF scalar-sector predictions (Higgs portal, light scalar mediators) map to collider observables at LHC Run 2/3. Order-of-magnitude exclusion regions:
+
+- **Higgs invisible decays:** BR(H→invisible) &lt; 0.11 (ATLAS+CMS); constrains scalar portal coupling × invisible-sector branching.
+- **Displaced vertices / LLPs:** Scalar mediators with cτ ~ mm–m → displaced signatures; current bounds from CMS/ATLAS LLP searches; OOM sensitivity ~10⁻⁵–10⁻⁶ on coupling for GeV-scale mediators.
+- **Resonance searches:** Narrow scalar resonances (e.g. Φ → γγ, ττ); Run 2 limits at ~few fb; Run 3 improvements OOM.
+
+Full OOM expansion and parameter-space mapping in empirical validation paper. See FALSIFICATION_PACKET for formal predictions.
+
+---
+
 ## Next Experiments (from Forward Plan)
 
 - **Long baseline stability:** 50M–100M bits; entropy/autocorrelation over time

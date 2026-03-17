@@ -43,12 +43,6 @@ Use this for a minimal "run once and compare" replication. The primary channel f
 
 ---
 
-## Intervention Protocol Track (Separate)
-
-A **block-randomized intervention protocol** (control vs. meditation/intervention) uses the ANU QRNG API directly. This is a separate track from the E-labeling ladder above. See [ANU_QRNG_INTERVENTION_PIPELINE.md](ANU_QRNG_INTERVENTION_PIPELINE.md) for cost model, artifact schema, and relationship to toe-empirical-validation. March 2026 runs: [QRNG_MEDITATION_INTERVENTION_REPORT_MARCH_2026.md](QRNG_MEDITATION_INTERVENTION_REPORT_MARCH_2026.md).
-
----
-
 ## Five rungs (in order)
 
 **(a) Run the scripts.**  

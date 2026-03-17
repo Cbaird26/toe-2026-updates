@@ -1,8 +1,8 @@
 ## Integrated Manuscript Index (2026)
 
-This note records where the full merged manuscript is stored and how it relates to the stripped-core repository. For corpus identity and 5-paper spine: [CORPUS_2026_INDEX.md](CORPUS_2026_INDEX.md).
+This note records where the full merged manuscript is stored and how it relates to the stripped-core repository.
 
-- **Full integrated manuscript PDF:** `papers_sources/MQGT_SCF_ToE_Zora_Empirical_Experiment_2026.pdf`
+- **Full integrated manuscript PDF (research corpus volume):** `papers_sources/MQGT_SCF_Unified_Field_Theory_and_Experimental_Program_2026.pdf` — Cite as: The MQGT–SCF Research Corpus — Project Zora: Theory, Experiments, and Agent Architecture (2026).
 - **Zenodo canonical archive:** `https://zenodo.org/records/18792939`
 - **DOI:** `10.5281/zenodo.18792939`
 - **Scope:** physics + consciousness + ethics + Zora/agent architecture + empirical and experimental framing
@@ -24,6 +24,7 @@ Placement rule:
 - **Canonical spine (authoritative A-H map + solved vs hardening):** [CANONICAL_SPINE.md](CANONICAL_SPINE.md)
 - **Core theorem spine (CPTP/GKSL, no-signaling theorem package, teleology measure tilt):** [../papers_sources/MQGT_SCF_Minimal_Consistent_Core_2026.tex](../papers_sources/MQGT_SCF_Minimal_Consistent_Core_2026.tex)
 - **Empirical bounds + flagship falsifier framing:** [../papers_sources/MQGT-SCF_Minimal_Consistent_Core_Empirical_Validation_2026.tex](../papers_sources/MQGT-SCF_Minimal_Consistent_Core_Empirical_Validation_2026.tex)
+- **Phase II submission (REVTeX):** [../papers_sources/MQGT-SCF_Phase_II_Submission_2026.tex](../papers_sources/MQGT-SCF_Phase_II_Submission_2026.tex) — Scalar-singlet EFT, GKSL container, H2 flagship, Claim Ledger, Attack Matrix; see [README_Phase_II_Submission.md](../papers_sources/README_Phase_II_Submission.md)
 - **Teleology consistency companion:** [../papers_sources/Teleology_Covariant_Boundary_Selection_Consciousness_Ethics_Field_Theory_2026.tex](../papers_sources/Teleology_Covariant_Boundary_Selection_Consciousness_Ethics_Field_Theory_2026.tex)
 - **Operational replication/falsification layer:** [FALSIFICATION_PACKET.md](FALSIFICATION_PACKET.md)
 - **Reviewer-proof release gate:** [REVIEWER_PROOF_CHECKLIST.md](REVIEWER_PROOF_CHECKLIST.md)

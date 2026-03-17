@@ -1,0 +1,288 @@
+% !TeX program = pdflatex
+% MQGT-SCF Phase II Submission 2026
+% Scalar-Singlet EFT Extension, GKSL Measurement Container, and Interferometric Test Program
+% Compiles with: pdflatex (2x) + bibtex (if using .bib) or pdflatex (2x) for embedded refs
+
+\documentclass[reprint,amsmath,amssymb,aps,showkeys]{revtex4-2}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{hyperref}
+\usepackage{enumitem}
+
+% ---------- Macros ----------
+\newcommand{\dd}{\mathrm{d}}
+\newcommand{\Tr}{\mathrm{Tr}}
+\newcommand{\Comm}[2]{\left[#1,#2\right]}
+\newcommand{\AComm}[2]{\left\{#1,#2\right\}}
+\newcommand{\Phic}{\Phi_{\mathrm{c}}}
+\newcommand{\Eth}{E}
+\newcommand{\Mpl}{M_{\mathrm{Pl}}}
+\newcommand{\Lag}{\mathcal{L}}
+\newcommand{\cO}{\mathcal{O}}
+\newcommand{\cH}{\mathcal{H}}
+
+\title{MQGT-SCF Phase II: Scalar-Singlet EFT Extension, GKSL Measurement Container, and Interferometric Test Program}
+
+\author{C.~M.~Baird}
+\affiliation{Independent Researcher}
+
+\date{March 2026}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+We present the Phase II charter for the Merged Quantum Gauge and Scalar Consciousness Framework (MQGT-SCF): a stripped-core effective field theory extension of GR+SM by two real scalar singlets, $\Phic(x)$ and $E(x)$, treated as generic scalar sectors with phenomenological interpretations explored in companion work. The mainline retains standard unitary microdynamics and places measurement inside one local, covariant CPTP/GKSL container. Teleology, if retained, is implemented as a measure tilt over trajectories; all core results hold in the $\eta\to 0$ limit. The flagship physical falsifier is H2 interferometric visibility suppression. We provide the minimal EFT action, boundedness conditions, decoupling limit, Claim Ledger, Attack Matrix, and Explicit Failure Conditions. The program is advanced at formal/specification closure but not yet at decisive external empirical confirmation.
+\end{abstract}
+
+% ---------------------------------------------------------------------------
+\section{Introduction}
+% ---------------------------------------------------------------------------
+This paper formalizes the Phase II research program for MQGT-SCF. The pivot is explicit: we restore standard unitary microdynamics as the mainline and treat any modified-collapse or Born-tilt construction as a companion hypothesis that must earn survival through data. The framework extends GR+SM by scalar-singlet sector(s) with explicit parameter hygiene and a staged falsification program. This document does not claim empirical confirmation; it defines the structure that reality can test.
+
+% ---------------------------------------------------------------------------
+\section{Core Decision and Canonical Spine}
+% ---------------------------------------------------------------------------
+\begin{enumerate}[leftmargin=*,label=(\arabic*)]
+\item \textbf{Standard unitary evolution} governs the underlying microdynamics.
+\item \textbf{Measurement}, where operationalized, is expressed within one canonical local, covariant CPTP/GKSL framework that reduces back to ordinary quantum mechanics in the appropriate limits.
+\item \textbf{Teleology}, if retained, is implemented as a measure tilt over trajectories or outcomes, not as a primitive time-odd bulk source term in the main Lagrangian.
+\item \textbf{MQGT-SCF} is the current effective phenomenological and test-facing layer; deeper SO(10)/string/uniqueness structure remains an exploratory UV program.
+\item \textbf{Zora} belongs to the execution, simulation, and agent-architecture layer, not to the minimal physics statement.
+\item The program is taken to be ahead at formal/specification closure, but not yet at decisive external empirical confirmation.
+\end{enumerate}
+
+% ---------------------------------------------------------------------------
+\section{Minimal EFT Action and Field Equations}
+% ---------------------------------------------------------------------------
+The minimal extension adds two real scalar singlets on spacetime $(M,g_{\mu\nu})$: $\Phic(x)$ and $\Eth(x)$, in addition to GR+SM fields. We work as an effective field theory with local operators of canonical dimension $\le 4$. The action is
+\begin{equation}
+S=\int \dd^4x\,\sqrt{-g}\;\Big(\Lag_{\rm GR}+\Lag_{\rm SM}+\Lag_{\Phic}+\Lag_{\Eth}+\Lag_{\rm int}\Big),
+\label{eq:action}
+\end{equation}
+with
+\begin{align}
+\Lag_{\rm GR} &= \frac{\Mpl^2}{2}R-\Lambda,
+\\
+\Lag_{\Phic} &= -\frac12\,(\nabla \Phic)^2 - \frac12 m_{\Phic}^2 \Phic^2 - \frac{\lambda_{\Phic}}{4}\Phic^4,
+\\
+\Lag_{\Eth} &= -\frac12\,(\nabla \Eth)^2 - \frac12 m_{\Eth}^2 \Eth^2 - \frac{\lambda_{\Eth}}{4}\Eth^4.
+\end{align}
+The minimal renormalizable interactions are
+\begin{equation}
+\Lag_{\rm int}
+=
+-\frac{\kappa}{2}\Phic^2\Eth^2
+-\gamma\,\Phic\,\Eth
+-\alpha_H |H|^2 \Phic
+-\beta_H |H|^2 \Eth
+-g_{\Phic}\Phic\,\cO_m
+-g_{\Eth}\Eth\,\cO_m.
+\label{eq:int}
+\end{equation}
+Here $H$ is the SM Higgs doublet and $\cO_m$ is a coarse-grained matter/neural order parameter. The bilinear $\gamma\,\Phic\Eth$ is treated as a standard interaction.
+
+Varying the action gives the scalar equations of motion
+\begin{align}
+\square \Phic + m_{\Phic}^2 \Phic + \lambda_{\Phic}\Phic^3 + \kappa\,\Phic\,\Eth^2 + \gamma\,\Eth &= J_{\Phic}(x),
+\\
+\square \Eth + m_{\Eth}^2 \Eth + \lambda_{\Eth}\Eth^3 + \kappa\,\Eth\,\Phic^2 + \gamma\,\Phic &= J_{\Eth}(x),
+\end{align}
+with canonical source terms
+\begin{equation}
+J_{\Phic}(x)=g_{\Phic}\,\cO_m(x)+\alpha_H |H(x)|^2,\qquad
+J_{\Eth}(x)=g_{\Eth}\,\cO_m(x)+\beta_H |H(x)|^2.
+\end{equation}
+
+% ---------------------------------------------------------------------------
+\section{Vacuum Stability and Boundedness Gate}
+% ---------------------------------------------------------------------------
+The quartic potential energy is
+\[
+V_4(\Phic,\Eth)=\frac{\lambda_{\Phic}}{4}\Phic^4+\frac{\lambda_{\Eth}}{4}\Eth^4+\frac{\kappa}{2}\Phic^2\Eth^2.
+\]
+A standard sufficient condition for boundedness is
+\begin{equation}
+\lambda_{\Phic}>0,\qquad \lambda_{\Eth}>0,\qquad \kappa>-\sqrt{\lambda_{\Phic}\lambda_{\Eth}}.
+\label{eq:stability}
+\end{equation}
+
+% ---------------------------------------------------------------------------
+\section{Measurement: Local Covariant CPTP/GKSL Container}
+% ---------------------------------------------------------------------------
+Let $\Sigma$ be a Cauchy surface and $\rho[\Sigma]$ a density functional. The canonical non-unitary dynamics is local GKSL on hypersurfaces:
+\begin{equation}
+\frac{\delta \rho[\Sigma]}{\delta \Sigma(x)}
+=
+-\frac{i}{\hbar}\Comm{\cH(x)}{\rho[\Sigma]}
++
+\sum_a \left(
+L_a(x)\rho[\Sigma]L_a^\dagger(x)
+-\frac12\,\AComm{L_a^\dagger(x)L_a(x)}{\rho[\Sigma]}
+\right).
+\label{eq:TS_GKSL}
+\end{equation}
+The Lindblad operators $L_a(x)$ are taken as local functionals of the scalar sector and matter operators, constrained by CPTP, locality, and bounded heating; explicit constructions are deferred to companion work.
+
+Microcausality: $\Comm{L_a(x)}{L_b(y)}=0$ whenever $x$ and $y$ are spacelike separated. Under standard assumptions (local generator, microcausality, linear CPTP, spacelike support separation), operational no-signaling holds: Alice's marginal outcome probabilities are invariant under Bob's spacelike-separated interventions.
+
+% ---------------------------------------------------------------------------
+\section{Teleology: Measure Tilt (Companion, Optional)}
+% ---------------------------------------------------------------------------
+All results in Sections 2--5 hold in the $\eta\to 0$ limit; the measure tilt constitutes a companion hypothesis subject to independent falsification.
+
+The canonical route, when retained, is a tilt of the trajectory/outcome measure:
+\begin{equation}
+\frac{\dd P_\eta}{\dd P_0}[\Gamma]
+=
+\exp\!\Big(\eta J_E[\Gamma]-\psi(\eta)\,T\Big),
+\end{equation}
+with local probability deformation
+\begin{equation}
+P_\eta(i)=\frac{p_i\,e^{\eta E_i}}{\sum_j p_j\,e^{\eta E_j}},\qquad E_i=\frac{\Delta E_i}{C_E}.
+\end{equation}
+Standard quantum mechanics is recovered when $\eta\to 0$, $\Delta E_i\to 0$, or $C_E\to\infty$.
+
+% ---------------------------------------------------------------------------
+\section{H2 Interferometric Visibility --- Flagship Observable}
+% ---------------------------------------------------------------------------
+The highest-payoff next physical signal is interferometric visibility suppression. The observable is
+\begin{equation}
+\frac{V}{V_0}=\exp\!\Big(-\Gamma\,T\,\Delta x^2\Big),
+\label{eq:visibility}
+\end{equation}
+where $V$ is observed visibility, $T$ the superposition time, and $\Delta x$ the path separation. Standard quantum mechanics predicts $\Gamma=0$; any statistically significant excess defines the test signal.
+
+A null at sensitivity $\delta_{\rm total}$ sets the exclusion floor
+\begin{equation}
+\Gamma_{\rm floor}=\frac{|\ln(1-\delta_{\rm total})|}{T\,\Delta x^2}.
+\label{eq:Gamma_floor}
+\end{equation}
+With the reference planning profile $T=10^{-6}\,\mathrm{s}$, $\Delta x=10^{-3}\,\mathrm{m}$, $\delta_{\rm total}\approx 1.15\times 10^{-3}$,
+\[
+\Gamma_{\rm floor}\approx 1.15\times 10^9\;\mathrm{s}^{-1}\,\mathrm{m}^{-2}.
+\]
+This is the first Phase II exclusion blade. A Phase-0 benchtop optical visibility pilot measures the achieved nuisance-budget floor; a null is scientifically valuable.
+
+% ---------------------------------------------------------------------------
+\section{Experimental Priority Order}
+% ---------------------------------------------------------------------------
+\begin{itemize}[leftmargin=*]
+\item \textbf{H2} --- Interferometric visibility suppression: primary physical blade.
+\item \textbf{H1} --- Estimator and adversarial stress-test channel: simulation-primary, protocol hardening.
+\item \textbf{H3} --- Joint consistency / model comparison: inference layer combining H2 with fifth-force, collider, cosmology.
+\end{itemize}
+QRNG is retained only as an optional secondary comparator, not the primary path.
+
+% ---------------------------------------------------------------------------
+\section{Decoupling Limit}
+% ---------------------------------------------------------------------------
+The decoupling limit is
+\[
+\kappa,\gamma,\alpha_H,\beta_H,g_{\Phic},g_{\Eth},\eta,\gamma_{\rm col}\longrightarrow 0
+\quad\Longrightarrow\quad
+\text{GR+SM + standard QM}.
+\]
+All predictions of the core EFT reduce to standard GR+SM in the decoupling limit of the scalar sector.
+
+% ---------------------------------------------------------------------------
+\section{What Is Solved and What Remains}
+% ---------------------------------------------------------------------------
+\textbf{Solved (formal specification):} Minimal EFT action, bounded vacuum condition, covariant CPTP/GKSL measurement dynamics with microcausality, no-signaling under stated assumptions, decoupling limit.
+
+\textbf{Remaining:} Operationalization of estimators, numerical constraint-fitting, external replication, and decisive empirical confirmation. The program does not justify claims of consciousness/ethics/teleology effects empirically detected, or that the framework has beaten standard QM/GR in live data.
+
+% ---------------------------------------------------------------------------
+\appendix
+% ---------------------------------------------------------------------------
+
+\section{Claim Ledger v1}
+\label{app:claim_ledger}
+
+\subsection*{A. Core --- keep in main physics papers}
+\begin{enumerate}
+\item Minimal scalar-singlet EFT extension of GR+SM. Status: Core/active. Evidence: formal ansatz. Demotion: no admissible stable parameter region, no decoupling limit, or redundancy with trivial field redefinition.
+\item Standard unitary microdynamics retained. Status: Core/active. Demotion: if foundational nonunitarity sneaks into bulk dynamics.
+\item One lawful local covariant CPTP/GKSL measurement container. Status: Core/active; operator-completion is a live task. Demotion: inability to specify operator families preserving CPTP, locality, no-signaling.
+\item H2 interferometric visibility suppression as flagship falsifier. Status: Core/active. Demotion: no lab-facing nuisance budget, no achievable $\Gamma_{\rm floor}$, or nulls wiping out viable parameter region.
+\item H1 as simulation-primary stress-test channel. Status: Core-supporting. Demotion: if rhetorically upgraded into hardware anomaly claim.
+\item H3 as executable cross-channel inference layer. Status: Core-supporting. Demotion: if treated as ``nature prefers the theory'' before external replication.
+\end{enumerate}
+
+\subsection*{B. Companion --- box separately}
+\begin{enumerate}
+\setcounter{enumi}{6}
+\item Optional measure tilt / ethics-weighted Born deformation. Status: Companion only. Demotion: fails normalization, sign, or no-signaling checks.
+\item Semantic interpretation of $\Phic$ and $E$ as consciousness/ethics sectors. Status: Companion/interpretive. Demotion: if no operational observable distinguishes semantic reading from generic singlet-scalar.
+\item Jhāna attractors, QRNG ethical-context effects. Status: Companion/exploratory. Demotion: non-predictive or outperformed by standard models.
+\item UV uniqueness / SO(10)/string branch. Status: Companion/exploratory. Demotion: if allowed to bleed into current test-facing claims.
+\end{enumerate}
+
+\subsection*{C. Implementation-only --- useful, not evidence}
+\begin{enumerate}
+\setcounter{enumi}{10}
+\item Zora architecture. Status: Implementation layer. Demotion: if presented as physical evidence.
+\item Replication bundle, runbooks, manifests. Status: Implementation. Demotion: if existence of code treated as confirmation.
+\end{enumerate}
+
+\subsection*{D. Deprecated --- retire from mainline}
+\begin{enumerate}
+\setcounter{enumi}{12}
+\item Teleology as explicit time-odd bulk source term in Lagrangian.
+\item Foundational modified Born rule as required core doctrine.
+\item QRNG as primary flagship blade.
+\item ``Solved empirically,'' ``decisive external evidence,'' or ``final global posterior'' language.
+\end{enumerate}
+
+% ---------------------------------------------------------------------------
+\section{Attack Matrix v1}
+\label{app:attack_matrix}
+
+\begin{enumerate}
+\item \textbf{Core EFT claim.} Support: clean EFT formulation, stable potential, decoupling limit. Attack: show ill-defined, redundant, unstable. Kill: vacuum instability, no decoupling limit.
+\item \textbf{Decoupling claim.} Support: explicit parameter limits. Attack: demand exact decoupling in equations. Kill: residual observable contradicting experiment.
+\item \textbf{Collapse modification claim.} Support: fully specified master equation, normalization, no-signaling. Attack: exact Lindblad operators, domains, CPTP proof. Kill: violates no-signaling, positivity, interference bounds.
+\item \textbf{$\Phic$ physicality claim.} Support: clear observable or operational definition. Attack: $\Phic$ is relabeling of complexity/synchrony. Kill: all $\Phic$ effects reproducible by standard neuroscience.
+\item \textbf{Ethical scalar claim.} Support: reproducible operationalization. Attack: arbitrariness if $E$ depends on human interpretation. Kill: $E$ cannot be measured independently of theory-laden assumptions.
+\item \textbf{Empirical QRNG claim.} Support: pre-registered trials, independent replication. Attack: statistical fishing, drift, hardware bias. Kill: large blinded preregistered null.
+\item \textbf{Neurophenomenology claim.} Support: state classification predicting EEG/MEG. Attack: mapping is poetic. Kill: standard neural models fit equally well.
+\item \textbf{Zora/recursive agent claim.} Support: runnable architecture with ablation studies. Attack: does standard RL/Bayesian do the same? Kill: ablations show no benefit.
+\item \textbf{Falsifiability claim.} Support: short list of outcomes forcing revision. Attack: every negative absorbed by ``coupling too small.'' Kill: no parameter region preserves novelty and survives constraints.
+\item \textbf{Publication-grade claim.} Support: clean separation of theorem/ansatz/interpretation. Attack: category errors. Kill: overstates what is shown.
+\end{enumerate}
+
+% ---------------------------------------------------------------------------
+\section{Explicit Failure Conditions}
+\label{app:failure_conditions}
+
+\begin{itemize}[leftmargin=*]
+\item If blinded QRNG experiments show no deviation above threshold $X$ after $N$ trials, the collapse-bias coupling is ruled out in regime $R$.
+\item If no operator set can be given that is completely positive and no-signaling, the collapse extension is rejected.
+\item If $\Phic$/$E$ observables cannot be distinguished from standard neural or stochastic models, the field interpretation is demoted to metaphor.
+\item If H2 interferometric null at achieved $\Gamma_{\rm floor}$ excludes the viable parameter region, the framework is falsified.
+\item If fifth-force and equivalence-principle experiments close the allowed scalar-coupling window to zero, the portal sector is ruled out.
+\item If joint fit over H2, fifth-force, collider, and cosmology yields no surviving parameter region, the framework is overconstrained.
+\end{itemize}
+
+% ---------------------------------------------------------------------------
+\begin{thebibliography}{9}
+% ---------------------------------------------------------------------------
+
+\bibitem{Lindblad1976}
+G.~Lindblad, Commun.\ Math.\ Phys.\ \textbf{48}, 119 (1976).
+
+\bibitem{GKS1976}
+V.~Gorini, A.~Kossakowski, and E.~C.~G.~Sudarshan, J.\ Math.\ Phys.\ \textbf{17}, 821 (1976).
+
+\bibitem{Bassi2013}
+A.~Bassi \emph{et al.}, Rev.\ Mod.\ Phys.\ \textbf{85}, 471 (2013).
+
+\bibitem{MQGT2026}
+C.~M.~Baird, MQGT-SCF Minimal Consistent Core (2026); Zenodo DOI: 10.5281/zenodo.18792939.
+
+\bibitem{ToE2026}
+C.~M.~Baird, MQGT-SCF Unified Field Theory and Experimental Program (2026).
+
+\end{thebibliography}
+
+\end{document}

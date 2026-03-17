@@ -6,6 +6,8 @@ This file defines the referee-safe submission route for the current MQGT-SCF pac
 
 - Core formal spine:
   - `papers_sources/MQGT_SCF_Minimal_Consistent_Core_2026.tex`
+- Phase II submission (lead referee-facing):
+  - `papers_sources/MQGT-SCF_Phase_II_Submission_2026.tex` — Scalar-singlet EFT, GKSL container, H2 flagship, Claim Ledger v1, Attack Matrix, Explicit Failure Conditions
 - Empirical / bounds layer:
   - `papers_sources/MQGT-SCF_Minimal_Consistent_Core_Empirical_Validation_2026.tex`
 - Teleology companion (formal, bounded role only):
