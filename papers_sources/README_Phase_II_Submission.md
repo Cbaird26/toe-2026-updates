@@ -43,4 +43,5 @@ latexmk -pdf MQGT-SCF_Phase_II_Submission_2026.tex
 ## Related
 - Core formalism: `MQGT_SCF_Minimal_Consistent_Core_2026.tex`
 - Empirical validation: `MQGT-SCF_Minimal_Consistent_Core_Empirical_Validation_2026.tex`
-- Zenodo: https://zenodo.org/records/18792939
+- Zenodo: https://zenodo.org/records/18792939 (corpus), https://zenodo.org/records/19060024 (Phase II)
+- **E-prints:** rxiVerse:2603.0061 (live 2026-03-17); ai.viXra submitted (ref 17884572). Status: [../docs/PHASE_II_SUBMISSION_STATUS_2026.md](../docs/PHASE_II_SUBMISSION_STATUS_2026.md)

@@ -6,6 +6,18 @@ Map of Phase II manuscripts, sources, and outputs across local and Zenodo.
 
 ---
 
+## E-print archives (Phase II 10-page submission)
+
+| Archive | Status | Identifier |
+|---------|--------|------------|
+| **rxiVerse** | Live | rxiVerse:2603.0061 (2026-03-17) — [Physics → Quantum Gravity and String Theory](https://rxiverse.org/) |
+| **ai.viXra** | Submitted | Form ref 17884572 (2026-03-17); ~48 h for listing |
+| **arXiv** | Ready | Metadata in [ARXIV_SUBMISSION_BLOCK.md](ARXIV_SUBMISSION_BLOCK.md) |
+
+Full status: [PHASE_II_SUBMISSION_STATUS_2026.md](PHASE_II_SUBMISSION_STATUS_2026.md).
+
+---
+
 ## Zenodo Archives
 
 | Zenodo | DOI | Main file | Role |
@@ -92,6 +104,7 @@ All papers in `papers_sources/` now use REVTeX (`revtex4-2`):
 
 ## Cross-Links
 
+- [PHASE_II_SUBMISSION_STATUS_2026.md](PHASE_II_SUBMISSION_STATUS_2026.md) — E-print status (rxiVerse, ai.viXra, arXiv)
 - [CORPUS_2026_INDEX.md](CORPUS_2026_INDEX.md) — Full corpus spine
 - [INTEGRATED_MANUSCRIPT_INDEX.md](INTEGRATED_MANUSCRIPT_INDEX.md) — Zenodo and hardening map
 - [PHYSICS_ONLY_SUBMISSION_PACKET_2026.md](PHYSICS_ONLY_SUBMISSION_PACKET_2026.md) — Referee packet

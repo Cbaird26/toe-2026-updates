@@ -9,6 +9,7 @@ This file defines the referee-safe submission route for the current MQGT-SCF pac
 - Phase II submission (lead referee-facing):
   - `papers_sources/MQGT-SCF_Phase_II_Submission_2026.tex` — Scalar-singlet EFT, GKSL container, H2 flagship, Claim Ledger v1, Attack Matrix, Explicit Failure Conditions
   - Zenodo: [10.5281/zenodo.19060024](https://doi.org/10.5281/zenodo.19060024) — MQGT_SCF_Unified_Field_Theory_and_Experimental_Program_2026_Phase_II-v1.pdf
+  - E-prints: rxiVerse:2603.0061 (live), ai.viXra (submitted). Status: [PHASE_II_SUBMISSION_STATUS_2026.md](PHASE_II_SUBMISSION_STATUS_2026.md)
   - Cross-reference: [PHASE_II_CROSS_REFERENCE.md](PHASE_II_CROSS_REFERENCE.md)
 - Empirical / bounds layer:
   - `papers_sources/MQGT-SCF_Minimal_Consistent_Core_Empirical_Validation_2026.tex`

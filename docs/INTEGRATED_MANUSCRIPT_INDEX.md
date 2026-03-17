@@ -7,6 +7,7 @@ This note records where the full merged manuscript is stored and how it relates 
 - **DOI:** `10.5281/zenodo.18792939`
 - **Phase II Zenodo:** `https://zenodo.org/records/19060024` — DOI `10.5281/zenodo.19060024` — MQGT_SCF_Unified_Field_Theory_and_Experimental_Program_2026_Phase_II-v1.pdf + reproducibility package
 - **Phase II cross-reference:** [PHASE_II_CROSS_REFERENCE.md](PHASE_II_CROSS_REFERENCE.md) — Map of all Phase II sources (Downloads, Overleaf, Zenodo)
+- **Phase II submission status:** [PHASE_II_SUBMISSION_STATUS_2026.md](PHASE_II_SUBMISSION_STATUS_2026.md) — rxiVerse:2603.0061 (live), ai.viXra (submitted), arXiv (ready)
 - **Scope:** physics + consciousness + ethics + Zora/agent architecture + empirical and experimental framing
 - **Canonical home for integrated narrative:** this `TOE` repository
 - **Reason:** preserves the full umbrella framing without diluting reviewer-safe physics-only artifacts
