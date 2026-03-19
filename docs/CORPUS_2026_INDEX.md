@@ -14,8 +14,6 @@
 
 **Phase II cross-reference:** [PHASE_II_CROSS_REFERENCE.md](PHASE_II_CROSS_REFERENCE.md) — Map of Phase II sources (Downloads, Overleaf, TOE)
 
-**Phase II submission status:** [PHASE_II_SUBMISSION_STATUS_2026.md](PHASE_II_SUBMISSION_STATUS_2026.md) — E-prints: rxiVerse:2603.0061 (live 2026-03-17), ai.viXra (submitted), arXiv (ready)
-
 ---
 
 ## Core Papers (6-Paper Spine)
