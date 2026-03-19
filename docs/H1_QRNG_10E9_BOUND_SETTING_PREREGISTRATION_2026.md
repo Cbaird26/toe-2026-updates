@@ -177,6 +177,7 @@ Any H1 outcome **must** be reported alongside a clear statement that **H2** test
 ## 12. Reproducibility and release
 
 - **Code:** `scripts/mqgt_sim/` (illustrative simulations); **`scripts/h1_qrng_pilot/`** (HDF5 collector, `stats_core`, `analyze.py`, **`placebo_batch.py`** — see `scripts/h1_qrng_pilot/README.md`)  
+- **Frozen cross-run readout:** [H1_FROZEN_CROSS_RUN_SUMMARY_2026.md](H1_FROZEN_CROSS_RUN_SUMMARY_2026.md)  
 - **Data schema (reference implementation):** HDF5 groups `metadata` (attrs: `stream_sha256_hex`, `extraction_rule_id`, …), datasets `raw_u32`, `chunk_timestamp_ns`; environmental logs: `[TBD external CSV/JSON alongside file]`  
 - **Versioning:** Git commit hash frozen at analysis freeze: `[TBD at freeze]`  
 - **License / access:** `[TBD]`
@@ -187,6 +188,7 @@ Any H1 outcome **must** be reported alongside a clear statement that **H2** test
 
 - **H2 (primary blade):** [docs/H2_PILOT_PREREGISTRATION_2026.md](H2_PILOT_PREREGISTRATION_2026.md)  
 - **1B go / no-go (campaign discipline):** [H1_1B_GO_NO_GO_MEMO_2026.md](H1_1B_GO_NO_GO_MEMO_2026.md)  
+- **Frozen cross-run summary:** [H1_FROZEN_CROSS_RUN_SUMMARY_2026.md](H1_FROZEN_CROSS_RUN_SUMMARY_2026.md)  
 - **This prereg (canonical markdown):** `docs/H1_QRNG_10E9_BOUND_SETTING_PREREGISTRATION_2026.md`  
 - **Theory TeX:** [papers_sources/MQGT-SCF_Phase_II_Submission_2026.tex](../papers_sources/MQGT-SCF_Phase_II_Submission_2026.tex)  
 - **GitHub (organization):** https://github.com/Cbaird26  
