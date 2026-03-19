@@ -2,7 +2,8 @@
 """
 ANU QRNG pilot: 10k bits to validate API, auth, and pipeline.
 Usage: python scripts/anu_qrng_pilot.py
-       ANU_QRNG_API_KEY=yourkey python scripts/anu_qrng_pilot.py  # new API (optional)
+       # or fill repo-root .env.anu with ANU_API_KEY_PAID / ANU_API_KEY_FREE
+       ANU_API_KEY=yourkey python scripts/anu_qrng_pilot.py  # one-off override
 Output: artifacts/anu_qrng_pilot_<timestamp>_bits.csv, *_summary.json
 Cost: ~2 requests ≈ $0.01 (if paid API) or free (legacy).
 """
@@ -14,6 +15,12 @@ import sys
 import time
 from datetime import datetime, timezone
 from pathlib import Path
+
+SCRIPTS_DIR = Path(__file__).resolve().parent
+if str(SCRIPTS_DIR) not in sys.path:
+    sys.path.insert(0, str(SCRIPTS_DIR))
+
+from anu_env import load_repo_env, resolve_anu_api_key
 
 try:
     import requests
@@ -27,9 +34,11 @@ OUTPUT_DIR = Path(__file__).resolve().parent.parent / "artifacts"
 LEGACY_URL = "https://qrng.anu.edu.au/API/jsonI.php"
 NEW_API_BASE = "https://api.quantumnumbers.anu.edu.au"
 
+load_repo_env()
+
 
 def get_api_key() -> str | None:
-    key = os.environ.get("ANU_QRNG_API_KEY")
+    key, _key_source = resolve_anu_api_key()
     if key:
         return key.strip()
     for p in [OUTPUT_DIR / ".anu_api_key", Path.cwd() / "artifacts" / ".anu_api_key", Path.cwd() / ".anu_api_key"]:

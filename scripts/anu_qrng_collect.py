@@ -6,8 +6,9 @@ Fetches true quantum random bits from ANU QRNG. Protocol per Grok/ZoraASI
 daylight recommendation and QRNG_EXPERIMENTAL_PROTOCOL_2026.md.
 
 Usage:
-  # With API key (recommended — no rate limit): get free key at quantumnumbers.anu.edu.au
-  export ANU_QRNG_API_KEY=your_key
+  # With API key (recommended — no rate limit): fill repo-root .env.anu
+  # with ANU_API_KEY_PAID / ANU_API_KEY_FREE, or export a one-off override
+  export ANU_API_KEY=your_key
   python scripts/anu_qrng_collect.py --n 100000 --out artifacts/ --label baseline
 
   # Or store the key in artifacts/.anu_api_key (gitignored via artifacts/)
@@ -35,9 +36,17 @@ from pathlib import Path
 from urllib.error import HTTPError
 from urllib.request import Request, urlopen
 
+SCRIPTS_DIR = Path(__file__).resolve().parent
+if str(SCRIPTS_DIR) not in sys.path:
+    sys.path.insert(0, str(SCRIPTS_DIR))
+
+from anu_env import load_repo_env, resolve_anu_api_key
+
 ANU_LEGACY_API = "https://qrng.anu.edu.au/API/jsonI.php"
 ANU_NEW_API = "https://api.quantumnumbers.anu.edu.au"
 MAX_PER_REQUEST = 1024
+
+load_repo_env()
 
 
 def preflight_check(api_key: str | None, key_source: str = "unknown") -> bool:
@@ -49,7 +58,8 @@ def preflight_check(api_key: str | None, key_source: str = "unknown") -> bool:
     if not api_key:
         raise RuntimeError(
             "Preflight failed: No API key. Required for confirmatory runs. "
-            "Set ANU_QRNG_API_KEY or use artifacts/.anu_api_key"
+            "Set ANU_API_KEY, ANU_QRNG_API_KEY, ANU_API_KEY_PAID, ANU_API_KEY_FREE, "
+            "or use artifacts/.anu_api_key"
         )
     try:
         url = f"{ANU_NEW_API}?length=16&type=uint8"
@@ -218,15 +228,11 @@ def load_api_key_from_file(path: Path) -> str | None:
     return key
 
 
-def resolve_api_key(cli_key: str, out_dir: str) -> tuple[str | None, Path | None]:
+def resolve_api_key(cli_key: str, out_dir: str) -> tuple[str | None, Path | None, str]:
     """Resolve API key from CLI, env, then local key files."""
-    key = cli_key.strip()
+    key, env_source = resolve_anu_api_key(cli_key)
     if key:
-        return key, None
-
-    key = os.environ.get("ANU_QRNG_API_KEY", "").strip()
-    if key:
-        return key, None
+        return key, None, env_source or "env"
 
     repo_root = Path(__file__).resolve().parents[1]
     candidate_paths = [
@@ -236,8 +242,8 @@ def resolve_api_key(cli_key: str, out_dir: str) -> tuple[str | None, Path | None
     for path in candidate_paths:
         key = load_api_key_from_file(path)
         if key:
-            return key, path
-    return None, None
+            return key, path, path.name
+    return None, None, "none"
 
 
 def main() -> None:
@@ -277,15 +283,12 @@ def main() -> None:
 
     if args.preflight_only:
         try:
-            api_key, api_key_path = resolve_api_key(args.api_key, args.out)
+            api_key, api_key_path, key_source = resolve_api_key(args.api_key, args.out)
         except RuntimeError as e:
             print(f"[ANU QRNG] {e}", file=sys.stderr)
             sys.exit(1)
-        key_src = "CLI" if args.api_key else ("env" if os.environ.get("ANU_QRNG_API_KEY") else "file")
-        if api_key_path:
-            key_src = api_key_path.name
         try:
-            preflight_check(api_key, key_src)
+            preflight_check(api_key, key_source)
             print("[ANU QRNG] Preflight-only: OK. Key verified. Proceed with collection.")
             sys.exit(0)
         except RuntimeError as e:
@@ -298,15 +301,13 @@ def main() -> None:
             print("[ANU QRNG] PILOT MODE — 10k bits (2 requests, ~$0.01)")
 
     try:
-        api_key, api_key_path = resolve_api_key(args.api_key, args.out)
+        api_key, api_key_path, key_source = resolve_api_key(args.api_key, args.out)
     except RuntimeError as e:
         print(f"[ANU QRNG] ERROR: {e}", file=sys.stderr)
         sys.exit(1)
 
-    key_source = "CLI" if args.api_key else ("env" if os.environ.get("ANU_QRNG_API_KEY") else "file")
     if api_key_path is not None:
         print(f"[ANU QRNG] Loaded API key from {api_key_path.name}")
-        key_source = api_key_path.name
 
     if (args.preflight or args.no_fallback) and not args.dry_run:
         try:

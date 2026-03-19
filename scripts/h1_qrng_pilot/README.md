@@ -7,7 +7,7 @@ Implements a **preregistered-shaped** pipeline for [docs/H1_QRNG_10E9_BOUND_SETT
 - **Burn-in** (excluded) + **train / holdout** split on the primary stream (index-based, deterministic).
 - **`urandom`**: OS CSPRNG (pipeline harness; not a physics claim).
 - **`placebo`**: **NumPy `Generator` (PCG64)** with a **fixed integer `--seed`** — same HDF5 chunking, datasets, and metadata shape as `urandom` / `anu`; use for **known-null** calibration.
-- **`anu`**: optional live stream from ANU Quantum Numbers (**requires** `ANU_API_KEY`). Rate limits apply; plan before scaling toward \(10^9\).
+- **`anu`**: optional live stream from ANU Quantum Numbers. Put keys in repo-root **`.env.anu`** using **`ANU_API_KEY_PAID`** / **`ANU_API_KEY_FREE`** and optionally set **`ANU_API_KEY_MODE=paid|free`**. A one-off **`ANU_API_KEY`** export still works. Rate limits apply; plan before scaling toward \(10^9\).
 
 Shared statistics live in `stats_core.py` (used by `analyze.py` and `placebo_batch.py`).
 
@@ -28,8 +28,8 @@ python scripts/h1_qrng_pilot/collect.py --mode urandom --target-bits 1000000 --o
 # Known-null stream (reproducible; methodology calibration)
 python scripts/h1_qrng_pilot/collect.py --mode placebo --seed 20260319 --target-bits 100000 --out artifacts/h1_pilot/placebo42.h5
 
-# ANU (export ANU_API_KEY first)
-python scripts/h1_qrng_pilot/collect.py --mode anu --target-bits 50000 --out artifacts/h1_pilot/anu_shake.h5
+# ANU (fill repo-root .env.anu first, then optionally choose a tier)
+python scripts/h1_qrng_pilot/collect.py --mode anu --anu-key-tier paid --target-bits 50000 --out artifacts/h1_pilot/anu_shake.h5
 ```
 
 `--mode placebo` **requires** `--seed`.

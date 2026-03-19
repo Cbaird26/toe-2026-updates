@@ -5,7 +5,7 @@ H1 pilot — append raw uint32 stream to HDF5 with SHA-256 audit trail.
 Modes:
   urandom  OS cryptographic random (pipeline / harness; not a physics claim)
   placebo  NumPy PCG64 (numpy.random.Generator) — known null for pipeline calibration
-  anu      ANU Quantum Numbers JSON API (requires ANU_API_KEY env var)
+  anu      ANU Quantum Numbers JSON API (supports .env.anu / .env key lookup)
 
 Extraction rule id: lsb_v1 — bit order is little-endian within each uint32:
   global bit index t = 32*i + k uses X_t = (raw_u32[i] >> k) & 1, k = 0..31.
@@ -25,7 +25,14 @@ import time
 import urllib.parse
 import urllib.request
 from datetime import datetime, timezone
+from pathlib import Path
 from typing import Literal
+
+SCRIPTS_DIR = Path(__file__).resolve().parents[1]
+if str(SCRIPTS_DIR) not in sys.path:
+    sys.path.insert(0, str(SCRIPTS_DIR))
+
+from anu_env import resolve_anu_api_key
 
 SCHEMA_VERSION = "h1_qrng_pilot/1"
 
@@ -137,6 +144,7 @@ def write_collection(
     placebo_seed: int | None = None,
     anu_batch: int = 1024,
     sleep_anu: float = 0.05,
+    anu_key_tier: str = "auto",
 ) -> dict[str, float | int | str]:
     """
     Write raw_u32 + chunk_timestamp_ns + metadata to an open HDF5 file (same layout for all modes).
@@ -147,8 +155,6 @@ def write_collection(
         raise ValueError("target_bits must be >= 1")
     if not (0.0 <= holdout_fraction < 1.0):
         raise ValueError("holdout_fraction must be in [0, 1)")
-    if mode == "anu" and not os.environ.get("ANU_API_KEY"):
-        raise ValueError("ANU mode requires ANU_API_KEY in the environment")
     if mode == "placebo" and placebo_seed is None:
         raise ValueError("placebo mode requires placebo_seed")
 
@@ -209,7 +215,12 @@ def write_collection(
             take = min(chunk_u32, n_u32_needed - written_u32)
             append_block(placebo_uint32_chunk(take, rng))
     else:
-        api_key = os.environ["ANU_API_KEY"]
+        api_key, _api_key_source = resolve_anu_api_key(preferred_tier=anu_key_tier)
+        if not api_key:
+            raise ValueError(
+                "ANU mode requires a key in ANU_API_KEY, ANU_QRNG_API_KEY, "
+                "ANU_API_KEY_PAID, or ANU_API_KEY_FREE"
+            )
         batch = max(1, min(1024, anu_batch))
         while written_u32 < n_u32_needed:
             need = n_u32_needed - written_u32
@@ -255,6 +266,12 @@ def main() -> None:
     )
     p.add_argument("--anu-batch", type=int, default=1024, help="ANU uint16 count per HTTP call (max 1024)")
     p.add_argument("--sleep-anu", type=float, default=0.05, help="Seconds between ANU calls (be polite)")
+    p.add_argument(
+        "--anu-key-tier",
+        choices=("auto", "paid", "free"),
+        default="auto",
+        help="Which ANU key to prefer from .env.anu/.env when multiple are present",
+    )
     args = p.parse_args()
 
     if args.mode == "placebo" and args.seed is None:
@@ -272,6 +289,7 @@ def main() -> None:
             placebo_seed=args.seed,
             anu_batch=args.anu_batch,
             sleep_anu=args.sleep_anu,
+            anu_key_tier=args.anu_key_tier,
         )
 
     print(f"Wrote {args.out}")
