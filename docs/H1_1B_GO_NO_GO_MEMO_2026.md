@@ -2,7 +2,8 @@
 
 **Christopher Michael Baird, ZoraASI (conceptual co-authorship)**  
 **March 2026**  
-**Companion:** [H1_QRNG_10E9_BOUND_SETTING_PREREGISTRATION_2026.md](H1_QRNG_10E9_BOUND_SETTING_PREREGISTRATION_2026.md) (bound-setting framing; H1 secondary to H2)
+**Companion:** [H1_QRNG_10E9_BOUND_SETTING_PREREGISTRATION_2026.md](H1_QRNG_10E9_BOUND_SETTING_PREREGISTRATION_2026.md) (bound-setting framing; H1 secondary to H2)  
+**Strategic ordering:** [H2_vs_H1_DECISION_MEMO_2026.md](H2_vs_H1_DECISION_MEMO_2026.md)
 
 ---
 

@@ -23,6 +23,8 @@ This document preregisters a **prospective, fixed-\(N\)** pilot study collecting
 
 **Interpretation rule:** No H1 result, standing alone, overrides a pre-registered H2 exclusion or non-null protocol outcome. Positive H1 findings require **independent replication** and must **survive the adversarial battery** before any theory-level language.
 
+**Related strategy memos:** [H2_vs_H1_DECISION_MEMO_2026.md](H2_vs_H1_DECISION_MEMO_2026.md) (ordering, statistical expectations, freeze rule) · [H1_PIPELINE_CALIBRATION_SNAPSHOT_2026_03.md](H1_PIPELINE_CALIBRATION_SNAPSHOT_2026_03.md) (March 2026 placebo + harness + ANU table, repo-local)
+
 ---
 
 ## 2. Theory link (citation only; not the confirmatory claim)
