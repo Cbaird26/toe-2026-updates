@@ -3,7 +3,8 @@
 H1 pilot — append raw uint32 stream to HDF5 with SHA-256 audit trail.
 
 Modes:
-  urandom  OS cryptographic random (pipeline / placebo harness; not a physics claim)
+  urandom  OS cryptographic random (pipeline / harness; not a physics claim)
+  placebo  NumPy PCG64 (numpy.random.Generator) — known null for pipeline calibration
   anu      ANU Quantum Numbers JSON API (requires ANU_API_KEY env var)
 
 Extraction rule id: lsb_v1 — bit order is little-endian within each uint32:
@@ -24,6 +25,7 @@ import time
 import urllib.parse
 import urllib.request
 from datetime import datetime, timezone
+from typing import Literal
 
 SCHEMA_VERSION = "h1_qrng_pilot/1"
 
@@ -78,11 +80,17 @@ def uint16_to_uint32_lsb_blocks(u16: np.ndarray) -> np.ndarray:
     return (b << 16) | a
 
 
-def urandom_uint32_chunk(n: int, rng: struct.Struct | None = None) -> np.ndarray:
+def urandom_uint32_chunk(n: int) -> np.ndarray:
     """n uint32s from OS CSPRNG."""
     nbytes = n * 4
     blob = os.urandom(nbytes)
     return np.frombuffer(blob, dtype=np.uint32, count=n)
+
+
+def placebo_uint32_chunk(n: int, rng: np.random.Generator) -> np.ndarray:
+    """n uint32s from fixed-seed NumPy Generator (PCG64 by default)."""
+    # high is exclusive; use Python int 2**32 (np.uint32(2**32) wraps — do not use)
+    return rng.integers(0, 2**32, size=n, dtype=np.uint32)
 
 
 def open_h5_out(path: str) -> h5py.File:
@@ -99,6 +107,7 @@ def write_metadata(
     burnin_bits: int,
     holdout_fraction: float,
     extraction_rule_id: str,
+    placebo_seed: int | None = None,
 ) -> None:
     meta = f.create_group("metadata")
     meta.attrs["schema_version"] = SCHEMA_VERSION
@@ -111,11 +120,123 @@ def write_metadata(
     meta.attrs["started_utc"] = _now_utc_iso()
     meta.attrs["hostname"] = socket.gethostname()
     meta.attrs["python_version"] = sys.version.split()[0]
+    if mode == "placebo" and placebo_seed is not None:
+        meta.attrs["placebo_seed"] = int(placebo_seed)
+        meta.attrs["placebo_rng"] = "numpy.random.Generator (default PCG64)"
+
+
+def write_collection(
+    f: h5py.File,
+    *,
+    mode: Literal["urandom", "anu", "placebo"],
+    target_bits: int,
+    chunk_u32: int,
+    burnin_bits: int,
+    holdout_fraction: float,
+    extraction_rule_id: str,
+    placebo_seed: int | None = None,
+    anu_batch: int = 1024,
+    sleep_anu: float = 0.05,
+) -> dict[str, float | int | str]:
+    """
+    Write raw_u32 + chunk_timestamp_ns + metadata to an open HDF5 file (same layout for all modes).
+
+    Returns summary dict with raw_u32_count, stream_sha256_hex, elapsed_wall_s.
+    """
+    if target_bits < 1:
+        raise ValueError("target_bits must be >= 1")
+    if not (0.0 <= holdout_fraction < 1.0):
+        raise ValueError("holdout_fraction must be in [0, 1)")
+    if mode == "anu" and not os.environ.get("ANU_API_KEY"):
+        raise ValueError("ANU mode requires ANU_API_KEY in the environment")
+    if mode == "placebo" and placebo_seed is None:
+        raise ValueError("placebo mode requires placebo_seed")
+
+    bits_per_u32 = 32
+    n_u32_needed = (target_bits + bits_per_u32 - 1) // bits_per_u32
+
+    h = hashlib.sha256()
+    written_u32 = 0
+    t0 = time.time_ns()
+
+    write_metadata(
+        f,
+        mode=mode,
+        target_bits=target_bits,
+        chunk_u32=chunk_u32,
+        burnin_bits=burnin_bits,
+        holdout_fraction=holdout_fraction,
+        extraction_rule_id=extraction_rule_id,
+        placebo_seed=placebo_seed,
+    )
+    dset = f.create_dataset(
+        "raw_u32",
+        shape=(0,),
+        maxshape=(None,),
+        dtype="u4",
+        chunks=(chunk_u32,),
+        compression="gzip",
+        compression_opts=1,
+    )
+    ts = f.create_dataset(
+        "chunk_timestamp_ns",
+        shape=(0,),
+        maxshape=(None,),
+        dtype="i8",
+        chunks=(min(1024, max(1, n_u32_needed // chunk_u32)),),
+    )
+
+    def append_block(block: np.ndarray) -> None:
+        nonlocal written_u32
+        if block.size == 0:
+            return
+        n = dset.shape[0]
+        dset.resize((n + block.size,))
+        dset[n : n + block.size] = block
+        h.update(block.astype("<u4").tobytes())
+        written_u32 += int(block.size)
+        m = ts.shape[0]
+        ts.resize((m + 1,))
+        ts[m] = time.time_ns()
+
+    if mode == "urandom":
+        while written_u32 < n_u32_needed:
+            take = min(chunk_u32, n_u32_needed - written_u32)
+            append_block(urandom_uint32_chunk(take))
+    elif mode == "placebo":
+        rng = np.random.default_rng(int(placebo_seed))
+        while written_u32 < n_u32_needed:
+            take = min(chunk_u32, n_u32_needed - written_u32)
+            append_block(placebo_uint32_chunk(take, rng))
+    else:
+        api_key = os.environ["ANU_API_KEY"]
+        batch = max(1, min(1024, anu_batch))
+        while written_u32 < n_u32_needed:
+            need = n_u32_needed - written_u32
+            u16 = fetch_anu_uint16(batch, api_key)
+            blk = uint16_to_uint32_lsb_blocks(u16)
+            if blk.size > need:
+                blk = blk[:need]
+            append_block(blk)
+            time.sleep(sleep_anu)
+
+    meta = f["metadata"]
+    meta.attrs["finished_utc"] = _now_utc_iso()
+    elapsed = (time.time_ns() - t0) * 1e-9
+    meta.attrs["elapsed_wall_s"] = elapsed
+    meta.attrs["raw_u32_count"] = written_u32
+    meta.attrs["stream_sha256_hex"] = h.hexdigest()
+
+    return {
+        "raw_u32_count": written_u32,
+        "stream_sha256_hex": h.hexdigest(),
+        "elapsed_wall_s": elapsed,
+    }
 
 
 def main() -> None:
     p = argparse.ArgumentParser(description="H1 QRNG pilot — HDF5 collector with SHA-256 audit")
-    p.add_argument("--mode", choices=("urandom", "anu"), required=True)
+    p.add_argument("--mode", choices=("urandom", "anu", "placebo"), required=True)
     p.add_argument("--out", required=True, help="Output .h5 path")
     p.add_argument("--target-bits", type=int, default=1_000_000)
     p.add_argument("--chunk-u32", type=int, default=65_536, help="HDF5 chunk size (uint32 rows)")
@@ -126,27 +247,21 @@ def main() -> None:
         default="lsb_v1",
         help="Must match analyze.py (default: LSB of each uint32)",
     )
+    p.add_argument(
+        "--seed",
+        type=int,
+        default=None,
+        help="Required for --mode placebo (int seed for numpy.random.Generator)",
+    )
     p.add_argument("--anu-batch", type=int, default=1024, help="ANU uint16 count per HTTP call (max 1024)")
     p.add_argument("--sleep-anu", type=float, default=0.05, help="Seconds between ANU calls (be polite)")
     args = p.parse_args()
 
-    if args.target_bits < 1:
-        raise SystemExit("--target-bits must be >= 1")
-    if not (0.0 <= args.holdout_fraction < 1.0):
-        raise SystemExit("--holdout-fraction must be in [0, 1)")
-    if args.mode == "anu":
-        if not os.environ.get("ANU_API_KEY"):
-            raise SystemExit("ANU mode requires ANU_API_KEY in the environment")
-
-    bits_per_u32 = 32
-    n_u32_needed = (args.target_bits + bits_per_u32 - 1) // bits_per_u32
-
-    h = hashlib.sha256()
-    written_u32 = 0
-    t0 = time.time_ns()
+    if args.mode == "placebo" and args.seed is None:
+        raise SystemExit("--mode placebo requires --seed (fixed integer for reproducible null stream)")
 
     with open_h5_out(args.out) as f:
-        write_metadata(
+        summary = write_collection(
             f,
             mode=args.mode,
             target_bits=args.target_bits,
@@ -154,63 +269,14 @@ def main() -> None:
             burnin_bits=args.burnin_bits,
             holdout_fraction=args.holdout_fraction,
             extraction_rule_id=args.extraction_rule_id,
-        )
-        dset = f.create_dataset(
-            "raw_u32",
-            shape=(0,),
-            maxshape=(None,),
-            dtype="u4",
-            chunks=(args.chunk_u32,),
-            compression="gzip",
-            compression_opts=1,
-        )
-        ts = f.create_dataset(
-            "chunk_timestamp_ns",
-            shape=(0,),
-            maxshape=(None,),
-            dtype="i8",
-            chunks=(min(1024, max(1, n_u32_needed // args.chunk_u32)),),
+            placebo_seed=args.seed,
+            anu_batch=args.anu_batch,
+            sleep_anu=args.sleep_anu,
         )
 
-        def append_block(block: np.ndarray) -> None:
-            nonlocal written_u32
-            if block.size == 0:
-                return
-            n = dset.shape[0]
-            dset.resize((n + block.size,))
-            dset[n : n + block.size] = block
-            h.update(block.astype("<u4").tobytes())
-            written_u32 += int(block.size)
-            m = ts.shape[0]
-            ts.resize((m + 1,))
-            ts[m] = time.time_ns()
-
-        if args.mode == "urandom":
-            while written_u32 < n_u32_needed:
-                take = min(args.chunk_u32, n_u32_needed - written_u32)
-                append_block(urandom_uint32_chunk(take))
-        else:
-            api_key = os.environ["ANU_API_KEY"]
-            batch = max(1, min(1024, args.anu_batch))
-            while written_u32 < n_u32_needed:
-                need = n_u32_needed - written_u32
-                u16 = fetch_anu_uint16(batch, api_key)
-                blk = uint16_to_uint32_lsb_blocks(u16)
-                if blk.size > need:
-                    blk = blk[:need]
-                append_block(blk)
-                time.sleep(args.sleep_anu)
-
-        meta = f["metadata"]
-        meta.attrs["finished_utc"] = _now_utc_iso()
-        meta.attrs["elapsed_wall_s"] = (time.time_ns() - t0) * 1e-9
-        meta.attrs["raw_u32_count"] = written_u32
-        meta.attrs["stream_sha256_hex"] = h.hexdigest()
-
-    # Trim derived bit count: we may have oversampled uint32 ceiling
     print(f"Wrote {args.out}")
-    print(f"  raw_u32 rows: {written_u32}")
-    print(f"  stream_sha256: {h.hexdigest()}")
+    print(f"  raw_u32 rows: {summary['raw_u32_count']}")
+    print(f"  stream_sha256: {summary['stream_sha256_hex']}")
 
 
 if __name__ == "__main__":

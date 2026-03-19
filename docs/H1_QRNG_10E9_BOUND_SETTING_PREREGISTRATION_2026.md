@@ -106,7 +106,7 @@ A **positive** claim requires **all** applicable items below to pass pre-specifi
 
 1. **Blinding / delayed decoding:** Analysis scripts frozen before **holdout** labels are merged; or cryptographic commitment to analysis code hash. `[TBD — exact procedure]`  
 2. **Label shuffling / permutation null:** Distribution of test statistics under permutations reported; observed statistic compared.  
-3. **Synthetic null streams:** PRNG-derived placebo streams through identical pipeline; false-positive rate check.  
+3. **Synthetic null streams:** PRNG-derived placebo streams through identical pipeline; false-positive rate check. **Reference implementation:** `scripts/h1_qrng_pilot/placebo_batch.py` (fixed-seed `placebo` mode + batch CSV/JSON summary).  
 4. **Independent rerun:** Second collection window or duplicate device (if available) with **pre-specified** agreement metric. `[TBD]`  
 5. **Decoupled windows (“chaos” controls):** Windows where **no** experimental manipulation or campaign context applies; must not show spurious coherence specific to “active” windows only. `[TBD definitions]`  
 6. **Multiple-testing guard:** If secondary endpoints are analyzed, report **all** endpoints or use a **pre-specified** multiplicity adjustment. `[TBD list of secondary endpoints, if any]`
@@ -176,7 +176,7 @@ Any H1 outcome **must** be reported alongside a clear statement that **H2** test
 
 ## 12. Reproducibility and release
 
-- **Code:** `scripts/mqgt_sim/` (illustrative simulations); **`scripts/h1_qrng_pilot/`** (HDF5 collector + primary analysis CLI — see `scripts/h1_qrng_pilot/README.md`)  
+- **Code:** `scripts/mqgt_sim/` (illustrative simulations); **`scripts/h1_qrng_pilot/`** (HDF5 collector, `stats_core`, `analyze.py`, **`placebo_batch.py`** — see `scripts/h1_qrng_pilot/README.md`)  
 - **Data schema (reference implementation):** HDF5 groups `metadata` (attrs: `stream_sha256_hex`, `extraction_rule_id`, …), datasets `raw_u32`, `chunk_timestamp_ns`; environmental logs: `[TBD external CSV/JSON alongside file]`  
 - **Versioning:** Git commit hash frozen at analysis freeze: `[TBD at freeze]`  
 - **License / access:** `[TBD]`
