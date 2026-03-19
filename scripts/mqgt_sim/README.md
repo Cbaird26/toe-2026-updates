@@ -71,3 +71,5 @@ python scripts/mqgt_sim/mqgt_gksl_ethics_field_sim.py
 
 - Phase II submission: `papers_sources/MQGT-SCF_Phase_II_Submission_2026.tex`
 - Status / archives: `docs/PHASE_II_SUBMISSION_STATUS_2026.md`
+- **H1 QRNG pilot (collector + analysis):** `scripts/h1_qrng_pilot/README.md`
+- **H2 bench runbook:** `docs/H2_PILOT_RUNBOOK.md`

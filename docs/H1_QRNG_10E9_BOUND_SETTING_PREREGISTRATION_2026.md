@@ -176,8 +176,8 @@ Any H1 outcome **must** be reported alongside a clear statement that **H2** test
 
 ## 12. Reproducibility and release
 
-- **Code:** Repository paths under `scripts/mqgt_sim/` (illustrative / analysis helpers); **production** collector scripts: `[TBD path or repo]`  
-- **Data schema:** Raw events + derived bits + timestamps + environmental logs; preferred container: `[TBD — e.g. HDF5 groups/datasets, Parquet]`  
+- **Code:** `scripts/mqgt_sim/` (illustrative simulations); **`scripts/h1_qrng_pilot/`** (HDF5 collector + primary analysis CLI — see `scripts/h1_qrng_pilot/README.md`)  
+- **Data schema (reference implementation):** HDF5 groups `metadata` (attrs: `stream_sha256_hex`, `extraction_rule_id`, …), datasets `raw_u32`, `chunk_timestamp_ns`; environmental logs: `[TBD external CSV/JSON alongside file]`  
 - **Versioning:** Git commit hash frozen at analysis freeze: `[TBD at freeze]`  
 - **License / access:** `[TBD]`
 

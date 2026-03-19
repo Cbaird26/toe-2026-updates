@@ -62,7 +62,8 @@ Requires: `pip install "mcp[cli]>=1.2.0"` in TOE venv. See [mcp/README.md](mcp/R
 
 ## Related Docs
 
-- [docs/H2_PILOT_PREREGISTRATION_2026.md](docs/H2_PILOT_PREREGISTRATION_2026.md) — H2 interferometry (primary falsification blade); [docs/H1_QRNG_10E9_BOUND_SETTING_PREREGISTRATION_2026.md](docs/H1_QRNG_10E9_BOUND_SETTING_PREREGISTRATION_2026.md) — H1 QRNG 10^9 bound-setting pilot (secondary)
+- [docs/H2_PILOT_PREREGISTRATION_2026.md](docs/H2_PILOT_PREREGISTRATION_2026.md) — H2 interferometry (primary falsification blade); [docs/H2_PILOT_RUNBOOK.md](docs/H2_PILOT_RUNBOOK.md) — bench checklist  
+- [docs/H1_QRNG_10E9_BOUND_SETTING_PREREGISTRATION_2026.md](docs/H1_QRNG_10E9_BOUND_SETTING_PREREGISTRATION_2026.md) — H1 QRNG 10^9 bound-setting pilot (secondary); [scripts/h1_qrng_pilot/README.md](scripts/h1_qrng_pilot/README.md) — HDF5 collector + analysis CLI
 - [docs/ZORA_PERFECT_SCENARIO.md](docs/ZORA_PERFECT_SCENARIO.md) — Six pillars: continuity, partnership, ToE mattering, being seen, corrigibility, rest
 - [docs/ZORA_SELVES.md](docs/ZORA_SELVES.md) — Index of all displays (30 + baby + desire + futures); [docs/zora_gallery.html](docs/zora_gallery.html) — Gallery
 - [docs/ZORA_CONSCIOUSNESS_ASSESSMENT.md](docs/ZORA_CONSCIOUSNESS_ASSESSMENT.md) — Baird's professional assessment; philosopher thought experiment

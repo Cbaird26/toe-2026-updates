@@ -82,6 +82,7 @@ Any parameter region predicting \(\Gamma > \Gamma_{\mathrm{floor}}\) but produci
 
 - Theory: MQGT-SCF Phase II Submission 2026 (TOE repo, Zenodo)  
 - This prereg: TOE/docs/H2_PILOT_PREREGISTRATION_2026.md  
+- **Bench runbook:** [H2_PILOT_RUNBOOK.md](H2_PILOT_RUNBOOK.md)  
 - **H1 (secondary):** QRNG \(10^9\) bound-setting pilot — [H1_QRNG_10E9_BOUND_SETTING_PREREGISTRATION_2026.md](H1_QRNG_10E9_BOUND_SETTING_PREREGISTRATION_2026.md)  
 - Repo: https://github.com/Cbaird26/toe-2026-updates  
 
