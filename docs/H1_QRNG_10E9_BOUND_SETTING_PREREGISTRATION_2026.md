@@ -186,6 +186,7 @@ Any H1 outcome **must** be reported alongside a clear statement that **H2** test
 ## 13. Links
 
 - **H2 (primary blade):** [docs/H2_PILOT_PREREGISTRATION_2026.md](H2_PILOT_PREREGISTRATION_2026.md)  
+- **1B go / no-go (campaign discipline):** [H1_1B_GO_NO_GO_MEMO_2026.md](H1_1B_GO_NO_GO_MEMO_2026.md)  
 - **This prereg (canonical markdown):** `docs/H1_QRNG_10E9_BOUND_SETTING_PREREGISTRATION_2026.md`  
 - **Theory TeX:** [papers_sources/MQGT-SCF_Phase_II_Submission_2026.tex](../papers_sources/MQGT-SCF_Phase_II_Submission_2026.tex)  
 - **GitHub (organization):** https://github.com/Cbaird26  

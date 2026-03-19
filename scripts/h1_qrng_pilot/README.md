@@ -80,4 +80,5 @@ Lattice / FastAPI demos remain **illustration only** per H1 §5.4. Claims about 
 
 ## See also
 
-- H2 (primary blade): [docs/H2_PILOT_PREREGISTRATION_2026.md](../../docs/H2_PILOT_PREREGISTRATION_2026.md) · [docs/H2_PILOT_RUNBOOK.md](../../docs/H2_PILOT_RUNBOOK.md)
+- H2 (primary blade): [docs/H2_PILOT_PREREGISTRATION_2026.md](../../docs/H2_PILOT_PREREGISTRATION_2026.md) · [docs/H2_PILOT_RUNBOOK.md](../../docs/H2_PILOT_RUNBOOK.md)  
+- Campaign discipline: [docs/H1_1B_GO_NO_GO_MEMO_2026.md](../../docs/H1_1B_GO_NO_GO_MEMO_2026.md)
