@@ -69,6 +69,10 @@ def main() -> None:
         args.e_high, args.steps, args.t_max, gamma_0=args.gamma_0, kappa=args.kappa
     )
 
+    import matplotlib
+
+    if args.no_show or args.save:
+        matplotlib.use("Agg")
     import matplotlib.pyplot as plt
 
     fig, ax = plt.subplots(1, 1, figsize=(8, 4))
