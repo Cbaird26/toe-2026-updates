@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>N-Body Gravity Simulator</title>
+  <style>
+    :root {
+      --bg: #0b0c10;
+      --panel: rgba(31, 40, 51, 0.85);
+      --text: #c5c6c7;
+      --accent: #66fcf1;
+      --accent-dim: #45a29e;
+      --shadow: rgba(0, 0, 0, 0.5);
+    }
+
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background: var(--bg);
+      color: var(--text);
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    canvas {
+      display: block;
+    }
+
+    #ui-panel {
+      position: absolute;
+      left: 50%;
+      bottom: 20px;
+      transform: translateX(-50%);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 18px;
+      align-items: center;
+      justify-content: center;
+      width: min(92vw, 960px);
+      padding: 14px 20px;
+      border: 1px solid var(--accent-dim);
+      border-radius: 10px;
+      background: var(--panel);
+      box-shadow: 0 4px 15px var(--shadow);
+      backdrop-filter: blur(4px);
+    }
+
+    .control-group {
+      display: flex;
+      flex-direction: column;
+      min-width: 140px;
+      font-size: 12px;
+    }
+
+    .control-group label {
+      margin-bottom: 5px;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    input[type="range"] {
+      cursor: pointer;
+      accent-color: var(--accent);
+    }
+
+    button {
+      padding: 8px 15px;
+      border: 1px solid var(--accent);
+      border-radius: 4px;
+      background: transparent;
+      color: var(--accent);
+      font-weight: 700;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    button:hover {
+      background: var(--accent);
+      color: var(--bg);
+    }
+
+    #title-badge {
+      position: absolute;
+      top: 18px;
+      left: 18px;
+      padding: 10px 14px;
+      border: 1px solid rgba(102, 252, 241, 0.35);
+      border-radius: 8px;
+      background: rgba(11, 12, 16, 0.72);
+      backdrop-filter: blur(4px);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.35);
+    }
+
+    #title-badge strong {
+      display: block;
+      color: var(--accent);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-size: 12px;
+      margin-bottom: 4px;
+    }
+
+    #title-badge span {
+      font-size: 13px;
+      color: var(--text);
+    }
+
+    @media (max-width: 720px) {
+      #ui-panel {
+        gap: 12px;
+        padding: 12px 14px;
+      }
+
+      .control-group {
+        min-width: 120px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <canvas id="simCanvas"></canvas>
+
+  <div id="title-badge">
+    <strong>N-Body Gravity Simulator</strong>
+    <span>Standalone browser demo hosted from the repo `docs/` tree.</span>
+  </div>
+
+  <div id="ui-panel">
+    <div class="control-group">
+      <label for="g-slider">Gravity (G): <span id="g-val">0.5</span></label>
+      <input type="range" id="g-slider" min="0.1" max="2.0" step="0.1" value="0.5">
+    </div>
+    <div class="control-group">
+      <label for="trail-slider">Trail Fade: <span id="trail-val">0.10</span></label>
+      <input type="range" id="trail-slider" min="0.01" max="0.5" step="0.01" value="0.10">
+    </div>
+    <button id="add-btn">Add Planet</button>
+    <button id="reset-btn">Reset System</button>
+  </div>
+
+  <script>
+    const canvas = document.getElementById("simCanvas");
+    const ctx = canvas.getContext("2d");
+
+    const gSlider = document.getElementById("g-slider");
+    const gVal = document.getElementById("g-val");
+    const trailSlider = document.getElementById("trail-slider");
+    const trailVal = document.getElementById("trail-val");
+    const addBtn = document.getElementById("add-btn");
+    const resetBtn = document.getElementById("reset-btn");
+
+    let width;
+    let height;
+    let bodies = [];
+    let G = parseFloat(gSlider.value);
+    let trailFade = parseFloat(trailSlider.value);
+    const SOFTENING = 2.0;
+    const colors = ["#66FCF1", "#45A29E", "#8e44ad", "#2980b9", "#1abc9c"];
+
+    function resizeCanvas() {
+      width = canvas.width = window.innerWidth;
+      height = canvas.height = window.innerHeight;
+    }
+
+    window.addEventListener("resize", resizeCanvas);
+    resizeCanvas();
+
+    class Body {
+      constructor(x, y, vx, vy, mass, radius, color, isStatic = false) {
+        this.x = x;
+        this.y = y;
+        this.vx = vx;
+        this.vy = vy;
+        this.mass = mass;
+        this.radius = radius;
+        this.color = color;
+        this.isStatic = isStatic;
+        this.dead = false;
+      }
+
+      draw() {
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+        ctx.fillStyle = this.color;
+        ctx.fill();
+      }
+    }
+
+    function initSystem() {
+      bodies = [];
+
+      const starMass = 5000;
+      bodies.push(new Body(width / 2, height / 2, 0, 0, starMass, 15, "#FDB813", false));
+
+      const numAsteroids = 150;
+      for (let i = 0; i < numAsteroids; i += 1) {
+        const angle = Math.random() * Math.PI * 2;
+        const dist = 50 + Math.random() * (Math.min(width, height) / 2 - 50);
+        const x = width / 2 + Math.cos(angle) * dist;
+        const y = height / 2 + Math.sin(angle) * dist;
+
+        const orbitalVelocity = Math.sqrt((G * starMass) / dist);
+        const vx = -Math.sin(angle) * orbitalVelocity;
+        const vy = Math.cos(angle) * orbitalVelocity;
+
+        const mass = 1 + Math.random() * 4;
+        const radius = Math.sqrt(mass);
+        const color = colors[Math.floor(Math.random() * colors.length)];
+
+        bodies.push(new Body(x, y, vx, vy, mass, radius, color));
+      }
+    }
+
+    function updatePhysics() {
+      for (let i = 0; i < bodies.length; i += 1) {
+        if (bodies[i].dead) {
+          continue;
+        }
+
+        let ax = 0;
+        let ay = 0;
+
+        for (let j = 0; j < bodies.length; j += 1) {
+          if (i === j || bodies[j].dead) {
+            continue;
+          }
+
+          const dx = bodies[j].x - bodies[i].x;
+          const dy = bodies[j].y - bodies[i].y;
+          const distSq = dx * dx + dy * dy;
+          const dist = Math.sqrt(distSq);
+
+          if (dist < bodies[i].radius + bodies[j].radius) {
+            const totalMass = bodies[i].mass + bodies[j].mass;
+            bodies[i].vx = (bodies[i].vx * bodies[i].mass + bodies[j].vx * bodies[j].mass) / totalMass;
+            bodies[i].vy = (bodies[i].vy * bodies[i].mass + bodies[j].vy * bodies[j].mass) / totalMass;
+            bodies[i].x = (bodies[i].x * bodies[i].mass + bodies[j].x * bodies[j].mass) / totalMass;
+            bodies[i].y = (bodies[i].y * bodies[i].mass + bodies[j].y * bodies[j].mass) / totalMass;
+            bodies[i].mass = totalMass;
+            bodies[i].radius = Math.sqrt(totalMass);
+            bodies[j].dead = true;
+            continue;
+          }
+
+          const force = (G * bodies[j].mass) / (distSq + SOFTENING);
+          ax += force * (dx / dist);
+          ay += force * (dy / dist);
+        }
+
+        if (!bodies[i].isStatic) {
+          bodies[i].vx += ax;
+          bodies[i].vy += ay;
+        }
+      }
+
+      bodies = bodies.filter((body) => {
+        if (body.dead) {
+          return false;
+        }
+        body.x += body.vx;
+        body.y += body.vy;
+        return true;
+      });
+    }
+
+    function loop() {
+      ctx.fillStyle = `rgba(11, 12, 16, ${trailFade})`;
+      ctx.fillRect(0, 0, width, height);
+
+      updatePhysics();
+      bodies.forEach((body) => body.draw());
+
+      requestAnimationFrame(loop);
+    }
+
+    gSlider.addEventListener("input", (event) => {
+      G = parseFloat(event.target.value);
+      gVal.textContent = G.toFixed(1);
+    });
+
+    trailSlider.addEventListener("input", (event) => {
+      trailFade = parseFloat(event.target.value);
+      trailVal.textContent = trailFade.toFixed(2);
+    });
+
+    resetBtn.addEventListener("click", () => {
+      ctx.fillStyle = "#0B0C10";
+      ctx.fillRect(0, 0, width, height);
+      initSystem();
+    });
+
+    addBtn.addEventListener("click", () => {
+      const angle = Math.random() * Math.PI * 2;
+      const dist = 100 + Math.random() * 200;
+      const x = width / 2 + Math.cos(angle) * dist;
+      const y = height / 2 + Math.sin(angle) * dist;
+      const v = 2 + Math.random() * 3;
+      const vx = -Math.sin(angle) * v + (Math.random() - 0.5);
+      const vy = Math.cos(angle) * v + (Math.random() - 0.5);
+      const mass = 50 + Math.random() * 50;
+
+      bodies.push(new Body(x, y, vx, vy, mass, Math.sqrt(mass), "#e74c3c"));
+    });
+
+    ctx.fillStyle = "#0B0C10";
+    ctx.fillRect(0, 0, width, height);
+    initSystem();
+    loop();
+  </script>
+</body>
+</html>
