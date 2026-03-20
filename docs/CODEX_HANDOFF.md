@@ -1,6 +1,7 @@
 # Codex / executor handoff (TOE)
 
 **Repo:** [cbaird26/toe-2026-updates](https://github.com/Cbaird26/toe-2026-updates) — work from the repository root (`TOE/`).
+**Verified baseline:** `ec33369`
 
 ## Do this first (no network required)
 
