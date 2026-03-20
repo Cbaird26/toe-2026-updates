@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MQGT-SCF: Topological Phase Space</title>
+    <style>
+        body, html {
+            margin: 0; padding: 0; width: 100%; height: 100%;
+            background-color: #0B0C10; color: #C5C6C7;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow: hidden;
+        }
+        #sim-container { width: 100%; height: 100%; position: relative; }
+        canvas { display: block; width: 100%; height: 100%; }
+
+        #ui-panel {
+            position: absolute; bottom: 30px; left: 50%; transform: translateX(-50%);
+            background: rgba(11, 12, 16, 0.85); padding: 20px 30px;
+            border-radius: 8px; border: 1px solid #45A29E;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.8); backdrop-filter: blur(4px);
+            display: flex; gap: 25px; align-items: center; z-index: 10;
+        }
+        .control-group { display: flex; flex-direction: column; font-size: 12px; width: 180px;}
+        label { margin-bottom: 5px; color: #66FCF1; text-transform: uppercase; letter-spacing: 1px; font-weight: bold; }
+        input[type=range] { accent-color: #66FCF1; cursor: pointer; }
+
+        button.action-btn {
+            background: transparent; color: #66FCF1; border: 1px solid #66FCF1;
+            padding: 10px 20px; border-radius: 4px; cursor: pointer; font-weight: bold; text-transform: uppercase;
+            transition: 0.3s;
+        }
+        button.action-btn:hover { background: #66FCF1; color: #0B0C10; }
+
+        #attractor-status {
+            position: absolute; top: 30px; left: 30px;
+            font-size: 14px; font-weight: bold; color: #8e44ad;
+            border: 1px solid #8e44ad; padding: 10px; border-radius: 4px;
+            background: rgba(11, 12, 16, 0.7);
+        }
+    </style>
+</head>
+<body>
+
+    <div id="sim-container">
+        <canvas id="phaseCanvas"></canvas>
+        <div id="attractor-status">Phi_c/E BASIN: <span id="basin-depth">SHALLOW</span></div>
+        <div id="ui-panel">
+            <div class="control-group">
+                <label>Thermal Entropy (kT): <span id="kt-val">1.0</span></label>
+                <input type="range" id="kt-slider" min="0.1" max="3.0" step="0.1" value="1.0">
+            </div>
+            <div class="control-group">
+                <label>Teleological Bias (xi): <span id="xi-val">2.5</span></label>
+                <input type="range" id="xi-slider" min="0.0" max="10.0" step="0.1" value="2.5">
+            </div>
+            <div class="control-group">
+                <label>Ethical Field Radius (E): <span id="e-val">1.5</span></label>
+                <input type="range" id="e-slider" min="0.1" max="5.0" step="0.1" value="1.5">
+            </div>
+            <button id="reset-btn" class="action-btn">Scatter States</button>
+        </div>
+    </div>
+
+    <script>
+        const canvas = document.getElementById('phaseCanvas');
+        const ctx = canvas.getContext('2d');
+
+        let width, height, cx, cy;
+        function resize() {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+            cx = width / 2;
+            cy = height / 2 - 50;
+        }
+        window.addEventListener('resize', resize);
+        resize();
+
+        let kT = 1.0;
+        let xi = 2.5;
+        let eRadius = 1.5;
+
+        document.getElementById('kt-slider').addEventListener('input', (e) => {
+            kT = parseFloat(e.target.value);
+            document.getElementById('kt-val').textContent = kT.toFixed(1);
+        });
+        document.getElementById('xi-slider').addEventListener('input', (e) => {
+            xi = parseFloat(e.target.value);
+            document.getElementById('xi-val').textContent = xi.toFixed(1);
+            updateStatus();
+        });
+        document.getElementById('e-slider').addEventListener('input', (e) => {
+            eRadius = parseFloat(e.target.value);
+            document.getElementById('e-val').textContent = eRadius.toFixed(1);
+            updateStatus();
+        });
+        document.getElementById('reset-btn').addEventListener('click', initParticles);
+
+        function updateStatus() {
+            const status = document.getElementById('basin-depth');
+            const force = xi * eRadius;
+            if (force < 2) status.textContent = "COLLAPSED (DECOHERENT)";
+            else if (force < 8) status.textContent = "STABLE";
+            else status.textContent = "DEEP ATTRACTOR (ANOMALOUS COHERENCE)";
+        }
+
+        let particles = [];
+        const numParticles = 400;
+
+        function initParticles() {
+            particles = [];
+            for (let i = 0; i < numParticles; i++) {
+                particles.push({
+                    x: Math.random() * width,
+                    y: Math.random() * height
+                });
+            }
+        }
+
+        function getVector(x, y) {
+            let vx = 0;
+            let vy = kT * 2.0;
+
+            const dx = cx - x;
+            const dy = cy - y;
+            const distSq = dx * dx + dy * dy;
+
+            const scaledE = eRadius * 100;
+            const pull = xi * 5 * Math.exp(-distSq / (2 * scaledE * scaledE));
+
+            const dist = Math.sqrt(distSq);
+            if (dist > 0) {
+                vx += (dx / dist) * pull;
+                vy += (dy / dist) * pull;
+            }
+
+            return { vx, vy };
+        }
+
+        function drawVectorField() {
+            ctx.strokeStyle = 'rgba(31, 40, 51, 0.4)';
+            ctx.lineWidth = 1;
+            const spacing = 50;
+
+            for (let x = 0; x < width; x += spacing) {
+                for (let y = 0; y < height; y += spacing) {
+                    const vec = getVector(x, y);
+                    const angle = Math.atan2(vec.vy, vec.vx);
+                    const mag = Math.min(Math.sqrt(vec.vx * vec.vx + vec.vy * vec.vy) * 3, 20);
+
+                    ctx.beginPath();
+                    ctx.moveTo(x, y);
+                    ctx.lineTo(x + Math.cos(angle) * mag, y + Math.sin(angle) * mag);
+                    ctx.stroke();
+
+                    ctx.beginPath();
+                    ctx.moveTo(x + Math.cos(angle) * mag, y + Math.sin(angle) * mag);
+                    ctx.lineTo(x + Math.cos(angle - 0.5) * mag * 0.6, y + Math.sin(angle - 0.5) * mag * 0.6);
+                    ctx.moveTo(x + Math.cos(angle) * mag, y + Math.sin(angle) * mag);
+                    ctx.lineTo(x + Math.cos(angle + 0.5) * mag * 0.6, y + Math.sin(angle + 0.5) * mag * 0.6);
+                    ctx.stroke();
+                }
+            }
+        }
+
+        function drawAttractor() {
+            const scaledE = eRadius * 100;
+            const intensity = Math.min(xi / 10, 1.0);
+
+            const gradient = ctx.createRadialGradient(cx, cy, 0, cx, cy, scaledE * 2);
+            gradient.addColorStop(0, `rgba(142, 68, 173, ${intensity * 0.8})`);
+            gradient.addColorStop(0.5, `rgba(142, 68, 173, ${intensity * 0.2})`);
+            gradient.addColorStop(1, 'rgba(11, 12, 16, 0)');
+
+            ctx.fillStyle = gradient;
+            ctx.beginPath();
+            ctx.arc(cx, cy, scaledE * 2, 0, Math.PI * 2);
+            ctx.fill();
+        }
+
+        function updateAndDrawParticles() {
+            ctx.fillStyle = '#66FCF1';
+
+            for (let p of particles) {
+                const vec = getVector(p.x, p.y);
+
+                const noiseX = (Math.random() - 0.5) * kT * 5;
+                const noiseY = (Math.random() - 0.5) * kT * 5;
+
+                p.x += vec.vx + noiseX;
+                p.y += vec.vy + noiseY;
+
+                if (p.x < 0) p.x = width;
+                if (p.x > width) p.x = 0;
+                if (p.y > height) {
+                    p.y = 0;
+                    p.x = Math.random() * width;
+                }
+                if (p.y < 0) p.y = height;
+
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, 2, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+
+        function loop() {
+            ctx.fillStyle = 'rgba(11, 12, 16, 0.2)';
+            ctx.fillRect(0, 0, width, height);
+
+            drawVectorField();
+            drawAttractor();
+            updateAndDrawParticles();
+
+            requestAnimationFrame(loop);
+        }
+
+        initParticles();
+        updateStatus();
+        loop();
+    </script>
+</body>
+</html>
