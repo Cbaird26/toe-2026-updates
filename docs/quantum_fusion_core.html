@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quantum Fusion Core: MQGT-SCF Tunneling</title>
+    <style>
+        body, html {
+            margin: 0; padding: 0; width: 100%; height: 100%;
+            background-color: #0B0C10; color: #C5C6C7;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow: hidden; display: flex; flex-direction: column;
+        }
+        #sim-container { flex: 1; position: relative; }
+        canvas { display: block; width: 100%; height: 100%; }
+        
+        #ui-panel {
+            position: absolute; bottom: 30px; left: 50%; transform: translateX(-50%);
+            background: rgba(11, 12, 16, 0.9); padding: 20px 30px;
+            border-radius: 8px; border: 1px solid #45A29E;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.8); backdrop-filter: blur(5px);
+            display: flex; gap: 25px; align-items: center; z-index: 10;
+        }
+        .control-group { display: flex; flex-direction: column; font-size: 12px; width: 180px;}
+        label { margin-bottom: 5px; color: #66FCF1; text-transform: uppercase; letter-spacing: 1px; font-weight: bold; }
+        input[type=range] { accent-color: #66FCF1; cursor: pointer; }
+        
+        #readout-panel {
+            position: absolute; top: 30px; right: 30px;
+            background: rgba(11, 12, 16, 0.85); padding: 20px;
+            border-radius: 8px; border: 1px solid #1F2833;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5); font-family: monospace; font-size: 14px;
+            width: 320px; z-index: 10;
+        }
+        .data-row { display: flex; justify-content: space-between; margin-bottom: 10px; border-bottom: 1px solid #1F2833; padding-bottom: 5px; }
+        .data-value { color: #66FCF1; font-weight: bold; }
+        .data-value.purple { color: #8e44ad; }
+        
+        #status-alert {
+            margin-top: 15px; font-size: 16px; font-weight: bold; text-align: center;
+            padding: 10px; border-radius: 4px; border: 1px solid #1F2833; transition: 0.3s;
+        }
+        .status-dead { color: #C5C6C7; }
+        .status-fusion { 
+            color: #8e44ad; text-shadow: 0 0 10px #8e44ad; 
+            border-color: #8e44ad !important; animation: pulse 1.5s infinite; 
+        }
+        @keyframes pulse { 0% { box-shadow: 0 0 5px rgba(142,68,173,0.2); } 50% { box-shadow: 0 0 20px rgba(142,68,173,0.6); } 100% { box-shadow: 0 0 5px rgba(142,68,173,0.2); } }
+        
+        .mqgt-label { color: #8e44ad !important; }
+    </style>
+</head>
+<body>
+
+    <div id="sim-container">
+        <canvas id="tunnelCanvas"></canvas>
+        
+        <div id="readout-panel">
+            <div class="data-row"><span>Standard Gamow (P_base):</span> <span id="out-pbase" class="data-value">0.00e+0</span></div>
+            <div class="data-row"><span>MQGT Multiplier:</span> <span id="out-mult" class="data-value purple">1.00x</span></div>
+            <div class="data-row" style="border-bottom:none;"><span>Effective Trans (P_mod):</span> <span id="out-pmod" class="data-value purple">0.00e+0</span></div>
+            <div id="status-alert" class="status-dead">DEAD STATE: NO FUSION</div>
+        </div>
+
+        <div id="ui-panel">
+            <div class="control-group">
+                <label>Deuteron Energy (Ek): <span id="ek-val">40</span></label>
+                <input type="range" id="ek-slider" min="10" max="90" step="1" value="40">
+            </div>
+            <div class="control-group">
+                <label>Coulomb Barrier Width: <span id="w-val">50</span></label>
+                <input type="range" id="w-slider" min="20" max="100" step="1" value="50">
+            </div>
+            <div class="control-group">
+                <label class="mqgt-label">Teleological Bias (ξ): <span id="xi-val">0.0</span></label>
+                <input type="range" id="xi-slider" min="0.0" max="10.0" step="0.1" value="0.0">
+            </div>
+            <div class="control-group">
+                <label class="mqgt-label">Attractor Field (E): <span id="e-val">0.0</span></label>
+                <input type="range" id="e-slider" min="0.0" max="5.0" step="0.1" value="0.0">
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const canvas = document.getElementById('tunnelCanvas');
+        const ctx = canvas.getContext('2d');
+
+        let width, height;
+        function resize() {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resize);
+        resize();
+
+        const V0 = 100;
+        let Ek = 40;
+        let barrierWidth = 50;
+        let xi = 0.0;
+        let eField = 0.0;
+        let time = 0;
+
+        document.getElementById('ek-slider').addEventListener('input', (e) => { Ek = parseFloat(e.target.value); document.getElementById('ek-val').textContent = Ek; });
+        document.getElementById('w-slider').addEventListener('input', (e) => { barrierWidth = parseFloat(e.target.value); document.getElementById('w-val').textContent = barrierWidth; });
+        document.getElementById('xi-slider').addEventListener('input', (e) => { xi = parseFloat(e.target.value); document.getElementById('xi-val').textContent = xi.toFixed(1); });
+        document.getElementById('e-slider').addEventListener('input', (e) => { eField = parseFloat(e.target.value); document.getElementById('e-val').textContent = eField.toFixed(1); });
+
+        function formatScientific(num) {
+            if (num === 0) return "0.00e+0";
+            if (num >= 0.01) return num.toFixed(4);
+            return num.toExponential(2);
+        }
+
+        function draw() {
+            ctx.fillStyle = '#0B0C10';
+            ctx.fillRect(0, 0, width, height);
+
+            const baselineY = height * 0.7;
+            const barrierStartX = width / 2 - barrierWidth * 3;
+            const barrierEndX = barrierStartX + barrierWidth * 6;
+            const barrierHeightPx = V0 * 3;
+
+            const kappa = Math.sqrt(V0 - Ek) * 0.15; 
+            const pBase = Math.exp(-2 * kappa * (barrierWidth * 0.2)); 
+            
+            const mqgtMultiplier = Math.exp(xi * eField * 0.8);
+            let pMod = pBase * mqgtMultiplier;
+            const visualTransmissionAmt = Math.min(1.0, pMod);
+
+            document.getElementById('out-pbase').textContent = formatScientific(pBase);
+            document.getElementById('out-mult').textContent = mqgtMultiplier.toFixed(2) + "x";
+            document.getElementById('out-pmod').textContent = formatScientific(pMod);
+
+            const statusAlert = document.getElementById('status-alert');
+            if (pMod > 0.05) {
+                statusAlert.textContent = "ANOMALOUS FUSION IGNITION";
+                statusAlert.className = "status-fusion";
+            } else {
+                statusAlert.textContent = "DEAD STATE: NO FUSION";
+                statusAlert.className = "status-dead";
+            }
+
+            ctx.lineWidth = 2;
+            ctx.strokeStyle = '#45A29E';
+            ctx.beginPath();
+            ctx.moveTo(0, baselineY);
+            ctx.lineTo(barrierStartX, baselineY);
+            ctx.lineTo(barrierStartX, baselineY - barrierHeightPx);
+            ctx.lineTo(barrierEndX, baselineY - barrierHeightPx);
+            ctx.lineTo(barrierEndX, baselineY);
+            ctx.lineTo(width, baselineY);
+            ctx.stroke();
+
+            if (xi * eField > 0) {
+                const glowIntensity = Math.min(1.0, (xi * eField) / 15.0);
+                const gradient = ctx.createLinearGradient(barrierStartX, 0, barrierEndX, 0);
+                gradient.addColorStop(0, `rgba(142, 68, 173, 0)`);
+                gradient.addColorStop(0.5, `rgba(142, 68, 173, ${glowIntensity * 0.6})`);
+                gradient.addColorStop(1, `rgba(142, 68, 173, 0)`);
+                ctx.fillStyle = gradient;
+                ctx.fillRect(barrierStartX, baselineY - barrierHeightPx, barrierEndX - barrierStartX, barrierHeightPx);
+                
+                ctx.strokeStyle = `rgba(142, 68, 173, ${glowIntensity})`;
+                ctx.setLineDash([5, 10]);
+                ctx.beginPath();
+                ctx.moveTo(barrierStartX + (barrierEndX - barrierStartX) / 2, baselineY);
+                ctx.lineTo(barrierStartX + (barrierEndX - barrierStartX) / 2, baselineY - barrierHeightPx);
+                ctx.stroke();
+                ctx.setLineDash([]);
+            }
+
+            ctx.beginPath();
+            const incidentAmplitude = Ek * 1.5;
+            const waveNumber = Math.sqrt(Ek) * 0.02;
+            const angularFreq = Ek * 0.05;
+
+            for (let x = 0; x < width; x += 2) {
+                let yOffset = 0;
+                let phase = waveNumber * x - time * angularFreq;
+
+                if (x <= barrierStartX) {
+                    yOffset = incidentAmplitude * Math.sin(phase);
+                } 
+                else if (x > barrierStartX && x <= barrierEndX) {
+                    const distIntoBarrier = x - barrierStartX;
+                    const visualKappa = -Math.log(visualTransmissionAmt) / (barrierEndX - barrierStartX);
+                    const localAmplitude = incidentAmplitude * Math.exp(-visualKappa * distIntoBarrier);
+                    yOffset = localAmplitude * Math.sin(phase);
+                } 
+                else {
+                    yOffset = incidentAmplitude * visualTransmissionAmt * Math.sin(phase);
+                }
+
+                const y = baselineY - (Ek * 1.5) - yOffset - 10;
+                if (x === 0) ctx.moveTo(x, y);
+                else ctx.lineTo(x, y);
+            }
+
+            if (pMod > pBase * 2 && pMod > 0.01) {
+                ctx.strokeStyle = '#8e44ad';
+                ctx.shadowBlur = 10;
+                ctx.shadowColor = '#8e44ad';
+            } else {
+                ctx.strokeStyle = '#66FCF1';
+                ctx.shadowBlur = 5;
+                ctx.shadowColor = '#66FCF1';
+            }
+            ctx.lineWidth = 3;
+            ctx.stroke();
+            ctx.shadowBlur = 0;
+
+            ctx.strokeStyle = 'rgba(102, 252, 241, 0.4)';
+            ctx.setLineDash([10, 5]);
+            ctx.beginPath();
+            ctx.moveTo(0, baselineY - (Ek * 3));
+            ctx.lineTo(barrierStartX, baselineY - (Ek * 3));
+            ctx.stroke();
+            ctx.setLineDash([]);
+
+            time += 0.5;
+            requestAnimationFrame(draw);
+        }
+
+        draw();
+    </script>
+</body>
+</html>
