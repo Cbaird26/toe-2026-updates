@@ -1,0 +1,869 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Attention Routing Simulator</title>
+  <style>
+    :root {
+      --bg: #071018;
+      --panel: rgba(10, 19, 28, 0.88);
+      --panel-border: rgba(119, 214, 255, 0.26);
+      --text: #d9f0ff;
+      --muted: #90aec2;
+      --accent: #70f0ff;
+      --accent-2: #ffcb6b;
+      --danger: #ff8c7a;
+      --grid: rgba(112, 240, 255, 0.08);
+      --shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html, body {
+      margin: 0;
+      min-height: 100%;
+      background:
+        radial-gradient(circle at top, rgba(39, 106, 130, 0.28), transparent 45%),
+        radial-gradient(circle at right, rgba(255, 203, 107, 0.12), transparent 35%),
+        linear-gradient(180deg, #09111a 0%, #060d14 100%);
+      color: var(--text);
+      font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+    }
+
+    body {
+      padding: 24px;
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: minmax(340px, 420px) minmax(540px, 1fr);
+      gap: 20px;
+      align-items: stretch;
+    }
+
+    .panel {
+      background: var(--panel);
+      border: 1px solid var(--panel-border);
+      border-radius: 18px;
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(10px);
+    }
+
+    .sidebar {
+      padding: 22px;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    .eyebrow {
+      color: var(--accent);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      margin: 0 0 8px;
+    }
+
+    h1 {
+      margin: 0 0 10px;
+      font-size: clamp(30px, 4vw, 42px);
+      line-height: 1.02;
+      letter-spacing: -0.03em;
+    }
+
+    p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    textarea {
+      width: 100%;
+      min-height: 128px;
+      resize: vertical;
+      border-radius: 14px;
+      border: 1px solid rgba(112, 240, 255, 0.18);
+      background: rgba(4, 11, 17, 0.9);
+      color: var(--text);
+      padding: 14px 16px;
+      font: inherit;
+      line-height: 1.45;
+      outline: none;
+    }
+
+    textarea:focus {
+      border-color: rgba(112, 240, 255, 0.46);
+      box-shadow: 0 0 0 3px rgba(112, 240, 255, 0.1);
+    }
+
+    .button-row, .preset-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    button {
+      appearance: none;
+      border: 1px solid rgba(112, 240, 255, 0.26);
+      background: rgba(8, 18, 27, 0.96);
+      color: var(--text);
+      padding: 10px 14px;
+      border-radius: 999px;
+      font: inherit;
+      font-weight: 700;
+      cursor: pointer;
+      transition: transform 0.15s ease, border-color 0.15s ease, background 0.15s ease;
+    }
+
+    button:hover {
+      transform: translateY(-1px);
+      border-color: rgba(112, 240, 255, 0.52);
+      background: rgba(18, 35, 49, 0.98);
+    }
+
+    button.primary {
+      background: linear-gradient(135deg, rgba(112, 240, 255, 0.24), rgba(255, 203, 107, 0.16));
+      border-color: rgba(255, 203, 107, 0.35);
+    }
+
+    .controls {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .control {
+      background: rgba(4, 11, 17, 0.72);
+      border: 1px solid rgba(112, 240, 255, 0.12);
+      border-radius: 14px;
+      padding: 12px;
+    }
+
+    .control label {
+      display: flex;
+      justify-content: space-between;
+      gap: 8px;
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--accent);
+      margin-bottom: 10px;
+    }
+
+    input[type="range"] {
+      width: 100%;
+      accent-color: var(--accent);
+    }
+
+    .toggle {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .toggle input {
+      accent-color: var(--accent-2);
+    }
+
+    .metric-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .metric {
+      background: rgba(4, 11, 17, 0.72);
+      border: 1px solid rgba(112, 240, 255, 0.12);
+      border-radius: 14px;
+      padding: 12px;
+    }
+
+    .metric span {
+      display: block;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 8px;
+    }
+
+    .metric strong {
+      font-size: 16px;
+      letter-spacing: -0.02em;
+    }
+
+    .legend-list, .route-list {
+      display: grid;
+      gap: 10px;
+    }
+
+    .legend-item, .route-item {
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 999px;
+      box-shadow: 0 0 14px currentColor;
+    }
+
+    .bar {
+      height: 8px;
+      border-radius: 999px;
+      overflow: hidden;
+      background: rgba(112, 240, 255, 0.08);
+    }
+
+    .bar > span {
+      display: block;
+      height: 100%;
+      border-radius: inherit;
+    }
+
+    .viz {
+      position: relative;
+      overflow: hidden;
+      min-height: 720px;
+    }
+
+    .viz-header {
+      position: absolute;
+      top: 18px;
+      left: 18px;
+      z-index: 2;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .chip {
+      border-radius: 999px;
+      padding: 8px 12px;
+      background: rgba(5, 12, 18, 0.78);
+      border: 1px solid rgba(112, 240, 255, 0.12);
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    canvas {
+      display: block;
+      width: 100%;
+      height: 100%;
+      min-height: 720px;
+    }
+
+    .footer-note {
+      font-size: 12px;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    code {
+      color: var(--accent-2);
+    }
+
+    @media (max-width: 1100px) {
+      .layout {
+        grid-template-columns: 1fr;
+      }
+
+      .viz {
+        min-height: 620px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="layout">
+    <aside class="panel sidebar">
+      <div>
+        <div class="eyebrow">Simulation 7</div>
+        <h1>Attention Routing Demo</h1>
+        <p>
+          A close recreation of the “query routes through pillars” simulator you described.
+          This is illustrative only: it is not Gemini’s or any commercial model’s real internal activation trace.
+        </p>
+      </div>
+
+      <div>
+        <div class="eyebrow">Query</div>
+        <textarea id="query-input">Calculate H2 visibility bounds and compare them against the H1 QRNG calibration lane while tracking the role of GKSL collapse, teleological bias, and reviewer-safe interpretation.</textarea>
+      </div>
+
+      <div class="preset-row">
+        <button class="preset-btn" data-query="Compute the H2 exclusion landscape and extract the exact gamma floor for the falsification packet.">H2 Bounds</button>
+        <button class="preset-btn" data-query="Map GKSL collapse, ethical weighting, and teleological bias into a sober execution-layer explainer.">GKSL Routing</button>
+        <button class="preset-btn" data-query="Compare placebo, urandom, and ANU runs under the frozen H1 estimator and decide whether the anomaly lane is justified.">H1 Calibration</button>
+      </div>
+
+      <div class="button-row">
+        <button id="route-btn" class="primary">Route Query</button>
+        <button id="shuffle-btn">Randomize Pulse</button>
+      </div>
+
+      <div class="controls">
+        <div class="control">
+          <label for="speed-range"><span>Animation Speed</span><span id="speed-value">1.0x</span></label>
+          <input id="speed-range" type="range" min="0.5" max="2.5" step="0.1" value="1.0">
+        </div>
+        <div class="control">
+          <label for="focus-range"><span>Focus Sharpness</span><span id="focus-value">0.72</span></label>
+          <input id="focus-range" type="range" min="0.3" max="1.0" step="0.01" value="0.72">
+        </div>
+      </div>
+
+      <label class="toggle">
+        <input id="pulse-toggle" type="checkbox" checked>
+        Animate routing pulses
+      </label>
+
+      <div class="metric-grid">
+        <div class="metric">
+          <span>Top Pillar</span>
+          <strong id="top-pillar">H2 / Visibility</strong>
+        </div>
+        <div class="metric">
+          <span>Confidence</span>
+          <strong id="top-score">0.00</strong>
+        </div>
+        <div class="metric">
+          <span>Tokens Routed</span>
+          <strong id="token-count">0</strong>
+        </div>
+        <div class="metric">
+          <span>Head Activity</span>
+          <strong id="head-state">Balanced</strong>
+        </div>
+      </div>
+
+      <div>
+        <div class="eyebrow">Pillar Weights</div>
+        <div id="route-list" class="route-list"></div>
+      </div>
+
+      <div>
+        <div class="eyebrow">Legend</div>
+        <div id="legend-list" class="legend-list"></div>
+      </div>
+
+      <p class="footer-note">
+        Hosted under <code>/docs</code> like the other simulator pages. Flat URL:
+        <code>/attention.html</code>. Folder URL:
+        <code>/attention-routing-simulator/</code>.
+      </p>
+    </aside>
+
+    <section class="panel viz">
+      <div class="viz-header">
+        <div class="chip">Left: query tokens</div>
+        <div class="chip">Middle: attention heads</div>
+        <div class="chip">Right: MQGT-SCF conceptual pillars</div>
+      </div>
+      <canvas id="viz-canvas"></canvas>
+    </section>
+  </div>
+
+  <script>
+    const canvas = document.getElementById("viz-canvas");
+    const ctx = canvas.getContext("2d");
+
+    const queryInput = document.getElementById("query-input");
+    const routeBtn = document.getElementById("route-btn");
+    const shuffleBtn = document.getElementById("shuffle-btn");
+    const pulseToggle = document.getElementById("pulse-toggle");
+    const speedRange = document.getElementById("speed-range");
+    const focusRange = document.getElementById("focus-range");
+    const speedValue = document.getElementById("speed-value");
+    const focusValue = document.getElementById("focus-value");
+    const topPillar = document.getElementById("top-pillar");
+    const topScore = document.getElementById("top-score");
+    const tokenCount = document.getElementById("token-count");
+    const headState = document.getElementById("head-state");
+    const routeList = document.getElementById("route-list");
+    const legendList = document.getElementById("legend-list");
+
+    const pillars = [
+      {
+        id: "h2",
+        label: "H2 / Visibility",
+        color: "#70f0ff",
+        keywords: ["h2", "visibility", "interferometric", "gamma", "bound", "bounds", "exclusion", "floor"]
+      },
+      {
+        id: "h1",
+        label: "H1 / QRNG",
+        color: "#ffcb6b",
+        keywords: ["h1", "qrng", "anu", "urandom", "placebo", "holdout", "z", "calibration", "null"]
+      },
+      {
+        id: "gksl",
+        label: "GKSL / Collapse",
+        color: "#b794ff",
+        keywords: ["gksl", "collapse", "lindblad", "density", "matrix", "born", "measurement"]
+      },
+      {
+        id: "teleology",
+        label: "Teleology / Ethics",
+        color: "#ff8c7a",
+        keywords: ["teleology", "ethical", "bias", "ethics", "value", "phi_c", "e-field"]
+      },
+      {
+        id: "execution",
+        label: "Execution Layer",
+        color: "#6ee7b7",
+        keywords: ["code", "script", "implementation", "demo", "repo", "pages", "host", "simulation"]
+      },
+      {
+        id: "review",
+        label: "Reviewer Safety",
+        color: "#7fb0ff",
+        keywords: ["reviewer", "safe", "sober", "preregistered", "falsification", "controls", "negative"]
+      }
+    ];
+
+    const heads = [
+      { label: "Physics Head", color: "#70f0ff", affinity: { h2: 1.0, gksl: 0.72, teleology: 0.44, h1: 0.28, execution: 0.16, review: 0.24 } },
+      { label: "Stats Head", color: "#ffcb6b", affinity: { h1: 1.0, review: 0.76, h2: 0.48, gksl: 0.18, teleology: 0.12, execution: 0.22 } },
+      { label: "Code Head", color: "#6ee7b7", affinity: { execution: 1.0, h1: 0.42, h2: 0.38, review: 0.24, gksl: 0.16, teleology: 0.12 } },
+      { label: "Interpretation Head", color: "#ff8c7a", affinity: { review: 1.0, teleology: 0.72, h2: 0.34, h1: 0.34, execution: 0.18, gksl: 0.22 } }
+    ];
+
+    const stopwords = new Set([
+      "the", "a", "an", "and", "or", "to", "of", "for", "while", "them", "they",
+      "into", "with", "against", "under", "their", "this", "that", "it", "is",
+      "be", "as", "by", "from", "we", "our", "your"
+    ]);
+
+    let state = {
+      tokens: [],
+      tokenNodes: [],
+      headNodes: [],
+      pillarNodes: [],
+      tokenHeadEdges: [],
+      headPillarEdges: [],
+      pulses: [],
+      lastTimestamp: 0,
+      seedOffset: 0
+    };
+
+    function resizeCanvas() {
+      const rect = canvas.parentElement.getBoundingClientRect();
+      canvas.width = Math.floor(rect.width * window.devicePixelRatio);
+      canvas.height = Math.floor(rect.height * window.devicePixelRatio);
+      canvas.style.width = rect.width + "px";
+      canvas.style.height = rect.height + "px";
+      ctx.setTransform(window.devicePixelRatio, 0, 0, window.devicePixelRatio, 0, 0);
+      routeQuery(false);
+    }
+
+    function hashString(text) {
+      let hash = 2166136261;
+      for (let i = 0; i < text.length; i += 1) {
+        hash ^= text.charCodeAt(i);
+        hash = Math.imul(hash, 16777619);
+      }
+      return Math.abs(hash >>> 0);
+    }
+
+    function tokenize(text) {
+      return text
+        .toLowerCase()
+        .replace(/[^a-z0-9_ -]/g, " ")
+        .split(/\s+/)
+        .filter(Boolean)
+        .filter(token => !stopwords.has(token))
+        .slice(0, 12);
+    }
+
+    function clamp(value, min, max) {
+      return Math.min(max, Math.max(min, value));
+    }
+
+    function normalizeScores(scores) {
+      const total = Object.values(scores).reduce((sum, value) => sum + value, 0);
+      if (total <= 0) {
+        const fallback = 1 / pillars.length;
+        return Object.fromEntries(pillars.map(p => [p.id, fallback]));
+      }
+      return Object.fromEntries(Object.entries(scores).map(([key, value]) => [key, value / total]));
+    }
+
+    function buildScores(tokens) {
+      const scores = Object.fromEntries(pillars.map(p => [p.id, 0]));
+      const focus = parseFloat(focusRange.value);
+
+      for (const token of tokens) {
+        const tokenHash = hashString(token + ":" + state.seedOffset);
+        for (const pillar of pillars) {
+          let score = 0.02 + ((tokenHash % 17) / 500);
+          for (const keyword of pillar.keywords) {
+            if (token.includes(keyword) || keyword.includes(token)) {
+              score += 0.28;
+            }
+          }
+          score += focus * ((tokenHash >> 3) % (pillar.id.length + 5)) / 300;
+          scores[pillar.id] += score;
+        }
+      }
+
+      return normalizeScores(scores);
+    }
+
+    function buildLayout(tokens, pillarScores) {
+      const width = canvas.clientWidth;
+      const height = canvas.clientHeight;
+
+      const tokenNodes = tokens.map((token, index) => ({
+        label: token,
+        x: width * 0.14,
+        y: 120 + index * ((height - 180) / Math.max(tokens.length, 1)),
+        radius: 18
+      }));
+
+      const headNodes = heads.map((head, index) => ({
+        label: head.label,
+        color: head.color,
+        x: width * 0.48,
+        y: 150 + index * ((height - 240) / Math.max(heads.length - 1, 1)),
+        radius: 24
+      }));
+
+      const pillarNodes = pillars.map((pillar, index) => ({
+        label: pillar.label,
+        color: pillar.color,
+        weight: pillarScores[pillar.id],
+        x: width * 0.82,
+        y: 110 + index * ((height - 180) / Math.max(pillars.length - 1, 1)),
+        radius: 22 + pillarScores[pillar.id] * 26
+      }));
+
+      const tokenHeadEdges = [];
+      tokenNodes.forEach((tokenNode, tokenIndex) => {
+        const token = tokens[tokenIndex];
+        const base = hashString(token + ":heads:" + state.seedOffset);
+        heads.forEach((head, headIndex) => {
+          const w = 0.24 + (((base >> headIndex) & 15) / 40);
+          tokenHeadEdges.push({ from: tokenIndex, to: headIndex, weight: clamp(w, 0.12, 0.72) });
+        });
+      });
+
+      const headPillarEdges = [];
+      heads.forEach((head, headIndex) => {
+        pillars.forEach((pillar, pillarIndex) => {
+          const base = head.affinity[pillar.id] || 0.1;
+          const weight = clamp((base * 0.55) + (pillarScores[pillar.id] * 0.95), 0.08, 1.0);
+          headPillarEdges.push({ from: headIndex, to: pillarIndex, weight });
+        });
+      });
+
+      state.tokenNodes = tokenNodes;
+      state.headNodes = headNodes;
+      state.pillarNodes = pillarNodes;
+      state.tokenHeadEdges = tokenHeadEdges;
+      state.headPillarEdges = headPillarEdges;
+    }
+
+    function updateSidebar(pillarScores, tokens) {
+      const ranked = [...pillars]
+        .map(p => ({ ...p, score: pillarScores[p.id] }))
+        .sort((a, b) => b.score - a.score);
+
+      topPillar.textContent = ranked[0].label;
+      topScore.textContent = ranked[0].score.toFixed(2);
+      tokenCount.textContent = String(tokens.length);
+
+      const spread = ranked[0].score - ranked[1].score;
+      headState.textContent = spread > 0.16 ? "Focused" : spread > 0.08 ? "Weighted" : "Balanced";
+
+      routeList.innerHTML = "";
+      ranked.forEach(item => {
+        const row = document.createElement("div");
+        row.className = "route-item";
+        row.innerHTML = `
+          <span class="dot" style="color:${item.color};background:${item.color};"></span>
+          <div>
+            <div style="font-weight:700;">${item.label}</div>
+            <div class="bar"><span style="width:${(item.score * 100).toFixed(1)}%;background:${item.color};"></span></div>
+          </div>
+          <strong>${item.score.toFixed(2)}</strong>
+        `;
+        routeList.appendChild(row);
+      });
+
+      legendList.innerHTML = "";
+      pillars.forEach(item => {
+        const row = document.createElement("div");
+        row.className = "legend-item";
+        row.innerHTML = `
+          <span class="dot" style="color:${item.color};background:${item.color};"></span>
+          <div>${item.label}</div>
+          <span style="color:var(--muted);font-size:12px;">${item.keywords.slice(0, 3).join(" / ")}</span>
+        `;
+        legendList.appendChild(row);
+      });
+    }
+
+    function spawnPulses() {
+      const pulses = [];
+      if (!pulseToggle.checked) {
+        state.pulses = pulses;
+        return;
+      }
+
+      state.tokenHeadEdges.forEach(edge => {
+        if (edge.weight < 0.34) {
+          return;
+        }
+        pulses.push({
+          type: "token-head",
+          edge,
+          t: Math.random(),
+          speed: 0.18 + edge.weight * 0.16
+        });
+      });
+
+      state.headPillarEdges.forEach(edge => {
+        if (edge.weight < 0.28) {
+          return;
+        }
+        pulses.push({
+          type: "head-pillar",
+          edge,
+          t: Math.random(),
+          speed: 0.14 + edge.weight * 0.14
+        });
+      });
+
+      state.pulses = pulses;
+    }
+
+    function routeQuery(resetSeed = true) {
+      if (resetSeed) {
+        state.seedOffset += 1;
+      }
+
+      const tokens = tokenize(queryInput.value);
+      state.tokens = tokens;
+      const pillarScores = buildScores(tokens);
+      buildLayout(tokens, pillarScores);
+      updateSidebar(pillarScores, tokens);
+      spawnPulses();
+    }
+
+    function drawGrid(width, height) {
+      ctx.save();
+      ctx.strokeStyle = "rgba(112, 240, 255, 0.06)";
+      ctx.lineWidth = 1;
+      for (let x = 0; x < width; x += 42) {
+        ctx.beginPath();
+        ctx.moveTo(x, 0);
+        ctx.lineTo(x, height);
+        ctx.stroke();
+      }
+      for (let y = 0; y < height; y += 42) {
+        ctx.beginPath();
+        ctx.moveTo(0, y);
+        ctx.lineTo(width, y);
+        ctx.stroke();
+      }
+      ctx.restore();
+    }
+
+    function drawNode(node, color, glow = 0.18) {
+      const gradient = ctx.createRadialGradient(node.x, node.y, 0, node.x, node.y, node.radius * 1.8);
+      gradient.addColorStop(0, color + "ff");
+      gradient.addColorStop(1, color + "00");
+      ctx.save();
+      ctx.fillStyle = gradient;
+      ctx.beginPath();
+      ctx.arc(node.x, node.y, node.radius * 1.9, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.globalAlpha = 0.95;
+      ctx.fillStyle = color;
+      ctx.beginPath();
+      ctx.arc(node.x, node.y, node.radius, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.lineWidth = 1.2;
+      ctx.strokeStyle = `rgba(255,255,255,${glow})`;
+      ctx.stroke();
+      ctx.restore();
+
+      ctx.save();
+      ctx.fillStyle = "#eaf8ff";
+      ctx.font = "600 13px Segoe UI";
+      ctx.textAlign = "center";
+      ctx.fillText(node.label, node.x, node.y + node.radius + 20);
+      ctx.restore();
+    }
+
+    function drawEdge(from, to, color, weight) {
+      ctx.save();
+      ctx.beginPath();
+      ctx.moveTo(from.x, from.y);
+      const ctrlX = (from.x + to.x) / 2;
+      const ctrlY = Math.min(from.y, to.y) - 20 + (Math.abs(to.y - from.y) * 0.1);
+      ctx.quadraticCurveTo(ctrlX, ctrlY, to.x, to.y);
+      ctx.strokeStyle = `rgba(${hexToRgb(color)},${0.08 + weight * 0.34})`;
+      ctx.lineWidth = 1 + weight * 3.2;
+      ctx.stroke();
+      ctx.restore();
+    }
+
+    function hexToRgb(hex) {
+      const clean = hex.replace("#", "");
+      const bigint = parseInt(clean, 16);
+      const r = (bigint >> 16) & 255;
+      const g = (bigint >> 8) & 255;
+      const b = bigint & 255;
+      return `${r},${g},${b}`;
+    }
+
+    function pointOnCurve(from, to, t) {
+      const ctrlX = (from.x + to.x) / 2;
+      const ctrlY = Math.min(from.y, to.y) - 20 + (Math.abs(to.y - from.y) * 0.1);
+      const mt = 1 - t;
+      return {
+        x: mt * mt * from.x + 2 * mt * t * ctrlX + t * t * to.x,
+        y: mt * mt * from.y + 2 * mt * t * ctrlY + t * t * to.y
+      };
+    }
+
+    function drawPulse(pulse) {
+      const edge = pulse.edge;
+      const from = pulse.type === "token-head"
+        ? state.tokenNodes[edge.from]
+        : state.headNodes[edge.from];
+      const to = pulse.type === "token-head"
+        ? state.headNodes[edge.to]
+        : state.pillarNodes[edge.to];
+
+      if (!from || !to) {
+        return;
+      }
+
+      const point = pointOnCurve(from, to, pulse.t);
+      const color = pulse.type === "token-head"
+        ? state.headNodes[edge.to].color
+        : state.pillarNodes[edge.to].color;
+
+      ctx.save();
+      const gradient = ctx.createRadialGradient(point.x, point.y, 0, point.x, point.y, 13);
+      gradient.addColorStop(0, color + "ff");
+      gradient.addColorStop(1, color + "00");
+      ctx.fillStyle = gradient;
+      ctx.beginPath();
+      ctx.arc(point.x, point.y, 14, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.restore();
+    }
+
+    function drawScene(timestamp) {
+      const width = canvas.clientWidth;
+      const height = canvas.clientHeight;
+      const delta = Math.min((timestamp - (state.lastTimestamp || timestamp)) / 1000, 0.033);
+      state.lastTimestamp = timestamp;
+
+      ctx.clearRect(0, 0, width, height);
+      drawGrid(width, height);
+
+      ctx.save();
+      const radial = ctx.createRadialGradient(width * 0.72, height * 0.18, 0, width * 0.72, height * 0.18, width * 0.8);
+      radial.addColorStop(0, "rgba(255, 203, 107, 0.10)");
+      radial.addColorStop(1, "rgba(255, 203, 107, 0.00)");
+      ctx.fillStyle = radial;
+      ctx.fillRect(0, 0, width, height);
+      ctx.restore();
+
+      state.tokenHeadEdges.forEach(edge => {
+        const from = state.tokenNodes[edge.from];
+        const to = state.headNodes[edge.to];
+        drawEdge(from, to, to.color, edge.weight);
+      });
+
+      state.headPillarEdges.forEach(edge => {
+        const from = state.headNodes[edge.from];
+        const to = state.pillarNodes[edge.to];
+        drawEdge(from, to, to.color, edge.weight);
+      });
+
+      const speed = parseFloat(speedRange.value);
+      if (pulseToggle.checked) {
+        state.pulses.forEach(pulse => {
+          pulse.t += pulse.speed * speed * delta;
+          if (pulse.t > 1) {
+            pulse.t -= 1;
+          }
+          drawPulse(pulse);
+        });
+      }
+
+      state.tokenNodes.forEach(node => drawNode(node, "#17384a", 0.28));
+      state.headNodes.forEach(node => drawNode(node, node.color, 0.42));
+      state.pillarNodes.forEach(node => drawNode(node, node.color, 0.48));
+
+      ctx.save();
+      ctx.fillStyle = "rgba(217, 240, 255, 0.92)";
+      ctx.font = "700 14px Segoe UI";
+      ctx.fillText("Query Tokens", width * 0.07, 48);
+      ctx.fillText("Self-Attention Heads", width * 0.39, 48);
+      ctx.fillText("Conceptual Pillars", width * 0.73, 48);
+      ctx.restore();
+
+      requestAnimationFrame(drawScene);
+    }
+
+    document.querySelectorAll(".preset-btn").forEach(button => {
+      button.addEventListener("click", () => {
+        queryInput.value = button.dataset.query;
+        routeQuery();
+      });
+    });
+
+    routeBtn.addEventListener("click", () => routeQuery());
+    shuffleBtn.addEventListener("click", () => {
+      state.seedOffset += 97;
+      routeQuery(false);
+    });
+
+    speedRange.addEventListener("input", () => {
+      speedValue.textContent = `${parseFloat(speedRange.value).toFixed(1)}x`;
+    });
+
+    focusRange.addEventListener("input", () => {
+      focusValue.textContent = parseFloat(focusRange.value).toFixed(2);
+      routeQuery(false);
+    });
+
+    pulseToggle.addEventListener("change", () => {
+      spawnPulses();
+    });
+
+    queryInput.addEventListener("keydown", event => {
+      if ((event.metaKey || event.ctrlKey) && event.key === "Enter") {
+        routeQuery();
+      }
+    });
+
+    window.addEventListener("resize", resizeCanvas);
+
+    speedValue.textContent = `${parseFloat(speedRange.value).toFixed(1)}x`;
+    focusValue.textContent = parseFloat(focusRange.value).toFixed(2);
+    resizeCanvas();
+    routeQuery(false);
+    requestAnimationFrame(drawScene);
+  </script>
+</body>
+</html>
