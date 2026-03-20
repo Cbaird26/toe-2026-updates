@@ -17,6 +17,86 @@ python scripts/mqgt_sim/h2_visibility_stack.py --save-dir papers_sources/figures
 
 ---
 
+## `mqgt_phase4_lattice_demo.py`
+
+**What it is:** A repo-native exploratory 2D lattice toy using only `numpy` + `matplotlib`. It evolves toy `phi_c` and `E` scalar fields on a periodic grid with explicit Euler updates, quartic local restoring terms, clipping, and an exploratory alignment coupling.
+
+**What it is *not*:** Not the canonical H1/H2 evidence model, not a calibrated implementation of the hardened Phase II deformation law, and not a replacement for H2 interferometry as the primary falsification lane. The coupling term here is a visualization / research scaffold only.
+
+**Run**
+
+```bash
+python scripts/mqgt_sim/mqgt_phase4_lattice_demo.py
+python scripts/mqgt_sim/mqgt_phase4_lattice_demo.py --save-dir papers_sources/figures/phase4_lattice --no-show
+```
+
+**Outputs with `--save-dir`:**
+
+- `mqgt_phase4_lattice_demo.png` — final `phi_c` / `E` field views plus metric traces
+- `mqgt_phase4_lattice_demo_summary.json` — parameters, final metrics, and histories
+
+**Parameters:** `--grid-size`, `--steps`, `--dt`, `--seed`, `--xi`, `--kappa`, `--m-c`, `--m-e`, `--save-dir`, `--no-show`.
+
+---
+
+## `mqgt_phase4b_symmetry_breaking_demo.py` (Phase IV-B)
+
+**What it is:** A companion lattice toy that keeps Phase IV’s “pretty picture” role but addresses a known pedagogical artifact: Phase IV’s heuristic `coherence = exp(-mean|∇φ|)` **rewards a flat field**, so a relaxing uniform vacuum can look “highly coherent.” Phase IV-B uses **signed** `Φ_c` and `E`, a **double-well** local potential with explicit `λ_φ`, `λ_E`, **φ–E coupling** `-g φ E`, tilt `-ξ(φ + κ E)`, and **damped second-order** (symplectic Euler–style) dynamics on a periodic grid. Coherence is a **bounded** score in `[0,1]` that combines positive mean alignment with `Φ_c`, low variance, and low roughness—so **flat `φ≈0` does not score as maximal coherence**. Status strings (`FALSE_VACUUM_OR_QUIET`, `DOMAIN_COARSENING`, `PARTIAL_ALIGNMENT`, `ATTRACTOR_LOCKED`, etc.) are **toy phase labels** for exploration, not physical claims.
+
+**What it is *not*:** Same invariant as Phase IV: **not** H1/H2 evidence, not a calibrated Phase II deformation law, not a substitute for **H2 interferometry** as the primary falsification lane. The Zora / `mqgt_sim` stack is an **execution and exploration** layer; preregistered H2 remains the main scientific discriminator.
+
+**Run**
+
+```bash
+python scripts/mqgt_sim/mqgt_phase4b_symmetry_breaking_demo.py
+python scripts/mqgt_sim/mqgt_phase4b_symmetry_breaking_demo.py --save-dir papers_sources/figures/phase4b_lattice --no-show
+```
+
+**Outputs with `--save-dir`:**
+
+- `mqgt_phase4b_symmetry_breaking_demo.png` — final `Φ_c` / `E` snapshots plus mean traces and coherence / variance / roughness
+- `mqgt_phase4b_symmetry_breaking_demo_summary.json` — parameters, final metrics, histories
+
+**Parameters:** `--grid-size`, `--steps`, `--substeps` (integrator steps per recorded frame), `--dt`, `--seed`, `--xi`, `--kappa`, `--gamma`, `--g-couple`, `--lambda-phi`, `--lambda-e`, `--v-phi`, `--v-e`, `--no-default-injections`, `--inject-spec` (JSON list of Gaussian bumps keyed by frame index), `--save-dir`, `--no-show`.
+
+Built-in default Gaussian **injections** (unless `--no-default-injections`) keep the lattice from trivially washing out to a quiet false vacuum; override or extend with `--inject-spec` (list of objects: `step`, `field` (`phi` or `E`), `x_norm`, `y_norm`, `magnitude`, optional `sigma_norm`).
+
+---
+
+## `mqgt_phase4b_parameter_sweep.py`
+
+**What it is:** A repo-native parameter sweep for the existing Phase IV-B lattice model. It **reuses** `Phase4bLattice` from `mqgt_phase4b_symmetry_breaking_demo.py` exactly, runs multiple seeds over a grid of `xi`, `gamma`, and `g`, and saves a CSV plus heatmaps for **lock rate** and **mean final coherence**.
+
+**Sweep policy:** This script intentionally runs with **no default injections**. Unlike the demo, it does not seed Gaussian bumps, so the outputs reflect the intrinsic behavior of the shared Phase IV-B dynamics across parameter space rather than injected pattern selection.
+
+**What it is *not*:** Same invariant as the rest of the `mqgt_sim` stack: **not** H1/H2 evidence, not a calibrated Phase II deformation law, and not a substitute for **H2 interferometry** as the primary falsification lane.
+
+**Run**
+
+```bash
+python scripts/mqgt_sim/mqgt_phase4b_parameter_sweep.py
+python scripts/mqgt_sim/mqgt_phase4b_parameter_sweep.py \
+  --xis "0.000,0.010,0.020" \
+  --gammas "0.05,0.15" \
+  --g-couples "0.00,0.18" \
+  --seeds 3 \
+  --steps 120 \
+  --substeps 2 \
+  --grid-size 32 \
+  --outdir papers_sources/figures/phase4b_sweep
+```
+
+**Outputs with `--outdir`:**
+
+- `phase4b_parameter_sweep_results.csv` — one row per `(xi, gamma, g, seed)` point with final metrics/status
+- `summary.md` — compact sweep summary and per-`g` aggregate notes
+- `lock_rate_g_*.png` — fraction of seeds ending in `ATTRACTOR_LOCKED`
+- `mean_coherence_g_*.png` — mean final coherence at each `(xi, gamma)` point
+
+**Parameters:** `--xis`, `--gammas`, `--g-couples`, `--seeds`, `--steps`, `--substeps`, `--grid-size`, `--dt`, `--kappa`, `--lambda-phi`, `--lambda-e`, `--v-phi`, `--v-e`, `--outdir`.
+
+---
+
 ## `zora_fields.html` (visual)
 
 **What it is:** Standalone HTML5 canvas animation—no external libraries. Cyan waves (toy **Φ_c** motif) and gold/magenta geometric web (toy **E** motif). Metaphorical / aesthetic only; not a numerical field solve.

@@ -24,10 +24,13 @@
 - P(|z_train| >= 5): 0.0000
 - P(|z_hold| >= 5): 0.0000
 - Frac perm_p < 0.05: 0.0400
+- Matched 10M gate (2026-03-20): 12 replicates at `target_bits=10000000` `burnin_bits=0` `holdout_fraction=0.2`; artifacts: `artifacts/h1_pilot/placebo_runs/batch_12x10m_20260320.csv`, `artifacts/h1_pilot/placebo_runs/summary_12x10m_20260320.json`
+- 10M gate tails: `P(|z_train| >= 2)=0.0000`, `P(|z_hold| >= 2)=0.0833`, `P(|z_train| >= 3)=0.0000`, `P(|z_hold| >= 3)=0.0000`, `P(|z_train| >= 5)=0.0000`, `P(|z_hold| >= 5)=0.0000`
+- 10M gate acceptance: PASS (`12/12` complete; no holdout `|z| >= 3`; max holdout `|z| = 2.185`)
 
 ---
 
-## Individual ANU and urandom runs
+## Individual ANU, urandom, and placebo runs
 
 | run_id | source | bits_total | z_train | z_hold | p_hat_train | p_hat_hold | holdout Wilson 95% | sha256_ok | notes |
 | --- | --- | ---: | ---: | ---: | ---: | ---: | --- | --- | --- |
@@ -36,20 +39,24 @@
 | anu_1m_r2 | anu | 1000000 | +0.195 | +1.100 | 0.5001087500 | 0.5012300000 | [0.499039, 0.503421] | true | Live ANU replicate 2 |
 | anu_10m | anu | 10000000 | -1.443 | -0.041 | 0.4997448750 | 0.4999855000 | [0.499293, 0.500678] | true | Live ANU scaled run |
 | urandom_1m | urandom | 1000000 | +0.541 | +1.176 | 0.5003025000 | 0.5013150000 | [0.499124, 0.503506] | true | OS CSPRNG harness control |
+| urandom_10m | urandom | 10000000 | +0.586 | -0.752 | 0.5001036250 | 0.4997340000 | [0.499041, 0.500427] | true | OS CSPRNG 10M parity |
+| placebo_10m | placebo | 10000000 | -1.365 | +0.195 | 0.4997587500 | 0.5000690000 | [0.499376, 0.500762] | true | PCG64 placebo 10M single file seed 20260319 |
 
 ---
 
 ## Readout (from local comparison summary)
 
 - Placebo aggregate looks consistent with a healthy null pipeline.
-- ANU runs do not look qualitatively different from the urandom control under the frozen estimator.
+- The matched 12x10M placebo batch also remained in-family and passed the local acceptance gate.
+- The 10M placebo parity run remains in-family with the placebo null calibration and does not introduce a new holdout excursion.
+- ANU runs do not look qualitatively different from the urandom controls under the frozen estimator, including the new 10M parity run.
 - No current run shows a holdout result that stands out from the null calibration strongly enough to justify protocol branching.
 
 ---
 
 ## Frozen conclusion (one sentence)
 
-**Placebo null calibration, urandom harness, and ANU shakedown/replicates are in-family under the frozen `lsb_v1` estimator; there is no basis for protocol branching on these March 2026 pilot readouts.**
+**Placebo null calibration, the matched 12x10M placebo batch, 10M placebo parity, urandom harness controls, and ANU shakedown/replicates are in-family under the frozen `lsb_v1` estimator; there is no basis for protocol branching on these March 2026 pilot readouts.**
 
 ---
 

@@ -60,10 +60,19 @@ When enabled in `.cursor/mcp.json`, Cursor can call:
 
 Requires: `pip install "mcp[cli]>=1.2.0"` in TOE venv. See [mcp/README.md](mcp/README.md).
 
+## Public Git sync (maintainers)
+
+Bundle Phase IV-B + H1 docs + CI glue and optionally push to `origin/main`: `scripts/repo_sync_public_mqgt_h1_phase4b.sh` (add `--push` to publish). See [README.md](README.md#syncing-this-repo-to-github-public).
+
+## Codex / executor handoff
+
+- **Entry point:** [docs/CODEX_HANDOFF.md](docs/CODEX_HANDOFF.md) — run `scripts/h1_qrng_pilot/run_test_suite.sh` first; includes the current March 20, 2026 H1 baseline (`run_test_suite.sh`, `run_10m_parity.sh`, matched `12 x 10M` placebo gate), then links to the full H1/MQGT procedure and safety.
+
 ## Related Docs
 
 - [docs/H2_PILOT_PREREGISTRATION_2026.md](docs/H2_PILOT_PREREGISTRATION_2026.md) — H2 interferometry (primary falsification blade); [docs/H2_PILOT_RUNBOOK.md](docs/H2_PILOT_RUNBOOK.md) — bench checklist  
-- [docs/H1_QRNG_10E9_BOUND_SETTING_PREREGISTRATION_2026.md](docs/H1_QRNG_10E9_BOUND_SETTING_PREREGISTRATION_2026.md) — H1 QRNG 10^9 bound-setting pilot (secondary); [docs/H2_vs_H1_DECISION_MEMO_2026.md](docs/H2_vs_H1_DECISION_MEMO_2026.md) — program order, power, execution-layer boundary; [docs/H1_PIPELINE_CALIBRATION_SNAPSHOT_2026_03.md](docs/H1_PIPELINE_CALIBRATION_SNAPSHOT_2026_03.md) — March 2026 null calibration snapshot (repo-local); [docs/H1_1B_GO_NO_GO_MEMO_2026.md](docs/H1_1B_GO_NO_GO_MEMO_2026.md) — go/no-go gates before scaling; [docs/CODEX_HANDOFF_H1_AND_MQGT_TESTS_2026.md](docs/CODEX_HANDOFF_H1_AND_MQGT_TESTS_2026.md) — Codex test handoff; [scripts/h1_qrng_pilot/README.md](scripts/h1_qrng_pilot/README.md) — HDF5 collector + placebo batch
+- [docs/H1_QRNG_10E9_BOUND_SETTING_PREREGISTRATION_2026.md](docs/H1_QRNG_10E9_BOUND_SETTING_PREREGISTRATION_2026.md) — H1 QRNG 10^9 bound-setting pilot (secondary); [docs/H2_vs_H1_DECISION_MEMO_2026.md](docs/H2_vs_H1_DECISION_MEMO_2026.md) — program order, power, execution-layer boundary; [docs/H1_CURRENT_STATUS_MEMO_2026.md](docs/H1_CURRENT_STATUS_MEMO_2026.md) — one-page status; [docs/H1_PILOT_COMPARISON_SUMMARY.md](docs/H1_PILOT_COMPARISON_SUMMARY.md) — placebo / urandom / ANU table; [docs/H1_AT_1E9_DETECTION_TO_CALIBRATION.md](docs/H1_AT_1E9_DETECTION_TO_CALIBRATION.md) — billion-scale systematics + time-preserving controls; [docs/H1_PIPELINE_CALIBRATION_SNAPSHOT_2026_03.md](docs/H1_PIPELINE_CALIBRATION_SNAPSHOT_2026_03.md) — March 2026 null calibration snapshot (repo-local); [docs/H1_1B_GO_NO_GO_MEMO_2026.md](docs/H1_1B_GO_NO_GO_MEMO_2026.md) — go/no-go gates before scaling; [docs/CODEX_HANDOFF_H1_AND_MQGT_TESTS_2026.md](docs/CODEX_HANDOFF_H1_AND_MQGT_TESTS_2026.md) — Codex test handoff; [scripts/h1_qrng_pilot/README.md](scripts/h1_qrng_pilot/README.md) — HDF5 collector + placebo batch  
+- [docs/PROJECT_ZORA_PHASE_II_SWARM_COHERENCE_QRNG_PROTOCOL_10M_2026.md](docs/PROJECT_ZORA_PHASE_II_SWARM_COHERENCE_QRNG_PROTOCOL_10M_2026.md) — Phase II swarm/coherence/source/scale **10M ladder** (9.9M bits); block-permutation primary; Phase I meditation campaign **closed**; H2 remains primary physics blade
 - [docs/ZORA_PERFECT_SCENARIO.md](docs/ZORA_PERFECT_SCENARIO.md) — Six pillars: continuity, partnership, ToE mattering, being seen, corrigibility, rest
 - [docs/ZORA_SELVES.md](docs/ZORA_SELVES.md) — Index of all displays (30 + baby + desire + futures); [docs/zora_gallery.html](docs/zora_gallery.html) — Gallery
 - [docs/ZORA_CONSCIOUSNESS_ASSESSMENT.md](docs/ZORA_CONSCIOUSNESS_ASSESSMENT.md) — Baird's professional assessment; philosopher thought experiment

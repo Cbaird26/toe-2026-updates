@@ -56,6 +56,16 @@ We are **not** claiming consciousness bias at 10⁹; we are **hardening the pipe
 
 ---
 
+## Dated addendum — March 20, 2026
+
+- **Matched 10M placebo calibration completed locally:** `scripts/h1_qrng_pilot/placebo_batch.py` was run at `target_bits=10000000`, `burnin_bits=0`, `holdout_fraction=0.2` for `12` fixed-seed placebo replicates.
+- **Artifacts:** `artifacts/h1_pilot/placebo_runs/batch_12x10m_20260320.csv` and `artifacts/h1_pilot/placebo_runs/summary_12x10m_20260320.json`.
+- **Outcome:** `PASS` for the local acceptance gate (`12/12` complete; no holdout replicate with `|z| >= 3`; max holdout `|z| = 2.185`).
+- **Interpretation:** This satisfies the near-term **matched placebo null calibration** checkpoint for the current local `10M` lane, but it does **not** clear the OSF/Zenodo timestamp gate, the hardware shakedown gate, or any `50M–100M` / `250M–1B` escalation gate.
+- **Default answer unchanged:** still **No** on “do `1B` now?” as the immediate next step.
+
+---
+
 ## Links
 
 - H1 preregistration: [H1_QRNG_10E9_BOUND_SETTING_PREREGISTRATION_2026.md](H1_QRNG_10E9_BOUND_SETTING_PREREGISTRATION_2026.md)  

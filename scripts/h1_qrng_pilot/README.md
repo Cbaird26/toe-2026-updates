@@ -19,6 +19,21 @@ pip install numpy h5py
 
 `anu` mode uses stdlib `urllib.request` only (no extra HTTP package).
 
+## 10M parity (urandom + placebo)
+
+One-shot (after `mkdir -p artifacts/h1_pilot`): collects **10,000,000** bits each for `urandom` and `placebo`, runs `analyze.py --verify-sha256`, prints two CSV lines for `run_comparison_individual.csv`:
+
+```bash
+chmod +x scripts/h1_qrng_pilot/run_10m_parity.sh
+./scripts/h1_qrng_pilot/run_10m_parity.sh
+```
+
+Single-row export from any existing `.h5`:
+
+```bash
+python scripts/h1_qrng_pilot/export_comparison_row.py --run-id my_run --source urandom --h5 artifacts/h1_pilot/my.h5 --notes "optional"
+```
+
 ## Collect
 
 ```bash
@@ -81,5 +96,6 @@ Lattice / FastAPI demos remain **illustration only** per H1 §5.4. Claims about 
 ## See also
 
 - H2 (primary blade): [docs/H2_PILOT_PREREGISTRATION_2026.md](../../docs/H2_PILOT_PREREGISTRATION_2026.md) · [docs/H2_PILOT_RUNBOOK.md](../../docs/H2_PILOT_RUNBOOK.md)  
+- **Phase II swarm/coherence ladder (9.9M-bit design, block-level primary):** [docs/PROJECT_ZORA_PHASE_II_SWARM_COHERENCE_QRNG_PROTOCOL_10M_2026.md](../../docs/PROJECT_ZORA_PHASE_II_SWARM_COHERENCE_QRNG_PROTOCOL_10M_2026.md) — distinct from closed Phase I meditation null; requires block manifest / schema beyond single-stream `collect.py`  
 - Campaign discipline: [docs/H1_1B_GO_NO_GO_MEMO_2026.md](../../docs/H1_1B_GO_NO_GO_MEMO_2026.md)  
 - **Codex / executor handoff:** [docs/CODEX_HANDOFF_H1_AND_MQGT_TESTS_2026.md](../../docs/CODEX_HANDOFF_H1_AND_MQGT_TESTS_2026.md) · `run_test_suite.sh` (this folder)

@@ -24,13 +24,14 @@ Canonical working repo for the Theory of Everything: MQGT-SCF. **This is the Zor
 
 - **Ask Zora**: [zoraasi-suite.onrender.com](https://zoraasi-suite.onrender.com) — Outer identity, ToE-informed
 - **GitHub**: [cbaird26/toe-2026-updates](https://github.com/cbaird26/toe-2026-updates) (this repo) | [cbaird26/zoraasi-suite](https://github.com/cbaird26/zoraasi-suite) | [cbaird26](https://github.com/cbaird26)
+- **GitHub Pages (this repo, `docs/`):** [cbaird26.github.io/toe-2026-updates/](https://cbaird26.github.io/toe-2026-updates/) — **N-body demo (use if subfolder 404s):** [nbody.html](https://cbaird26.github.io/toe-2026-updates/nbody.html) · folder: [nbody-gravity-simulator/](https://cbaird26.github.io/toe-2026-updates/nbody-gravity-simulator/). Static hosting uses [`docs/.nojekyll`](docs/.nojekyll) to bypass Jekyll quirks on nested `index.html`.
 - **ZoraASI/ToE source**: [Cbaird26/A-Theory-of-Everything](https://github.com/Cbaird26/A-Theory-of-Everything)
 - **Zenodo** (Baird, Christopher Michael): [Zenodo search](https://zenodo.org/search?q=metadata.creators.person_or_org.name%3A%22Baird%2C%20Christopher%20Michael%22&l=list&p=1&s=10&sort=bestmatch) — **Latest: ToE + Empirical Validation (v231):** [zenodo.org/records/18778749](https://zenodo.org/records/18778749) (DOI [10.5281/zenodo.18778749](https://doi.org/10.5281/zenodo.18778749))
 
 ## Repo layout
 
 - **papers_sources/** — Papers (PDF/LaTeX), sources, and README.
-- **docs/** — Alignment appendix, Galaxy console, replication ladder, and other documentation. **Align All (one-page map):** [docs/ALIGN_ALL.md](docs/ALIGN_ALL.md). **Canonical spine (Zenodo 18690303 + four layers):** [docs/CANONICAL_SPINE.md](docs/CANONICAL_SPINE.md). **ToE stack map + drift controls:** [docs/TOE_STACK_MAP_DRIFT_CONTROLS.md](docs/TOE_STACK_MAP_DRIFT_CONTROLS.md).
+- **docs/** — Alignment appendix, Galaxy console, replication ladder, and other documentation. **Align All (one-page map):** [docs/ALIGN_ALL.md](docs/ALIGN_ALL.md). **Canonical spine (Zenodo 18690303 + four layers):** [docs/CANONICAL_SPINE.md](docs/CANONICAL_SPINE.md). **ToE stack map + drift controls:** [docs/TOE_STACK_MAP_DRIFT_CONTROLS.md](docs/TOE_STACK_MAP_DRIFT_CONTROLS.md). **Codex / CI handoff:** [docs/CODEX_HANDOFF.md](docs/CODEX_HANDOFF.md) (run `./scripts/h1_qrng_pilot/run_test_suite.sh`; current handoff also records the March 20, 2026 local H1 baseline and matched `12 x 10M` placebo gate).
 - **scripts/** — Moltbook fetch/post, log action, paper checks, Galaxy loop.
 - **zoraasi/** — ZoraASI chat, RAG, and training (see `zoraasi/README.md`).
 - **logs/** — Autonomous action logs (see [SAFETY_CONSTITUTION](SAFETY_CONSTITUTION.md) and [logs/autonomous_actions/](logs/autonomous_actions/)).
@@ -39,6 +40,19 @@ Canonical working repo for the Theory of Everything: MQGT-SCF. **This is the Zor
 ## 2026 next steps (lead scientist checklist)
 
 Replication and falsification ([FALSIFICATION_PACKET](docs/FALSIFICATION_PACKET.md), [REPLICATION_LADDER](docs/REPLICATION_LADDER.md)); entry point ([Addendum](papers_sources/Addendum_2026_ToE_Companion.tex)); Φc protocol ([PHI_C_JHANA_PROTOCOL](docs/PHI_C_JHANA_PROTOCOL.md)); tech prototype ([TECH_PROTOTYPE_QRNG](docs/TECH_PROTOTYPE_QRNG.md)); governance and cosmology ([GOVERNANCE_NEXT_STEPS](docs/GOVERNANCE_NEXT_STEPS.md), [COSMOLOGY_NEXT_STEPS](docs/COSMOLOGY_NEXT_STEPS.md)). Full list: [docs/CANONICAL_SPINE.md](docs/CANONICAL_SPINE.md).
+
+## Syncing this repo to GitHub (public)
+
+**Remote:** [cbaird26/toe-2026-updates](https://github.com/cbaird26/toe-2026-updates) (`origin`). After pulling Phase IV-B / H1 documentation updates locally, bundle and publish with:
+
+```bash
+cd /path/to/TOE
+chmod +x scripts/repo_sync_public_mqgt_h1_phase4b.sh   # once
+./scripts/repo_sync_public_mqgt_h1_phase4b.sh            # commit only
+./scripts/repo_sync_public_mqgt_h1_phase4b.sh --push     # commit + push main
+```
+
+The script stages `README.md`, `AGENTS.md`, the current Phase IV lattice toy, the Phase IV-B lattice demo, `mqgt_phase4b_parameter_sweep.py`, `scripts/mqgt_sim/README.md`, the H1/MQGT smoke suite, H1 docs (`H1_CURRENT_STATUS_MEMO_2026.md`, `H1_PILOT_COMPARISON_SUMMARY.md`, `H1_AT_1E9_DETECTION_TO_CALIBRATION.md`), `docs/ZORA_CONTINUITY_LOG.md`, and itself. Add any other modified files with `git add` before running if you need a wider commit.
 
 ## Repos and manifest
 
