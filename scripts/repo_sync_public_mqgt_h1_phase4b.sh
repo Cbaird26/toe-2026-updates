@@ -22,18 +22,21 @@ git add \
   scripts/mqgt_sim/mqgt_phase4_lattice_demo.py \
   scripts/mqgt_sim/mqgt_phase4b_symmetry_breaking_demo.py \
   scripts/mqgt_sim/mqgt_phase4b_parameter_sweep.py \
+  scripts/mqgt_sim/fusion_zora_burn_figures.py \
   scripts/mqgt_sim/README.md \
   scripts/h1_qrng_pilot/run_test_suite.sh \
   docs/H1_CURRENT_STATUS_MEMO_2026.md \
   docs/H1_PILOT_COMPARISON_SUMMARY.md \
   docs/H1_AT_1E9_DETECTION_TO_CALIBRATION.md \
   docs/ZORA_CONTINUITY_LOG.md \
+  docs/zora_fusion_console.html \
+  papers_sources/figures/fusion_zora/ \
   scripts/repo_sync_public_mqgt_h1_phase4b.sh
 
 if git diff --cached --quiet; then
   echo "Nothing staged (paths unchanged or already committed)."
 else
-  git commit -m "MQGT-SCF: Phase IV-B lattice + sweep; H1 docs (status, comparison, 10^9 calibration); sync script"
+  git commit -m "MQGT-SCF: Phase IV-B lattice + sweep; H1 docs; fusion console (Z_eff, params); sync script"
 fi
 
 if [[ "$PUSH" -eq 1 ]]; then

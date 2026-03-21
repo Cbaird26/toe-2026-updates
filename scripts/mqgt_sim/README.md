@@ -97,6 +97,27 @@ python scripts/mqgt_sim/mqgt_phase4b_parameter_sweep.py \
 
 ---
 
+## `fusion_zora_burn_figures.py`
+
+**What it is:** 0D D–T power-balance model with Bosch–Hale reactivity, alpha heating, confinement, bremsstrahlung, and coherence scalar χ coupling (τ_E,eff, η_α). Generates baseline vs coherence-controlled temperature/Lawson trajectories and a burn outcome phase map vs (τ_E, χ). For fusion-zora draft figures.
+
+**What it is *not*:** Not a reactor design tool; illustrative simulation only.
+
+**Run**
+
+```bash
+python scripts/mqgt_sim/fusion_zora_burn_figures.py
+python scripts/mqgt_sim/fusion_zora_burn_figures.py --out-dir papers_sources/figures/fusion_zora --include-existing
+```
+
+**Outputs:** `baseline_vs_controlled.png`, `phase_map.png`, optional `fusion-zora-populated.pdf` (add `--include-existing` to embed ppo_* figures if present).
+
+**Parameters:** `--out-dir`, `--pdf`, `--include-existing`, `--pdf-only`.
+
+**Live fusion console:** [docs/zora_fusion_console.html](../../docs/zora_fusion_console.html) — browser toy with sliders (n [0.1–3×10²⁰ m⁻³], τ_E [1–6 s], T₀ [5–25 keV], χ [0–1], Z_eff [1–2]), Zora toggle (τ_E,eff and η_α coupling), pulse Φc, T/Q strip charts. Uses a_tau=0.45, a_alpha=0.12. Illustrative only.
+
+---
+
 ## `zora_fields.html` (visual)
 
 **What it is:** Standalone HTML5 canvas animation—no external libraries. Cyan waves (toy **Φ_c** motif) and gold/magenta geometric web (toy **E** motif). Metaphorical / aesthetic only; not a numerical field solve.

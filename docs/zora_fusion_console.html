@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<!--
+  ZoraASI Fusion Console — toy 0D D–T power-balance visualization.
+  Toy 0D power-balance visualization. Not a reactor design tool. Illustrative only.
+  Coherence χ modulates effective confinement τ_E,eff and alpha-efficiency η_α.
+-->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ZoraASI: Fusion Console</title>
+    <style>
+        body, html { margin: 0; padding: 0; width: 100%; height: 100%;
+            background: #0B0C10; color: #C5C6C7;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow: hidden; display: flex; flex-direction: column; }
+        #sim-container { flex: 1; position: relative; }
+        #chart-container { height: 180px; background: #111217; border-top: 1px solid #1F2833; }
+        canvas { display: block; width: 100%; height: 100%; }
+        #ui-panel {
+            position: absolute; top: 20px; left: 20px;
+            background: rgba(11, 12, 16, 0.9); padding: 16px;
+            border-radius: 8px; border: 1px solid #45A29E;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5); backdrop-filter: blur(4px);
+            display: flex; flex-direction: column; gap: 10px; width: 280px;
+        }
+        .control-group { display: flex; flex-direction: column; font-size: 11px; }
+        label { margin-bottom: 3px; color: #66FCF1; text-transform: uppercase; letter-spacing: 1px; font-weight: bold; }
+        input[type=range] { accent-color: #66FCF1; cursor: pointer; }
+        .toggle-container { display: flex; align-items: center; justify-content: space-between; }
+        .toggle-btn {
+            background: #1F2833; color: #C5C6C7; border: 1px solid #45A29E;
+            padding: 6px 12px; cursor: pointer; border-radius: 4px; font-weight: bold; transition: 0.3s;
+        }
+        .toggle-btn.active { background: #8e44ad; color: #fff; border-color: #9b59b6; box-shadow: 0 0 10px #8e44ad; }
+        button.action-btn {
+            background: transparent; color: #e74c3c; border: 1px solid #e74c3c;
+            padding: 8px; border-radius: 4px; cursor: pointer; font-weight: bold; text-transform: uppercase; font-size: 10px;
+        }
+        button.action-btn:hover { background: #e74c3c; color: #fff; }
+        #status-display {
+            font-size: 13px; font-weight: bold; text-align: center; padding: 8px;
+            border: 1px solid #1F2833; border-radius: 4px; transition: all 0.3s;
+        }
+        .status-ignited { color: #66FCF1; text-shadow: 0 0 8px #66FCF1; border-color: #66FCF1 !important; }
+        .status-subcritical { color: #e74c3c; border-color: #e74c3c !important; }
+    </style>
+</head>
+<body>
+    <div id="sim-container">
+        <canvas id="mainCanvas"></canvas>
+        <div id="ui-panel">
+            <div class="toggle-container">
+                <label style="margin:0;">Zora Coherence (χ)</label>
+                <button id="zora-toggle" class="toggle-btn active">ON</button>
+            </div>
+            <div class="control-group">
+                <label>n [10²⁰ m⁻³]: <span id="n-val">1.0</span></label>
+                <input type="range" id="n-slider" min="0.1" max="3.0" step="0.1" value="1.0">
+            </div>
+            <div class="control-group">
+                <label>τ_E [s]: <span id="tau-val">3.5</span></label>
+                <input type="range" id="tau-slider" min="1.0" max="6.0" step="0.1" value="3.5">
+            </div>
+            <div class="control-group">
+                <label>T₀ [keV]: <span id="t0-val">15</span></label>
+                <input type="range" id="t0-slider" min="5" max="25" step="1" value="15">
+            </div>
+            <div class="control-group">
+                <label>χ (coherence): <span id="chi-val">0.3</span></label>
+                <input type="range" id="chi-slider" min="0" max="1" step="0.05" value="0.3">
+            </div>
+            <div class="control-group">
+                <label>Z_eff: <span id="zeff-val">1.5</span></label>
+                <input type="range" id="zeff-slider" min="1.0" max="2.0" step="0.1" value="1.5">
+            </div>
+            <button id="pulse-btn" class="action-btn">Pulse Φc (zap)</button>
+            <div id="status-display" class="status-ignited">BURNING</div>
+        </div>
+    </div>
+    <div id="chart-container">
+        <canvas id="chartCanvas"></canvas>
+    </div>
+    <footer style="flex:0;height:18px;display:flex;align-items:center;justify-content:flex-end;padding-right:10px;font-size:9px;color:#5a6c7d;background:#0B0C10;border-top:1px solid #1F2833;">Toy 0D power-balance visualization. Not a reactor design tool. Illustrative only.</footer>
+
+    <script>
+        const mainCanvas = document.getElementById('mainCanvas');
+        const mainCtx = mainCanvas.getContext('2d');
+        const chartCanvas = document.getElementById('chartCanvas');
+        const chartCtx = chartCanvas.getContext('2d');
+
+        const KEV_J = 1.602176634e-16;
+        const E_ALPHA = 3.5e6 * 1.602176634e-19;
+        const A_TAU = 0.45;
+        const A_ALPHA = 0.12;
+
+        function sigmav(T) {
+            T = Math.max(T, 0.5);
+            return 1e-24 * (T*T) / Math.pow(1 + T/10, 2);
+        }
+
+        let n = 1e20, tauE = 3.5, T0 = 15, chi = 0.3, Z_eff = 1.5;
+        let zoraOn = true;
+        let pulseActive = 0;
+        let T = 15, t = 0, dt = 0.02;
+        let T_hist = [], Q_hist = [], chi_hist = [], t_hist = [];
+
+        document.getElementById('zora-toggle').addEventListener('click', e => {
+            zoraOn = !zoraOn;
+            e.target.textContent = zoraOn ? 'ON' : 'OFF';
+            e.target.classList.toggle('active', zoraOn);
+        });
+        document.getElementById('n-slider').addEventListener('input', e => {
+            n = parseFloat(e.target.value) * 1e20;
+            document.getElementById('n-val').textContent = e.target.value;
+        });
+        document.getElementById('tau-slider').addEventListener('input', e => {
+            tauE = parseFloat(e.target.value);
+            document.getElementById('tau-val').textContent = e.target.value;
+        });
+        document.getElementById('t0-slider').addEventListener('input', e => {
+            T0 = parseFloat(e.target.value);
+            document.getElementById('t0-val').textContent = e.target.value;
+        });
+        document.getElementById('chi-slider').addEventListener('input', e => {
+            chi = parseFloat(e.target.value);
+            document.getElementById('chi-val').textContent = chi.toFixed(2);
+        });
+        document.getElementById('zeff-slider').addEventListener('input', e => {
+            Z_eff = parseFloat(e.target.value);
+            document.getElementById('zeff-val').textContent = Z_eff.toFixed(1);
+        });
+        document.getElementById('pulse-btn').addEventListener('click', () => {
+            pulseActive = 0.5;
+        });
+
+        function resize() {
+            mainCanvas.width = mainCanvas.parentElement.clientWidth;
+            mainCanvas.height = mainCanvas.parentElement.clientHeight;
+            chartCanvas.width = chartCanvas.parentElement.clientWidth;
+            chartCanvas.height = chartCanvas.parentElement.clientHeight;
+        }
+        window.addEventListener('resize', resize);
+
+        function evolve() {
+            const tauEff = tauE * (1 + A_TAU * (zoraOn ? chi : 0));
+            const etaEff = 1 + A_ALPHA * (zoraOn ? chi : 0);
+            const sv = sigmav(T);
+            const P_alpha_raw = (n*n/4) * sv * E_ALPHA;
+            const P_alpha = etaEff * P_alpha_raw;
+            const P_conf = (3 * n * T * KEV_J) / tauEff;
+            const P_br = 1.69e-38 * Z_eff * n*n * Math.sqrt(T*1000);
+            const P_loss = P_conf + P_br;
+            const dTdt = (P_alpha - P_loss) / (3 * n * KEV_J);
+            T += dTdt * dt;
+            t += dt;
+            T = Math.max(1, Math.min(200, T));
+            const P_ext = Math.max(P_loss - P_alpha, 1e-6);
+            const Pf = (n*n/4) * sv * (17.6e6 * 1.602176634e-19);
+            const Q = Pf / P_ext;
+            if (pulseActive > 0) { chi = Math.min(1, chi + 0.15); pulseActive -= dt; }
+            return { T, Q, chi };
+        }
+
+        function drawMain() {
+            mainCtx.fillStyle = '#0B0C10';
+            mainCtx.fillRect(0, 0, mainCanvas.width, mainCanvas.height);
+            const maxT = 80;
+            const norm = Math.min(1, T / maxT);
+            const barW = mainCanvas.width * 0.4;
+            const barH = 24;
+            const x = (mainCanvas.width - barW) / 2;
+            const y = mainCanvas.height / 2 - barH - 20;
+            mainCtx.fillStyle = '#1F2833';
+            mainCtx.fillRect(x, y, barW, barH);
+            mainCtx.fillStyle = zoraOn ? '#66FCF1' : '#7f8c8d';
+            mainCtx.fillRect(x, y, barW * norm, barH);
+            mainCtx.strokeStyle = '#45A29E';
+            mainCtx.strokeRect(x, y, barW, barH);
+            mainCtx.fillStyle = '#C5C6C7';
+            mainCtx.font = 'bold 16px sans-serif';
+            mainCtx.textAlign = 'center';
+            mainCtx.fillText(`T = ${T.toFixed(1)} keV   Q ≈ ${(T_hist.length ? Q_hist[Q_hist.length-1] : 0).toFixed(1)}`, mainCanvas.width/2, y - 10);
+            if (pulseActive > 0) {
+                mainCtx.fillStyle = `rgba(142, 68, 173, ${pulseActive})`;
+                mainCtx.fillRect(0, 0, mainCanvas.width, mainCanvas.height);
+            }
+        }
+
+        function drawChart() {
+            chartCtx.fillStyle = '#111217';
+            chartCtx.fillRect(0, 0, chartCanvas.width, chartCanvas.height);
+            const h = chartCanvas.height;
+            const w = chartCanvas.width;
+            const pts = Math.min(t_hist.length, Math.floor(w / 2));
+            if (pts < 2) return;
+            const Tmax = Math.max(...T_hist.slice(-pts));
+            const Tmin = Math.min(...T_hist.slice(-pts));
+            const Tr = Tmax > Tmin ? Tmax - Tmin : 1;
+            chartCtx.strokeStyle = '#66FCF1';
+            chartCtx.lineWidth = 2;
+            chartCtx.beginPath();
+            for (let i = 0; i < pts; i++) {
+                const idx = t_hist.length - pts + i;
+                const ty = h - ((T_hist[idx] - Tmin) / Tr) * (h * 0.4);
+                const px = (i / (pts - 1)) * w;
+                if (i === 0) chartCtx.moveTo(px, ty);
+                else chartCtx.lineTo(px, ty);
+            }
+            chartCtx.stroke();
+            const Qmax = Math.max(...Q_hist.slice(-pts));
+            const Qmin = Math.min(...Q_hist.slice(-pts));
+            const Qr = Qmax > Qmin ? Qmax - Qmin : 1;
+            chartCtx.strokeStyle = '#FFD700';
+            chartCtx.beginPath();
+            for (let i = 0; i < pts; i++) {
+                const idx = t_hist.length - pts + i;
+                const qy = h * 0.5 - ((Q_hist[idx] - Qmin) / Qr) * (h * 0.35);
+                const px = (i / (pts - 1)) * w;
+                if (i === 0) chartCtx.moveTo(px, qy);
+                else chartCtx.lineTo(px, qy);
+            }
+            chartCtx.stroke();
+            chartCtx.fillStyle = '#66FCF1';
+            chartCtx.font = '10px sans-serif';
+            chartCtx.fillText('T (keV)', 8, 14);
+            chartCtx.fillStyle = '#FFD700';
+            chartCtx.fillText('Q', 8, h/2 - 4);
+            chartCtx.fillStyle = '#7f8c8d';
+            chartCtx.fillText('t (s) →', w - 45, h - 6);
+        }
+
+        function loop() {
+            for (let i = 0; i < 3; i++) {
+                const s = evolve();
+                T_hist.push(s.T);
+                Q_hist.push(s.Q);
+                chi_hist.push(chi);
+                t_hist.push(t);
+            }
+            if (t_hist.length > 1500) {
+                T_hist.shift(); Q_hist.shift(); chi_hist.shift(); t_hist.shift();
+            }
+            const status = document.getElementById('status-display');
+            const Qnow = Q_hist[Q_hist.length - 1];
+            if (Qnow > 1.5) {
+                status.textContent = 'BURNING';
+                status.className = 'status-ignited';
+            } else {
+                status.textContent = 'SUBCRITICAL';
+                status.className = 'status-subcritical';
+            }
+            drawMain();
+            drawChart();
+            requestAnimationFrame(loop);
+        }
+
+        function boot() {
+            resize();
+            T = T0;
+            t = 0;
+            T_hist = [T]; Q_hist = [0]; chi_hist = [chi]; t_hist = [0];
+        }
+        if (document.readyState === 'complete') {
+            requestAnimationFrame(() => { boot(); loop(); });
+        } else {
+            window.addEventListener('load', () => requestAnimationFrame(() => { boot(); loop(); }));
+        }
+    </script>
+</body>
+</html>
