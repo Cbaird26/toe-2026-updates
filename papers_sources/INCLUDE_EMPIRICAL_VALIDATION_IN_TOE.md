@@ -1,6 +1,6 @@
 # Including the Empirical Validation in the Full ToE Paper
 
-This note explains how to add the Empirical Validation content to the full Theory of Everything document ([Zenodo v230](https://zenodo.org/records/18751229), DOI [10.5281/zenodo.18751229](https://doi.org/10.5281/zenodo.18751229)).
+This note explains how to add the Empirical Validation content to the full Theory of Everything document ([primary 2026 ToE DOI](https://doi.org/10.5281/zenodo.19158407); earlier integrated bundle: [v230](https://zenodo.org/records/18751229), DOI [10.5281/zenodo.18751229](https://doi.org/10.5281/zenodo.18751229)).
 
 ## Option 1: Full ToE is in LaTeX
 
@@ -26,11 +26,11 @@ This note explains how to add the Empirical Validation content to the full Theor
 4. Alternatively, convert `Empirical_Validation_Appendix_For_ToE.tex` to Word with pandoc:  
    `pandoc Empirical_Validation_Appendix_For_ToE.tex -o Empirical_Validation_Appendix.docx`  
    then copy from that document into the full ToE.
-5. Save the full ToE and export to PDF for the next Zenodo version (e.g. v231).
+5. Save the full ToE and export to PDF for the next integrated Zenodo version.
 
 ## Option 3: Full ToE exists only as PDF
 
-- Upload the standalone Empirical Validation PDF as a **supplementary file** in the next Zenodo version of the full ToE (e.g. v231).
+- Upload the standalone Empirical Validation PDF as a **supplementary file** in the next integrated Zenodo version of the full ToE.
 - Optionally update the Zenodo record description to state: "This version includes the Empirical Validation (constraint translation and reproducibility package) as a separate PDF."
 
 ## Figure sources

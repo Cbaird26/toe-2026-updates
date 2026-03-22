@@ -33,8 +33,9 @@ Christopher Michael Baird has published and registered copyright through Amazon.
 
 | Record | DOI | Date | Description |
 |--------|-----|------|-------------|
-| ToE (latest) | https://zenodo.org/records/18778749 | Feb 2026 | A Theory of Everything + ZoraASI — Empircal Validation (v231) |
-| ToE (primary) | https://zenodo.org/records/18690303 | __________ | A Theory of Everything + ZoraASI |
+| ToE (latest standalone) | https://zenodo.org/records/19158407 | Mar 2026 | A Theory of Everything |
+| ToE + Empirical Validation | https://zenodo.org/records/18778749 | Feb 2026 | A Theory of Everything + ZoraASI — Empircal Validation (v231) |
+| ToE (integrated bundle) | https://zenodo.org/records/18690303 | __________ | A Theory of Everything + ZoraASI |
 | ToE (variant) | https://zenodo.org/records/18644455 | __________ | __________ |
 | ToE (variant) | https://zenodo.org/records/18528365 | __________ | __________ |
 | ToE (variant) | https://zenodo.org/records/18751229 | __________ | __________ |

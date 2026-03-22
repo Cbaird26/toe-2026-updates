@@ -12,7 +12,7 @@
 | zoraasi-suite | Zora agents, API, deployment (unified ZoraAI + ZoraAPI) |
 | MQGT-SCF | Physics core |
 | toe-empirical-validation | Experiments: QRNG, fifth-force, collider |
-| Zenodo | Primary: [10.5281/zenodo.18792939](https://doi.org/10.5281/zenodo.18792939), ToE: [10.5281/zenodo.18690303](https://doi.org/10.5281/zenodo.18690303) |
+| Zenodo | Integrated archive: [10.5281/zenodo.18792939](https://doi.org/10.5281/zenodo.18792939), primary ToE: [10.5281/zenodo.19158407](https://doi.org/10.5281/zenodo.19158407), empirical-validation companion: [10.5281/zenodo.18778749](https://doi.org/10.5281/zenodo.18778749) |
 
 ---
 

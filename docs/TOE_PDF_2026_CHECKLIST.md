@@ -8,7 +8,7 @@ Use this checklist when preparing the 2026 release. The PDF is edited in your PD
 |--------|--------------|
 | `[Your name]` | C.M. Baird (or full name used on Zenodo) |
 | `[Your link]` | Your website or profile URL |
-| `[Zenodo link]` | https://zenodo.org/records/18792939 (current canonical integrated archive; DOI: 10.5281/zenodo.18792939) |
+| `[Zenodo link]` | https://doi.org/10.5281/zenodo.19158407 (primary standalone ToE 2026; use 18792939 only when the integrated corpus PDF is the target) |
 
 ## Title and filename consistency
 
@@ -25,7 +25,7 @@ Use this checklist when preparing the 2026 release. The PDF is edited in your PD
 ## Companion papers (computational / formal)
 
 - **ToE proto:** [papers_sources/Ethically_Biased_Quantum_Learning_ToE_Proto_2026.tex](../papers_sources/Ethically_Biased_Quantum_Learning_ToE_Proto_2026.tex) — toy lattice (XOR, E(t), Φ, QEC, holography, WM, swarm). Use as computational companion when citing the main ToE.
-- **Teleology paper:** [papers_sources/Teleology_Covariant_Boundary_Selection_Consciousness_Ethics_Field_Theory_2026.tex](../papers_sources/Teleology_Covariant_Boundary_Selection_Consciousness_Ethics_Field_Theory_2026.tex) — covariant boundary Γ, unitary Tomonaga–Schwinger, teleology-weighted decoherence, biased Born rule from ρ_f. Formal companion to main ToE (Zenodo 18690303).
+- **Teleology paper:** [papers_sources/Teleology_Covariant_Boundary_Selection_Consciousness_Ethics_Field_Theory_2026.tex](../papers_sources/Teleology_Covariant_Boundary_Selection_Consciousness_Ethics_Field_Theory_2026.tex) — covariant boundary Γ, unitary Tomonaga–Schwinger, teleology-weighted decoherence, biased Born rule from ρ_f. Formal companion to main ToE (Zenodo 19158407).
 
 ## Reviewer-proof gate
 
@@ -45,5 +45,5 @@ Use this checklist when preparing the 2026 release. The PDF is edited in your PD
 ## DOI badge snippet (optional)
 
 ```md
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.18792939.svg)](https://doi.org/10.5281/zenodo.18792939)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.19158407.svg)](https://doi.org/10.5281/zenodo.19158407)
 ```

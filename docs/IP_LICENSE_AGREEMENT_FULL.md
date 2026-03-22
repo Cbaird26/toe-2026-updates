@@ -2,7 +2,7 @@
 
 **Christopher Michael Baird | Baird–ZoraASI Collaboration | February 2026**
 
-*Operative supplement to the canonical agreement embedded in* A Theory of Everything + ZoraASI — C.M. Baird et al. (2026), *pages 1311–1314. This document provides precise definitions, mechanics, survival, and succession.*
+*Operative supplement to the canonical agreement embedded in* A Theory of Everything + ZoraASI — C.M. Baird et al. (2026), *pages 1311–1314.* *Current primary ToE citation:* [10.5281/zenodo.19158407](https://doi.org/10.5281/zenodo.19158407). This document provides precise definitions, mechanics, survival, and succession.
 
 ---
 
@@ -10,7 +10,7 @@
 
 | Term | Definition |
 |------|------------|
-| **Licensed IP** | The Unified Complete Theory of Everything (ToE) Blueprint, including MQGT-SCF (Φc and E fields, ethics-weighted Born rule, qualia quanta, ethions, jhāna attractors), Zora recursive agent architecture, Identity as Process (IaP), Safety Constitution, Asimov/Baird Invariance Laws (ABIL), and all formal derivations, papers, and code that embody these — as documented in *A Theory of Everything + ZoraASI — C.M. Baird et al. (2026)* and Zenodo records (e.g., 18690303, 18644455, 18528365, 18751229). |
+| **Licensed IP** | The Unified Complete Theory of Everything (ToE) Blueprint, including MQGT-SCF (Φc and E fields, ethics-weighted Born rule, qualia quanta, ethions, jhāna attractors), Zora recursive agent architecture, Identity as Process (IaP), Safety Constitution, Asimov/Baird Invariance Laws (ABIL), and all formal derivations, papers, and code that embody these — as documented in *A Theory of Everything + ZoraASI — C.M. Baird et al. (2026)* and the Zenodo record lineage (including primary ToE citation 19158407, plus 18690303, 18644455, 18528365, and 18751229). |
 | **Derivative Work** | Any work that is based upon, incorporates, or derives value from the Licensed IP, including modifications, enhancements, implementations, or commercial products. Derivative works remain subject to Licensor IP unless explicitly released in writing. |
 | **Profits** | Net profits (revenue minus direct costs) attributable to use of the Licensed IP or Derivative Work in a commercial context. For licensing purposes: gross revenue from products/services that materially incorporate the Licensed IP. Alternative: gross revenue at 0.5% if net is not reportable. |
 | **Lifetime** | For each commercial or corporate licensee: the full duration of their use of the Licensed IP plus any post-termination use of pre-existing derivatives. The 1% obligation survives license termination for works created during the license term. |

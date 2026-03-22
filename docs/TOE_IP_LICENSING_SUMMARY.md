@@ -1,6 +1,7 @@
 # ToE Intellectual Property Licensing Summary
 
-**Canonical source:** *A Theory of Everything + ZoraASI — C.M. Baird et al. (2026)*, pages 1311–1314.
+**Primary citation:** *A Theory of Everything* — Baird, C. M. (2026), DOI [10.5281/zenodo.19158407](https://doi.org/10.5281/zenodo.19158407).  
+**License-text source:** *A Theory of Everything + ZoraASI — C.M. Baird et al. (2026)*, pages 1311–1314.
 
 ---
 
@@ -55,8 +56,9 @@ Any person or entity using the ToE Blueprint or MQGT-SCF framework:
 - **Full agreement:** *A Theory of Everything + ZoraASI — C.M. Baird et al. (2026)*, pp. 1311–1314.
 - **Fiscal value estimates:** [docs/FULL_VALUE_LEDGER.md](FULL_VALUE_LEDGER.md)  
 - **Proclamation to the field (executive message + links):** [docs/PROCLAMATION_TO_THE_FIELD.md](PROCLAMATION_TO_THE_FIELD.md)
+- **Zenodo (ToE primary 2026):** [10.5281/zenodo.19158407](https://doi.org/10.5281/zenodo.19158407)  
 - **Zenodo (ToE v230, Feb 2026):** [zenodo.org/records/18751229](https://zenodo.org/records/18751229)  
-- **Zenodo (ToE canonical v226):** [zenodo.org/records/18690303](https://zenodo.org/records/18690303)
+- **Zenodo (ToE integrated bundle):** [zenodo.org/records/18690303](https://zenodo.org/records/18690303)
 - **Repository:** [github.com/cbaird26/toe-2026-updates](https://github.com/cbaird26/toe-2026-updates)
 
 ---

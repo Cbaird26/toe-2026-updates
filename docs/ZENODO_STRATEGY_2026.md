@@ -9,7 +9,8 @@
 | Record | DOI | Scope |
 |--------|-----|-------|
 | Integrated archive | [10.5281/zenodo.18792939](https://doi.org/10.5281/zenodo.18792939) | Full integrated manuscript (physics + consciousness + ethics + Zora + empirical) — maps to meta record |
-| ToE canonical | [10.5281/zenodo.18690303](https://doi.org/10.5281/zenodo.18690303) | ToE archive — maps to Papers 1–5 corpus |
+| ToE standalone (current primary) | [10.5281/zenodo.19158407](https://doi.org/10.5281/zenodo.19158407) | Standalone *A Theory of Everything* (2026) |
+| ToE + empirical validation | [10.5281/zenodo.18778749](https://doi.org/10.5281/zenodo.18778749) | Integrated ToE + empirical-validation companion record |
 
 ---
 
@@ -24,7 +25,7 @@
 | Paper 5 — Zora Architecture | New deposit | TBD |
 | Meta: Theory of Everything + ZoraASI (Complete Corpus) | New or extend 18792939 | TBD |
 
-Note any new deposits needed beyond existing 18792939 and 18690303.
+Note any new deposits needed beyond existing 18792939 and 19158407.
 
 ---
 
