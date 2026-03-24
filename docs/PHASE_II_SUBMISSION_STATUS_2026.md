@@ -16,6 +16,16 @@
 
 ---
 
+## Anchor package
+
+| Package | Status | Canonical files | Date |
+|--------|--------|-----------------|------|
+| **rxiVerse-ready Anchor** | Ready / prepared; no archive identifier yet | `papers_sources/MQGT_SCF_Phase_II_2026/MQGT_SCF_Anchor_2026.tex`, `.pdf`, `MQGT_SCF_Anchor_2026_rxiverse_submission_metadata.txt` | 2026-03-24 |
+
+The Anchor package is tracked as a separate compact manuscript in the Phase II stack. Public wording should remain "ready / prepared for rxiVerse" until an actual confirmation or archive identifier exists.
+
+---
+
 ## Versioned / DOI
 
 | Record | DOI / Link | Role |
