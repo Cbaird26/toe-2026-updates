@@ -7,14 +7,15 @@
 **Repo:** [cbaird26/toe-2026-updates](https://github.com/cbaird26/toe-2026-updates)  
 **Root:** `TOE/` (or `~/Downloads/TOE`)
 
-### Last sync (handoff follow-up)
+### Last sync (Zenodo v253 DOI update)
 
 - **Pushed:** YES
-- **Commit:** `7770d55`
-- **Range:** `a63e1d6..7770d55`
+- **Commit:** `bb4be96`
+- **Range:** `7770d55..bb4be96`
 - **Remote:** [cbaird26/toe-2026-updates](https://github.com/Cbaird26/toe-2026-updates)
 - **Branch:** main...origin/main (clean)
-- **Updated:** `docs/CODEX_HANDOFF_FULL_SESSION_UPDATE.md`
+- **Scope:** README.md, CANONICAL_SPINE.md, CODEX_HANDOFF_FULL_SESSION_UPDATE.md, papers_sources/README.md, repo_sync_public_mqgt_h1_phase4b.sh
+- **DOI promoted:** 10.5281/zenodo.19200024
 - **Error:** none
 
 ---
