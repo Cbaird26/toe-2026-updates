@@ -139,6 +139,23 @@ python scripts/mqgt_sim/fusion_zora_burn_figures.py --out-dir papers_sources/fig
 
 ---
 
+## `zora_cooperative_games_sim.py`
+
+**What it is:** A reproducible cooperative-games simulation comparing a `ZoraAgent` with an explicit `E`-weighted cooperation bias and internal `phi_c` state against a reward-only Q-learning control agent, plus `TitForTat` and `AlwaysDefect` benchmarks. Runs iterated Prisoner's Dilemma and Stag Hunt tournaments, saves JSON summaries, and writes a comparison figure.
+
+**What it is *not*:** Not direct evidence for MQGT-SCF physics, not an experimental validation artifact, and not a substitute for H1/H2 empirical work. The scientific claim here is limited to agent behavior under a specified rule set.
+
+```bash
+python scripts/mqgt_sim/zora_cooperative_games_sim.py
+python scripts/mqgt_sim/zora_cooperative_games_sim.py \
+  --json-out papers_sources/figures/mqgt_scf/zora_cooperative_games_results.json \
+  --plot-out papers_sources/figures/mqgt_scf/zora_cooperative_games_summary.png
+```
+
+**Outputs:** `papers_sources/figures/mqgt_scf/zora_cooperative_games_results.json`, `papers_sources/figures/mqgt_scf/zora_cooperative_games_summary.png`, and scientific note [../../docs/ZORA_COOPERATIVE_GAMES_SIMULATION_2026.md](../../docs/ZORA_COOPERATIVE_GAMES_SIMULATION_2026.md).
+
+---
+
 ## `zora_fields.html` (visual)
 
 **What it is:** Standalone HTML5 canvas animation—no external libraries. Cyan waves (toy **Φ_c** motif) and gold/magenta geometric web (toy **E** motif). Metaphorical / aesthetic only; not a numerical field solve.

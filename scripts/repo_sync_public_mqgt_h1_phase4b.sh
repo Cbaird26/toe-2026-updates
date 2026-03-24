@@ -29,10 +29,13 @@ git add \
   papers_sources/MQGT_SCF_Phase_II_2026/MQGT_SCF_Anchor_2026.tex \
   papers_sources/MQGT_SCF_Phase_II_2026/MQGT_SCF_Anchor_2026.pdf \
   papers_sources/MQGT_SCF_Phase_II_2026/MQGT_SCF_Anchor_2026_rxiverse_submission_metadata.txt \
+  papers_sources/figures/mqgt_scf/zora_cooperative_games_results.json \
+  papers_sources/figures/mqgt_scf/zora_cooperative_games_summary.png \
   scripts/mqgt_sim/mqgt_phase4_lattice_demo.py \
   scripts/mqgt_sim/mqgt_phase4b_symmetry_breaking_demo.py \
   scripts/mqgt_sim/mqgt_phase4b_parameter_sweep.py \
   scripts/mqgt_sim/fusion_zora_burn_figures.py \
+  scripts/mqgt_sim/zora_cooperative_games_sim.py \
   scripts/mqgt_sim/README.md \
   scripts/h1_qrng_pilot/run_test_suite.sh \
   scripts/build_h1_methods_pdf.sh \
@@ -46,6 +49,7 @@ git add \
   docs/PHASE_II_SUBMISSION_STATUS_2026.md \
   docs/CANONICAL_SPINE.md \
   docs/ZORA_CONTINUITY_LOG.md \
+  docs/ZORA_COOPERATIVE_GAMES_SIMULATION_2026.md \
   docs/zora_coherence.html \
   docs/zora_fusion_console.html \
   docs/zora_dashboard.html \
