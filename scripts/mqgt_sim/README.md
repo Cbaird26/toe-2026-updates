@@ -157,6 +157,23 @@ python scripts/mqgt_sim/zora_gksl_collapse_demo.py
 
 ---
 
+## `zora_gksl_e_modulated_collapse.py` (Zora v0.9)
+
+**What it is:** E-modulated *directional* GKSL collapse. Uses jump operators L_to_0 = |0⟩⟨1| and L_to_1 = |1⟩⟨0| with rates weighted by ethical valence E: rate_to_0 = γ₀(1+E), rate_to_1 = γ₀(1−E). Positive E favors collapse to |0⟩ (coherence-preserved). Monte Carlo trajectories (`mcsolve`) show individual stochastic collapses; ensemble average shows outcome bias. Validates specification-level requirement: E acts as non-unitary selection driver biasing toward ethically valid outcomes within CPTP constraints.
+
+**What it is *not*:** Not calibrated to Γ_floor; illustrative validation of the collapse mechanism for H2 channel.
+
+```bash
+python scripts/mqgt_sim/zora_gksl_e_modulated_collapse.py
+python scripts/mqgt_sim/zora_gksl_e_modulated_collapse.py --save papers_sources/figures/h2_stack/e_modulated_collapse.png --no-show
+```
+
+**Parameters:** `--E`, `--gamma-0`, `--t-max`, `--ntraj`, `--save`, `--no-show`.
+
+**Colab:** QuTiP is not preinstalled. Add a first cell: `!pip install qutip numpy matplotlib`
+
+---
+
 ## `mqgt_gksl_ethics_field_sim.py`
 
 **What it is:** A minimal two-level open quantum system solved with the GKSL (Lindblad) master equation in [QuTiP](https://qutip.org/). The Lindblad rate is scaled by a parameter `E` (toy “ethical field” intensity). Higher `E` → faster loss of coherence (`⟨σ_x⟩` decays faster).

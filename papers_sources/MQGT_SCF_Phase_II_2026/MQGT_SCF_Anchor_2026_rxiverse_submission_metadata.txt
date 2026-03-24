@@ -1,0 +1,20 @@
+Suggested category: Quantum Gravity and String Theory
+
+Suggested title:
+MQGT-SCF Phase II: Minimal Scalar-Singlet EFT, Local GKSL Measurement Dynamics, and an H2 Interferometric Exclusion Observable
+
+Suggested author listing:
+Christopher Michael Baird
+Independent Researcher
+
+Suggested abstract (244 words):
+We present a compact Phase II formulation of the MQGT-SCF program as a minimal scalar-singlet effective field theory extending General Relativity and the Standard Model by two real singlets Phi_c(x) and E(x). The technical claim is deliberately limited to specification-level closure: the framework fixes the action, field equations, decoupling limit, boundedness conditions, a mediator-derived nonlocal-kernel route, and a local covariant Gorini-Kossakowski-Sudarshan-Lindblad (GKSL) measurement container compatible with completely positive trace-preserving evolution. Any teleology-like effect is retained only as an optional measure-level tilt rather than as a bulk time-odd source. We state a finite-dimensional operational no-signalling result for the safe local class and identify the main empirical target as excess interferometric dephasing in the H2 channel, summarized by a visibility-suppression law and an instrument-bounded exclusion floor. A controlled low-energy naturalness module is added by adopting an EFT cutoff benchmark Lambda_* = 1 TeV with stress band Lambda in [1,10] TeV, which separates an ultralight mainline sector from a heavier collider-safe companion benchmark. The result is a smaller and more auditable object than an all-at-once unification claim: a framework that can be constrained or falsified in clear ways.
+
+Suggested comments field:
+7 pages, 1 table. CC BY 4.0. Prepared with AI-assisted editorial support.
+
+Submission notes:
+- rxiVerse asks for abstract under 400 words.
+- Comments should be brief and limited to technicalities.
+- The PDF should be a single self-contained file under 5 MB.
+- This title/abstract are similar enough to rxiVerse:2603.0061 that the archive may treat the upload as a replacement.

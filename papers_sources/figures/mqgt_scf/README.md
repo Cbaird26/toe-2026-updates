@@ -19,3 +19,13 @@ python scripts/mqgt_sim/mqgt_multi_channel_exclusion_plot.py --out-dir papers_so
 ```
 
 Used in: Phase II anchor paper, parameter card appendix, multi-channel constraint discussion.
+
+## Concept figure
+
+**File:** `mqgt_scf_phi_e_gksl_concept.png`
+
+Conceptual artwork for the Anchor / Phase II explanatory stack: Φc, E, and GKSL measurement channel feeding a stabilized-reality motif.
+
+- Explanatory / conceptual only
+- Not a referee-safe evidence figure
+- Does not replace `papers_sources/mqgt-scf-diagram.png`

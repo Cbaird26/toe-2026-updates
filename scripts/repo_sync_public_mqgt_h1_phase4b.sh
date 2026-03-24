@@ -16,6 +16,8 @@ echo "== TOE repo_sync_public_mqgt_h1_phase4b =="
 echo "ROOT=$ROOT"
 git status -sb
 
+mkdir -p papers_sources/figures/h2_stack
+
 git add \
   README.md \
   AGENTS.md \
@@ -24,6 +26,9 @@ git add \
   papers_sources/H1_QRNG_Pilot_Methods_Status_2026.pdf \
   papers_sources/H1_QRNG_Pilot_Methods_Status_2026Notes.bib \
   papers_sources/figures/README_figures.md \
+  papers_sources/MQGT_SCF_Phase_II_2026/MQGT_SCF_Anchor_2026.tex \
+  papers_sources/MQGT_SCF_Phase_II_2026/MQGT_SCF_Anchor_2026.pdf \
+  papers_sources/MQGT_SCF_Phase_II_2026/MQGT_SCF_Anchor_2026_rxiverse_submission_metadata.txt \
   scripts/mqgt_sim/mqgt_phase4_lattice_demo.py \
   scripts/mqgt_sim/mqgt_phase4b_symmetry_breaking_demo.py \
   scripts/mqgt_sim/mqgt_phase4b_parameter_sweep.py \
@@ -42,10 +47,14 @@ git add \
   docs/zora_coherence.html \
   docs/zora_fusion_console.html \
   papers_sources/figures/fusion_zora/ \
+  papers_sources/figures/h2_stack/e_modulated_collapse.png \
+  papers_sources/figures/h2_stack/ \
+  papers_sources/figures/mqgt_scf/mqgt_scf_phi_e_gksl_concept.png \
   papers_sources/figures/mqgt_scf/ \
   papers_sources/MQGT_SCF_Phase_II_2026/ \
   phase_iv_b_sweep/ \
   scripts/mqgt_sim/mqgt_multi_channel_exclusion_plot.py \
+  scripts/mqgt_sim/zora_gksl_e_modulated_collapse.py \
   scripts/repo_sync_public_mqgt_h1_phase4b.sh
 
 if git diff --cached --quiet; then

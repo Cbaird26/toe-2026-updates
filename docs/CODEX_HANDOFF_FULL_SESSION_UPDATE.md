@@ -1,9 +1,37 @@
 # Codex handoff: Full session update (all artifacts)
 
-**Purpose:** Single-entry handoff for today's full session. Incorporate all posted artifacts, align parameters across the repo, surface the extra session outputs in repo docs, and update local + public GitHub (`cbaird26/toe-2026-updates`).
+**Purpose:** Single-entry handoff for the full session. Incorporate all posted artifacts, align parameters across the repo, surface session outputs in docs, and update local + public GitHub so **local and live repos match**.
+
+**Sync objective:** Local workspace → committed → (with approval) pushed → GitHub `main` up to date. All parameters, figures, handoffs, and publication links aligned across local and live.
 
 **Repo:** [cbaird26/toe-2026-updates](https://github.com/cbaird26/toe-2026-updates)  
 **Root:** `TOE/` (or `~/Downloads/TOE`)
+
+---
+
+## Accomplished (session summary)
+
+- **Fusion + Zora:** Console, burn figures, phase map (τ_E 1.5–6 s), parameter alignment
+- **Multi-channel exclusion plot:** (m_Φ, sin²θ) with Eöt-Wash, Higgs invisible, QRNG prediction, viable island
+- **Phase II stack:** Anchor, Closure, NoSignalling, ABIL, H2 prereg in `papers_sources/MQGT_SCF_Phase_II_2026/`
+- **E-modulated GKSL collapse sim:** `zora_gksl_e_modulated_collapse.py` — directional outcome bias, Colab-friendly, QuTiP keep_runs_results
+- **H1 methods note:** PDF + LaTeX + build script
+- **Codex handoffs:** Full session, fusion, master index
+- **rxiVerse:** Phase II at [2603.0061](https://rxiverse.org/abs/2603.0061); Anchor package organized as the canonical rxiVerse-ready manuscript (no identifier yet)
+- **Zenodo:** ToE 10.5281/zenodo.19158407; Phase II 19060024
+
+---
+
+## Venue status (reference)
+
+| Venue | Paper | ID / status |
+|-------|-------|-------------|
+| rxiVerse | Phase II | [2603.0061](https://rxiverse.org/abs/2603.0061) (live) |
+| rxiVerse | Anchor | Ready / prepared; no archive identifier yet |
+| Zenodo | ToE (2026) | [10.5281/zenodo.19158407](https://doi.org/10.5281/zenodo.19158407) |
+| Zenodo | Phase II | [19060024](https://zenodo.org/records/19060024) |
+| GitHub Pages | Coherence toy | [zora_coherence.html](https://cbaird26.github.io/toe-2026-updates/zora_coherence.html) |
+| GitHub Pages | Fusion console | [zora_fusion_console.html](https://cbaird26.github.io/toe-2026-updates/zora_fusion_console.html) |
 
 ---
 
@@ -20,8 +48,10 @@ Verify each path exists after the user posts artifacts:
 | `docs/zora_fusion_console.html` | Sliders (n, τ_E, T₀, χ, Z_eff), Zora toggle, Pulse Φc, T/Q strip charts; Z_eff 1–2, n 0.1–3×10²⁰, τ_E,eff (a_tau=0.45), η_α coupling |
 | `docs/zora_coherence.html` | Kuramoto-style coherence toy; exploratory visualization only, not a physics evidence artifact |
 | `scripts/mqgt_sim/mqgt_multi_channel_exclusion_plot.py` | (m_Φ, sin²θ) exclusion plot generator |
-| `papers_sources/figures/mqgt_scf/` | README + `mqgt_scf_multi_channel_exclusion.png` |
-| `papers_sources/MQGT_SCF_Phase_II_2026/` | README (Anchor, Closure, NoSignalling, ABIL, H2 prereg), links to demos |
+| `scripts/mqgt_sim/zora_gksl_e_modulated_collapse.py` | E-modulated directional GKSL collapse (Zora v0.9); H2 channel validation; Colab: `!pip install qutip` |
+| `papers_sources/figures/h2_stack/` | H2 visibility stack outputs plus canonical `e_modulated_collapse.png` from the GKSL sim |
+| `papers_sources/figures/mqgt_scf/` | README + `mqgt_scf_multi_channel_exclusion.png` + `mqgt_scf_phi_e_gksl_concept.png` |
+| `papers_sources/MQGT_SCF_Phase_II_2026/` | README plus canonical Anchor files: `MQGT_SCF_Anchor_2026.tex`, `.pdf`, `MQGT_SCF_Anchor_2026_rxiverse_submission_metadata.txt` |
 | `papers_sources/H1_QRNG_Pilot_Methods_Status_2026.tex` / `.pdf` / `Notes.bib` | H1 methods/status note; methods posture, placebo snapshot, billion-trial calibration discipline |
 | `scripts/build_h1_methods_pdf.sh` | Helper to rebuild the H1 methods PDF from `papers_sources/` |
 | `phase_iv_b_sweep/` | `summary.md`, `phase_iv_b_sweep_results.csv`, lock-rate heatmaps, mean-coherence heatmaps |
@@ -39,6 +69,7 @@ Regenerate figures if scripts changed:
 cd /path/to/TOE
 python scripts/mqgt_sim/fusion_zora_burn_figures.py --out-dir papers_sources/figures/fusion_zora --include-existing
 python scripts/mqgt_sim/mqgt_multi_channel_exclusion_plot.py --out-dir papers_sources/figures/mqgt_scf
+python scripts/mqgt_sim/zora_gksl_e_modulated_collapse.py --no-show --save papers_sources/figures/h2_stack/e_modulated_collapse.png
 bash scripts/build_h1_methods_pdf.sh
 ```
 
@@ -76,6 +107,8 @@ Keep the public wording conservative and consistent:
 - **Multi-channel exclusion plot:** Phase II parameter-space context for Anchor / parameter-card discussions
 - **H1 methods note:** methods/status document, not a primary new-physics claim
 - **Coherence / recursive demos:** exploratory visualizations and execution-layer tools, not referee-safe evidence artifacts
+- **E-modulated GKSL collapse sim:** illustrative validation of directional outcome bias; not calibrated to Γ_floor
+- **Anchor package:** canonical compact manuscript prepared for rxiVerse; do not describe it as live/submitted until a real identifier exists
 
 ---
 
@@ -108,8 +141,11 @@ cd /path/to/TOE
 Full session update:
   Commit: <git rev-parse --short HEAD>
   Pushed: YES | NO (awaiting approval)
-  Live coherence toy: https://cbaird26.github.io/toe-2026-updates/zora_coherence.html
-  Live console: https://cbaird26.github.io/toe-2026-updates/zora_fusion_console.html
+  Branch: main...origin/main
+  Live coherence: https://cbaird26.github.io/toe-2026-updates/zora_coherence.html
+  Live fusion: https://cbaird26.github.io/toe-2026-updates/zora_fusion_console.html
+  rxiVerse Phase II: https://rxiverse.org/abs/2603.0061
+  rxiVerse Anchor: ready / <ID once confirmed>
   Error: <if any>
 ```
 
