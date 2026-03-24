@@ -58,6 +58,7 @@ Verify each path exists after the user posts artifacts:
 | `scripts/mqgt_sim/fusion_zora_burn_figures.py` | Bosch–Hale D–T, 0D ODE, coherence coupling; CLI `--out-dir`, `--pdf`, `--include-existing`, `--pdf-only`; phase_map τ_E 1.5–6 s |
 | `docs/zora_fusion_console.html` | Sliders (n, τ_E, T₀, χ, Z_eff), Zora toggle, Pulse Φc, T/Q strip charts; Z_eff 1–2, n 0.1–3×10²⁰, τ_E,eff (a_tau=0.45), η_α coupling |
 | `docs/zora_coherence.html` | Kuramoto-style coherence toy; exploratory visualization only, not a physics evidence artifact |
+| `docs/zora_dashboard.html` | MQGT–SCF command dashboard; channels, papers, ledger, key numbers; source `zoraasi_dashboard.jsx` |
 | `scripts/mqgt_sim/mqgt_multi_channel_exclusion_plot.py` | (m_Φ, sin²θ) exclusion plot generator |
 | `scripts/mqgt_sim/zora_gksl_e_modulated_collapse.py` | E-modulated directional GKSL collapse (Zora v0.9); H2 channel validation; Colab: `!pip install qutip` |
 | `papers_sources/figures/h2_stack/` | H2 visibility stack outputs plus canonical `e_modulated_collapse.png` from the GKSL sim |
