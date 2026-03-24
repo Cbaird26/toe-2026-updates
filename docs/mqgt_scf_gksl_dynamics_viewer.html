@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<!--
+  MQGT-SCF GKSL Dynamics Viewer — static demo (React + Recharts via esm.sh).
+  Bundler-friendly source: mqgt_scf_gksl_dynamics_viewer.jsx
+  Exploratory toy only; not calibrated to H2 prereg or Γ_floor.
+-->
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MQGT-SCF GKSL Dynamics Viewer</title>
+  <style>
+    body { margin: 0; background: #050508; min-height: 100vh; }
+    #root { max-width: 1100px; margin: 0 auto; padding: 16px; }
+    a.back { color: #00f0ff88; font-family: monospace; font-size: 12px; text-decoration: none; display: inline-block; margin-bottom: 12px; }
+    a.back:hover { color: #00f0ff; }
+  </style>
+</head>
+<body>
+  <div id="root"></div>
+  <script type="module">
+    import React, { useState, useMemo } from "https://esm.sh/react@18.2.0";
+    import { createRoot } from "https://esm.sh/react-dom@18.2.0/client";
+    import {
+      LineChart,
+      Line,
+      XAxis,
+      YAxis,
+      CartesianGrid,
+      Tooltip,
+      ResponsiveContainer,
+      ReferenceLine,
+      Legend,
+    } from "https://esm.sh/recharts@2.12.7?deps=react@18.2.0,react-dom@18.2.0";
+
+    const e = React.createElement;
+
+    function ControlSlider({ label, value, min, max, step, onChange, color }) {
+      return e("div", { style: { marginBottom: "20px" } },
+        e("div", { style: { display: "flex", justifyContent: "space-between", marginBottom: "8px" } },
+          e("label", null, label),
+          e("span", { style: { color, fontWeight: "bold" } }, value)
+        ),
+        e("input", {
+          type: "range",
+          min,
+          max,
+          step,
+          value,
+          onChange: (ev) => onChange(parseFloat(ev.target.value)),
+          style: { width: "100%", accentColor: color },
+        })
+      );
+    }
+
+    function MQGTSimulator() {
+      const [phiC, setPhiC] = useState(0.5);
+      const [eField, setEField] = useState(0.5);
+      const [lambda, setLambda] = useState(1.0);
+      const [gkslRate, setGkslRate] = useState(0.2);
+
+      const simulationData = useMemo(() => {
+        const data = [];
+        const timeSteps = 100;
+        const dt = 0.1;
+        for (let i = 0; i <= timeSteps; i++) {
+          const t = i * dt;
+          const baselineCoherence = Math.cos(t) * Math.exp(-0.05 * t);
+          const amplitudeModulator = 1 + phiC * 0.4 + eField * 0.4;
+          const frequencyModulator = lambda;
+          const gkslEnvelope = Math.exp(-gkslRate * t);
+          const perturbedCoherence =
+            amplitudeModulator * Math.cos(t * frequencyModulator) * gkslEnvelope;
+          data.push({
+            time: t.toFixed(1),
+            Baseline: baselineCoherence,
+            PerturbedState: perturbedCoherence,
+          });
+        }
+        return data;
+      }, [phiC, eField, lambda, gkslRate]);
+
+      const theme = {
+        bg: "#0a0a0f",
+        panelBg: "#13131a",
+        text: "#e0e0e0",
+        accent1: "#00f0ff",
+        accent2: "#b026ff",
+        boundLine: "#ff2a2a",
+      };
+
+      return e("div", {
+        style: {
+          padding: "24px",
+          backgroundColor: theme.bg,
+          color: theme.text,
+          fontFamily: "monospace",
+          borderRadius: "8px",
+        },
+      },
+        e("a", { className: "back", href: "zora_dashboard.html" }, "← MQGT–SCF Dashboard"),
+        e("h2", {
+          style: {
+            color: theme.accent1,
+            borderBottom: `1px solid ${theme.accent2}`,
+            paddingBottom: "10px",
+            marginTop: 0,
+          },
+        }, "ZoraASI // MQGT-SCF GKSL Dynamics Viewer"),
+        e("p", {
+          style: { fontSize: 12, color: "#888", marginTop: 8, maxWidth: 720 },
+        }, "Toy visualization only. Curves are not calibrated to Γ_floor or preregistered H2 analysis; band lines are illustrative."),
+        e("div", { style: { display: "flex", gap: "24px", marginTop: "20px", flexWrap: "wrap" } },
+          e("div", {
+            style: {
+              flex: "1",
+              minWidth: 260,
+              backgroundColor: theme.panelBg,
+              padding: "20px",
+              borderRadius: "8px",
+              border: `1px solid ${theme.accent1}40`,
+            },
+          },
+            e("h3", { style: { marginTop: 0, color: theme.accent2 } }, "EFT Parameters"),
+            e(ControlSlider, {
+              label: "Phi_c Coupling",
+              value: phiC,
+              min: 0,
+              max: 1,
+              step: 0.01,
+              onChange: setPhiC,
+              color: theme.accent1,
+            }),
+            e(ControlSlider, {
+              label: "E Field Coupling",
+              value: eField,
+              min: 0,
+              max: 1,
+              step: 0.01,
+              onChange: setEField,
+              color: theme.accent1,
+            }),
+            e(ControlSlider, {
+              label: "Lambda (TeV)",
+              value: lambda,
+              min: 1,
+              max: 10,
+              step: 0.1,
+              onChange: setLambda,
+              color: theme.accent2,
+            }),
+            e(ControlSlider, {
+              label: "GKSL Dissipation",
+              value: gkslRate,
+              min: 0,
+              max: 1,
+              step: 0.01,
+              onChange: setGkslRate,
+              color: theme.accent2,
+            })
+          ),
+          e("div", {
+            style: {
+              flex: "2",
+              minWidth: 320,
+              height: "400px",
+              backgroundColor: theme.panelBg,
+              padding: "20px",
+              borderRadius: "8px",
+              border: `1px solid ${theme.accent2}40`,
+            },
+          },
+            e(ResponsiveContainer, { width: "100%", height: "100%" },
+              e(LineChart, { data: simulationData, margin: { top: 5, right: 20, bottom: 5, left: 0 } },
+                e(CartesianGrid, { strokeDasharray: "3 3", stroke: "#2a2a35" }),
+                e(XAxis, { dataKey: "time", stroke: theme.text, tick: { fill: theme.text } }),
+                e(YAxis, { stroke: theme.text, tick: { fill: theme.text }, domain: [-2, 2] }),
+                e(Tooltip, {
+                  contentStyle: { backgroundColor: "#000", border: `1px solid ${theme.accent1}` },
+                }),
+                e(Legend, null),
+                e(ReferenceLine, {
+                  y: 0.15,
+                  label: {
+                    position: "top",
+                    value: "Illustrative band",
+                    fill: theme.boundLine,
+                    fontSize: 12,
+                  },
+                  stroke: theme.boundLine,
+                  strokeDasharray: "3 3",
+                }),
+                e(ReferenceLine, { y: -0.15, stroke: theme.boundLine, strokeDasharray: "3 3" }),
+                e(Line, {
+                  type: "monotone",
+                  dataKey: "Baseline",
+                  stroke: "#555566",
+                  strokeWidth: 2,
+                  dot: false,
+                }),
+                e(Line, {
+                  type: "monotone",
+                  dataKey: "PerturbedState",
+                  stroke: theme.accent1,
+                  strokeWidth: 3,
+                  dot: false,
+                  activeDot: { r: 8 },
+                })
+              )
+            )
+          )
+        )
+      );
+    }
+
+    createRoot(document.getElementById("root")).render(e(MQGTSimulator));
+  </script>
+</body>
+</html>

@@ -54,6 +54,8 @@ git add \
   docs/zora_fusion_console.html \
   docs/zora_dashboard.html \
   docs/zora_closure_explorer.html \
+  docs/mqgt_scf_gksl_dynamics_viewer.html \
+  docs/mqgt_scf_gksl_dynamics_viewer.jsx \
   docs/zoraasi_dashboard.jsx \
   docs/zora_self_manifestation.html \
   papers_sources/figures/fusion_zora/ \

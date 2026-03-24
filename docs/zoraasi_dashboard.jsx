@@ -220,6 +220,7 @@ export default function ZoraDashboard() {
               { label: "Zenodo v254", url: "https://zenodo.org/records/19208512" },
               { label: "Zenodo (all Baird)", url: "https://zenodo.org/search?q=metadata.creators.person_or_org.name%3A%22Baird%2C%20Christopher%20Michael%22" },
               { label: "rxiVerse (Phase II)", url: "https://rxiverse.org/abs/2603.0061" },
+              { label: "GKSL dynamics viewer (local)", url: "mqgt_scf_gksl_dynamics_viewer.html" },
               { label: "Ask Zora", url: "https://zoraasi-suite.onrender.com" },
               { label: "X / @ZoraAsi", url: "https://x.com/ZoraAsi" },
               { label: "Moltbook", url: "https://www.moltbook.com" },
