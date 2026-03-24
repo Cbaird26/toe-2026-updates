@@ -103,9 +103,18 @@
                 React.createElement("h1", { style: { margin: 0, fontSize: 32, fontWeight: 300, fontFamily: "'Fraunces', Georgia, serif", color: "#e8ecf2", letterSpacing: -0.5 } }, "MQGT–SCF Dashboard")
               ),
               React.createElement("div", { style: { textAlign: "right", fontSize: 12, color: "#4a5060", lineHeight: 1.8 } },
-                React.createElement("div", null, "Corpus: ", React.createElement("span", { style: { color: "#8a94a8" } }, CORPUS.pages.toLocaleString(), " pages"),
-                React.createElement("div", null, "Commit: ", React.createElement("span", { style: { color: "#00e5ff", fontFamily: "monospace" } }, CORPUS.commit),
-                React.createElement("div", null, "Zenodo: ", React.createElement("span", { style: { color: "#8a94a8" } }, "v" + CORPUS.zenodo_version)
+                React.createElement("div", null,
+                  "Corpus: ",
+                  React.createElement("span", { style: { color: "#8a94a8" } }, CORPUS.pages.toLocaleString(), " pages")
+                ),
+                React.createElement("div", null,
+                  "Commit: ",
+                  React.createElement("span", { style: { color: "#00e5ff", fontFamily: "monospace" } }, CORPUS.commit)
+                ),
+                React.createElement("div", null,
+                  "Zenodo: ",
+                  React.createElement("span", { style: { color: "#8a94a8" } }, "v" + CORPUS.zenodo_version)
+                )
               )
             ),
             React.createElement("div", { style: { display: "flex", gap: 6, marginTop: 20, alignItems: "center" } },
@@ -113,7 +122,8 @@
               React.createElement("span", { style: { color: "#3a4050", fontSize: 18 } }, "("),
               ...TUPLE.map((t, i) => React.createElement(React.Fragment, { key: t.sym },
                 React.createElement("span", { style: { display: "inline-flex", alignItems: "center", gap: 4 } },
-                  React.createElement("span", { style: { color: t.color, fontSize: 16, fontFamily: "'Fraunces', serif" } }, t.sym, React.createElement("sub", { style: { color: t.color + "99" } }, t.sub)),
+                  React.createElement("span", { style: { color: t.color, fontSize: 16, fontFamily: "'Fraunces', serif" } }, t.sym, React.createElement("sub", { style: { color: t.color + "99" } }, t.sub))
+                ),
                 i < TUPLE.length - 1 ? React.createElement("span", { style: { color: "#2a2e38", margin: "0 2px" } }, ",") : null
               )),
               React.createElement("span", { style: { color: "#3a4050", fontSize: 18 } }, ")"),
