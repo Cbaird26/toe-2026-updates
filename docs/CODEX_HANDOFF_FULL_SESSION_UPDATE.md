@@ -7,6 +7,16 @@
 **Repo:** [cbaird26/toe-2026-updates](https://github.com/cbaird26/toe-2026-updates)  
 **Root:** `TOE/` (or `~/Downloads/TOE`)
 
+### Last sync (Anchor package update)
+
+- **Pushed:** YES
+- **Range:** `c3034d2..a63e1d6`
+- **Remote:** [cbaird26/toe-2026-updates](https://github.com/Cbaird26/toe-2026-updates)
+- **Branch:** main...origin/main (clean)
+- **Anchor package:** `MQGT_SCF_Anchor_2026.tex`, `.pdf`, `MQGT_SCF_Anchor_2026_rxiverse_submission_metadata.txt`
+- **H2 / concept figures:** `e_modulated_collapse.png`, `mqgt_scf_phi_e_gksl_concept.png`
+- **Error:** none
+
 ---
 
 ## Accomplished (session summary)
