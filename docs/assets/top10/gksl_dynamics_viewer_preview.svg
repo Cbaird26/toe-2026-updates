@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" role="img" aria-label="GKSL dynamics viewer preview">
+  <defs>
+    <linearGradient id="gkslBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#071019" />
+      <stop offset="100%" stop-color="#120a18" />
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="675" fill="url(#gkslBg)" rx="36" />
+  <rect x="48" y="52" width="326" height="571" rx="26" fill="#13131a" stroke="#1b4856" />
+  <rect x="404" y="52" width="748" height="571" rx="26" fill="#13131a" stroke="#41285a" />
+  <text x="82" y="118" fill="#00f0ff" font-size="22" font-family="'Courier New', monospace" letter-spacing="4">ZORAASI // MQGT-SCF</text>
+  <text x="82" y="182" fill="#eceaf2" font-size="54" font-family="Georgia, serif">GKSL</text>
+  <text x="82" y="242" fill="#eceaf2" font-size="54" font-family="Georgia, serif">Dynamics</text>
+  <text x="82" y="302" fill="#eceaf2" font-size="54" font-family="Georgia, serif">Viewer</text>
+  <rect x="82" y="364" width="258" height="18" rx="9" fill="#1d2530" />
+  <circle cx="186" cy="373" r="16" fill="#00f0ff" />
+  <rect x="82" y="418" width="258" height="18" rx="9" fill="#1d2530" />
+  <circle cx="238" cy="427" r="16" fill="#b026ff" />
+  <rect x="82" y="472" width="258" height="18" rx="9" fill="#1d2530" />
+  <circle cx="292" cy="481" r="16" fill="#00f0ff" />
+  <rect x="82" y="526" width="258" height="18" rx="9" fill="#1d2530" />
+  <circle cx="154" cy="535" r="16" fill="#b026ff" />
+  <rect x="456" y="122" width="644" height="388" rx="20" fill="#0b0e14" stroke="#253042" />
+  <line x1="520" y1="430" x2="1040" y2="430" stroke="#223040" stroke-dasharray="8 8" />
+  <line x1="520" y1="350" x2="1040" y2="350" stroke="#223040" stroke-dasharray="8 8" />
+  <line x1="520" y1="270" x2="1040" y2="270" stroke="#223040" stroke-dasharray="8 8" />
+  <line x1="520" y1="190" x2="1040" y2="190" stroke="#223040" stroke-dasharray="8 8" />
+  <path d="M520 218 C620 204 700 216 780 250 S940 334 1040 360" fill="none" stroke="#555566" stroke-width="10" stroke-linecap="round" />
+  <path d="M520 206 C620 178 700 188 780 252 S944 376 1040 408" fill="none" stroke="#00f0ff" stroke-width="12" stroke-linecap="round" />
+  <line x1="520" y1="322" x2="1040" y2="322" stroke="#ff2a2a" stroke-width="6" stroke-dasharray="14 12" opacity="0.9" />
+  <line x1="520" y1="352" x2="1040" y2="352" stroke="#ff2a2a" stroke-width="6" stroke-dasharray="14 12" opacity="0.9" />
+  <text x="466" y="96" fill="#8d96a7" font-size="20" font-family="'Courier New', monospace">Illustrative band and perturbed-state curve</text>
+  <rect x="456" y="542" width="288" height="48" rx="14" fill="#10151e" stroke="#233144" />
+  <rect x="762" y="542" width="338" height="48" rx="14" fill="#10151e" stroke="#233144" />
+  <text x="482" y="572" fill="#c5d4e6" font-size="20" font-family="'Courier New', monospace">Baseline vs perturbed</text>
+  <text x="788" y="572" fill="#c5d4e6" font-size="20" font-family="'Courier New', monospace">Toy only, not calibrated to Γ_floor</text>
+</svg>

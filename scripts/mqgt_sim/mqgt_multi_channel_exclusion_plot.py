@@ -20,6 +20,17 @@ import numpy as np
 # QRNG prediction: theta ≈ 3.7e-6 → sin^2 theta ≈ 1.4e-11
 QRNG_SIN2_THETA = 1.4e-11
 H2_NUISANCE_FLOOR = 1.15e-3
+HC_E_V_M = 1.97e-7  # hbar c in eV·m
+
+
+def mass_to_range(mass_eV):
+    values = np.clip(np.asarray(mass_eV, dtype=float), 1e-30, None)
+    return HC_E_V_M / values
+
+
+def range_to_mass(range_m):
+    values = np.clip(np.asarray(range_m, dtype=float), 1e-30, None)
+    return HC_E_V_M / values
 
 
 def main() -> None:
@@ -39,8 +50,7 @@ def main() -> None:
 
     m_phi = np.logspace(-1, 11, 500)
     # Yukawa range lambda = hbar c / (m_phi c^2) in m; m in eV -> lambda in m
-    hc_eV_m = 1.97e-7  # hbar c in eV·m
-    lam_m = hc_eV_m / m_phi
+    lam_m = HC_E_V_M / m_phi
 
     # EXCLUDED: Higgs invisible (top) — sin^2 theta > ~0.11 for m_Phi < m_H/2
     sin2_max = 1e2
@@ -76,7 +86,7 @@ def main() -> None:
     ax.set_ylabel(r"Higgs-portal mixing $\sin^2\theta_{h\Phi}$")
     ax.set_title("MQGT-SCF Multi-Channel Exclusion Plot\nThree independent channels constraining the ($m_\\Phi$, $\\sin^2\\theta$) parameter plane.")
 
-    secax = ax.secondary_xaxis("top", functions=(lambda m: hc_eV_m / np.array(m), lambda lam: hc_eV_m / np.array(lam)))
+    secax = ax.secondary_xaxis("top", functions=(mass_to_range, range_to_mass))
     secax.set_xlabel(r"Yukawa range $\lambda$ [m]")
 
     ax.legend(loc="upper right", fontsize=8)

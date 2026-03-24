@@ -1,8 +1,19 @@
 # MQGT-SCF illustrative simulations
 
-## Top 10 visual sims (batch)
+## Canonical top 10
 
-**Table + runner:** [TOP_10_VISUAL_SIMULATIONS.md](TOP_10_VISUAL_SIMULATIONS.md) · `python scripts/mqgt_sim/zora_top10_visual_runner.py` → `papers_sources/figures/zora_top10/*.png`
+**Manifest:** [TOP_10_VISUAL_SIMULATIONS.md](TOP_10_VISUAL_SIMULATIONS.md)
+
+**Public gallery:** `docs/zora_top10_simulations.html`
+
+**Batch suite runner:**
+
+```bash
+python scripts/mqgt_sim/zora_top10_visual_runner.py
+python scripts/mqgt_sim/zora_top10_visual_runner.py --skip-qutip
+```
+
+The runner writes the canonical batch outputs to `papers_sources/figures/zora_top10/` and the public preview/artifact copies to `docs/assets/top10/`. It does not fail the whole suite when QuTiP is absent; that slot is marked unavailable instead.
 
 ---
 

@@ -1,276 +1,416 @@
 #!/usr/bin/env python3
 """
-Zora — Top 10 visual simulations (batch export).
+Canonical ZoraASI top-10 batch suite runner.
 
-Generates PNGs under --out (default: papers_sources/figures/zora_top10/).
-Plots 1–2,4,6–10 use numpy+matplotlib only. Plots 3,5 need QuTiP (skipped if missing).
+Runs the six batch simulations that feed the public Top 10 gallery:
+  - H2 visibility stack
+  - multi-channel exclusion plot
+  - E-modulated GKSL collapse
+  - Phase IV-B symmetry-breaking lattice demo
+  - Phase IV-B parameter sweep
+  - fusion burn figures
+
+Outputs canonical batch artifacts under --out-root and copies one public-facing
+artifact plus one thumbnail per batch entry under --docs-assets-dir.
 
 Run:
-  cd ~/Downloads/TOE && python3 scripts/mqgt_sim/zora_top10_visual_runner.py
+  cd ~/Downloads/TOE
+  python scripts/mqgt_sim/zora_top10_visual_runner.py
+  python scripts/mqgt_sim/zora_top10_visual_runner.py --skip-qutip
 """
 
 from __future__ import annotations
 
 import argparse
+import importlib.util
+import json
 import os
+import shutil
+import subprocess
 import sys
+from dataclasses import dataclass
+from pathlib import Path
 
-OUT_DEFAULT = "papers_sources/figures/zora_top10"
+
+@dataclass(frozen=True)
+class BatchEntry:
+    rank: int
+    slug: str
+    title: str
+    command: list[str]
+    artifact_relpath: str
+    qutip_required: bool = False
+
+
+def resolve_repo_path(repo_root: Path, raw_path: str) -> Path:
+    path = Path(raw_path)
+    if path.is_absolute():
+        return path
+    return repo_root / path
+
+
+def qutip_available() -> bool:
+    return importlib.util.find_spec("qutip") is not None
+
+
+def ensure_parent(path: Path) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+
+
+def create_status_image(path: Path, title: str, message: str, accent: str = "#ff9557") -> None:
+    ensure_parent(path)
+    import matplotlib
+
+    matplotlib.use("Agg")
+    import matplotlib.pyplot as plt
+
+    fig = plt.figure(figsize=(8, 4.5))
+    fig.patch.set_facecolor("#071018")
+    ax = fig.add_axes([0, 0, 1, 1])
+    ax.set_facecolor("#071018")
+    ax.axis("off")
+
+    ax.text(
+        0.08,
+        0.78,
+        title,
+        color="#eaf4ff",
+        fontsize=20,
+        fontweight="bold",
+        ha="left",
+        va="top",
+        transform=ax.transAxes,
+    )
+    ax.text(
+        0.08,
+        0.58,
+        message,
+        color="#a7bed3",
+        fontsize=13,
+        ha="left",
+        va="top",
+        transform=ax.transAxes,
+        wrap=True,
+    )
+    ax.text(
+        0.08,
+        0.16,
+        "Top 10 batch suite placeholder",
+        color=accent,
+        fontsize=12,
+        ha="left",
+        va="bottom",
+        transform=ax.transAxes,
+    )
+    ax.plot([0.08, 0.92], [0.1, 0.1], color=accent, lw=3, alpha=0.9, transform=ax.transAxes)
+    fig.savefig(path, dpi=160, bbox_inches="tight", facecolor=fig.get_facecolor())
+    plt.close(fig)
+
+
+def copy_public_assets(source: Path, docs_assets_dir: Path, slug: str) -> tuple[Path, Path]:
+    public_png = docs_assets_dir / f"{slug}.png"
+    thumb_png = docs_assets_dir / f"{slug}_thumb.png"
+    ensure_parent(public_png)
+    shutil.copy2(source, public_png)
+    shutil.copy2(source, thumb_png)
+    return public_png, thumb_png
+
+
+def build_batch_entries(repo_root: Path, out_root: Path) -> list[BatchEntry]:
+    scripts_dir = repo_root / "scripts" / "mqgt_sim"
+    py = sys.executable
+    return [
+        BatchEntry(
+            rank=5,
+            slug="h2_visibility_stack",
+            title="H2 visibility stack",
+            command=[
+                py,
+                str(scripts_dir / "h2_visibility_stack.py"),
+                "--save-dir",
+                str(out_root / "h2_visibility_stack"),
+                "--no-show",
+            ],
+            artifact_relpath="h2_visibility_stack/h2_visibility_vs_gamma.png",
+        ),
+        BatchEntry(
+            rank=6,
+            slug="multi_channel_exclusion",
+            title="Multi-channel exclusion plot",
+            command=[
+                py,
+                str(scripts_dir / "mqgt_multi_channel_exclusion_plot.py"),
+                "--out-dir",
+                str(out_root / "mqgt_scf"),
+                "--no-show",
+            ],
+            artifact_relpath="mqgt_scf/mqgt_scf_multi_channel_exclusion.png",
+        ),
+        BatchEntry(
+            rank=7,
+            slug="e_modulated_gksl_collapse",
+            title="E-modulated GKSL collapse",
+            command=[
+                py,
+                str(scripts_dir / "zora_gksl_e_modulated_collapse.py"),
+                "--save",
+                str(out_root / "h2_stack" / "e_modulated_collapse.png"),
+                "--no-show",
+                "--ntraj",
+                "30",
+                "--t-max",
+                "8.0",
+            ],
+            artifact_relpath="h2_stack/e_modulated_collapse.png",
+            qutip_required=True,
+        ),
+        BatchEntry(
+            rank=8,
+            slug="phase4b_symmetry_breaking",
+            title="Phase IV-B symmetry-breaking lattice",
+            command=[
+                py,
+                str(scripts_dir / "mqgt_phase4b_symmetry_breaking_demo.py"),
+                "--save-dir",
+                str(out_root / "phase4b_demo"),
+                "--no-show",
+                "--grid-size",
+                "48",
+                "--steps",
+                "180",
+                "--substeps",
+                "2",
+            ],
+            artifact_relpath="phase4b_demo/mqgt_phase4b_symmetry_breaking_demo.png",
+        ),
+        BatchEntry(
+            rank=9,
+            slug="phase4b_parameter_sweep",
+            title="Phase IV-B parameter sweep",
+            command=[
+                py,
+                str(scripts_dir / "mqgt_phase4b_parameter_sweep.py"),
+                "--outdir",
+                str(out_root / "phase4b_sweep"),
+                "--xis",
+                "0.000,0.010,0.020",
+                "--gammas",
+                "0.05,0.15,0.20",
+                "--g-couples",
+                "0.18",
+                "--seeds",
+                "2",
+                "--steps",
+                "120",
+                "--substeps",
+                "2",
+                "--grid-size",
+                "32",
+            ],
+            artifact_relpath="phase4b_sweep/mean_coherence_g_0.180.png",
+        ),
+        BatchEntry(
+            rank=10,
+            slug="fusion_burn_figures",
+            title="Fusion burn figures",
+            command=[
+                py,
+                str(scripts_dir / "fusion_zora_burn_figures.py"),
+                "--out-dir",
+                str(out_root / "fusion_zora"),
+            ],
+            artifact_relpath="fusion_zora/baseline_vs_controlled.png",
+        ),
+    ]
+
+
+def run_entry(
+    *,
+    entry: BatchEntry,
+    repo_root: Path,
+    out_root: Path,
+    docs_assets_dir: Path,
+    skip_qutip: bool,
+    qutip_ok: bool,
+) -> dict[str, str | int | bool]:
+    artifact_path = out_root / entry.artifact_relpath
+    public_png = docs_assets_dir / f"{entry.slug}.png"
+    thumb_png = docs_assets_dir / f"{entry.slug}_thumb.png"
+
+    if entry.qutip_required and skip_qutip:
+        reason = "Skipped by --skip-qutip."
+        print(f"[top10] skipping {entry.rank}: {entry.title} :: {reason}")
+        create_status_image(public_png, entry.title, reason)
+        shutil.copy2(public_png, thumb_png)
+        return {
+            "rank": entry.rank,
+            "slug": entry.slug,
+            "title": entry.title,
+            "status": "unavailable",
+            "artifact": str(artifact_path.relative_to(repo_root)),
+            "public_asset": str(public_png.relative_to(repo_root)),
+            "reason": reason,
+        }
+
+    if entry.qutip_required and not qutip_ok:
+        reason = "Skipped because QuTiP is unavailable."
+        print(f"[top10] skipping {entry.rank}: {entry.title} :: {reason}")
+        create_status_image(public_png, entry.title, reason)
+        shutil.copy2(public_png, thumb_png)
+        return {
+            "rank": entry.rank,
+            "slug": entry.slug,
+            "title": entry.title,
+            "status": "unavailable",
+            "artifact": str(artifact_path.relative_to(repo_root)),
+            "public_asset": str(public_png.relative_to(repo_root)),
+            "reason": reason,
+        }
+
+    print(f"[top10] running {entry.rank}: {entry.title}")
+    env = os.environ.copy()
+    env.setdefault("MPLBACKEND", "Agg")
+    try:
+        subprocess.run(entry.command, cwd=repo_root, check=True, env=env)
+    except subprocess.CalledProcessError as exc:
+        create_status_image(public_png, entry.title, f"Batch run failed with exit code {exc.returncode}.")
+        shutil.copy2(public_png, thumb_png)
+        return {
+            "rank": entry.rank,
+            "slug": entry.slug,
+            "title": entry.title,
+            "status": "failed",
+            "artifact": str(artifact_path.relative_to(repo_root)),
+            "public_asset": str(public_png.relative_to(repo_root)),
+            "reason": f"Command failed with exit code {exc.returncode}.",
+        }
+
+    if not artifact_path.is_file():
+        create_status_image(public_png, entry.title, "Expected output artifact was not created.")
+        shutil.copy2(public_png, thumb_png)
+        return {
+            "rank": entry.rank,
+            "slug": entry.slug,
+            "title": entry.title,
+            "status": "failed",
+            "artifact": str(artifact_path.relative_to(repo_root)),
+            "public_asset": str(public_png.relative_to(repo_root)),
+            "reason": "Expected output artifact missing.",
+        }
+
+    public_png, thumb_png = copy_public_assets(artifact_path, docs_assets_dir, entry.slug)
+    return {
+        "rank": entry.rank,
+        "slug": entry.slug,
+        "title": entry.title,
+        "status": "ok",
+        "artifact": str(artifact_path.relative_to(repo_root)),
+        "public_asset": str(public_png.relative_to(repo_root)),
+        "thumbnail": str(thumb_png.relative_to(repo_root)),
+        "reason": "",
+    }
+
+
+def create_mosaic(statuses: list[dict[str, str | int | bool]], docs_assets_dir: Path, out_root: Path) -> None:
+    import matplotlib
+
+    matplotlib.use("Agg")
+    import matplotlib.image as mpimg
+    import matplotlib.pyplot as plt
+
+    fig, axes = plt.subplots(2, 3, figsize=(15, 9))
+    fig.patch.set_facecolor("#04070d")
+
+    for ax, status in zip(axes.ravel(), statuses):
+        asset_path = docs_assets_dir / f"{status['slug']}.png"
+        img = mpimg.imread(asset_path)
+        ax.imshow(img)
+        ax.set_axis_off()
+        title_color = "#7fffd4" if status["status"] == "ok" else "#ffbf80"
+        ax.set_title(f"{status['rank']}. {status['title']}", color=title_color, fontsize=11, pad=10)
+
+    fig.suptitle(
+        "ZoraASI Top 10 batch suite poster",
+        color="#ecf5ff",
+        fontsize=16,
+        y=0.98,
+    )
+    fig.tight_layout(rect=(0, 0, 1, 0.96))
+
+    out_png = out_root / "batch_suite_mosaic.png"
+    docs_png = docs_assets_dir / "batch_suite_mosaic.png"
+    docs_thumb = docs_assets_dir / "batch_suite_mosaic_thumb.png"
+    ensure_parent(out_png)
+    fig.savefig(out_png, dpi=160, facecolor=fig.get_facecolor())
+    fig.savefig(docs_png, dpi=160, facecolor=fig.get_facecolor())
+    fig.savefig(docs_thumb, dpi=160, facecolor=fig.get_facecolor())
+    plt.close(fig)
 
 
 def main() -> None:
-    ap = argparse.ArgumentParser()
-    ap.add_argument("--out", default=OUT_DEFAULT, help="Output directory for PNGs")
-    args = ap.parse_args()
-    out = args.out
-    os.makedirs(out, exist_ok=True)
+    repo_root = Path(__file__).resolve().parents[2]
 
-    try:
-        import matplotlib
+    parser = argparse.ArgumentParser(description="Run the canonical ZoraASI top-10 batch suite")
+    parser.add_argument(
+        "--out-root",
+        default="papers_sources/figures/zora_top10",
+        help="Root directory for generated batch artifacts",
+    )
+    parser.add_argument(
+        "--docs-assets-dir",
+        default="docs/assets/top10",
+        help="Docs-side asset directory for public previews and artifact copies",
+    )
+    parser.add_argument(
+        "--skip-qutip",
+        action="store_true",
+        help="Skip the QuTiP-backed GKSL collapse entry and mark it unavailable",
+    )
+    args = parser.parse_args()
 
-        matplotlib.use("Agg")
-        import matplotlib.pyplot as plt
-        import numpy as np
-    except ImportError:
-        print("pip install numpy matplotlib", file=sys.stderr)
-        sys.exit(1)
+    out_root = resolve_repo_path(repo_root, args.out_root)
+    docs_assets_dir = resolve_repo_path(repo_root, args.docs_assets_dir)
+    out_root.mkdir(parents=True, exist_ok=True)
+    docs_assets_dir.mkdir(parents=True, exist_ok=True)
 
-    T_ref, dx_ref, delta = 1e-6, 1e-3, 1.15e-3
-    G_floor = -np.log(1 - delta) / (T_ref * dx_ref**2)
+    qutip_ok = qutip_available()
+    entries = build_batch_entries(repo_root, out_root)
+    statuses: list[dict[str, str | int | bool]] = []
 
-    # ---------- 1. H2: V/V0 vs Γ ----------
-    G = np.logspace(6, 11, 400)
-    V = np.exp(-G * T_ref * dx_ref**2)
-    fig, ax = plt.subplots(figsize=(9, 5))
-    ax.semilogx(G, V, lw=2, color="#00d4aa")
-    ax.axvline(G_floor, ls="--", color="#ff6b9d", lw=1.5, label=rf"$\Gamma_{{\rm floor}}\approx{G_floor:.2e}$")
-    ax.set_xlabel(r"$\Gamma$ (s$^{-1}$ m$^{-2}$)")
-    ax.set_ylabel(r"$V/V_0$")
-    ax.set_title("1 — H2 visibility vs decoherence strength")
-    ax.legend()
-    ax.grid(True, alpha=0.3)
-    ax.set_facecolor("#0d1117")
-    fig.patch.set_facecolor("#0d1117")
-    ax.tick_params(colors="white")
-    ax.xaxis.label.set_color("white")
-    ax.yaxis.label.set_color("white")
-    ax.title.set_color("white")
-    for s in ax.legend().get_texts():
-        s.set_color("white")
-    fig.tight_layout()
-    fig.savefig(os.path.join(out, "01_h2_visibility_vs_gamma.png"), dpi=160, facecolor=fig.get_facecolor())
-    plt.close()
+    for entry in entries:
+        status = run_entry(
+            entry=entry,
+            repo_root=repo_root,
+            out_root=out_root,
+            docs_assets_dir=docs_assets_dir,
+            skip_qutip=args.skip_qutip,
+            qutip_ok=qutip_ok,
+        )
+        statuses.append(status)
 
-    # ---------- 2. H2: exclusion landscape ----------
-    Tg = np.logspace(-8, -3, 100)
-    dxg = np.logspace(-6, -2, 100)
-    TG, DXG = np.meshgrid(Tg, dxg)
-    logG = np.log10(-np.log(1 - delta) / (TG * DXG**2))
-    fig, ax = plt.subplots(figsize=(9, 6))
-    im = ax.contourf(TG, DXG, logG, levels=40, cmap="magma")
-    ax.set_xscale("log")
-    ax.set_yscale("log")
-    plt.colorbar(im, ax=ax, label=r"$\log_{10}\Gamma_{\rm floor}$")
-    ax.scatter([T_ref], [dx_ref], c="cyan", s=120, marker="*", edgecolors="w", zorder=5)
-    ax.set_xlabel(r"$T$ (s)")
-    ax.set_ylabel(r"$\Delta x$ (m)")
-    ax.set_title("2 — H2 exclusion landscape (abstract ref ★)")
-    fig.tight_layout()
-    fig.savefig(os.path.join(out, "02_h2_exclusion_landscape.png"), dpi=160)
-    plt.close()
+    create_mosaic(statuses, docs_assets_dir, out_root)
 
-    # ---------- 3. GKSL: ⟨σ_x⟩ for several E (QuTiP) ----------
-    try:
-        import qutip as qt
+    status_path = out_root / "top10_batch_status.json"
+    with status_path.open("w", encoding="utf-8") as fh:
+        json.dump(
+            {
+                "out_root": str(out_root.relative_to(repo_root)),
+                "docs_assets_dir": str(docs_assets_dir.relative_to(repo_root)),
+                "skip_qutip": args.skip_qutip,
+                "qutip_available": qutip_ok,
+                "entries": statuses,
+            },
+            fh,
+            indent=2,
+        )
 
-        def sx_traj(Ei, steps=300, tmax=20, g0=0.05, kappa=0.2):
-            H = 0.5 * qt.sigmax()
-            psi0 = (qt.basis(2, 0) + qt.basis(2, 1)).unit()
-            rho0 = qt.ket2dm(psi0)
-            ge = g0 * (1 + kappa * Ei)
-            c_ops = [np.sqrt(max(ge, 0)) * qt.sigmaz()]
-            tlist = np.linspace(0, tmax, steps)
-            r = qt.mesolve(H, rho0, tlist, c_ops, [qt.sigmax()])
-            return tlist, np.asarray(r.expect[0])
-
-        fig, ax = plt.subplots(figsize=(9, 5))
-        colors = plt.cm.cool(np.linspace(0.15, 0.85, 5))
-        for i, E in enumerate([0, 2, 5, 10, 20]):
-            t, sx = sx_traj(E)
-            ax.plot(t, sx, lw=2, color=colors[i], label=rf"$E={E}$")
-        ax.set_xlabel("time (toy units)")
-        ax.set_ylabel(r"$\langle\sigma_x\rangle$ coherence")
-        ax.set_title("3 — GKSL: ethical-field strength vs decoherence speed")
-        ax.legend()
-        ax.grid(True, alpha=0.3)
-        ax.set_facecolor("#0d1117")
-        fig.patch.set_facecolor("#0d1117")
-        for spine in ax.spines.values():
-            spine.set_color("#666")
-        ax.tick_params(colors="white")
-        ax.xaxis.label.set_color("white")
-        ax.yaxis.label.set_color("white")
-        ax.title.set_color("white")
-        for s in ax.legend().get_texts():
-            s.set_color("white")
-        fig.tight_layout()
-        fig.savefig(os.path.join(out, "03_gksl_coherence_vs_E.png"), dpi=160, facecolor=fig.get_facecolor())
-        plt.close()
-    except Exception:
-        fig, ax = plt.subplots(figsize=(9, 3))
-        ax.text(0.5, 0.5, "3 — Install QuTiP: pip install qutip", ha="center", va="center", fontsize=14)
-        ax.axis("off")
-        fig.savefig(os.path.join(out, "03_gksl_coherence_vs_E_SKIPPED.png"), dpi=120)
-        plt.close()
-
-    # ---------- 4. Heatmap V/V0 in (Γ, T) at fixed Δx ----------
-    G2 = np.logspace(6, 10, 80)
-    T2 = np.logspace(-8, -4, 80)
-    GG, TT = np.meshgrid(G2, T2)
-    VV = np.exp(-GG * TT * dx_ref**2)
-    fig, ax = plt.subplots(figsize=(8, 6))
-    im = ax.pcolormesh(GG, TT, VV, shading="auto", cmap="viridis")
-    ax.set_xscale("log")
-    ax.set_yscale("log")
-    plt.colorbar(im, ax=ax, label=r"$V/V_0$")
-    ax.set_xlabel(r"$\Gamma$ (s$^{-1}$ m$^{-2}$)")
-    ax.set_ylabel(r"$T$ (s)")
-    ax.set_title(rf"4 — $V/V_0$ in $(\Gamma,T)$ at $\Delta x={dx_ref:g}$ m")
-    fig.tight_layout()
-    fig.savefig(os.path.join(out, "04_heatmap_V_over_Gamma_T.png"), dpi=160)
-    plt.close()
-
-    # ---------- 5. Purity Tr(ρ²) vs t (QuTiP) ----------
-    try:
-        import qutip as qt
-
-        fig, ax = plt.subplots(figsize=(9, 5))
-        for E, c in [(0, "#7fdbff"), (10, "#ff6b9d")]:
-            H = 0.5 * qt.sigmax()
-            psi0 = (qt.basis(2, 0) + qt.basis(2, 1)).unit()
-            rho0 = qt.ket2dm(psi0)
-            ge = 0.05 * (1 + 0.2 * E)
-            c_ops = [np.sqrt(max(ge, 0)) * qt.sigmaz()]
-            tlist = np.linspace(0, 20, 400)
-            r = qt.mesolve(H, rho0, tlist, c_ops, [])
-            pur = [(rho * rho).tr().real for rho in r.states]
-            ax.plot(tlist, pur, lw=2, label=rf"$E={E}$, Tr$(\rho^2)$", color=c)
-        ax.set_xlabel("time")
-        ax.set_ylabel(r"Tr$(\rho^2)$")
-        ax.set_title("5 — Purity decay: baseline vs high E")
-        ax.legend()
-        ax.grid(True, alpha=0.3)
-        fig.tight_layout()
-        fig.savefig(os.path.join(out, "05_purity_vs_time_E0_E10.png"), dpi=160)
-        plt.close()
-    except Exception:
-        fig, ax = plt.subplots(figsize=(9, 3))
-        ax.text(0.5, 0.5, "5 — Needs QuTiP", ha="center", va="center")
-        ax.axis("off")
-        fig.savefig(os.path.join(out, "05_purity_SKIPPED.png"), dpi=120)
-        plt.close()
-
-    # ---------- 6. Fringe envelope (conceptual 1D interference + decoherence) ----------
-    x = np.linspace(-3, 3, 1200)
-    k = 8.0
-    I0 = np.cos(k * x) ** 2
-    Gamma_show = G_floor * 0.5
-    env = np.exp(-Gamma_show * T_ref * dx_ref**2)  # scalar visibility scale
-    I = env * I0 + (1 - env) * 0.5  # mix toward uniform
-    fig, ax = plt.subplots(figsize=(10, 4))
-    ax.plot(x, I0, lw=0.8, alpha=0.4, label="Ideal fringes")
-    ax.plot(x, I, lw=1.2, color="gold", label=rf"Reduced visibility (toy, $V/V_0\approx{env:.4f}$)")
-    ax.set_xlabel("position (arb.)")
-    ax.set_ylabel("intensity")
-    ax.set_title("6 — Interference fringes + visibility suppression (schematic)")
-    ax.legend()
-    ax.grid(True, alpha=0.3)
-    fig.tight_layout()
-    fig.savefig(os.path.join(out, "06_fringe_visibility_schematic.png"), dpi=160)
-    plt.close()
-
-    # ---------- 7. Contours of constant V/V0 in (T, Δx) ----------
-    T7 = np.logspace(-8, -3, 200)
-    dx7 = np.logspace(-6, -2, 200)
-    T7g, dx7g = np.meshgrid(T7, dx7)
-    # fix Gamma at G_floor: V = exp(-G T dx^2)
-    V7 = np.exp(-G_floor * T7g * dx7g**2)
-    fig, ax = plt.subplots(figsize=(8, 6))
-    cs = ax.contour(T7g, dx7g, V7, levels=[0.999, 0.9995, 0.99885, 0.99, 0.95], colors="white", linewidths=1.2)
-    ax.clabel(cs, inline=True, fontsize=8)
-    ax.set_xscale("log")
-    ax.set_yscale("log")
-    ax.set_facecolor("#1a1a2e")
-    ax.set_xlabel(r"$T$ (s)")
-    ax.set_ylabel(r"$\Delta x$ (m)")
-    ax.set_title(rf"7 — Iso-$V/V_0$ at fixed $\Gamma=\Gamma_{{\rm floor}}$")
-    fig.patch.set_facecolor("#1a1a2e")
-    fig.tight_layout()
-    fig.savefig(os.path.join(out, "07_isovisibility_contours.png"), dpi=160, facecolor=fig.get_facecolor())
-    plt.close()
-
-    # ---------- 8. Relative Lindblad rate γ(E)/γ(0) ----------
-    Es = np.linspace(0, 15, 100)
-    ratio = 1 + 0.2 * Es
-    fig, ax = plt.subplots(figsize=(7, 4))
-    ax.fill_between(Es, 1, ratio, alpha=0.3, color="#ff6b9d")
-    ax.plot(Es, ratio, lw=2, color="#fff")
-    ax.axhline(3, ls=":", color="#7fdbff", label=r"$3\times$ at $E=10$")
-    ax.set_xlabel(r"toy $E$ intensity")
-    ax.set_ylabel(r"$\gamma(E)/\gamma(0)$")
-    ax.set_title("8 — GKSL toy: collapse rate vs E")
-    ax.legend()
-    ax.grid(True, alpha=0.3)
-    ax.set_facecolor("#0d1117")
-    fig.patch.set_facecolor("#0d1117")
-    ax.tick_params(colors="white")
-    for s in ax.get_xticklabels() + ax.get_yticklabels():
-        s.set_color("white")
-    ax.xaxis.label.set_color("white")
-    ax.yaxis.label.set_color("white")
-    ax.title.set_color("white")
-    fig.tight_layout()
-    fig.savefig(os.path.join(out, "08_relative_gamma_vs_E.png"), dpi=160, facecolor=fig.get_facecolor())
-    plt.close()
-
-    # ---------- 9. Binary survive / deep-exclude at abstract point ----------
-    G_scan = np.logspace(5, 12, 500)
-    survives = np.exp(-G_scan * T_ref * dx_ref**2) >= (1 - delta)
-    fig, ax = plt.subplots(figsize=(9, 3))
-    ax.fill_between(G_scan, 0, 1, where=survives, alpha=0.5, color="#2ecc71", label="above floor visibility")
-    ax.fill_between(G_scan, 0, 1, where=~survives, alpha=0.5, color="#e74c3c", label="excluded zone (toy)")
-    ax.set_xscale("log")
-    ax.set_xlabel(r"$\Gamma$")
-    ax.set_yticks([])
-    ax.set_title("9 — At (T_ref, Δx_ref): parameter space vs abstract δ")
-    ax.legend(loc="upper right")
-    fig.tight_layout()
-    fig.savefig(os.path.join(out, "09_survive_vs_exclude_strip.png"), dpi=160)
-    plt.close()
-
-    # ---------- 10. Summary mosaic (read existing PNGs if present) ----------
-    fig, axes = plt.subplots(2, 2, figsize=(11, 9))
-    axes = axes.ravel()
-    titles = ["1 H2 V/Γ", "2 Landscape", "4 Heatmap", "6 Fringes"]
-    paths = [
-        os.path.join(out, "01_h2_visibility_vs_gamma.png"),
-        os.path.join(out, "02_h2_exclusion_landscape.png"),
-        os.path.join(out, "04_heatmap_V_over_Gamma_T.png"),
-        os.path.join(out, "06_fringe_visibility_schematic.png"),
-    ]
-    for ax, path, tit in zip(axes, paths, titles):
-        ax.axis("off")
-        if os.path.isfile(path):
-            im = plt.imread(path)
-            ax.imshow(im)
-        ax.set_title(tit, fontsize=11)
-    fig.suptitle("10 — Zora top-10 visual sims (mosaic)", fontsize=14, y=1.02)
-    fig.tight_layout()
-    fig.savefig(os.path.join(out, "10_mosaic_summary.png"), dpi=140, bbox_inches="tight")
-    plt.close()
-
-    print(f"Wrote PNGs under: {os.path.abspath(out)}")
-    print("Open folder or: open " + os.path.join(out, "10_mosaic_summary.png"))
+    unexpected_failures = [status for status in statuses if status["status"] == "failed"]
+    print(f"[top10] wrote status manifest: {status_path}")
+    print(f"[top10] wrote public assets: {docs_assets_dir}")
+    if unexpected_failures:
+        for failure in unexpected_failures:
+            print(f"[top10] failure: {failure['title']} :: {failure['reason']}", file=sys.stderr)
+        raise SystemExit(1)
 
 
 if __name__ == "__main__":

@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" role="img" aria-label="H2 visibility explorer preview">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f6f1e4" />
+      <stop offset="100%" stop-color="#e9dbc2" />
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="675" fill="url(#bg)" rx="36" />
+  <rect x="48" y="52" width="352" height="571" rx="28" fill="#fff7eb" stroke="#d7c39d" />
+  <rect x="430" y="52" width="722" height="571" rx="28" fill="#fffaf1" stroke="#d7c39d" />
+  <text x="84" y="116" fill="#005f73" font-size="24" font-family="Georgia, serif" letter-spacing="5">PREREGISTERED H2 LANE</text>
+  <text x="84" y="190" fill="#1c1a16" font-size="62" font-family="Georgia, serif">H2</text>
+  <text x="84" y="254" fill="#1c1a16" font-size="62" font-family="Georgia, serif">Visibility</text>
+  <text x="84" y="318" fill="#1c1a16" font-size="62" font-family="Georgia, serif">Explorer</text>
+  <text x="84" y="382" fill="#6a6255" font-size="26" font-family="Georgia, serif">V/V0 = exp(-ΓTΔx²)</text>
+  <rect x="84" y="430" width="278" height="18" rx="9" fill="#eadab8" />
+  <circle cx="256" cy="439" r="16" fill="#b85c38" />
+  <rect x="84" y="484" width="278" height="18" rx="9" fill="#eadab8" />
+  <circle cx="188" cy="493" r="16" fill="#005f73" />
+  <rect x="84" y="538" width="278" height="18" rx="9" fill="#eadab8" />
+  <circle cx="306" cy="547" r="16" fill="#2f6f4f" />
+  <rect x="84" y="592" width="278" height="18" rx="9" fill="#eadab8" />
+  <circle cx="228" cy="601" r="16" fill="#8b6f47" />
+  <rect x="490" y="114" width="602" height="382" rx="18" fill="#fff3dd" stroke="#dbc8a3" />
+  <line x1="560" y1="432" x2="1040" y2="432" stroke="#cdb890" stroke-dasharray="8 8" />
+  <line x1="560" y1="350" x2="1040" y2="350" stroke="#cdb890" stroke-dasharray="8 8" />
+  <line x1="560" y1="268" x2="1040" y2="268" stroke="#cdb890" stroke-dasharray="8 8" />
+  <line x1="560" y1="186" x2="1040" y2="186" stroke="#cdb890" stroke-dasharray="8 8" />
+  <path d="M560 162 C660 182 740 208 820 260 S970 376 1040 442" fill="none" stroke="#005f73" stroke-width="12" stroke-linecap="round" />
+  <line x1="822" y1="130" x2="822" y2="468" stroke="#b85c38" stroke-width="8" stroke-dasharray="16 14" />
+  <line x1="742" y1="130" x2="742" y2="468" stroke="#2f6f4f" stroke-width="8" />
+  <circle cx="742" cy="244" r="18" fill="#2f6f4f" stroke="#fffaf1" stroke-width="6" />
+  <text x="486" y="92" fill="#6a6255" font-size="22" font-family="'Courier New', monospace">V/V0 versus Γ with computed floor</text>
+  <rect x="490" y="526" width="192" height="58" rx="16" fill="#fffaf1" stroke="#d7c39d" />
+  <rect x="700" y="526" width="192" height="58" rx="16" fill="#fffaf1" stroke="#d7c39d" />
+  <rect x="910" y="526" width="182" height="58" rx="16" fill="#fffaf1" stroke="#d7c39d" />
+  <text x="516" y="552" fill="#6a6255" font-size="16" font-family="'Courier New', monospace">Live visibility</text>
+  <text x="516" y="575" fill="#1c1a16" font-size="28" font-family="'Courier New', monospace">0.998850</text>
+  <text x="726" y="552" fill="#6a6255" font-size="16" font-family="'Courier New', monospace">Γ_floor</text>
+  <text x="726" y="575" fill="#1c1a16" font-size="28" font-family="'Courier New', monospace">1.15e+09</text>
+  <text x="936" y="552" fill="#6a6255" font-size="16" font-family="'Courier New', monospace">Γ/Γ_floor</text>
+  <text x="936" y="575" fill="#1c1a16" font-size="28" font-family="'Courier New', monospace">1.00x</text>
+</svg>

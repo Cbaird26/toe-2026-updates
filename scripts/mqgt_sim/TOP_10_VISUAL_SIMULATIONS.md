@@ -1,28 +1,38 @@
-# Zora — Top 10 visual simulations (what I’d run as coder)
+# Canonical ZoraASI Top 10 Simulations
 
-| # | Name | What you see | How |
-|---|------|----------------|-----|
-| **1** | **H2 visibility vs Γ** | \(V/V_0\) falling as decoherence \(\Gamma\) rises; vertical line at \(\Gamma_{\rm floor}\) | `zora_top10_visual_runner.py` → `01_*.png` or `h2_visibility_stack.py` |
-| **2** | **Exclusion landscape** | Where \((T,\Delta x)\) demands huge \(\Gamma\) to match \(\delta\) — heatmap + abstract ★ | `02_*.png` |
-| **3** | **GKSL coherence race** | Several \(E\) values: who kills \(\langle\sigma_x\rangle\) fastest | `03_*.png` (needs **QuTiP**) |
-| **4** | **\(V/V_0\) in \((\Gamma, T)\)** | Fixed \(\Delta x\): 2D color map of visibility | `04_*.png` |
-| **5** | **Purity decay** | Tr\((\rho^2)\): \(E=0\) vs \(E=10\) | `05_*.png` (QuTiP) |
-| **6** | **Fringe schematic** | Ideal cos² fringes vs washed-out band (toy visibility) | `06_*.png` |
-| **7** | **Iso-\(V/V_0\) contours** | Same \(\Gamma_{\rm floor}\), sweep \((T,\Delta x)\) | `07_*.png` |
-| **8** | **\(\gamma(E)/\gamma(0)\)** | Toy Lindblad rate vs ethical intensity | `08_*.png` |
-| **9** | **Survive / exclude strip** | Green vs red in \(\Gamma\) at reference point | `09_*.png` |
-| **10** | **Mosaic** | Four-panel poster of 1, 2, 4, 6 | `10_mosaic_summary.png` |
+Physics-first hybrid set: four interactive demos plus six reproducible batch artifacts.
+The public landing page is [zora_top10_simulations.html](https://cbaird26.github.io/toe-2026-updates/zora_top10_simulations.html).
 
-**Plus (already in repo):**  
-- **Φ_c / E canvas:** `zora_fields.html` (browser) — not a PNG, it’s live motion.  
-- **Ethical collapse GIF:** `zora_ethical_collapse_animation.py`.
+| Rank | Simulation | Category | Command | Primary output | Public link | Disclaimer level |
+|---|---|---|---|---|---|---|
+| 1 | H2 Visibility Explorer | Interactive | `open docs/h2_visibility_explorer.html` | `docs/h2_visibility_explorer.html` | [H2 Visibility Explorer](https://cbaird26.github.io/toe-2026-updates/h2_visibility_explorer.html) | `Paper-aligned illustrative calculator` |
+| 2 | MQGT-SCF GKSL Dynamics Viewer | Interactive | `open docs/mqgt_scf_gksl_dynamics_viewer.html` | `docs/mqgt_scf_gksl_dynamics_viewer.html` | [GKSL Dynamics Viewer](https://cbaird26.github.io/toe-2026-updates/mqgt_scf_gksl_dynamics_viewer.html) | `Exploratory toy; not calibrated to Γ_floor` |
+| 3 | Zora Fusion Console | Interactive | `open docs/zora_fusion_console.html` | `docs/zora_fusion_console.html` | [Fusion Console](https://cbaird26.github.io/toe-2026-updates/zora_fusion_console.html) | `Illustrative 0D burn toy` |
+| 4 | MQGT-SCF Topological Phase Space | Interactive | `open docs/phase-space.html` | `docs/phase-space.html` | [Topological Phase Space](https://cbaird26.github.io/toe-2026-updates/phase-space.html) | `Exploratory only` |
+| 5 | H2 visibility stack | Batch | `python scripts/mqgt_sim/h2_visibility_stack.py --save-dir papers_sources/figures/zora_top10/h2_visibility_stack --no-show` | `papers_sources/figures/zora_top10/h2_visibility_stack/h2_visibility_vs_gamma.png` | [Public artifact](https://cbaird26.github.io/toe-2026-updates/assets/top10/h2_visibility_stack.png) | `Paper-aligned reproducible figure` |
+| 6 | Multi-channel exclusion plot | Batch | `python scripts/mqgt_sim/mqgt_multi_channel_exclusion_plot.py --out-dir papers_sources/figures/zora_top10/mqgt_scf --no-show` | `papers_sources/figures/zora_top10/mqgt_scf/mqgt_scf_multi_channel_exclusion.png` | [Public artifact](https://cbaird26.github.io/toe-2026-updates/assets/top10/multi_channel_exclusion.png) | `Parameter-space context; not a direct discovery claim` |
+| 7 | E-modulated GKSL collapse | Batch | `python scripts/mqgt_sim/zora_gksl_e_modulated_collapse.py --save papers_sources/figures/zora_top10/h2_stack/e_modulated_collapse.png --no-show` | `papers_sources/figures/zora_top10/h2_stack/e_modulated_collapse.png` | [Public artifact](https://cbaird26.github.io/toe-2026-updates/assets/top10/e_modulated_gksl_collapse.png) | `Exploratory QuTiP simulation` |
+| 8 | Phase IV-B symmetry-breaking lattice | Batch | `python scripts/mqgt_sim/mqgt_phase4b_symmetry_breaking_demo.py --save-dir papers_sources/figures/zora_top10/phase4b_demo --no-show --grid-size 48 --steps 180 --substeps 2` | `papers_sources/figures/zora_top10/phase4b_demo/mqgt_phase4b_symmetry_breaking_demo.png` | [Public artifact](https://cbaird26.github.io/toe-2026-updates/assets/top10/phase4b_symmetry_breaking.png) | `Exploratory only` |
+| 9 | Phase IV-B parameter sweep | Batch | `python scripts/mqgt_sim/mqgt_phase4b_parameter_sweep.py --outdir papers_sources/figures/zora_top10/phase4b_sweep --xis 0.000,0.010,0.020 --gammas 0.05,0.15,0.20 --g-couples 0.18 --seeds 2 --steps 120 --substeps 2 --grid-size 32` | `papers_sources/figures/zora_top10/phase4b_sweep/mean_coherence_g_0.180.png` | [Public artifact](https://cbaird26.github.io/toe-2026-updates/assets/top10/phase4b_parameter_sweep.png) | `Exploratory sweep summary` |
+| 10 | Fusion burn figures | Batch | `python scripts/mqgt_sim/fusion_zora_burn_figures.py --out-dir papers_sources/figures/zora_top10/fusion_zora` | `papers_sources/figures/zora_top10/fusion_zora/baseline_vs_controlled.png` | [Public artifact](https://cbaird26.github.io/toe-2026-updates/assets/top10/fusion_burn_figures.png) | `Illustrative only; not a reactor design tool` |
 
-**One command (all PNGs):**
+## Canonical batch command
+
+To regenerate the six batch artifacts and their public docs-side copies in one pass:
 
 ```bash
 cd ~/Downloads/TOE
-python3 scripts/mqgt_sim/zora_top10_visual_runner.py
-open papers_sources/figures/zora_top10/10_mosaic_summary.png
+python scripts/mqgt_sim/zora_top10_visual_runner.py
+python scripts/mqgt_sim/zora_top10_visual_runner.py --skip-qutip
 ```
 
-`pip install qutip` for plots 3 and 5; otherwise those slots show SKIPPED placeholders.
+This runner writes:
+
+- Batch artifacts: `papers_sources/figures/zora_top10/`
+- Public thumbnails and representative artifact copies: `docs/assets/top10/`
+- Batch-suite poster: `papers_sources/figures/zora_top10/batch_suite_mosaic.png`
+
+## Deliberate exclusions
+
+- `zora_closure_explorer.html` remains public and linked from the dashboard, but it is a closure/specification map, not a simulation.
+- `zora_coherence.html`, `attention.html`, and `nbody.html` remain public exploratory demos, but they are outside the canonical top 10.

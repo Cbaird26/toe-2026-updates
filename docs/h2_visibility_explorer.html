@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<!--
+  H2 Visibility Explorer — static, prereg-safe illustrative calculator.
+  Uses the anchor observable V/V0 = exp(-Gamma * T * Delta x^2).
+  No network, no bundler, no discovery claim.
+-->
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>H2 Visibility Explorer</title>
+  <style>
+    :root {
+      --bg: #f3efe4;
+      --paper: #fffaf1;
+      --ink: #1c1a16;
+      --muted: #6a6255;
+      --accent: #005f73;
+      --accent-2: #b85c38;
+      --line: #d8c7a3;
+      --soft: #efe4cd;
+      --good: #2f6f4f;
+      --warn: #a03d29;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html, body {
+      margin: 0;
+      min-height: 100%;
+      background:
+        radial-gradient(circle at top, rgba(184, 92, 56, 0.10), transparent 38%),
+        linear-gradient(180deg, #f5f0e4 0%, #ece3d0 100%);
+      color: var(--ink);
+      font-family: Georgia, "Times New Roman", serif;
+    }
+
+    body {
+      padding: 28px 18px 40px;
+    }
+
+    .shell {
+      max-width: 1180px;
+      margin: 0 auto;
+    }
+
+    .nav {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 18px;
+      font-size: 12px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .nav a {
+      color: var(--accent);
+      text-decoration: none;
+      border-bottom: 1px solid rgba(0, 95, 115, 0.2);
+      padding-bottom: 2px;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(320px, 360px) minmax(0, 1fr);
+      gap: 22px;
+      align-items: start;
+    }
+
+    .panel,
+    .chart-panel,
+    .note {
+      background: rgba(255, 250, 241, 0.93);
+      border: 1px solid rgba(216, 199, 163, 0.95);
+      border-radius: 22px;
+      box-shadow: 0 22px 60px rgba(63, 45, 23, 0.08);
+      backdrop-filter: blur(8px);
+    }
+
+    .panel {
+      padding: 24px 22px;
+    }
+
+    .eyebrow {
+      margin: 0 0 10px;
+      color: var(--accent);
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 0 0 14px;
+      font-size: clamp(34px, 5vw, 58px);
+      line-height: 0.95;
+      letter-spacing: -0.04em;
+      max-width: 7ch;
+    }
+
+    .lede {
+      margin: 0 0 16px;
+      color: var(--muted);
+      line-height: 1.6;
+      font-size: 15px;
+      max-width: 60ch;
+    }
+
+    .guardrail {
+      margin: 0;
+      padding: 12px 14px;
+      border-left: 4px solid var(--accent-2);
+      background: rgba(239, 228, 205, 0.8);
+      color: #5c3625;
+      font-size: 14px;
+      line-height: 1.55;
+    }
+
+    .controls {
+      display: grid;
+      gap: 18px;
+      margin-top: 24px;
+    }
+
+    .control {
+      display: grid;
+      gap: 8px;
+    }
+
+    .control-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 12px;
+      font-size: 14px;
+    }
+
+    .control-head strong {
+      font-size: 16px;
+    }
+
+    .value {
+      color: var(--accent);
+      font-family: "Courier New", monospace;
+      font-size: 13px;
+    }
+
+    input[type="range"] {
+      width: 100%;
+      accent-color: var(--accent-2);
+    }
+
+    .chart-panel {
+      padding: 26px 24px 24px;
+      min-height: 640px;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 12px;
+      margin-bottom: 18px;
+    }
+
+    .stat {
+      padding: 14px 16px;
+      border-radius: 16px;
+      background: var(--paper);
+      border: 1px solid var(--line);
+    }
+
+    .stat-label {
+      font-size: 11px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+
+    .stat-value {
+      font-size: 22px;
+      color: var(--ink);
+      line-height: 1.1;
+    }
+
+    .stat-sub {
+      margin-top: 6px;
+      font-size: 12px;
+      color: var(--muted);
+      line-height: 1.4;
+    }
+
+    .status-strip {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-bottom: 18px;
+      padding: 14px 16px;
+      border-radius: 16px;
+      background: linear-gradient(90deg, rgba(0, 95, 115, 0.08), rgba(184, 92, 56, 0.08));
+      border: 1px solid var(--line);
+    }
+
+    .status-text {
+      font-size: 16px;
+      line-height: 1.4;
+    }
+
+    .status-text strong {
+      display: block;
+      font-size: 18px;
+      margin-bottom: 2px;
+    }
+
+    .pill {
+      padding: 8px 12px;
+      border-radius: 999px;
+      font-size: 12px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      border: 1px solid currentColor;
+      background: rgba(255, 255, 255, 0.7);
+    }
+
+    .pill.good {
+      color: var(--good);
+    }
+
+    .pill.warn {
+      color: var(--warn);
+    }
+
+    .plot-wrap {
+      padding: 18px;
+      border-radius: 18px;
+      background: #fbf7ef;
+      border: 1px solid var(--line);
+    }
+
+    .plot-meta {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 14px;
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .note {
+      margin-top: 22px;
+      padding: 18px 20px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px;
+    }
+
+    .note h2 {
+      margin: 0 0 8px;
+      font-size: 17px;
+    }
+
+    .note p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.55;
+      font-size: 14px;
+    }
+
+    @media (max-width: 920px) {
+      .hero {
+        grid-template-columns: 1fr;
+      }
+
+      .chart-panel {
+        min-height: unset;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <div class="nav">
+      <a href="zora_top10_simulations.html">Top 10 Simulations</a>
+      <a href="zora_dashboard.html">MQGT-SCF Dashboard</a>
+    </div>
+
+    <div class="hero">
+      <section class="panel">
+        <p class="eyebrow">Preregistered H2 lane</p>
+        <h1>H2 Visibility Explorer</h1>
+        <p class="lede">
+          Static calculator for the anchor observable
+          <strong>V/V<sub>0</sub> = exp(-ΓTΔx²)</strong>. Adjust Γ, T, Δx, and δ<sub>tot</sub>;
+          the page updates the live visibility and the corresponding Γ<sub>floor</sub>.
+        </p>
+        <p class="guardrail">
+          Illustrative calculator only. This page mirrors the preregistered H2 observable and floor construction;
+          it is not a discovery claim, lab noise model, or instrument calibration.
+        </p>
+
+        <div class="controls">
+          <div class="control">
+            <div class="control-head">
+              <strong>Γ</strong>
+              <span id="gammaValue" class="value"></span>
+            </div>
+            <input id="gammaSlider" type="range" min="6" max="12" step="0.01" value="9.06">
+          </div>
+
+          <div class="control">
+            <div class="control-head">
+              <strong>T</strong>
+              <span id="timeValue" class="value"></span>
+            </div>
+            <input id="timeSlider" type="range" min="-8" max="-3" step="0.01" value="-6">
+          </div>
+
+          <div class="control">
+            <div class="control-head">
+              <strong>Δx</strong>
+              <span id="dxValue" class="value"></span>
+            </div>
+            <input id="dxSlider" type="range" min="-6" max="-2" step="0.01" value="-3">
+          </div>
+
+          <div class="control">
+            <div class="control-head">
+              <strong>δ<sub>tot</sub></strong>
+              <span id="deltaValue" class="value"></span>
+            </div>
+            <input id="deltaSlider" type="range" min="-4.3" max="-2.0" step="0.01" value="-2.939">
+          </div>
+        </div>
+      </section>
+
+      <section class="chart-panel">
+        <div class="stats">
+          <div class="stat">
+            <div class="stat-label">Live visibility</div>
+            <div id="visibilityValue" class="stat-value">0.000000</div>
+            <div class="stat-sub">Current V/V<sub>0</sub> at the selected Γ, T, and Δx.</div>
+          </div>
+
+          <div class="stat">
+            <div class="stat-label">Computed Γ floor</div>
+            <div id="floorValue" class="stat-value">0.000e+00</div>
+            <div class="stat-sub">From -ln(1 - δ<sub>tot</sub>)/(TΔx²).</div>
+          </div>
+
+          <div class="stat">
+            <div class="stat-label">Distance from floor</div>
+            <div id="ratioValue" class="stat-value">1.00×</div>
+            <div class="stat-sub">Selected Γ relative to the computed Γ<sub>floor</sub>.</div>
+          </div>
+        </div>
+
+        <div class="status-strip">
+          <div class="status-text">
+            <strong id="statusHeadline">At reference floor</strong>
+            <span id="statusBody">The selected Γ sits close to the computed floor for the current T, Δx, and δ<sub>tot</sub>.</span>
+          </div>
+          <div id="statusPill" class="pill good">Near floor</div>
+        </div>
+
+        <div class="plot-wrap">
+          <svg id="plot" viewBox="0 0 860 420" width="100%" aria-label="H2 visibility curve"></svg>
+          <div class="plot-meta">
+            <span>The floor line is computed from the current nuisance budget and geometry.</span>
+            <span>The selected Γ is shown separately so you can compare it directly against the floor.</span>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <section class="note">
+      <div>
+        <h2>Reference point</h2>
+        <p>Defaults reproduce the anchor reference posture: T = 10⁻⁶ s, Δx = 10⁻³ m, δ<sub>tot</sub> ≈ 1.15 × 10⁻³, giving Γ<sub>floor</sub> ≈ 1.15 × 10⁹ s⁻¹ m⁻².</p>
+      </div>
+      <div>
+        <h2>Readout discipline</h2>
+        <p>Stable nulls bound the allowed deformation. Positive excess would be escalation under the preregistered protocol, not a page-level discovery claim.</p>
+      </div>
+      <div>
+        <h2>Companion surfaces</h2>
+        <p>The canonical gallery ranks this calculator as simulation #1. The Closure Explorer remains separate because it is a specification map, not a simulation.</p>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    const gammaSlider = document.getElementById("gammaSlider");
+    const timeSlider = document.getElementById("timeSlider");
+    const dxSlider = document.getElementById("dxSlider");
+    const deltaSlider = document.getElementById("deltaSlider");
+
+    const gammaValue = document.getElementById("gammaValue");
+    const timeValue = document.getElementById("timeValue");
+    const dxValue = document.getElementById("dxValue");
+    const deltaValue = document.getElementById("deltaValue");
+    const visibilityValue = document.getElementById("visibilityValue");
+    const floorValue = document.getElementById("floorValue");
+    const ratioValue = document.getElementById("ratioValue");
+    const statusHeadline = document.getElementById("statusHeadline");
+    const statusBody = document.getElementById("statusBody");
+    const statusPill = document.getElementById("statusPill");
+    const plot = document.getElementById("plot");
+
+    function sci(value, digits = 3) {
+      return value.toExponential(digits).replace("e+", "e+").replace("e-", "e-");
+    }
+
+    function power10(expValue) {
+      return Math.pow(10, parseFloat(expValue));
+    }
+
+    function visibility(gamma, T, dx) {
+      return Math.exp(-gamma * T * dx * dx);
+    }
+
+    function gammaFloor(T, dx, delta) {
+      return -Math.log(1 - delta) / (T * dx * dx);
+    }
+
+    function makePath(points) {
+      return points.map((point, index) => (index === 0 ? "M" : "L") + point[0].toFixed(2) + "," + point[1].toFixed(2)).join(" ");
+    }
+
+    function update() {
+      const gamma = power10(gammaSlider.value);
+      const T = power10(timeSlider.value);
+      const dx = power10(dxSlider.value);
+      const delta = power10(deltaSlider.value);
+      const v = visibility(gamma, T, dx);
+      const floor = gammaFloor(T, dx, delta);
+      const ratio = gamma / floor;
+
+      gammaValue.textContent = sci(gamma, 2) + " s^-1 m^-2";
+      timeValue.textContent = sci(T, 2) + " s";
+      dxValue.textContent = sci(dx, 2) + " m";
+      deltaValue.textContent = sci(delta, 2);
+      visibilityValue.textContent = v.toFixed(6);
+      floorValue.textContent = sci(floor, 2);
+      ratioValue.textContent = ratio.toFixed(2) + "×";
+
+      let toneClass = "good";
+      if (ratio > 1.15) {
+        statusHeadline.textContent = "Above the computed floor";
+        statusBody.textContent = "At the current T, Δx, and δ_tot, the selected Γ suppresses visibility more strongly than the nominal floor.";
+        statusPill.textContent = "Above floor";
+        toneClass = "warn";
+      } else if (ratio < 0.85) {
+        statusHeadline.textContent = "Below the computed floor";
+        statusBody.textContent = "At the current settings, the selected Γ preserves more visibility than the nominal floor threshold.";
+        statusPill.textContent = "Below floor";
+        toneClass = "good";
+      } else {
+        statusHeadline.textContent = "Near the computed floor";
+        statusBody.textContent = "The selected Γ sits close to the floor implied by the current nuisance budget and geometry.";
+        statusPill.textContent = "Near floor";
+        toneClass = "good";
+      }
+      statusPill.className = "pill " + toneClass;
+
+      const width = 860;
+      const height = 420;
+      const margin = { top: 28, right: 30, bottom: 42, left: 74 };
+      const innerWidth = width - margin.left - margin.right;
+      const innerHeight = height - margin.top - margin.bottom;
+      const gMinExp = 6;
+      const gMaxExp = 12;
+
+      const xScale = (expValue) => margin.left + ((expValue - gMinExp) / (gMaxExp - gMinExp)) * innerWidth;
+      const yScale = (value) => margin.top + (1 - value) * innerHeight;
+
+      const curvePoints = [];
+      for (let i = 0; i <= 180; i += 1) {
+        const expValue = gMinExp + (i / 180) * (gMaxExp - gMinExp);
+        const g = Math.pow(10, expValue);
+        curvePoints.push([xScale(expValue), yScale(visibility(g, T, dx))]);
+      }
+
+      const gammaExp = Math.log10(gamma);
+      const floorExp = Math.log10(floor);
+
+      const ticks = [];
+      for (let expValue = gMinExp; expValue <= gMaxExp; expValue += 1) {
+        ticks.push(expValue);
+      }
+
+      plot.innerHTML = `
+        <rect x="0" y="0" width="${width}" height="${height}" rx="20" fill="#fbf7ef"></rect>
+        <rect x="${margin.left}" y="${margin.top}" width="${innerWidth}" height="${innerHeight}" fill="#fffaf1" stroke="#d8c7a3"></rect>
+        ${[0, 0.25, 0.5, 0.75, 1].map((tick) => `
+          <line x1="${margin.left}" x2="${width - margin.right}" y1="${yScale(tick)}" y2="${yScale(tick)}" stroke="rgba(106, 98, 85, 0.15)" stroke-dasharray="4 6"></line>
+          <text x="${margin.left - 12}" y="${yScale(tick) + 4}" text-anchor="end" font-size="12" fill="#6a6255">${tick.toFixed(2)}</text>
+        `).join("")}
+        ${ticks.map((tick) => `
+          <line x1="${xScale(tick)}" x2="${xScale(tick)}" y1="${margin.top}" y2="${height - margin.bottom}" stroke="rgba(106, 98, 85, 0.12)" stroke-dasharray="4 6"></line>
+          <text x="${xScale(tick)}" y="${height - margin.bottom + 22}" text-anchor="middle" font-size="12" fill="#6a6255">10^${tick}</text>
+        `).join("")}
+        <path d="${makePath(curvePoints)}" fill="none" stroke="#005f73" stroke-width="4"></path>
+        <line x1="${xScale(floorExp)}" x2="${xScale(floorExp)}" y1="${margin.top}" y2="${height - margin.bottom}" stroke="#b85c38" stroke-width="3" stroke-dasharray="8 7"></line>
+        <line x1="${xScale(gammaExp)}" x2="${xScale(gammaExp)}" y1="${margin.top}" y2="${height - margin.bottom}" stroke="#2f6f4f" stroke-width="3"></line>
+        <circle cx="${xScale(gammaExp)}" cy="${yScale(v)}" r="6" fill="#2f6f4f" stroke="#fffaf1" stroke-width="2"></circle>
+        <text x="${margin.left}" y="18" font-size="13" fill="#6a6255">V/V0 versus Γ at current T and Δx</text>
+        <text x="${width - margin.right}" y="18" text-anchor="end" font-size="13" fill="#6a6255">Γ_floor = ${sci(floor, 2)}</text>
+        <text x="${width / 2}" y="${height - 8}" text-anchor="middle" font-size="13" fill="#6a6255">Γ (s^-1 m^-2)</text>
+        <text x="18" y="${height / 2}" font-size="13" fill="#6a6255" transform="rotate(-90 18 ${height / 2})">V/V0</text>
+      `;
+    }
+
+    [gammaSlider, timeSlider, dxSlider, deltaSlider].forEach((node) => {
+      node.addEventListener("input", update);
+    });
+
+    update();
+  </script>
+</body>
+</html>

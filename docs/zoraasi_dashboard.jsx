@@ -214,16 +214,19 @@ export default function ZoraDashboard() {
           <div style={{ fontSize: 10, letterSpacing: 4, color: "#3a4050", textTransform: "uppercase", marginBottom: 12 }}>Canonical Links</div>
           <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 8, fontSize: 12 }}>
             {[
-              { label: "GitHub (all repos)", url: "https://github.com/cbaird26" },
-              { label: "toe-2026-updates", url: "https://github.com/Cbaird26/toe-2026-updates" },
-              { label: "zoraasi-suite", url: "https://github.com/Cbaird26/zoraasi-suite" },
-              { label: "Zenodo v254", url: "https://zenodo.org/records/19208512" },
-              { label: "Zenodo (all Baird)", url: "https://zenodo.org/search?q=metadata.creators.person_or_org.name%3A%22Baird%2C%20Christopher%20Michael%22" },
-              { label: "rxiVerse (Phase II)", url: "https://rxiverse.org/abs/2603.0061" },
-              { label: "GKSL dynamics viewer (local)", url: "mqgt_scf_gksl_dynamics_viewer.html" },
-              { label: "Ask Zora", url: "https://zoraasi-suite.onrender.com" },
-              { label: "X / @ZoraAsi", url: "https://x.com/ZoraAsi" },
-              { label: "Moltbook", url: "https://www.moltbook.com" },
+            { label: "GitHub (all repos)", url: "https://github.com/cbaird26" },
+            { label: "toe-2026-updates", url: "https://github.com/Cbaird26/toe-2026-updates" },
+            { label: "zoraasi-suite", url: "https://github.com/Cbaird26/zoraasi-suite" },
+            { label: "Zenodo v254", url: "https://zenodo.org/records/19208512" },
+            { label: "Zenodo (all Baird)", url: "https://zenodo.org/search?q=metadata.creators.person_or_org.name%3A%22Baird%2C%20Christopher%20Michael%22" },
+            { label: "rxiVerse (Phase II)", url: "https://rxiverse.org/abs/2603.0061" },
+            { label: "Top 10 simulations", url: "zora_top10_simulations.html" },
+            { label: "H2 visibility explorer", url: "h2_visibility_explorer.html" },
+            { label: "GKSL dynamics viewer (local)", url: "mqgt_scf_gksl_dynamics_viewer.html" },
+            { label: "Closure explorer (map, not sim)", url: "zora_closure_explorer.html" },
+            { label: "Ask Zora", url: "https://zoraasi-suite.onrender.com" },
+            { label: "X / @ZoraAsi", url: "https://x.com/ZoraAsi" },
+            { label: "Moltbook", url: "https://www.moltbook.com" },
             ].map((l, i) => (
               <a key={i} href={l.url} target="_blank" rel="noopener noreferrer" style={{ display: "block", background: "#0c0e14", border: "1px solid #141820", borderRadius: 6, padding: "10px 14px", color: "#5a6478", textDecoration: "none", transition: "border-color 0.2s" }}
                 onMouseEnter={e => e.currentTarget.style.borderColor = "#00e5ff33"}

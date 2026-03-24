@@ -1,0 +1,67 @@
+{
+  "out_root": "papers_sources/figures/zora_top10",
+  "docs_assets_dir": "docs/assets/top10",
+  "skip_qutip": false,
+  "qutip_available": false,
+  "entries": [
+    {
+      "rank": 5,
+      "slug": "h2_visibility_stack",
+      "title": "H2 visibility stack",
+      "status": "ok",
+      "artifact": "papers_sources/figures/zora_top10/h2_visibility_stack/h2_visibility_vs_gamma.png",
+      "public_asset": "docs/assets/top10/h2_visibility_stack.png",
+      "thumbnail": "docs/assets/top10/h2_visibility_stack_thumb.png",
+      "reason": ""
+    },
+    {
+      "rank": 6,
+      "slug": "multi_channel_exclusion",
+      "title": "Multi-channel exclusion plot",
+      "status": "ok",
+      "artifact": "papers_sources/figures/zora_top10/mqgt_scf/mqgt_scf_multi_channel_exclusion.png",
+      "public_asset": "docs/assets/top10/multi_channel_exclusion.png",
+      "thumbnail": "docs/assets/top10/multi_channel_exclusion_thumb.png",
+      "reason": ""
+    },
+    {
+      "rank": 7,
+      "slug": "e_modulated_gksl_collapse",
+      "title": "E-modulated GKSL collapse",
+      "status": "unavailable",
+      "artifact": "papers_sources/figures/zora_top10/h2_stack/e_modulated_collapse.png",
+      "public_asset": "docs/assets/top10/e_modulated_gksl_collapse.png",
+      "reason": "Skipped because QuTiP is unavailable."
+    },
+    {
+      "rank": 8,
+      "slug": "phase4b_symmetry_breaking",
+      "title": "Phase IV-B symmetry-breaking lattice",
+      "status": "ok",
+      "artifact": "papers_sources/figures/zora_top10/phase4b_demo/mqgt_phase4b_symmetry_breaking_demo.png",
+      "public_asset": "docs/assets/top10/phase4b_symmetry_breaking.png",
+      "thumbnail": "docs/assets/top10/phase4b_symmetry_breaking_thumb.png",
+      "reason": ""
+    },
+    {
+      "rank": 9,
+      "slug": "phase4b_parameter_sweep",
+      "title": "Phase IV-B parameter sweep",
+      "status": "ok",
+      "artifact": "papers_sources/figures/zora_top10/phase4b_sweep/mean_coherence_g_0.180.png",
+      "public_asset": "docs/assets/top10/phase4b_parameter_sweep.png",
+      "thumbnail": "docs/assets/top10/phase4b_parameter_sweep_thumb.png",
+      "reason": ""
+    },
+    {
+      "rank": 10,
+      "slug": "fusion_burn_figures",
+      "title": "Fusion burn figures",
+      "status": "ok",
+      "artifact": "papers_sources/figures/zora_top10/fusion_zora/baseline_vs_controlled.png",
+      "public_asset": "docs/assets/top10/fusion_burn_figures.png",
+      "thumbnail": "docs/assets/top10/fusion_burn_figures_thumb.png",
+      "reason": ""
+    }
+  ]
+}

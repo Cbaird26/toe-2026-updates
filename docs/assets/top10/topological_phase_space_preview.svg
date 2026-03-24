@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" role="img" aria-label="Topological phase space preview">
+  <defs>
+    <linearGradient id="phaseBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#071018" />
+      <stop offset="100%" stop-color="#06141f" />
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="675" fill="url(#phaseBg)" rx="36" />
+  <rect x="58" y="60" width="1084" height="555" rx="28" fill="#0d151d" stroke="#28404d" />
+  <text x="96" y="120" fill="#66fcf1" font-size="22" font-family="'Courier New', monospace" letter-spacing="4">EXPLORATORY BASIN VISUALIZATION</text>
+  <text x="96" y="188" fill="#eef7ff" font-size="60" font-family="Georgia, serif">MQGT-SCF</text>
+  <text x="96" y="252" fill="#eef7ff" font-size="60" font-family="Georgia, serif">Topological Phase Space</text>
+  <text x="96" y="310" fill="#94b1c3" font-size="24" font-family="Georgia, serif">thermal entropy · teleological bias · ethical radius</text>
+  <circle cx="774" cy="348" r="160" fill="none" stroke="#1e323f" stroke-width="18" />
+  <circle cx="774" cy="348" r="114" fill="none" stroke="#244656" stroke-width="12" />
+  <circle cx="774" cy="348" r="66" fill="none" stroke="#2b596f" stroke-width="10" />
+  <circle cx="774" cy="348" r="26" fill="#8e44ad" opacity="0.92" />
+  <path d="M960 222 C930 248 892 274 866 312 S826 410 774 458 S648 506 586 486" fill="none" stroke="#66fcf1" stroke-width="10" stroke-linecap="round" />
+  <path d="M934 516 C876 506 834 484 808 448 S760 362 706 320 S612 274 540 266" fill="none" stroke="#ffcb6b" stroke-width="10" stroke-linecap="round" />
+  <path d="M522 390 C586 362 642 334 686 290 S754 208 836 188" fill="none" stroke="#e67e22" stroke-width="8" stroke-dasharray="14 12" stroke-linecap="round" />
+  <circle cx="960" cy="222" r="18" fill="#66fcf1" />
+  <circle cx="934" cy="516" r="18" fill="#ffcb6b" />
+  <circle cx="522" cy="390" r="18" fill="#e67e22" />
+  <circle cx="586" cy="486" r="16" fill="#45a29e" opacity="0.85" />
+  <circle cx="540" cy="266" r="16" fill="#45a29e" opacity="0.85" />
+  <rect x="96" y="424" width="284" height="32" rx="16" fill="#121e27" stroke="#2a4150" />
+  <rect x="96" y="476" width="284" height="32" rx="16" fill="#121e27" stroke="#2a4150" />
+  <rect x="96" y="528" width="284" height="32" rx="16" fill="#121e27" stroke="#2a4150" />
+  <text x="122" y="446" fill="#eef7ff" font-size="20" font-family="'Courier New', monospace">kT ↔ entropy drift</text>
+  <text x="122" y="498" fill="#eef7ff" font-size="20" font-family="'Courier New', monospace">xi ↔ attractor depth</text>
+  <text x="122" y="550" fill="#eef7ff" font-size="20" font-family="'Courier New', monospace">E ↔ basin radius</text>
+</svg>

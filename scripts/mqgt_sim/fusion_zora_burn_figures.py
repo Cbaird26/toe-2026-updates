@@ -47,6 +47,7 @@ def bosch_hale_dt_sigmav(T_kev: np.ndarray) -> np.ndarray:
         1.0
         - T * (C2 + T * (C4 + T * C6)) / (1.0 + T * (C3 + T * (C5 + T * C7)))
     )
+    theta = np.clip(theta, 1e-12, None)
     xi = (bg**2 / (4.0 * theta * mr_c2)) ** (1.0 / 3.0)
     sigmav = C1 * theta * np.sqrt(xi / (mr_c2 * T**3)) * np.exp(-3.0 * xi)
     return np.clip(sigmav, 0.0, np.inf)
@@ -133,8 +134,8 @@ def run_baseline_vs_controlled(out_png: str, p: Params) -> None:
     t1, T1, N1 = integrate(4.0, t_end, dt, chi_baseline, p)
     t2, T2, N2 = integrate(4.0, t_end, dt, chi_controlled, p)
 
-    fig = plt.figure(figsize=(10.5, 4.6))
-    gs = GridSpec(1, 2, width_ratios=[1.1, 1.0], wspace=0.28)
+    fig = plt.figure(figsize=(10.5, 4.6), constrained_layout=True)
+    gs = GridSpec(1, 2, figure=fig, width_ratios=[1.1, 1.0], wspace=0.28)
     ax0 = fig.add_subplot(gs[0, 0])
     ax1 = fig.add_subplot(gs[0, 1])
 
@@ -157,7 +158,6 @@ def run_baseline_vs_controlled(out_png: str, p: Params) -> None:
     ax1.legend(loc="lower right", fontsize=8)
 
     fig.suptitle("Figure 1 — Baseline vs coherence-coupled 0D burn (illustrative)", y=1.02, fontsize=11)
-    fig.tight_layout()
     os.makedirs(os.path.dirname(out_png) or ".", exist_ok=True)
     fig.savefig(out_png, dpi=160, bbox_inches="tight")
     plt.close(fig)

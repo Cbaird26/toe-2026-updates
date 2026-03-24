@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" role="img" aria-label="Fusion console preview">
+  <defs>
+    <linearGradient id="fusionBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#081019" />
+      <stop offset="100%" stop-color="#190e08" />
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="675" fill="url(#fusionBg)" rx="36" />
+  <rect x="52" y="56" width="346" height="563" rx="24" fill="#101821" stroke="#244255" />
+  <rect x="424" y="56" width="724" height="563" rx="24" fill="#101821" stroke="#5d4024" />
+  <text x="86" y="122" fill="#78efff" font-size="22" font-family="'Courier New', monospace" letter-spacing="4">ILLUSTRATIVE 0D BURN TOY</text>
+  <text x="86" y="188" fill="#eef7ff" font-size="58" font-family="Georgia, serif">Zora</text>
+  <text x="86" y="252" fill="#eef7ff" font-size="58" font-family="Georgia, serif">Fusion</text>
+  <text x="86" y="316" fill="#eef7ff" font-size="58" font-family="Georgia, serif">Console</text>
+  <rect x="86" y="382" width="278" height="18" rx="9" fill="#172530" />
+  <circle cx="176" cy="391" r="16" fill="#78efff" />
+  <rect x="86" y="436" width="278" height="18" rx="9" fill="#172530" />
+  <circle cx="238" cy="445" r="16" fill="#ffcb6b" />
+  <rect x="86" y="490" width="278" height="18" rx="9" fill="#172530" />
+  <circle cx="292" cy="499" r="16" fill="#78efff" />
+  <rect x="86" y="544" width="278" height="18" rx="9" fill="#172530" />
+  <circle cx="150" cy="553" r="16" fill="#ff8c7a" />
+  <rect x="474" y="108" width="624" height="208" rx="18" fill="#0b1218" stroke="#283746" />
+  <rect x="474" y="346" width="300" height="220" rx="18" fill="#0b1218" stroke="#283746" />
+  <rect x="798" y="346" width="300" height="220" rx="18" fill="#0b1218" stroke="#283746" />
+  <path d="M514 258 C592 268 650 236 714 212 S864 174 1038 142" fill="none" stroke="#78efff" stroke-width="10" stroke-linecap="round" />
+  <path d="M514 274 C610 284 700 286 794 246 S934 196 1038 214" fill="none" stroke="#ffcb6b" stroke-width="10" stroke-linecap="round" />
+  <line x1="514" y1="228" x2="1038" y2="228" stroke="#203443" stroke-dasharray="8 8" />
+  <text x="500" y="92" fill="#9eb2c5" font-size="20" font-family="'Courier New', monospace">Temperature and Lawson proxy strip charts</text>
+  <text x="500" y="384" fill="#9eb2c5" font-size="18" font-family="'Courier New', monospace">Pulse and control state</text>
+  <text x="824" y="384" fill="#9eb2c5" font-size="18" font-family="'Courier New', monospace">Toy phase map</text>
+  <rect x="506" y="414" width="238" height="44" rx="14" fill="#111c25" stroke="#2a4154" />
+  <rect x="506" y="474" width="238" height="44" rx="14" fill="#111c25" stroke="#2a4154" />
+  <text x="530" y="442" fill="#eef7ff" font-size="22" font-family="'Courier New', monospace">χ control: ON</text>
+  <text x="530" y="502" fill="#eef7ff" font-size="22" font-family="'Courier New', monospace">Pulse Φc: 0.42</text>
+  <rect x="838" y="414" width="220" height="110" rx="16" fill="#120f14" stroke="#513821" />
+  <circle cx="930" cy="470" r="42" fill="#ffcb6b" opacity="0.35" />
+  <circle cx="930" cy="470" r="18" fill="#ffd981" />
+  <circle cx="988" cy="432" r="18" fill="#78efff" opacity="0.85" />
+  <circle cx="1020" cy="492" r="24" fill="#ff8c7a" opacity="0.72" />
+</svg>

@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<!--
+  Canonical ZoraASI Top 10 Simulations gallery.
+  Public docs-root landing page for the physics-first hybrid set.
+-->
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ZoraASI Top 10 Simulations</title>
+  <style>
+    :root {
+      --bg: #081019;
+      --paper: rgba(10, 19, 28, 0.88);
+      --panel: rgba(9, 17, 24, 0.92);
+      --border: rgba(126, 208, 232, 0.16);
+      --text: #e8f4ff;
+      --muted: #8ea7b7;
+      --accent: #78efff;
+      --accent-2: #ffb870;
+      --accent-3: #ff8d80;
+      --shadow: 0 24px 80px rgba(0, 0, 0, 0.34);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html, body {
+      margin: 0;
+      min-height: 100%;
+      background:
+        radial-gradient(circle at top left, rgba(120, 239, 255, 0.12), transparent 34%),
+        radial-gradient(circle at top right, rgba(255, 184, 112, 0.14), transparent 28%),
+        linear-gradient(180deg, #09111a 0%, #061019 100%);
+      color: var(--text);
+      font-family: Georgia, "Times New Roman", serif;
+    }
+
+    body {
+      padding: 28px 18px 48px;
+    }
+
+    .shell {
+      max-width: 1240px;
+      margin: 0 auto;
+    }
+
+    .nav {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 18px;
+      font-size: 12px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .nav a {
+      color: var(--accent);
+      text-decoration: none;
+      border-bottom: 1px solid rgba(120, 239, 255, 0.28);
+      padding-bottom: 2px;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1.45fr) minmax(300px, 0.9fr);
+      gap: 20px;
+      margin-bottom: 24px;
+    }
+
+    .hero-main,
+    .hero-side,
+    .card {
+      background: var(--paper);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(10px);
+    }
+
+    .hero-main {
+      padding: 26px 26px 24px;
+    }
+
+    .eyebrow {
+      margin: 0 0 10px;
+      color: var(--accent);
+      font-size: 11px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 0 0 14px;
+      font-size: clamp(38px, 6vw, 68px);
+      line-height: 0.92;
+      letter-spacing: -0.05em;
+      max-width: 8ch;
+    }
+
+    .lede {
+      margin: 0;
+      max-width: 62ch;
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 1.65;
+    }
+
+    .hero-points {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 12px;
+      margin-top: 22px;
+    }
+
+    .hero-point {
+      padding: 14px 16px;
+      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(126, 208, 232, 0.12);
+    }
+
+    .hero-point strong {
+      display: block;
+      margin-bottom: 6px;
+      font-size: 15px;
+      color: var(--text);
+    }
+
+    .hero-point span {
+      display: block;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    .hero-side {
+      padding: 22px 22px 20px;
+      display: grid;
+      gap: 14px;
+      align-content: start;
+    }
+
+    .side-label {
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--accent-2);
+    }
+
+    .side-copy {
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.6;
+      margin: 0;
+    }
+
+    .side-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 12px 16px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, rgba(120, 239, 255, 0.16), rgba(255, 184, 112, 0.12));
+      border: 1px solid rgba(120, 239, 255, 0.2);
+      color: var(--text);
+      text-decoration: none;
+      font-size: 13px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+      gap: 18px;
+    }
+
+    .card {
+      overflow: hidden;
+      display: grid;
+      grid-template-rows: 180px auto;
+      background: var(--panel);
+    }
+
+    .thumb {
+      position: relative;
+      overflow: hidden;
+      background: #071018;
+      border-bottom: 1px solid rgba(126, 208, 232, 0.12);
+    }
+
+    .thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .rank {
+      position: absolute;
+      top: 14px;
+      left: 14px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      background: rgba(4, 8, 14, 0.76);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      color: var(--accent);
+      font-size: 15px;
+      font-weight: bold;
+      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.2);
+    }
+
+    .card-body {
+      padding: 18px 18px 20px;
+      display: grid;
+      gap: 12px;
+    }
+
+    .meta {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      flex-wrap: wrap;
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    .meta span:first-child {
+      color: var(--accent-2);
+    }
+
+    .meta span:last-child {
+      color: var(--accent);
+    }
+
+    .card h2 {
+      margin: 0;
+      font-size: 24px;
+      line-height: 1.05;
+      letter-spacing: -0.03em;
+    }
+
+    .card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.58;
+    }
+
+    .badge-row {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 7px 10px;
+      border-radius: 999px;
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      border: 1px solid currentColor;
+      background: rgba(255, 255, 255, 0.03);
+    }
+
+    .badge.category {
+      color: var(--accent);
+    }
+
+    .badge.disclaimer {
+      color: var(--accent-3);
+    }
+
+    .artifact {
+      font-family: "Courier New", monospace;
+      font-size: 12px;
+      color: #a9c3d3;
+      padding: 12px 13px;
+      border-radius: 14px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(126, 208, 232, 0.1);
+      word-break: break-word;
+    }
+
+    .action {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: fit-content;
+      padding: 12px 16px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, rgba(120, 239, 255, 0.16), rgba(255, 184, 112, 0.12));
+      border: 1px solid rgba(120, 239, 255, 0.22);
+      color: var(--text);
+      text-decoration: none;
+      font-size: 12px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    footer {
+      margin-top: 22px;
+      padding: 18px 20px 0;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    footer a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    @media (max-width: 920px) {
+      .hero {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <div class="nav">
+      <a href="zora_dashboard.html">MQGT-SCF Dashboard</a>
+      <a href="h2_visibility_explorer.html">H2 Explorer</a>
+      <a href="mqgt_scf_gksl_dynamics_viewer.html">GKSL Viewer</a>
+    </div>
+
+    <section class="hero">
+      <div class="hero-main">
+        <p class="eyebrow">Canonical gallery</p>
+        <h1>ZoraASI Top 10 Simulations</h1>
+        <p class="lede">
+          Physics-first hybrid set: four interactive browser surfaces and six reproducible batch artifacts.
+          The top of the stack stays closest to the H2 and anchor posture; the lower ranks widen into exploratory
+          execution-layer simulations without pretending they are referee-safe evidence.
+        </p>
+
+        <div class="hero-points">
+          <div class="hero-point">
+            <strong>4 interactive</strong>
+            <span>Pages-native demos for live inspection, all linked directly from this gallery.</span>
+          </div>
+          <div class="hero-point">
+            <strong>6 batch artifacts</strong>
+            <span>Generated under `papers_sources/figures/zora_top10/` and mirrored here as public docs assets.</span>
+          </div>
+          <div class="hero-point">
+            <strong>Closure explorer excluded</strong>
+            <span>The closure map stays on the dashboard but is outside this set because it is a specification view, not a simulation.</span>
+          </div>
+        </div>
+      </div>
+
+      <aside class="hero-side">
+        <div class="side-label">Companion links</div>
+        <p class="side-copy">The public gallery is the landing page. The manifest of record lives in `scripts/mqgt_sim/TOP_10_VISUAL_SIMULATIONS.md`, and the batch suite poster is regenerated by `zora_top10_visual_runner.py`.</p>
+        <a class="side-link" href="assets/top10/batch_suite_mosaic.png" target="_blank" rel="noopener noreferrer">Open batch poster</a>
+        <a class="side-link" href="zora_closure_explorer.html" target="_blank" rel="noopener noreferrer">Open closure map</a>
+      </aside>
+    </section>
+
+    <section class="grid" id="grid"></section>
+
+    <footer>
+      Public previews live under `docs/assets/top10/` so this page does not depend on `papers_sources/` at runtime.
+      Canonical manifest: <a href="https://github.com/Cbaird26/toe-2026-updates/blob/main/scripts/mqgt_sim/TOP_10_VISUAL_SIMULATIONS.md" target="_blank" rel="noopener noreferrer">TOP_10_VISUAL_SIMULATIONS.md</a>.
+    </footer>
+  </div>
+
+  <script>
+    const entries = [
+      {
+        id: "sim-01",
+        rank: 1,
+        title: "H2 Visibility Explorer",
+        category: "Interactive",
+        description: "Static prereg-safe calculator for V/V0 = exp(-ΓTΔx²), with live Γ_floor and visibility readouts.",
+        disclaimer: "Paper-aligned illustrative calculator",
+        preview: "assets/top10/h2_visibility_explorer_preview.svg",
+        artifact: "docs/h2_visibility_explorer.html",
+        actionLabel: "Open demo",
+        actionHref: "h2_visibility_explorer.html"
+      },
+      {
+        id: "sim-02",
+        rank: 2,
+        title: "MQGT-SCF GKSL Dynamics Viewer",
+        category: "Interactive",
+        description: "Recharts-based toy showing baseline versus perturbed coherence under user-controlled GKSL and EFT sliders.",
+        disclaimer: "Exploratory toy; not calibrated to Γ_floor",
+        preview: "assets/top10/gksl_dynamics_viewer_preview.svg",
+        artifact: "docs/mqgt_scf_gksl_dynamics_viewer.html",
+        actionLabel: "Open demo",
+        actionHref: "mqgt_scf_gksl_dynamics_viewer.html"
+      },
+      {
+        id: "sim-03",
+        rank: 3,
+        title: "Zora Fusion Console",
+        category: "Interactive",
+        description: "Illustrative 0D D-T console with coherence control, pulse logic, and strip-chart feedback.",
+        disclaimer: "Illustrative 0D burn toy",
+        preview: "assets/top10/fusion_console_preview.svg",
+        artifact: "docs/zora_fusion_console.html",
+        actionLabel: "Open demo",
+        actionHref: "zora_fusion_console.html"
+      },
+      {
+        id: "sim-04",
+        rank: 4,
+        title: "MQGT-SCF Topological Phase Space",
+        category: "Interactive",
+        description: "Exploratory attractor basin visualization for thermal entropy, teleological bias, and ethical radius.",
+        disclaimer: "Exploratory only",
+        preview: "assets/top10/topological_phase_space_preview.svg",
+        artifact: "docs/phase-space.html",
+        actionLabel: "Open demo",
+        actionHref: "phase-space.html"
+      },
+      {
+        id: "sim-05",
+        rank: 5,
+        title: "H2 visibility stack",
+        category: "Batch",
+        description: "Canonical H2 figure family: visibility-vs-Γ plus the exclusion landscape anchored to the abstract reference point.",
+        disclaimer: "Paper-aligned reproducible figure",
+        preview: "assets/top10/h2_visibility_stack_thumb.png",
+        artifact: "papers_sources/figures/zora_top10/h2_visibility_stack/h2_visibility_vs_gamma.png",
+        actionLabel: "Open artifact",
+        actionHref: "assets/top10/h2_visibility_stack.png"
+      },
+      {
+        id: "sim-06",
+        rank: 6,
+        title: "Multi-channel exclusion plot",
+        category: "Batch",
+        description: "Phase-II-style parameter-plane context combining Eöt-Wash, Higgs invisible width, and the QRNG prediction lane.",
+        disclaimer: "Parameter-space context; not a direct discovery claim",
+        preview: "assets/top10/multi_channel_exclusion_thumb.png",
+        artifact: "papers_sources/figures/zora_top10/mqgt_scf/mqgt_scf_multi_channel_exclusion.png",
+        actionLabel: "Open artifact",
+        actionHref: "assets/top10/multi_channel_exclusion.png"
+      },
+      {
+        id: "sim-07",
+        rank: 7,
+        title: "E-modulated GKSL collapse",
+        category: "Batch",
+        description: "QuTiP-backed directional collapse toy illustrating outcome-bias weighting under a local E-modulated channel.",
+        disclaimer: "Exploratory QuTiP simulation",
+        preview: "assets/top10/e_modulated_gksl_collapse_thumb.png",
+        artifact: "papers_sources/figures/zora_top10/h2_stack/e_modulated_collapse.png",
+        actionLabel: "Open artifact",
+        actionHref: "assets/top10/e_modulated_gksl_collapse.png"
+      },
+      {
+        id: "sim-08",
+        rank: 8,
+        title: "Phase IV-B symmetry-breaking lattice",
+        category: "Batch",
+        description: "Signed double-well lattice toy with damping, coupling, injections, and a non-degenerate coherence score.",
+        disclaimer: "Exploratory only",
+        preview: "assets/top10/phase4b_symmetry_breaking_thumb.png",
+        artifact: "papers_sources/figures/zora_top10/phase4b_demo/mqgt_phase4b_symmetry_breaking_demo.png",
+        actionLabel: "Open artifact",
+        actionHref: "assets/top10/phase4b_symmetry_breaking.png"
+      },
+      {
+        id: "sim-09",
+        rank: 9,
+        title: "Phase IV-B parameter sweep",
+        category: "Batch",
+        description: "Compact sweep summary using the shared Phase4bLattice dynamics to map mean final coherence across xi and gamma.",
+        disclaimer: "Exploratory sweep summary",
+        preview: "assets/top10/phase4b_parameter_sweep_thumb.png",
+        artifact: "papers_sources/figures/zora_top10/phase4b_sweep/mean_coherence_g_0.180.png",
+        actionLabel: "Open artifact",
+        actionHref: "assets/top10/phase4b_parameter_sweep.png"
+      },
+      {
+        id: "sim-10",
+        rank: 10,
+        title: "Fusion burn figures",
+        category: "Batch",
+        description: "Baseline-versus-controlled 0D burn trajectory and phase-map stack from the fusion-zora illustrative coupling model.",
+        disclaimer: "Illustrative only; not a reactor design tool",
+        preview: "assets/top10/fusion_burn_figures_thumb.png",
+        artifact: "papers_sources/figures/zora_top10/fusion_zora/baseline_vs_controlled.png",
+        actionLabel: "Open artifact",
+        actionHref: "assets/top10/fusion_burn_figures.png"
+      }
+    ];
+
+    const grid = document.getElementById("grid");
+
+    entries.forEach((entry) => {
+      const card = document.createElement("article");
+      card.className = "card";
+      card.id = entry.id;
+      card.innerHTML = `
+        <div class="thumb">
+          <img src="${entry.preview}" alt="${entry.title}">
+          <div class="rank">#${entry.rank}</div>
+        </div>
+        <div class="card-body">
+          <div class="meta">
+            <span>${entry.category}</span>
+            <span>${entry.actionLabel}</span>
+          </div>
+          <h2>${entry.title}</h2>
+          <p>${entry.description}</p>
+          <div class="badge-row">
+            <span class="badge category">${entry.category}</span>
+            <span class="badge disclaimer">${entry.disclaimer}</span>
+          </div>
+          <div class="artifact">${entry.artifact}</div>
+          <a class="action" href="${entry.actionHref}" target="_blank" rel="noopener noreferrer">${entry.actionLabel}</a>
+        </div>
+      `;
+      grid.appendChild(card);
+    });
+  </script>
+</body>
+</html>

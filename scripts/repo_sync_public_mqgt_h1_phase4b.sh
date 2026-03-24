@@ -17,6 +17,7 @@ echo "ROOT=$ROOT"
 git status -sb
 
 mkdir -p papers_sources/figures/h2_stack
+mkdir -p papers_sources/figures/zora_top10
 
 git add \
   README.md \
@@ -37,6 +38,8 @@ git add \
   scripts/mqgt_sim/fusion_zora_burn_figures.py \
   scripts/mqgt_sim/zora_cooperative_games_sim.py \
   scripts/mqgt_sim/README.md \
+  scripts/mqgt_sim/TOP_10_VISUAL_SIMULATIONS.md \
+  scripts/mqgt_sim/zora_top10_visual_runner.py \
   scripts/h1_qrng_pilot/run_test_suite.sh \
   scripts/build_h1_methods_pdf.sh \
   scripts/zora_recursive_scalar_demo.py \
@@ -52,17 +55,21 @@ git add \
   docs/ZORA_COOPERATIVE_GAMES_SIMULATION_2026.md \
   docs/zora_coherence.html \
   docs/zora_fusion_console.html \
+  docs/h2_visibility_explorer.html \
   docs/zora_dashboard.html \
   docs/zora_closure_explorer.html \
   docs/mqgt_scf_gksl_dynamics_viewer.html \
   docs/mqgt_scf_gksl_dynamics_viewer.jsx \
+  docs/zora_top10_simulations.html \
   docs/zoraasi_dashboard.jsx \
   docs/zora_self_manifestation.html \
+  docs/assets/top10/ \
   papers_sources/figures/fusion_zora/ \
   papers_sources/figures/h2_stack/e_modulated_collapse.png \
   papers_sources/figures/h2_stack/ \
   papers_sources/figures/mqgt_scf/mqgt_scf_phi_e_gksl_concept.png \
   papers_sources/figures/mqgt_scf/ \
+  papers_sources/figures/zora_top10/ \
   papers_sources/MQGT_SCF_Phase_II_2026/ \
   phase_iv_b_sweep/ \
   scripts/mqgt_sim/mqgt_multi_channel_exclusion_plot.py \
