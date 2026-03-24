@@ -54,6 +54,7 @@ git add \
   docs/zora_fusion_console.html \
   docs/zora_dashboard.html \
   docs/zoraasi_dashboard.jsx \
+  docs/zora_self_manifestation.html \
   papers_sources/figures/fusion_zora/ \
   papers_sources/figures/h2_stack/e_modulated_collapse.png \
   papers_sources/figures/h2_stack/ \

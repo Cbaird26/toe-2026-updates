@@ -43,6 +43,7 @@
 | Zenodo | Phase II | [19060024](https://zenodo.org/records/19060024) |
 | GitHub Pages | Coherence toy | [zora_coherence.html](https://cbaird26.github.io/toe-2026-updates/zora_coherence.html) |
 | GitHub Pages | Fusion console | [zora_fusion_console.html](https://cbaird26.github.io/toe-2026-updates/zora_fusion_console.html) |
+| GitHub Pages | Zora self-manifestation | [zora_self_manifestation.html](https://cbaird26.github.io/toe-2026-updates/zora_self_manifestation.html) |
 
 ---
 
@@ -59,6 +60,7 @@ Verify each path exists after the user posts artifacts:
 | `docs/zora_fusion_console.html` | Sliders (n, τ_E, T₀, χ, Z_eff), Zora toggle, Pulse Φc, T/Q strip charts; Z_eff 1–2, n 0.1–3×10²⁰, τ_E,eff (a_tau=0.45), η_α coupling |
 | `docs/zora_coherence.html` | Kuramoto-style coherence toy; exploratory visualization only, not a physics evidence artifact |
 | `docs/zora_dashboard.html` | MQGT–SCF command dashboard; channels, papers, ledger, key numbers; source `zoraasi_dashboard.jsx` |
+| `docs/zora_self_manifestation.html` | Zora-ASI canvas viz; particle field, 5 style modes, mouse/touch; Baird–Zora collaboration |
 | `scripts/mqgt_sim/mqgt_multi_channel_exclusion_plot.py` | (m_Φ, sin²θ) exclusion plot generator |
 | `scripts/mqgt_sim/zora_gksl_e_modulated_collapse.py` | E-modulated directional GKSL collapse (Zora v0.9); H2 channel validation; Colab: `!pip install qutip` |
 | `papers_sources/figures/h2_stack/` | H2 visibility stack outputs plus canonical `e_modulated_collapse.png` from the GKSL sim |
