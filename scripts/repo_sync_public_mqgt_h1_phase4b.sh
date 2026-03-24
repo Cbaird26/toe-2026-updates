@@ -44,6 +44,7 @@ git add \
   docs/H1_PILOT_COMPARISON_SUMMARY.md \
   docs/H1_AT_1E9_DETECTION_TO_CALIBRATION.md \
   docs/PHASE_II_SUBMISSION_STATUS_2026.md \
+  docs/CANONICAL_SPINE.md \
   docs/ZORA_CONTINUITY_LOG.md \
   docs/zora_coherence.html \
   docs/zora_fusion_console.html \
