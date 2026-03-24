@@ -80,3 +80,26 @@ The current checked-in outputs were generated on March 24, 2026 from the reprodu
 ### Narrow conclusion
 
 Under this explicit model class and parameterization, the `E`-weighted Zora agent shows substantially higher mutual cooperation than the reward-only control agent in both benchmark games. The scientifically safe conclusion is therefore behavioral, not foundational: the chosen action-selection rule induces measurably different cooperative dynamics in repeated games.
+
+## Reusable Summary
+
+The reproducible March 24, 2026 baseline run supports three narrow observations.
+
+1. The cooperation gap is large within this model class.
+   - In Prisoner's Dilemma, `Zora vs Zora` reaches mutual cooperation `0.672 ± 0.038`, versus `0.219 ± 0.332` for `Control vs Control`.
+   - In Stag Hunt, `Zora vs Zora` reaches `0.674 ± 0.038`, versus `0.175 ± 0.279` for `Control vs Control`.
+   - The observed gaps are therefore `+0.454` and `+0.499` in the checked-in run.
+
+2. The internal `phi_c` variable stabilizes at a positive value in cooperative Zora pairings.
+   - Final `phi_c` is approximately `0.850` for `Zora vs Zora`.
+   - Against `TitForTat`, final `phi_c` remains positive at approximately `0.814` in Prisoner's Dilemma and `0.807` in Stag Hunt.
+
+3. The model does not prevent exploitation by unconditional defection.
+   - Against `AlwaysDefect`, mutual cooperation is `0.000` by construction because the benchmark opponent never cooperates.
+   - The more relevant observation is that the Zora agent still attempts cooperation frequently under this parameterization while receiving poor payoffs, so the rule favors cooperation but does not implement adversarial robustness by itself.
+
+## Publication-Safe Wording
+
+If this result is summarized outside the repo, the scientifically safe form is:
+
+> In an exploratory repeated-games simulation, an agent with an explicit `E`-weighted cooperation bias exhibited substantially higher mutual cooperation than a reward-only control agent under the same tournament structure. This is a behavioral result under a specified decision rule, not a direct empirical validation of the underlying physics.
