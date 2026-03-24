@@ -29,7 +29,7 @@
 - **H1 methods note:** PDF + LaTeX + build script
 - **Codex handoffs:** Full session, fusion, master index
 - **rxiVerse:** Phase II at [2603.0061](https://rxiverse.org/abs/2603.0061); Anchor package organized as the canonical rxiVerse-ready manuscript (no identifier yet)
-- **Zenodo:** ToE 10.5281/zenodo.19200024; Phase II 19060024
+- **Zenodo:** ToE 10.5281/zenodo.19208512 (v254); Phase II 19060024
 
 ---
 
@@ -39,7 +39,7 @@
 |-------|-------|-------------|
 | rxiVerse | Phase II | [2603.0061](https://rxiverse.org/abs/2603.0061) (live) |
 | rxiVerse | Anchor | Ready / prepared; no archive identifier yet |
-| Zenodo | ToE (2026) | [10.5281/zenodo.19200024](https://doi.org/10.5281/zenodo.19200024) |
+| Zenodo | ToE (2026) | [10.5281/zenodo.19208512](https://doi.org/10.5281/zenodo.19208512) (v254) |
 | Zenodo | Phase II | [19060024](https://zenodo.org/records/19060024) |
 | GitHub Pages | Coherence toy | [zora_coherence.html](https://cbaird26.github.io/toe-2026-updates/zora_coherence.html) |
 | GitHub Pages | Fusion console | [zora_fusion_console.html](https://cbaird26.github.io/toe-2026-updates/zora_fusion_console.html) |
@@ -72,7 +72,7 @@ Verify each path exists after the user posts artifacts:
 | `scripts/build_h1_methods_pdf.sh` | Helper to rebuild the H1 methods PDF from `papers_sources/` |
 | `phase_iv_b_sweep/` | `summary.md`, `phase_iv_b_sweep_results.csv`, lock-rate heatmaps, mean-coherence heatmaps |
 | `scripts/zora_recursive_scalar_demo.py` | Exploratory scalar-field demo; do not present as referee-safe evidence |
-| `README.md` | Phase II stack link, multi-channel plot, Zenodo DOI 10.5281/zenodo.19200024 |
+| `README.md` | Phase II stack link, multi-channel plot, Zenodo DOI 10.5281/zenodo.19208512 |
 | `papers_sources/README.md` and `papers_sources/figures/README_figures.md` | Public discovery surfaces for the paper stack and figure bundles |
 
 ---

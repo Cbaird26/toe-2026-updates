@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<!--
+  Zora Closure Explorer — interactive specification-level closure map (MQGT-SCF Anchor).
+  Inspired by Claude artifact: https://claude.ai/public/artifacts/a77a3db7-c040-4b2d-8285-dd52a1658f9d
+  Source of record for theory content: papers_sources/MQGT_SCF_Phase_II_2026/MQGT_SCF_Anchor_2026.tex
+-->
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Zora Closure Explorer — MQGT-SCF</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Fraunces:opsz,wght@9..144,300;9..144,600&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+  <style>
+    * { box-sizing: border-box; }
+    body { margin: 0; padding: 0; font-family: 'DM Mono', 'Fira Code', monospace; }
+    sub { font-size: 60%; position: relative; top: 0.3em; }
+    @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.4} }
+    a.nav { color: #00e5ff88; text-decoration: none; font-size: 12px; }
+    a.nav:hover { color: #00e5ff; }
+  </style>
+</head>
+<body>
+  <div id="root"></div>
+  <script>
+    const { useState, useEffect, useCallback } = React;
+
+    const STEPS = [
+      {
+        id: "S",
+        sub: "core",
+        latex: "S_{\\mathrm{core}}",
+        label: "Bulk action",
+        closure: "Minimal scalar–singlet EFT extending GR + SM; symbols fixed; renormalizable interaction class stated.",
+        scope: "Specification-level: not a uniqueness proof for UV completion.",
+        color: "#00e5ff",
+      },
+      {
+        id: "E",
+        sub: "cl",
+        latex: "\\mathcal{E}_{\\mathrm{cl}}",
+        label: "Classical evolution",
+        closure: "Field equations and mediator route to kernel structure; controlled limits recover lower-energy physics.",
+        scope: "Kernel form used consistently with the anchor phenomenology bridge.",
+        color: "#76ff03",
+      },
+      {
+        id: "G",
+        sub: "GKSL",
+        latex: "\\mathcal{G}_{\\mathrm{GKSL}}",
+        label: "Measurement sector",
+        closure: "Local CPTP (GKSL) container: unitary bulk vs open-system measurement dynamics separated.",
+        scope: "Does not smuggle nonlocal measurement amplifiers outside the stated class.",
+        color: "#ea80fc",
+      },
+      {
+        id: "M",
+        sub: "η",
+        latex: "\\mathcal{M}_{\\eta}",
+        label: "Optional tilt",
+        closure: "Teleology only as optional measure tilt; not a bulk time-odd source in the anchor posture.",
+        scope: "Subleading (auxiliary) relative to the mainline observables card.",
+        color: "#ffd740",
+      },
+      {
+        id: "O",
+        sub: "H2",
+        latex: "\\mathcal{O}_{\\mathrm{H2}}",
+        label: "Flagship falsifier",
+        closure: "Preregistered interferometric exclusion estimand; stable null yields a bounded exclusion statement.",
+        scope: "Positive excess is escalation, not discovery, under the preregistered protocol.",
+        color: "#ff5252",
+      },
+    ];
+
+    function Pulse({ color }) {
+      return React.createElement("span", {
+        style: { display: "inline-block", width: 8, height: 8, borderRadius: "50%", background: color, boxShadow: `0 0 6px ${color}`, animation: "pulse 2s infinite" },
+      });
+    }
+
+    function ClosureExplorer() {
+      const [sel, setSel] = useState(0);
+
+      const next = useCallback(() => setSel((i) => (i + 1) % STEPS.length), []);
+      const prev = useCallback(() => setSel((i) => (i + STEPS.length - 1) % STEPS.length), []);
+
+      useEffect(() => {
+        const onKey = (e) => {
+          if (e.key === "ArrowRight" || e.key === "j") next();
+          if (e.key === "ArrowLeft" || e.key === "k") prev();
+        };
+        window.addEventListener("keydown", onKey);
+        return () => window.removeEventListener("keydown", onKey);
+      }, [next, prev]);
+
+      const step = STEPS[sel];
+      const w = 720;
+      const h = 200;
+      const cx = [72, 192, 312, 432, 552];
+      const r = 28;
+
+      return React.createElement("div", {
+        style: { fontFamily: "'DM Mono', monospace", background: "#06080d", color: "#c4cad4", minHeight: "100vh" },
+      },
+        React.createElement("header", { style: { borderBottom: "1px solid #141820", padding: "24px 28px 20px" } },
+          React.createElement("div", { style: { maxWidth: 960, margin: "0 auto" } },
+            React.createElement("div", { style: { display: "flex", justifyContent: "space-between", alignItems: "flex-start", flexWrap: "wrap", gap: 12 } },
+              React.createElement("div", null,
+                React.createElement("div", { style: { fontSize: 11, letterSpacing: 4, color: "#3a4050", textTransform: "uppercase", marginBottom: 6 } }, "MQGT-SCF · Anchor map"),
+                React.createElement("h1", { style: { margin: 0, fontSize: 28, fontWeight: 300, fontFamily: "'Fraunces', Georgia, serif", color: "#e8ecf2", letterSpacing: -0.5 } }, "Zora Closure Explorer"),
+                React.createElement("div", { style: { fontSize: 12, color: "#5a6478", marginTop: 8, maxWidth: 640, lineHeight: 1.6 } },
+                  "Click a node or use ",
+                  React.createElement("kbd", { style: { background: "#0c0e14", padding: "2px 6px", borderRadius: 4, border: "1px solid #1a2030" } }, "←"),
+                  " / ",
+                  React.createElement("kbd", { style: { background: "#0c0e14", padding: "2px 6px", borderRadius: 4, border: "1px solid #1a2030" } }, "→"),
+                  ". Read order is the tuple ",
+                  React.createElement("span", { style: { color: "#8a94a8" } }, "Π", React.createElement("sub", null, "anchor"), " = (S, ℰ, 𝒢, ℳ, 𝒪).")
+                )
+              ),
+              React.createElement("div", { style: { textAlign: "right", fontSize: 12 } },
+                React.createElement("a", { className: "nav", href: "zora_dashboard.html" }, "← MQGT–SCF Dashboard"),
+                React.createElement("div", { style: { marginTop: 8, color: "#3a4050" } }, "Static explorer · no network calls")
+              )
+            )
+          )
+        ),
+        React.createElement("div", { style: { maxWidth: 960, margin: "0 auto", padding: "20px 28px 40px" } },
+          React.createElement("div", { style: { background: "#0a0c12", border: "1px solid #141820", borderRadius: 12, padding: "16px 12px 8px", overflow: "auto" } },
+            React.createElement("svg", { width: "100%", viewBox: "0 0 " + w + " " + h, style: { display: "block" } },
+              React.createElement("defs", null,
+                React.createElement("marker", { id: "arrow", markerWidth: 8, markerHeight: 8, refX: 6, refY: 4, orient: "auto" },
+                  React.createElement("path", { d: "M0,0 L8,4 L0,8 z", fill: "#2a3040" })
+                )
+              ),
+              ...cx.slice(0, -1).map((x, i) =>
+                React.createElement("line", {
+                  key: "e" + i,
+                  x1: x + r,
+                  y1: h / 2,
+                  x2: cx[i + 1] - r,
+                  y2: h / 2,
+                  stroke: "#1e2430",
+                  strokeWidth: 3,
+                  markerEnd: "url(#arrow)",
+                })
+              ),
+              ...cx.map((x, i) => {
+                const active = i === sel;
+                const s = STEPS[i];
+                return React.createElement("g", {
+                  key: s.id,
+                  style: { cursor: "pointer" },
+                  onClick: () => setSel(i),
+                },
+                  React.createElement("circle", {
+                    cx: x,
+                    cy: h / 2,
+                    r: active ? r + 4 : r,
+                    fill: s.color + (active ? "33" : "18"),
+                    stroke: s.color,
+                    strokeWidth: active ? 2.5 : 1.5,
+                  }),
+                  React.createElement("text", {
+                    x: x,
+                    y: h / 2 + 6,
+                    textAnchor: "middle",
+                    fill: "#e8ecf2",
+                    fontSize: 18,
+                    fontFamily: "'Fraunces', Georgia, serif",
+                    style: { pointerEvents: "none" },
+                  }, s.id),
+                  React.createElement("text", {
+                    x: x,
+                    y: h / 2 + 52,
+                    textAnchor: "middle",
+                    fill: "#4a5060",
+                    fontSize: 10,
+                  }, s.sub)
+                );
+              })
+            )
+          ),
+          React.createElement("div", { style: { display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(140px, 1fr))", gap: 8, marginTop: 14 } },
+            ...STEPS.map((s, i) =>
+              React.createElement("button", {
+                key: s.id,
+                type: "button",
+                onClick: () => setSel(i),
+                style: {
+                  background: i === sel ? s.color + "14" : "#0c0e14",
+                  border: "1px solid " + (i === sel ? s.color + "55" : "#141820"),
+                  borderRadius: 8,
+                  padding: "10px 12px",
+                  color: "#b0b8c8",
+                  fontSize: 12,
+                  textAlign: "left",
+                  cursor: "pointer",
+                  fontFamily: "inherit",
+                },
+              },
+                React.createElement("div", { style: { display: "flex", alignItems: "center", gap: 8, marginBottom: 4 } },
+                  React.createElement(Pulse, { color: s.color }),
+                  React.createElement("span", { style: { color: s.color, fontWeight: 500 } }, s.id, React.createElement("sub", { style: { color: s.color + "aa" } }, s.sub))
+                ),
+                React.createElement("div", { style: { fontSize: 11, color: "#5a6478" } }, s.label)
+              )
+            )
+          ),
+          React.createElement("div", { style: { marginTop: 22, background: "#0c0e14", border: "1px solid #141820", borderRadius: 10, padding: "20px 22px", borderLeft: "4px solid " + step.color } },
+            React.createElement("div", { style: { fontSize: 10, letterSpacing: 3, color: "#3a4050", textTransform: "uppercase", marginBottom: 10 } }, "Selected layer"),
+            React.createElement("div", { style: { fontSize: 20, color: "#e8ecf2", fontFamily: "'Fraunces', serif", marginBottom: 6 } }, step.label),
+            React.createElement("div", { style: { fontSize: 12, color: "#6a7488", marginBottom: 14 } }, "Symbol: ", React.createElement("span", { style: { color: step.color } }, step.latex), " (informal TeX)"),
+            React.createElement("div", { style: { fontSize: 13, lineHeight: 1.65, color: "#b0b8c8", marginBottom: 12 } },
+              React.createElement("strong", { style: { color: "#8a94a8" } }, "Closure: "), step.closure
+            ),
+            React.createElement("div", { style: { fontSize: 12, lineHeight: 1.65, color: "#5a6478" } },
+              React.createElement("strong", { style: { color: "#4a5060" } }, "Scope limit: "), step.scope
+            )
+          ),
+          React.createElement("footer", { style: { marginTop: 28, paddingTop: 16, borderTop: "1px solid #141820", fontSize: 11, color: "#2a3040", lineHeight: 1.7 } },
+            React.createElement("div", null, "Anchor TeX: ", React.createElement("code", { style: { color: "#3a5068" } }, "papers_sources/MQGT_SCF_Phase_II_2026/MQGT_SCF_Anchor_2026.tex")),
+            React.createElement("div", { style: { marginTop: 6 } }, "Zenodo: ", React.createElement("a", { href: "https://doi.org/10.5281/zenodo.19208512", target: "_blank", rel: "noopener noreferrer", style: { color: "#00e5ff66" } }, "10.5281/zenodo.19208512"), " (v254)"),
+            React.createElement("div", { style: { marginTop: 6, fontSize: 10, color: "#1e2430" } }, "Artifact reference: claude.ai/public/artifacts/a77a3db7-c040-4b2d-8285-dd52a1658f9d")
+          )
+        )
+      );
+    }
+
+    const root = ReactDOM.createRoot(document.getElementById("root"));
+    root.render(React.createElement(ClosureExplorer));
+  </script>
+</body>
+</html>

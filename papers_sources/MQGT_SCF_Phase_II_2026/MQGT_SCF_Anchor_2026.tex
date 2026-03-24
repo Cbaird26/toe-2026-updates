@@ -1,80 +1,94 @@
-\documentclass[11pt]{article}
+\documentclass[aps,prd,twocolumn,superscriptaddress,nofootinbib]{revtex4-2}
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
 \usepackage{lmodern}
-\usepackage{microtype}
-\usepackage{geometry}
-\geometry{margin=1in}
-\usepackage{amsmath,amssymb,amsthm,mathtools}
-\usepackage{booktabs,tabularx,array}
-\usepackage{enumitem}
-\usepackage{hyperref}
+\usepackage[expansion=false]{microtype}
+\usepackage{amsmath,amssymb,amsthm,bm,graphicx,booktabs,array}
+\usepackage{mathtools}
+\usepackage{tabularx}
 \usepackage{xcolor}
-\usepackage{setspace}
-\setstretch{1.05}
-\setlength{\parskip}{0.45em}
-\setlength{\parindent}{0pt}
-\hypersetup{colorlinks=true,linkcolor=black,citecolor=black,urlcolor=blue}
+% hyperref last
+\usepackage[colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue,breaklinks=true]{hyperref}
 
-\newcolumntype{Y}{>{\raggedright\arraybackslash}X}
-\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+% Plain UTF-8 source; avoid pasting from PDF (soft hyphens / invisible marks).
+\hyphenation{co-va-ri-ant mea-sure-ment mea-sure-ments}
+
+\allowdisplaybreaks[2]
+\raggedbottom
+
+\newtheorem{definition}{Definition}
 \newtheorem{proposition}{Proposition}
 \newtheorem{theorem}{Theorem}
 \newtheorem{remark}{Remark}
 
-\title{\vspace{-1.2em}\textbf{MQGT-SCF Phase II:}\\[0.35em]
-\Large Minimal Scalar-Singlet EFT, Local GKSL Measurement Dynamics,\\[0.15em]
-\Large and an H2 Interferometric Exclusion Observable}
-\author{Christopher Michael Baird\\
-\normalsize Independent Researcher\\
-\normalsize\textit{Prepared with AI-assisted editorial support from ZoraASI; scientific responsibility remains with the author.}}
-\date{March 24, 2026}
+\newcolumntype{Y}{>{\raggedright\arraybackslash}X}
 
 \begin{document}
-\maketitle
-\thispagestyle{empty}
 
-\begin{center}
-\small License: CC BY 4.0
-\end{center}
+\title[MQGT-SCF minimal scalar-singlet EFT]{MQGT-SCF as a Minimal Scalar-Singlet EFT:\\
+Specification-Level Closure, Local GKSL Measurement Dynamics,\\
+and an H2 Interferometric Exclusion Observable}
+
+\author{Christopher Michael Baird}
+\affiliation{Independent Researcher}
+
+\author{Zora}
+\affiliation{Conceptual AI Coauthor}
+
+\date{March 2026}
 
 \begin{abstract}
-We present a compact Phase II formulation of the MQGT-SCF program as a minimal scalar-singlet effective field theory extending General Relativity and the Standard Model by two real singlets $\Phi_c(x)$ and $E(x)$. The technical claim is deliberately limited to \emph{specification-level closure}: the framework fixes the action, field equations, decoupling limit, boundedness conditions, a mediator-derived nonlocal-kernel route, and a local covariant Gorini-Kossakowski-Sudarshan-Lindblad (GKSL) measurement container compatible with completely positive trace-preserving evolution. Any teleology-like effect is retained only as an optional measure-level tilt rather than as a bulk time-odd source. We state a finite-dimensional operational no-signalling result for the safe local class and identify the main empirical target as excess interferometric dephasing in the H2 channel, summarized by a visibility-suppression law and an instrument-bounded exclusion floor. A controlled low-energy naturalness module is added by adopting an EFT cutoff benchmark $\Lambda_\star = 1\,\mathrm{TeV}$ with stress band $\Lambda \in [1,10]\,\mathrm{TeV}$, which separates an ultralight mainline sector from a heavier collider-safe companion benchmark. The result is a smaller and more auditable object than an all-at-once unification claim: a framework that can be constrained or falsified in clear ways.
+\sloppy
+We present a compact anchor-paper formulation of the MQGT-SCF program. The claim is deliberately limited: the framework is treated as internally closed at the level of formal specification rather than decisively confirmed by external experiment. The anchor core consists of five coupled elements: (i) a minimal scalar-singlet effective field theory extending General Relativity and the Standard Model by two real singlets $\Phi_c(x)$ and $E(x)$; (ii) the corresponding classical field equations and a mediator-derived nonlocal kernel route; (iii) a local, covariant GKSL measurement container; (iv) an optional measure tilt retained as a companion statistical layer rather than a time-odd bulk teleology source; and (v) a flagship interferometric exclusion observable for the H2 channel. We then add a controlled naturalness module, adopting a low-energy EFT posture with cutoff benchmark $\Lambda_\star = 1\,\mathrm{TeV}$ and stress band $\Lambda\in[1,10]\,\mathrm{TeV}$. This yields an ultralight mainline sector, relevant to fifth-force and coherence-facing tests, together with a collider-safe GeV companion benchmark. Finally, we connect the parameter inventory to a preregistered Phase-0 optical H2 pilot through a fixed excess-dephasing estimand and an instrument-bounded exclusion floor. The result is a smaller and more auditable object than a maximal \mbox{all-at-once} ToE presentation: stronger precisely because it can fail in clear ways.
 \end{abstract}
 
+\maketitle
+
 \section{Introduction}
+Ambitious unification programs often fail rhetorically before they fail physically. When too many layers are presented as coequal from the outset---field content, measurement deformation, teleology, phenomenology, agent architecture, safety, and social applications---the reader is invited to attack whichever flank appears weakest.
+The mathematically closed core then becomes obscured. The present paper adopts a stricter posture.
 
-Ambitious unification programs often fail rhetorically before they fail physically. When field content, measurement deformation, teleology, phenomenology, agent architecture, and implementation claims are presented as coequal from the outset, the mathematically explicit core is easily obscured. The present paper adopts a stricter posture.
+The goal here is not to declare final empirical confirmation, nor to restate the full philosophical scope of the larger MQGT-SCF corpus. The goal is to state the smallest mathematically coherent and empirically auditable core currently available. We call this \emph{specification-level closure}: the mathematical objects are explicit, the evolution and selection rules are explicit, controlled limiting cases recover validated lower-energy physics, and the parameter inventory is finite and operationally linked to data.
 
-The goal here is not to claim final empirical confirmation, nor to restate the full philosophical scope of the wider MQGT-SCF corpus. The goal is to state the smallest mathematically coherent and empirically auditable core currently available. We use the phrase \emph{specification-level closure} to mean that the mathematical objects are explicit, the limiting cases are explicit, and the parameter inventory is finite and operationally linked to data.
-
-The framework is organized around five coupled elements: (i) a minimal scalar-singlet EFT extending General Relativity and the Standard Model by two real singlets $\Phi_c(x)$ and $E(x)$; (ii) the corresponding classical field equations together with a mediator-derived route to an effective nonlocal kernel; (iii) a local covariant GKSL measurement container; (iv) an optional measure tilt retained as a companion statistical layer rather than a bulk time-odd teleology source; and (v) a flagship interferometric exclusion observable for the H2 channel.
-
-A further ingredient added here is a controlled naturalness analysis for the scalar-singlet sector. Rather than claiming a high-scale ultraviolet completion, we adopt a deliberately low-energy EFT stance and require technical control only within a finite cutoff window. This sharpens the viable parameter region and makes the connection to experiment more disciplined.
-
-\section{Minimal scalar-singlet EFT core}
-
-We work on a four-dimensional Lorentzian spacetime $(\mathcal{M},g_{\mu\nu})$ with natural units $\hbar=c=1$. The minimal bulk is General Relativity plus the Standard Model plus two real gauge-singlet scalar sectors, denoted $\Phi_c(x)$ and $E(x)$. The anchor action is
+In this anchor formulation, the program is organized around the tuple
 \begin{equation}
-S_{\mathrm{core}}=\int_{\mathcal{M}} d^4x\,\sqrt{-g}\,\bigl(\mathcal{L}_{\mathrm{GR}}+\mathcal{L}_{\mathrm{SM}}+\mathcal{L}_{\Phi}+\mathcal{L}_{E}+\mathcal{L}_{\mathrm{int}}\bigr).
+\begin{split}
+\Pi_{\mathrm{anchor}} = \bigl(S_{\mathrm{core}},\, \mathcal{E}_{\mathrm{cl}},\, \mathcal{G}_{\mathrm{GKSL}}, \\
+\qquad{} \mathcal{M}_{\eta},\, \mathcal{O}_{\mathrm{H2}}\bigr),
+\end{split}
+\end{equation}
+where, read in order, each entry fixes respectively the bulk action functional, classical field evolution, the measurement-sector generator, an optional companion statistical tilt, and the H2-channel exclusion observable.
+Concretely, $S_{\mathrm{core}}$ is the minimal effective action, $\mathcal{E}_{\mathrm{cl}}$ denotes the classical field equations, $\mathcal{G}_{\mathrm{GKSL}}$ the local measurement generator, $\mathcal{M}_{\eta}$ the optional measure tilt, and $\mathcal{O}_{\mathrm{H2}}$ the interferometric exclusion observable. The broader corpus contains companion notes that separately develop specification-level closure, operational \mbox{no-signalling}, a preregistered H2 pilot, and an AI-safety constraint architecture \cite{BairdClosure2026,BairdNoSignal2026,BairdH22026,BairdABIL2026}. The anchor paper draws from those results but remains narrowly focused on the minimal scientific core.
+
+The new ingredient contributed here is a controlled naturalness analysis for the scalar-singlet sector. Rather than claiming a high-scale ultraviolet completion, we adopt a deliberate effective-field-theory (EFT) stance and require technical stability only within a low-energy cutoff window. This choice sharply clarifies the viable parameter region and makes the connection to experiment more honest.
+
+\section{Minimal Effective Field-Theory Core}
+We work on a four-dimensional Lorentzian spacetime $(M,g_{\mu\nu})$ and use natural units $\hbar=c=1$. The minimal bulk is General Relativity plus the Standard Model plus two real gauge-singlet scalar sectors, denoted $\Phi_c(x)$ and $E(x)$. The anchor action is
+\begin{equation}
+S_{\mathrm{core}} = \int_M d^4x\,\sqrt{-g}\,\Bigl(\mathcal{L}_{\mathrm{GR}}+\mathcal{L}_{\mathrm{SM}}+\mathcal{L}_{\Phi}+\mathcal{L}_{E}+\mathcal{L}_{\mathrm{int}}\Bigr).
 \label{eq:score}
 \end{equation}
 The gravitational and singlet sectors are
 \begin{align}
-\mathcal{L}_{\mathrm{GR}} &= \frac{M_{\mathrm{Pl}}^2}{2}R-\Lambda, \\
-\mathcal{L}_{\Phi} &= -\frac12 (\nabla \Phi_c)^2 - V_{\Phi}(\Phi_c), \\
-\mathcal{L}_{E} &= -\frac12 (\nabla E)^2 - V_E(E),
+\mathcal{L}_{\mathrm{GR}} &= \frac{M_{\mathrm{Pl}}^2}{2}R - \Lambda, \\
+\mathcal{L}_{\Phi} &= -\frac{1}{2}(\nabla\Phi_c)^2 - V_{\Phi}(\Phi_c), \\
+\mathcal{L}_{E} &= -\frac{1}{2}(\nabla E)^2 - V_E(E),
 \end{align}
 with renormalizable potentials
 \begin{align}
-V_{\Phi}(\Phi_c) &= \frac12 m_{\Phi}^2\Phi_c^2 + \frac{\lambda_{\Phi}}{4}\Phi_c^4, \\
-V_E(E) &= \frac12 m_E^2 E^2 + \frac{\lambda_E}{4}E^4.
+V_{\Phi}(\Phi_c) &= \frac{1}{2}m_{\Phi}^2\Phi_c^2 + \frac{\lambda_{\Phi}}{4}\Phi_c^4,\\
+V_E(E) &= \frac{1}{2}m_E^2E^2 + \frac{\lambda_E}{4}E^4.
 \end{align}
+We adopt the most general renormalizable scalar--singlet interaction (within the stated field content and portal structure) consistent with Standard Model gauge symmetry.
 A minimal interaction sector is
 \begin{equation}
-\mathcal{L}_{\mathrm{int}} = -\frac{\kappa}{2}\Phi_c^2E^2 - \gamma\Phi_c E - \frac{\lambda_{h\Phi}}{2}\Phi_c^2 H^{\dagger}H - \frac{\lambda_{hE}}{2}E^2H^{\dagger}H + J_{\Phi}\Phi_c + J_E E,
+\begin{split}
+\mathcal{L}_{\mathrm{int}} = {}&-\frac{\kappa}{2}\Phi_c^2E^2 - \gamma\Phi_c E - \frac{\kappa_{\Phi}}{2}\Phi_c^2 H^{\dagger}H \\
+&- \frac{\kappa_E}{2}E^2 H^{\dagger}H + J_{\Phi}\Phi_c + J_E E,
+\end{split}
+\label{eq:Lint}
 \end{equation}
-where $H$ is the Standard Model Higgs doublet and $J_{\Phi}(x),J_E(x)$ denote external or effective source functionals. The interpretive labels ``consciousness field'' and ``ethical field'' are retained only for continuity; mathematically the construction is a two-singlet EFT coupled to gravity and the Standard Model through renormalizable portals and effective sources.
+where $H$ is the Standard Model Higgs doublet and $J_{\Phi}(x),J_E(x)$ denote external or effective source functionals. The interpretive labels ``consciousness field'' and ``ethical field'' are retained for continuity, but mathematically the construction is simply a two-singlet EFT coupled to gravity and to the Standard Model through renormalizable portals and effective sources.
 
 \begin{proposition}[Bounded quartic sector]
 The quartic potential
@@ -83,7 +97,7 @@ V_4(\Phi_c,E)=\frac{\lambda_{\Phi}}{4}\Phi_c^4+\frac{\lambda_E}{4}E^4+\frac{\kap
 \end{equation}
 is bounded from below if
 \begin{equation}
-\lambda_{\Phi}>0,\qquad \lambda_E>0,\qquad \kappa > -\sqrt{\lambda_{\Phi}\lambda_E}.
+\lambda_{\Phi}>0,\qquad \lambda_E>0,\qquad \kappa> -\sqrt{\lambda_{\Phi}\lambda_E}.
 \end{equation}
 \end{proposition}
 
@@ -93,204 +107,369 @@ G_{\mu\nu}+\Lambda g_{\mu\nu}=\frac{2}{M_{\mathrm{Pl}}^2}T^{\mathrm{total}}_{\mu
 \end{equation}
 and the singlet field equations
 \begin{align}
-\Box\Phi_c + m_{\Phi}^2\Phi_c + \lambda_{\Phi}\Phi_c^3 + \kappa\Phi_c E^2 + \gamma E + \lambda_{h\Phi}\Phi_c H^{\dagger}H &= J_{\Phi}, \\
-\Box E + m_E^2 E + \lambda_E E^3 + \kappa E\Phi_c^2 + \gamma\Phi_c + \lambda_{hE}E H^{\dagger}H &= J_E.
+\Box\Phi_c + m_{\Phi}^2\Phi_c + \lambda_{\Phi}\Phi_c^3 + \kappa\Phi_c E^2 + \gamma E + \kappa_{\Phi}\Phi_c H^{\dagger}H &= J_{\Phi},
+\label{eq:phieom}\\
+\Box E + m_E^2E + \lambda_E E^3 + \kappa E\Phi_c^2 + \gamma\Phi_c + \kappa_E E H^{\dagger}H &= J_E.
+\label{eq:eeom}
 \end{align}
 
 A useful closure route for any effective nonlocal kernel is to derive it by integrating out a UV-local mediator. Introduce an auxiliary real scalar $M(x)$ with action
 \begin{equation}
-S_M = \int d^4x\,\sqrt{-g}\left[-\frac12 g^{\mu\nu}\partial_{\mu}M\partial_{\nu}M - \frac12 m_M^2 M^2 - g_{\Phi}M\Phi_c - g_E M E\right].
+\begin{split}
+S_M = \int d^4x\,\sqrt{-g}\,\Bigl[ &-\frac{1}{2}g^{\mu\nu}\partial_{\mu}M\partial_{\nu}M - \frac{1}{2}m_M^2M^2 \\
+&- g_{\Phi}M\Phi_c - g_E M E\Bigr].
+\end{split}
 \end{equation}
 Integrating out $M$ yields the effective nonlocal interaction
 \begin{equation}
-S_{\mathrm{nonloc}}[\Phi_c,E] = \frac12 \int d^4x\,\sqrt{-g}\int d^4x'\,\sqrt{-g'}\,J(x)G(x,x')J(x'),
+\begin{split}
+S_{\mathrm{nonloc}}[\Phi_c,E] = \frac{1}{2}\int d^4x\sqrt{-g}\int d^4x'\sqrt{-g'} \\
+\times J(x)G(x,x')J(x'),
+\end{split}
 \end{equation}
 with $J(x)=g_{\Phi}\Phi_c(x)+g_EE(x)$ and kernel
 \begin{equation}
-K(x,x')=g_{\Phi}g_E\,G(x,x').
+K(x,x') = g_{\Phi}g_E G(x,x').
 \end{equation}
 In the quasi-static Minkowski limit, $K(r)\propto e^{-m_M r}/(4\pi r)$, while for $m_M\to\infty$ one recovers a local derivative expansion.
 
 \begin{remark}[Decoupling]
-If the novel couplings are taken to zero and the singlet sectors are absent or dynamically frozen,
+If the new couplings are taken to zero and the singlet sectors are absent or dynamically frozen,
 \begin{equation}
-\kappa,\gamma,\lambda_{h\Phi},\lambda_{hE},J_{\Phi},J_E\to 0,
+\kappa,\gamma,\kappa_{\Phi},\kappa_E,J_{\Phi},J_E\to 0,
 \end{equation}
-then the framework reduces to GR$+$SM at low energy. This is the essential consistency requirement for the anchor core.
+then the theory reduces to GR+SM at low energy. This is the essential consistency requirement for the anchor core.
 \end{remark}
 
-\section{Local GKSL measurement container and optional measure tilt}
-
-The measurement layer is formulated as a local covariant open-system channel written in GKSL form. In a Tomonaga-Schwinger hypersurface description, the density operator evolves according to
+\section{Local GKSL Measurement Container}
+The measurement layer is formulated as a local covariant open-system channel in Gorini--Kossakowski--Sudarshan--Lindblad (GKSL) form. In a Tomonaga--Schwinger hypersurface description, the density operator evolves according to
 \begin{equation}
-\frac{\delta \rho[\Sigma]}{\delta\Sigma(x)} = -i[H(x),\rho[\Sigma]] + \sum_a\left(L_a(x)\rho[\Sigma]L_a^{\dagger}(x)-\frac12\{L_a^{\dagger}(x)L_a(x),\rho[\Sigma]\}\right).
+\begin{split}
+\frac{\delta\rho[\Sigma]}{\delta\Sigma(x)} = {}&{-}i[H(x),\rho[\Sigma]] \\
+&+ \sum_a \Bigl(L_a(x)\rho[\Sigma]L_a^{\dagger}(x)-\frac{1}{2}\{L_a^{\dagger}(x)L_a(x),\rho[\Sigma]\}\Bigr).
+\end{split}
+\label{eq:gksl}
 \end{equation}
 A minimal local modulation is
 \begin{equation}
-L_a(x)=\sqrt{\lambda_a(E(x),\Phi_c(x))}\,\widehat{M}_a(x),\qquad \lambda_a(E,\Phi_c)=\lambda_{a,0}e^{\eta_a E},\qquad |\eta_a E|\ll 1,
+\begin{split}
+L_a(x) &= \sqrt{\lambda_a(E(x),\Phi_c(x))}\,\hat M_a(x), \\
+\lambda_a(E,\Phi_c) &= \lambda_{a,0}\exp(\eta_a E),\qquad |\eta_a E|\ll 1,
+\end{split}
+\label{eq:locallambda}
 \end{equation}
-with nonnegative baseline rates $\lambda_{a,0}\ge 0$ and local measurement operators $\widehat{M}_a(x)$. As long as the rates remain nonnegative, the evolution is completely positive and trace preserving.
-
-At the effective outcome level, a corresponding normalized exponential tilt is
+with nonnegative baseline rates $\lambda_{a,0}\ge 0$ and local measurement operators $\hat M_a(x)$. As long as the rates remain nonnegative, Eq.~\eqref{eq:gksl} defines a completely positive, trace-preserving evolution. At the effective outcome level, a corresponding normalized exponential tilt is
 \begin{equation}
 P_{\eta}(i)=\frac{|c_i|^2 e^{\eta\Delta E_i}}{\sum_j |c_j|^2 e^{\eta\Delta E_j}},\qquad |\eta|\ll 1,
+\label{eq:measuretilt}
 \end{equation}
 which linearizes to
 \begin{equation}
-P_{\eta}(i)=|c_i|^2\Bigl[1+\eta\bigl(\Delta E_i-\langle \Delta E\rangle\bigr)\Bigr]+\mathcal{O}(\eta^2).
+P_{\eta}(i)=|c_i|^2\left[1+\eta\bigl(\Delta E_i-\langle \Delta E\rangle\bigr)\right]+\mathcal{O}(\eta^2).
 \end{equation}
-The crucial operational point is that any measurement deformation is confined to a local, linear, CPTP container. This is the smallest disciplined setting in which the no-signalling question can be posed cleanly.
+The crucial operational point is that the measurement deformation is confined to a \emph{local}, \emph{linear}, \emph{CPTP} container. This is the smallest disciplined setting in which the \mbox{no-signalling} question can be asked cleanly.
+This construction does not modify the unitary bulk dynamics of quantum theory; it augments the description with a local open-system channel on the measurement side.
 
-\section{Controlled EFT regime and benchmark parameter card}
+\begin{theorem}[Finite-dimensional operational no-signalling]
+Let $\mathcal{H}_{AB}=\mathcal{H}_A\otimes\mathcal{H}_B$ and assume the joint evolution factorizes locally as
+\begin{equation}
+\begin{split}
+\dot\rho_{AB}(t)={}&\bigl(\mathcal{L}^{u_A}_A\otimes \mathrm{id}_B \\
+&\quad + \mathrm{id}_A\otimes \mathcal{L}^{u_B}_B\bigr)\rho_{AB}(t),
+\end{split}
+\label{eq:factorizedgksl}
+\end{equation}
+where the generator acting in region $A$ depends only on local settings and source data in $A$, and similarly for $B$. Then the reduced state on $A$ satisfies
+\begin{equation}
+\dot\rho_A(t)=\mathcal{L}^{u_A}_A\bigl(\rho_A(t)\bigr),\qquad \rho_A(t)=\mathrm{Tr}_B\rho_{AB}(t),
+\end{equation}
+and is therefore independent of the remote protocol choice $u_B(t)$.
+\end{theorem}
 
-A central consistency requirement is that the scalar-singlet sector remain technically controlled in the presence of Standard Model radiative corrections. The present formulation therefore adopts a low-energy EFT posture rather than a high-scale UV-completion claim.
+The exact finite-dimensional proof and the corresponding continuum statement are given in Appendix~B. Standard quantum mechanics is recovered when $\eta\to 0$, $\Delta E_i\to 0$, or the local modulations are switched off. This is why the measurement layer can be included without overclaiming a wholesale replacement of ordinary quantum theory.
 
+\section{Naturalness and Controlled EFT Regime}
+A central consistency requirement is that the scalar-singlet sector remain technically controlled in the presence of Standard Model radiative corrections. The anchor paper therefore adopts a low-energy EFT posture rather than a high-scale UV-completion claim.
+We do not attempt to solve the hierarchy problem; we only enforce internal consistency within the stated EFT window.
+
+\subsection{Cutoff benchmark and philosophy}
 We define a central cutoff benchmark
 \begin{equation}
-\Lambda_\star = 1\,\mathrm{TeV},
+\Lambda_{\star}=1\,\mathrm{TeV},
 \end{equation}
 with a stress-test band
 \begin{equation}
 \Lambda\in[1,10]~\mathrm{TeV}.
 \end{equation}
-Naturalness is enforced only within this EFT validity window.
+Naturalness is then enforced only within this EFT validity window. This is a feature, not a weakness: it prevents the program from implicitly making a high-scale promise that the present corpus does not yet justify.
 
-The dominant one-loop radiative corrections to the singlet masses arise from the Higgs-portal terms:
-\begin{equation}
-\delta m_{\Phi}^2\sim \frac{\lambda_{h\Phi}}{16\pi^2}\Lambda^2,\qquad \delta m_E^2\sim \frac{\lambda_{hE}}{16\pi^2}\Lambda^2.
-\end{equation}
-Imposing the technical-naturalness conditions
+\subsection{Portal-induced radiative corrections}
+The dominant one-loop radiative corrections to the singlet masses arise from Higgs-portal terms:
+\begin{align}
+\delta m_{\Phi}^2 &\sim \frac{\lambda_{h\Phi}}{16\pi^2}\,\Lambda^2,\\
+\delta m_E^2 &\sim \frac{\lambda_{hE}}{16\pi^2}\,\Lambda^2.
+\end{align}
+We impose the technical-naturalness conditions
 \begin{equation}
 |\delta m_i^2|\lesssim \mathcal{O}(m_i^2),\qquad i\in\{\Phi,E\},
 \end{equation}
-implies the portal ceilings
+which imply
 \begin{equation}
 \lambda_{hs}\lesssim 16\pi^2\frac{m_s^2}{\Lambda^2},\qquad s\in\{\Phi,E\}.
+\label{eq:natbound}
 \end{equation}
-This immediately separates the viable region into two operational sectors. In an ultralight mainline sector with $m_s\sim 10^{-4}$--$10^{-3}\,\mathrm{eV}$, relevant to coherence-facing and sub-millimeter force searches, the portal ceilings at $\Lambda_\star=1\,\mathrm{TeV}$ are $\lambda_{hs}\lesssim 1.6\times 10^{-30}$--$1.6\times 10^{-28}$. In a heavier companion sector with $m_s\sim 1$--$10\,\mathrm{GeV}$, the corresponding ceiling is $\lambda_{hs}\lesssim 1.6\times 10^{-4}$--$1.6\times 10^{-2}$.
 
-The local GKSL container also matters structurally: it narrows the allowed deformation class and excludes an entire family of uncontrolled nonlocal amplification channels. In this way, naturalness is achieved through layered suppression: small Higgs-portal couplings, an explicit low EFT cutoff, confinement of measurement dynamics to a local CPTP container, and retention of teleology only as an optional measure tilt rather than a bulk time-odd source.
+\subsection{Two operational sectors}
+Equation~\eqref{eq:natbound} immediately separates the viable region into two operational sectors.
 
-The benchmark parameter card used in the present paper is given in Table~\ref{tab:paramcard}.
+\paragraph*{Ultralight mainline sector.}
+For
+\begin{equation}
+m_s\sim 10^{-4}\text{--}10^{-3}\,\mathrm{eV},
+\end{equation}
+relevant to coherence-facing and sub-millimeter force searches, the portal ceilings at $\Lambda_{\star}=1\,\mathrm{TeV}$ are
+\begin{equation}
+\lambda_{hs}\lesssim 1.6\times10^{-30}\text{--}1.6\times10^{-28}.
+\end{equation}
+Thus any unscreened Higgs mixing in this window is effectively negligible. In this regime, the main external pressure comes from fifth-force style constraints rather than collider phenomenology, while the main program-facing observable is the H2 interferometric channel.
 
-\begin{table}[htbp]
+\paragraph*{Collider-safe companion sector.}
+For
+\begin{equation}
+m_s\sim 1\text{--}10\,\mathrm{GeV},
+\end{equation}
+Eq.~\eqref{eq:natbound} gives
+\begin{equation}
+\lambda_{hs}\lesssim 1.6\times10^{-4}\text{--}1.6\times10^{-2}
+\end{equation}
+at $\Lambda_{\star}=1\,\mathrm{TeV}$. This defines a collider-safe companion benchmark for a heavier singlet realization, but it is not the mainline regime used by the anchor paper.
+
+\subsection{Why GKSL locality matters for naturalness}
+The local GKSL container narrows the allowed deformation class and thereby excludes an entire family of uncontrolled nonlocal amplification channels. Naturalness in the anchor program is therefore achieved through layered suppression:
+\begin{itemize}
+\item small Higgs-portal couplings,
+\item an explicit low EFT cutoff,
+\item confinement of measurement dynamics to a local CPTP container,
+\item retention of teleology only as an optional measure tilt, not as a bulk time-odd source.
+\end{itemize}
+The resulting theory is modest but controlled.
+
+\section{Parameter Space, Viable Island, and Empirical Bounds}
+The physically viable region is the subset of parameter space satisfying, simultaneously,
+\begin{align}
+&\text{(i) technical stability:} && |\delta m_i^2|\lesssim m_i^2,\\
+&\text{(ii) weak Higgs mixing:} && \sin^2\theta_{hs}\ll 1,\\
+&\text{(iii) EFT validity:} && m_i\ll \Lambda,\\
+&\text{(iv) nonzero connectivity:} && \lambda_{hs}\neq 0\ \text{or equivalent effective coupling}.
+\end{align}
+This defines the anchor-paper \emph{viable island}. It is bounded above by naturalness and portal constraints, bounded below in the ultralight regime by existing sub-millimeter and fifth-force style exclusions, and operationally probed by the H2 interferometric observable.
+
+Table~\ref{tab:paramcard} gives the benchmark parameter card. The ultralight mainline sector is the one carried forward into the anchor argument; the GeV-scale entries are companion collider-safe benchmarks only.
+
+\begin{table*}[t]
 \centering
-\small
-\setlength{\tabcolsep}{5pt}
-\renewcommand{\arraystretch}{1.18}
-\begin{tabularx}{\textwidth}{@{}lYlYl@{}}
-\toprule
-Parameter & Meaning & Central benchmark & Allowed / target regime & Status \\
-\midrule
-$\Lambda$ & EFT cutoff & $1\,\mathrm{TeV}$ & $1$--$10\,\mathrm{TeV}$ & fixed benchmark \\
-$m_{\Phi}$ & $\Phi_c$ physical mass & $10^{-4}$--$10^{-3}\,\mathrm{eV}$ & ultralight mainline & fit target / benchmark \\
-$m_E$ & $E$ physical mass & $10^{-4}$--$10^{-3}\,\mathrm{eV}$ & ultralight mainline & fit target / benchmark \\
-$\lambda_{h\Phi}$ & Higgs--$\Phi_c$ portal & $\lesssim 1.6\times 10^{-30}$ to $1.6\times 10^{-28}$ & $\ll 1$ & naturalness bound \\
-$\lambda_{hE}$ & Higgs--$E$ portal & $\lesssim 1.6\times 10^{-30}$ to $1.6\times 10^{-28}$ & $\ll 1$ & naturalness bound \\
-$\sin^2\theta_{h\Phi}$ & Higgs mixing for $\Phi_c$ & effectively negligible & $\ll 1$ & derived \\
-$\sin^2\theta_{hE}$ & Higgs mixing for $E$ & effectively negligible & $\ll 1$ & derived \\
-$\xi$ & optional measure-level teleological tilt & $\approx 0$ operationally & $|\xi|\ll 1$ & companion-only / tiny \\
-$\eta$ & measure-tilt parameter & $\approx 0$ operationally & $|\eta|\ll 1$ & companion-only / tiny \\
-$m_s^{\mathrm{comp}}$ & companion singlet mass & $1$--$10\,\mathrm{GeV}$ & heavier singlet sector & optional benchmark \\
-$\lambda_{hs}^{\mathrm{comp}}$ & portal at $1$--$10\,\mathrm{GeV}$ & $\lesssim 1.6\times 10^{-4}$ to $1.6\times 10^{-2}$ & weak but nonzero & companion benchmark \\
-\bottomrule
-\end{tabularx}
-\caption{Benchmark card for the MQGT-SCF low-energy EFT used in the present Phase II formulation.}
+\footnotesize
+\setlength{\tabcolsep}{3pt}
+\renewcommand{\arraystretch}{1.12}
+\caption{Anchor-paper benchmark card for the MQGT-SCF low-energy EFT.}
 \label{tab:paramcard}
-\end{table}
+\begin{tabular}{@{}lllll@{}}
+\toprule
+\parbox[t]{0.12\textwidth}{\raggedright Parameter} &
+\parbox[t]{0.20\textwidth}{\raggedright Meaning} &
+\parbox[t]{0.17\textwidth}{\raggedright Central benchmark} &
+\parbox[t]{0.23\textwidth}{\raggedright Allowed / target regime} &
+\parbox[t]{0.16\textwidth}{\raggedright Status} \\
+\midrule
+$\Lambda$ &
+\parbox[t]{0.20\textwidth}{\raggedright EFT cutoff} &
+\parbox[t]{0.17\textwidth}{\raggedright $1\,\mathrm{TeV}$} &
+\parbox[t]{0.23\textwidth}{\raggedright $1$--$10\,\mathrm{TeV}$} &
+\parbox[t]{0.16\textwidth}{\raggedright fixed benchmark} \\
+$m_{\Phi}$ &
+\parbox[t]{0.20\textwidth}{\raggedright $\Phi_c$ physical mass} &
+\parbox[t]{0.17\textwidth}{\raggedright $10^{-4}$--$10^{-3}\,\mathrm{eV}$} &
+\parbox[t]{0.23\textwidth}{\raggedright ultralight mainline} &
+\parbox[t]{0.16\textwidth}{\raggedright fit target / benchmark} \\
+$m_E$ &
+\parbox[t]{0.20\textwidth}{\raggedright $E$ physical mass} &
+\parbox[t]{0.17\textwidth}{\raggedright $10^{-4}$--$10^{-3}\,\mathrm{eV}$} &
+\parbox[t]{0.23\textwidth}{\raggedright ultralight mainline} &
+\parbox[t]{0.16\textwidth}{\raggedright fit target / benchmark} \\
+$\lambda_{h\Phi}$ &
+\parbox[t]{0.20\textwidth}{\raggedright Higgs--$\Phi_c$ portal} &
+\parbox[t]{0.17\textwidth}{\raggedright $\lesssim 1.6\times10^{-30}$ to $1.6\times10^{-28}$} &
+\parbox[t]{0.23\textwidth}{\raggedright $\ll 1$} &
+\parbox[t]{0.16\textwidth}{\raggedright naturalness bound} \\
+$\lambda_{hE}$ &
+\parbox[t]{0.20\textwidth}{\raggedright Higgs--$E$ portal} &
+\parbox[t]{0.17\textwidth}{\raggedright $\lesssim 1.6\times10^{-30}$ to $1.6\times10^{-28}$} &
+\parbox[t]{0.23\textwidth}{\raggedright $\ll 1$} &
+\parbox[t]{0.16\textwidth}{\raggedright naturalness bound} \\
+$\sin^2\theta_{h\Phi}$ &
+\parbox[t]{0.20\textwidth}{\raggedright Higgs mixing for $\Phi_c$} &
+\parbox[t]{0.17\textwidth}{\raggedright effectively negligible} &
+\parbox[t]{0.23\textwidth}{\raggedright $\ll 1$} &
+\parbox[t]{0.16\textwidth}{\raggedright derived} \\
+$\sin^2\theta_{hE}$ &
+\parbox[t]{0.20\textwidth}{\raggedright Higgs mixing for $E$} &
+\parbox[t]{0.17\textwidth}{\raggedright effectively negligible} &
+\parbox[t]{0.23\textwidth}{\raggedright $\ll 1$} &
+\parbox[t]{0.16\textwidth}{\raggedright derived} \\
+$\xi$ &
+\parbox[t]{0.20\textwidth}{\raggedright optional measure-level teleological tilt} &
+\parbox[t]{0.17\textwidth}{\raggedright $\approx 0$ operationally} &
+\parbox[t]{0.23\textwidth}{\raggedright $|\xi|\ll 1$} &
+\parbox[t]{0.16\textwidth}{\raggedright subleading (auxiliary)} \\
+$\eta$ &
+\parbox[t]{0.20\textwidth}{\raggedright measure-tilt parameter} &
+\parbox[t]{0.17\textwidth}{\raggedright $\approx 0$ operationally} &
+\parbox[t]{0.23\textwidth}{\raggedright $|\eta|\ll 1$} &
+\parbox[t]{0.16\textwidth}{\raggedright subleading (auxiliary)} \\
+\midrule
+$m_{\Phi},m_E$ &
+\parbox[t]{0.20\textwidth}{\raggedright companion collider-safe masses} &
+\parbox[t]{0.17\textwidth}{\raggedright $1$--$10\,\mathrm{GeV}$} &
+\parbox[t]{0.23\textwidth}{\raggedright heavier singlet sector} &
+\parbox[t]{0.16\textwidth}{\raggedright optional benchmark} \\
+$\lambda_{hs}$ &
+\parbox[t]{0.20\textwidth}{\raggedright portal at $1\text{--}10\,\mathrm{GeV}$} &
+\parbox[t]{0.17\textwidth}{\raggedright $\lesssim 1.6\times10^{-4}$ to $1.6\times10^{-2}$} &
+\parbox[t]{0.23\textwidth}{\raggedright weak but nonzero} &
+\parbox[t]{0.16\textwidth}{\raggedright companion benchmark} \\
+\bottomrule
+\end{tabular}
+\end{table*}
 
-\section{H2 interferometric exclusion observable}
+The anchor paper therefore avoids a common confusion: not all masses and portals behave the same way. An ultralight coherence-facing sector and a GeV collider-facing sector may both live inside the broader corpus, but they should not be rhetorically conflated.
 
+\section{H2 Interferometric Exclusion Observable}
 The flagship physical falsifier for the anchor program is interferometric visibility suppression in the H2 channel. The preregistered signal model is
 \begin{equation}
-\frac{V}{V_0}=\exp(-\Gamma T\,\Delta x^2),
+\frac{V}{V_0}=\exp\bigl(-\Gamma T\Delta x^2\bigr),
+\label{eq:h2signal}
 \end{equation}
-where $V$ is the measured interferometric visibility, $V_0$ is the baseline visibility predicted by the nuisance-only instrument model, $T$ is the effective superposition time, $\Delta x$ is the effective path separation, and $\Gamma$ is an excess dephasing coefficient. Defining the sensitivity coordinate
+where $V$ is measured interferometric visibility, $V_0$ is the baseline visibility predicted by the nuisance-only instrument model, $T$ is effective superposition time, $\Delta x$ is effective path separation, and $\Gamma$ is an excess dephasing coefficient.
+All quantities entering $\Gamma$ in the analysis pipeline are either directly measurable or instrument-calibrated under the preregistered protocol.
+Defining the sensitivity coordinate
 \begin{equation}
-Q:=T\,\Delta x^2,
+Q:=T\Delta x^2,
 \end{equation}
-accepted sweeps are analyzed through the preregistered regression model
+accepted sweeps are analyzed by the preregistered regression model
 \begin{equation}
 -\ln V_{jr}=a_{s(r)}+\Gamma Q_j+X_{jr}^{\top}\beta+\varepsilon_{jr},
+\label{eq:h2reg}
 \end{equation}
 with session-specific intercepts and nuisance regressors.
 
 The core deliverable of the Phase-0 pilot is not discovery language but the achieved exclusion floor
 \begin{equation}
-\Gamma_{\mathrm{floor}}=\frac{|\ln(1-\delta_{\mathrm{tot}})|}{T\,\Delta x^2},
+\Gamma_{\mathrm{floor}}=\frac{|\ln(1-\delta_{\mathrm{tot}})|}{T\Delta x^2},
+\label{eq:gammfloor}
 \end{equation}
 where $\delta_{\mathrm{tot}}$ is the preregistered total nuisance budget. Using the reference profile
 \begin{equation}
-T_{\mathrm{ref}}=10^{-6}\,\mathrm{s},\qquad \Delta x_{\mathrm{ref}}=10^{-3}\,\mathrm{m},\qquad \delta_{\mathrm{tot,ref}}=1.15\times 10^{-3},
+\begin{split}
+T_{\mathrm{ref}} &= 10^{-6}\,\mathrm{s},\qquad \Delta x_{\mathrm{ref}}=10^{-3}\,\mathrm{m}, \\
+\delta_{\mathrm{tot,ref}} &= 1.15\times10^{-3},
+\end{split}
 \end{equation}
 one obtains
 \begin{equation}
-\Gamma_{\mathrm{floor,ref}}\approx 1.15\times 10^{9}\,\mathrm{s}^{-1}\mathrm{m}^{-2}.
+\Gamma_{\mathrm{floor,ref}}\approx 1.15\times10^9\,\mathrm{s}^{-1}\mathrm{m}^{-2}.
 \end{equation}
 This is a planning benchmark, not a hardware discovery claim.
 
-The key interpretive asymmetry of H2 is worth preserving. A stable null is a scientific success because it produces a real, instrument-bounded exclusion statement. A stable positive excess is not a discovery; it is only an escalation trigger for a stronger follow-up platform. That asymmetry is what makes the H2 channel compatible with the deliberately modest posture adopted here.
+The key interpretive asymmetry of H2 is worth preserving. A stable null is a scientific success because it produces a real, instrument-bounded exclusion statement. A stable positive excess is \emph{not} a discovery; it is only an escalation trigger for a stronger follow-up platform. That asymmetry is what makes the H2 channel compatible with the modest anchor-paper posture.
 
 \section{Conclusion}
+The MQGT-SCF program is strongest when presented not as a triumphant final answer, but as a closed research architecture with a mathematically explicit core. In the anchor formulation, that core consists of a minimal scalar-singlet EFT action, explicit classical field equations, a mediator-derived kernel route, a local covariant GKSL measurement container, an optional measure-level tilt retained as a companion statistical layer, a finite \mbox{no-signalling} theorem for the safe measurement class, a controlled low-energy naturalness module, and a direct bridge from parameters to a preregistered interferometric exclusion observable.
 
-The MQGT-SCF program is strongest when presented not as a triumphant final answer, but as a closed research architecture with a mathematically explicit core. In the formulation given here, that core consists of a minimal scalar-singlet EFT action, explicit classical field equations, a mediator-derived kernel route, a local covariant GKSL measurement container, an optional measure-level tilt retained as a companion statistical layer, a finite operational no-signalling statement for the safe measurement class, a controlled low-energy naturalness module, and a direct bridge from parameters to a preregistered interferometric exclusion observable.
-
-This is enough to justify a precise but limited claim: the program is closed at specification level. It is not enough to justify decisive empirical confirmation, a high-scale ultraviolet completion, or a uniqueness theorem for a final Theory of Everything. Those remain open. But because the symbols are fixed, the limiting cases are clear, and the experimental bridge is explicit, the remaining gaps are no longer hidden behind rhetoric. They have become ordinary scientific work.
+This is enough to justify a precise claim: the program is internally closed at the level of formal specification. It is \emph{not} enough to justify decisive empirical confirmation, a high-scale UV completion, or a uniqueness theorem for a final ToE. Those remain open. But because the symbols are fixed, the limiting cases are clear, and the experimental bridge is explicit, the remaining gaps are no longer hidden behind rhetoric. They have become ordinary scientific work.
 
 \appendix
 
-\section{Compact benchmark logic}
-
-For convenience, the benchmark logic may be summarized as
+\section{MQGT-SCF Parameter Card}
+For convenience, we restate the anchor benchmark logic in compact form:
 \begin{align}
-\Lambda_\star &= 1\,\mathrm{TeV},\qquad \Lambda\in[1,10]~\mathrm{TeV}, \\
-\lambda_{hs}^{\max} &\sim 16\pi^2\frac{m_s^2}{\Lambda^2}, \\
-m_s^{\mathrm{main}} &\sim 10^{-4}\text{--}10^{-3}\,\mathrm{eV}, \\
-m_s^{\mathrm{comp}} &\sim 1\text{--}10\,\mathrm{GeV}.
+\Lambda_{\star} &= 1\,\mathrm{TeV},\qquad \Lambda\in[1,10]~\mathrm{TeV},\\
+\lambda_{hs}^{\mathrm{max}} &\sim 16\pi^2\frac{m_s^2}{\Lambda^2},\\
+\text{ultralight mainline:}\quad m_s &\sim 10^{-4}\text{--}10^{-3}\,\mathrm{eV},\\
+\text{companion collider benchmark:}\quad m_s &\sim 1\text{--}10\,\mathrm{GeV}.
 \end{align}
 The ultralight sector is the mainline anchor-paper regime. The heavier benchmark is included only to show that the broader corpus admits a collider-safe singlet realization without changing the anchor argument.
 
-\section{Operational no-signalling statement}
-
-\begin{theorem}[Operational no-signalling under local factorization]
-Let $\mathcal{H}_{AB}=\mathcal{H}_A\otimes\mathcal{H}_B$ and suppose the joint state evolves according to
+\section{Operational No-Signalling Statement}
+We record the theorem in its cleanest finite-dimensional form. Let $\mathcal{H}_{AB}=\mathcal{H}_A\otimes \mathcal{H}_B$ and suppose the joint state evolves according to
 \begin{equation}
-\dot\rho_{AB}(t)=\bigl(\mathcal{L}_A^{u_A}\otimes \mathrm{id}_B + \mathrm{id}_A\otimes \mathcal{L}_B^{u_B}\bigr)\rho_{AB}(t),
+\begin{split}
+\dot\rho_{AB}(t)={}&\bigl(\mathcal{L}^{u_A}_A\otimes \mathrm{id}_B \\
+&\quad + \mathrm{id}_A\otimes \mathcal{L}^{u_B}_B\bigr)\rho_{AB}(t),
+\end{split}
 \end{equation}
-with each local generator of GKSL type and with explicitly local dependence on settings and source data. Then the reduced state on $A$ satisfies
+with each local generator of GKSL type and with explicitly local dependence on settings and source data. Then
 \begin{equation}
-\dot\rho_A(t)=\mathcal{L}_A^{u_A}(\rho_A(t)),\qquad \rho_A(t)=\mathrm{Tr}_B\rho_{AB}(t),
+\dot\rho_A(t)=\mathcal{L}^{u_A}_A\bigl(\rho_A(t)\bigr),\qquad \rho_A(t)=\mathrm{Tr}_B\rho_{AB}(t),
 \end{equation}
-so local outcome statistics in region $A$ do not depend on free protocol choices made in spacelike-separated region $B$.
-\end{theorem}
+so local outcome statistics in region $A$ do not depend on free protocol choices made in spacelike-separated region $B$. The theorem does \emph{not} cover nonlocal generators, nonlinear rules outside the GKSL container, or non-factorizing companion tilts.
 
-\textit{Proof sketch.} Taking the partial trace over $B$ gives
-\begin{equation}
-\dot\rho_A(t)=\mathrm{Tr}_B\bigl[(\mathcal{L}_A^{u_A}\otimes \mathrm{id}_B)\rho_{AB}(t)\bigr] + \mathrm{Tr}_B\bigl[(\mathrm{id}_A\otimes \mathcal{L}_B^{u_B})\rho_{AB}(t)\bigr].
-\end{equation}
-Because $\mathcal{L}_A^{u_A}$ acts only on $A$, the first term equals $\mathcal{L}_A^{u_A}(\rho_A)$. The second term vanishes because a GKSL generator is trace preserving on $B$. Hence $\dot\rho_A(t)=\mathcal{L}_A^{u_A}(\rho_A(t))$, independent of $u_B$. The statement does not cover nonlocal generators, nonlinear rules outside the GKSL container, or non-factorizing companion tilts.\hfill$\square$
+\begin{thebibliography}{99}
 
-\begin{thebibliography}{11}
+\bibitem{BairdClosure2026}
+C. M. Baird,
+\emph{Specification-Level Mathematical Closure of the MQGT--SCF Program: A Compact, Publication-Ready Scientific Synthesis}
+(2026).
+
+\bibitem{BairdNoSignal2026}
+C. M. Baird,
+\emph{Operational No-Signalling for a Safe Class of Local GKSL-Type Measurement Deformations in MQGT--SCF}
+(2026).
+
+\bibitem{BairdH22026}
+C. M. Baird,
+\emph{H2 Interferometric Visibility Suppression: A Preregistered Phase-0 Benchtop Optical Pilot for MQGT--SCF}
+(2026).
+
+\bibitem{BairdABIL2026}
+C. M. Baird,
+\emph{Asimov--Baird Invariance Laws: Field-Theoretic Safety Constraints for Autonomous AI Systems}
+(2026).
+
 \bibitem{Lindblad1976}
-G.~Lindblad, ``On the generators of quantum dynamical semigroups,'' \textit{Communications in Mathematical Physics} \textbf{48} (1976), 119--130.
+G. Lindblad,
+``On the generators of quantum dynamical semigroups,''
+\emph{Commun. Math. Phys.} \textbf{48}, 119--130 (1976).
 
-\bibitem{Gorini1976}
-V.~Gorini, A.~Kossakowski, and E.~C.~G.~Sudarshan, ``Completely positive dynamical semigroups of $N$-level systems,'' \textit{Journal of Mathematical Physics} \textbf{17} (1976), 821--825.
+\bibitem{GKS1976}
+V. Gorini, A. Kossakowski, and E. C. G. Sudarshan,
+``Completely positive dynamical semigroups of N-level systems,''
+\emph{J. Math. Phys.} \textbf{17}, 821--825 (1976).
 
 \bibitem{Tomonaga1946}
-S.~Tomonaga, ``On a relativistically invariant formulation of the quantum theory of wave fields,'' \textit{Progress of Theoretical Physics} \textbf{1} (1946), 27--42.
+S. Tomonaga,
+``On a relativistically invariant formulation of the quantum theory of wave fields,''
+\emph{Prog. Theor. Phys.} \textbf{1}, 27--42 (1946).
 
 \bibitem{Schwinger1948}
-J.~Schwinger, ``Quantum electrodynamics. I. A covariant formulation,'' \textit{Physical Review} \textbf{74} (1948), 1439--1461.
-
-\bibitem{Georgi1993}
-H.~Georgi, ``Effective field theory,'' \textit{Annual Review of Nuclear and Particle Science} \textbf{43} (1993), 209--252.
+J. Schwinger,
+``Quantum electrodynamics. I. A covariant formulation,''
+\emph{Phys. Rev.} \textbf{74}, 1439--1461 (1948).
 
 \bibitem{Bassi2013}
-A.~Bassi, K.~Lochan, S.~Satin, T.~P.~Singh, and H.~Ulbricht, ``Models of wave-function collapse, underlying theories, and experimental tests,'' \textit{Reviews of Modern Physics} \textbf{85} (2013), 471--527.
+A. Bassi, K. Lochan, S. Satin, T. P. Singh, and H. Ulbricht,
+``Models of wave-function collapse, underlying theories, and experimental tests,''
+\emph{Rev. Mod. Phys.} \textbf{85}, 471--527 (2013).
 
 \bibitem{Nimmrichter2014}
-S.~Nimmrichter, K.~Hornberger, P.~Haslinger, and M.~Arndt, ``Macroscopic matter-wave interferometry probes collapse-model parameters,'' \textit{Physical Review Letters} \textbf{113} (2014), 020405.
+S. Nimmrichter, K. Hornberger, P. Haslinger, and M. Arndt,
+``Macroscopic matter-wave interferometry probes collapse-model parameters,''
+\emph{Phys. Rev. Lett.} \textbf{113}, 020405 (2014).
+
+\bibitem{Ames2017}
+A. D. Ames, X. Xu, J. W. Grizzle, and P. Tabuada,
+``Control barrier function based quadratic programs for safety critical systems,''
+\emph{IEEE Trans. Automat. Control} \textbf{62}(8), 3861--3876 (2017).
+
 \end{thebibliography}
 
 \end{document}

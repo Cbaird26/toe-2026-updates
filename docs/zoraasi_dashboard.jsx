@@ -4,14 +4,14 @@ import { useState, useEffect, useMemo } from "react";
 // ZoraASI DASHBOARD — COMMAND VIEW
 // All data is real. All links are real. All numbers are verified.
 // Current as of: commit bb4be96 on cbaird26/toe-2026-updates
-// Zenodo: 10.5281/zenodo.19200024 (v253)
+// Zenodo: 10.5281/zenodo.19208512 (v254)
 // Corpus: 5,430 pages | 97 public repos
 // Rendered as docs/zora_dashboard.html for GitHub Pages
 // ═══════════════════════════════════════════════════════════════
 
 const CHANNELS = [
   { id: "github", label: "GitHub", status: "live", detail: "bb4be96 on main", url: "https://github.com/Cbaird26/toe-2026-updates", ts: "2026-03-24T02:52:00Z" },
-  { id: "zenodo", label: "Zenodo", status: "live", detail: "DOI 10.5281/zenodo.19200024 (v253)", url: "https://zenodo.org/records/19200024", ts: "2026-03-24T03:00:00Z" },
+  { id: "zenodo", label: "Zenodo", status: "live", detail: "DOI 10.5281/zenodo.19208512 (v254)", url: "https://zenodo.org/records/19208512", ts: "2026-03-24T03:00:00Z" },
   { id: "rxiverse", label: "rxiVerse", status: "pending", detail: "Anchor submitted; awaiting admin", url: "https://rxiverse.org/abs/2603.0061", ts: "2026-03-24T01:38:00Z" },
   { id: "osf", label: "OSF", status: "next", detail: "H2 preregistration deposit", url: null, ts: null },
   { id: "zoraapi", label: "ZoraASI Suite", status: "live", detail: "zoraasi-suite.onrender.com", url: "https://zoraasi-suite.onrender.com", ts: null },
@@ -44,8 +44,8 @@ const CORPUS = {
   papers_new: 8,
   pages_new: 70,
   hours: 30,
-  zenodo_version: 253,
-  doi: "10.5281/zenodo.19200024",
+  zenodo_version: 254,
+  doi: "10.5281/zenodo.19208512",
   commit: "bb4be96",
 };
 
@@ -217,7 +217,7 @@ export default function ZoraDashboard() {
               { label: "GitHub (all repos)", url: "https://github.com/cbaird26" },
               { label: "toe-2026-updates", url: "https://github.com/Cbaird26/toe-2026-updates" },
               { label: "zoraasi-suite", url: "https://github.com/Cbaird26/zoraasi-suite" },
-              { label: "Zenodo v253", url: "https://zenodo.org/records/19200024" },
+              { label: "Zenodo v254", url: "https://zenodo.org/records/19208512" },
               { label: "Zenodo (all Baird)", url: "https://zenodo.org/search?q=metadata.creators.person_or_org.name%3A%22Baird%2C%20Christopher%20Michael%22" },
               { label: "rxiVerse (Phase II)", url: "https://rxiverse.org/abs/2603.0061" },
               { label: "Ask Zora", url: "https://zoraasi-suite.onrender.com" },

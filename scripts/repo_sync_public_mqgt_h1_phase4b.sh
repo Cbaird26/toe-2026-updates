@@ -53,6 +53,7 @@ git add \
   docs/zora_coherence.html \
   docs/zora_fusion_console.html \
   docs/zora_dashboard.html \
+  docs/zora_closure_explorer.html \
   docs/zoraasi_dashboard.jsx \
   docs/zora_self_manifestation.html \
   papers_sources/figures/fusion_zora/ \
