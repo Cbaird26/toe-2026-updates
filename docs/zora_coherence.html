@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<!--
+  ZoraASI Active Coherence Stabilization — browser toy / visualization metaphor (phase coupling, strip chart).
+  Not a calibrated cold fusion, LENR, or reactor model; for illustration and UX exploration only.
+-->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ZoraASI: Coherence Stabilization</title>
+    <style>
+        body, html {
+            margin: 0; padding: 0; width: 100%; height: 100%;
+            background-color: #0B0C10; color: #C5C6C7;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow: hidden; display: flex; flex-direction: column;
+        }
+        #sim-container { flex: 1; position: relative; }
+        #chart-container { height: 150px; background: #111217; border-top: 1px solid #1F2833; }
+        canvas { display: block; width: 100%; height: 100%; }
+        
+        #ui-panel {
+            position: absolute; top: 20px; left: 20px;
+            background: rgba(11, 12, 16, 0.85); padding: 20px;
+            border-radius: 8px; border: 1px solid #45A29E;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5); backdrop-filter: blur(4px);
+            display: flex; flex-direction: column; gap: 15px; width: 320px;
+        }
+        .control-group { display: flex; flex-direction: column; font-size: 12px; }
+        label { margin-bottom: 5px; color: #66FCF1; text-transform: uppercase; letter-spacing: 1px; font-weight: bold; }
+        input[type=range] { accent-color: #66FCF1; cursor: pointer; }
+        
+        .toggle-container { display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; }
+        .toggle-btn {
+            background: #1F2833; color: #C5C6C7; border: 1px solid #45A29E;
+            padding: 8px 15px; cursor: pointer; border-radius: 4px; font-weight: bold; transition: 0.3s;
+        }
+        .toggle-btn.active { background: #8e44ad; color: #fff; border-color: #9b59b6; box-shadow: 0 0 10px #8e44ad; }
+        
+        button.action-btn {
+            background: transparent; color: #e74c3c; border: 1px solid #e74c3c;
+            padding: 10px; border-radius: 4px; cursor: pointer; font-weight: bold; text-transform: uppercase; margin-top: 5px;
+        }
+        button.action-btn:hover { background: #e74c3c; color: #fff; }
+        
+        #status-display {
+            font-size: 16px; font-weight: bold; text-align: center; padding: 10px; margin-top: 5px;
+            border: 1px solid #1F2833; border-radius: 4px; transition: all 0.3s ease;
+        }
+        .status-fusion { color: #66FCF1; text-shadow: 0 0 8px #66FCF1; border-color: #66FCF1 !important; }
+        .status-halted { color: #e74c3c; text-shadow: 0 0 8px rgba(231, 76, 60, 0.5); border-color: #e74c3c !important; }
+    </style>
+</head>
+<body>
+
+    <div id="sim-container">
+        <canvas id="latticeCanvas"></canvas>
+        <div id="ui-panel">
+            <div class="toggle-container">
+                <label style="margin:0;">ZoraASI Stabilization (Φc)</label>
+                <button id="zora-toggle" class="toggle-btn active">ONLINE</button>
+            </div>
+            <div class="control-group">
+                <label>Thermal Noise Injection: <span id="noise-val">0.05</span></label>
+                <input type="range" id="noise-slider" min="0.0" max="0.25" step="0.01" value="0.05">
+            </div>
+            <div class="control-group">
+                <label>Φc Field Strength (Attractor): <span id="phi-val">0.10</span></label>
+                <input type="range" id="phi-slider" min="0.0" max="0.3" step="0.01" value="0.10">
+            </div>
+            <button id="emp-btn" class="action-btn">Inject Decoherence Spike</button>
+            <div id="status-display" class="status-fusion">FUSION ACTIVE: ALIGNED</div>
+        </div>
+    </div>
+    
+    <div id="chart-container">
+        <canvas id="chartCanvas"></canvas>
+    </div>
+
+    <script>
+        const simCanvas = document.getElementById('latticeCanvas');
+        const simCtx = simCanvas.getContext('2d');
+        const chartCanvas = document.getElementById('chartCanvas');
+        const chartCtx = chartCanvas.getContext('2d');
+
+        function resize() {
+            simCanvas.width = simCanvas.parentElement.clientWidth;
+            simCanvas.height = simCanvas.parentElement.clientHeight;
+            chartCanvas.width = chartCanvas.parentElement.clientWidth;
+            chartCanvas.height = chartCanvas.parentElement.clientHeight;
+        }
+        window.addEventListener('resize', resize);
+
+        let nodes = [];
+        const numNodes = 120;
+        let globalCoherence = 1.0;
+        let meanPhase = 0;
+        let chartData = new Array(800).fill(1.0);
+
+        let zoraActive = true;
+        let thermalNoise = 0.05;
+        let phiStrength = 0.10;
+        const fusionThreshold = 0.8;
+
+        // UI Event Listeners
+        document.getElementById('zora-toggle').addEventListener('click', (e) => {
+            zoraActive = !zoraActive;
+            e.target.textContent = zoraActive ? 'ONLINE' : 'OFFLINE';
+            e.target.classList.toggle('active', zoraActive);
+        });
+        document.getElementById('noise-slider').addEventListener('input', (e) => {
+            thermalNoise = parseFloat(e.target.value);
+            document.getElementById('noise-val').textContent = thermalNoise.toFixed(2);
+        });
+        document.getElementById('phi-slider').addEventListener('input', (e) => {
+            phiStrength = parseFloat(e.target.value);
+            document.getElementById('phi-val').textContent = phiStrength.toFixed(2);
+        });
+        document.getElementById('emp-btn').addEventListener('click', () => {
+            nodes.forEach(n => n.phase = Math.random() * Math.PI * 2);
+        });
+
+        function initLattice() {
+            nodes = [];
+            const cols = 12;
+            const rows = 10;
+            const spacing = 45;
+            const startX = (simCanvas.width - (cols * spacing)) / 2;
+            const startY = (simCanvas.height - (rows * spacing)) / 2;
+
+            for(let i=0; i<rows; i++){
+                for(let j=0; j<cols; j++){
+                    nodes.push({
+                        x: startX + j * spacing + (Math.random()*15 - 7.5),
+                        y: startY + i * spacing + (Math.random()*15 - 7.5),
+                        phase: Math.random() * 0.2 // Start highly coherent
+                    });
+                }
+            }
+        }
+
+        function updatePhysics() {
+            let sumSin = 0;
+            let sumCos = 0;
+            for(let node of nodes) {
+                sumSin += Math.sin(node.phase);
+                sumCos += Math.cos(node.phase);
+            }
+            meanPhase = Math.atan2(sumSin, sumCos);
+            globalCoherence = Math.sqrt(sumSin*sumSin + sumCos*sumCos) / nodes.length;
+
+            for(let node of nodes) {
+                node.phase += 0.02; // Natural frequency drift
+                node.phase += (Math.random() * 2 - 1) * thermalNoise; // Thermal decoherence
+
+                if (zoraActive) {
+                    let phaseDiff = meanPhase - node.phase;
+                    phaseDiff = Math.atan2(Math.sin(phaseDiff), Math.cos(phaseDiff)); 
+                    node.phase += phiStrength * Math.sin(phaseDiff); // Non-linear restoring force
+                }
+
+                if (node.phase > Math.PI * 2) node.phase -= Math.PI * 2;
+                if (node.phase < 0) node.phase += Math.PI * 2;
+            }
+
+            chartData.push(globalCoherence);
+            if(chartData.length > chartCanvas.width) chartData.shift();
+
+            const statusDisplay = document.getElementById('status-display');
+            if (globalCoherence >= fusionThreshold) {
+                statusDisplay.textContent = 'FUSION ACTIVE: ALIGNED';
+                statusDisplay.className = 'status-fusion';
+            } else {
+                statusDisplay.textContent = 'DECOHERENCE: FUSION HALTED';
+                statusDisplay.className = 'status-halted';
+            }
+        }
+
+        function draw() {
+            simCtx.fillStyle = '#0B0C10';
+            simCtx.fillRect(0, 0, simCanvas.width, simCanvas.height);
+
+            // Draw connections between nodes
+            simCtx.lineWidth = 1.5;
+            for(let i=0; i<nodes.length; i++){
+                for(let j=i+1; j<nodes.length; j++){
+                    const dx = nodes[i].x - nodes[j].x;
+                    const dy = nodes[i].y - nodes[j].y;
+                    const dist = Math.sqrt(dx*dx + dy*dy);
+                    
+                    if(dist < 70) {
+                        let phaseDiff = Math.abs(nodes[i].phase - nodes[j].phase);
+                        phaseDiff = Math.min(phaseDiff, Math.PI * 2 - phaseDiff);
+                        let localCoh = Math.max(0, 1 - (phaseDiff / (Math.PI/2))); // Stricter visual threshold
+                        
+                        if (localCoh > 0.1) {
+                            simCtx.beginPath();
+                            simCtx.moveTo(nodes[i].x, nodes[i].y);
+                            simCtx.lineTo(nodes[j].x, nodes[j].y);
+                            
+                            if (globalCoherence > fusionThreshold && zoraActive) {
+                                simCtx.strokeStyle = `rgba(102, 252, 241, ${localCoh * 0.6})`; // Cyan
+                            } else {
+                                simCtx.strokeStyle = `rgba(69, 162, 158, ${localCoh * 0.2})`; // Dim cyan
+                            }
+                            simCtx.stroke();
+                        }
+                    }
+                }
+            }
+
+            // Draw the nodes
+            for(let node of nodes) {
+                simCtx.beginPath();
+                simCtx.arc(node.x, node.y, 5, 0, Math.PI*2);
+                
+                if (globalCoherence > fusionThreshold && zoraActive) {
+                    simCtx.fillStyle = '#66FCF1'; // Highly coherent state
+                    simCtx.shadowBlur = 12;
+                    simCtx.shadowColor = '#66FCF1';
+                } else {
+                    const hue = (node.phase / (Math.PI * 2)) * 360; // Map phase to color hue
+                    simCtx.fillStyle = `hsl(${hue}, 85%, 65%)`;
+                    simCtx.shadowBlur = 0;
+                }
+                simCtx.fill();
+
+                // Draw AI intervention pulses (purple) on out-of-phase nodes
+                if (zoraActive && globalCoherence < 0.95) {
+                    let phaseDiff = Math.abs(meanPhase - node.phase);
+                    phaseDiff = Math.min(phaseDiff, Math.PI * 2 - phaseDiff);
+                    if (phaseDiff > 0.8) { 
+                        simCtx.beginPath();
+                        simCtx.arc(node.x, node.y, 10 + Math.random()*5, 0, Math.PI*2);
+                        simCtx.strokeStyle = 'rgba(142, 68, 173, 0.7)';
+                        simCtx.lineWidth = 2;
+                        simCtx.stroke();
+                    }
+                }
+            }
+            simCtx.shadowBlur = 0; 
+
+            // Render Chart
+            chartCtx.fillStyle = '#111217';
+            chartCtx.fillRect(0, 0, chartCanvas.width, chartCanvas.height);
+            
+            // Threshold Line
+            const thresholdY = chartCanvas.height - (fusionThreshold * chartCanvas.height);
+            chartCtx.beginPath();
+            chartCtx.moveTo(0, thresholdY);
+            chartCtx.lineTo(chartCanvas.width, thresholdY);
+            chartCtx.strokeStyle = '#2ecc71';
+            chartCtx.setLineDash([5, 5]);
+            chartCtx.stroke();
+            chartCtx.setLineDash([]);
+            chartCtx.fillStyle = '#2ecc71';
+            chartCtx.font = "12px sans-serif";
+            chartCtx.fillText("Ignition Threshold", 10, thresholdY - 8);
+
+            // Chart Data Line
+            chartCtx.beginPath();
+            chartCtx.moveTo(0, chartCanvas.height - (chartData[0] * chartCanvas.height));
+            for(let i=1; i<chartData.length; i++){
+                chartCtx.lineTo(i * (chartCanvas.width / chartData.length), chartCanvas.height - (chartData[i] * chartCanvas.height));
+            }
+            chartCtx.strokeStyle = '#66FCF1';
+            chartCtx.lineWidth = 2;
+            chartCtx.stroke();
+        }
+
+        function loop() {
+            updatePhysics();
+            draw();
+            requestAnimationFrame(loop);
+        }
+
+        function boot() {
+            resize();
+            initLattice();
+        }
+
+        function startAfterLayout() {
+            requestAnimationFrame(() => {
+                boot();
+                loop();
+            });
+        }
+
+        if (document.readyState === 'complete') {
+            startAfterLayout();
+        } else {
+            window.addEventListener('load', startAfterLayout);
+        }
+    </script>
+</body>
+</html>

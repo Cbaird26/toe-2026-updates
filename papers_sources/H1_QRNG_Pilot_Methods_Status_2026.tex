@@ -1,0 +1,123 @@
+% !TeX program = pdflatex
+% H1 QRNG binary pilot — methods, status, and billion-trial calibration discipline
+% Self-contained: pdflatex x2 (no BibTeX required)
+% Repository: scripts/h1_qrng_pilot/, docs/H1_*.md
+
+\documentclass[reprint,amsmath,amssymb,aps,showkeys]{revtex4-2}
+\usepackage{graphicx}
+\usepackage{hyperref}
+
+\hypersetup{colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue}
+
+\begin{document}
+
+\title{H1 QRNG binary pilot: methods posture, null calibration snapshot,\\and billion-trial systematics discipline (MQGT-SCF)}
+
+\author{C.~M.~Baird}
+\affiliation{Independent Researcher}
+
+\date{March 2026}
+
+\begin{abstract}
+We summarize the \emph{secondary} H1 lane of the Merged Quantum Gauge and Scalar Consciousness Framework (MQGT-SCF): a preregistered-style binary-outcome pipeline built to harden data collection, freeze estimators, and bound reproducible offsets under adversarial controls. We state explicitly how H1 relates to the primary H2 interferometric falsifier, why nominal sample size at $N\sim 10^9$ does not by itself resolve parameter regimes of order $10^{-6}$ without a mapped observable, and why large-$N$ campaigns shift the dominant error budget from sampling noise to systematics. We record a March~2026 null-calibration snapshot: a 500-replicate placebo batch consistent with nominal frequentist tails, and individual live-source runs (OS CSPRNG and ANU QRNG API) that remain in-family under a frozen train/holdout $z$-score analysis. The operational rule is conservative: at billion-scale sampling, statistical significance is cheap, calibration is expensive, and credibility requires surviving time-structure--preserving adversarial controls and cross-device replication.
+\end{abstract}
+
+\maketitle
+
+% ---------------------------------------------------------------------------
+\section{Program order: H2 first, H1 as calibration}
+% ---------------------------------------------------------------------------
+Within the MQGT-SCF Phase~II posture, \textbf{H2 interferometry} is the flagship physics falsifier. The H1 QRNG binary program is explicitly \textbf{secondary}: it exists to (i)~validate logging, integrity checks, and estimators; (ii)~place reviewer-safe bounds on reproducible binary offsets under stated conditions; and (iii)~stress the pipeline with placebo, classical RNG, and live quantum API sources. H1 is not treated as a substitute falsifier for H2.
+
+% ---------------------------------------------------------------------------
+\section{Sampling variance versus effective sample size}
+% ---------------------------------------------------------------------------
+For balanced Bernoulli trials with success probability $p=\tfrac12$ under a null, the textbook standard error of the sample mean proportion is
+\begin{equation}
+\sigma_{\hat p} = \sqrt{\frac{p(1-p)}{N}} = \frac{1}{2\sqrt{N}}.
+\label{eq:se}
+\end{equation}
+At $N=10^9$, $\sigma_{\hat p}\approx 1.58\times 10^{-5}$. Corresponding Gaussian-equivalent tail thresholds (for illustration only) scale as $k\sigma_{\hat p}$; e.g.\ $3\sigma\approx 4.7\times 10^{-5}$ and $5\sigma\approx 7.9\times 10^{-5}$ in raw offset from $\tfrac12$ at perfect IID balance.
+
+Equation~\eqref{eq:se} \emph{overstates} inferential precision when bits are not effectively independent. Autocorrelation, block structure, nonstationarity, and hardware state imply an \textbf{effective sample size} $N_{\mathrm{eff}}<N$. In practice the bit stream must be analyzed as a \textbf{time series} (spectral density, block dependence, drift), not only as a single binomial draw.
+
+% ---------------------------------------------------------------------------
+\section{Large $N$: systematics dominate}
+% ---------------------------------------------------------------------------
+As $N$ grows, pure sampling variance shrinks and the limiting failure mode becomes \textbf{systematic bias}: environmental drift, firmware behavior, timing and buffering, network batching, and analysis degrees of freedom. At $N\sim 10^9$, infinitesimal biases routinely achieve conventional ``significance'' under naive tests. The correct discriminant is therefore not merely ``nonzero?'' but whether an excursion is \textbf{larger than calibrated hardware/process drift} and \textbf{stable} across runs, devices, time splits, and blinded reruns.
+
+% ---------------------------------------------------------------------------
+\section{Adversarial controls and time structure}
+% ---------------------------------------------------------------------------
+Blinding, delayed labels, holdout splits, and synthetic injections are standard gold-standard directions. A practical refinement is that \textbf{uniform random permutations} of bits can destroy temporal structure and yield an artificially easy null. Stronger nulls preserve realistic correlation structure while breaking the hypothesis of interest, including blockwise permutations, circular shifts, device swaps, and seeded injections with hidden timestamps.
+
+% ---------------------------------------------------------------------------
+\section{Frozen estimator snapshot (March 2026)}
+% ---------------------------------------------------------------------------
+The in-repository pilot applies a fixed train/holdout split fraction (here $0.2$ holdout after optional burn-in), reports $\hat p$, $\Delta=\hat p-\tfrac12$, and
+\begin{equation}
+z = \frac{\Delta}{\sqrt{1/(4N_{\mathrm{split}})}},
+\end{equation}
+on each split, with Wilson intervals for the holdout where recorded. SHA-256 stream verification is used when enabled in collection artifacts.
+
+\subsection{Placebo batch aggregate}
+Table~\ref{tab:placebo} summarizes 500 replicates at \texttt{target\_bits}${}=200{,}000$, \texttt{burnin\_bits}${}=1000$, \texttt{holdout\_fraction}${}=0.2$. Tail rates for $|z|$ on train/holdout and the fraction of permutation $p<0.05$ are consistent with a healthy null pipeline under the frozen code path.
+
+\begin{table}[t]
+\caption{Placebo batch aggregate (500 replicates).}
+\label{tab:placebo}
+\begin{ruledtabular}
+\begin{tabular}{lc}
+Metric & Value \\
+\colrule
+$P(|z_{\mathrm{train}}|\ge 2)$ & $0.0420$ \\
+$P(|z_{\mathrm{hold}}|\ge 2)$ & $0.0600$ \\
+$P(|z_{\mathrm{train}}|\ge 3)$ & $0.0020$ \\
+$P(|z_{\mathrm{hold}}|\ge 3)$ & $0.0040$ \\
+$P(|z_{\mathrm{train}}|\ge 5)$ & $0.0000$ \\
+$P(|z_{\mathrm{hold}}|\ge 5)$ & $0.0000$ \\
+Fraction $\mathrm{perm}\,p<0.05$ & $0.0400$ \\
+\end{tabular}
+\end{ruledtabular}
+\end{table}
+
+\subsection{Individual live-source runs}
+Table~\ref{tab:runs} lists representative ANU API and OS CSPRNG (\texttt{urandom}) harness runs. Under the frozen estimator, ANU does not present a qualitative separation from the classical control at the recorded $N$; no holdout $z$ motivates protocol branching without pre-registered multiplicity and replication.
+
+\begin{table}[t]
+\caption{Individual runs: train/holdout $z$-scores and proportions (March~2026 snapshot). Wilson interval endpoints are reported for the holdout split.}
+\label{tab:runs}
+{\footnotesize\setlength{\tabcolsep}{3pt}%
+\begin{ruledtabular}
+\begin{tabular}{llrrrrrp{1.55in}}
+Run ID & Source & $N$ & $z_{\mathrm{tr}}$ & $z_{\mathrm{ho}}$ & $\hat p_{\mathrm{tr}}$ & $\hat p_{\mathrm{ho}}$ & Wilson 95\% (hold) \\
+\colrule
+\texttt{anu\_shake} & ANU & $50{,}016$ & $+0.465$ & $+0.550$ & $0.501162$ & $0.502749$ & $[0.492952,\,0.512545]$ \\
+\texttt{anu\_1m} & ANU & $1{,}000{,}000$ & $+1.483$ & $+1.297$ & $0.500829$ & $0.501450$ & $[0.499259,\,0.503641]$ \\
+\texttt{anu\_1m\_r2} & ANU & $1{,}000{,}000$ & $+0.195$ & $+1.100$ & $0.500109$ & $0.501230$ & $[0.499039,\,0.503421]$ \\
+\texttt{anu\_10m} & ANU & $10{,}000{,}000$ & $-1.443$ & $-0.041$ & $0.499745$ & $0.499986$ & $[0.499293,\,0.500678]$ \\
+\texttt{urandom\_1m} & urandom & $1{,}000{,}000$ & $+0.541$ & $+1.176$ & $0.500303$ & $0.501315$ & $[0.499124,\,0.503506]$ \\
+\end{tabular}
+\end{ruledtabular}
+}
+\end{table}
+
+% ---------------------------------------------------------------------------
+\section{Operational rule and next steps}
+% ---------------------------------------------------------------------------
+\textbf{Operational rule:} at billion-scale sampling, significance is cheap, calibration is expensive, and credibility comes from surviving hostile controls.
+
+\textbf{Credibility checklist:} replication; cross-device consistency; split stability; time stability; robustness under blinded reruns. Failure on any axis defaults to ``drift or tooling'' until proven otherwise.
+
+\textbf{Next steps (documentation discipline):} freeze the primary estimator; maintain a compact comparison table in-repo; lock the test matrix unless an out-of-family result survives the checklist; keep H2 as the physics-first blade.
+
+% ---------------------------------------------------------------------------
+\section*{Data and code availability}
+% ---------------------------------------------------------------------------
+Pilot scripts and tests: \texttt{scripts/h1\_qrng\_pilot/} (collector, analyzer, placebo batch, \texttt{run\_test\_suite.sh}). Companion markdown summaries: \texttt{docs/H1\_CURRENT\_STATUS\_MEMO\_2026.md}, \texttt{docs/H1\_PILOT\_COMPARISON\_SUMMARY.md}, \texttt{docs/H1\_AT\_1E9\_DETECTION\_TO\_CALIBRATION.md}.
+
+\begin{acknowledgments}
+This note is a methods and status transcription intended for Overleaf/pdfLaTeX compilation; it does not claim new fundamental physics results beyond pipeline calibration statements.
+\end{acknowledgments}
+
+\end{document}

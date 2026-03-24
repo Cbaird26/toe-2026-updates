@@ -31,6 +31,8 @@ chmod +x scripts/h1_qrng_pilot/run_test_suite.sh
 | Matched 12x10M placebo gate | `scripts/h1_qrng_pilot/placebo_batch.py` at `target_bits=10000000`, `burnin_bits=0`, `holdout_fraction=0.2`; see full handoff for artifacts + acceptance rule |
 | Phase II Swarm / coherence ladder (spec) | [PROJECT_ZORA_PHASE_II_SWARM_COHERENCE_QRNG_PROTOCOL_10M_2026.md](PROJECT_ZORA_PHASE_II_SWARM_COHERENCE_QRNG_PROTOCOL_10M_2026.md) — block runner **not** fully implemented; `collect.py` alone is single-stream |
 | Public sync (maintainers) | [README.md](../README.md#syncing-this-repo-to-github-public) · `scripts/repo_sync_public_mqgt_h1_phase4b.sh` |
+| Full session update (all artifacts) | [CODEX_HANDOFF_FULL_SESSION_UPDATE.md](CODEX_HANDOFF_FULL_SESSION_UPDATE.md) — incorporate all posted artifacts, align parameters, commit + push |
+| Fusion + GitHub update | [CODEX_HANDOFF_FUSION_GITHUB_UPDATE.md](CODEX_HANDOFF_FUSION_GITHUB_UPDATE.md) — commit + push fusion console, figures, script |
 
 ## Safety & authority
 

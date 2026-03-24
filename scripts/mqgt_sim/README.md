@@ -6,6 +6,18 @@
 
 ---
 
+## Multi-channel exclusion plot (Phase II)
+
+**Script:** `mqgt_multi_channel_exclusion_plot.py` — (m_Φ, sin²θ) plane with Eöt-Wash, Higgs invisible, QRNG prediction, viable island.
+
+```bash
+python scripts/mqgt_sim/mqgt_multi_channel_exclusion_plot.py --out-dir papers_sources/figures/mqgt_scf
+```
+
+Output: `papers_sources/figures/mqgt_scf/mqgt_scf_multi_channel_exclusion.png`. Used in the Phase II anchor paper and parameter card as parameter-space context.
+
+---
+
 ## H2 paper-aligned stack
 
 **Observable:** \(V/V_0=\exp(-\Gamma T\Delta x^2)\). Script: **`h2_visibility_stack.py`** — visibility vs \(\Gamma\), 2D exclusion landscape. See **[H2_SIMULATION_STACK.md](H2_SIMULATION_STACK.md)** for GKSL/HTML bridge.
@@ -93,6 +105,8 @@ python scripts/mqgt_sim/mqgt_phase4b_parameter_sweep.py \
 - `lock_rate_g_*.png` — fraction of seeds ending in `ATTRACTOR_LOCKED`
 - `mean_coherence_g_*.png` — mean final coherence at each `(xi, gamma)` point
 
+**Current full-session bundle:** the repository currently tracks a sweep export in `phase_iv_b_sweep/` with `summary.md`, `phase_iv_b_sweep_results.csv`, and the current heatmaps. This bundle is exploratory only.
+
 **Parameters:** `--xis`, `--gammas`, `--g-couples`, `--seeds`, `--steps`, `--substeps`, `--grid-size`, `--dt`, `--kappa`, `--lambda-phi`, `--lambda-e`, `--v-phi`, `--v-e`, `--outdir`.
 
 ---
@@ -115,6 +129,13 @@ python scripts/mqgt_sim/fusion_zora_burn_figures.py --out-dir papers_sources/fig
 **Parameters:** `--out-dir`, `--pdf`, `--include-existing`, `--pdf-only`.
 
 **Live fusion console:** [docs/zora_fusion_console.html](../../docs/zora_fusion_console.html) — browser toy with sliders (n [0.1–3×10²⁰ m⁻³], τ_E [1–6 s], T₀ [5–25 keV], χ [0–1], Z_eff [1–2]), Zora toggle (τ_E,eff and η_α coupling), pulse Φc, T/Q strip charts. Uses a_tau=0.45, a_alpha=0.12. Illustrative only.
+
+---
+
+## GitHub Pages demos
+
+- **`../../docs/zora_coherence.html`** — Kuramoto-style coherence visualization. Exploratory only; not a referee-safe physics artifact.
+- **`../../docs/zora_fusion_console.html`** — 0D D–T fusion browser toy. Illustrative only.
 
 ---
 
