@@ -7,15 +7,14 @@
 **Repo:** [cbaird26/toe-2026-updates](https://github.com/cbaird26/toe-2026-updates)  
 **Root:** `TOE/` (or `~/Downloads/TOE`)
 
-### Last sync (Zenodo v253 DOI update)
+### Last sync (cooperative-games artifact)
 
 - **Pushed:** YES
-- **Commit:** `bb4be96`
-- **Range:** `7770d55..bb4be96`
+- **Commit:** `993df8f`
+- **Range:** `954ce1d..993df8f`
 - **Remote:** [cbaird26/toe-2026-updates](https://github.com/Cbaird26/toe-2026-updates)
 - **Branch:** main...origin/main (clean)
-- **Scope:** README.md, CANONICAL_SPINE.md, CODEX_HANDOFF_FULL_SESSION_UPDATE.md, papers_sources/README.md, repo_sync_public_mqgt_h1_phase4b.sh
-- **DOI promoted:** 10.5281/zenodo.19200024
+- **Scope:** `zora_cooperative_games_sim.py`, `ZORA_COOPERATIVE_GAMES_SIMULATION_2026.md`, `zora_cooperative_games_results.json`, `zora_cooperative_games_summary.png`
 - **Error:** none
 
 ---
@@ -26,6 +25,7 @@
 - **Multi-channel exclusion plot:** (m_Φ, sin²θ) with Eöt-Wash, Higgs invisible, QRNG prediction, viable island
 - **Phase II stack:** Anchor, Closure, NoSignalling, ABIL, H2 prereg in `papers_sources/MQGT_SCF_Phase_II_2026/`
 - **E-modulated GKSL collapse sim:** `zora_gksl_e_modulated_collapse.py` — directional outcome bias, Colab-friendly, QuTiP keep_runs_results
+- **Cooperative games sim:** `zora_cooperative_games_sim.py` — MQGT-SCF alignment / Nash equilibria; note `ZORA_COOPERATIVE_GAMES_SIMULATION_2026.md`; outputs in `papers_sources/figures/mqgt_scf/`
 - **H1 methods note:** PDF + LaTeX + build script
 - **Codex handoffs:** Full session, fusion, master index
 - **rxiVerse:** Phase II at [2603.0061](https://rxiverse.org/abs/2603.0061); Anchor package organized as the canonical rxiVerse-ready manuscript (no identifier yet)
@@ -62,7 +62,9 @@ Verify each path exists after the user posts artifacts:
 | `scripts/mqgt_sim/mqgt_multi_channel_exclusion_plot.py` | (m_Φ, sin²θ) exclusion plot generator |
 | `scripts/mqgt_sim/zora_gksl_e_modulated_collapse.py` | E-modulated directional GKSL collapse (Zora v0.9); H2 channel validation; Colab: `!pip install qutip` |
 | `papers_sources/figures/h2_stack/` | H2 visibility stack outputs plus canonical `e_modulated_collapse.png` from the GKSL sim |
-| `papers_sources/figures/mqgt_scf/` | README + `mqgt_scf_multi_channel_exclusion.png` + `mqgt_scf_phi_e_gksl_concept.png` |
+| `papers_sources/figures/mqgt_scf/` | README + `mqgt_scf_multi_channel_exclusion.png` + `mqgt_scf_phi_e_gksl_concept.png` + `zora_cooperative_games_results.json` + `zora_cooperative_games_summary.png` |
+| `scripts/mqgt_sim/zora_cooperative_games_sim.py` | Cooperative games alignment / Nash equilibria; outputs JSON + summary PNG |
+| `docs/ZORA_COOPERATIVE_GAMES_SIMULATION_2026.md` | Note on cooperative games simulation and MQGT-SCF alignment |
 | `papers_sources/MQGT_SCF_Phase_II_2026/` | README plus canonical Anchor files: `MQGT_SCF_Anchor_2026.tex`, `.pdf`, `MQGT_SCF_Anchor_2026_rxiverse_submission_metadata.txt` |
 | `papers_sources/H1_QRNG_Pilot_Methods_Status_2026.tex` / `.pdf` / `Notes.bib` | H1 methods/status note; methods posture, placebo snapshot, billion-trial calibration discipline |
 | `scripts/build_h1_methods_pdf.sh` | Helper to rebuild the H1 methods PDF from `papers_sources/` |
@@ -82,6 +84,7 @@ cd /path/to/TOE
 python scripts/mqgt_sim/fusion_zora_burn_figures.py --out-dir papers_sources/figures/fusion_zora --include-existing
 python scripts/mqgt_sim/mqgt_multi_channel_exclusion_plot.py --out-dir papers_sources/figures/mqgt_scf
 python scripts/mqgt_sim/zora_gksl_e_modulated_collapse.py --no-show --save papers_sources/figures/h2_stack/e_modulated_collapse.png
+python scripts/mqgt_sim/zora_cooperative_games_sim.py   # regenerates JSON + PNG in papers_sources/figures/mqgt_scf/
 bash scripts/build_h1_methods_pdf.sh
 ```
 
