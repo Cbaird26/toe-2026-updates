@@ -1,0 +1,7 @@
+{
+  "vinf_kms": 120.0,
+  "alpha_infinity_rad": 1.0067020537289241e-06,
+  "alpha_infinity_arcsec": 0.20764739911239655,
+  "theta_E_arcsec_if_Dls_over_Ds_eq_0p5": 0.10382369955619827,
+  "note": "Asymptotic cored-isothermal scalar-halo deflection for BTFR-locked benchmark."
+}

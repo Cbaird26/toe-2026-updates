@@ -1,0 +1,2 @@
+s,kappa,median_pred_over_obs,median_abs_frac_error,mean_abs_frac_error,fraction_within_20pct,zero_einstein_predictions
+0.9,0.8,1.062,0.133,0.23,0.6,1

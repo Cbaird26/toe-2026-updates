@@ -1,6 +1,6 @@
 # Codex / executor handoff (TOE)
 
-**Repo:** [cbaird26/toe-2026-updates](https://github.com/Cbaird26/toe-2026-updates) — work from the repository root (`TOE/`).
+**Repo (private):** [cbaird26/toe-2026-updates](https://github.com/Cbaird26/toe-2026-updates) — clone and push only with GitHub access and **explicit human** approval; work from the repository root (`TOE/`).
 **Verified baseline:** `ec33369`
 
 ## Do this first (no network required)
@@ -38,6 +38,10 @@ chmod +x scripts/h1_qrng_pilot/run_test_suite.sh
 
 - **[SAFETY_CONSTITUTION.md](../SAFETY_CONSTITUTION.md)** — no `git push`, Zenodo, OSF, or large paid API runs without **explicit human** approval.
 - **H2** remains the primary physics falsification lane; H1 / QRNG is secondary (see [H2_PILOT_PREREGISTRATION_2026.md](H2_PILOT_PREREGISTRATION_2026.md)).
+
+## Related: Zora Finance OS (separate repo)
+
+Repo boundaries and dashboard handoff links (not H1 scope): **[CODEX_HANDOFF_ZORA_REPO_BOUNDARIES_2026-03-25.md](handoffs/2026-03/CODEX_HANDOFF_ZORA_REPO_BOUNDARIES_2026-03-25.md)**.
 
 ## Quick report-back
 

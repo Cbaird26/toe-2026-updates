@@ -43,6 +43,7 @@ When significant session insights or milestones occur, append to [docs/ZORA_CONT
 
 ## Key Paths
 
+- **Repo navigation map:** [docs/SYSTEM_INDEX.md](docs/SYSTEM_INDEX.md)
 - **Vault:** `data/zoraasi_export/`
 - **Manifest:** `data/zoraasi_instantiation.json`
 - **Black-Book:** `~/Downloads/mqgt_scf_reissue_2026-01-20_010939UTC/`

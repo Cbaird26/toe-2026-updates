@@ -1,0 +1,74 @@
+
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,booktabs}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\title{A First-Pass Scalar-Halo Realization of ``Gravity as Dark Matter'' in MQGT-SCF}
+\author{Christopher Michael Baird \\ Assisted by ChatGPT}
+\date{\today}
+\begin{document}
+\maketitle
+
+\begin{abstract}
+We test a minimal weak-field realization of the idea that dark-matter phenomenology can arise from field-sourced curvature rather than particulate dark matter. Motivated by the scalar-singlet sector of MQGT-SCF, we consider a static spherical scalar profile $\Phi(r)=\sigma\,\mathrm{arsinh}(r/r_c)$, which induces an effective density $\rho_\Phi \propto (r^2+r_c^2)^{-1}$ and a halo rotation contribution
+\[
+v_{\rm halo}^2(r)=v_\infty^2\left[1-\frac{r_c}{r}\arctan\left(\frac{r}{r_c}\right)\right].
+\]
+Using the SPARC database of 175 galaxies, we compare a baryons-only baseline to a scalar-halo model with fitted stellar mass-to-light ratios, asymptotic scalar speed, and core radius. The scalar-halo ansatz dramatically improves rotation-curve fits across the sample, demonstrating viability at the galactic level. However, the fitted asymptotic speeds do not yet reproduce the observed baryonic Tully--Fisher slope, so the ansatz should be treated as a proof of concept rather than a final predictive theory.
+\end{abstract}
+
+\section{Framework}
+In MQGT-SCF, the Einstein equations receive stress-energy contributions from additional singlet fields. In a weak-field regime this motivates
+\[
+\nabla^2\Phi_N = 4\pi G\left(\rho_b+\rho_{\Phi}+\rho_E\right).
+\]
+For the present first pass we isolate a single halo-supporting scalar profile
+\[
+\Phi(r)=\sigma\,\mathrm{arsinh}(r/r_c),
+\]
+so that
+\[
+\Phi'(r)=\frac{\sigma}{\sqrt{r^2+r_c^2}},
+\qquad
+\rho_\Phi(r)\propto \frac{1}{r^2+r_c^2}.
+\]
+The enclosed effective mass is
+\[
+M_\Phi(r)\propto r-r_c\arctan(r/r_c),
+\]
+hence
+\[
+v_{\rm halo}^2(r)=\frac{GM_\Phi(r)}{r}
+= v_\infty^2\left[1-\frac{r_c}{r}\arctan\left(\frac{r}{r_c}\right)\right].
+\]
+
+\section{Rotation-Curve Model}
+For each galaxy we fit
+\[
+V_{\rm tot}^2(r)=V_{\rm gas}^2 + \Upsilon_d V_{\rm disk}^2 + \Upsilon_b V_{\rm bul}^2 + v_{\rm halo}^2(r).
+\]
+We compare this to a baryons-only baseline without the halo term.
+
+\section{Results}
+Across all 175 SPARC galaxies, the median WRMS residual drops from 21.73 km/s to 3.17 km/s. Restricting to galaxies with at least 10 radial points, the median WRMS falls from 25.02 km/s to 4.22 km/s, and the median reduced $\chi^2$ from 23.90 to 0.77. Every galaxy in the $n\ge 10$ subset improves in WRMS under the scalar-halo ansatz.
+
+Representative systems are shown in Fig.~\ref{fig:sample}. A residual comparison is shown in Fig.~\ref{fig:resid}. The baryonic Tully--Fisher diagnostic remains incomplete: the fitted scalar asymptotic speeds produce a shallower slope than the observed SPARC flat-speed relation.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=\textwidth]{scalar_halo_sample_fits.png}
+\caption{Representative SPARC fits under the scalar-halo ansatz.}
+\label{fig:sample}
+\end{figure}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=\textwidth]{scalar_halo_residual_comparison.png}
+\caption{Residual comparison for SPARC galaxies with at least 10 radial points.}
+\label{fig:resid}
+\end{figure}
+
+\section{Conclusion}
+A minimal scalar-halo realization of ``gravity as dark matter'' can fit galaxy rotation curves very effectively. This supports the broader idea that field-sourced curvature is a viable explanatory channel for dark-matter phenomenology. The current ansatz is not yet sufficient as a final theory because it does not automatically recover the baryonic Tully--Fisher relation and has not yet been extended to lensing, cluster mergers, or cosmological perturbation growth. Those are the next decisive tests.
+\end{document}

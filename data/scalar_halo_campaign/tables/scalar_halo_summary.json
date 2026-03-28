@@ -1,0 +1,16 @@
+{
+  "reconstruction_note": "Reconstructed from in-chat reported summary metrics because the original summary JSON was not present on disk.",
+  "total_galaxies_fit": 175,
+  "galaxies_n_ge_10": 124,
+  "median_wrms_all_baryons_only_kms": 21.73,
+  "median_wrms_all_scalar_halo_kms": 3.17,
+  "median_wrms_n_ge_10_baryons_only_kms": 25.02,
+  "median_wrms_n_ge_10_scalar_halo_kms": 4.22,
+  "median_reduced_chi2_n_ge_10_baryons_only": 23.9,
+  "median_reduced_chi2_n_ge_10_scalar_halo": 0.77,
+  "fraction_improved_wrms_n_ge_10": 1.0,
+  "median_fitted_v_infty_n_ge_10_kms": 133.2,
+  "median_fitted_rc_n_ge_10_kpc": 2.77,
+  "btfr_slope_from_fitted_scalar_speeds": 3.16,
+  "btfr_slope_from_sparc_observed_flat_speeds": 3.49
+}

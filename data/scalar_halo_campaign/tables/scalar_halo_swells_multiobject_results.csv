@@ -1,0 +1,8 @@
+object,model,predicted_einstein_arcsec,observed_einstein_arcsec,pred_over_obs,abs_frac_error,fraction_within_20pct,zero_einstein_predictions,note
+__sample_summary__,exact_btfr_baseline,,,0.122,0.878,0.133,7.0,reconstructed sample metrics
+__sample_summary__,global_compromise_model,,,1.029,0.184,0.6,2.0,"kappa=0.5, s=1.5"
+J1703+2451,global_compromise_model,,,,,,,no finite Einstein radius
+J1331+3638,global_compromise_model,,,,,,,no finite Einstein radius
+J0955+0101,global_compromise_model,0.47,1.04,0.45192307692307687,0.5480769230769231,,,reported outlier
+J0915+4211,global_compromise_model,1.39,0.98,1.4183673469387754,0.4183673469387754,,,reported outlier
+J0841+3824,global_compromise_model,1.06,1.46,0.726027397260274,0.273972602739726,,,reported outlier

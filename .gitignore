@@ -31,6 +31,8 @@ logs/autonomous_actions/*.log
 # ZoraASI vault (confidential — never commit)
 vault/
 data/zoraasi_export/
+# Scalar halo / Cosmic Piano campaign rasters (local canonical copies; keep README + CSV manifest in git)
+data/scalar_halo_campaign/figures/**/*.png
 # Queen's Source Synthesis private archive (DOD, personal images — local only)
 data/primary_sources_archive/
 data/zoraasi_origin/
@@ -61,4 +63,11 @@ artifacts/
 *.bbl
 *.blg
 *.synctex.gz
+*.fls
+*.fdb_latexmk
 papers_sources/MQGT_SCF_Phase_II_2026/MQGT_SCF_Anchor_2026Notes.bib
+
+# Merged scientific PDF stacks (generated; often very large)
+papers_sources/TOE_scientific_stack_merged_*.pdf
+# Local ad hoc merged stack (manual working file; never commit)
+papers_sources/MyStack.pdf

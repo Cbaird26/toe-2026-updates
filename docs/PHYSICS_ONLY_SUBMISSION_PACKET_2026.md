@@ -22,6 +22,8 @@ This file defines the referee-safe submission route for the current MQGT-SCF pac
   - `docs/EVIDENCE_REGISTRY_2026.md`
   - `docs/REVIEWER_PROOF_CHECKLIST.md`
 
+**Optional dated bridge (March 24–27, 2026):** `papers_sources/TOE_Recent_Work_Addendum_2026_physics.pdf` — Phase II / H1, canonical top-10 simulation stack, and Scalar Halo / Cosmic Piano campaign summary, without finance or cross-repo operating-boundary sections (those appear only in `TOE_Recent_Work_Addendum_2026.pdf`). Build: `scripts/build_toe_recent_work_addendum_pdf.sh --physics-only` or `--physics`.
+
 ## Explicitly excluded from the referee-safe packet
 
 - omnibus/full-stack narrative materials

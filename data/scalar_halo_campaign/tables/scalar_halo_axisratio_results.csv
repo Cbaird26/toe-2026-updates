@@ -1,0 +1,8 @@
+object,model,predicted_einstein_arcsec,observed_einstein_arcsec,pred_over_obs,abs_frac_error,mean_abs_frac_error,fraction_within_20pct,zero_einstein_predictions,note
+__sample_summary__,exact_btfr_axisratio,,,1.082,0.173,0.244,0.6,1.0,reconstructed sample metrics
+__sample_summary__,best_global_point,,,1.062,0.133,0.23,0.6,1.0,"s=0.90, kappa=0.80"
+J1331+3638,exact_btfr_axisratio,,,,,,,,zero predicted Einstein radius
+J0841+3824,exact_btfr_axisratio,,,,0.4,,,,underpredicted by about 40%
+J1313+0506,exact_btfr_axisratio,,,,0.34,,,,overpredicted by about 34%
+J1135+3720,exact_btfr_axisratio,,,,0.31,,,,overpredicted by about 31%
+J2141-0001,exact_btfr_axisratio,,,,0.29,,,,overpredicted by about 29%

@@ -1,0 +1,25 @@
+{
+  "best_free_exponent_locked_model": {
+    "V0_kms": 122.0,
+    "p": 0.24,
+    "median_chi2_red": 1.9085561421071853,
+    "median_wrms": 5.6748846162010045
+  },
+  "best_fixed_btfr_locked_model": {
+    "V0_kms": 120.0,
+    "p": 0.25,
+    "median_chi2_red": 1.9897890071101565,
+    "median_wrms": 5.709140794372944
+  },
+  "matched_n_ge_10": 115,
+  "median_wrms_bary_n_ge_10": 24.967702912705256,
+  "median_wrms_free_per_galaxy_n_ge_10": 4.212955581793672,
+  "median_wrms_btfr_locked_n_ge_10": 5.709140794372944,
+  "median_wrms_freepred_locked_n_ge_10": 5.6748846162010045,
+  "median_chi2_bary_n_ge_10": 27.295080571901554,
+  "median_chi2_free_per_galaxy_n_ge_10": 0.8417442095734812,
+  "median_chi2_btfr_locked_n_ge_10": 1.9897890071101565,
+  "median_chi2_freepred_locked_n_ge_10": 1.9085561421071853,
+  "frac_btfr_better_than_bary_n_ge_10": 0.991304347826087,
+  "frac_btfr_within_35pct_of_free_n_ge_10": 0.6608695652173913
+}

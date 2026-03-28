@@ -1,0 +1,47 @@
+{
+  "reconstruction_note": "Reconstructed from in-chat reported sample-level metrics because the original summary JSON was missing.",
+  "exact_btfr_axisratio_run": {
+    "median_pred_over_obs": 1.082,
+    "median_abs_frac_error": 0.173,
+    "mean_abs_frac_error": 0.244,
+    "fraction_within_20pct": 0.6,
+    "zero_einstein_predictions": 1
+  },
+  "best_global_point": {
+    "scalar_amplitude_multiplier_s": 0.9,
+    "kappa": 0.8,
+    "median_pred_over_obs": 1.062,
+    "median_abs_frac_error": 0.133,
+    "mean_abs_frac_error": 0.23,
+    "fraction_within_20pct": 0.6,
+    "zero_einstein_predictions": 1
+  },
+  "reported_outliers": [
+    {
+      "object": "J1331+3638",
+      "predicted_einstein_arcsec": null,
+      "observed_einstein_arcsec": null,
+      "note": "zero predicted Einstein radius"
+    },
+    {
+      "object": "J0841+3824",
+      "approx_frac_residual": -0.4,
+      "note": "underpredicted by about 40%"
+    },
+    {
+      "object": "J1313+0506",
+      "approx_frac_residual": 0.34,
+      "note": "overpredicted by about 34%"
+    },
+    {
+      "object": "J1135+3720",
+      "approx_frac_residual": 0.31,
+      "note": "overpredicted by about 31%"
+    },
+    {
+      "object": "J2141-0001",
+      "approx_frac_residual": 0.29,
+      "note": "overpredicted by about 29%"
+    }
+  ]
+}

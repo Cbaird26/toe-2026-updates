@@ -1,0 +1,47 @@
+{
+  "reconstruction_note": "Reconstructed from in-chat reported sample-level metrics because the original summary JSON was missing.",
+  "sample_size": 15,
+  "exact_btfr_baseline": {
+    "median_pred_over_obs": 0.122,
+    "median_abs_frac_error": 0.878,
+    "fraction_within_20pct": 0.133,
+    "zero_einstein_predictions": 7
+  },
+  "global_compromise_model": {
+    "kappa": 0.5,
+    "scalar_amplitude_multiplier_s": 1.5,
+    "median_pred_over_obs": 1.029,
+    "median_abs_frac_error": 0.184,
+    "fraction_within_20pct": 0.6,
+    "zero_einstein_predictions": 2
+  },
+  "reported_outliers": [
+    {
+      "object": "J1703+2451",
+      "predicted_einstein_arcsec": null,
+      "observed_einstein_arcsec": null,
+      "note": "no finite Einstein radius"
+    },
+    {
+      "object": "J1331+3638",
+      "predicted_einstein_arcsec": null,
+      "observed_einstein_arcsec": null,
+      "note": "no finite Einstein radius"
+    },
+    {
+      "object": "J0955+0101",
+      "predicted_einstein_arcsec": 0.47,
+      "observed_einstein_arcsec": 1.04
+    },
+    {
+      "object": "J0915+4211",
+      "predicted_einstein_arcsec": 1.39,
+      "observed_einstein_arcsec": 0.98
+    },
+    {
+      "object": "J0841+3824",
+      "predicted_einstein_arcsec": 1.06,
+      "observed_einstein_arcsec": 1.46
+    }
+  ]
+}

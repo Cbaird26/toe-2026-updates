@@ -1,0 +1,41 @@
+{
+  "target": "SDSS J2141-0001",
+  "observed": {
+    "z_l": 0.138,
+    "z_s": 0.7127,
+    "D_d_kpc": 497600.0,
+    "D_s_kpc": 1510200.0,
+    "D_ds_kpc": 1179600.0,
+    "theta_E_obs_arcsec": 0.91,
+    "theta_E_obs_err_arcsec": 0.02,
+    "theta_E_legacy_arcsec": 0.96,
+    "theta_E_legacy_err_arcsec": 0.04,
+    "log10_Mstar": 10.99,
+    "bulge_fraction_photometric": 0.2,
+    "R_d_kpc": 3.7,
+    "R50_bulge_kpc": 0.63
+  },
+  "btfr_locked_exact": {
+    "v_inf_kms": 212.16866612811836,
+    "best_rc_kpc": 3.432203389830508,
+    "outer_rotation_chi2": 26.65929112895054,
+    "predicted_theta_E_arcsec": 0.4746021688752468,
+    "theta_pred_over_obs": 0.5215408449178536
+  },
+  "btfr_relaxed_scalar": {
+    "s": 0.76,
+    "rc_kpc": 0.3,
+    "chi2_joint": 353.62884625231584,
+    "chi2_outer": 124.70204263013768,
+    "chi2_lens": 228.92680362217817,
+    "theta_E_arcsec": 0.6073934543852839
+  },
+  "bulge_fraction_stress_test": {
+    "bulge_fraction": 0.55,
+    "rc_kpc": 3.751724137931035,
+    "chi2_joint": 141.79322106703202,
+    "chi2_outer": 114.66199102547827,
+    "chi2_lens": 27.13123004155376,
+    "theta_E_arcsec": 0.805824705344206
+  }
+}
