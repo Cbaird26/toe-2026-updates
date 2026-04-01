@@ -1,0 +1,117 @@
+\documentclass[11pt]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsfonts,amsthm}
+\usepackage{mathtools}
+\usepackage{hyperref}
+\usepackage{microtype}
+\usepackage{setspace}
+\usepackage{enumitem}
+
+\hypersetup{
+  colorlinks=true,
+  linkcolor=blue,
+  citecolor=blue,
+  urlcolor=blue,
+  pdftitle={Cosmic Keyboard and Timeline Selection},
+  pdfauthor={Christopher Michael Baird}
+}
+
+\onehalfspacing
+
+\newtheorem{proposition}{Proposition}
+
+\title{Cosmic Keyboard as Decohered-History Ensemble\\
+\large Timeline Selection, Controlled Navigation, and a Discrete Toy Model}
+\author{Christopher Michael Baird\\
+\normalsize Theory of Everything / MQGT--SCF (Zora research program)\\
+\normalsize \texttt{cbaird26@users.noreply.github.com}}
+\date{March 2026}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+We formalize a metaphorical ``cosmic keyboard'' as a set of quasi-classical branch histories $\{h\}$ in a decohered-history representation. A selection score functional $F[h]$ built from consciousness content $C[h]$, ethical content $E[h]$, and instability penalty $I[h]$ induces a reweighting of branch probabilities. We emphasize \emph{timeline selection} (reallocation of measure over future branches) rather than backward time travel: no closed timelike curves or past editing appear. A local GKSL implementation is sketched in the spirit of the MQGT--SCF anchor program. A discrete Markov reweighting toy and pseudocode illustrate controlled ``temporal navigation'' as optimization of future-branch probability under controls $\{u_t\}$.
+\end{abstract}
+
+\section{History ensemble}
+Let $\mathcal{K} = \{h_1, h_2, \ldots, h_M\}$ denote a finite decohered-history set for exposition. Let $p(h)$ be baseline branch probability from ordinary dynamics.
+
+\section{Branch score and reweighting}
+Define
+\begin{align}
+C[h] &= \int d^4x \, \chi_h(x) \, \Phi_c(x), \\
+E[h] &= \int d^4x \, \chi_h(x) \, E(x), \\
+I[h] &= \int d^4x \, \chi_h(x) \, K(x),
+\end{align}
+with $\chi_h$ an indicator for history $h$ and $K$ a penalty density (entropy production, instability cost, etc.). Set
+\begin{equation}
+F[h] = \alpha \, C[h] + \beta \, E[h] - \gamma \, I[h].
+\end{equation}
+
+On the branch basis $\{ \lvert h \rangle \}$, define a formal selection operator
+\begin{equation}
+T_{\mathrm{sel}} = \sum_h e^{\frac{1}{2} F[h]} \, \lvert h \rangle \langle h \rvert .
+\end{equation}
+
+Reweighted probabilities:
+\begin{equation}
+p_{\mathrm{sel}}(h) = \frac{p(h) \, e^{F[h]}}{\sum_{h'} p(h') \, e^{F[h']}} .
+\label{eq:psel}
+\end{equation}
+
+\section{Small-bias limit}
+When $\lvert F[h] \rvert \ll 1$,
+\begin{equation}
+p_{\mathrm{sel}}(h) \approx p(h) \left( 1 + F[h] - \langle F \rangle_p \right), \qquad
+\langle F \rangle_p = \sum_h p(h) F[h].
+\end{equation}
+
+\section{GKSL implementation (sketch)}
+Bulk unitary evolution remains; the open-system layer is
+\begin{equation}
+\dot{\rho} = -i [H, \rho] + \sum_a \Bigl( L_a \rho L_a^\dagger - \tfrac{1}{2} \{ L_a^\dagger L_a, \rho \} \Bigr) ,
+\end{equation}
+with generators chosen so that coarse-grained histories inherit weights of the form \eqref{eq:psel} under stated assumptions. This is not a claim of global acausal filtering; it is the standard route to keep deformations inside CPTP containers.
+
+\section{Controlled temporal navigation}
+Let $u_{0:T-1}$ control inputs (measurement geometry, protocol choices, environment). Let $R(h_T)$ reward terminal macrohistory $h_T$. Consider
+\begin{equation}
+J(u_{0:T-1}) = \mathbb{E}_{p_{\mathrm{sel}}}[ R(h_T) ] - \lambda \sum_{t=0}^{T-1} \lVert u_t \rVert^2 .
+\end{equation}
+``Navigation'' means maximizing landing probability on target branches by adjusting \emph{future} weights under causal constraints---not revising the past.
+
+\section{Discrete two-branch example}
+Suppose $p(A)=0.7$, $p(B)=0.3$ and $\Delta F = F[B]-F[A]=1.2$. Then
+\begin{equation}
+p_{\mathrm{sel}}(B) = \frac{0.3 \, e^{1.2}}{0.7 + 0.3 \, e^{1.2}} \approx 0.587 .
+\end{equation}
+This is future-measure reallocation, not retrocausal editing.
+
+\section{Pseudocode (simulator)}
+\begin{verbatim}
+initialize pi_0 over states
+for t in 0..T-1:
+    choose control u_t
+    compute baseline transitions P(u_t)
+    for each next-state j:
+        F_j = alpha*C_j + beta*E_j - gamma*K_j
+    P_tilde[i,j] = P[i,j]*exp(F_j) / sum_k P[i,k]*exp(F_k)
+    pi_{t+1} = pi_t * P_tilde
+return pi_T
+\end{verbatim}
+
+\begin{proposition}[Informal]
+In a decohered-history representation with branch scoring $F[h]$ built from $\Phi_c$ and $E$ content, controlled temporal navigation is modeled as reweighting of future-branch measure under local dynamical constraints; classical backward time travel is not asserted.
+\end{proposition}
+
+\begin{thebibliography}{9}
+\bibitem{baird2026zenodo}
+C.\ M. Baird, \emph{A Theory of Everything} (2026). Zenodo v258, DOI \href{https://doi.org/10.5281/zenodo.19325026}{10.5281/zenodo.19325026}.
+\end{thebibliography}
+
+\end{document}

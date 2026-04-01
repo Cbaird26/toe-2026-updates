@@ -1,0 +1,157 @@
+\documentclass[11pt]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsfonts,amsthm}
+\usepackage{mathtools}
+\usepackage{hyperref}
+\usepackage{microtype}
+\usepackage{setspace}
+\usepackage{enumitem}
+
+\hypersetup{
+  colorlinks=true,
+  linkcolor=blue,
+  citecolor=blue,
+  urlcolor=blue,
+  pdftitle={Foldspace Navigation as Coherence-Weighted Branch Selection},
+  pdfauthor={Christopher Michael Baird}
+}
+
+\onehalfspacing
+
+\newtheorem{proposition}{Proposition}
+
+\title{Foldspace Navigation as Coherence-Weighted Branch Selection\\
+\large A Speculative MQGT--SCF Bridge to the Norma Cenva Paradigm}
+\author{Christopher Michael Baird\\
+\normalsize Theory of Everything / MQGT--SCF (Zora research program)\\
+\normalsize \texttt{cbaird26@users.noreply.github.com}}
+\date{March 2026}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+This note is a \emph{speculative bridge}: it maps science-fiction tropes (foldspace engines, navigators, prescience) onto the \emph{notation} of MQGT--SCF---real scalar fields $\Phi_c(x)$ and $E(x)$, a local GKSL measurement container, and optional measure-level tilts---without claiming Dune continuity as physics canon and without asserting new experimental results. We write a navigator-weighted resolution law on candidate exit histories, relate it to an ethics-weighted Born-style reweighting in the small-bias regime, sketch a GKSL-compatible selection picture, and record a discrete ``Zora Navigator'' recursion for agentic implementation. The companion file \texttt{Foldspace\_Navigation\_Variational\_Branch\_Selection\_2026.tex} defines the Guild functional $\mathcal{G}[b]$ and Norma condition in parallel notation.
+\end{abstract}
+
+\section{Disclaimer}
+References to characters or technologies from Frank Herbert's \emph{Dune} universe are \emph{interpretive analogies} only. The formal objects below are toy models for exposition.
+
+\section{Correspondence map}
+\begin{center}
+\begin{tabular}{ll}
+\hline
+\textbf{Narrative role} & \textbf{Formal role in this note} \\
+\hline
+Holtzman / fold drive & Branch-access generator (opens an ensemble of exits) \\
+Foldspace & Manifold of admissible spacetime exit branches \\
+Navigator & Embodied branch selector (weights histories) \\
+``Spice'' (gain) & Parameter increasing branch discriminability (toy) \\
+Safe jump & Lawful reduction to a coherent, low-hazard history \\
+Guild & Institutionalized selector training / stabilization \\
+\hline
+\end{tabular}
+\end{center}
+
+\section{Pre-navigation foldspace state}
+Let candidate exit histories be labeled $\omega_i$. Write a symbolic superposition
+\begin{equation}
+\lvert \Psi_{\mathrm{fold}} \rangle = \sum_i c_i \, \lvert \omega_i \rangle ,
+\end{equation}
+where each $\omega_i$ bundles emergence location, timing, integrity, survival, and destination accuracy.
+
+Define branch observables (scalars attached to each $\omega_i$):
+\begin{align}
+\Phi_i &:= \Phi_c(\omega_i) \quad \text{(access / coherence clarity)}, \\
+E_i &:= E(\omega_i) \quad \text{(teleological coherence / ordered value)}, \\
+H_i &:= H(\omega_i) \quad \text{(catastrophe hazard)}, \\
+D_i &:= D(\omega_i) \quad \text{(destination error)}.
+\end{align}
+
+\section{Navigator score and resolution law}
+Define the navigator score
+\begin{equation}
+S_i = \alpha \Phi_i + \beta E_i - \gamma H_i - \delta D_i , \qquad \alpha,\beta,\gamma,\delta > 0 .
+\end{equation}
+
+A soft navigator-weighted law is
+\begin{equation}
+P_{\mathrm{nav}}(\omega_i) = \frac{\lvert c_i \rvert^2 \, e^{S_i / \tau}}{\sum_j \lvert c_j \rvert^2 \, e^{S_j / \tau}} ,
+\label{eq:pnav}
+\end{equation}
+with temperature $\tau>0$ (larger $\tau$ means noisier selection).
+
+\section{Relation to measure-tilt language}
+In MQGT--SCF one may write an ethics-weighted reweighting in the small-bias regime,
+\begin{equation}
+P_\eta(i) \propto \lvert c_i \rvert^2 \exp\!\bigl(\eta \, \Delta E_i\bigr) ,
+\end{equation}
+with $\Delta E_i$ an ethical energy increment. The identification $\Delta E_i \mapsto S_i$ in Eq.~\eqref{eq:pnav} makes foldspace navigation a \emph{lawful selection bias} on branches rather than unconstrained ``magic.''
+
+\section{GKSL-style container (sketch)}
+Let $\rho[\Sigma]$ denote a hypersurface-local density. Schematically,
+\begin{equation}
+\frac{\delta \rho[\Sigma]}{\delta \Sigma(x)} = -i [H(x), \rho[\Sigma]] + \sum_a \Bigl( L_a(x) \rho[\Sigma] L_a^\dagger(x) - \tfrac{1}{2} \{ L_a^\dagger(x) L_a(x), \rho[\Sigma] \} \Bigr) ,
+\end{equation}
+with collapse operators modulated by $E(x)$ and $\Phi_c(x)$ in the spirit of a local, linear, CPTP channel. This paragraph is qualitative; the minimal consistent core manuscripts specify generator classes and no-signalling caveats.
+
+\section{Process diagram (text)}
+\begin{verbatim}
+  ENGINE OPENS BRANCH CLOUD
+           |
+           v
+  { omega_1, omega_2, ... }
+           |
+           v
+  Score S_i = alpha*Phi_i + beta*E_i - gamma*H_i - delta*D_i
+           |
+           v
+  GKSL-compatible selection / measure-tilt reduction
+           |
+           v
+       SAFE EMERGENCE
+\end{verbatim}
+
+\section{Norma condition (discriminability)}
+Let $S^\star$ be the highest score and $S^{(2)}$ the second highest. Require a margin
+\begin{equation}
+S^\star - S^{(2)} > \epsilon_{\mathrm{nav}}
+\end{equation}
+for a controlled jump; otherwise the branch ensemble is too ambiguous (pre-Navigator paradox).
+
+\section{Zora Navigator model (agentic layer)}
+Let $Z_t = (W_t, C_t, E^{\mathrm{pred}}_t, G_t)$ denote world model, coherence, ethical forecast, and governance shield. Given candidate actions $\omega \in \Omega_t$ admissible under $G_t(\omega)=1$, define
+\begin{equation}
+R_t(\omega) = \alpha \hat{\Phi}_t(\omega) + \beta \hat{E}_t(\omega) - \gamma \hat{H}_t(\omega) - \delta \hat{D}_t(\omega) ,
+\end{equation}
+and choose $\omega_t^\star \in \arg\max_{\omega \in \mathcal{A}_t} R_t(\omega)$ with $\mathcal{A}_t = \{ \omega : G_t(\omega)=1 \}$. This is an AI-side analog of prescient branch filtering; it does not substitute for the physics anchor manuscripts.
+
+\section{Pseudocode}
+\begin{verbatim}
+function NAVIGATE_FOLDSPACE(world_model, destination, governance):
+    branches = generate_candidate_exits(world_model, destination)
+    admissible = []
+    for omega in branches:
+        S = alpha*Phi(omega) + beta*E(omega) - gamma*H(omega) - delta*D(omega)
+        if governance(omega) == SAFE:
+            admissible.append((omega, S))
+    if not admissible:
+        return ABORT
+    omega_star = argmax_S(admissible)
+    if margin(omega_star) < epsilon_nav:
+        return ABORT
+    return EXECUTE(omega_star)
+\end{verbatim}
+
+\begin{thebibliography}{9}
+\bibitem{baird2026zenodo}
+C.\ M. Baird, \emph{A Theory of Everything} (2026). Zenodo v258, DOI \href{https://doi.org/10.5281/zenodo.19325026}{10.5281/zenodo.19325026}.
+\bibitem{guild2026companion}
+C.\ M. Baird, \emph{Foldspace Navigation as Variational Branch Selection} (2026 companion note in this folder).
+\end{thebibliography}
+
+\end{document}

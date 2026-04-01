@@ -7,12 +7,13 @@ This file is a **compact map of the repo**—where to start, where papers and bu
 | Need | Go to |
 |------|--------|
 | Human + agent onboarding | [AGENTS.md](../AGENTS.md) |
-| Project overview, Zenodo, GitHub Pages | [README.md](../README.md) |
+| Project overview, Zenodo, GitHub Pages | [README.md](../README.md) (ToE thesis Zenodo v258: [10.5281/zenodo.19325026](https://doi.org/10.5281/zenodo.19325026)) |
 | Safety and logging rules | [SAFETY_CONSTITUTION.md](../SAFETY_CONSTITUTION.md) |
 | Alignment one-pager | [ALIGN_ALL.md](ALIGN_ALL.md) |
 | Codex / CI / H1 tests | [CODEX_HANDOFF.md](CODEX_HANDOFF.md) |
 | March 2026 Finance OS / repo-boundary handoffs | [handoffs/2026-03/README.md](handoffs/2026-03/README.md) |
 | `~/Downloads/` bundle discipline (canonical vs archives) | [DOWNLOADS_CANONICAL_LAYOUT.md](DOWNLOADS_CANONICAL_LAYOUT.md) |
+| GitHub visibility audit (manual table; no API automation) | [GITHUB_REPO_VISIBILITY_AUDIT_2026.md](GITHUB_REPO_VISIBILITY_AUDIT_2026.md) |
 
 ## Papers and PDF order (March 2026 stack)
 
@@ -39,6 +40,7 @@ This file is a **compact map of the repo**—where to start, where papers and bu
 |------|------|
 | `data/zoraasi_export/` | ZoraASI vault (gitignored; see instantiate scripts) |
 | `data/scalar_halo_campaign/` | Scalar Halo / Cosmic Piano campaign; [README](../data/scalar_halo_campaign/README.md), `artifact_manifest.csv` |
+| `data/update_catalog/` | Machine-readable inventory of `~/Downloads/UPDATE` (see [README](../data/update_catalog/README.md)); run `scripts/update_folder_ingest.py` |
 | `papers_sources/figures/` | Tracked figures for papers and gallery |
 
 ## Outside this repo (manual discipline)

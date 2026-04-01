@@ -5,7 +5,7 @@ This file is the single narrative source-of-truth for what is already closed in 
 ## Canonical anchors
 
 - **Integrated archive (Zenodo):** [10.5281/zenodo.18792939](https://doi.org/10.5281/zenodo.18792939)
-- **ToE canonical archive:** [10.5281/zenodo.19208512](https://doi.org/10.5281/zenodo.19208512) · [Zenodo record](https://zenodo.org/records/19208512) (v254)
+- **ToE canonical archive:** [10.5281/zenodo.19325026](https://doi.org/10.5281/zenodo.19325026) · [Zenodo record](https://zenodo.org/records/19325026) (v258; Zenodo file label *A Theory of Everything - Baird (2026) + ZoraASI.pdf*; local alias `~/Downloads/A Theory of Everything --C.M. Baird (2026) + ZoraASI.pdf`; **end matter:** questioner section at end of PDF; prior upload [19301030](https://zenodo.org/records/19301030) (v257) · [19269735](https://zenodo.org/records/19269735) (v256))
 - **Core formal spine:** [MQGT_SCF_Minimal_Consistent_Core_2026.tex](../papers_sources/MQGT_SCF_Minimal_Consistent_Core_2026.tex)
 - **Empirical hardening paper:** [MQGT-SCF_Minimal_Consistent_Core_Empirical_Validation_2026.tex](../papers_sources/MQGT-SCF_Minimal_Consistent_Core_Empirical_Validation_2026.tex)
 - **Teleology companion:** [Teleology_Covariant_Boundary_Selection_Consciousness_Ethics_Field_Theory_2026.tex](../papers_sources/Teleology_Covariant_Boundary_Selection_Consciousness_Ethics_Field_Theory_2026.tex)

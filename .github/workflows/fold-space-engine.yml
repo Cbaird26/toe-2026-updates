@@ -1,0 +1,28 @@
+name: Fold-Space Engine (test + build)
+
+on:
+  push:
+    paths:
+      - "apps/fold-space-engine/**"
+      - ".github/workflows/fold-space-engine.yml"
+  pull_request:
+    paths:
+      - "apps/fold-space-engine/**"
+
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: apps/fold-space-engine
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - name: Install
+        run: npm install
+      - name: Test
+        run: npm test
+      - name: Build
+        run: npm run build

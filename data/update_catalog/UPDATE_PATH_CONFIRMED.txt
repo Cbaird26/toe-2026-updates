@@ -1,0 +1,5 @@
+Resolved UPDATE_DIR: ~/Downloads/UPDATE
+exists: false
+default_if_unset: ~/Downloads/UPDATE
+
+Run `python3 scripts/update_folder_ingest.py` after placing March 2026 assets under ~/Downloads/UPDATE (or set UPDATE_DIR) to refresh manifests and perform copies.

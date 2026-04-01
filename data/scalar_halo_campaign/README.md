@@ -56,6 +56,16 @@ Environment overrides:
 - `SCALAR_HALO_ASSETS` — Cursor assets directory  
 - `SCALAR_HALO_BUNDLE` — bundle directory for gap-fill  
 
+## Ingest from `~/Downloads/UPDATE`
+
+March 2026 work may land first in an all-caps **`UPDATE`** folder under Downloads. To inventory everything there, copy campaign PNGs here (and finance screenshots to `docs/internal/finance_os/screenshots/`), and merge new rows into `artifact_manifest.csv`:
+
+```bash
+python3 scripts/update_folder_ingest.py
+```
+
+See `data/update_catalog/README.md` for manifest output paths and `UPDATE_DIR` override.
+
 ## Git policy
 
 Raster PNGs under `figures/**` are **gitignored** to avoid bloating `toe-2026-updates`. This README, `artifact_manifest.csv`, and text/binary tables/scripts/reports you choose to track remain committable.

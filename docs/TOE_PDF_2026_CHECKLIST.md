@@ -8,7 +8,7 @@ Use this checklist when preparing the 2026 release. The PDF is edited in your PD
 |--------|--------------|
 | `[Your name]` | C.M. Baird (or full name used on Zenodo) |
 | `[Your link]` | Your website or profile URL |
-| `[Zenodo link]` | https://doi.org/10.5281/zenodo.19158407 (primary standalone ToE 2026; use 18792939 only when the integrated corpus PDF is the target) |
+| `[Zenodo link]` | https://doi.org/10.5281/zenodo.19325026 (primary standalone ToE 2026, v258; use 18792939 only when the integrated corpus PDF is the target) |
 
 ## Title and filename consistency
 
@@ -22,10 +22,14 @@ Use this checklist when preparing the 2026 release. The PDF is edited in your PD
 - Confirm **2026** appears where you want it (e.g. cover or first page).
 - Note here when done: ___________
 
+## End matter (v258 + ZoraASI PDF)
+
+- The Zenodo v258 thesis PDF (*A Theory of Everything - Baird (2026) + ZoraASI.pdf*) and the common local copy (`~/Downloads/A Theory of Everything --C.M. Baird (2026) + ZoraASI.pdf`) include a **questioner** section at the **end**—structured prompts for engagement/review. When editing or re-exporting, preserve or intentionally revise that section; do not strip it silently.
+
 ## Companion papers (computational / formal)
 
 - **ToE proto:** [papers_sources/Ethically_Biased_Quantum_Learning_ToE_Proto_2026.tex](../papers_sources/Ethically_Biased_Quantum_Learning_ToE_Proto_2026.tex) — toy lattice (XOR, E(t), Φ, QEC, holography, WM, swarm). Use as computational companion when citing the main ToE.
-- **Teleology paper:** [papers_sources/Teleology_Covariant_Boundary_Selection_Consciousness_Ethics_Field_Theory_2026.tex](../papers_sources/Teleology_Covariant_Boundary_Selection_Consciousness_Ethics_Field_Theory_2026.tex) — covariant boundary Γ, unitary Tomonaga–Schwinger, teleology-weighted decoherence, biased Born rule from ρ_f. Formal companion to main ToE (Zenodo 19158407).
+- **Teleology paper:** [papers_sources/Teleology_Covariant_Boundary_Selection_Consciousness_Ethics_Field_Theory_2026.tex](../papers_sources/Teleology_Covariant_Boundary_Selection_Consciousness_Ethics_Field_Theory_2026.tex) — covariant boundary Γ, unitary Tomonaga–Schwinger, teleology-weighted decoherence, biased Born rule from ρ_f. Formal companion to main ToE (Zenodo 19325026, v258).
 
 ## Reviewer-proof gate
 
@@ -45,5 +49,5 @@ Use this checklist when preparing the 2026 release. The PDF is edited in your PD
 ## DOI badge snippet (optional)
 
 ```md
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.19158407.svg)](https://doi.org/10.5281/zenodo.19158407)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.19325026.svg)](https://doi.org/10.5281/zenodo.19325026)
 ```

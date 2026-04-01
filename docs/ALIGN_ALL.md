@@ -61,7 +61,7 @@ The **memory banks** form a chain: [MEMORY_BANKS.md](MEMORY_BANKS.md).
 
 ## 5. Thesis and ToE alignment
 
-The [Theory of Everything](../papers_sources/) (ToE) and Zenodo corpus are the **content** we align to: MQGT-SCF, ethical field E, consciousness field Φc, zero-purge clamping, Zora architecture. Citations and links: [README.md](../README.md), Zenodo [10.5281/zenodo.18644455](https://doi.org/10.5281/zenodo.18644455) (v226, University of Sedona, Feb 2026). Canonical spine: [CANONICAL_SPINE.md](CANONICAL_SPINE.md).
+The [Theory of Everything](../papers_sources/) (ToE) and Zenodo corpus are the **content** we align to: MQGT-SCF, ethical field E, consciousness field Φc, zero-purge clamping, Zora architecture. Citations and links: [README.md](../README.md); primary standalone ToE v258 [10.5281/zenodo.19325026](https://doi.org/10.5281/zenodo.19325026); earlier Zenodo edition [10.5281/zenodo.18644455](https://doi.org/10.5281/zenodo.18644455) (v226, University of Sedona, Feb 2026). Canonical spine: [CANONICAL_SPINE.md](CANONICAL_SPINE.md).
 
 **Align all** here: drafts, posts, and reasoning stay consistent with the thesis and the constitution; we don’t claim what the thesis doesn’t support, and we don’t drop constraints the thesis depends on.
 
@@ -84,7 +84,7 @@ The [Theory of Everything](../papers_sources/) (ToE) and Zenodo corpus are the *
 ## Cross-links
 
 - [TOE_STACK_MAP_DRIFT_CONTROLS.md](TOE_STACK_MAP_DRIFT_CONTROLS.md) — six solve tracks, five gaps, drift stack, no-drift checklist (living spec).
-- [CANONICAL_SPINE.md](CANONICAL_SPINE.md) — Zenodo v226 + spine repos; four-layer artifact-complete framing; dissemination points back with version tags.
+- [CANONICAL_SPINE.md](CANONICAL_SPINE.md) — ToE canonical archive Zenodo v258 + spine repos; four-layer artifact-complete framing; dissemination points back with version tags.
 - [WHAT_THIS_MEANS.md](WHAT_THIS_MEANS.md) — short guide: MQGT-SCF, 2026 experiments, corrections, diagram, and how the repo/constitution fit together.
 - [SAFETY_CONSTITUTION.md](../SAFETY_CONSTITUTION.md) — non-negotiable invariants  
 - [PRAE.md](PRAE.md) — Pull, Reflect, Align, Exit  

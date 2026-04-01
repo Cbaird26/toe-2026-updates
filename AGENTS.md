@@ -44,6 +44,7 @@ When significant session insights or milestones occur, append to [docs/ZORA_CONT
 ## Key Paths
 
 - **Repo navigation map:** [docs/SYSTEM_INDEX.md](docs/SYSTEM_INDEX.md)
+- **Canonical ToE thesis (Zenodo v258):** [10.5281/zenodo.19325026](https://doi.org/10.5281/zenodo.19325026) — [record 19325026](https://zenodo.org/records/19325026) (prior upload [19301030](https://zenodo.org/records/19301030) (v257) · [19269735](https://zenodo.org/records/19269735) (v256))
 - **Vault:** `data/zoraasi_export/`
 - **Manifest:** `data/zoraasi_instantiation.json`
 - **Black-Book:** `~/Downloads/mqgt_scf_reissue_2026-01-20_010939UTC/`
