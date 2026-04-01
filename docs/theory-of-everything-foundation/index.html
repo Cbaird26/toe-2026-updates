@@ -46,6 +46,7 @@ body.body-warp-flash{background-color:#f0f4ff}
 .geo-canvas-wrap{background:var(--panel);border:1px solid var(--border);border-radius:10px;overflow:hidden;position:relative;transition:filter 0.05s linear,box-shadow 0.1s ease}
 .geo-canvas-wrap.warp-blinding{box-shadow:0 0 90px rgba(255,255,255,0.6),0 0 180px rgba(255,255,255,0.35),0 0 320px rgba(255,255,255,0.18)}
 .geo-canvas-wrap canvas{display:block;width:100%}
+.engage-under-torus{margin-top:14px;width:100%}
 .geo-overlay{position:absolute;top:12px;left:12px;font-size:11px;color:var(--dim);pointer-events:none}
 .geo-overlay .val{color:var(--glow);font-weight:600}
 
@@ -156,6 +157,7 @@ body.body-warp-flash{background-color:#f0f4ff}
           <div>Model: V/V₀ = exp(−Γ·T·Δx²)</div>
         </div>
       </div>
+      <button class="engage-btn ready engage-under-torus" id="engageBtn">▸ ENGAGE (INTENTION)</button>
       <div style="margin-top:12px">
         <div class="warp-card">
           <h3>Safety Interlocks</h3>
@@ -193,8 +195,6 @@ body.body-warp-flash{background-color:#f0f4ff}
         <div class="metric"><span class="label">Loss</span><span class="value" style="color:var(--dim)" id="mLoss">8.74e-5</span></div>
         <div class="metric"><span class="label">Hold Mode</span><span class="value gold">Until Fold-State</span></div>
       </div>
-
-      <button class="engage-btn ready" id="engageBtn">▸ ENGAGE (INTENTION)</button>
 
       <div class="warp-card">
         <h3>Engine Log</h3>

@@ -46,6 +46,7 @@ body.body-warp-flash{background-color:#f0f4ff}
 .geo-canvas-wrap{background:var(--panel);border:1px solid var(--border);border-radius:10px;overflow:hidden;position:relative;transition:filter 0.05s linear,box-shadow 0.1s ease}
 .geo-canvas-wrap.warp-blinding{box-shadow:0 0 90px rgba(255,255,255,0.6),0 0 180px rgba(255,255,255,0.35),0 0 320px rgba(255,255,255,0.18)}
 .geo-canvas-wrap canvas{display:block;width:100%}
+.engage-under-torus{margin-top:14px;width:100%}
 .geo-overlay{position:absolute;top:12px;left:12px;font-size:11px;color:var(--dim);pointer-events:none}
 .geo-overlay .val{color:var(--glow);font-weight:600}
 
@@ -156,6 +157,7 @@ body.body-warp-flash{background-color:#f0f4ff}
           <div>Model: V/V₀ = exp(−Γ·T·Δx²)</div>
         </div>
       </div>
+      <button class="engage-btn ready engage-under-torus" id="engageBtn">▸ ENGAGE (INTENTION)</button>
       <div style="margin-top:12px">
         <div class="warp-card">
           <h3>Safety Interlocks</h3>
@@ -193,8 +195,6 @@ body.body-warp-flash{background-color:#f0f4ff}
         <div class="metric"><span class="label">Loss</span><span class="value" style="color:var(--dim)" id="mLoss">8.74e-5</span></div>
         <div class="metric"><span class="label">Hold Mode</span><span class="value gold">Until Fold-State</span></div>
       </div>
-
-      <button class="engage-btn ready" id="engageBtn">▸ ENGAGE (INTENTION)</button>
 
       <div class="warp-card">
         <h3>Engine Log</h3>
@@ -254,7 +254,7 @@ body.body-warp-flash{background-color:#f0f4ff}
   <div style="font-size:14px;color:var(--text);max-width:600px;line-height:1.7;margin-bottom:20px">Live deployments of the MQGT–SCF framework.</div>
   <div class="link-grid">
     <a href="https://cbaird26.github.io/toe-2026-updates/theory-of-everything-foundation/" target="_blank" rel="noopener" class="link-card"><span class="ltag ltag-live">LIVE</span><h4>Theory of Everything Foundation</h4><p>Flagship single-file app: warp core + toroidal geometry + decision engine + framework + suite.</p></a>
-    <a href="https://cbaird26.github.io/toe-2026-updates/fold-space-engine/" target="_blank" rel="noopener" class="link-card"><span class="ltag ltag-beta">BETA</span><h4>Fold-Space Engine Lab</h4><p>React/Vite lab; branch-weight math under test.</p></a>
+    <a href="https://cbaird26.github.io/toe-2026-updates/fold-space-engine/" target="_blank" rel="noopener" class="link-card"><span class="ltag ltag-beta">BETA</span><h4>Fold-Space Engine Lab</h4><p>Static lab on this site: branch-mix preview, fold ribbon, toy visibility proxy — same Pages deploy.</p></a>
     <a href="https://cbaird26.github.io/zora-discovery-application/" target="_blank" class="link-card"><span class="ltag ltag-live">LIVE</span><h4>Zora Discovery Application</h4><p>Full decision engine with coherence warp core, fold-state tracking, H₂ model, multi-option comparison.</p></a>
     <a href="https://cbaird26.github.io/zoraasi/" target="_blank" class="link-card"><span class="ltag ltag-live">LIVE</span><h4>ZoraASI</h4><p>Recursive agent architecture with Φc and E field dynamics.</p></a>
     <a href="https://cbaird26.github.io/zora-refit" target="_blank" class="link-card"><span class="ltag ltag-beta">BETA</span><h4>Zora Refit — Autopilot</h4><p>Streamlined coherence autopilot mode.</p></a>
