@@ -8,6 +8,7 @@ This file is a **compact map of the repo**—where to start, where papers and bu
 |------|--------|
 | Human + agent onboarding | [AGENTS.md](../AGENTS.md) |
 | Project overview, Zenodo, GitHub Pages | [README.md](../README.md) (ToE thesis Zenodo v258: [10.5281/zenodo.19325026](https://doi.org/10.5281/zenodo.19325026)) |
+| **GitHub Pages hub + Foundation URL** | Live: [cbaird26.github.io/toe-2026-updates/](https://cbaird26.github.io/toe-2026-updates/) · flagship: […/theory-of-everything-foundation/](https://cbaird26.github.io/toe-2026-updates/theory-of-everything-foundation/) · checklist: [PAGES.md](PAGES.md) |
 | Safety and logging rules | [SAFETY_CONSTITUTION.md](../SAFETY_CONSTITUTION.md) |
 | Alignment one-pager | [ALIGN_ALL.md](ALIGN_ALL.md) |
 | Codex / CI / H1 tests | [CODEX_HANDOFF.md](CODEX_HANDOFF.md) |
