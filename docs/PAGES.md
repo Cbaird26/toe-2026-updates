@@ -4,12 +4,12 @@
 
 | Page | URL |
 |------|-----|
-| **Zora Console (docs hub)** | [cbaird26.github.io/toe-2026-updates/](https://cbaird26.github.io/toe-2026-updates/) — links all Pages apps + suite + repo |
+| **Pages hub (docs root)** | [cbaird26.github.io/toe-2026-updates/](https://cbaird26.github.io/toe-2026-updates/) — simple index; Foundation persists dials via `localStorage` (`mqgt_toe_console_v1`) on this origin |
 | **Theory of Everything Foundation** | [cbaird26.github.io/toe-2026-updates/theory-of-everything-foundation/](https://cbaird26.github.io/toe-2026-updates/theory-of-everything-foundation/) |
 | **Warp artifact (HTML snapshot)** | […/artifacts/TOE_FOUNDATION_WARP_BLINDING_x1000.html](https://cbaird26.github.io/toe-2026-updates/artifacts/TOE_FOUNDATION_WARP_BLINDING_x1000.html) |
 | Explicit `index.html` | […/theory-of-everything-foundation/index.html](https://cbaird26.github.io/toe-2026-updates/theory-of-everything-foundation/index.html) |
 
-Source: [`docs/index.html`](index.html) (Zora Console hub), [`docs/theory-of-everything-foundation/index.html`](theory-of-everything-foundation/index.html) (Foundation app).
+Source: [`docs/index.html`](index.html) (hub), [`docs/theory-of-everything-foundation/index.html`](theory-of-everything-foundation/index.html) (Foundation app), [`docs/js/toe-console-bridge.js`](js/toe-console-bridge.js) (shared dial storage for other `github.io` apps).
 
 ## Required GitHub settings (pick one)
 

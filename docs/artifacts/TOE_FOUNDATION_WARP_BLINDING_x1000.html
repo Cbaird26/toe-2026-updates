@@ -127,10 +127,7 @@ body.body-warp-flash{background-color:#f0f4ff}
 <body id="appBody">
 
 <div class="header">
-  <div style="display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;width:100%;justify-content:space-between">
-  <h1 style="margin:0">Theory of <span>Everything</span> Foundation</h1>
-  <a href="../" style="font-size:11px;color:var(--glow);text-decoration:none;border:1px solid var(--border);padding:6px 12px;border-radius:6px;white-space:nowrap" title="TOE Pages hub — Zora Console">↩ Zora Console</a>
-  </div>
+  <h1>Theory of <span>Everything</span> Foundation</h1>
   <div class="header-status">
     <span><span class="status-dot on" id="bridgeDot"></span><span id="bridgeStatus">Bridge Stable</span></span>
     <span><span class="status-dot on" id="warpDot"></span><span id="warpStatus">Warp Core Online</span></span>
@@ -275,6 +272,7 @@ body.body-warp-flash{background-color:#f0f4ff}
   Π = (S_core, E_cl, G_GKSL, M_η, O_H₂) — stronger because it can fail in clear ways
 </div>
 
+<script src="../js/toe-console-bridge.js"></script>
 <script>
 // ═══════════ TAB SYSTEM ═══════════
 document.querySelectorAll('.tab').forEach(t=>{
@@ -283,6 +281,7 @@ document.querySelectorAll('.tab').forEach(t=>{
     t.classList.add('active');
     document.querySelectorAll('.panel').forEach(p=>p.classList.add('panel-hidden'));
     document.getElementById('panel-'+t.dataset.tab).classList.remove('panel-hidden');
+    saveToeConsoleDebounced();
   });
 });
 
@@ -321,10 +320,74 @@ function applyWarpDomEffects(dt,isWarping){
   else body.style.backgroundColor='';
 }
 
+// ═══════════ SHARED CONSOLE STORAGE (same origin: all cbaird26.github.io apps) ═══════════
+var _tcsTimer=null;
+function saveToeConsoleDebounced(){
+  clearTimeout(_tcsTimer);
+  _tcsTimer=setTimeout(function(){
+    if(!window.TOE_CONSOLE_BRIDGE)return;
+    var mt=document.querySelector('.tab.active');
+    TOE_CONSOLE_BRIDGE.write({
+      align:S.align,complex:S.complex,timeH:S.timeH,stab:S.stab,eta:S.eta,fold:S.fold,flashPower:S.flashPower,
+      activeOpt:S.activeOpt,
+      opts:JSON.parse(JSON.stringify(S.opts)),
+      mainTab:mt&&mt.dataset.tab?mt.dataset.tab:'warp'
+    });
+  },120);
+}
+function mergeFromBridge(b){
+  if(!b||b.v!==1)return false;
+  if(typeof b.align==='number')S.align=b.align;
+  if(typeof b.complex==='number')S.complex=b.complex;
+  if(typeof b.timeH==='number')S.timeH=b.timeH;
+  if(typeof b.stab==='number')S.stab=b.stab;
+  if(typeof b.eta==='number')S.eta=b.eta;
+  if(typeof b.fold==='number')S.fold=b.fold;
+  if(typeof b.flashPower==='number')S.flashPower=b.flashPower;
+  if(typeof b.activeOpt==='number')S.activeOpt=Math.max(0,Math.min(2,b.activeOpt));
+  if(Array.isArray(b.opts)&&b.opts.length===3)S.opts=b.opts;
+  if(typeof b.mainTab==='string'&&['warp','decision','equations','links'].indexOf(b.mainTab)>=0)window._savedMainTab=b.mainTab;
+  S.phase='ready';S.engageTime=null;
+  return true;
+}
+function applySFromState(){
+  document.getElementById('sAlign').value=S.align;
+  document.getElementById('vAlign').textContent=S.align.toFixed(2);
+  document.getElementById('sComplex').value=S.complex;
+  document.getElementById('vComplex').textContent=S.complex.toFixed(2);
+  document.getElementById('sTime').value=S.timeH;
+  document.getElementById('vTime').textContent=S.timeH.toFixed(2);
+  document.getElementById('sStab').value=S.stab;
+  document.getElementById('vStab').textContent=S.stab.toFixed(2);
+  document.getElementById('sEta').value=S.eta;
+  document.getElementById('vEta').textContent=S.eta.toFixed(2);
+  document.getElementById('sFold').value=S.fold;
+  document.getElementById('vFold').textContent=S.fold.toFixed(2);
+  document.getElementById('sFlash').value=S.flashPower;
+  document.getElementById('vFlash').textContent=String(S.flashPower);
+  var eb=document.getElementById('engageBtn');
+  eb.className='engage-btn ready';
+  eb.textContent='▸ ENGAGE (INTENTION)';
+  loadOpt();
+  renderDecisions();
+  if(window._savedMainTab){
+    var tn=window._savedMainTab;
+    delete window._savedMainTab;
+    var tabEl=document.querySelector('.tab[data-tab="'+tn+'"]');
+    if(tabEl){
+      document.querySelectorAll('.tab').forEach(b=>b.classList.remove('active'));
+      tabEl.classList.add('active');
+      document.querySelectorAll('.panel').forEach(p=>p.classList.add('panel-hidden'));
+      document.getElementById('panel-'+tn).classList.remove('panel-hidden');
+    }
+  }
+  update();
+}
+
 // ═══════════ SLIDER BINDINGS ═══════════
 function bindSlider(id,vId,key){
   const el=document.getElementById(id);
-  el.addEventListener('input',()=>{S[key]=parseFloat(el.value);document.getElementById(vId).textContent=parseFloat(el.value).toFixed(2);update();});
+  el.addEventListener('input',()=>{S[key]=parseFloat(el.value);document.getElementById(vId).textContent=parseFloat(el.value).toFixed(2);update();saveToeConsoleDebounced();});
 }
 bindSlider('sAlign','vAlign','align');
 bindSlider('sComplex','vComplex','complex');
@@ -334,7 +397,7 @@ bindSlider('sEta','vEta','eta');
 bindSlider('sFold','vFold','fold');
 (function(){
   const el=document.getElementById('sFlash'),v=document.getElementById('vFlash');
-  el.addEventListener('input',()=>{S.flashPower=parseInt(el.value,10);v.textContent=String(S.flashPower);update();});
+  el.addEventListener('input',()=>{S.flashPower=parseInt(el.value,10);v.textContent=String(S.flashPower);update();saveToeConsoleDebounced();});
 })();
 
 // ═══════════ UPDATE ═══════════
@@ -397,13 +460,16 @@ engBtn.addEventListener('click',()=>{
     S.phase='active';engBtn.className='engage-btn active';engBtn.textContent='◈ WARPING...';
     S.engageTime=gTime;
     addLog('ENGAGE sequence initiated. Toroidal warp active.');
+    saveToeConsoleDebounced();
     setTimeout(()=>{
       S.phase='arrived';engBtn.className='engage-btn arrived';engBtn.textContent='✓ ARRIVED — RE-ENGAGE?';
       addLog('Fold-state resolved. Arrived. Coherence: '+coherence().toFixed(3));
+      saveToeConsoleDebounced();
     },3000);
   } else {
     S.phase='ready';S.engageTime=null;engBtn.className='engage-btn ready';engBtn.textContent='▸ ENGAGE (INTENTION)';
     addLog('Re-engaged. Warp core reset.');
+    saveToeConsoleDebounced();
   }
 });
 
@@ -618,6 +684,7 @@ optTabs.forEach(t=>{
     t.classList.add('active');
     loadOpt();
     renderDecisions();
+    saveToeConsoleDebounced();
   });
 });
 
@@ -629,6 +696,7 @@ optTabs.forEach(t=>{
     ['dAlign','dComplex','dTime','dStab'][i];
     document.getElementById(['dAlign','dComplex','dTime','dStab'][i]).textContent=v.toFixed(2);
     renderDecisions();
+    saveToeConsoleDebounced();
   });
 });
 
@@ -667,10 +735,16 @@ function renderDecisions(){
   });
   document.getElementById('optResults').innerHTML=html;
 }
-loadOpt();renderDecisions();
 
-// Initial update
-update();
+// Hydrate from shared browser storage (linked consoles on this origin)
+(function initToeConsole(){
+  var raw=window.TOE_CONSOLE_BRIDGE&&TOE_CONSOLE_BRIDGE.read();
+  if(raw&&mergeFromBridge(raw))applySFromState();
+  else{loadOpt();renderDecisions();update();}
+  if(window.TOE_CONSOLE_BRIDGE)TOE_CONSOLE_BRIDGE.subscribe(function(p){
+    if(p&&mergeFromBridge(p))applySFromState();
+  });
+})();
 setInterval(update,200);
 </script>
 </body>
