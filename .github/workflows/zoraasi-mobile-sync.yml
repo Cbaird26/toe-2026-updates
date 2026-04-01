@@ -1,0 +1,36 @@
+name: Sync zoraasi mobile bundle
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: zoraasi-mobile-sync
+  cancel-in-progress: true
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Clone zoraasi, build, copy to docs/zoraasi-mobile
+        run: bash scripts/build_zoraasi_mobile.sh
+
+      - name: Commit and push if changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add docs/zoraasi-mobile
+          if git diff --staged --quiet; then
+            echo "No changes to docs/zoraasi-mobile"
+            exit 0
+          fi
+          git commit -m "chore(docs): sync zoraasi-mobile from Cbaird26/zoraasi [skip ci]"
+          git push

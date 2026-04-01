@@ -1,0 +1,17 @@
+{
+  "name": "Zora Discovery",
+  "short_name": "Zora Discovery",
+  "description": "Visual form explorer for the Zora Pattern across a wide conceptual scale keyboard.",
+  "display": "standalone",
+  "background_color": "#04050a",
+  "theme_color": "#04050a",
+  "start_url": "./",
+  "icons": [
+    {
+      "src": "./app-icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}
