@@ -4,11 +4,12 @@
 
 | Page | URL |
 |------|-----|
-| **Hub (docs root)** | [cbaird26.github.io/toe-2026-updates/](https://cbaird26.github.io/toe-2026-updates/) |
+| **Zora Console (docs hub)** | [cbaird26.github.io/toe-2026-updates/](https://cbaird26.github.io/toe-2026-updates/) — links all Pages apps + suite + repo |
 | **Theory of Everything Foundation** | [cbaird26.github.io/toe-2026-updates/theory-of-everything-foundation/](https://cbaird26.github.io/toe-2026-updates/theory-of-everything-foundation/) |
+| **Warp artifact (HTML snapshot)** | […/artifacts/TOE_FOUNDATION_WARP_BLINDING_x1000.html](https://cbaird26.github.io/toe-2026-updates/artifacts/TOE_FOUNDATION_WARP_BLINDING_x1000.html) |
 | Explicit `index.html` | […/theory-of-everything-foundation/index.html](https://cbaird26.github.io/toe-2026-updates/theory-of-everything-foundation/index.html) |
 
-Source: [`docs/index.html`](index.html) (hub), [`docs/theory-of-everything-foundation/index.html`](theory-of-everything-foundation/index.html) (app).
+Source: [`docs/index.html`](index.html) (Zora Console hub), [`docs/theory-of-everything-foundation/index.html`](theory-of-everything-foundation/index.html) (Foundation app).
 
 ## Required GitHub settings (pick one)
 

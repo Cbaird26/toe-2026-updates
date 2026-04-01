@@ -3,34 +3,149 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Theory of Everything — GitHub Pages (cbaird26)</title>
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=Cormorant+Garamond:wght@600;700&display=swap" rel="stylesheet">
+<title>Zora Console — TOE Pages Hub</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=Cormorant+Garamond:wght@600;700&display=swap" rel="stylesheet">
 <style>
 *{box-sizing:border-box}
-body{margin:0;background:#060810;color:#d0d6ea;font-family:'IBM Plex Mono',monospace;min-height:100vh;padding:28px 22px 40px}
-h1{font-family:'Cormorant Garamond',serif;color:#fff;font-size:24px;margin:0 0 10px;letter-spacing:-0.02em}
-p.lead{color:#7882a8;font-size:13px;max-width:680px;line-height:1.65;margin:0 0 22px}
-ul{list-style:none;padding:0;margin:0}
-li{margin:12px 0}
-a{color:#00f0ff;text-decoration:none;border:1px solid #1e2240;border-radius:10px;padding:16px 20px;display:block;background:#0b0e18;transition:border-color .2s,box-shadow .2s,transform .2s}
-a:hover{border-color:#00f0ff50;box-shadow:0 0 24px rgba(0,240,255,0.12);transform:translateY(-1px)}
-a.primary{border-color:#00f0ff40;background:linear-gradient(145deg,#101425,#0b0e18)}
-a strong{display:block;font-size:14px;margin-bottom:4px;color:#fff}
-a span.desc{font-size:11px;color:#7882a8;font-weight:400;line-height:1.45}
-a.small{font-size:12px;padding:10px 14px;display:inline-block;margin-top:14px;border-radius:6px}
-footer{margin-top:36px;font-size:11px;color:#525a78;max-width:680px;line-height:1.6}
-code{background:#141830;padding:2px 6px;border-radius:4px;font-size:11px;color:#b374ff}
+:root{--bg:#060810;--panel:#0b0e18;--card:#141830;--border:#1e2240;--glow:#00f0ff;--glow2:#b374ff;--dim:#7882a8;--text:#d0d6ea;--green:#3de8a8;--gold:#fbbf24}
+body{margin:0;background:var(--bg);color:var(--text);font-family:'IBM Plex Mono',monospace;font-size:13px;min-height:100vh;padding:0 20px 48px}
+.wrap{max-width:1100px;margin:0 auto}
+
+/* Header */
+.head{padding:22px 0 8px;border-bottom:1px solid var(--border);margin-bottom:20px}
+.head h1{font-family:'Cormorant Garamond',serif;color:#fff;font-size:26px;font-weight:700;margin:0;letter-spacing:-0.02em}
+.head h1 span{background:linear-gradient(135deg,var(--glow),var(--glow2));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.sub{color:var(--dim);font-size:12px;margin:10px 0 0;max-width:720px;line-height:1.65}
+.status{display:flex;flex-wrap:wrap;gap:10px 18px;margin-top:14px;font-size:11px;color:var(--dim)}
+.status b{color:var(--glow);font-weight:600}
+.dot{width:8px;height:8px;border-radius:50%;background:var(--green);display:inline-block;margin-right:6px;box-shadow:0 0 8px var(--green)80}
+
+/* Sections */
+h2{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:0.14em;color:var(--dim);margin:28px 0 12px}
+h2:first-of-type{margin-top:8px}
+
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px}
+.card{display:block;text-decoration:none;color:inherit;border:1px solid var(--border);border-radius:10px;padding:16px 18px;background:var(--card);transition:border-color .2s,box-shadow .2s,transform .2s}
+.card:hover{border-color:var(--glow2)50;box-shadow:0 6px 28px rgba(0,0,0,0.35);transform:translateY(-2px)}
+.card.primary{border-color:var(--glow)45;background:linear-gradient(155deg,#101425,#0b0e18)}
+.card h3{font-family:'Cormorant Garamond',serif;font-size:16px;color:#fff;margin:0 0 6px;font-weight:600}
+.card p{margin:0;font-size:11px;color:var(--dim);line-height:1.55}
+.tag{font-size:9px;padding:2px 7px;border-radius:3px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;display:inline-block;margin-bottom:8px}
+.t-live{background:var(--green)18;color:var(--green);border:1px solid var(--green)35}
+.t-beta{background:var(--gold)18;color:var(--gold);border:1px solid var(--gold)35}
+.t-here{background:var(--glow)12;color:var(--glow);border:1px solid var(--glow)30}
+.t-art{background:var(--glow2)15;color:var(--glow2);border:1px solid var(--glow2)30}
+
+.row{display:flex;flex-wrap:wrap;gap:10px;margin-top:12px}
+.row a{font-size:11px;color:var(--glow);text-decoration:none;border:1px solid var(--border);padding:8px 12px;border-radius:6px;background:var(--panel)}
+.row a:hover{border-color:var(--glow)40}
+
+.foot{margin-top:36px;padding-top:18px;border-top:1px solid var(--border);font-size:11px;color:#525a78;line-height:1.6;max-width:720px}
+code{background:#141830;padding:2px 6px;border-radius:4px;font-size:11px;color:var(--glow2)}
 </style>
 </head>
 <body>
-  <h1>Theory of Everything — Pages hub</h1>
-  <p class="lead">Entry point for <strong>cbaird26.github.io/toe-2026-updates</strong> (this repo’s <code>docs/</code> folder). Open the flagship app below. If a path returns 404, confirm GitHub <strong>Settings → Pages</strong> uses branch <code>main</code> and folder <code>/docs</code>, then wait a minute for the site to rebuild after a push.</p>
-  <ul>
-    <li><a class="primary" href="theory-of-everything-foundation/"><strong>Theory of Everything Foundation</strong><span class="desc">Warp core + geometry engine, decision engine, framework equations, suite links — single static app.</span></a></li>
-    <li><a href="cbaird26_ecosystem_illustration.html"><strong>Cbaird26 ecosystem illustration</strong><span class="desc">Prior default landing visualization.</span></a></li>
-    <li><a href="zora_top10_simulations.html"><strong>Top 10 simulations gallery</strong><span class="desc">Curated browser demos index.</span></a></li>
-  </ul>
-  <p><a class="small" href="https://github.com/cbaird26/toe-2026-updates/blob/main/docs/PAGES.md">Pages checklist &amp; troubleshooting (repo)</a></p>
-  <footer>MQGT–SCF · Christopher Michael Baird · 2026 · Π_anchor operational demos</footer>
+<div class="wrap">
+  <header class="head">
+    <h1>Zora <span>Console</span></h1>
+    <p class="sub">Single hub for this Pages site and the public Zora / MQGT–SCF apps. Same spirit as local <code>zora discover</code> / <code>~/.zora/discovery/</code>, but wired for <strong>cbaird26.github.io</strong> deployments.</p>
+    <div class="status">
+      <span><span class="dot"></span>Site root: <b>toe-2026-updates</b> · branch <code>main</code> · folder <code>/docs</code></span>
+      <span>Canonical hub: <b>cbaird26.github.io/toe-2026-updates/</b></span>
+    </div>
+  </header>
+
+  <h2>This repository (Pages)</h2>
+  <div class="grid">
+    <a class="card primary" href="theory-of-everything-foundation/">
+      <span class="tag t-here">Flagship</span>
+      <h3>Theory of Everything Foundation</h3>
+      <p>Warp core, toroidal geometry, decision engine, framework equations, suite tab — full single-file app.</p>
+    </a>
+    <a class="card" href="artifacts/TOE_FOUNDATION_WARP_BLINDING_x1000.html">
+      <span class="tag t-art">Artifact</span>
+      <h3>Warp snapshot (blinding ×1000)</h3>
+      <p>Standalone HTML copy of the Foundation warp build for download or direct open.</p>
+    </a>
+    <a class="card" href="cbaird26_ecosystem_illustration.html">
+      <span class="tag t-here">Visual</span>
+      <h3>Cbaird26 ecosystem illustration</h3>
+      <p>Prior default landing visualization for the ecosystem.</p>
+    </a>
+    <a class="card" href="zora_top10_simulations.html">
+      <span class="tag t-here">Gallery</span>
+      <h3>Top 10 simulations</h3>
+      <p>Curated browser demos index.</p>
+    </a>
+  </div>
+
+  <h2>Zora application suite (live)</h2>
+  <div class="grid">
+    <a class="card" href="https://cbaird26.github.io/toe-2026-updates/fold-space-engine/" target="_blank" rel="noopener">
+      <span class="tag t-beta">Beta</span>
+      <h3>Fold-Space Engine Lab</h3>
+      <p>React/Vite lab; branch-weight math under test.</p>
+    </a>
+    <a class="card" href="https://cbaird26.github.io/zora-discovery-application/" target="_blank" rel="noopener">
+      <span class="tag t-live">Live</span>
+      <h3>Zora Discovery Application</h3>
+      <p>Decision engine, coherence warp core, fold-state, H₂ model, multi-option comparison.</p>
+    </a>
+    <a class="card" href="https://cbaird26.github.io/zoraasi/" target="_blank" rel="noopener">
+      <span class="tag t-live">Live</span>
+      <h3>ZoraASI</h3>
+      <p>Recursive agent architecture with Φc and E field dynamics.</p>
+    </a>
+    <a class="card" href="https://cbaird26.github.io/zora-refit" target="_blank" rel="noopener">
+      <span class="tag t-beta">Beta</span>
+      <h3>Zora Refit — Autopilot</h3>
+      <p>Streamlined coherence autopilot mode.</p>
+    </a>
+    <a class="card" href="https://cbaird26.github.io/zora-refit-mobile/" target="_blank" rel="noopener">
+      <span class="tag t-beta">Beta</span>
+      <h3>Zora Refit — Mobile</h3>
+      <p>Touch-optimized mobile coherence engine.</p>
+    </a>
+    <a class="card" href="https://cbaird26.github.io/zora-refitted/" target="_blank" rel="noopener">
+      <span class="tag t-beta">Beta</span>
+      <h3>Zora Refitted</h3>
+      <p>Refined controls and improved field visualization.</p>
+    </a>
+    <a class="card" href="https://cbaird26.github.io/zora-refitted-mobile/" target="_blank" rel="noopener">
+      <span class="tag t-beta">Beta</span>
+      <h3>Zora Refitted — Mobile</h3>
+      <p>Mobile variant with full coherence tracking.</p>
+    </a>
+  </div>
+
+  <h2>Source &amp; paper</h2>
+  <div class="grid">
+    <a class="card" href="https://github.com/cbaird26/toe-2026-updates" target="_blank" rel="noopener">
+      <span class="tag t-here">Repo</span>
+      <h3>toe-2026-updates (GitHub)</h3>
+      <p>This site’s source, issues, and history.</p>
+    </a>
+    <a class="card" href="https://github.com/cbaird26/toe-2026-updates/blob/main/docs/PAGES.md" target="_blank" rel="noopener">
+      <span class="tag t-here">Docs</span>
+      <h3>Pages checklist</h3>
+      <p>Settings, troubleshooting, and deployment notes (<code>PAGES.md</code>).</p>
+    </a>
+    <a class="card" href="https://github.com/Cbaird26/A-Theory-of-Everything---Baird-et-al-2025-.pdf" target="_blank" rel="noopener">
+      <span class="tag t-live">Paper</span>
+      <h3>MQGT–SCF thesis (PDF)</h3>
+      <p>Complete mathematical foundation repository.</p>
+    </a>
+  </div>
+
+  <div class="row">
+    <a href="theory-of-everything-foundation/">Open Foundation</a>
+    <a href="https://github.com/cbaird26/toe-2026-updates/settings/pages" target="_blank" rel="noopener">GitHub Pages settings</a>
+  </div>
+
+  <footer class="foot">
+    MQGT–SCF · Zora Console hub · Christopher Michael Baird · 2026<br>
+    Local Discovery UI remains available via <code>zora discover</code> on your machine; this page is the public web console for the same constellation of tools.
+  </footer>
+</div>
 </body>
 </html>
