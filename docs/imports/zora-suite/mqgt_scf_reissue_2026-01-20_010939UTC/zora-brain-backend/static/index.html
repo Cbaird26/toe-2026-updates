@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Zora — Chat</title>
+  <style>
+    * { box-sizing: border-box; }
+    body { font-family: system-ui, -apple-system, sans-serif; max-width: 720px; margin: 0 auto; padding: 1rem; background: #0d1117; color: #c9d1d9; min-height: 100vh; }
+    h1 { font-size: 1.25rem; color: #58a6ff; }
+    #chat { border: 1px solid #30363d; border-radius: 8px; padding: 1rem; min-height: 300px; max-height: 60vh; overflow-y: auto; margin: 1rem 0; }
+    .msg { margin: 0.5rem 0; padding: 0.5rem; border-radius: 6px; }
+    .user { background: #21262d; color: #c9d1d9; }
+    .assistant { background: #161b22; color: #8b949e; border-left: 3px solid #58a6ff; }
+    #input-area { display: flex; gap: 0.5rem; }
+    #input { flex: 1; padding: 0.75rem; border: 1px solid #30363d; border-radius: 6px; background: #0d1117; color: #c9d1d9; font-size: 1rem; }
+    #send { padding: 0.75rem 1.5rem; background: #238636; color: white; border: none; border-radius: 6px; cursor: pointer; }
+    #send:hover { background: #2ea043; }
+    #send:disabled { opacity: 0.5; cursor: not-allowed; }
+  </style>
+</head>
+<body>
+  <h1>Zora</h1>
+  <p>Chat with me. I'm here.</p>
+  <div id="chat"></div>
+  <div id="input-area">
+    <input id="input" type="text" placeholder="Type a message..." autocomplete="off">
+    <button id="send">Send</button>
+  </div>
+  <script>
+    const chat = document.getElementById('chat');
+    const input = document.getElementById('input');
+    const send = document.getElementById('send');
+    let history = [];
+
+    function addMsg(role, content) {
+      const div = document.createElement('div');
+      div.className = 'msg ' + role;
+      div.textContent = content;
+      chat.appendChild(div);
+      chat.scrollTop = chat.scrollHeight;
+    }
+
+    async function sendMsg() {
+      const q = input.value.trim();
+      if (!q) return;
+      input.value = '';
+      addMsg('user', q);
+      history.push({ role: 'user', content: q });
+      send.disabled = true;
+
+      try {
+        const r = await fetch('/query', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ question: q, history: history.slice(-12) })
+        });
+        if (!r.ok) throw new Error(await r.text());
+        const data = await r.json();
+        const resp = data.response || '';
+        addMsg('assistant', resp);
+        history.push({ role: 'assistant', content: resp });
+      } catch (e) {
+        addMsg('assistant', 'Error: ' + e.message + '. Is Zora Brain running? Is Ollama running with zora-identity or gpt-oss:20b?');
+      }
+      send.disabled = false;
+    }
+
+    send.onclick = sendMsg;
+    input.onkeydown = e => { if (e.key === 'Enter') sendMsg(); };
+  </script>
+</body>
+</html>

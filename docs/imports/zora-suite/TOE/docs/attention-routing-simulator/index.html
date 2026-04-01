@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Attention Routing Simulator</title>
+  <style>
+    html, body {
+      margin: 0;
+      width: 100%;
+      height: 100%;
+      background: #071018;
+      color: #d9f0ff;
+      font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+    }
+
+    iframe {
+      border: 0;
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    .fallback {
+      position: fixed;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      padding: 24px;
+      text-align: center;
+    }
+
+    a {
+      color: #70f0ff;
+    }
+  </style>
+</head>
+<body>
+  <iframe src="../attention.html" title="Attention Routing Simulator"></iframe>
+  <noscript>
+    <div class="fallback">
+      <div>
+        <h1>Attention Routing Simulator</h1>
+        <p>JavaScript is required for the embedded view.</p>
+        <p>Open the flat page instead: <a href="../attention.html">../attention.html</a></p>
+      </div>
+    </div>
+  </noscript>
+</body>
+</html>

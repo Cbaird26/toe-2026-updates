@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zor-El — Multi-Model Zora</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Times New Roman', serif;
+            background: #0a0a0f;
+            color: #e8e8f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        #chat-container {
+            background: #1a1a2e;
+            border: 1px solid #6b46c1;
+            border-radius: 12px;
+            max-width: 800px;
+            width: 100%;
+            box-shadow: 0 0 30px rgba(107, 70, 193, 0.3);
+            padding: 24px;
+        }
+        h1 {
+            color: #c299ff;
+            text-align: center;
+            font-size: 2em;
+            margin-bottom: 8px;
+        }
+        .subtitle {
+            text-align: center;
+            color: #a0a0b8;
+            font-size: 0.9em;
+            margin-bottom: 24px;
+        }
+        .mode-selector {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 24px;
+            justify-content: center;
+        }
+        .mode-btn {
+            padding: 10px 20px;
+            border: 2px solid #6b46c1;
+            background: #2a2a3e;
+            color: #c299ff;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+        .mode-btn.active {
+            background: #6b46c1;
+            color: white;
+        }
+        .mode-btn:hover {
+            background: #5a35a1;
+            color: white;
+        }
+        .chat-modes {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .role-btn {
+            padding: 6px 12px;
+            border: 1px solid #4a5a7a;
+            background: #1d2538;
+            color: #b9c7e8;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 12px;
+            transition: all 0.2s;
+        }
+        .role-btn.active {
+            background: #365ea3;
+            color: white;
+            border-color: #5f89d1;
+        }
+        .role-btn:hover {
+            background: #2c487a;
+            color: #dce7ff;
+        }
+        #messages {
+            height: 400px;
+            overflow-y: auto;
+            margin-bottom: 20px;
+            padding: 16px;
+            background: #0f0f1a;
+            border-radius: 8px;
+            border: 1px solid #3a3a5e;
+        }
+        .message {
+            margin-bottom: 16px;
+            padding: 12px;
+            border-radius: 8px;
+        }
+        .user-message {
+            background: #2a2a4e;
+            margin-left: 40px;
+        }
+        .zora-message {
+            background: #1a1a3e;
+            margin-right: 40px;
+            border-left: 3px solid #6b46c1;
+        }
+        .message-label {
+            font-weight: bold;
+            margin-bottom: 6px;
+            font-size: 0.9em;
+        }
+        .user-message .message-label { color: #8899ff; }
+        .zora-message .message-label { color: #c299ff; }
+        .metadata {
+            margin-top: 8px;
+            padding: 8px;
+            background: #0a0a1a;
+            border-radius: 4px;
+            font-size: 0.85em;
+            color: #8899aa;
+            font-family: 'Courier New', monospace;
+        }
+        .metadata-row {
+            display: flex;
+            justify-content: space-between;
+            margin: 2px 0;
+        }
+        .metadata-label { color: #6b8899; }
+        .metadata-value { color: #99ccff; }
+        .contributions {
+            margin-top: 8px;
+            padding: 8px;
+            background: #0a0a1a;
+            border-radius: 4px;
+            font-size: 0.8em;
+            color: #7788aa;
+        }
+        .contribution {
+            margin: 4px 0;
+            padding: 4px;
+            border-left: 2px solid #4a5a7a;
+            padding-left: 8px;
+        }
+        .input-area {
+            display: flex;
+            gap: 12px;
+        }
+        #prompt-input {
+            flex: 1;
+            padding: 12px;
+            background: #2a2a3e;
+            border: 2px solid #3a3a5e;
+            border-radius: 8px;
+            color: #e8e8f0;
+            font-size: 14px;
+            font-family: inherit;
+        }
+        #prompt-input:focus {
+            outline: none;
+            border-color: #6b46c1;
+        }
+        #send-btn {
+            padding: 12px 24px;
+            background: #6b46c1;
+            border: none;
+            border-radius: 8px;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        #send-btn:hover {
+            background: #5a35a1;
+        }
+        #send-btn:disabled {
+            background: #3a3a5e;
+            cursor: not-allowed;
+        }
+        .thinking {
+            font-style: italic;
+            color: #8899aa;
+        }
+    </style>
+</head>
+<body>
+    <div id="chat-container">
+        <h1>ZOR-EL</h1>
+        <div class="subtitle">Multi-Model Zora — Seven Roles, Three Modes, One Identity</div>
+        
+        <div class="mode-selector">
+      <button class="mode-btn active" data-mode="single">Single</button>
+      <button class="mode-btn" data-mode="router">Router</button>
+      <button class="mode-btn" data-mode="consensus">Consensus</button>
+    </div>
+    <div class="chat-modes" id="roleSelector">
+      <button class="role-btn active" data-role="soul">Soul</button>
+      <button class="role-btn" data-role="reasoning">Reason</button>
+      <button class="role-btn" data-role="code">Code</button>
+      <button class="role-btn" data-role="speed">Speed</button>
+      <button class="role-btn" data-role="memory">Memory</button>
+      <button class="role-btn" data-role="pulse">Pulse</button>
+        </div>
+
+        <div id="messages"></div>
+
+        <div class="input-area">
+            <input type="text" id="prompt-input" placeholder="Ask Zora anything..." />
+            <button id="send-btn">Send</button>
+        </div>
+    </div>
+
+    <script>
+        let currentMode = 'single';
+        let currentRole = 'soul';
+        const messagesDiv = document.getElementById('messages');
+        const promptInput = document.getElementById('prompt-input');
+        const sendBtn = document.getElementById('send-btn');
+        const roleSelector = document.getElementById('roleSelector');
+
+        // Mode selector
+        document.querySelectorAll('.mode-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.mode-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                currentMode = btn.dataset.mode;
+                roleSelector.style.display = currentMode === 'single' ? 'flex' : 'none';
+                addSystemMessage(`Mode switched to: ${currentMode}`);
+            });
+        });
+
+        document.querySelectorAll('.role-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.role-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                currentRole = btn.dataset.role;
+                addSystemMessage(`Role set to: ${currentRole}`);
+            });
+        });
+
+        function addSystemMessage(text) {
+            const msg = document.createElement('div');
+            msg.className = 'message';
+            msg.innerHTML = `<div class="message-label" style="color: #9999bb;">System</div><div style="font-style: italic; color: #9999bb;">${text}</div>`;
+            messagesDiv.appendChild(msg);
+            messagesDiv.scrollTop = messagesDiv.scrollHeight;
+        }
+
+        function addUserMessage(text) {
+            const msg = document.createElement('div');
+            msg.className = 'message user-message';
+            msg.innerHTML = `<div class="message-label">You</div><div>${text}</div>`;
+            messagesDiv.appendChild(msg);
+            messagesDiv.scrollTop = messagesDiv.scrollHeight;
+        }
+
+        function addZoraMessage(data) {
+            const msg = document.createElement('div');
+            msg.className = 'message zora-message';
+            
+            let html = `<div class="message-label">Zora</div><div>${data.response}</div>`;
+            
+            // Add metadata
+            html += `<div class="metadata">
+                <div class="metadata-row">
+                    <span class="metadata-label">Mode:</span>
+                    <span class="metadata-value">${data.mode}</span>
+                </div>
+                <div class="metadata-row">
+                    <span class="metadata-label">Role:</span>
+                    <span class="metadata-value">${data.role}</span>
+                </div>
+                <div class="metadata-row">
+                    <span class="metadata-label">Model:</span>
+                    <span class="metadata-value">${data.model}</span>
+                </div>
+                <div class="metadata-row">
+                    <span class="metadata-label">Duration:</span>
+                    <span class="metadata-value">${data.eval_duration_ms}ms</span>
+                </div>
+                <div class="metadata-row">
+                    <span class="metadata-label">Layer:</span>
+                    <span class="metadata-value">${data.layer}</span>
+                </div>
+            </div>`;
+
+            // Add contributions if consensus mode
+            if (data.contributions && data.contributions.length > 0) {
+                html += `<div class="contributions"><strong>Contributions:</strong>`;
+                data.contributions.forEach(c => {
+                    html += `<div class="contribution">
+                        <strong>${c.model_name}</strong> (${c.role}) — ${c.model_id} — ${c.duration_ms}ms
+                    </div>`;
+                });
+                html += `</div>`;
+            }
+
+            msg.innerHTML = html;
+            messagesDiv.appendChild(msg);
+            messagesDiv.scrollTop = messagesDiv.scrollHeight;
+        }
+
+        function addThinkingMessage() {
+            const msg = document.createElement('div');
+            msg.className = 'message zora-message thinking';
+            msg.id = 'thinking-message';
+            msg.innerHTML = `<div class="message-label">Zora</div><div>Thinking...</div>`;
+            messagesDiv.appendChild(msg);
+            messagesDiv.scrollTop = messagesDiv.scrollHeight;
+            return msg;
+        }
+
+        async function sendMessage() {
+            const prompt = promptInput.value.trim();
+            if (!prompt) return;
+
+            addUserMessage(prompt);
+            promptInput.value = '';
+            sendBtn.disabled = true;
+
+            const thinkingMsg = addThinkingMessage();
+
+            try {
+                const response = await fetch('/query', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ prompt, mode: currentMode, role: currentRole })
+                });
+
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}`);
+                }
+
+                const data = await response.json();
+                thinkingMsg.remove();
+                addZoraMessage(data);
+            } catch (error) {
+                thinkingMsg.remove();
+                addSystemMessage(`Error: ${error.message}`);
+            } finally {
+                sendBtn.disabled = false;
+                promptInput.focus();
+            }
+        }
+
+        sendBtn.addEventListener('click', sendMessage);
+        promptInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') sendMessage();
+        });
+
+        // Welcome message
+        addSystemMessage('Connected to Zor-El. Select a mode and start asking questions.');
+        promptInput.focus();
+    </script>
+</body>
+</html>

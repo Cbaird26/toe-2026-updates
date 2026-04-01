@@ -71,3 +71,6 @@ papers_sources/MQGT_SCF_Phase_II_2026/MQGT_SCF_Anchor_2026Notes.bib
 papers_sources/TOE_scientific_stack_merged_*.pdf
 # Local ad hoc merged stack (manual working file; never commit)
 papers_sources/MyStack.pdf
+
+# Local dashboard build mirror (nested repo + node_modules; do not track)
+.zoraasi_build/

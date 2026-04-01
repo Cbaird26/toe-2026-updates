@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Fold-Space Engine Lab</title>
+<meta name="description" content="MQGT-SCF fold-space branch-weight lab — static beta on GitHub Pages">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Cormorant+Garamond:wght@600;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#060810;--panel:#0b0e18;--card:#141830;--border:#1e2240;
+  --glow:#00f0ff;--glow2:#b374ff;--dim:#7882a8;--text:#d0d6ea;--gold:#fbbf24;--green:#3de8a8;
+}
+body{background:var(--bg);color:var(--text);font-family:'IBM Plex Mono',monospace;font-size:13px;line-height:1.55;min-height:100vh;padding:20px 18px 40px}
+.wrap{max-width:900px;margin:0 auto}
+header{border-bottom:1px solid var(--border);padding-bottom:16px;margin-bottom:20px}
+h1{font-family:'Cormorant Garamond',serif;font-size:24px;color:#fff;font-weight:700}
+h1 span{background:linear-gradient(135deg,var(--glow),var(--glow2));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.tag{display:inline-block;font-size:9px;padding:3px 8px;border-radius:4px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;margin-top:8px;background:rgba(251,191,36,0.12);color:var(--gold);border:1px solid rgba(251,191,36,0.35)}
+.lead{color:var(--dim);font-size:12px;max-width:640px;margin-top:10px}
+
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media(max-width:720px){.grid{grid-template-columns:1fr}}
+
+.card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:16px}
+.card h2{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:0.12em;color:var(--dim);margin-bottom:12px}
+.row{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;font-size:11px}
+.row label{color:var(--dim)}
+.row span.val{color:var(--glow);font-weight:600}
+input[type=range]{width:100%;height:4px;accent-color:var(--glow);cursor:pointer;margin-top:4px}
+
+.canvas-wrap{background:var(--panel);border:1px solid var(--border);border-radius:10px;overflow:hidden;margin-top:8px}
+canvas{display:block;width:100%;height:auto}
+
+.eq{font-size:12px;padding:10px 12px;border-radius:8px;border:1px solid var(--glow)25;background:rgba(0,240,255,0.06);color:var(--glow);margin-top:12px;line-height:1.5}
+
+.nav{display:flex;flex-wrap:wrap;gap:10px;margin-top:20px;padding-top:16px;border-top:1px solid var(--border)}
+.nav a{font-size:11px;color:var(--glow);text-decoration:none;border:1px solid var(--border);padding:8px 12px;border-radius:8px;background:var(--panel)}
+.nav a:hover{border-color:var(--glow)40}
+
+.foot{margin-top:28px;font-size:11px;color:#525a78}
+code{background:#141830;padding:2px 6px;border-radius:4px;font-size:11px;color:var(--glow2)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>Fold-Space <span>Engine Lab</span></h1>
+    <span class="tag">Beta · static Pages</span>
+    <p class="lead">Lightweight branch-weight playground on the same origin as the <a href="../theory-of-everything-foundation/" style="color:var(--glow)">Theory of Everything Foundation</a>. Tune α-like branch mix and fold depth; preview a toy visibility proxy. No separate deploy required.</p>
+  </header>
+
+  <div class="grid">
+    <div class="card">
+      <h2>Controls</h2>
+      <div class="row"><label>Branch mix α</label><span class="val" id="vAlpha">0.50</span></div>
+      <input type="range" id="sAlpha" min="0" max="1" step="0.01" value="0.5">
+      <div class="row" style="margin-top:14px"><label>Fold depth λ</label><span class="val" id="vFold">0.20</span></div>
+      <input type="range" id="sFold" min="0" max="1" step="0.01" value="0.2">
+      <div class="row" style="margin-top:14px"><label>Coherence c</label><span class="val" id="vCoh">0.90</span></div>
+      <input type="range" id="sCoh" min="0" max="1" step="0.01" value="0.9">
+      <p class="eq" id="eqLine">W_branch ∝ α·c + (1−α)·(1−λ)  ·  V_proxy = exp(−κ·λ²/c)</p>
+    </div>
+    <div class="card">
+      <h2>Field preview</h2>
+      <p style="font-size:11px;color:var(--dim);margin-bottom:8px">Toy fold ribbon + branch tint (not a full React build — enough to validate the lab route is live).</p>
+      <div class="canvas-wrap">
+        <canvas id="cv" width="420" height="240"></canvas>
+      </div>
+      <p style="font-size:11px;color:var(--dim);margin-top:10px">κ = 2.0 (display only) · <span id="vProxy" style="color:var(--green)">V_proxy = 0.000</span></p>
+    </div>
+  </div>
+
+  <div class="nav">
+    <a href="../theory-of-everything-foundation/">← Theory of Everything Foundation</a>
+    <a href="../">Pages hub</a>
+    <a href="../js/toe-console-bridge.js" target="_blank" rel="noopener">Console bridge (source)</a>
+    <a href="https://github.com/cbaird26/toe-2026-updates/tree/main/docs/fold-space-engine" target="_blank" rel="noopener">This folder on GitHub</a>
+  </div>
+
+  <footer class="foot">MQGT–SCF · Fold-Space Engine Lab · Christopher Michael Baird · 2026</footer>
+</div>
+
+<script src="../js/toe-console-bridge.js"></script>
+<script>
+(function(){
+  var sA=document.getElementById('sAlpha'),sF=document.getElementById('sFold'),sC=document.getElementById('sCoh');
+  var vA=document.getElementById('vAlpha'),vF=document.getElementById('vFold'),vC=document.getElementById('vCoh');
+  var cv=document.getElementById('cv'),ctx=cv.getContext('2d');
+  var vProxy=document.getElementById('vProxy');
+
+  function vals(){
+    var a=parseFloat(sA.value),f=parseFloat(sF.value),c=Math.max(0.05,parseFloat(sC.value));
+    vA.textContent=a.toFixed(2);vF.textContent=f.toFixed(2);vC.textContent=c.toFixed(2);
+    return {a:a,f:f,c:c};
+  }
+
+  function Vproxy(a,f,c){
+    var k=2;
+    return Math.exp(-k*f*f/c);
+  }
+
+  function draw(){
+    var o=vals(),w=cv.width,h=cv.height,a=o.a,f=o.f,c=o.c;
+    var vp=Vproxy(a,f,c);
+    vProxy.textContent='V_proxy = '+vp.toFixed(4);
+
+    ctx.fillStyle='#060810';
+    ctx.fillRect(0,0,w,h);
+
+    var g=ctx.createLinearGradient(0,0,w,0);
+    g.addColorStop(0,'rgba(0,240,255,'+(0.15+a*0.35)+')');
+    g.addColorStop(1,'rgba(179,116,255,'+(0.15+(1-a)*0.35)+')');
+    ctx.fillStyle=g;
+    ctx.fillRect(0,0,w,h);
+
+    ctx.strokeStyle='rgba(255,255,255,'+(0.12+0.2*c)+')';
+    ctx.lineWidth=1.5;
+    ctx.beginPath();
+    for(var x=0;x<=w;x+=4){
+      var t=x/w*Math.PI*2;
+      var y=h/2+Math.sin(t+f*6)*(40+60*f)+Math.sin(t*3)*8*a;
+      if(x===0)ctx.moveTo(x,y);else ctx.lineTo(x,y);
+    }
+    ctx.stroke();
+
+    ctx.fillStyle='rgba(0,240,255,0.85)';
+    ctx.beginPath();
+    ctx.arc(w*0.5,h*0.45,6+14*vp,0,Math.PI*2);
+    ctx.fill();
+  }
+
+  function debounce(fn,t){var id;return function(){clearTimeout(id);id=setTimeout(fn,t);};}
+  var saveDeb=debounce(draw,100);
+
+  ['input','change'].forEach(function(ev){
+    sA.addEventListener(ev,saveDeb);
+    sF.addEventListener(ev,saveDeb);
+    sC.addEventListener(ev,saveDeb);
+  });
+
+  try{
+    var b=window.TOE_CONSOLE_BRIDGE&&TOE_CONSOLE_BRIDGE.read();
+    if(b&&typeof b.fold==='number'){sF.value=b.fold;document.getElementById('vFold').textContent=b.fold.toFixed(2);}
+  }catch(e){}
+
+  draw();
+})();
+</script>
+</body>
+</html>

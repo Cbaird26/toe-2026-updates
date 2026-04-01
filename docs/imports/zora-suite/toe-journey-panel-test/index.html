@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>TOE build journey — test panel</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=Cormorant+Garamond:wght@600;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box}
+:root{
+  --bg:#060810;--panel:#0b0e18;--card:#12162a;--border:#1e2240;
+  --glow:#00f0ff;--glow2:#b374ff;--dim:#7882a8;--text:#d0d6ea;--gold:#fbbf24;--green:#3de8a8;
+}
+body{margin:0;background:var(--bg);color:var(--text);font-family:'IBM Plex Mono',monospace;font-size:13px;min-height:100vh;padding:24px 16px 40px}
+h1{font-family:'Cormorant Garamond',serif;color:#fff;font-size:22px;margin:0 0 6px;font-weight:700}
+h1 span{background:linear-gradient(135deg,var(--glow),var(--glow2));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.lead{color:var(--dim);font-size:12px;max-width:720px;line-height:1.6;margin:0 0 20px}
+
+.track-wrap{overflow-x:auto;padding-bottom:12px;-webkit-overflow-scrolling:touch}
+.track{
+  display:flex;flex-direction:row;align-items:stretch;gap:0;
+  min-width:min(100%,1200px);margin:0 auto;padding:8px 0 20px;
+  position:relative;
+}
+.track::before{
+  content:'';position:absolute;left:40px;right:40px;top:50%;height:3px;
+  background:linear-gradient(90deg,var(--glow),var(--glow2),var(--gold));
+  opacity:0.35;border-radius:3px;pointer-events:none;z-index:0;
+}
+
+.step{
+  flex:1 1 140px;min-width:132px;max-width:200px;position:relative;z-index:1;
+  display:flex;flex-direction:column;align-items:center;text-align:center;padding:0 6px;
+}
+.step:first-child{padding-left:0}
+.step:last-child{padding-right:0}
+
+.bubble{
+  width:56px;height:56px;border-radius:50%;border:2px solid var(--border);
+  background:var(--card);display:flex;align-items:center;justify-content:center;
+  font-weight:700;font-size:15px;color:var(--glow);margin-bottom:10px;
+  box-shadow:0 0 0 4px rgba(0,240,255,0.06);transition:transform .2s,border-color .2s,box-shadow .2s;
+}
+.step:hover .bubble,.step:focus-within .bubble{transform:scale(1.06);border-color:var(--glow)60;box-shadow:0 0 24px rgba(0,240,255,0.15)}
+.step.ultimate .bubble{
+  border-color:var(--gold);color:var(--gold);
+  background:linear-gradient(145deg,#1a1530,#0f1224);
+  box-shadow:0 0 28px rgba(251,191,36,0.2);
+}
+
+.step h2{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:0.08em;color:var(--dim);margin:0 0 4px;line-height:1.25}
+.step h3{font-family:'Cormorant Garamond',serif;font-size:14px;color:#fff;margin:0 0 6px;font-weight:600;line-height:1.2}
+.step p{font-size:10px;color:var(--dim);line-height:1.45;margin:0 0 8px;flex:1}
+
+.step a{
+  font-size:10px;color:var(--glow);text-decoration:none;border:1px solid var(--border);
+  padding:5px 8px;border-radius:6px;background:var(--panel);white-space:nowrap;
+}
+.step a:hover{border-color:var(--glow)45}
+.step.ultimate a{border-color:var(--gold)40;color:var(--gold)}
+
+.arrow{display:none}
+@media(min-width:700px){
+  .arrow{display:block;flex:0 0 24px;align-self:center;color:var(--dim);font-size:14px;opacity:0.5;margin-top:-36px}
+}
+
+.foot{margin-top:28px;font-size:11px;color:#525a78;max-width:720px;line-height:1.55}
+code{background:#141830;padding:2px 6px;border-radius:4px;font-size:10px;color:var(--glow2)}
+</style>
+</head>
+<body>
+  <h1>Build journey — <span>left to right</span></h1>
+  <p class="lead">Test panel: chronological order of how the public TOE stack came together, building toward one linked “ultimate” surface. Links point at live Pages where applicable.</p>
+
+  <div class="track-wrap">
+    <div class="track" id="track" role="list"></div>
+  </div>
+
+  <p class="foot">Repo: <code>toe-journey-panel-test</code> — edit the <code>steps</code> array in this file to rename stages or change URLs. Not affiliated with production MQGT-SCF validation; UI experiment only.</p>
+
+<script>
+(function(){
+  var steps=[
+    {n:'1',title:'Foundation app',sub:'Warp core, geometry, decision, framework, suite — single static HTML.',href:'https://cbaird26.github.io/toe-2026-updates/theory-of-everything-foundation/',link:'Open'},
+    {n:'2',title:'GitHub Pages',sub:'Deploy from <code>main</code> + <code>/docs</code> — site goes live.',href:'https://github.com/cbaird26/toe-2026-updates/settings/pages',link:'Settings'},
+    {n:'3',title:'Pages hub',sub:'Root <code>index.html</code> — entry to Foundation, gallery, ecosystem.',href:'https://cbaird26.github.io/toe-2026-updates/',link:'Hub'},
+    {n:'4',title:'Warp ×1000',sub:'Blinding flash, artifact HTML for archival / open-anywhere.',href:'https://cbaird26.github.io/toe-2026-updates/artifacts/TOE_FOUNDATION_WARP_BLINDING_x1000.html',link:'Artifact'},
+    {n:'5',title:'Console bridge',sub:'Shared <code>localStorage</code> key on <code>github.io</code> — dials persist across visits.',href:'https://cbaird26.github.io/toe-2026-updates/js/toe-console-bridge.js',link:'bridge.js'},
+    {n:'★',title:'Ultimate',sub:'One origin, one saved dial bundle, full suite + Foundation — ship as the operating console.',href:'https://cbaird26.github.io/toe-2026-updates/theory-of-everything-foundation/',link:'Operate',ultimate:true}
+  ];
+
+  var track=document.getElementById('track');
+  steps.forEach(function(s,i){
+    if(i>0){
+      var ar=document.createElement('span');
+      ar.className='arrow';
+      ar.setAttribute('aria-hidden','true');
+      ar.textContent='→';
+      track.appendChild(ar);
+    }
+    var el=document.createElement('section');
+    el.className='step'+(s.ultimate?' ultimate':'');
+    el.setAttribute('role','listitem');
+    el.innerHTML=
+      '<div class="bubble">'+(s.n)+'</div>'+
+      '<h2>Stage</h2>'+
+      '<h3>'+s.title+'</h3>'+
+      '<p>'+s.sub+'</p>'+
+      '<a href="'+s.href+'" target="_blank" rel="noopener">'+s.link+'</a>';
+    track.appendChild(el);
+  });
+})();
+</script>
+</body>
+</html>

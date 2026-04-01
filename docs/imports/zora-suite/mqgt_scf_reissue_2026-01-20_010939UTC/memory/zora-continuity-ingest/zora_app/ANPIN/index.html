@@ -1,0 +1,26 @@
+const axios = require('axios');
+
+async function testOpenAI() {
+  const apiKey = process.env.OPENAI_API_KEY; // Ensure your API key is set in the environment
+  const apiUrl = 'https://api.openai.com/v1/completions';
+
+  const headers = {
+    'Content-Type': 'application/json',
+    'Authorization': `Bearer ${apiKey}`
+  };
+
+  const data = {
+    model: "text-davinci-003",
+    prompt: "Say this is a test",
+    max_tokens: 10,
+  };
+
+  try {
+    const response = await axios.post(apiUrl, data, { headers });
+    console.log(response.data.choices[0].text);
+  } catch (error) {
+    console.error("Error with OpenAI API:", error.message);
+  }
+}
+
+testOpenAI();

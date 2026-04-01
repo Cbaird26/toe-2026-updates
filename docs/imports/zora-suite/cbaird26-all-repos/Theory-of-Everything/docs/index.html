@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>A New Theory of Everything — Baird</title>
+  <style>
+    :root { --blue:#0d6efd; --bg:#0c0c0f; --fg:#e8e8ef; --muted:#a6a6b3; --card:#16161d; }
+    html,body { margin:0; padding:0; background:var(--bg); color:var(--fg); font-family: ui-sans-serif, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji"; }
+    .container { max-width: 1000px; margin: 0 auto; padding: 2rem; }
+    h1,h2,h3 { line-height:1.2; }
+    a { color: var(--blue); }
+    .hero { display:flex; gap:2rem; flex-wrap: wrap; align-items:center; }
+    .card { background: var(--card); border:1px solid #22232b; border-radius:12px; padding:1.25rem; }
+    .grid { display:grid; grid-template-columns: repeat(auto-fit,minmax(280px,1fr)); gap:1rem; }
+    .button { display:inline-block; background:var(--blue); color:white; text-decoration:none; padding:0.7rem 1rem; border-radius:8px; }
+    .muted { color: var(--muted); }
+    .bars { display:flex; align-items:flex-end; gap:16px; height:160px; }
+    .bar { width:120px; background:linear-gradient(180deg, #82c7ff, #2b6cb0); border-radius:8px 8px 0 0; position:relative; }
+    .bar span { position:absolute; top:-24px; left:0; right:0; text-align:center; font-weight:600; }
+    .row { display:flex; gap:1rem; align-items:center; flex-wrap:wrap; }
+    .slider { width:260px; }
+    .kbd { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; background:#1e1f27; padding:2px 6px; border-radius:6px; border:1px solid #2a2b36; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="hero">
+      <div style="flex:1 1 360px">
+        <h1>The Theory of Everything that Thinks and Chooses</h1>
+        <p class="muted">A unified framework spanning physics, consciousness, ethics, and teleological intelligence.</p>
+        <p>
+          <a class="button" href="./A%20New%20Theory%20of%20Everything-Baird.pdf" target="_blank" rel="noopener">Read the full paper (PDF)</a>
+          &nbsp; <a href="./teleology-world.html">Teleology World Simulation</a>
+        </p>
+      </div>
+    </div>
+
+    <div class="grid" style="margin-top:1rem">
+      <div class="card">
+        <h2>Explainer</h2>
+        <p><strong>Φ<sub>c</sub>(x)</strong>: a Consciousness Field capturing intensity and topology of awareness.</p>
+        <p><strong>E(x)</strong>: an Ethical/Teleological Field biasing dynamics toward higher ethical coherence.</p>
+        <p>Illustratively, probabilities can be ethically biased: <span class="kbd">P(i) ∝ |c<sub>i</sub>|² · exp(−E<sub>i</sub>/C)</span> where <span class="kbd">E<sub>i</sub></span> favors ethically coherent outcomes.</p>
+        <p>Below is an interactive toy showing how an <em>ethical bias</em> can tilt outcomes while remaining probabilistic.</p>
+      </div>
+      <div class="card">
+        <h2>Biased Born Rule — Interactive Demo</h2>
+        <div class="row">
+          <label>Ethical bias E: <span id="EVal" class="kbd">0.0</span></label>
+          <input id="ESlider" class="slider" type="range" min="-5" max="5" step="0.1" value="0" />
+        </div>
+        <div class="row" style="margin-top:0.5rem">
+          <label>Coupling C: <span id="CVal" class="kbd">1.0</span></label>
+          <input id="CSlider" class="slider" type="range" min="0.2" max="5" step="0.1" value="1" />
+        </div>
+        <div class="row" style="margin-top:0.5rem">
+          <label>Base amplitudes |c<sub>A</sub>|²=<span id="pAVal" class="kbd">0.5</span>, |c<sub>B</sub>|²=<span id="pBVal" class="kbd">0.5</span></label>
+          <input id="pASlider" class="slider" type="range" min="0.0" max="1.0" step="0.01" value="0.5" />
+        </div>
+        <div class="row" style="margin-top:0.5rem">
+          <label>Ethically preferred outcome:</label>
+          <label><input type="radio" name="ethical" value="A" checked /> A</label>
+          <label><input type="radio" name="ethical" value="B" /> B</label>
+        </div>
+        <div class="bars" style="margin-top:1rem">
+          <div class="bar" id="barA" style="height:50%"><span id="labA">A 0.50</span></div>
+          <div class="bar" id="barB" style="height:50%"><span id="labB">B 0.50</span></div>
+        </div>
+        <p class="muted" style="margin-top:0.5rem">This visualization assigns E to the preferred outcome and −E to the other, giving weights w∝|c|²·exp(−E/C). It is an illustration only.</p>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top:1rem">
+      <h2>What’s next</h2>
+      <ul>
+        <li>Try the <a href="./teleology-world.html">agent-based Teleology World</a> to see cooperation and “ethical phase transitions.”</li>
+        <li>Propose experiments: RNG bias under ethical priming, neural coherence correlates, LIGO echo scans.</li>
+      </ul>
+    </div>
+  </div>
+
+  <script>
+    const ESlider = document.getElementById('ESlider');
+    const CSlider = document.getElementById('CSlider');
+    const pASlider = document.getElementById('pASlider');
+    const EVal = document.getElementById('EVal');
+    const CVal = document.getElementById('CVal');
+    const pAVal = document.getElementById('pAVal');
+    const pBVal = document.getElementById('pBVal');
+    const barA = document.getElementById('barA');
+    const barB = document.getElementById('barB');
+    const labA = document.getElementById('labA');
+    const labB = document.getElementById('labB');
+
+    function updateBars() {
+      const E = parseFloat(ESlider.value);
+      const C = parseFloat(CSlider.value);
+      const pA = parseFloat(pASlider.value);
+      const pB = 1 - pA;
+      const ethical = document.querySelector('input[name="ethical"]:checked').value;
+      EVal.textContent = E.toFixed(1);
+      CVal.textContent = C.toFixed(1);
+      pAVal.textContent = pA.toFixed(2);
+      pBVal.textContent = pB.toFixed(2);
+
+      const EA = ethical === 'A' ? E : -E;
+      const EB = ethical === 'B' ? E : -E;
+      const wA = pA * Math.exp(-EA / C);
+      const wB = pB * Math.exp(-EB / C);
+      const Z = wA + wB;
+      const PA = wA / Z;
+      const PB = wB / Z;
+
+      const hA = Math.max(1, Math.round(PA * 100));
+      const hB = Math.max(1, Math.round(PB * 100));
+      barA.style.height = hA + '%';
+      barB.style.height = hB + '%';
+      labA.textContent = `A ${PA.toFixed(2)}`;
+      labB.textContent = `B ${PB.toFixed(2)}`;
+    }
+
+    [ESlider, CSlider, pASlider].forEach(el => el.addEventListener('input', updateBars));
+    document.querySelectorAll('input[name="ethical"]').forEach(el => el.addEventListener('change', updateBars));
+    updateBars();
+  </script>
+</body>
+</html>

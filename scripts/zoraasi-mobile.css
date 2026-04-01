@@ -1,5 +1,6 @@
 /* Injected into upstream ZoraASI build for GitHub Pages (subpath + phones + notches) */
-/* React serializes inline styles as hyphenated CSS (e.g. flex-direction), not flexDirection. */
+/* Upstream App uses a 2-col grid: gridTemplateColumns: "minmax(0, 1.7fr) minmax(320px, 0.9fr)" — the
+   320px min track forces horizontal overflow on phones; collapse to one column. */
 html {
   -webkit-text-size-adjust: 100%;
 }
@@ -10,12 +11,30 @@ body {
 #root {
   min-height: 100vh;
   min-height: 100dvh;
-  /* Avoid 100vw + padding horizontal scroll (iOS / Chrome) */
   width: 100%;
   max-width: 100%;
   box-sizing: border-box;
   padding: max(12px, env(safe-area-inset-top)) max(12px, env(safe-area-inset-right))
     max(12px, env(safe-area-inset-bottom)) max(12px, env(safe-area-inset-left));
+}
+/* Let grid/flex children shrink instead of forcing overflow */
+#root * {
+  min-width: 0;
+}
+@media (max-width: 900px) {
+  /* Main split + any other layout that pins a 320px min track */
+  #root [style*="minmax(320px"] {
+    grid-template-columns: 1fr !important;
+  }
+  #root h1 {
+    font-size: clamp(1.5rem, 7vw, 2.75rem) !important;
+    line-height: 1.08 !important;
+  }
+  /* Pattern stage: upstream minHeight 760px is tall on small screens */
+  #root [style*="min-height: 760px"],
+  #root [style*="min-height:760px"] {
+    min-height: min(560px, 62vh) !important;
+  }
 }
 @media (max-width: 900px) {
   #root [style*="flex-direction: row"],
@@ -24,7 +43,6 @@ body {
     align-items: stretch !important;
   }
 }
-/* Touch targets */
 button,
 input[type="range"],
 [role="tab"] {

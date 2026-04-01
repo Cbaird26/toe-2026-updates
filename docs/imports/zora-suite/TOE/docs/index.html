@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#05060b">
+<title>Theory of Everything — docs hub</title>
+<meta name="description" content="MQGT–SCF documentation and hosted demos on GitHub Pages — Christopher Michael Baird">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --void:#05060b;--deep:#0a0c15;--panel:#0d1019;--surface:#121522;
+  --border:#1e2238;--glow:#00f0ff;--glow2:#b374ff;--glow3:#f472b6;
+  --gold:#fbbf24;--green:#3de8a8;
+  --text:#d0d4e4;--dim:#7880a0;--ghost:#303650;
+  --serif:'Cormorant Garamond',Georgia,serif;
+  --mono:'IBM Plex Mono','Courier New',monospace;
+}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{
+  background:var(--void);color:var(--text);font-family:var(--mono);font-size:14px;line-height:1.65;
+  min-height:100vh;min-height:100dvh;overflow-x:hidden;
+  padding:max(1.25rem,env(safe-area-inset-top)) max(1.25rem,env(safe-area-inset-right)) max(2rem,env(safe-area-inset-bottom)) max(1.25rem,env(safe-area-inset-left));
+}
+a{color:var(--glow);text-decoration:none;transition:color .2s}
+a:hover{color:#fff}
+::selection{background:var(--glow2);color:#fff}
+
+.container{max-width:900px;margin:0 auto;width:100%}
+.divider{height:1px;background:linear-gradient(90deg,transparent,var(--border),transparent);margin:2.5rem auto;max-width:560px}
+
+/* Hero (aligned with Zora Framework Portal reference) */
+.hero{text-align:center;padding:2.5rem 0 1.5rem}
+.hero .eyebrow{
+  font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--glow);font-weight:600;margin-bottom:.75rem;
+}
+.hero h1{
+  font-family:var(--serif);font-size:clamp(1.75rem,5vw,2.5rem);font-weight:700;color:#fff;letter-spacing:-.03em;line-height:1.15;margin-bottom:.6rem;
+}
+.hero h1 span{background:linear-gradient(135deg,var(--glow),var(--glow2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero .tagline{
+  font-family:var(--serif);font-size:clamp(1rem,2.4vw,1.2rem);color:var(--dim);font-style:italic;max-width:34rem;margin:0 auto 1.5rem;line-height:1.5;
+}
+.hero-cta{display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:11px 22px;border-radius:6px;font-family:var(--mono);font-size:12px;font-weight:600;letter-spacing:.04em;
+  border:1px solid;transition:all .25s;cursor:pointer;-webkit-tap-highlight-color:transparent;touch-action:manipulation;min-height:44px;
+}
+.btn-primary{background:var(--glow)12;border-color:var(--glow);color:var(--glow)}
+.btn-primary:hover{background:var(--glow)22;color:#fff;box-shadow:0 0 20px var(--glow)28}
+.btn-ghost{background:transparent;border-color:var(--border);color:var(--dim)}
+.btn-ghost:hover{border-color:var(--glow2);color:var(--glow2)}
+
+.section-label{font-size:11px;color:var(--glow);letter-spacing:.18em;text-transform:uppercase;margin-bottom:10px;font-weight:600}
+.section-title{font-family:var(--serif);font-size:clamp(1.35rem,3.5vw,1.75rem);font-weight:700;color:#fff;margin-bottom:6px;line-height:1.2}
+.section-desc{font-size:13px;color:var(--dim);max-width:36rem;line-height:1.7;margin-bottom:1.5rem}
+
+.app-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;margin-bottom:1.5rem}
+.app-card{
+  background:var(--panel);border:1px solid var(--border);border-radius:10px;padding:20px 22px;text-decoration:none;display:block;transition:all .25s;color:inherit;
+}
+.app-card:hover{border-color:var(--glow2)45;transform:translateY(-2px);box-shadow:0 8px 28px rgba(0,0,0,.35)}
+.app-card h3{font-size:17px;font-weight:600;color:#fff;margin-bottom:6px;font-family:var(--serif)}
+.app-card p{font-size:12px;color:var(--dim);line-height:1.65}
+.app-tag{font-size:10px;padding:3px 8px;border-radius:3px;display:inline-block;margin-bottom:10px;font-weight:600;letter-spacing:.06em;text-transform:uppercase}
+.tag-live{background:var(--green)18;color:var(--green);border:1px solid var(--green)35}
+.tag-beta{background:var(--gold)18;color:var(--gold);border:1px solid var(--gold)35}
+.tag-map{background:var(--glow2)15;color:var(--glow2);border:1px solid var(--glow2)30}
+.tag-snap{background:var(--glow)12;color:var(--glow);border:1px solid var(--glow)28}
+
+.hint{font-size:12px;color:var(--ghost);margin-top:.5rem;line-height:1.6}
+.hint a{color:var(--dim);border-bottom:1px solid rgba(120,128,160,.4)}
+.hint a:hover{color:var(--glow);border-bottom-color:var(--glow)}
+
+footer{padding:2rem 0 0;text-align:center;border-top:1px solid var(--border);margin-top:2rem}
+footer p{font-size:12px;color:var(--ghost);line-height:1.7}
+footer .sig{font-family:var(--serif);font-style:italic;font-size:14px;color:var(--dim);margin-bottom:12px}
+
+@media(max-width:520px){
+  .hero{padding:1.5rem 0 1rem}
+  .hero-cta{flex-direction:column;align-items:stretch}
+  .btn{width:100%}
+}
+</style>
+<script src="js/toe-console-bridge.js"></script>
+</head>
+<body>
+<div class="container">
+  <header class="hero">
+    <p class="eyebrow">GitHub Pages · documentation hub</p>
+    <h1>Theory of Everything · <span>docs</span></h1>
+    <p class="tagline">Hosted static routes for MQGT–SCF demos and references.</p>
+    <div class="hero-cta">
+      <a class="btn btn-primary" href="theory-of-everything-foundation/">Launch Foundation app</a>
+      <a class="btn btn-ghost" href="https://github.com/cbaird26/toe-2026-updates/blob/main/docs/PAGES.md" target="_blank" rel="noopener">Pages deploy notes</a>
+    </div>
+  </header>
+
+  <div class="divider" aria-hidden="true"></div>
+
+  <section>
+    <p class="section-label">Hosted routes</p>
+    <h2 class="section-title">Browse</h2>
+    <p class="section-desc">Same origin as the flagship app — shared console storage where applicable.</p>
+
+    <div class="app-grid">
+      <a class="app-card" href="theory-of-everything-foundation/">
+        <span class="app-tag tag-live">Flagship</span>
+        <h3>Theory of Everything Foundation</h3>
+        <p>Warp core, geometry engine, lab, decisions, framework, suite — single-page application.</p>
+      </a>
+      <a class="app-card" href="fold-space-engine/">
+        <span class="app-tag tag-beta">Lab</span>
+        <h3>Fold-Space Engine</h3>
+        <p>Branch-mix and fold preview (beta on this site).</p>
+      </a>
+      <a class="app-card" href="artifacts/TOE_FOUNDATION_WARP_BLINDING_x1000.html">
+        <span class="app-tag tag-snap">Snapshot</span>
+        <h3>Warp artifact</h3>
+        <p>HTML snapshot of a high-intensity warp run.</p>
+      </a>
+      <a class="app-card" href="cbaird26_ecosystem_illustration.html">
+        <span class="app-tag tag-map">Map</span>
+        <h3>Ecosystem illustration</h3>
+        <p>Research-style orbit diagram of the GitHub project graph.</p>
+      </a>
+      <a class="app-card" href="zora_top10_simulations.html">
+        <span class="app-tag tag-snap">Gallery</span>
+        <h3>Top 10 simulations</h3>
+        <p>Curated index of browser demos.</p>
+      </a>
+    </div>
+  </section>
+
+  <footer>
+    <p class="sig">MQGT–SCF · specification-level closure · empirical blades</p>
+    <p>Christopher Michael Baird · 2026</p>
+  </footer>
+</div>
+</body>
+</html>

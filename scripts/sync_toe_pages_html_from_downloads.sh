@@ -14,7 +14,10 @@ cp "$DL/index_1.html" "$DOCS/artifacts/foundation-legacy-index-1.html"
 cp "$DL/index (1).html" "$DOCS/artifacts/zora-framework-portal-standalone.html"
 
 # Zora Matrix Builder (single-file app; optional sources in ~/Downloads)
-if [[ -f "$DL/zora-matrix-v2.html" ]]; then
+# Same copy as: python3 scripts/materialize_matrix_index.py (from repo root)
+if [[ -f "$DL/zora-matrix-fixed.html" ]]; then
+  cp "$DL/zora-matrix-fixed.html" "$DOCS/zora-matrix-builder/index.html"
+elif [[ -f "$DL/zora-matrix-v2.html" ]]; then
   cp "$DL/zora-matrix-v2.html" "$DOCS/zora-matrix-builder/index.html"
 fi
 if [[ -f "$DL/zora-matrix-builder.html" ]]; then
