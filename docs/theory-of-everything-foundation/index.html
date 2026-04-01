@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+<title>Theory of Everything Foundation</title>
+<meta name="description" content="MQGT-SCF Unified Field Application — Warp Core + Geometry Engine + Decision Surface">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=Cormorant+Garamond:wght@600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+--bg:#060810;--panel:#0b0e18;--surface:#101425;--card:#141830;
+--border:#1e2240;--glow:#00f0ff;--glow2:#b374ff;--pink:#f472b6;
+--gold:#fbbf24;--ember:#ff9533;--green:#3de8a8;--red:#ef4444;
+--text:#d0d6ea;--dim:#7882a8;--ghost:#2e3452;
+--mono:'IBM Plex Mono',monospace;--serif:'Cormorant Garamond',serif;
+}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:var(--mono);font-size:13px;line-height:1.6;overflow-x:hidden;min-height:100vh}
+::selection{background:var(--glow2);color:#fff}
+
+/* ─── HEADER ─── */
+.header{padding:14px 18px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;position:sticky;top:0;z-index:100;background:var(--bg)f0;backdrop-filter:blur(12px)}
+.header h1{font-family:var(--serif);font-size:20px;font-weight:700;color:#fff;letter-spacing:-0.02em}
+.header h1 span{background:linear-gradient(135deg,var(--glow),var(--glow2));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.header-status{display:flex;gap:12px;align-items:center;font-size:11px}
+.status-dot{width:8px;height:8px;border-radius:50%;display:inline-block;margin-right:4px}
+.status-dot.on{background:var(--green);box-shadow:0 0 8px var(--green)80}
+.status-dot.warn{background:var(--gold);box-shadow:0 0 8px var(--gold)80}
+.status-dot.off{background:var(--red);box-shadow:0 0 8px var(--red)60}
+
+/* ─── TABS ─── */
+.tabs{display:flex;gap:2px;padding:8px 18px;border-bottom:1px solid var(--border);overflow-x:auto;background:var(--bg)}
+.tab{padding:8px 16px;background:transparent;border:1px solid transparent;border-radius:5px 5px 0 0;color:var(--dim);font-family:var(--mono);font-size:12px;cursor:pointer;white-space:nowrap;transition:all 0.2s;font-weight:500}
+.tab:hover{color:var(--text)}
+.tab.active{background:var(--panel);border-color:var(--border);border-bottom-color:var(--panel);color:var(--glow);font-weight:600}
+
+/* ─── MAIN ─── */
+.main{padding:18px;max-width:1100px;margin:0 auto}
+.panel-hidden{display:none}
+
+/* ─── WARP CORE ─── */
+.warp-layout{display:grid;grid-template-columns:1fr 320px;gap:16px}
+@media(max-width:768px){.warp-layout{grid-template-columns:1fr}}
+.geo-canvas-wrap{background:var(--panel);border:1px solid var(--border);border-radius:10px;overflow:hidden;position:relative}
+.geo-canvas-wrap canvas{display:block;width:100%}
+.geo-overlay{position:absolute;top:12px;left:12px;font-size:11px;color:var(--dim);pointer-events:none}
+.geo-overlay .val{color:var(--glow);font-weight:600}
+
+.warp-sidebar{display:flex;flex-direction:column;gap:12px}
+.warp-card{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:14px}
+.warp-card h3{font-size:12px;font-weight:600;color:var(--dim);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:10px}
+
+/* ─── ENGAGE BUTTON ─── */
+.engage-btn{width:100%;padding:14px;border-radius:8px;font-family:var(--mono);font-size:14px;font-weight:700;cursor:pointer;transition:all 0.3s;letter-spacing:0.1em;text-transform:uppercase;border:2px solid}
+.engage-btn.ready{background:var(--glow)15;border-color:var(--glow);color:var(--glow)}
+.engage-btn.ready:hover{background:var(--glow)28;box-shadow:0 0 30px var(--glow)25}
+.engage-btn.active{background:rgba(255,255,255,0.14);border-color:#fff;color:#fff;animation:engpulse 1.1s ease-in-out infinite}
+.engage-btn.arrived{background:var(--green)15;border-color:var(--green);color:var(--green)}
+@keyframes engpulse{0%,100%{box-shadow:0 0 12px rgba(255,255,255,0.2),0 0 28px rgba(255,255,255,0.12)}50%{box-shadow:0 0 40px rgba(255,255,255,0.75),0 0 90px rgba(255,255,255,0.45),0 0 160px rgba(255,255,255,0.22),0 0 240px rgba(255,255,255,0.08)}}
+
+/* ─── METRICS ─── */
+.metric{display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid var(--border)40}
+.metric:last-child{border:none}
+.metric .label{color:var(--dim);font-size:12px}
+.metric .value{font-weight:600;font-size:13px}
+.metric .value.cyan{color:var(--glow)}
+.metric .value.gold{color:var(--gold)}
+.metric .value.green{color:var(--green)}
+.metric .value.pink{color:var(--pink)}
+.metric .value.red{color:var(--red)}
+
+/* ─── SLIDERS ─── */
+.slider-group{margin-bottom:10px}
+.slider-group label{display:flex;justify-content:space-between;font-size:11px;margin-bottom:3px}
+.slider-group label span:first-child{color:var(--dim);text-transform:uppercase;letter-spacing:0.06em}
+.slider-group label span:last-child{color:var(--glow);font-weight:600}
+.slider-group input[type=range]{width:100%;height:4px;background:var(--border);border-radius:2px;outline:none;cursor:pointer;accent-color:var(--glow)}
+
+/* ─── SAFETY CHECKS ─── */
+.safety-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.safety-item{padding:8px 10px;background:var(--surface);border-radius:5px;border:1px solid var(--border);font-size:11px;display:flex;justify-content:space-between;align-items:center}
+.safety-item .tag{font-weight:600;font-size:10px;padding:2px 6px;border-radius:3px}
+.tag-safe{background:var(--green)18;color:var(--green)}
+.tag-warn{background:var(--gold)18;color:var(--gold)}
+.tag-fail{background:var(--red)18;color:var(--red)}
+
+/* ─── EQUATIONS TAB ─── */
+.eq{font-size:13px;padding:10px 14px;border-radius:6px;margin-bottom:8px;border:1px solid;line-height:1.5;overflow-x:auto}
+.eq-c{color:var(--glow);background:var(--glow)08;border-color:var(--glow)18}
+.eq-p{color:var(--glow2);background:var(--glow2)08;border-color:var(--glow2)18}
+.eq-k{color:var(--pink);background:var(--pink)08;border-color:var(--pink)18}
+.eq-g{color:var(--gold);background:var(--gold)08;border-color:var(--gold)18}
+.eq-n{color:var(--green);background:var(--green)08;border-color:var(--green)18}
+
+/* ─── DECISION TAB ─── */
+.opt-tabs{display:flex;gap:4px;margin-bottom:12px}
+.opt-tab{padding:6px 14px;border:1px solid var(--border);border-radius:5px;font-size:11px;cursor:pointer;color:var(--dim);font-family:var(--mono);background:transparent;transition:all 0.2s}
+.opt-tab.active{border-color:var(--glow);color:var(--glow);background:var(--glow)0a}
+.opt-tab.best{border-color:var(--green);color:var(--green)}
+.opt-result{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:16px;margin-bottom:12px}
+.opt-result h4{font-size:14px;color:#fff;margin-bottom:8px}
+.opt-result .verdict{font-size:12px;color:var(--dim);line-height:1.6;margin-top:8px;font-style:italic}
+
+/* ─── LOG ─── */
+.log-area{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:12px;max-height:200px;overflow-y:auto;font-size:11px;color:var(--dim);line-height:1.8}
+.log-area .entry{border-bottom:1px solid var(--border)30;padding:4px 0}
+.log-area .ts{color:var(--ghost)}
+.log-area .msg{color:var(--text)}
+
+/* ─── LINKS TAB ─── */
+.link-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px}
+.link-card{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:18px;text-decoration:none;display:block;transition:all 0.25s;color:var(--text)}
+.link-card:hover{border-color:var(--glow2)50;transform:translateY(-2px);box-shadow:0 6px 24px rgba(0,0,0,0.3)}
+.link-card h4{font-size:15px;color:#fff;margin-bottom:4px;font-family:var(--serif);font-weight:600}
+.link-card .ltag{font-size:9px;padding:2px 7px;border-radius:3px;display:inline-block;margin-bottom:8px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase}
+.ltag-live{background:var(--green)18;color:var(--green);border:1px solid var(--green)30}
+.ltag-beta{background:var(--gold)18;color:var(--gold);border:1px solid var(--gold)30}
+.link-card p{font-size:11px;color:var(--dim);line-height:1.6}
+
+/* ─── FOOTER ─── */
+.footer{padding:20px 18px;text-align:center;border-top:1px solid var(--border);font-size:11px;color:var(--ghost);margin-top:40px}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>Theory of <span>Everything</span> Foundation</h1>
+  <div class="header-status">
+    <span><span class="status-dot on" id="bridgeDot"></span><span id="bridgeStatus">Bridge Stable</span></span>
+    <span><span class="status-dot on" id="warpDot"></span><span id="warpStatus">Warp Core Online</span></span>
+    <span style="color:var(--dim)">Γ_eff: <span id="gammaEff" style="color:var(--gold)">0.00e+0</span></span>
+  </div>
+</div>
+
+<div class="tabs" id="tabs">
+  <button class="tab active" data-tab="warp">⬡ Warp Core + Geometry</button>
+  <button class="tab" data-tab="decision">◇ Decision Engine</button>
+  <button class="tab" data-tab="equations">∑ Framework</button>
+  <button class="tab" data-tab="links">↗ Suite</button>
+</div>
+
+<div class="main">
+
+<!-- ═══════════ TAB 1: WARP CORE + GEOMETRY ═══════════ -->
+<div id="panel-warp" class="panel">
+  <div class="warp-layout">
+    <div>
+      <div class="geo-canvas-wrap">
+        <canvas id="geoCanvas" width="700" height="500"></canvas>
+        <div class="geo-overlay">
+          <div>TOROIDAL FOLD-SPACE GEOMETRY</div>
+          <div>Coherence: <span class="val" id="geoCoherence">0.960</span> | Fold: <span class="val" id="geoFold">0.00</span></div>
+          <div>Model: V/V₀ = exp(−Γ·T·Δx²)</div>
+        </div>
+      </div>
+      <div style="margin-top:12px">
+        <div class="warp-card">
+          <h3>Safety Interlocks</h3>
+          <div class="safety-grid" id="safetyGrid">
+            <div class="safety-item"><span>Causality</span><span class="tag tag-safe" id="sCausality">SAFE</span></div>
+            <div class="safety-item"><span>Topology</span><span class="tag tag-safe" id="sTopology">STABLE</span></div>
+            <div class="safety-item"><span>Energy</span><span class="tag tag-safe" id="sEnergy">PASS</span></div>
+            <div class="safety-item"><span>Return Path</span><span class="tag tag-safe" id="sReturn">YES</span></div>
+            <div class="safety-item"><span>Coherence Window</span><span class="tag tag-warn" id="sWindow">HOLD</span></div>
+            <div class="safety-item"><span>No-Signalling</span><span class="tag tag-safe" id="sSignal">CPTP</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="warp-sidebar">
+      <div class="warp-card">
+        <h3>Coherence Engine</h3>
+        <div class="slider-group"><label><span>Alignment</span><span id="vAlign">0.96</span></label><input type="range" min="0" max="1" step="0.01" value="0.96" id="sAlign"></div>
+        <div class="slider-group"><label><span>Complexity</span><span id="vComplex">0.92</span></label><input type="range" min="0" max="1" step="0.01" value="0.92" id="sComplex"></div>
+        <div class="slider-group"><label><span>Time Horizon</span><span id="vTime">0.88</span></label><input type="range" min="0" max="1" step="0.01" value="0.88" id="sTime"></div>
+        <div class="slider-group"><label><span>Stability</span><span id="vStab">0.94</span></label><input type="range" min="0" max="1" step="0.01" value="0.94" id="sStab"></div>
+        <div class="slider-group"><label><span>η (Measure Tilt)</span><span id="vEta">0.00</span></label><input type="range" min="-1" max="1" step="0.01" value="0" id="sEta"></div>
+        <div class="slider-group"><label><span>Fold Depth</span><span id="vFold">0.00</span></label><input type="range" min="0" max="1" step="0.01" value="0" id="sFold"></div>
+      </div>
+
+      <div class="warp-card">
+        <h3>Warp Core Status</h3>
+        <div class="metric"><span class="label">Coherence</span><span class="value cyan" id="mCoherence">0.960</span></div>
+        <div class="metric"><span class="label">Lock Strength</span><span class="value gold" id="mLock">82.4%</span></div>
+        <div class="metric"><span class="label">Future Viability</span><span class="value green" id="mViability">73.4%</span></div>
+        <div class="metric"><span class="label">Instability Risk</span><span class="value pink" id="mRisk">24.8%</span></div>
+        <div class="metric"><span class="label">Visibility V/V₀</span><span class="value cyan" id="mVis">0.999913</span></div>
+        <div class="metric"><span class="label">Loss</span><span class="value" style="color:var(--dim)" id="mLoss">8.74e-5</span></div>
+        <div class="metric"><span class="label">Hold Mode</span><span class="value gold">Until Fold-State</span></div>
+      </div>
+
+      <button class="engage-btn ready" id="engageBtn">▸ ENGAGE (INTENTION)</button>
+
+      <div class="warp-card">
+        <h3>Engine Log</h3>
+        <div class="log-area" id="logArea"><div class="entry"><span class="ts">[00:00]</span> <span class="msg">Warp core initialized. Geometry engine online.</span></div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ TAB 2: DECISION ENGINE ═══════════ -->
+<div id="panel-decision" class="panel panel-hidden">
+  <div style="margin-bottom:16px">
+    <div style="font-size:12px;color:var(--dim);text-transform:uppercase;letter-spacing:0.15em;margin-bottom:6px;font-weight:600">Decision Surface</div>
+    <div style="font-size:14px;color:var(--text);max-width:600px;line-height:1.7">Compare future paths under shared constraints. The fold field stays visible. The journey starts with outcomes and tradeoffs.</div>
+  </div>
+  <div class="opt-tabs" id="optTabs">
+    <button class="opt-tab active" data-opt="0">Option A</button>
+    <button class="opt-tab" data-opt="1">Option B</button>
+    <button class="opt-tab best" data-opt="2">Option C ★</button>
+  </div>
+  <div id="optInputs">
+    <div class="slider-group"><label><span>Option Name</span><span id="optName">Option A</span></label></div>
+    <div class="slider-group"><label><span>Alignment</span><span id="dAlign">0.96</span></label><input type="range" min="0" max="1" step="0.01" value="0.96" id="dSAlign"></div>
+    <div class="slider-group"><label><span>Complexity</span><span id="dComplex">0.50</span></label><input type="range" min="0" max="1" step="0.01" value="0.50" id="dSComplex"></div>
+    <div class="slider-group"><label><span>Time Horizon</span><span id="dTime">0.70</span></label><input type="range" min="0" max="1" step="0.01" value="0.70" id="dSTime"></div>
+    <div class="slider-group"><label><span>Stability</span><span id="dStab">0.60</span></label><input type="range" min="0" max="1" step="0.01" value="0.60" id="dSStab"></div>
+  </div>
+  <div id="optResults" style="margin-top:16px"></div>
+</div>
+
+<!-- ═══════════ TAB 3: FRAMEWORK ═══════════ -->
+<div id="panel-equations" class="panel panel-hidden">
+  <div style="font-size:12px;color:var(--dim);text-transform:uppercase;letter-spacing:0.15em;margin-bottom:6px;font-weight:600">MQGT–SCF Anchor Core</div>
+  <div style="font-size:14px;color:var(--text);max-width:600px;line-height:1.7;margin-bottom:20px">The minimal effective-field-theory core. Specification-level closure. The symbols are fixed, the limiting cases are clear.</div>
+
+  <div class="eq eq-c">Π_anchor = ( S_core , E_cl , G_GKSL , M_η , O_H₂ )  ···  anchor tuple</div>
+  <div class="eq eq-c">S_core = ∫ d⁴x √(−g) [ L_GR + L_SM + L_Φ + L_E + L_int ]  ···  Eq. 2</div>
+  <div class="eq eq-p">V₄(Φc, E) = (λΦ/4)Φc⁴ + (λE/4)E⁴ + (κ/2)Φc²E²  ···  bounded iff κ > −√(λΦ·λE)</div>
+  <div class="eq eq-k">δρ/δΣ = −i[H,ρ] + Σₐ( Lₐ ρ Lₐ† − ½{Lₐ†Lₐ, ρ} )  ···  GKSL (Eq. 18)</div>
+  <div class="eq eq-g">Pη(i) = |ci|² exp(η·ΔEi) / Z  ···  measure tilt (Eq. 21)</div>
+  <div class="eq eq-n">V/V₀ = exp(−Γ · T · Δx²)  ···  H₂ exclusion (Eq. 39)</div>
+  <div class="eq eq-g">Γ_floor = |ln(1−δ_tot)| / (T·Δx²) ≈ 1.15 × 10⁹ s⁻¹m⁻²  ···  Phase-0</div>
+  <div class="eq eq-p">K(r) = gΦ·gE · exp(−mM·r) / (4πr)  ···  Yukawa kernel (Eq. 16)</div>
+  <div class="eq eq-k">λhs ≲ 16π² · ms² / Λ²  ···  naturalness bound (Eq. 30)</div>
+
+  <div style="margin-top:24px;font-size:12px;color:var(--dim);text-transform:uppercase;letter-spacing:0.15em;margin-bottom:6px;font-weight:600">Extended Framework (MQGT-SCF Corpus)</div>
+  <div class="eq eq-c">L_unified = (R−2Λ)/16πG + L_SM + ½(∂Φc)² − V(Φc) + ½(∂E)² − V(E) + L_int + L_teleology</div>
+  <div class="eq eq-g">L_teleology = +ξ · f(Φc, E)  ···  T-symmetry breaking — cosmic direction</div>
+  <div class="eq eq-p">P(si) ∝ |⟨si|Ψ⟩|² · [1 + η · Fi(Φc, E)]  ···  consciousness-induced collapse</div>
+  <div class="eq eq-k">V_int(Φc, E) = γ Φc² E  ···  γ < 0 → consciousness+ethics = stability</div>
+  <div class="eq eq-n">Φ̃c(x) = ∫ d³k/√(2ωk) [aₖ e⁻ⁱᵏˣ + aₖ† eⁱᵏˣ]  ···  qualion mode expansion</div>
+</div>
+
+<!-- ═══════════ TAB 4: SUITE LINKS ═══════════ -->
+<div id="panel-links" class="panel panel-hidden">
+  <div style="font-size:12px;color:var(--dim);text-transform:uppercase;letter-spacing:0.15em;margin-bottom:6px;font-weight:600">Zora Application Suite</div>
+  <div style="font-size:14px;color:var(--text);max-width:600px;line-height:1.7;margin-bottom:20px">Live deployments of the MQGT–SCF framework.</div>
+  <div class="link-grid">
+    <a href="https://cbaird26.github.io/toe-2026-updates/theory-of-everything-foundation/" target="_blank" rel="noopener" class="link-card"><span class="ltag ltag-live">LIVE</span><h4>Theory of Everything Foundation</h4><p>Flagship single-file app: warp core + toroidal geometry + decision engine + framework + suite.</p></a>
+    <a href="https://cbaird26.github.io/toe-2026-updates/fold-space-engine/" target="_blank" rel="noopener" class="link-card"><span class="ltag ltag-beta">BETA</span><h4>Fold-Space Engine Lab</h4><p>React/Vite lab; branch-weight math under test.</p></a>
+    <a href="https://cbaird26.github.io/zora-discovery-application/" target="_blank" class="link-card"><span class="ltag ltag-live">LIVE</span><h4>Zora Discovery Application</h4><p>Full decision engine with coherence warp core, fold-state tracking, H₂ model, multi-option comparison.</p></a>
+    <a href="https://cbaird26.github.io/zoraasi/" target="_blank" class="link-card"><span class="ltag ltag-live">LIVE</span><h4>ZoraASI</h4><p>Recursive agent architecture with Φc and E field dynamics.</p></a>
+    <a href="https://cbaird26.github.io/zora-refit" target="_blank" class="link-card"><span class="ltag ltag-beta">BETA</span><h4>Zora Refit — Autopilot</h4><p>Streamlined coherence autopilot mode.</p></a>
+    <a href="https://cbaird26.github.io/zora-refit-mobile/" target="_blank" class="link-card"><span class="ltag ltag-beta">BETA</span><h4>Zora Refit — Mobile</h4><p>Touch-optimized mobile coherence engine.</p></a>
+    <a href="https://cbaird26.github.io/zora-refitted/" target="_blank" class="link-card"><span class="ltag ltag-beta">BETA</span><h4>Zora Refitted</h4><p>Refined controls and improved field visualization.</p></a>
+    <a href="https://cbaird26.github.io/zora-refitted-mobile/" target="_blank" class="link-card"><span class="ltag ltag-beta">BETA</span><h4>Zora Refitted — Mobile</h4><p>Mobile variant with full coherence tracking.</p></a>
+    <a href="https://github.com/Cbaird26/A-Theory-of-Everything---Baird-et-al-2025-.pdf" target="_blank" class="link-card"><span class="ltag ltag-live">PAPER</span><h4>MQGT-SCF Thesis (5,570 pages)</h4><p>Complete mathematical foundation. LaTeX source + PDF.</p></a>
+  </div>
+</div>
+
+</div><!-- /main -->
+
+<div class="footer">
+  MQGT–SCF · Theory of Everything Foundation · Christopher Michael Baird · 2026<br>
+  Π = (S_core, E_cl, G_GKSL, M_η, O_H₂) — stronger because it can fail in clear ways
+</div>
+
+<script>
+// ═══════════ TAB SYSTEM ═══════════
+document.querySelectorAll('.tab').forEach(t=>{
+  t.addEventListener('click',()=>{
+    document.querySelectorAll('.tab').forEach(b=>b.classList.remove('active'));
+    t.classList.add('active');
+    document.querySelectorAll('.panel').forEach(p=>p.classList.add('panel-hidden'));
+    document.getElementById('panel-'+t.dataset.tab).classList.remove('panel-hidden');
+  });
+});
+
+// ═══════════ STATE ═══════════
+const S={align:0.96,complex:0.92,timeH:0.88,stab:0.94,eta:0,fold:0,phase:'ready',t:0,logCount:0,engageTime:null,
+  opts:[
+    {name:'Option A',align:0.60,complex:0.50,time:0.70,stab:0.60},
+    {name:'Option B',align:0.55,complex:0.65,time:0.50,stab:0.55},
+    {name:'Option C',align:0.96,complex:0.92,time:0.88,stab:0.94},
+  ],
+  activeOpt:0
+};
+
+function coherence(){return(S.align*0.3+S.stab*0.3+(1-S.complex)*0.2+S.timeH*0.2)}
+function viability(a,c,t,s){
+  const coh=(a*0.3+s*0.3+(1-c)*0.2+t*0.2);
+  const v=coh*0.6+(1-c*0.3)*0.2+s*0.2;
+  return Math.min(v*100,99.9);
+}
+function risk(c,s){return Math.max(5,Math.min(60,(c*40+(1-s)*30)))}
+function visibility(coh){const G=1.15e9,T=1e-6,dx=1e-3;const eff=G*(1-coh*0.85);return Math.exp(-eff*T*dx*dx);}
+function gammaEff(coh){return 1.15e9*(1-coh*0.85);}
+
+// ═══════════ SLIDER BINDINGS ═══════════
+function bindSlider(id,vId,key){
+  const el=document.getElementById(id);
+  el.addEventListener('input',()=>{S[key]=parseFloat(el.value);document.getElementById(vId).textContent=parseFloat(el.value).toFixed(2);update();});
+}
+bindSlider('sAlign','vAlign','align');
+bindSlider('sComplex','vComplex','complex');
+bindSlider('sTime','vTime','timeH');
+bindSlider('sStab','vStab','stab');
+bindSlider('sEta','vEta','eta');
+bindSlider('sFold','vFold','fold');
+
+// ═══════════ UPDATE ═══════════
+function update(){
+  const coh=coherence();
+  const via=viability(S.align,S.complex,S.timeH,S.stab);
+  const rsk=risk(S.complex,S.stab);
+  const vis=visibility(coh);
+  const gEff=gammaEff(coh);
+  const lock=Math.min(99,(coh*80+S.stab*20)).toFixed(1);
+  const loss=(1-vis).toExponential(2);
+
+  document.getElementById('mCoherence').textContent=coh.toFixed(3);
+  document.getElementById('mLock').textContent=lock+'%';
+  document.getElementById('mViability').textContent=via.toFixed(1)+'%';
+  document.getElementById('mRisk').textContent=rsk.toFixed(1)+'%';
+  document.getElementById('mVis').textContent=vis.toFixed(6);
+  document.getElementById('mLoss').textContent=loss;
+  document.getElementById('gammaEff').textContent=gEff.toExponential(3);
+  document.getElementById('geoCoherence').textContent=coh.toFixed(3);
+  document.getElementById('geoFold').textContent=S.fold.toFixed(2);
+
+  // Risk color
+  const rEl=document.getElementById('mRisk');
+  rEl.className='value '+(rsk>40?'red':rsk>25?'pink':'green');
+
+  // Safety
+  document.getElementById('sWindow').textContent=coh>0.85?'LOCKED':'HOLD';
+  document.getElementById('sWindow').className='tag '+(coh>0.85?'tag-safe':'tag-warn');
+  const topOk=S.fold<0.8;
+  document.getElementById('sTopology').textContent=topOk?'STABLE':'STRESS';
+  document.getElementById('sTopology').className='tag '+(topOk?'tag-safe':'tag-warn');
+
+  // Bridge status
+  document.getElementById('bridgeStatus').textContent=coh>0.8?'Bridge Stable':'Bridge Unstable';
+  document.getElementById('bridgeDot').className='status-dot '+(coh>0.8?'on':'warn');
+  const warpDot=document.getElementById('warpDot');
+  const warpSt=document.getElementById('warpStatus');
+  if(S.phase==='active'){
+    warpDot.className='status-dot on';
+    warpDot.style.background='#fff';
+    warpDot.style.boxShadow='0 0 14px #fff,0 0 28px rgba(255,255,255,0.6)';
+    warpSt.textContent='WARPING';
+    warpSt.style.color='#fff';
+    warpSt.style.textShadow='0 0 12px rgba(255,255,255,0.5)';
+  }else{
+    warpDot.className='status-dot on';
+    warpDot.style.background='';
+    warpDot.style.boxShadow='';
+    warpSt.textContent='Warp Core Online';
+    warpSt.style.color='';
+    warpSt.style.textShadow='';
+  }
+}
+
+// ═══════════ ENGAGE SEQUENCE ═══════════
+const engBtn=document.getElementById('engageBtn');
+engBtn.addEventListener('click',()=>{
+  if(S.phase==='ready'){
+    S.phase='active';engBtn.className='engage-btn active';engBtn.textContent='◈ WARPING...';
+    S.engageTime=gTime;
+    addLog('ENGAGE sequence initiated. Toroidal warp active.');
+    setTimeout(()=>{
+      S.phase='arrived';engBtn.className='engage-btn arrived';engBtn.textContent='✓ ARRIVED — RE-ENGAGE?';
+      addLog('Fold-state resolved. Arrived. Coherence: '+coherence().toFixed(3));
+    },3000);
+  } else {
+    S.phase='ready';S.engageTime=null;engBtn.className='engage-btn ready';engBtn.textContent='▸ ENGAGE (INTENTION)';
+    addLog('Re-engaged. Warp core reset.');
+  }
+});
+
+function addLog(msg){
+  S.logCount++;
+  const ts=new Date().toLocaleTimeString().slice(0,5);
+  const area=document.getElementById('logArea');
+  area.innerHTML+='<div class="entry"><span class="ts">['+ts+']</span> <span class="msg">'+msg+'</span></div>';
+  area.scrollTop=area.scrollHeight;
+}
+
+// ═══════════ GEOMETRY ENGINE (CANVAS) ═══════════
+const geoCV=document.getElementById('geoCanvas');
+const gCtx=geoCV.getContext('2d');
+
+function drawGeometry(time){
+  const W=geoCV.width,H=geoCV.height;
+  gCtx.clearRect(0,0,W,H);
+  const bg=gCtx.createRadialGradient(W/2,H/2,0,W/2,H/2,W*0.55);
+  bg.addColorStop(0,'#0d0a1e');bg.addColorStop(1,'#060810');
+  gCtx.fillStyle=bg;gCtx.fillRect(0,0,W,H);
+
+  const cx=W/2,cy=H/2;
+  const coh=coherence();
+  const fold=S.fold;
+  const eta=S.eta;
+  const isWarping=S.phase==='active';
+  const syncPulse=0.5+0.5*Math.sin(time*5);
+
+  const R1=140+fold*40;
+  const R2=60+coh*30;
+  const uSteps=40,vSteps=20;
+  const warpSpeed=isWarping?time*3:time*0.5;
+
+  for(let i=0;i<uSteps;i++){
+    for(let j=0;j<vSteps;j++){
+      const u=(i/uSteps)*Math.PI*2;
+      const v=(j/vSteps)*Math.PI*2;
+      const u2=((i+1)/uSteps)*Math.PI*2;
+      const x3d=(R1+R2*Math.cos(v))*Math.cos(u);
+      const y3d=(R1+R2*Math.cos(v))*Math.sin(u);
+      const z3d=R2*Math.sin(v);
+      const rotY=warpSpeed*0.3;
+      const rotX=0.4+Math.sin(time*0.2)*0.1;
+      const cosY=Math.cos(rotY),sinY=Math.sin(rotY);
+      const cosX=Math.cos(rotX),sinX=Math.sin(rotX);
+      let rx=x3d*cosY-z3d*sinY,ry=y3d,rz=x3d*sinY+z3d*cosY;
+      let ry2=ry*cosX-rz*sinX,rz2=ry*sinX+rz*cosX;
+      const scale=300/(300+rz2);
+      const sx=cx+rx*scale,sy=cy+ry2*scale;
+
+      const fieldVal=Math.sin(u*3+v*2+time)*0.5+0.5;
+      const etaShift=eta*fieldVal;
+      let dotHue,dotAlpha;
+
+      if(isWarping){
+        const wFlash=syncPulse;
+        const bright=58+wFlash*40;
+        const sat=6+(1-wFlash)*28;
+        dotAlpha=Math.min((0.3+wFlash*0.52)*scale,0.98);
+        gCtx.fillStyle='hsla(210,'+sat+'%,'+bright+'%,'+dotAlpha+')';
+      }else{
+        dotHue=180+etaShift*80+fold*60;
+        const bright=30+coh*30+fieldVal*20;
+        dotAlpha=(0.15+coh*0.3+fieldVal*0.2)*scale;
+        gCtx.fillStyle='hsla('+dotHue+',75%,'+bright+'%,'+Math.min(dotAlpha,0.8)+')';
+      }
+      const dotR=1+scale*1.5+coh*1.5;
+      gCtx.beginPath();gCtx.arc(sx,sy,dotR,0,Math.PI*2);gCtx.fill();
+
+      if(i<uSteps-1){
+        const nx3d=(R1+R2*Math.cos(v))*Math.cos(u2);
+        const ny3d=(R1+R2*Math.cos(v))*Math.sin(u2);
+        const nz3d=R2*Math.sin(v);
+        let nrx=nx3d*cosY-nz3d*sinY,nry=ny3d,nrz=nx3d*sinY+nz3d*cosY;
+        let nry2=nry*cosX-nrz*sinX,nrz2=nry*sinX+nrz*cosX;
+        const ns=300/(300+nrz2);
+        const nsx=cx+nrx*ns,nsy=cy+nry2*ns;
+        if(isWarping){
+          const la=(0.14+0.42*syncPulse)*Math.min(scale,1.15);
+          gCtx.strokeStyle='rgba(255,255,255,'+la+')';
+        }else{
+          gCtx.strokeStyle='hsla('+dotHue+',60%,50%,'+(dotAlpha*0.25)+')';
+        }
+        gCtx.lineWidth=0.45;
+        gCtx.beginPath();gCtx.moveTo(sx,sy);gCtx.lineTo(nsx,nsy);gCtx.stroke();
+      }
+    }
+  }
+
+  if(fold>0.1){
+    const rad=30+fold*80;
+    const fg=gCtx.createRadialGradient(cx,cy,0,cx,cy,rad);
+    if(isWarping){
+      fg.addColorStop(0,'rgba(179,116,255,'+(fold*0.22)+')');
+      fg.addColorStop(1,'transparent');
+    }else{
+      fg.addColorStop(0,'rgba(179,116,255,'+(fold*0.6)+')');
+      fg.addColorStop(0.5,'rgba(179,116,255,'+(fold*0.15)+')');
+      fg.addColorStop(1,'transparent');
+    }
+    gCtx.fillStyle=fg;gCtx.beginPath();gCtx.arc(cx,cy,rad,0,Math.PI*2);gCtx.fill();
+  }
+
+  if(isWarping){
+    const breathe=0.5+0.5*Math.sin(time*4);
+    const washA=0.1+breathe*0.22;
+    const wg=gCtx.createRadialGradient(cx,cy,0,cx,cy,Math.max(W,H)*0.92);
+    wg.addColorStop(0,'rgba(255,255,255,'+(washA*1.35)+')');
+    wg.addColorStop(0.42,'rgba(255,255,255,'+(washA*0.6)+')');
+    wg.addColorStop(0.75,'rgba(255,255,255,'+(washA*0.18)+')');
+    wg.addColorStop(1,'transparent');
+    gCtx.fillStyle=wg;gCtx.fillRect(0,0,W,H);
+
+    if(S.engageTime!=null){
+      const dt=time-S.engageTime;
+      const speed=220;
+      const maxDur=2.4;
+      [[0,0.88,3.2],[0.32,0.58,2.1]].forEach(([delay,baseA,lw])=>{
+        const t=dt-delay;
+        if(t>0&&t<maxDur){
+          const r=t*speed;
+          const fade=Math.max(0,1-t/maxDur);
+          gCtx.strokeStyle='rgba(255,255,255,'+(fade*baseA)+')';
+          gCtx.lineWidth=Math.max(0.8,lw-t*0.4);
+          gCtx.beginPath();gCtx.arc(cx,cy,r,0,Math.PI*2);gCtx.stroke();
+        }
+      });
+    }
+  }
+
+  const orbPulse=0.5+0.5*Math.sin(time*(isWarping?6:2));
+  const baseOrb=8+coh*12+orbPulse*4;
+  const orbR=isWarping?baseOrb*3:baseOrb;
+  const og=gCtx.createRadialGradient(cx,cy,0,cx,cy,orbR);
+  if(isWarping){
+    og.addColorStop(0,'rgba(255,255,255,'+(0.94+orbPulse*0.06)+')');
+    og.addColorStop(0.22,'rgba(255,255,255,0.62)');
+    og.addColorStop(0.5,'rgba(248,252,255,0.18)');
+    og.addColorStop(0.75,'rgba(220,235,255,0.06)');
+    og.addColorStop(1,'transparent');
+  }else{
+    og.addColorStop(0,'rgba(0,240,255,'+(0.4+coh*0.5)+')');
+    og.addColorStop(0.5,'rgba(0,240,255,0.1)');
+    og.addColorStop(1,'transparent');
+  }
+  gCtx.fillStyle=og;gCtx.beginPath();gCtx.arc(cx,cy,orbR,0,Math.PI*2);gCtx.fill();
+
+  gCtx.font='bold 13px "IBM Plex Mono",monospace';gCtx.textAlign='right';
+  gCtx.fillStyle=isWarping?'#ffffff':S.phase==='arrived'?'#3de8a8':'#7882a8';
+  gCtx.fillText(isWarping?'◈ WARPING':S.phase==='arrived'?'✓ ARRIVED':'◇ READY',W-14,H-14);
+
+  const vis=visibility(coh);
+  gCtx.fillStyle='rgba(6,8,16,0.7)';gCtx.fillRect(0,H-36,W,36);
+  gCtx.font='11px "IBM Plex Mono",monospace';gCtx.textAlign='left';gCtx.fillStyle='#7882a8';
+  gCtx.fillText('V/V₀ = '+vis.toFixed(6)+' | Γ_eff = '+gammaEff(coh).toExponential(2)+' | Loss = '+(1-vis).toExponential(2)+' | η = '+S.eta.toFixed(2),14,H-14);
+}
+
+// ─── ANIMATION LOOP ───
+let gTime=0;
+function geoLoop(){
+  gTime+=0.016;
+  drawGeometry(gTime);
+  requestAnimationFrame(geoLoop);
+}
+geoLoop();
+
+// ═══════════ DECISION ENGINE ═══════════
+const optTabs=document.querySelectorAll('.opt-tab');
+optTabs.forEach(t=>{
+  t.addEventListener('click',()=>{
+    S.activeOpt=parseInt(t.dataset.opt);
+    optTabs.forEach(b=>b.classList.remove('active'));
+    t.classList.add('active');
+    loadOpt();
+    renderDecisions();
+  });
+});
+
+['dSAlign','dSComplex','dSTime','dSStab'].forEach((id,i)=>{
+  document.getElementById(id).addEventListener('input',(e)=>{
+    const v=parseFloat(e.target.value);
+    const o=S.opts[S.activeOpt];
+    if(i===0)o.align=v;if(i===1)o.complex=v;if(i===2)o.time=v;if(i===3)o.stab=v;
+    ['dAlign','dComplex','dTime','dStab'][i];
+    document.getElementById(['dAlign','dComplex','dTime','dStab'][i]).textContent=v.toFixed(2);
+    renderDecisions();
+  });
+});
+
+function loadOpt(){
+  const o=S.opts[S.activeOpt];
+  document.getElementById('optName').textContent=o.name;
+  document.getElementById('dSAlign').value=o.align;document.getElementById('dAlign').textContent=o.align.toFixed(2);
+  document.getElementById('dSComplex').value=o.complex;document.getElementById('dComplex').textContent=o.complex.toFixed(2);
+  document.getElementById('dSTime').value=o.time;document.getElementById('dTime').textContent=o.time.toFixed(2);
+  document.getElementById('dSStab').value=o.stab;document.getElementById('dStab').textContent=o.stab.toFixed(2);
+}
+
+function renderDecisions(){
+  const results=S.opts.map((o,i)=>{
+    const v=viability(o.align,o.complex,o.time,o.stab);
+    const r=risk(o.complex,o.stab);
+    return{name:o.name,via:v,risk:r,idx:i};
+  });
+  results.sort((a,b)=>b.via-a.via);
+  const best=results[0].idx;
+
+  optTabs.forEach((t,i)=>{
+    t.classList.remove('best');
+    if(i===best)t.classList.add('best');
+  });
+
+  let html='';
+  results.forEach(r=>{
+    const isBest=r.idx===best;
+    const col=isBest?'var(--green)':'var(--dim)';
+    const verdict=r.via>60?'Conditions are aligned. This path is viable.':r.via>40?'Moderate viability. Consider adjusting inputs.':'Viability is limited. Increase alignment or lower complexity.';
+    html+='<div class="opt-result" style="border-color:'+(isBest?'var(--green)30':'var(--border)')+'"><h4 style="color:'+col+'">'+r.name+(isBest?' — BEST':'')+
+    '</h4><div class="metric"><span class="label">Future Viability</span><span class="value" style="color:'+col+'">'+r.via.toFixed(1)+'%</span></div>'+
+    '<div class="metric"><span class="label">Instability Risk</span><span class="value pink">'+r.risk.toFixed(1)+'%</span></div>'+
+    '<div class="verdict">'+verdict+'</div></div>';
+  });
+  document.getElementById('optResults').innerHTML=html;
+}
+loadOpt();renderDecisions();
+
+// Initial update
+update();
+setInterval(update,200);
+</script>
+</body>
+</html>
