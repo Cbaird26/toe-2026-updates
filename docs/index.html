@@ -7,11 +7,15 @@
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=Cormorant+Garamond:wght@600;700&display=swap" rel="stylesheet">
 <style>
 *{box-sizing:border-box}
+:root{--glow:#00f0ff}
 html{overflow-x:hidden}
 body{margin:0;background:#060810;color:#d0d6ea;font-family:'IBM Plex Mono',monospace;min-height:100vh;padding:28px 18px 40px;overflow-x:hidden;word-break:break-word;overflow-wrap:anywhere}
 .wrap{max-width:42rem;margin:0 auto;width:100%}
 h1{font-family:'Cormorant Garamond',serif;color:#fff;font-size:clamp(1.25rem,4vw,1.5rem);margin:0 0 10px;letter-spacing:-0.02em;line-height:1.2}
 p.lead{color:#7882a8;font-size:13px;line-height:1.65;margin:0 0 22px;max-width:none}
+p.hint{color:#525a78;font-size:11px;margin:0 0 20px;line-height:1.55}
+p.hint a{color:var(--glow);text-decoration:none;border-bottom:1px solid var(--border)}
+p.hint a:hover{border-bottom-color:var(--glow)50}
 ul{list-style:none;padding:0;margin:0}
 li{margin:12px 0}
 a{color:#00f0ff;text-decoration:none;border:1px solid #1e2240;border-radius:10px;padding:16px 18px;display:block;background:#0b0e18;transition:border-color .2s,box-shadow .2s,transform .2s;max-width:100%}
@@ -27,9 +31,9 @@ code{background:#141830;padding:2px 6px;border-radius:4px;font-size:11px;color:#
 </head>
 <body>
 <div class="wrap">
-  <h1>Theory of Everything — Pages hub</h1>
-  <p class="lead">Entry point for <strong>cbaird26.github.io/toe-2026-updates</strong> (this repo’s <code>docs/</code> folder).</p>
-  <p class="lead" style="margin-top:-12px"><strong>Foundation</strong> saves your coherence / decision dials in this browser (same site) so returning from other Pages apps does not reset them. If something 404s, confirm GitHub <strong>Settings → Pages</strong> uses branch <code>main</code> and folder <code>/docs</code>, then wait a minute after a push.</p>
+  <h1>Theory of Everything — hub</h1>
+  <p class="lead">Static apps from this repo’s <code>docs/</code> folder. <strong>Foundation</strong> keeps your sliders in this browser on <code>cbaird26.github.io</code> so you can hop between these pages without losing settings.</p>
+  <p class="hint">Deploy or 404 questions → <a href="https://github.com/cbaird26/toe-2026-updates/blob/main/docs/PAGES.md">PAGES.md</a> on GitHub.</p>
   <ul>
     <li><a class="primary" href="theory-of-everything-foundation/"><strong>Theory of Everything Foundation</strong><span class="desc">Warp core + geometry engine, decision engine, framework equations, suite links — dials persist via shared browser storage.</span></a></li>
     <li><a href="fold-space-engine/"><strong>Fold-Space Engine Lab</strong><span class="desc">Branch-mix + fold preview; static beta on this site (Suite link target).</span></a></li>
@@ -37,7 +41,7 @@ code{background:#141830;padding:2px 6px;border-radius:4px;font-size:11px;color:#
     <li><a href="cbaird26_ecosystem_illustration.html"><strong>Cbaird26 ecosystem illustration</strong><span class="desc">Prior default landing visualization.</span></a></li>
     <li><a href="zora_top10_simulations.html"><strong>Top 10 simulations gallery</strong><span class="desc">Curated browser demos index.</span></a></li>
   </ul>
-  <p><a class="small" href="https://github.com/cbaird26/toe-2026-updates/blob/main/docs/PAGES.md">Pages checklist &amp; troubleshooting (repo)</a></p>
+  <p><a class="small" href="https://github.com/cbaird26/toe-2026-updates/blob/main/docs/PAGES.md">Full checklist &amp; troubleshooting</a></p>
   <footer>MQGT–SCF · Christopher Michael Baird · 2026 · Π_anchor operational demos</footer>
 </div>
 </body>
