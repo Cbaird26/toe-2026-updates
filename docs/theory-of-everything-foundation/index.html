@@ -18,7 +18,7 @@
 --text:#d0d6ea;--dim:#7882a8;--ghost:#2e3452;
 --mono:'IBM Plex Mono',monospace;--serif:'Cormorant Garamond',serif;
 }
-html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;overflow-x:hidden}
 body{
 background:var(--bg);color:var(--text);font-family:var(--mono);font-size:13px;line-height:1.6;overflow-x:hidden;min-height:100vh;min-height:100dvh;transition:background-color 0.06s linear;
 padding-bottom:env(safe-area-inset-bottom);
@@ -49,9 +49,9 @@ body.body-warp-flash{background-color:#f0f4ff}
 .tab.active{background:var(--panel);border-color:var(--border);border-bottom-color:var(--panel);color:var(--glow);font-weight:600}
 
 /* ─── MAIN ─── */
-.main{padding:18px max(18px,env(safe-area-inset-left)) 24px max(18px,env(safe-area-inset-right));max-width:min(1100px,100%);margin:0 auto;width:100%}
+.main{padding:18px max(18px,env(safe-area-inset-right)) 24px max(18px,env(safe-area-inset-left));max-width:min(1100px,100%);margin:0 auto;width:100%}
 @media(min-width:900px){
-.main{padding:22px max(24px,env(safe-area-inset-left)) 32px max(24px,env(safe-area-inset-right));max-width:min(1200px,calc(100% - 48px))}
+.main{padding:22px max(24px,env(safe-area-inset-right)) 32px max(24px,env(safe-area-inset-left));max-width:min(1200px,calc(100% - 48px))}
 }
 @media(min-width:1280px){
 /* MacBook / comfortable desktop reading */
@@ -160,8 +160,16 @@ body.body-warp-flash{background-color:#f0f4ff}
 .ltag-beta{background:var(--gold)18;color:var(--gold);border:1px solid var(--gold)30}
 .link-card p{font-size:11px;color:var(--dim);line-height:1.6}
 
+/* ─── MOBILE SHELL (header / tabs / main share one horizontal rhythm) ─── */
+@media(max-width:900px){
+.header,.tabs,.main,.footer{box-sizing:border-box;width:100%;max-width:100%;margin-left:0;margin-right:0}
+.main .panel{min-width:0}
+.opt-tabs,.lab-tabs{flex-wrap:wrap;gap:8px 6px}
+.tabs{scroll-padding-inline:max(18px,env(safe-area-inset-left))}
+}
+
 /* ─── FOOTER ─── */
-.footer{padding:20px max(18px,env(safe-area-inset-left)) calc(20px + env(safe-area-inset-bottom)) max(18px,env(safe-area-inset-right));text-align:center;border-top:1px solid var(--border);font-size:11px;color:var(--ghost);margin-top:40px;line-height:1.55}
+.footer{padding:20px max(18px,env(safe-area-inset-right)) calc(20px + env(safe-area-inset-bottom)) max(18px,env(safe-area-inset-left));text-align:center;border-top:1px solid var(--border);font-size:11px;color:var(--ghost);margin-top:40px;line-height:1.55}
 </style>
 </head>
 <body id="appBody">
@@ -361,7 +369,7 @@ body.body-warp-flash{background-color:#f0f4ff}
     <a href="https://cbaird26.github.io/zoraasi/" target="_blank" class="link-card"><span class="ltag ltag-live">LIVE</span><h4>ZoraASI</h4><p>Recursive agent architecture with Φc and E field dynamics.</p></a>
     <a href="https://cbaird26.github.io/zora-refit" target="_blank" class="link-card"><span class="ltag ltag-beta">BETA</span><h4>Zora Refit — Autopilot</h4><p>Streamlined coherence autopilot mode.</p></a>
     <a href="https://cbaird26.github.io/zora-refit-mobile/" target="_blank" class="link-card"><span class="ltag ltag-beta">BETA</span><h4>Zora Refit — Mobile</h4><p>Touch-optimized mobile coherence engine.</p></a>
-    <a href="https://cbaird26.github.io/toe-2026-updates/zoraasi-mobile/" target="_blank" rel="noopener" class="link-card"><span class="ltag ltag-beta">MOBILE</span><h4>Zora Discovery — Mobile</h4><p>On this site: toroidal geometry, scalar bloom, scale bands, Engage sweep — same Pages deploy as Foundation.</p></a>
+    <a href="https://cbaird26.github.io/toe-2026-updates/zoraasi-mobile/" target="_blank" rel="noopener" class="link-card"><span class="ltag ltag-beta">MOBILE</span><h4>Zora Discovery — Mobile</h4><p>Vite bundle of upstream Cbaird26/zoraasi (refresh via <code style="font-size:11px">scripts/build_zoraasi_mobile.sh</code> or the Sync workflow).</p></a>
     <a href="https://cbaird26.github.io/zora-refitted/" target="_blank" class="link-card"><span class="ltag ltag-beta">BETA</span><h4>Zora Refitted</h4><p>Refined controls and improved field visualization.</p></a>
     <a href="https://cbaird26.github.io/zora-refitted-mobile/" target="_blank" class="link-card"><span class="ltag ltag-beta">BETA</span><h4>Zora Refitted — Mobile</h4><p>Mobile variant with full coherence tracking.</p></a>
     <a href="https://github.com/Cbaird26/A-Theory-of-Everything---Baird-et-al-2025-.pdf" target="_blank" class="link-card"><span class="ltag ltag-live">PAPER</span><h4>MQGT-SCF Thesis (5,570 pages)</h4><p>Complete mathematical foundation. LaTeX source + PDF.</p></a>
