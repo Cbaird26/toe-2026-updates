@@ -2,7 +2,8 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0d0f14">
 <title>Theory of Everything — docs hub</title>
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=DM+Serif+Display&display=swap" rel="stylesheet">
 <style>
@@ -26,12 +27,14 @@
     background: var(--bg);
     color: var(--text);
     min-height: 100vh;
-    padding: 2rem 1.25rem 3rem;
+    min-height: 100dvh;
+    padding: max(1.5rem, env(safe-area-inset-top)) max(1rem, env(safe-area-inset-right)) max(2rem, env(safe-area-inset-bottom)) max(1rem, env(safe-area-inset-left));
     overflow-x: hidden;
     word-break: break-word;
     overflow-wrap: anywhere;
+    -webkit-text-size-adjust: 100%;
   }
-  .wrap { max-width: 52rem; margin: 0 auto; }
+  .wrap { max-width: min(52rem, 100%); margin: 0 auto; width: 100%; }
   h1 {
     font-family: 'DM Serif Display', Georgia, serif;
     font-size: clamp(1.35rem, 3.5vw, 1.85rem);
@@ -56,8 +59,11 @@
     position: relative;
     width: 100%;
     max-width: 28rem;
-    height: 14rem;
+    height: clamp(10rem, 38vw, 14rem);
     margin: 0 auto 2rem;
+  }
+  @media (max-width: 420px) {
+    .figure { transform: scale(0.88); transform-origin: center top; margin-bottom: 1.25rem; }
   }
   .orbit {
     position: absolute;
@@ -104,14 +110,17 @@
 
   .node {
     display: block;
-    padding: 0.55rem 0.85rem;
+    padding: 0.65rem 0.9rem;
+    min-height: 44px;
     border-radius: 6px;
-    font-size: 0.72rem;
+    font-size: clamp(0.68rem, 2.8vw, 0.72rem);
     text-decoration: none;
     color: inherit;
     transition: transform 0.2s, box-shadow 0.2s;
     border: 1px solid;
     margin-bottom: 0.5rem;
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
   }
   .node:hover {
     transform: translateY(-1px);
@@ -119,6 +128,7 @@
   }
   .toe     { background: rgba(124,156,191,0.18); border-color: var(--toe); color: var(--toe); }
   .mqgt    { background: rgba(167,139,250,0.18); border-color: var(--mqgt); color: var(--mqgt); }
+  .zora    { background: rgba(52,211,153,0.15); border-color: var(--zora); color: var(--zora); }
   .sim     { background: rgba(251,191,36,0.15); border-color: var(--sim); color: var(--sim); }
   .other   { background: rgba(148,163,184,0.15); border-color: var(--other); color: var(--other); }
 
@@ -183,6 +193,10 @@
   <a class="node toe" href="theory-of-everything-foundation/">
     <strong>Theory of Everything Foundation</strong>
     <span class="desc">Warp core, geometry engine, speculative lab, decisions, framework, suite — single-file app; shared storage with other Pages on this origin.</span>
+  </a>
+  <a class="node zora" href="zoraasi-mobile/">
+    <strong>Zora Discovery — Mobile</strong>
+    <span class="desc">Clone of the ZoraASI pattern view (geometry + scalar bloom, scale bands, Engage sweep) — touch-first, safe areas.</span>
   </a>
   <a class="node mqgt" href="fold-space-engine/">
     <strong>Fold-Space Engine Lab</strong>
