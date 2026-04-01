@@ -16,7 +16,8 @@
 --mono:'IBM Plex Mono',monospace;--serif:'Cormorant Garamond',serif;
 }
 html{scroll-behavior:smooth}
-body{background:var(--bg);color:var(--text);font-family:var(--mono);font-size:13px;line-height:1.6;overflow-x:hidden;min-height:100vh}
+body{background:var(--bg);color:var(--text);font-family:var(--mono);font-size:13px;line-height:1.6;overflow-x:hidden;min-height:100vh;transition:background-color 0.06s linear}
+body.body-warp-flash{background-color:#f0f4ff}
 ::selection{background:var(--glow2);color:#fff}
 
 /* ─── HEADER ─── */
@@ -42,7 +43,8 @@ body{background:var(--bg);color:var(--text);font-family:var(--mono);font-size:13
 /* ─── WARP CORE ─── */
 .warp-layout{display:grid;grid-template-columns:1fr 320px;gap:16px}
 @media(max-width:768px){.warp-layout{grid-template-columns:1fr}}
-.geo-canvas-wrap{background:var(--panel);border:1px solid var(--border);border-radius:10px;overflow:hidden;position:relative}
+.geo-canvas-wrap{background:var(--panel);border:1px solid var(--border);border-radius:10px;overflow:hidden;position:relative;transition:filter 0.05s linear,box-shadow 0.1s ease}
+.geo-canvas-wrap.warp-blinding{box-shadow:0 0 90px rgba(255,255,255,0.6),0 0 180px rgba(255,255,255,0.35),0 0 320px rgba(255,255,255,0.18)}
 .geo-canvas-wrap canvas{display:block;width:100%}
 .geo-overlay{position:absolute;top:12px;left:12px;font-size:11px;color:var(--dim);pointer-events:none}
 .geo-overlay .val{color:var(--glow);font-weight:600}
@@ -57,7 +59,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--mono);font-size:13
 .engage-btn.ready:hover{background:var(--glow)28;box-shadow:0 0 30px var(--glow)25}
 .engage-btn.active{background:rgba(255,255,255,0.14);border-color:#fff;color:#fff;animation:engpulse 1.1s ease-in-out infinite}
 .engage-btn.arrived{background:var(--green)15;border-color:var(--green);color:var(--green)}
-@keyframes engpulse{0%,100%{box-shadow:0 0 12px rgba(255,255,255,0.2),0 0 28px rgba(255,255,255,0.12)}50%{box-shadow:0 0 40px rgba(255,255,255,0.75),0 0 90px rgba(255,255,255,0.45),0 0 160px rgba(255,255,255,0.22),0 0 240px rgba(255,255,255,0.08)}}
+@keyframes engpulse{0%,100%{box-shadow:0 0 18px rgba(255,255,255,0.4),0 0 44px rgba(255,255,255,0.22)}50%{box-shadow:0 0 64px rgba(255,255,255,0.98),0 0 150px rgba(255,255,255,0.72),0 0 280px rgba(255,255,255,0.45),0 0 440px rgba(255,255,255,0.2)}}
 
 /* ─── METRICS ─── */
 .metric{display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid var(--border)40}
@@ -122,7 +124,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--mono);font-size:13
 .footer{padding:20px 18px;text-align:center;border-top:1px solid var(--border);font-size:11px;color:var(--ghost);margin-top:40px}
 </style>
 </head>
-<body>
+<body id="appBody">
 
 <div class="header">
   <h1>Theory of <span>Everything</span> Foundation</h1>
@@ -146,7 +148,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--mono);font-size:13
 <div id="panel-warp" class="panel">
   <div class="warp-layout">
     <div>
-      <div class="geo-canvas-wrap">
+      <div class="geo-canvas-wrap" id="geoCanvasWrap">
         <canvas id="geoCanvas" width="700" height="500"></canvas>
         <div class="geo-overlay">
           <div>TOROIDAL FOLD-SPACE GEOMETRY</div>
@@ -178,6 +180,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--mono);font-size:13
         <div class="slider-group"><label><span>Stability</span><span id="vStab">0.94</span></label><input type="range" min="0" max="1" step="0.01" value="0.94" id="sStab"></div>
         <div class="slider-group"><label><span>η (Measure Tilt)</span><span id="vEta">0.00</span></label><input type="range" min="-1" max="1" step="0.01" value="0" id="sEta"></div>
         <div class="slider-group"><label><span>Fold Depth</span><span id="vFold">0.00</span></label><input type="range" min="0" max="1" step="0.01" value="0" id="sFold"></div>
+        <div class="slider-group"><label><span>Flash power</span><span id="vFlash">100</span>×</label><input type="range" min="1" max="1000" step="1" value="100" id="sFlash" title="1×–1000× warp flash intensity"></div>
       </div>
 
       <div class="warp-card">
@@ -281,7 +284,7 @@ document.querySelectorAll('.tab').forEach(t=>{
 });
 
 // ═══════════ STATE ═══════════
-const S={align:0.96,complex:0.92,timeH:0.88,stab:0.94,eta:0,fold:0,phase:'ready',t:0,logCount:0,engageTime:null,
+const S={align:0.96,complex:0.92,timeH:0.88,stab:0.94,eta:0,fold:0,flashPower:100,phase:'ready',t:0,logCount:0,engageTime:null,
   opts:[
     {name:'Option A',align:0.60,complex:0.50,time:0.70,stab:0.60},
     {name:'Option B',align:0.55,complex:0.65,time:0.50,stab:0.55},
@@ -299,6 +302,21 @@ function viability(a,c,t,s){
 function risk(c,s){return Math.max(5,Math.min(60,(c*40+(1-s)*30)))}
 function visibility(coh){const G=1.15e9,T=1e-6,dx=1e-3;const eff=G*(1-coh*0.85);return Math.exp(-eff*T*dx*dx);}
 function gammaEff(coh){return 1.15e9*(1-coh*0.85);}
+function flashFactor(){return Math.max(0.01,Math.min(10,S.flashPower/100));}
+function applyWarpDomEffects(dt,isWarping){
+  const body=document.getElementById('appBody'),wrap=document.getElementById('geoCanvasWrap');
+  if(!body||!wrap)return;
+  if(!isWarping){body.classList.remove('body-warp-flash');wrap.classList.remove('warp-blinding');wrap.style.filter='';body.style.backgroundColor='';return;}
+  const peak=Math.min(1,dt/0.12);
+  const bright=1+Math.min(49,(S.flashPower/100)*4.9)*peak;
+  wrap.style.filter='brightness('+bright+')';
+  wrap.classList.add('warp-blinding');
+  const strobeWin=dt>0.05&&dt<0.66;
+  const strobe=strobeWin&&(Math.sin((dt-0.05)*Math.PI*16)>0);
+  body.classList.toggle('body-warp-flash',dt<2.6);
+  if(strobe&&dt<0.72)body.style.backgroundColor='#ffffff';
+  else body.style.backgroundColor='';
+}
 
 // ═══════════ SLIDER BINDINGS ═══════════
 function bindSlider(id,vId,key){
@@ -311,6 +329,10 @@ bindSlider('sTime','vTime','timeH');
 bindSlider('sStab','vStab','stab');
 bindSlider('sEta','vEta','eta');
 bindSlider('sFold','vFold','fold');
+(function(){
+  const el=document.getElementById('sFlash'),v=document.getElementById('vFlash');
+  el.addEventListener('input',()=>{S.flashPower=parseInt(el.value,10);v.textContent=String(S.flashPower);update();});
+})();
 
 // ═══════════ UPDATE ═══════════
 function update(){
@@ -396,6 +418,7 @@ const gCtx=geoCV.getContext('2d');
 
 function drawGeometry(time){
   const W=geoCV.width,H=geoCV.height;
+  const ff=flashFactor();
   gCtx.clearRect(0,0,W,H);
   const bg=gCtx.createRadialGradient(W/2,H/2,0,W/2,H/2,W*0.55);
   bg.addColorStop(0,'#0d0a1e');bg.addColorStop(1,'#060810');
@@ -436,10 +459,10 @@ function drawGeometry(time){
 
       if(isWarping){
         const wFlash=syncPulse;
-        const bright=58+wFlash*40;
+        const bright=58+wFlash*40*ff;
         const sat=6+(1-wFlash)*28;
-        dotAlpha=Math.min((0.3+wFlash*0.52)*scale,0.98);
-        gCtx.fillStyle='hsla(210,'+sat+'%,'+bright+'%,'+dotAlpha+')';
+        dotAlpha=Math.min((0.3+wFlash*0.52*ff)*scale,0.995);
+        gCtx.fillStyle='hsla(210,'+sat+'%,'+Math.min(99,bright)+'%,'+dotAlpha+')';
       }else{
         dotHue=180+etaShift*80+fold*60;
         const bright=30+coh*30+fieldVal*20;
@@ -458,8 +481,8 @@ function drawGeometry(time){
         const ns=300/(300+nrz2);
         const nsx=cx+nrx*ns,nsy=cy+nry2*ns;
         if(isWarping){
-          const la=(0.14+0.42*syncPulse)*Math.min(scale,1.15);
-          gCtx.strokeStyle='rgba(255,255,255,'+la+')';
+          const la=(0.14+0.42*syncPulse)*Math.min(scale,1.15)*ff;
+          gCtx.strokeStyle='rgba(255,255,255,'+Math.min(1,la)+')';
         }else{
           gCtx.strokeStyle='hsla('+dotHue+',60%,50%,'+(dotAlpha*0.25)+')';
         }
@@ -473,7 +496,7 @@ function drawGeometry(time){
     const rad=30+fold*80;
     const fg=gCtx.createRadialGradient(cx,cy,0,cx,cy,rad);
     if(isWarping){
-      fg.addColorStop(0,'rgba(179,116,255,'+(fold*0.22)+')');
+      fg.addColorStop(0,'rgba(179,116,255,'+(fold*0.22*ff)+')');
       fg.addColorStop(1,'transparent');
     }else{
       fg.addColorStop(0,'rgba(179,116,255,'+(fold*0.6)+')');
@@ -485,40 +508,74 @@ function drawGeometry(time){
 
   if(isWarping){
     const breathe=0.5+0.5*Math.sin(time*4);
-    const washA=0.1+breathe*0.22;
-    const wg=gCtx.createRadialGradient(cx,cy,0,cx,cy,Math.max(W,H)*0.92);
-    wg.addColorStop(0,'rgba(255,255,255,'+(washA*1.35)+')');
-    wg.addColorStop(0.42,'rgba(255,255,255,'+(washA*0.6)+')');
-    wg.addColorStop(0.75,'rgba(255,255,255,'+(washA*0.18)+')');
-    wg.addColorStop(1,'transparent');
-    gCtx.fillStyle=wg;gCtx.fillRect(0,0,W,H);
+    const washA=(0.1+breathe*0.22)*ff;
+    const radMax=Math.max(W,H)*0.92;
+    for(let layer=0;layer<5;layer++){
+      const lfac=1-layer*0.14;
+      const wg=gCtx.createRadialGradient(cx,cy,0,cx,cy,radMax*lfac);
+      const a0=washA*(1.35-layer*0.12);
+      const a1=washA*(0.62-layer*0.08);
+      const a2=washA*(0.2-layer*0.03);
+      wg.addColorStop(0,'rgba(255,255,255,'+a0+')');
+      wg.addColorStop(0.38,'rgba(255,255,255,'+a1+')');
+      wg.addColorStop(0.72,'rgba(255,255,255,'+a2+')');
+      wg.addColorStop(1,'transparent');
+      gCtx.globalCompositeOperation='lighter';
+      gCtx.fillStyle=wg;gCtx.fillRect(0,0,W,H);
+    }
+    gCtx.globalCompositeOperation='source-over';
 
     if(S.engageTime!=null){
       const dt=time-S.engageTime;
-      const speed=220;
+      const speed=220*ff;
       const maxDur=2.4;
-      [[0,0.88,3.2],[0.32,0.58,2.1]].forEach(([delay,baseA,lw])=>{
-        const t=dt-delay;
-        if(t>0&&t<maxDur){
-          const r=t*speed;
-          const fade=Math.max(0,1-t/maxDur);
-          gCtx.strokeStyle='rgba(255,255,255,'+(fade*baseA)+')';
-          gCtx.lineWidth=Math.max(0.8,lw-t*0.4);
+      const strobePeak=dt>0.05&&dt<0.66;
+      const strobe=strobePeak&&(Math.sin((dt-0.05)*Math.PI*16)>0);
+      if(strobe){
+        gCtx.fillStyle='rgba(255,255,255,'+(0.35+0.45*ff)+')';
+        gCtx.fillRect(0,0,W,H);
+      }
+      [[0,0.92,3.4],[0.333,0.62,2.4]].forEach(([delay,baseA,lw])=>{
+        const tt=dt-delay;
+        if(tt>0&&tt<maxDur){
+          const r=tt*speed;
+          const fade=Math.max(0,1-tt/maxDur);
+          gCtx.strokeStyle='rgba(255,255,255,'+(fade*baseA*ff)+')';
+          gCtx.lineWidth=Math.max(0.8,(lw+ff*0.6)-tt*0.35);
           gCtx.beginPath();gCtx.arc(cx,cy,r,0,Math.PI*2);gCtx.stroke();
         }
       });
+
+      const rayLen=Math.max(W,H)*0.75*ff;
+      gCtx.save();
+      for(let k=0;k<16;k++){
+        const ang=(k/16)*Math.PI*2+time*(2+ff*0.15);
+        const rp=0.4+0.6*Math.sin(dt*22+ff);
+        gCtx.strokeStyle='rgba(255,255,255,'+Math.min(0.98,0.1*ff*rp)+')';
+        gCtx.lineWidth=1+Math.min(8,ff*0.9);
+        gCtx.beginPath();
+        gCtx.moveTo(cx,cy);
+        gCtx.lineTo(cx+Math.cos(ang)*rayLen,cy+Math.sin(ang)*rayLen);
+        gCtx.stroke();
+      }
+      gCtx.restore();
     }
   }
 
   const orbPulse=0.5+0.5*Math.sin(time*(isWarping?6:2));
   const baseOrb=8+coh*12+orbPulse*4;
-  const orbR=isWarping?baseOrb*3:baseOrb;
+  const orbR=isWarping?baseOrb*(3+ff*2.2):baseOrb;
+  gCtx.save();
+  if(isWarping){
+    gCtx.shadowColor='rgba(255,255,255,0.95)';
+    gCtx.shadowBlur=20+ff*55;
+  }
   const og=gCtx.createRadialGradient(cx,cy,0,cx,cy,orbR);
   if(isWarping){
-    og.addColorStop(0,'rgba(255,255,255,'+(0.94+orbPulse*0.06)+')');
-    og.addColorStop(0.22,'rgba(255,255,255,0.62)');
-    og.addColorStop(0.5,'rgba(248,252,255,0.18)');
-    og.addColorStop(0.75,'rgba(220,235,255,0.06)');
+    og.addColorStop(0,'rgba(255,255,255,'+Math.min(1,(0.94+orbPulse*0.06)*ff)+')');
+    og.addColorStop(0.18,'rgba(255,255,255,0.72)');
+    og.addColorStop(0.45,'rgba(248,252,255,0.28)');
+    og.addColorStop(0.72,'rgba(220,235,255,0.1)');
     og.addColorStop(1,'transparent');
   }else{
     og.addColorStop(0,'rgba(0,240,255,'+(0.4+coh*0.5)+')');
@@ -526,6 +583,7 @@ function drawGeometry(time){
     og.addColorStop(1,'transparent');
   }
   gCtx.fillStyle=og;gCtx.beginPath();gCtx.arc(cx,cy,orbR,0,Math.PI*2);gCtx.fill();
+  gCtx.restore();
 
   gCtx.font='bold 13px "IBM Plex Mono",monospace';gCtx.textAlign='right';
   gCtx.fillStyle=isWarping?'#ffffff':S.phase==='arrived'?'#3de8a8':'#7882a8';
@@ -534,7 +592,9 @@ function drawGeometry(time){
   const vis=visibility(coh);
   gCtx.fillStyle='rgba(6,8,16,0.7)';gCtx.fillRect(0,H-36,W,36);
   gCtx.font='11px "IBM Plex Mono",monospace';gCtx.textAlign='left';gCtx.fillStyle='#7882a8';
-  gCtx.fillText('V/V₀ = '+vis.toFixed(6)+' | Γ_eff = '+gammaEff(coh).toExponential(2)+' | Loss = '+(1-vis).toExponential(2)+' | η = '+S.eta.toFixed(2),14,H-14);
+  gCtx.fillText('V/V₀ = '+vis.toFixed(6)+' | Γ_eff = '+gammaEff(coh).toExponential(2)+' | Loss = '+(1-vis).toExponential(2)+' | η = '+S.eta.toFixed(2)+' | flash '+S.flashPower+'×',14,H-14);
+
+  applyWarpDomEffects(isWarping&&S.engageTime!=null?time-S.engageTime:0,isWarping);
 }
 
 // ─── ANIMATION LOOP ───
