@@ -3,45 +3,213 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Theory of Everything — GitHub Pages (cbaird26)</title>
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=Cormorant+Garamond:wght@600;700&display=swap" rel="stylesheet">
+<title>Theory of Everything — docs hub</title>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=DM+Serif+Display&display=swap" rel="stylesheet">
 <style>
-*{box-sizing:border-box}
-:root{--glow:#00f0ff}
-html{overflow-x:hidden}
-body{margin:0;background:#060810;color:#d0d6ea;font-family:'IBM Plex Mono',monospace;min-height:100vh;padding:28px 18px 40px;overflow-x:hidden;word-break:break-word;overflow-wrap:anywhere}
-.wrap{max-width:42rem;margin:0 auto;width:100%}
-h1{font-family:'Cormorant Garamond',serif;color:#fff;font-size:clamp(1.25rem,4vw,1.5rem);margin:0 0 10px;letter-spacing:-0.02em;line-height:1.2}
-p.lead{color:#7882a8;font-size:13px;line-height:1.65;margin:0 0 22px;max-width:none}
-p.hint{color:#525a78;font-size:11px;margin:0 0 20px;line-height:1.55}
-p.hint a{color:var(--glow);text-decoration:none;border-bottom:1px solid var(--border)}
-p.hint a:hover{border-bottom-color:var(--glow)50}
-ul{list-style:none;padding:0;margin:0}
-li{margin:12px 0}
-a{color:#00f0ff;text-decoration:none;border:1px solid #1e2240;border-radius:10px;padding:16px 18px;display:block;background:#0b0e18;transition:border-color .2s,box-shadow .2s,transform .2s;max-width:100%}
-a:hover{border-color:#00f0ff50;box-shadow:0 0 24px rgba(0,240,255,0.12);transform:translateY(-1px)}
-a.primary{border-color:#00f0ff40;background:linear-gradient(145deg,#101425,#0b0e18)}
-a strong{display:block;font-size:14px;margin-bottom:4px;color:#fff}
-a span.desc{display:block;font-size:11px;color:#7882a8;font-weight:400;line-height:1.45;margin-top:2px}
-a.small{font-size:12px;padding:10px 14px;display:inline-block;margin-top:14px;border-radius:6px;max-width:100%}
-footer{margin-top:36px;font-size:11px;color:#525a78;line-height:1.6}
-code{background:#141830;padding:2px 6px;border-radius:4px;font-size:11px;color:#b374ff;word-break:break-all}
+  :root {
+    --bg: #0d0f14;
+    --surface: #161a22;
+    --border: #2a3142;
+    --toe: #7c9cbf;
+    --mqgt: #a78bfa;
+    --zora: #34d399;
+    --sim: #fbbf24;
+    --quantum: #60a5fa;
+    --apps: #f472b6;
+    --other: #94a3b8;
+    --text: #e2e8f0;
+    --muted: #64748b;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'JetBrains Mono', monospace;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    padding: 2rem 1.25rem 3rem;
+    overflow-x: hidden;
+    word-break: break-word;
+    overflow-wrap: anywhere;
+  }
+  .wrap { max-width: 52rem; margin: 0 auto; }
+  h1 {
+    font-family: 'DM Serif Display', Georgia, serif;
+    font-size: clamp(1.35rem, 3.5vw, 1.85rem);
+    text-align: center;
+    margin-bottom: 0.35rem;
+    letter-spacing: -0.02em;
+  }
+  .subtitle {
+    text-align: center;
+    color: var(--muted);
+    font-size: 0.8rem;
+    line-height: 1.55;
+    margin-bottom: 1.75rem;
+    max-width: 40rem;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .subtitle code { color: var(--toe); font-size: 0.85em; }
+
+  /* Paper-style figure: orbits + hub (matches ecosystem illustration language) */
+  .figure {
+    position: relative;
+    width: 100%;
+    max-width: 28rem;
+    height: 14rem;
+    margin: 0 auto 2rem;
+  }
+  .orbit {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    border: 1px dashed var(--border);
+    border-radius: 50%;
+    opacity: 0.45;
+  }
+  .o1 { width: 6.5rem; height: 6.5rem; }
+  .o2 { width: 10rem; height: 10rem; }
+  .o3 { width: 14rem; height: 14rem; }
+  .o4 { width: 18rem; height: 18rem; }
+  .hub {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 5.5rem;
+    height: 5.5rem;
+    border-radius: 50%;
+    background: radial-gradient(circle at 30% 30%, #1e2533, var(--surface));
+    border: 2px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-size: 0.65rem;
+    font-weight: 600;
+    line-height: 1.25;
+    z-index: 2;
+    box-shadow: 0 0 32px rgba(0,0,0,0.45);
+    color: var(--text);
+  }
+  .caption {
+    text-align: center;
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--muted);
+    margin-bottom: 1.25rem;
+  }
+
+  .node {
+    display: block;
+    padding: 0.55rem 0.85rem;
+    border-radius: 6px;
+    font-size: 0.72rem;
+    text-decoration: none;
+    color: inherit;
+    transition: transform 0.2s, box-shadow 0.2s;
+    border: 1px solid;
+    margin-bottom: 0.5rem;
+  }
+  .node:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 18px rgba(0,0,0,0.35);
+  }
+  .toe     { background: rgba(124,156,191,0.18); border-color: var(--toe); color: var(--toe); }
+  .mqgt    { background: rgba(167,139,250,0.18); border-color: var(--mqgt); color: var(--mqgt); }
+  .sim     { background: rgba(251,191,36,0.15); border-color: var(--sim); color: var(--sim); }
+  .other   { background: rgba(148,163,184,0.15); border-color: var(--other); color: var(--other); }
+
+  .node strong { display: block; font-size: 0.78rem; margin-bottom: 0.2rem; color: var(--text); }
+  .node span.desc { font-size: 0.68rem; opacity: 0.88; line-height: 1.45; font-weight: 400; }
+
+  .list-label {
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--muted);
+    margin: 1.5rem 0 0.65rem;
+  }
+  .hint {
+    font-size: 0.72rem;
+    color: var(--muted);
+    margin: 1.25rem 0;
+    line-height: 1.55;
+  }
+  .hint a { color: var(--toe); text-decoration: none; border-bottom: 1px solid rgba(124,156,191,0.4); }
+  .hint a:hover { border-bottom-color: var(--toe); }
+
+  .legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem 1.25rem;
+    justify-content: center;
+    margin-top: 1.75rem;
+    padding-top: 1.25rem;
+    border-top: 1px solid var(--border);
+    font-size: 0.68rem;
+    color: var(--muted);
+  }
+  .legend span { display: inline-flex; align-items: center; gap: 0.35rem; }
+  .dot { width: 8px; height: 8px; border-radius: 50%; }
+
+  footer {
+    text-align: center;
+    margin-top: 2rem;
+    font-size: 0.72rem;
+    color: var(--muted);
+    line-height: 1.6;
+  }
 </style>
 <script src="js/toe-console-bridge.js"></script>
 </head>
 <body>
 <div class="wrap">
-  <h1>Theory of Everything — hub</h1>
-  <p class="lead">Static apps from this repo’s <code>docs/</code> folder. <strong>Foundation</strong> keeps your sliders in this browser on <code>cbaird26.github.io</code> so you can hop between these pages without losing settings.</p>
-  <p class="hint">Deploy or 404 questions → <a href="https://github.com/cbaird26/toe-2026-updates/blob/main/docs/PAGES.md">PAGES.md</a> on GitHub.</p>
-  <ul>
-    <li><a class="primary" href="theory-of-everything-foundation/"><strong>Theory of Everything Foundation</strong><span class="desc">Warp core + geometry engine, decision engine, framework equations, suite links — dials persist via shared browser storage.</span></a></li>
-    <li><a href="fold-space-engine/"><strong>Fold-Space Engine Lab</strong><span class="desc">Branch-mix + fold preview; static beta on this site (Suite link target).</span></a></li>
-    <li><a href="artifacts/TOE_FOUNDATION_WARP_BLINDING_x1000.html"><strong>Warp artifact (HTML snapshot)</strong><span class="desc">Standalone copy; uses the same dial storage as Foundation when opened on this origin.</span></a></li>
-    <li><a href="cbaird26_ecosystem_illustration.html"><strong>Cbaird26 ecosystem illustration</strong><span class="desc">Prior default landing visualization.</span></a></li>
-    <li><a href="zora_top10_simulations.html"><strong>Top 10 simulations gallery</strong><span class="desc">Curated browser demos index.</span></a></li>
-  </ul>
-  <p><a class="small" href="https://github.com/cbaird26/toe-2026-updates/blob/main/docs/PAGES.md">Full checklist &amp; troubleshooting</a></p>
+  <h1>Theory of Everything — <span style="color:var(--toe)">docs</span> hub</h1>
+  <p class="subtitle">Static apps in this repo’s <code>docs/</code> folder. Open <strong>Foundation</strong> first: coherence and fold dials persist in-browser on <code>cbaird26.github.io</code> while you move between these routes.</p>
+
+  <p class="caption">Figure 1 · Π_anchor operational layer (same legend as ecosystem illustration)</p>
+  <div class="figure" aria-hidden="true">
+    <div class="orbit o4"></div>
+    <div class="orbit o3"></div>
+    <div class="orbit o2"></div>
+    <div class="orbit o1"></div>
+    <div class="hub">docs<br/>hub</div>
+  </div>
+
+  <p class="list-label">Routes</p>
+  <a class="node toe" href="theory-of-everything-foundation/">
+    <strong>Theory of Everything Foundation</strong>
+    <span class="desc">Warp core, geometry engine, speculative lab, decisions, framework, suite — single-file app; shared storage with other Pages on this origin.</span>
+  </a>
+  <a class="node mqgt" href="fold-space-engine/">
+    <strong>Fold-Space Engine Lab</strong>
+    <span class="desc">Branch-mix + fold preview (beta on this site).</span>
+  </a>
+  <a class="node sim" href="artifacts/TOE_FOUNDATION_WARP_BLINDING_x1000.html">
+    <strong>Warp artifact (HTML snapshot)</strong>
+    <span class="desc">Standalone snapshot; same dial storage on this origin when applicable.</span>
+  </a>
+  <a class="node other" href="cbaird26_ecosystem_illustration.html">
+    <strong>Cbaird26 ecosystem illustration</strong>
+    <span class="desc">Full GitHub ecosystem orbit diagram (research-style map).</span>
+  </a>
+  <a class="node sim" href="zora_top10_simulations.html">
+    <strong>Top 10 simulations gallery</strong>
+    <span class="desc">Curated browser demos index.</span>
+  </a>
+
+  <p class="hint">Deploy / 404 → <a href="https://github.com/cbaird26/toe-2026-updates/blob/main/docs/PAGES.md">PAGES.md</a></p>
+
+  <div class="legend">
+    <span><span class="dot" style="background:var(--toe)"></span> ToE</span>
+    <span><span class="dot" style="background:var(--mqgt)"></span> MQGT-SCF</span>
+    <span><span class="dot" style="background:var(--sim)"></span> Snapshots</span>
+    <span><span class="dot" style="background:var(--other)"></span> Maps / misc</span>
+  </div>
+
   <footer>MQGT–SCF · Christopher Michael Baird · 2026 · Π_anchor operational demos</footer>
 </div>
 </body>
