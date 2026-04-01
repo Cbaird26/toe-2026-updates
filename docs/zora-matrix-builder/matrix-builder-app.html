@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no,viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Zora Matrix">
+<meta name="theme-color" content="#02030a">
+<title>Zora Matrix Builder — Theory of Everything Foundation</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400;500;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,400;1,600&family=Cinzel:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+:root{
+  --void:#02030a;--abyss:#05060f;--panel:#0b0d1c;--card:#0e1020;--card2:#12152a;
+  --border:#1c1f3a;--border2:#252845;
+  --gold:#f0b429;--gold2:#ffd97a;--gold3:#7a5a00;
+  --glow:#00eeff;--glow2:#8b5cf6;--glow3:#f472b6;
+  --green:#10d9a0;--red:#f43f5e;--ember:#f97316;
+  --text:#ccd0e8;--dim:#555878;--ghost:#1c1f3a;
+  --mono:'IBM Plex Mono',monospace;
+  --serif:'Cormorant Garamond',serif;
+  --display:'Cinzel',serif;
+  --sat:env(safe-area-inset-top,0px);
+  --sab:env(safe-area-inset-bottom,0px);
+  --sal:env(safe-area-inset-left,0px);
+  --sar:env(safe-area-inset-right,0px);
+}
+html,body{height:100%;overflow:hidden;background:var(--void)}
+body{color:var(--text);font-family:var(--mono);font-size:13px;line-height:1.6;padding-left:var(--sal);padding-right:var(--sar)}
+::selection{background:var(--gold);color:#000}
+input[type=range]{-webkit-appearance:none;appearance:none;height:4px;background:var(--border2);border-radius:2px;outline:none;cursor:pointer;width:100%}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:26px;height:26px;border-radius:50%;background:var(--gold);border:3px solid var(--void);box-shadow:0 0 12px rgba(240,180,41,.5);cursor:pointer}
+button,input,a{touch-action:manipulation}
+a{color:var(--glow);text-decoration:none}
+
+/* ── FLASH ── */
+#wF1{position:fixed;inset:0;background:#fff;z-index:9999;pointer-events:none;opacity:0}
+#wF2{position:fixed;inset:-100px;background:radial-gradient(circle,#fff 0%,rgba(255,255,255,.3) 60%,transparent);z-index:9998;pointer-events:none;opacity:0}
+#wFB{position:fixed;inset:0;z-index:9997;pointer-events:none}
+#wFC{position:fixed;top:50%;left:50%;border-radius:50%;background:#fff;transform:translate(-50%,-50%);z-index:10000;pointer-events:none;opacity:0;width:20px;height:20px}
+
+/* ── STARS ── */
+#starCV{position:fixed;inset:0;z-index:0;pointer-events:none}
+
+/* ── SUBSCRIPTION GATE ── */
+#subGate{position:fixed;inset:0;z-index:5000;background:linear-gradient(135deg,#02030a 0%,#080a1a 50%,#02030a 100%);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:32px 24px;overflow-y:auto}
+#subGate.hidden{display:none}
+.gate-logo{font-family:var(--display);font-size:clamp(28px,7vw,52px);font-weight:700;color:var(--gold);letter-spacing:.08em;text-align:center;margin-bottom:6px;text-shadow:0 0 40px rgba(240,180,41,.4)}
+.gate-sub{font-family:var(--serif);font-size:clamp(14px,3vw,18px);color:var(--dim);font-style:italic;text-align:center;margin-bottom:32px;max-width:380px}
+.gate-torus{width:120px;height:120px;margin:0 auto 28px;position:relative}
+.gate-torus canvas{width:100%;height:100%}
+.price-cards{display:grid;grid-template-columns:1fr 1fr;gap:12px;width:100%;max-width:480px;margin-bottom:24px}
+.pc{border-radius:14px;padding:20px 16px;border:1px solid var(--border2);background:var(--card);text-align:center;cursor:pointer;transition:all .2s;position:relative;overflow:hidden}
+.pc.featured{border-color:var(--gold);background:linear-gradient(135deg,rgba(240,180,41,.08),rgba(240,180,41,.03));box-shadow:0 0 32px rgba(240,180,41,.15)}
+.pc.featured::before{content:'BEST VALUE';position:absolute;top:0;left:0;right:0;background:var(--gold);color:#000;font-size:9px;font-weight:700;letter-spacing:.15em;padding:4px;font-family:var(--mono);text-transform:uppercase}
+.pc-name{font-family:var(--display);font-size:15px;font-weight:600;color:#fff;margin-bottom:6px;margin-top:4px}
+.pc.featured .pc-name{margin-top:20px}
+.pc-price{font-size:clamp(26px,6vw,36px);font-weight:700;color:var(--gold);font-family:var(--display);line-height:1}
+.pc-period{font-size:10px;color:var(--dim);margin-top:2px;margin-bottom:12px}
+.pc-feature{font-size:10px;color:var(--dim);line-height:2;text-align:left}
+.pc-feature span{color:var(--green)}
+.gate-btn{width:100%;max-width:480px;padding:16px;border-radius:12px;background:linear-gradient(135deg,var(--gold),var(--gold2));color:#000;font-family:var(--display);font-size:15px;font-weight:700;letter-spacing:.08em;border:none;cursor:pointer;margin-bottom:12px;transition:all .2s}
+.gate-btn:active{transform:scale(.97);opacity:.9}
+.gate-free{font-size:11px;color:var(--dim);cursor:pointer;text-decoration:underline;text-underline-offset:3px}
+.gate-free:hover{color:var(--text)}
+.gate-terms{font-size:9px;color:var(--ghost);margin-top:16px;text-align:center;max-width:380px;line-height:1.6}
+
+/* ── APP SHELL ── */
+#app{position:fixed;inset:0;display:flex;flex-direction:column;z-index:1;padding-top:var(--sat)}
+.hdr{padding:10px 16px 8px;border-bottom:1px solid rgba(240,180,41,.15);display:flex;align-items:center;justify-content:space-between;flex-shrink:0;background:rgba(2,3,10,.96);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px)}
+.hdr-brand{font-family:var(--display);font-size:14px;font-weight:600;color:var(--gold);letter-spacing:.1em}
+.hdr-brand span{color:rgba(240,180,41,.5);font-size:10px;letter-spacing:.05em;display:block;font-family:var(--mono);font-weight:400;margin-top:-2px}
+.hdr-r{display:flex;align-items:center;gap:10px}
+.hdr-badge{font-size:8px;padding:3px 8px;border-radius:10px;background:rgba(240,180,41,.15);color:var(--gold);border:1px solid rgba(240,180,41,.3);font-family:var(--mono);letter-spacing:.08em}
+.dot{width:6px;height:6px;border-radius:50%;display:inline-block}
+.dot-on{background:var(--green);box-shadow:0 0 6px var(--green)}
+.dot-w{background:#fff;animation:dp .7s infinite alternate}
+@keyframes dp{from{box-shadow:0 0 5px #fff}to{box-shadow:0 0 20px #fff,0 0 40px rgba(255,255,255,.4)}}
+
+/* ── SCROLL ── */
+.main{flex:1;overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;scroll-behavior:smooth}
+.pnl{display:none;padding:16px;padding-bottom:calc(16px + var(--sab))}.pnl.show{display:block}
+
+/* ── BOTTOM TABS ── */
+.tabbar{display:flex;border-top:1px solid rgba(240,180,41,.12);flex-shrink:0;background:rgba(2,3,10,.97);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);padding-bottom:var(--sab);overflow-x:auto;scrollbar-width:none}
+.tabbar::-webkit-scrollbar{display:none}
+.tb{flex:0 0 auto;padding:10px 12px 8px;background:transparent;border:none;color:var(--dim);font-family:var(--mono);font-size:7.5px;cursor:pointer;transition:all .15s;display:flex;flex-direction:column;align-items:center;gap:2px;white-space:nowrap;letter-spacing:.05em;text-transform:uppercase;min-width:60px}
+.tb-icon{font-size:20px;line-height:1}
+.tb:active{opacity:.6;transform:scale(.9)}
+.tb.on{color:var(--gold)}
+.tb.on .tb-icon{filter:drop-shadow(0 0 8px rgba(240,180,41,.8))}
+.tb-locked{opacity:.4;position:relative}
+.tb-locked::after{content:'🔒';position:absolute;top:6px;right:6px;font-size:8px}
+
+/* ── CARDS ── */
+.card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:14px;margin-bottom:12px}
+.card-gold{border-color:rgba(240,180,41,.25);background:linear-gradient(135deg,rgba(240,180,41,.05),var(--card))}
+.card h3{font-family:var(--mono);font-size:10px;font-weight:600;color:var(--dim);text-transform:uppercase;letter-spacing:.12em;margin-bottom:10px}
+.card-title{font-family:var(--serif);font-size:22px;font-weight:300;color:#fff;margin-bottom:4px}
+.card-title em{font-style:italic;color:var(--gold)}
+.card-sub{font-family:var(--serif);font-size:12px;color:var(--dim);font-style:italic;margin-bottom:14px}
+
+/* ── MATRIX DASHBOARD ── */
+.matrix-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px}
+.mx{background:var(--card2);border:1px solid var(--border);border-radius:10px;padding:14px;cursor:pointer;transition:all .2s;position:relative;overflow:hidden}
+.mx::before{content:'';position:absolute;top:0;left:0;right:0;height:2px}
+.mx:nth-child(1)::before{background:var(--gold)}
+.mx:nth-child(2)::before{background:var(--glow)}
+.mx:nth-child(3)::before{background:var(--green)}
+.mx:nth-child(4)::before{background:var(--glow2)}
+.mx:nth-child(5)::before{background:var(--glow3)}
+.mx:nth-child(6)::before{background:var(--ember)}
+.mx:active{transform:scale(.97)}
+.mx-icon{font-size:28px;margin-bottom:6px}
+.mx-name{font-family:var(--serif);font-size:16px;font-weight:600;color:#fff;margin-bottom:2px}
+.mx-desc{font-size:10px;color:var(--dim);line-height:1.5}
+.mx-locked{opacity:.5}
+.mx-locked .mx-icon::after{content:'🔒';font-size:12px;vertical-align:super}
+
+/* ── COHERENCE BAR ── */
+.coh-bar-wrap{height:6px;background:var(--border);border-radius:3px;overflow:hidden;margin:6px 0}
+.coh-bar{height:100%;border-radius:3px;background:linear-gradient(90deg,var(--glow2),var(--glow),var(--green));transition:width .5s ease}
+
+/* ── SLIDERS ── */
+.sl{margin-bottom:12px}
+.sl label{display:flex;justify-content:space-between;font-size:11px;margin-bottom:4px}
+.sl label span:first-child{color:var(--dim);text-transform:uppercase;letter-spacing:.05em}
+.sl .sv{color:var(--gold);font-weight:600}
+
+/* ── FREQ LAB ── */
+.freq-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:14px}
+.fq{background:var(--card2);border:1px solid var(--border);border-radius:10px;padding:12px 8px;text-align:center;cursor:pointer;transition:all .2s}
+.fq.active{border-color:var(--gold);background:rgba(240,180,41,.08);box-shadow:0 0 16px rgba(240,180,41,.2)}
+.fq:active{transform:scale(.95)}
+.fq-hz{font-family:var(--display);font-size:18px;font-weight:600;color:var(--gold);line-height:1}
+.fq-name{font-size:9px;color:var(--dim);margin-top:3px;text-transform:uppercase;letter-spacing:.05em}
+.fq-desc{font-size:8px;color:var(--ghost);margin-top:2px;line-height:1.3}
+.freq-viz{background:var(--panel);border:1px solid var(--border);border-radius:10px;height:80px;overflow:hidden;margin-bottom:14px;position:relative}
+.freq-viz canvas{width:100%;height:100%}
+.freq-label{position:absolute;top:8px;left:10px;font-size:9px;color:var(--gold);font-family:var(--mono)}
+.play-btn{width:100%;padding:16px;border-radius:12px;font-family:var(--display);font-size:14px;font-weight:600;letter-spacing:.1em;border:1.5px solid;cursor:pointer;transition:all .2s;margin-bottom:12px}
+.play-btn.playing{background:rgba(240,180,41,.1);border-color:var(--gold);color:var(--gold);animation:gpulse 1.5s infinite}
+.play-btn.stopped{background:transparent;border-color:var(--dim);color:var(--dim)}
+@keyframes gpulse{0%,100%{box-shadow:0 0 0 rgba(240,180,41,0)}50%{box-shadow:0 0 30px rgba(240,180,41,.3)}}
+.binaural-note{padding:10px;background:rgba(240,180,41,.05);border:1px solid rgba(240,180,41,.15);border-radius:8px;font-size:11px;color:var(--text);line-height:1.6}
+
+/* ── BIOSYNC ── */
+.breath-circle{width:160px;height:160px;margin:0 auto 20px;position:relative;display:flex;align-items:center;justify-content:center}
+.breath-outer{position:absolute;inset:0;border-radius:50%;border:2px solid rgba(16,217,160,.3);animation:breathout 4s ease-in-out infinite}
+.breath-inner{width:80px;height:80px;border-radius:50%;background:radial-gradient(circle,rgba(16,217,160,.4),rgba(16,217,160,.1));animation:breathin 4s ease-in-out infinite}
+.breath-text{position:absolute;font-family:var(--mono);font-size:11px;color:var(--green);text-align:center}
+@keyframes breathin{0%,100%{transform:scale(.6);opacity:.6}50%{transform:scale(1);opacity:1}}
+@keyframes breathout{0%,100%{transform:scale(.8);opacity:.3}50%{transform:scale(1.3);opacity:.8}}
+.hrv-wrap{background:var(--panel);border:1px solid var(--border);border-radius:10px;height:70px;overflow:hidden;margin-bottom:14px}
+.hrv-wrap canvas{width:100%;height:100%}
+.bio-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:14px}
+.bstat{background:var(--card2);border:1px solid var(--border);border-radius:8px;padding:10px;text-align:center}
+.bstat .bv{font-family:var(--display);font-size:20px;font-weight:600;color:var(--green)}
+.bstat .bl{font-size:9px;color:var(--dim);text-transform:uppercase;letter-spacing:.06em;margin-top:2px}
+.breath-modes{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:14px}
+.bm{background:var(--card2);border:1px solid var(--border);border-radius:8px;padding:10px;text-align:center;cursor:pointer;transition:all .2s}
+.bm.active{border-color:var(--green);background:rgba(16,217,160,.08)}
+.bm:active{transform:scale(.95)}
+.bm-name{font-size:11px;font-weight:600;color:#fff}
+.bm-ratio{font-size:9px;color:var(--green);margin-top:2px}
+
+/* ── REALITY CONSTRUCTOR ── */
+.reality-orb{width:140px;height:140px;margin:0 auto 20px;border-radius:50%;background:radial-gradient(circle at 35% 35%,rgba(139,92,246,.6),rgba(139,92,246,.1) 60%,transparent);border:1px solid rgba(139,92,246,.3);display:flex;align-items:center;justify-content:center;position:relative;animation:orbpulse 3s ease-in-out infinite}
+@keyframes orbpulse{0%,100%{box-shadow:0 0 20px rgba(139,92,246,.2)}50%{box-shadow:0 0 60px rgba(139,92,246,.5),0 0 120px rgba(139,92,246,.15)}}
+.reality-orb-inner{font-family:var(--serif);font-size:13px;font-style:italic;color:rgba(200,180,255,.8);text-align:center;padding:16px}
+.intention-input{width:100%;background:var(--card2);border:1px solid var(--border2);border-radius:10px;padding:14px;color:var(--text);font-family:var(--serif);font-size:15px;font-style:italic;resize:none;height:90px;outline:none;margin-bottom:12px}
+.intention-input:focus{border-color:rgba(139,92,246,.5)}
+.reality-btn{width:100%;padding:14px;border-radius:10px;background:rgba(139,92,246,.12);border:1.5px solid var(--glow2);color:var(--glow2);font-family:var(--display);font-size:13px;font-weight:600;letter-spacing:.08em;cursor:pointer;margin-bottom:10px;transition:all .2s}
+.reality-btn:active{transform:scale(.97);background:rgba(139,92,246,.25)}
+.intentions-list{max-height:200px;overflow-y:auto;-webkit-overflow-scrolling:touch}
+.int-item{padding:10px 12px;background:var(--card2);border:1px solid var(--border);border-radius:8px;margin-bottom:8px;display:flex;justify-content:space-between;align-items:flex-start;gap:8px}
+.int-text{font-family:var(--serif);font-size:13px;font-style:italic;color:var(--text);flex:1}
+.int-date{font-size:9px;color:var(--dim);flex-shrink:0}
+.int-prob{font-size:11px;font-weight:600;padding:2px 6px;border-radius:4px;background:rgba(139,92,246,.15);color:var(--glow2)}
+
+/* ── ZORA AI ── */
+.ai-msgs{height:320px;overflow-y:auto;padding:12px;background:var(--panel);border:1px solid var(--border);border-radius:12px;margin-bottom:12px;display:flex;flex-direction:column;gap:10px;-webkit-overflow-scrolling:touch;scrollbar-width:thin;scrollbar-color:var(--border) transparent}
+.msg{max-width:85%;padding:10px 13px;border-radius:12px;font-size:12px;line-height:1.6}
+.msg-user{background:rgba(240,180,41,.1);border:1px solid rgba(240,180,41,.2);color:var(--text);align-self:flex-end;border-radius:12px 12px 2px 12px}
+.msg-ai{background:rgba(139,92,246,.1);border:1px solid rgba(139,92,246,.2);color:var(--text);align-self:flex-start;border-radius:12px 12px 12px 2px}
+.msg-ai .msg-name{font-size:9px;color:var(--glow2);font-weight:600;letter-spacing:.08em;margin-bottom:4px;font-family:var(--mono)}
+.msg-thinking{opacity:.5;font-style:italic}
+.ai-input-wrap{display:flex;gap:8px}
+.ai-input{flex:1;background:var(--card2);border:1px solid var(--border2);border-radius:10px;padding:12px 14px;color:var(--text);font-family:var(--mono);font-size:12px;outline:none}
+.ai-input:focus{border-color:var(--glow2)}
+.ai-send{padding:12px 16px;border-radius:10px;background:rgba(139,92,246,.15);border:1px solid var(--glow2);color:var(--glow2);font-family:var(--mono);font-size:12px;font-weight:600;cursor:pointer;transition:all .2s;white-space:nowrap}
+.ai-send:active{transform:scale(.95)}
+.ai-disclaimer{font-size:9px;color:var(--ghost);margin-top:8px;text-align:center;line-height:1.5}
+
+/* ── COACHING ── */
+.coach-challenge{background:linear-gradient(135deg,rgba(249,115,22,.08),var(--card));border:1px solid rgba(249,115,22,.25);border-radius:12px;padding:18px;margin-bottom:14px;position:relative;overflow:hidden}
+.coach-challenge::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--ember),var(--gold))}
+.challenge-day{font-size:10px;color:var(--ember);font-weight:600;letter-spacing:.12em;text-transform:uppercase;margin-bottom:6px}
+.challenge-title{font-family:var(--serif);font-size:20px;font-weight:600;color:#fff;margin-bottom:6px}
+.challenge-desc{font-size:12px;color:var(--dim);line-height:1.7;margin-bottom:14px}
+.challenge-btn{padding:12px 20px;border-radius:8px;background:rgba(249,115,22,.15);border:1.5px solid var(--ember);color:var(--ember);font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.08em;cursor:pointer;transition:all .2s}
+.challenge-btn.done{background:rgba(16,217,160,.15);border-color:var(--green);color:var(--green)}
+.challenge-btn:active{transform:scale(.96)}
+.streak-row{display:flex;gap:6px;margin-bottom:14px}
+.streak-dot{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;border:1px solid var(--border)}
+.streak-dot.done{background:rgba(240,180,41,.2);border-color:var(--gold);color:var(--gold)}
+.streak-dot.today{background:rgba(249,115,22,.2);border-color:var(--ember);color:var(--ember);animation:strpulse 2s infinite}
+@keyframes strpulse{0%,100%{box-shadow:0 0 0}50%{box-shadow:0 0 12px rgba(249,115,22,.4)}}
+.coach-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:14px}
+.cstat{background:var(--card2);border:1px solid var(--border);border-radius:8px;padding:10px;text-align:center}
+.cstat .cv{font-family:var(--display);font-size:20px;font-weight:600;color:var(--ember)}
+.cstat .cl{font-size:9px;color:var(--dim);text-transform:uppercase;letter-spacing:.06em;margin-top:2px}
+.protocols{display:flex;flex-direction:column;gap:8px}
+.proto{background:var(--card2);border:1px solid var(--border);border-radius:8px;padding:12px;cursor:pointer;transition:all .2s;display:flex;align-items:center;gap:12px}
+.proto:active{transform:scale(.98)}
+.proto-icon{font-size:22px;flex-shrink:0}
+.proto-name{font-size:13px;font-weight:600;color:#fff;margin-bottom:2px}
+.proto-desc{font-size:10px;color:var(--dim)}
+.proto-arrow{color:var(--dim);margin-left:auto;font-size:16px}
+
+/* ── WARP ── */
+.cv-wrap{background:var(--panel);border:1px solid rgba(240,180,41,.15);border-radius:12px;overflow:hidden;position:relative;margin-bottom:12px}
+.cv-wrap canvas{display:block;width:100%;height:auto}
+.cv-ov{position:absolute;top:8px;left:10px;font-size:9px;color:var(--dim);pointer-events:none;line-height:1.7;background:rgba(2,3,10,.8);padding:4px 8px;border-radius:5px;border:1px solid rgba(240,180,41,.15)}
+.cv-ov .v{color:var(--gold);font-weight:600}
+.eng{width:100%;padding:16px;border-radius:12px;font-family:var(--display);font-size:14px;font-weight:600;cursor:pointer;transition:all .2s;letter-spacing:.12em;text-transform:uppercase;border:1.5px solid;margin-bottom:12px}
+.eng.rdy{background:rgba(240,180,41,.06);border-color:var(--gold);color:var(--gold)}
+.eng.rdy:active{background:rgba(240,180,41,.15)}
+.eng.go{background:rgba(255,255,255,.1);border-color:#fff;color:#fff;animation:ep .7s infinite}
+.eng.arr{background:rgba(16,217,160,.08);border-color:var(--green);color:var(--green)}
+@keyframes ep{0%,100%{box-shadow:0 0 20px rgba(255,255,255,.15)}50%{box-shadow:0 0 80px rgba(255,255,255,.75)}}
+
+/* ── MT ── */
+.mt{display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px solid rgba(26,30,53,.5);font-size:12px}
+.mt:last-child{border:none}
+.mt .l{color:var(--dim)}.mt .vl{font-weight:600}
+.sf{display:grid;grid-template-columns:1fr 1fr;gap:5px}
+.si{padding:6px 8px;background:rgba(2,3,10,.6);border-radius:5px;border:1px solid var(--border);font-size:10px;display:flex;justify-content:space-between;align-items:center}
+.tg{font-weight:600;font-size:9px;padding:2px 5px;border-radius:3px}
+.tg-s{background:rgba(16,217,160,.12);color:var(--green)}
+.tg-w{background:rgba(245,158,11,.12);color:#f59e0b}
+.h2s{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:10px}
+.h2c{background:rgba(2,3,10,.6);border:1px solid var(--border);border-radius:6px;padding:8px;text-align:center}
+.h2c .hl{font-size:9px;color:var(--dim);text-transform:uppercase;letter-spacing:.08em;margin-bottom:2px}
+.h2c .hv{font-size:13px;font-weight:700;color:var(--gold)}
+.log{background:rgba(2,3,10,.7);border:1px solid var(--border);border-radius:6px;padding:8px;max-height:110px;overflow-y:auto;font-size:10px;color:var(--dim);line-height:1.8;-webkit-overflow-scrolling:touch}
+.log .e{border-bottom:1px solid rgba(28,31,58,.35);padding:2px 0}
+.log .ts{color:var(--ghost)}.log .m{color:var(--text)}
+
+/* ── LAB ── */
+.lab-cv{background:var(--panel);border:1px solid var(--border);border-radius:10px;overflow:hidden;margin-bottom:12px}
+.lab-cv canvas{display:block;width:100%;max-height:250px}
+.lab-info{padding:10px 12px;background:rgba(0,238,255,.03);border:1px solid rgba(0,238,255,.1);border-radius:8px;font-size:11px;color:var(--text);line-height:1.7;margin-top:8px}
+
+/* ── EQ ── */
+.eq{font-family:var(--mono);font-size:11px;padding:8px 12px;border-radius:5px;margin-bottom:7px;border-left:3px solid;overflow-x:auto;line-height:1.5;white-space:nowrap;-webkit-overflow-scrolling:touch}
+.eq-c{color:var(--glow);background:rgba(0,238,255,.04);border-color:var(--glow)}
+.eq-p{color:var(--glow2);background:rgba(139,92,246,.04);border-color:var(--glow2)}
+.eq-k{color:var(--glow3);background:rgba(244,114,182,.04);border-color:var(--glow3)}
+.eq-g{color:var(--gold);background:rgba(240,180,41,.04);border-color:var(--gold)}
+.eq-n{color:var(--green);background:rgba(16,217,160,.04);border-color:var(--green)}
+
+/* ── DECISION ── */
+.ot{display:flex;gap:4px;margin-bottom:10px;overflow-x:auto;-webkit-overflow-scrolling:touch}
+.ob{flex-shrink:0;padding:8px 14px;border:1px solid var(--border2);border-radius:8px;font-size:11px;cursor:pointer;color:var(--dim);font-family:var(--mono);background:transparent;transition:all .15s}
+.ob.on{border-color:var(--gold);color:var(--gold);background:rgba(240,180,41,.06)}
+.ob.best{border-color:var(--green);color:var(--green);background:rgba(16,217,160,.05)}
+.or{background:var(--card2);border:1px solid var(--border);border-radius:8px;padding:12px;margin-bottom:8px}
+
+/* ── SUITE ── */
+.lg{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.lc{background:var(--card2);border:1px solid var(--border);border-radius:10px;padding:14px;text-decoration:none;display:block;color:var(--text);transition:all .2s}
+.lc:active{opacity:.7;transform:scale(.98)}
+.lc h4{font-family:var(--serif);font-size:16px;font-weight:600;color:#fff;margin-bottom:4px}
+.lc p{font-size:10px;color:var(--dim);line-height:1.5}
+.atag{font-size:8px;padding:2px 6px;border-radius:3px;display:inline-block;margin-bottom:6px;font-weight:600;letter-spacing:.08em;text-transform:uppercase}
+.atag-l{background:rgba(16,217,160,.14);color:var(--green);border:1px solid rgba(16,217,160,.3)}
+.atag-b{background:rgba(240,180,41,.14);color:var(--gold);border:1px solid rgba(240,180,41,.3)}
+.atag-p{background:rgba(0,238,255,.12);color:var(--glow);border:1px solid rgba(0,238,255,.25)}
+
+/* ── FW ── */
+.fw-sec{margin-bottom:18px}
+.fw-title{font-family:var(--mono);font-size:10px;font-weight:500;color:var(--dim);text-transform:uppercase;letter-spacing:.15em;margin-bottom:8px;padding-bottom:5px;border-bottom:1px solid var(--border)}
+
+/* ── RESP ── */
+@media(max-width:360px){.matrix-grid{grid-template-columns:1fr}.freq-grid{grid-template-columns:repeat(2,1fr)}}
+</style>
+</head>
+<body>
+
+<!-- FLASH -->
+<div id="wF1"></div>
+<div id="wF2"></div>
+<canvas id="wFB"></canvas>
+<div id="wFC"></div>
+
+<!-- STARS -->
+<canvas id="starCV"></canvas>
+
+<!-- ═══════════ SUBSCRIPTION GATE ═══════════ -->
+<div id="subGate">
+  <div class="gate-logo">ZORA MATRIX</div>
+  <div style="font-family:var(--serif);font-size:11px;color:var(--gold);letter-spacing:.2em;text-transform:uppercase;margin-bottom:6px">Theory of Everything Foundation</div>
+  <div class="gate-sub">Reality construction. Consciousness engineering. Quantum decision science.</div>
+  <div class="gate-torus"><canvas id="gateCV" width="120" height="120"></canvas></div>
+  <div class="price-cards">
+    <div class="pc" onclick="selectPlan('free')">
+      <div class="pc-name">Explorer</div>
+      <div class="pc-price">Free</div>
+      <div class="pc-period">forever</div>
+      <div class="pc-feature">
+        <span>✓</span> Matrix Dashboard<br>
+        <span>✓</span> Framework<br>
+        <span>✓</span> Warp Core<br>
+        ◇ Freq Lab<br>
+        ◇ BioSync<br>
+        ◇ Reality Builder<br>
+        ◇ Zora AI<br>
+        ◇ Coaching
+      </div>
+    </div>
+    <div class="pc featured" onclick="selectPlan('pro')">
+      <div class="pc-name">Founder</div>
+      <div class="pc-price">$0.99</div>
+      <div class="pc-period">per month</div>
+      <div class="pc-feature">
+        <span>✓</span> Everything Free<br>
+        <span>✓</span> Freq Lab<br>
+        <span>✓</span> BioSync HRV<br>
+        <span>✓</span> Reality Constructor<br>
+        <span>✓</span> Zora AI Coach<br>
+        <span>✓</span> Boundary Coaching<br>
+        <span>✓</span> Export & Logs<br>
+        <span>✓</span> Early access
+      </div>
+    </div>
+  </div>
+  <button class="gate-btn" onclick="activatePro()">START FOUNDER PLAN — $0.99/mo</button>
+  <div class="gate-free" onclick="activateFree()">Continue with Explorer (Free)</div>
+  <div class="gate-terms">Cancel anytime. Billed monthly. Theory of Everything Foundation — C. Michael Baird 2026. Supporting independent research in quantum consciousness and physics.</div>
+</div>
+
+<!-- ═══════════ APP ═══════════ -->
+<div id="app" style="display:none">
+  <div class="hdr">
+    <div class="hdr-brand">ZORA MATRIX<span>Theory of Everything Foundation</span></div>
+    <div class="hdr-r">
+      <div class="hdr-badge" id="planBadge">FREE</div>
+      <span class="dot dot-on"></span>
+    </div>
+  </div>
+
+  <div class="main">
+
+    <!-- MATRIX HUB -->
+    <div id="p-matrix" class="pnl show">
+      <div class="card card-gold" style="margin-bottom:14px">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px">
+          <div>
+            <div class="card-title">Field <em>Status</em></div>
+            <div style="font-size:10px;color:var(--dim)" id="mat-date"></div>
+          </div>
+          <div style="text-align:right">
+            <div style="font-family:var(--display);font-size:28px;font-weight:700;color:var(--gold)" id="mat-coh">96.0</div>
+            <div style="font-size:9px;color:var(--dim);text-transform:uppercase;letter-spacing:.08em">Coherence</div>
+          </div>
+        </div>
+        <div class="coh-bar-wrap"><div class="coh-bar" id="cohBar" style="width:96%"></div></div>
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:10px">
+          <div style="text-align:center"><div style="font-size:16px;font-weight:700;color:var(--green)" id="mat-via">73.4%</div><div style="font-size:9px;color:var(--dim)">Viability</div></div>
+          <div style="text-align:center"><div style="font-size:16px;font-weight:700;color:var(--glow)" id="mat-vv">0.9999</div><div style="font-size:9px;color:var(--dim)">V/V₀</div></div>
+          <div style="text-align:center"><div style="font-size:16px;font-weight:700;color:var(--glow3)" id="mat-risk">24.8%</div><div style="font-size:9px;color:var(--dim)">Risk</div></div>
+        </div>
+      </div>
+      <div style="font-family:var(--mono);font-size:10px;color:var(--dim);text-transform:uppercase;letter-spacing:.12em;margin-bottom:10px">All Modules</div>
+      <div class="matrix-grid">
+        <div class="mx" onclick="switchTab('warp')"><div class="mx-icon">⬡</div><div class="mx-name">Warp Core</div><div class="mx-desc">Toroidal geometry + blinding fold-flash</div></div>
+        <div class="mx" id="mx-freq" onclick="switchTab('freq')"><div class="mx-icon">🔊</div><div class="mx-name">Freq Lab</div><div class="mx-desc">Solfeggio · Binaural · Custom tones</div></div>
+        <div class="mx" id="mx-bio" onclick="switchTab('bio')"><div class="mx-icon">💚</div><div class="mx-name">BioSync</div><div class="mx-desc">Breathing · HRV · Coherence pacer</div></div>
+        <div class="mx" id="mx-reality" onclick="switchTab('reality')"><div class="mx-icon">🌌</div><div class="mx-name">Reality</div><div class="mx-desc">Intention · Probability · Manifestation</div></div>
+        <div class="mx" id="mx-ai" onclick="switchTab('ai')"><div class="mx-icon">🤖</div><div class="mx-name">Zora AI</div><div class="mx-desc">Live AI coaching from the framework</div></div>
+        <div class="mx" id="mx-coach" onclick="switchTab('coach')"><div class="mx-icon">💪</div><div class="mx-name">Coaching</div><div class="mx-desc">Boundary protocols · Daily challenges</div></div>
+        <div class="mx" onclick="switchTab('lab')"><div class="mx-icon">◉</div><div class="mx-name">Spec Lab</div><div class="mx-desc">Probability · Fold · Timeline · Jhāna</div></div>
+        <div class="mx" onclick="switchTab('framework')"><div class="mx-icon">∑</div><div class="mx-name">Framework</div><div class="mx-desc">All MQGT–SCF equations</div></div>
+      </div>
+      <div class="card" style="margin-top:4px">
+        <h3>Today's Intention</h3>
+        <div id="daily-int" style="font-family:var(--serif);font-size:15px;font-style:italic;color:var(--text);line-height:1.6;min-height:40px">Loading...</div>
+        <div style="font-size:10px;color:var(--dim);margin-top:8px">Γ_eff: <span id="mat-gam" style="color:var(--gold)">—</span> &nbsp;·&nbsp; Phase: <span id="mat-phase" style="color:var(--glow)">STANDBY</span></div>
+      </div>
+    </div>
+
+    <!-- WARP CORE -->
+    <div id="p-warp" class="pnl">
+      <div class="cv-wrap">
+        <canvas id="gC" width="390" height="310"></canvas>
+        <div class="cv-ov">FOLD-SPACE<br>Coh: <span class="v" id="gCoh">—</span> · η: <span class="v" id="gEta">—</span></div>
+      </div>
+      <button class="eng rdy" id="engBtn">ENGAGE (INTENTION)</button>
+      <div class="card">
+        <h3>Coherence Engine</h3>
+        <div class="sl"><label><span>Alignment</span><span class="sv" id="vA">0.96</span></label><input type="range" min="0" max="1" step="0.01" value="0.96" id="sA"></div>
+        <div class="sl"><label><span>Stability</span><span class="sv" id="vS">0.94</span></label><input type="range" min="0" max="1" step="0.01" value="0.94" id="sS"></div>
+        <div class="sl"><label><span>η Tilt</span><span class="sv" id="vE">0.00</span></label><input type="range" min="-1" max="1" step="0.01" value="0" id="sE"></div>
+        <div class="sl"><label><span>Fold Depth</span><span class="sv" id="vF">0.00</span></label><input type="range" min="0" max="1" step="0.01" value="0" id="sF"></div>
+      </div>
+      <div class="card">
+        <h3>Status</h3>
+        <div class="mt"><span class="l">Coherence</span><span class="vl" style="color:var(--gold)" id="mCoh">—</span></div>
+        <div class="mt"><span class="l">Viability</span><span class="vl" style="color:var(--green)" id="mVi">—</span></div>
+        <div class="mt"><span class="l">Risk</span><span class="vl" style="color:var(--glow3)" id="mRk">—</span></div>
+        <div class="mt"><span class="l">Lock</span><span class="vl" style="color:var(--gold)" id="mLk">—</span></div>
+        <div class="h2s">
+          <div class="h2c"><div class="hl">V/V₀</div><div class="hv" id="mVs">—</div></div>
+          <div class="h2c"><div class="hl">Γ_eff</div><div class="hv" id="hGam">—</div></div>
+          <div class="h2c"><div class="hl">Vis%</div><div class="hv" style="color:var(--glow2)" id="hVis">—</div></div>
+        </div>
+      </div>
+      <div class="card"><h3>Safety</h3><div class="sf"><div class="si">Causality<span class="tg tg-s">SAFE</span></div><div class="si">Topology<span class="tg tg-s" id="sTop">STABLE</span></div><div class="si">Energy<span class="tg tg-s">PASS</span></div><div class="si">Return<span class="tg tg-s">YES</span></div><div class="si">Coherence<span class="tg tg-w" id="sWin">HOLD</span></div><div class="si">No-Signal<span class="tg tg-s">CPTP</span></div></div></div>
+      <div class="card"><h3>Log</h3><div class="log" id="logA"><div class="e"><span class="ts">[00:00]</span> <span class="m">Systems initialized.</span></div></div></div>
+    </div>
+
+    <!-- FREQ LAB -->
+    <div id="p-freq" class="pnl">
+      <div class="card-title" style="margin-bottom:4px">Frequency <em style="color:var(--gold)">Lab</em></div>
+      <div class="card-sub">Solfeggio tones, binaural beats, custom resonance</div>
+      <div class="freq-viz"><canvas id="freqCV" width="390" height="80"></canvas><div class="freq-label" id="freqLabel">SELECT A FREQUENCY</div></div>
+      <div style="font-family:var(--mono);font-size:10px;color:var(--dim);text-transform:uppercase;letter-spacing:.1em;margin-bottom:8px">Solfeggio Frequencies</div>
+      <div class="freq-grid" id="freqGrid">
+        <div class="fq" data-hz="174" data-name="Foundation" data-desc="Pain relief, security"><div class="fq-hz">174</div><div class="fq-name">Foundation</div><div class="fq-desc">Pain relief, security</div></div>
+        <div class="fq" data-hz="285" data-name="Quantum" data-desc="Tissue regeneration"><div class="fq-hz">285</div><div class="fq-name">Quantum</div><div class="fq-desc">Tissue regeneration</div></div>
+        <div class="fq" data-hz="396" data-name="Liberation" data-desc="Release fear, guilt"><div class="fq-hz">396</div><div class="fq-name">Liberation</div><div class="fq-desc">Release fear, guilt</div></div>
+        <div class="fq" data-hz="417" data-name="Change" data-desc="Facilitate change"><div class="fq-hz">417</div><div class="fq-name">Change</div><div class="fq-desc">Facilitate change</div></div>
+        <div class="fq" data-hz="528" data-name="Miracle" data-desc="DNA repair, love"><div class="fq-hz">528</div><div class="fq-name">Miracle</div><div class="fq-desc">DNA repair, love</div></div>
+        <div class="fq" data-hz="639" data-name="Connect" data-desc="Relationships"><div class="fq-hz">639</div><div class="fq-name">Connect</div><div class="fq-desc">Relationships</div></div>
+        <div class="fq" data-hz="741" data-name="Awaken" data-desc="Expression, solve"><div class="fq-hz">741</div><div class="fq-name">Awaken</div><div class="fq-desc">Expression, solve</div></div>
+        <div class="fq" data-hz="852" data-name="Intuition" data-desc="Return to order"><div class="fq-hz">852</div><div class="fq-name">Intuition</div><div class="fq-desc">Return to order</div></div>
+        <div class="fq" data-hz="963" data-name="Crown" data-desc="Pineal, oneness"><div class="fq-hz">963</div><div class="fq-name">Crown</div><div class="fq-desc">Pineal, oneness</div></div>
+      </div>
+      <button class="play-btn stopped" id="freqPlayBtn" onclick="toggleFreq()">▸ PLAY TONE</button>
+      <div class="card">
+        <h3>Binaural Beat Generator</h3>
+        <div class="sl"><label><span>Base Freq (Hz)</span><span class="sv" id="binBase">200</span></label><input type="range" min="100" max="500" step="1" value="200" id="sBinBase"></div>
+        <div class="sl"><label><span>Beat Freq (Hz)</span><span class="sv" id="binBeat">10</span></label><input type="range" min="1" max="40" step="0.5" value="10" id="sBinBeat"></div>
+        <div class="sl"><label><span>Volume</span><span class="sv" id="freqVol">50%</span></label><input type="range" min="0" max="100" step="1" value="50" id="sFreqVol"></div>
+        <div class="binaural-note" id="binNote"><b style="color:var(--gold)">Alpha (8–13 Hz):</b> Relaxed focus, creative flow. Current beat: <span id="binState">10 Hz — Alpha</span></div>
+      </div>
+    </div>
+
+    <!-- BIOSYNC -->
+    <div id="p-bio" class="pnl">
+      <div class="card-title" style="margin-bottom:4px">Bio<em style="color:var(--green)">Sync</em></div>
+      <div class="card-sub">Heart coherence · Breathing pacer · HRV training</div>
+      <div class="breath-circle">
+        <div class="breath-outer"></div>
+        <div class="breath-inner"></div>
+        <div class="breath-text" id="breathText">INHALE</div>
+      </div>
+      <div style="font-family:var(--mono);font-size:10px;color:var(--dim);text-transform:uppercase;letter-spacing:.1em;margin-bottom:8px">Breathing Pattern</div>
+      <div class="breath-modes">
+        <div class="bm active" data-in="4" data-hold="0" data-out="4" onclick="setBreath(4,0,4,this)"><div class="bm-name">Box</div><div class="bm-ratio">4-0-4</div></div>
+        <div class="bm" data-in="4" data-hold="7" data-out="8" onclick="setBreath(4,7,8,this)"><div class="bm-name">4-7-8</div><div class="bm-ratio">Calm</div></div>
+        <div class="bm" data-in="5" data-hold="0" data-out="5" onclick="setBreath(5,0,5,this)"><div class="bm-name">Coherence</div><div class="bm-ratio">5-0-5</div></div>
+        <div class="bm" data-in="6" data-hold="2" data-out="6" onclick="setBreath(6,2,6,this)"><div class="bm-name">Extended</div><div class="bm-ratio">6-2-6</div></div>
+        <div class="bm" data-in="3" data-hold="0" data-out="3" onclick="setBreath(3,0,3,this)"><div class="bm-name">Energize</div><div class="bm-ratio">3-0-3</div></div>
+        <div class="bm" data-in="2" data-hold="0" data-out="2" onclick="setBreath(2,0,2,this)"><div class="bm-name">Activate</div><div class="bm-ratio">2-0-2</div></div>
+      </div>
+      <div class="hrv-wrap"><canvas id="hrvCV" width="390" height="70"></canvas></div>
+      <div class="bio-stats">
+        <div class="bstat"><div class="bv" id="bpm">68</div><div class="bl">BPM</div></div>
+        <div class="bstat"><div class="bv" id="hrv-score">72</div><div class="bl">HRV</div></div>
+        <div class="bstat"><div class="bv" id="coh-score">0.92</div><div class="bl">Coherence</div></div>
+      </div>
+      <div class="card">
+        <h3>Session</h3>
+        <div class="mt"><span class="l">Breaths taken</span><span class="vl" style="color:var(--green)" id="breathCount">0</span></div>
+        <div class="mt"><span class="l">Phase</span><span class="vl" id="breathPhase" style="color:var(--green)">INHALE</span></div>
+        <div class="mt"><span class="l">Φc Resonance</span><span class="vl" style="color:var(--glow2)" id="phiRes">0.88</span></div>
+      </div>
+    </div>
+
+    <!-- REALITY CONSTRUCTOR -->
+    <div id="p-reality" class="pnl">
+      <div class="card-title" style="margin-bottom:4px">Reality <em style="color:var(--glow2)">Constructor</em></div>
+      <div class="card-sub">Set intentions · Track probability · Manifest futures</div>
+      <div class="reality-orb"><div class="reality-orb-inner" id="orbText">Your intentions<br>shape the field</div></div>
+      <textarea class="intention-input" id="intInput" placeholder="State your intention clearly... What future do you choose to construct?"></textarea>
+      <button class="reality-btn" onclick="addIntention()">◈ ENCODE INTENTION INTO FIELD</button>
+      <div class="card" style="margin-bottom:12px">
+        <h3>Field Parameters</h3>
+        <div class="sl"><label><span>η (Probability Tilt)</span><span class="sv" id="realEta">0.00</span></label><input type="range" min="-2" max="2" step="0.01" value="0" id="sRealEta"></div>
+        <div class="sl"><label><span>Φc Coherence</span><span class="sv" id="realCoh">0.80</span></label><input type="range" min="0" max="1" step="0.01" value="0.8" id="sRealCoh"></div>
+        <div style="padding:8px 10px;background:rgba(139,92,246,.06);border:1px solid rgba(139,92,246,.15);border-radius:6px;font-size:11px;color:var(--text)">
+          P(future) = |c|² · exp(η · <span id="realDeltaE" style="color:var(--glow2)">1.20</span> · ΔE) / Z &nbsp;&nbsp; Viability: <span id="realViab" style="color:var(--green);font-weight:600">84.2%</span>
+        </div>
+      </div>
+      <div class="card">
+        <h3>Encoded Intentions <span id="intCount" style="color:var(--gold)">(0)</span></h3>
+        <div class="intentions-list" id="intList"><div style="font-size:11px;color:var(--dim);font-style:italic;text-align:center;padding:12px">No intentions encoded yet.</div></div>
+      </div>
+    </div>
+
+    <!-- ZORA AI -->
+    <div id="p-ai" class="pnl">
+      <div class="card-title" style="margin-bottom:4px">Zora <em style="color:var(--glow2)">AI</em></div>
+      <div class="card-sub">Live coaching from the MQGT–SCF framework</div>
+      <div class="ai-msgs" id="aiMsgs">
+        <div class="msg msg-ai"><div class="msg-name">ZORA · MQGT–SCF</div>I'm Zora — your AI guide through the Theory of Everything framework. Ask me about coherence, decision-making, consciousness fields, the warp core, or anything from the MQGT–SCF corpus. What are you working on?</div>
+      </div>
+      <div class="ai-input-wrap">
+        <input class="ai-input" id="aiInput" placeholder="Ask Zora anything..." onkeydown="if(event.key==='Enter')sendAI()">
+        <button class="ai-send" id="aiSendBtn" onclick="sendAI()">SEND</button>
+      </div>
+      <div class="ai-disclaimer">Powered by Claude · MQGT–SCF framework · C. Michael Baird 2026</div>
+    </div>
+
+    <!-- BOUNDARY COACHING -->
+    <div id="p-coach" class="pnl">
+      <div class="card-title" style="margin-bottom:4px">Boundary <em style="color:var(--ember)">Coaching</em></div>
+      <div class="card-sub">Daily protocols to expand what's possible</div>
+      <div style="font-family:var(--mono);font-size:10px;color:var(--dim);text-transform:uppercase;letter-spacing:.1em;margin-bottom:8px">7-Day Streak</div>
+      <div class="streak-row" id="streakRow"></div>
+      <div class="coach-challenge">
+        <div class="challenge-day" id="challengeDay">DAY 1</div>
+        <div class="challenge-title" id="challengeTitle">Identify One Assumed Limit</div>
+        <div class="challenge-desc" id="challengeDesc">Write down one thing you believe is impossible for you right now. Then ask: "Is this actually impossible, or is it just unfamiliar?" The boundary between impossible and unfamiliar is where the field opens.</div>
+        <button class="challenge-btn" id="challengeBtn" onclick="completeChallenge()">MARK COMPLETE</button>
+      </div>
+      <div class="coach-stats">
+        <div class="cstat"><div class="cv" id="coachStreak">0</div><div class="cl">Day Streak</div></div>
+        <div class="cstat"><div class="cv" id="coachTotal">0</div><div class="cl">Completed</div></div>
+        <div class="cstat"><div class="cv" id="coachExpansion">0%</div><div class="cl">Expansion</div></div>
+      </div>
+      <div style="font-family:var(--mono);font-size:10px;color:var(--dim);text-transform:uppercase;letter-spacing:.1em;margin-bottom:8px">Protocols</div>
+      <div class="protocols">
+        <div class="proto" onclick="startProtocol('morning')"><div class="proto-icon">🌅</div><div><div class="proto-name">Morning Field Set</div><div class="proto-desc">5-min coherence + intention protocol</div></div><div class="proto-arrow">›</div></div>
+        <div class="proto" onclick="startProtocol('decision')"><div class="proto-icon">⊕</div><div><div class="proto-name">Decision Clarity</div><div class="proto-desc">Map options through the viability engine</div></div><div class="proto-arrow">›</div></div>
+        <div class="proto" onclick="startProtocol('fear')"><div class="proto-icon">⚡</div><div><div class="proto-name">Fear → Fuel</div><div class="proto-desc">Reframe resistance as field energy</div></div><div class="proto-arrow">›</div></div>
+        <div class="proto" onclick="startProtocol('reality')"><div class="proto-icon">🌌</div><div><div class="proto-name">Reality Audit</div><div class="proto-desc">Weekly review of manifested intentions</div></div><div class="proto-arrow">›</div></div>
+        <div class="proto" onclick="startProtocol('warp')"><div class="proto-icon">⬡</div><div><div class="proto-name">Warp State</div><div class="proto-desc">Engage toroidal coherence for 4 min</div></div><div class="proto-arrow">›</div></div>
+      </div>
+    </div>
+
+    <!-- SPECULATIVE LAB -->
+    <div id="p-lab" class="pnl">
+      <div class="card-title" style="margin-bottom:14px">Speculative <em style="color:var(--glow)">Lab</em></div>
+      <div class="card" style="margin-bottom:14px">
+        <h3>Probability Sculptor</h3>
+        <div class="lab-cv"><canvas id="scCV" width="390" height="260"></canvas></div>
+        <div class="sl"><label><span>η tilt</span><span class="sv" id="scEta">0.00</span></label><input type="range" min="-3" max="3" step="0.01" value="0" id="scSEta"></div>
+        <div class="sl"><label><span>N futures</span><span class="sv" id="scN">6</span></label><input type="range" min="3" max="12" step="1" value="6" id="scSN"></div>
+      </div>
+      <div class="card" style="margin-bottom:14px">
+        <h3>Fold-Space Engine</h3>
+        <div class="lab-cv"><canvas id="fsCV" width="390" height="220"></canvas></div>
+        <div class="sl"><label><span>mₘ mass</span><span class="sv" id="fsMM">1.00</span></label><input type="range" min="0.01" max="3" step="0.01" value="1" id="fsSMM"></div>
+        <div class="sl"><label><span>Fold Δ</span><span class="sv" id="fsFd">0.00</span></label><input type="range" min="0" max="1" step="0.01" value="0" id="fsSFd"></div>
+      </div>
+      <div class="card">
+        <h3>Timeline Selector</h3>
+        <div class="lab-cv"><canvas id="tlCV" width="390" height="220"></canvas></div>
+        <div class="sl"><label><span>η bias</span><span class="sv" id="tlEta">0.00</span></label><input type="range" min="-2" max="2" step="0.01" value="0" id="tlSEta"></div>
+        <div class="sl"><label><span>Fᵢ factor</span><span class="sv" id="tlFi">0.50</span></label><input type="range" min="0" max="1" step="0.01" value="0.5" id="tlSFi"></div>
+      </div>
+    </div>
+
+    <!-- FRAMEWORK -->
+    <div id="p-framework" class="pnl">
+      <div class="card-title" style="margin-bottom:14px">MQGT–SCF <em style="color:var(--glow)">Framework</em></div>
+      <div class="fw-sec"><div class="fw-title">Anchor Tuple</div>
+        <div class="eq eq-c">Π = ( S_core, E_cl, G_GKSL, M_η, O_H₂ )</div>
+        <div class="eq eq-c">S_core = ∫d⁴x √(-g)[L_GR+L_SM+L_Φ+L_E+L_int]</div>
+      </div>
+      <div class="fw-sec"><div class="fw-title">Core Dynamics</div>
+        <div class="eq eq-p">V₄ = (λΦ/4)Φc⁴ + (λE/4)E⁴ + (κ/2)Φc²E²</div>
+        <div class="eq eq-k">dρ/dΣ = -i[H,ρ] + Σₐ(Lₐ ρ Lₐ† - ½{Lₐ†Lₐ,ρ})</div>
+        <div class="eq eq-g">Pη(i) = |cᵢ|² exp(η ΔEᵢ)/Z  ← measure tilt</div>
+        <div class="eq eq-n">V/V₀ = exp(-Γ T Δx²)  ← H₂ observable</div>
+        <div class="eq eq-p">K(r) = gΦ gE exp(-mₘr)/(4πr)  ← Yukawa</div>
+      </div>
+      <div class="fw-sec"><div class="fw-title">Extended Corpus</div>
+        <div class="eq eq-g">L_tele = +ξ f(Φc,E)  ← T-symmetry break</div>
+        <div class="eq eq-k">P(sᵢ) = |ψᵢ|²[1+η Fᵢ(Φc,E)]  ← collapse</div>
+        <div class="eq eq-n">V_int = γ Φc² E  ← γ&lt;0 ethical stability</div>
+      </div>
+    </div>
+
+    <!-- SUITE -->
+    <div id="p-suite" class="pnl">
+      <div class="card-title" style="margin-bottom:14px">Zora <em style="color:var(--gold)">Suite</em></div>
+      <div class="lg">
+        <a href="https://cbaird26.github.io/zora-discovery-application/" target="_blank" class="lc"><span class="atag atag-l">LIVE</span><h4>Zora Discovery</h4><p>Full decision engine, warp core, H₂ model.</p></a>
+        <a href="https://cbaird26.github.io/zoraasi/" target="_blank" class="lc"><span class="atag atag-l">LIVE</span><h4>ZoraASI</h4><p>Recursive agent with field dynamics.</p></a>
+        <a href="https://cbaird26.github.io/zora-refit/" target="_blank" class="lc"><span class="atag atag-b">BETA</span><h4>Refit Autopilot</h4><p>Coherence autopilot mode.</p></a>
+        <a href="https://cbaird26.github.io/zora-refitted/" target="_blank" class="lc"><span class="atag atag-b">BETA</span><h4>Zora Refitted</h4><p>Refined controls and field viz.</p></a>
+        <a href="https://cbaird26.github.io/zora-refitted-mobile/" target="_blank" class="lc"><span class="atag atag-b">BETA</span><h4>Mobile</h4><p>Touch-optimised field display.</p></a>
+        <a href="https://cbaird26.github.io/toe-2026-updates/theory-of-everything-foundation/cosmic-redesign.html" target="_blank" class="lc"><span class="atag atag-l">WEB</span><h4>TOE Foundation</h4><p>Full cosmic web portal.</p></a>
+        <a href="https://github.com/Cbaird26/A-Theory-of-Everything---Baird-et-al-2025-.pdf" target="_blank" class="lc"><span class="atag atag-p">PAPER</span><h4>Thesis</h4><p>5,570 pages. Full foundation.</p></a>
+        <a href="https://github.com/Cbaird26" target="_blank" class="lc"><span class="atag atag-l">GH</span><h4>GitHub</h4><p>All repos and source code.</p></a>
+      </div>
+    </div>
+
+  </div><!-- .main -->
+
+  <!-- BOTTOM TAB BAR -->
+  <div class="tabbar">
+    <button class="tb on" data-t="matrix"><span class="tb-icon">🌀</span>Matrix</button>
+    <button class="tb" data-t="warp"><span class="tb-icon">⬡</span>Warp</button>
+    <button class="tb" data-t="freq" id="tbFreq"><span class="tb-icon">🔊</span>Freq</button>
+    <button class="tb" data-t="bio" id="tbBio"><span class="tb-icon">💚</span>Bio</button>
+    <button class="tb" data-t="reality" id="tbReality"><span class="tb-icon">🌌</span>Reality</button>
+    <button class="tb" data-t="ai" id="tbAI"><span class="tb-icon">🤖</span>Zora AI</button>
+    <button class="tb" data-t="coach" id="tbCoach"><span class="tb-icon">💪</span>Coach</button>
+    <button class="tb" data-t="lab"><span class="tb-icon">◉</span>Lab</button>
+    <button class="tb" data-t="framework"><span class="tb-icon">∑</span>Math</button>
+    <button class="tb" data-t="suite"><span class="tb-icon">↗</span>Suite</button>
+  </div>
+</div>
+
+<script>
+var TAU=Math.PI*2,clamp=function(v,a,b){return Math.max(a,Math.min(b,v))},lerp=function(a,b,t){return a+(b-a)*t};
+var isPro=false;
+
+/* ─── HAPTICS ─── */
+var isNative=!!(window.Capacitor&&window.Capacitor.isNativePlatform&&window.Capacitor.isNativePlatform());
+function haptic(t){if(!isNative)return;try{var H=window.Capacitor.Plugins.Haptics;if(!H)return;t==='impact'?H.impact({style:'medium'}):t==='success'?H.notification({type:'SUCCESS'}):t==='warning'?H.notification({type:'WARNING'}):H.impact({style:'light'});}catch(e){}}
+
+/* ─── STARS ─── */
+(function(){var sc=document.getElementById('starCV'),cx=sc.getContext('2d'),stars=[];function rs(){sc.width=window.innerWidth;sc.height=window.innerHeight;}rs();window.addEventListener('resize',rs);for(var i=0;i<200;i++)stars.push({x:Math.random(),y:Math.random(),r:Math.random()*1.1+.2,s:Math.random()*.004+.001,p:Math.random()*TAU});function draw(t){cx.clearRect(0,0,sc.width,sc.height);stars.forEach(function(s){var a=.15+.45*Math.abs(Math.sin(t*s.s*1000+s.p));cx.fillStyle='rgba(200,185,120,'+a+')';cx.beginPath();cx.arc(s.x*sc.width,s.y*sc.height,s.r,0,TAU);cx.fill();});requestAnimationFrame(draw);}requestAnimationFrame(draw);})();
+
+/* ─── GATE TORUS ─── */
+(function(){var cv=document.getElementById('gateCV'),ctx=cv.getContext('2d'),t=0;function draw(){t+=.025;ctx.clearRect(0,0,120,120);var cx=60,cy=60,R=32,r=12;for(var i=0;i<600;i++){var u=(i/600)*TAU,v=((i*5.1)+t*0.8)%TAU;var x3=(R+r*Math.cos(v))*Math.cos(u),y3=(R+r*Math.cos(v))*Math.sin(u),z3=r*Math.sin(v);var ry=t*.5,cy2=Math.cos(ry),sy2=Math.sin(ry);var rx2=x3*cy2-z3*sy2,rz=x3*sy2+z3*cy2;var sc=100/(100+rz),px=cx+rx2*sc,py=cy+y3*sc;var d=(rz+20)/40,h=40+d*25,fv=Math.sin(u*3+v*2+t)*.5+.5;ctx.fillStyle='hsla('+h+',80%,'+(50+fv*20)+'%,'+Math.min((.3+fv*.4)*sc,.9)+')';ctx.beginPath();ctx.arc(px,py,1.2+sc*1.2,0,TAU);ctx.fill();}requestAnimationFrame(draw);}draw();})();
+
+/* ─── SUBSCRIPTION ─── */
+function selectPlan(p){document.querySelectorAll('.pc').forEach(function(c){c.style.transform='scale(1)'});event.currentTarget&&(event.currentTarget.style.transform='scale(1.02)');}
+function activatePro(){isPro=true;document.getElementById('planBadge').textContent='FOUNDER';document.getElementById('planBadge').style.background='rgba(240,180,41,.25)';document.getElementById('planBadge').style.borderColor='var(--gold)';unlockAll();launchApp();}
+function activateFree(){isPro=false;launchApp();}
+function launchApp(){document.getElementById('subGate').classList.add('hidden');document.getElementById('app').style.display='flex';initApp();}
+function unlockAll(){['tbFreq','tbBio','tbReality','tbAI','tbCoach'].forEach(function(id){var el=document.getElementById(id);if(el){el.classList.remove('tb-locked');}});['mx-freq','mx-bio','mx-reality','mx-ai','mx-coach'].forEach(function(id){var el=document.getElementById(id);if(el){el.classList.remove('mx-locked');}});}
+function switchTab(t){if(!isPro&&['freq','bio','reality','ai','coach'].includes(t)){showUpgrade();return;}document.querySelectorAll('.tb').forEach(function(b){b.classList.remove('on')});var btn=document.querySelector('[data-t="'+t+'"]');if(btn)btn.classList.add('on');document.querySelectorAll('.pnl').forEach(function(p){p.classList.remove('show')});var pnl=document.getElementById('p-'+t);if(pnl)pnl.classList.add('show');document.querySelector('.main').scrollTop=0;haptic('light');}
+function showUpgrade(){alert('Unlock with Founder Plan — $0.99/month');}
+function initApp(){updateDate();setInterval(function(){upd();},300);initCoach();}
+
+/* ─── TABS ─── */
+document.querySelectorAll('.tb').forEach(function(tb){tb.addEventListener('click',function(){var t=tb.dataset.t;if(!isPro&&['freq','bio','reality','ai','coach'].includes(t)){showUpgrade();return;}switchTab(t);});});
+
+/* ─── STATE ─── */
+var Z={a:.96,c:.92,th:.88,st:.94,eta:0,fold:0,phase:'rdy',eT:0,opts:[{n:'A',a:.6,c:.5,t:.7,s:.6},{n:'B',a:.55,c:.65,t:.5,s:.55},{n:'C',a:.96,c:.92,t:.88,s:.94}],ao:0};
+function coh(){return Z.a*.3+Z.st*.3+(1-Z.c)*.2+Z.th*.2}
+function via(a,c,t,s){return Math.min((a*.3+s*.3+(1-c)*.2+t*.2)*.6+(1-c*.3)*.2+s*.2,.999)*100}
+function rsk(c,s){return clamp(c*40+(1-s)*30,5,60)}
+function visf(co){return Math.exp(-1.15e9*(1-co*.85)*1e-12)}
+function gEf(co){return 1.15e9*(1-co*.85)}
+
+function updateDate(){var d=new Date();document.getElementById('mat-date').textContent=d.toLocaleDateString('en-US',{weekday:'long',month:'long',day:'numeric'});}
+var intentions_of_day=['Today, I align with the highest-viability future available to me.','I expand the boundaries of what I believe is possible.','My coherence field is clear. My path forward is visible.','I choose the timeline where consciousness and ethics rise together.','The fold opens. I step through without hesitation.'];
+function upd(){var co=coh(),v=via(Z.a,Z.c,Z.th,Z.st),r=rsk(Z.c,Z.st),vs=visf(co),ge=gEf(co);
+  document.getElementById('mat-coh').textContent=(co*100).toFixed(1);
+  document.getElementById('cohBar').style.width=(co*100)+'%';
+  document.getElementById('mat-via').textContent=v.toFixed(1)+'%';
+  document.getElementById('mat-vv').textContent=vs.toFixed(4);
+  document.getElementById('mat-risk').textContent=r.toFixed(1)+'%';
+  document.getElementById('mat-gam').textContent=ge.toExponential(2);
+  document.getElementById('mat-phase').textContent=Z.phase==='go'?'WARPING':Z.phase==='arr'?'ARRIVED':'STANDBY';
+  var di=document.getElementById('daily-int');if(di.textContent==='Loading...')di.textContent=intentions_of_day[new Date().getDay()%intentions_of_day.length];
+  if(document.getElementById('mCoh')){document.getElementById('mCoh').textContent=co.toFixed(3);document.getElementById('mLk').textContent=Math.min(99,co*80+Z.st*20).toFixed(1)+'%';document.getElementById('mVi').textContent=v.toFixed(1)+'%';document.getElementById('mRk').textContent=r.toFixed(1)+'%';document.getElementById('mRk').style.color=r>40?'var(--red)':r>25?'var(--glow3)':'var(--green)';document.getElementById('mVs').textContent=vs.toFixed(6);document.getElementById('hGam').textContent=ge.toExponential(2);document.getElementById('hVis').textContent=(vs*100).toFixed(3)+'%';document.getElementById('gCoh').textContent=co.toFixed(3);document.getElementById('gEta').textContent=Z.eta.toFixed(2);document.getElementById('sWin').textContent=co>.85?'LOCKED':'HOLD';document.getElementById('sWin').className='tg '+(co>.85?'tg-s':'tg-w');document.getElementById('sTop').textContent=Z.fold<.8?'STABLE':'STRESS';document.getElementById('sTop').className='tg '+(Z.fold<.8?'tg-s':'tg-w');}
+  var wd=document.getElementById('wDot');if(wd){wd&&(Z.phase==='go'?wd.className='dot dot-w':wd.className='dot dot-on');}
+}
+
+/* ─── SLIDERS ─── */
+[['sA','vA','a'],['sS','vS','st'],['sE','vE','eta'],['sF','vF','fold']].forEach(function(x){var el=document.getElementById(x[0]);if(el)el.addEventListener('input',function(e){Z[x[2]]=+e.target.value;document.getElementById(x[1]).textContent=(+e.target.value).toFixed(2);upd();});});
+
+/* ─── FLASH ─── */
+var wF1=document.getElementById('wF1'),wF2=document.getElementById('wF2'),wFBc=document.getElementById('wFB'),wFBx=wFBc.getContext('2d');
+var wFC=document.getElementById('wFC'),warpActive=false,warpTick=0,rR=0,rO=0,flashT=0;
+function resB(){wFBc.width=window.innerWidth;wFBc.height=window.innerHeight;}resB();window.addEventListener('resize',resB);
+function applyFlash(f,strobe){var f2=Math.min(1,f),f3=Math.min(1,f*2);wF1.style.opacity=f2;wF2.style.opacity=Math.min(1,f3*.8);wFBc.style.opacity=f2>.04?1:0;document.body.style.background=f2>.3?'rgba(255,255,255,'+Math.min(1,(f2-.3)*4)+')':'';var cs=Math.round(20+f3*600);wFC.style.width=cs+'px';wFC.style.height=cs+'px';wFC.style.marginLeft=(-cs/2)+'px';wFC.style.marginTop=(-cs/2)+'px';wFC.style.opacity=Math.min(1,f3*5);wFC.style.filter='blur('+Math.round(f3*70)+'px)';wFBx.clearRect(0,0,wFBc.width,wFBc.height);if(f3>.06){var cx2=wFBc.width/2,cy2=wFBc.height/2;for(var i=0;i<18;i++){var ang=(i/18)*TAU+flashT*.9,len=1400*f3*(.55+.45*Math.sin(flashT*3+i));var grd=wFBx.createLinearGradient(cx2,cy2,cx2+Math.cos(ang)*len,cy2+Math.sin(ang)*len);grd.addColorStop(0,'rgba(255,255,255,'+Math.min(1,f3)+')');grd.addColorStop(1,'rgba(255,255,255,0)');wFBx.beginPath();wFBx.moveTo(cx2,cy2);wFBx.lineTo(cx2+Math.cos(ang)*len,cy2+Math.sin(ang)*len);wFBx.strokeStyle=grd;wFBx.lineWidth=Math.max(1,f3*26);wFBx.stroke();}}if(strobe>.5){wFBx.fillStyle='rgba(255,255,255,'+strobe+')';wFBx.fillRect(0,0,wFBc.width,wFBc.height);}if(rO>0){document.getElementById('wFR')&&(document.getElementById('wFR').style.opacity=rO);}}
+function clearFlash(){wF1.style.opacity=0;wF2.style.opacity=0;wFBc.style.opacity=0;wFC.style.opacity=0;document.body.style.background='';if(document.getElementById('gC'))document.getElementById('gC').style.filter='none';}
+
+/* ─── ENGAGE ─── */
+var engBtn=document.getElementById('engBtn');
+if(engBtn)engBtn.addEventListener('click',function(){if(Z.phase==='rdy'){haptic('impact');Z.phase='go';Z.eT=gt;warpActive=true;warpTick=0;rR=0;rO=1;engBtn.className='eng go';engBtn.textContent='WARPING...';aLog('ENGAGE. Fold-space initiated.');setTimeout(function(){Z.phase='arr';warpActive=false;clearFlash();haptic('success');engBtn.className='eng arr';engBtn.textContent='ARRIVED — RE-ENGAGE?';aLog('ARRIVED. Coh: '+coh().toFixed(3));upd();},4500);}else{haptic('warning');Z.phase='rdy';warpActive=false;clearFlash();engBtn.className='eng rdy';engBtn.textContent='ENGAGE (INTENTION)';aLog('Re-engaged.');}upd();});
+function aLog(m){var t=new Date().toLocaleTimeString().slice(0,5),a=document.getElementById('logA');if(a){a.innerHTML+='<div class="e"><span class="ts">['+t+']</span> <span class="m">'+m+'</span></div>';a.scrollTop=a.scrollHeight;}}
+
+/* ─── WARP CANVAS ─── */
+var gCV=document.getElementById('gC'),gx=gCV?gCV.getContext('2d'):null,gt=0;
+function drawG(){gt+=.018;flashT+=.022;if(!gx){requestAnimationFrame(drawG);return;}var W=gCV.width,H=gCV.height;gx.clearRect(0,0,W,H);var bg=gx.createRadialGradient(W/2,H/2,0,W/2,H/2,W*.55);bg.addColorStop(0,'#0a0818');bg.addColorStop(1,'#02030a');gx.fillStyle=bg;gx.fillRect(0,0,W,H);var cx=W/2,cy=H/2,co=coh(),fd=Z.fold,eta=Z.eta,isW=Z.phase==='go';var R1=88+fd*32,R2=35+co*20,uS=34,vS=18,ws=isW?gt*3.5:gt*.5;var fv2=0,sv2=0;if(warpActive){warpTick++;if(warpTick<=6){fv2=warpTick/6;}else if(warpTick<=12){fv2=1;sv2=(warpTick%2===0)?1:0;}else if(warpTick<=55){fv2=1;sv2=Math.sin((warpTick-12)*1.8)>0?1:0;}else if(warpTick<=120){var sp=(warpTick-55)/65;fv2=1-sp*.4;sv2=Math.sin((warpTick-55)*1.2)>.2?.8:0;}else if(warpTick<=180){var sp2=(warpTick-120)/60;fv2=.6-sp2*.5;}else{fv2=Math.max(0,.1-(warpTick-180)/70*.1);}rR+=10+fv2*20;rO=Math.max(0,1-rR/480);applyFlash(fv2,sv2);}if(rO>0){gx.beginPath();gx.arc(cx,cy,rR,0,TAU);gx.strokeStyle='rgba(255,255,255,'+rO+')';gx.lineWidth=Math.max(1,14*(1-rR/480));gx.stroke();}for(var i=0;i<uS;i++)for(var j=0;j<vS;j++){var u=(i/uS)*TAU,v=(j/vS)*TAU;var x3=(R1+R2*Math.cos(v))*Math.cos(u),y3=(R1+R2*Math.cos(v))*Math.sin(u),z3=R2*Math.sin(v);var rY=ws*.3,rX=.4+Math.sin(gt*.2)*.1,cY=Math.cos(rY),sY=Math.sin(rY),cX=Math.cos(rX),sX=Math.sin(rX);var rx=x3*cY-z3*sY,ry=y3,rz=x3*sY+z3*cY,ry2=ry*cX-rz*sX,rz2=ry*sX+rz*cX;var sc=250/(250+rz2),sx=cx+rx*sc,sy=cy+ry2*sc,fv=Math.sin(u*3+v*2+gt)*.5+.5;if(isW){var wf=.5+.5*Math.sin(gt*8+u*3+v*4);gx.fillStyle='hsla(215,'+(8+fv*10)+'%,'+(72+wf*24)+'%,'+Math.min((.55+wf*.44)*sc,.98)+')';}else{var hh=42+eta*fv*40+fd*20;gx.fillStyle='hsla('+hh+','+Math.round(65+co*18)+'%,'+Math.round(28+co*26+fv*16)+'%,'+Math.min((.12+co*.26+fv*.16)*sc,.8)+')';}var dr=1+sc*1.5+co*1.3+(isW?1.8:0);gx.beginPath();gx.arc(sx,sy,dr,0,TAU);gx.fill();}if(isW){var fa=.1+.16*Math.abs(Math.sin(gt*5));var fg=gx.createRadialGradient(cx,cy,0,cx,cy,R1+R2+40);fg.addColorStop(0,'rgba(255,255,255,'+(fa*5)+')');fg.addColorStop(1,'transparent');gx.fillStyle=fg;gx.beginPath();gx.arc(cx,cy,R1+R2+40,0,TAU);gx.fill();}if(fd>.05){var fg2=gx.createRadialGradient(cx,cy,0,cx,cy,18+fd*80);fg2.addColorStop(0,'rgba(240,180,41,'+(fd*.6)+')');fg2.addColorStop(1,'transparent');gx.fillStyle=fg2;gx.beginPath();gx.arc(cx,cy,18+fd*80,0,TAU);gx.fill();}var op=.5+.5*Math.sin(gt*(isW?9:2)),oR=isW?18+op*14:7+co*10+op*4;var og=gx.createRadialGradient(cx,cy,0,cx,cy,oR);if(isW){og.addColorStop(0,'rgba(255,255,255,.95)');og.addColorStop(.3,'rgba(255,255,255,.4)');og.addColorStop(1,'transparent');}else{og.addColorStop(0,'rgba(240,180,41,'+(.35+co*.5)+')');og.addColorStop(1,'transparent');}gx.fillStyle=og;gx.beginPath();gx.arc(cx,cy,oR,0,TAU);gx.fill();gx.font='bold 10px "IBM Plex Mono",monospace';gx.textAlign='right';gx.fillStyle=isW?'#fff':Z.phase==='arr'?'#10d9a0':'#555878';gx.fillText(isW?'◈ WARPING':Z.phase==='arr'?'◈ ARRIVED':'◈ STANDBY',W-10,H-10);requestAnimationFrame(drawG);}
+drawG();
+
+/* ─── FREQ LAB ─── */
+var audioCtx=null,freqOsc1=null,freqOsc2=null,gainNode=null,freqPlaying=false,activeHz=528,binBase=200,binBeat=10;
+var freqCV=document.getElementById('freqCV'),freqCtx=freqCV?freqCV.getContext('2d'):null,freqT=0;
+function initAudio(){if(!audioCtx){try{audioCtx=new(window.AudioContext||window.webkitAudioContext)();gainNode=audioCtx.createGain();gainNode.gain.value=.5;gainNode.connect(audioCtx.destination);}catch(e){console.log('Audio not available');}}}
+document.querySelectorAll('.fq').forEach(function(fq){fq.addEventListener('click',function(){haptic('impact');document.querySelectorAll('.fq').forEach(function(f){f.classList.remove('active')});fq.classList.add('active');activeHz=+fq.dataset.hz;document.getElementById('freqLabel').textContent=activeHz+' Hz — '+fq.dataset.name.toUpperCase();if(freqPlaying)playFreq();});});
+function toggleFreq(){if(freqPlaying)stopFreq();else playFreq();}
+function playFreq(){initAudio();if(!audioCtx)return;stopFreq();try{freqOsc1=audioCtx.createOscillator();freqOsc1.frequency.value=activeHz;freqOsc1.connect(gainNode);freqOsc1.start();freqPlaying=true;var btn=document.getElementById('freqPlayBtn');btn.textContent='■ STOP';btn.className='play-btn playing';haptic('success');}catch(e){}}
+function stopFreq(){if(freqOsc1){try{freqOsc1.stop();freqOsc1.disconnect();}catch(e){}freqOsc1=null;}freqPlaying=false;var btn=document.getElementById('freqPlayBtn');if(btn){btn.textContent='▸ PLAY TONE';btn.className='play-btn stopped';}}
+var sBinBase=document.getElementById('sBinBase');if(sBinBase)sBinBase.addEventListener('input',function(e){binBase=+e.target.value;document.getElementById('binBase').textContent=binBase;updateBinNote();});
+var sBinBeat=document.getElementById('sBinBeat');if(sBinBeat)sBinBeat.addEventListener('input',function(e){binBeat=+e.target.value;document.getElementById('binBeat').textContent=binBeat;updateBinNote();});
+var sFreqVol=document.getElementById('sFreqVol');if(sFreqVol)sFreqVol.addEventListener('input',function(e){var v=+e.target.value;document.getElementById('freqVol').textContent=v+'%';if(gainNode)gainNode.gain.value=v/100;});
+function updateBinNote(){var b=binBeat,states=['Delta (0.5–4 Hz): Deep sleep, healing','Theta (4–8 Hz): Meditation, creativity','Alpha (8–13 Hz): Relaxed focus, flow','Beta (13–30 Hz): Active thinking, focus','Gamma (30–100 Hz): Insight, high cognition'];var label=b<4?states[0]:b<8?states[1]:b<13?states[2]:b<30?states[3]:states[4];var el=document.getElementById('binNote');if(el)el.innerHTML='<b style="color:var(--gold)">'+label.split(':')[0]+':</b>'+label.split(':')[1]+'. Beat: <span id="binState">'+b+' Hz</span>';}
+function drawFreq(){if(!freqCtx){requestAnimationFrame(drawFreq);return;}freqT+=.04;var W=freqCV.width,H=freqCV.height;freqCtx.fillStyle='rgba(11,13,28,.3)';freqCtx.fillRect(0,0,W,H);if(freqPlaying){freqCtx.beginPath();for(var x=0;x<W;x++){var y=H/2+Math.sin((x/W)*TAU*3+freqT*6)*(H*.25)*Math.sin(freqT*.5+x/W*TAU)+ Math.sin((x/W)*TAU*7+freqT*12)*(H*.1);x===0?freqCtx.moveTo(x,y):freqCtx.lineTo(x,y);}freqCtx.strokeStyle='rgba(240,180,41,0.8)';freqCtx.lineWidth=2;freqCtx.stroke();}requestAnimationFrame(drawFreq);}
+drawFreq();
+
+/* ─── BIOSYNC ─── */
+var breathIn=4,breathHold=0,breathOut=4,breathPhaseState='inhale',breathTimer=0,breathCyclePos=0,totalBreaths=0;
+var hrvCV=document.getElementById('hrvCV'),hrvCtx=hrvCV?hrvCV.getContext('2d'):null,hrvData=[],bpmVal=68;
+function setBreath(i,h,o,el){breathIn=i;breathHold=h;breathOut=o;document.querySelectorAll('.bm').forEach(function(b){b.classList.remove('active')});el.classList.add('active');}
+function updateBreath(){var total=breathIn+(breathHold||0)+breathOut;breathCyclePos=(breathCyclePos+0.05)%total;var phase,txt;if(breathCyclePos<breathIn){phase='inhale';txt='INHALE';}else if(breathCyclePos<breathIn+breathHold){phase='hold';txt='HOLD';}else{phase='exhale';txt='EXHALE';}if(phase!==breathPhaseState&&phase==='inhale')totalBreaths++;breathPhaseState=phase;document.getElementById('breathText').textContent=txt;document.getElementById('breathPhase').textContent=txt;document.getElementById('breathCount').textContent=totalBreaths;bpmVal=60+(Math.sin(breathCyclePos/total*TAU)*8);document.getElementById('bpm').textContent=Math.round(bpmVal);var hrv=65+Math.sin(Date.now()/3000)*12;document.getElementById('hrv-score').textContent=Math.round(hrv);var cohB=0.8+Math.sin(Date.now()/5000)*.12;document.getElementById('coh-score').textContent=cohB.toFixed(2);document.getElementById('phiRes').textContent=(0.75+Math.sin(Date.now()/4000)*.15).toFixed(2);hrvData.push(bpmVal);if(hrvData.length>80)hrvData.shift();drawHRV();}
+setInterval(updateBreath,200);
+function drawHRV(){if(!hrvCtx)return;var W=hrvCV.width,H=hrvCV.height;hrvCtx.fillStyle='#05060f';hrvCtx.fillRect(0,0,W,H);if(hrvData.length<2)return;hrvCtx.beginPath();var mn=Math.min.apply(null,hrvData),mx=Math.max.apply(null,hrvData);hrvData.forEach(function(v,i){var x=(i/(hrvData.length-1))*W,y=H-((v-mn)/(mx-mn+1))*(H*.8)-H*.1;i===0?hrvCtx.moveTo(x,y):hrvCtx.lineTo(x,y);});hrvCtx.strokeStyle='rgba(16,217,160,.7)';hrvCtx.lineWidth=1.5;hrvCtx.stroke();}
+
+/* ─── REALITY CONSTRUCTOR ─── */
+var intentions=JSON.parse(localStorage.getItem('toe_intentions')||'[]');
+function renderIntentions(){var list=document.getElementById('intList');if(!list)return;if(intentions.length===0){list.innerHTML='<div style="font-size:11px;color:var(--dim);font-style:italic;text-align:center;padding:12px">No intentions encoded yet.</div>';return;}list.innerHTML=intentions.slice().reverse().map(function(it){return'<div class="int-item"><div class="int-text">'+it.text+'</div><div style="text-align:right"><div class="int-date">'+it.date+'</div><div class="int-prob">'+it.prob+'%</div></div></div>';}).join('');document.getElementById('intCount').textContent='('+intentions.length+')';}
+function addIntention(){var inp=document.getElementById('intInput');if(!inp||!inp.value.trim())return;haptic('success');var prob=Math.round(55+parseFloat(document.getElementById('realCoh').value||.8)*40+parseFloat(document.getElementById('realEta').value||0)*5);intentions.push({text:inp.value.trim(),date:new Date().toLocaleDateString(),prob:clamp(prob,30,99)});localStorage.setItem('toe_intentions',JSON.stringify(intentions));document.getElementById('orbText').textContent='"'+inp.value.trim().slice(0,50)+(inp.value.length>50?'...':'')+'"';inp.value='';renderIntentions();}
+var sRealEta=document.getElementById('sRealEta');if(sRealEta)sRealEta.addEventListener('input',function(e){document.getElementById('realEta').textContent=(+e.target.value).toFixed(2);updateRealityCalc();});
+var sRealCoh=document.getElementById('sRealCoh');if(sRealCoh)sRealCoh.addEventListener('input',function(e){document.getElementById('realCoh').textContent=(+e.target.value).toFixed(2);updateRealityCalc();});
+function updateRealityCalc(){var eta=parseFloat(document.getElementById('realEta').textContent||0),coh=parseFloat(document.getElementById('realCoh').textContent||.8),dE=1+Math.abs(eta)*.2;document.getElementById('realDeltaE').textContent=dE.toFixed(2);var viab=clamp(55+coh*40+eta*5,10,99);document.getElementById('realViab').textContent=viab.toFixed(1)+'%';}
+
+/* ─── ZORA AI ─── */
+var aiHistory=[];
+async function sendAI(){var inp=document.getElementById('aiInput');if(!inp||!inp.value.trim())return;var msg=inp.value.trim();inp.value='';haptic('impact');addMsg(msg,'user');var btn=document.getElementById('aiSendBtn');if(btn)btn.disabled=true;addMsg('Thinking...','ai',true);try{var res=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:1000,system:'You are Zora, an AI guide embedded in the Theory of Everything Foundation app, built on the MQGT-SCF (Merged Quantum Gauge and Scalar Consciousness Framework) by C. Michael Baird. Your purpose is to help users navigate reality construction, quantum decision science, consciousness field coherence, and personal boundary expansion. Draw on the framework: Φc (consciousness field), E (ethics field), η (measure tilt), GKSL dynamics, the toroidal warp core, H₂ interferometric testing, and the anchor tuple Π = (S_core, E_cl, G_GKSL, M_η, O_H₂). Be profound, practical, and encouraging. Keep responses concise and actionable — this is a mobile app. Help the user build coherence, make decisions, and expand what they believe is possible.',messages:[...aiHistory,{role:'user',content:msg}]})});var data=await res.json();var reply=data.content?data.content.filter(function(b){return b.type==='text'}).map(function(b){return b.text}).join(''):'I am here. Ask anything.';removeThinking();addMsg(reply,'ai');aiHistory.push({role:'user',content:msg},{role:'assistant',content:reply});if(aiHistory.length>20)aiHistory=aiHistory.slice(-20);}catch(e){removeThinking();addMsg('Connection unavailable. The field is still active — try again shortly.','ai');}if(btn)btn.disabled=false;}
+function addMsg(text,role,thinking){var msgs=document.getElementById('aiMsgs');if(!msgs)return;var d=document.createElement('div');d.className='msg msg-'+role+(thinking?' msg-thinking':'');if(role==='ai')d.innerHTML='<div class="msg-name">ZORA · MQGT–SCF</div>'+text;else d.textContent=text;msgs.appendChild(d);msgs.scrollTop=msgs.scrollHeight;}
+function removeThinking(){var msgs=document.getElementById('aiMsgs');if(!msgs)return;var thinking=msgs.querySelector('.msg-thinking');if(thinking)msgs.removeChild(thinking);}
+
+/* ─── COACHING ─── */
+var challenges=[{title:'Identify One Assumed Limit',desc:'Write down one thing you believe is impossible for you right now. Then ask: "Is this actually impossible, or just unfamiliar?" That gap is where the field opens.',icon:'🎯'},{title:'5-Minute Field Set',desc:'Set a clear intention in the Reality Constructor. Then do 5 minutes of BioSync breathing. Notice the difference in how you see your options.',icon:'🌅'},{title:'The Coherence Walk',desc:'Take a 10-minute walk with one question in mind: "What would I do if I knew this would work?" Let the answer emerge without forcing it.',icon:'🚶'},{title:'Decision Audit',desc:'Pick one pending decision. Run all options through the Warp Core decision surface. Trust the viability score — then verify with your gut.',icon:'⊕'},{title:'Reframe a Resistance',desc:'Find something you have been avoiding. Ask: "What does this resistance protect me from?" Then ask: "Is that protection still serving me?"',icon:'⚡'},{title:'Warp State Protocol',desc:'Open the Warp Core. Set alignment to max. Hit ENGAGE. Sit with the field for the full 4-second sequence. Journal what comes up immediately after.',icon:'⬡'},{title:'Future Self Letter',desc:'Write 3 sentences from your future self — one year from now — back to present you. What did you need to hear? Encode this as a Reality Constructor intention.',icon:'📡'}];
+var coachData=JSON.parse(localStorage.getItem('toe_coach')||'{"streak":0,"total":0,"lastDate":null,"done":[]}');
+function initCoach(){updateStreakUI();loadChallenge();}
+function loadChallenge(){var today=new Date().toDateString();var dayIdx=new Date().getDay();var c=challenges[dayIdx%challenges.length];document.getElementById('challengeDay').textContent='DAY CHALLENGE';document.getElementById('challengeTitle').textContent=c.title;document.getElementById('challengeDesc').textContent=c.desc;document.getElementById('coachStreak').textContent=coachData.streak;document.getElementById('coachTotal').textContent=coachData.total;document.getElementById('coachExpansion').textContent=Math.min(99,coachData.total*7)+'%';if(coachData.lastDate===today){document.getElementById('challengeBtn').textContent='✓ COMPLETED TODAY';document.getElementById('challengeBtn').className='challenge-btn done';}}
+function updateStreakUI(){var row=document.getElementById('streakRow');if(!row)return;row.innerHTML='';var today=new Date();for(var i=6;i>=0;i--){var d=new Date(today);d.setDate(d.getDate()-i);var ds=d.toDateString();var dot=document.createElement('div');var label=['S','M','T','W','T','F','S'][d.getDay()];dot.className='streak-dot'+(i===0?' today':coachData.done.includes(ds)?' done':'');dot.textContent=label;row.appendChild(dot);}}
+function completeChallenge(){var today=new Date().toDateString();if(coachData.lastDate===today)return;haptic('success');coachData.done.push(today);coachData.total++;var yesterday=new Date();yesterday.setDate(yesterday.getDate()-1);coachData.streak=coachData.lastDate===yesterday.toDateString()?coachData.streak+1:1;coachData.lastDate=today;localStorage.setItem('toe_coach',JSON.stringify(coachData));document.getElementById('challengeBtn').textContent='✓ COMPLETED TODAY';document.getElementById('challengeBtn').className='challenge-btn done';document.getElementById('coachStreak').textContent=coachData.streak;document.getElementById('coachTotal').textContent=coachData.total;document.getElementById('coachExpansion').textContent=Math.min(99,coachData.total*7)+'%';updateStreakUI();}
+function startProtocol(p){var msgs={morning:'Open BioSync → do 3 minutes of Coherence breathing → then open Reality Constructor and set today\'s intention.',decision:'List your options in the Decision tab. Set alignment and stability sliders honestly. The highest viability score is your field\'s recommendation.',fear:'Name the fear in the Reality Constructor. Set η to +1.5. Watch probability shift toward growth timelines. Fear is just high-potential energy.',reality:'Review all encoded intentions. Which ones arrived? Mark them. Which need higher coherence? Adjust your field parameters.',warp:'Open Warp Core. Alignment max. Hit ENGAGE. Stay present through the entire 4-second sequence. Note what becomes clear.'};alert('Protocol: '+msgs[p]);}
+
+/* ─── LAB CANVASES ─── */
+var scCV=document.getElementById('scCV'),scCtx=scCV?scCV.getContext('2d'):null,scT=0,scP={eta:0,n:6};
+['scSEta','scSN'].forEach(function(id,i){var el=document.getElementById(id);if(el)el.addEventListener('input',function(e){var v=+e.target.value;if(i===0)scP.eta=v;if(i===1)scP.n=v;document.getElementById(['scEta','scN'][i]).textContent=v.toFixed(i===1?0:2);});});
+function drawSc(){if(!scCtx){requestAnimationFrame(drawSc);return;}scT+=.018;var cv=scCV,W=cv.width,H=cv.height,ctx=scCtx;ctx.clearRect(0,0,W,H);var bg=ctx.createRadialGradient(W/2,H/2,0,W/2,H/2,W*.6);bg.addColorStop(0,'#0d0820');bg.addColorStop(1,'#02030a');ctx.fillStyle=bg;ctx.fillRect(0,0,W,H);var n=scP.n,cx=W/2,cy=H/2,R=Math.min(W,H)*.38,fs=Array.from({length:n},function(_,i){return{a:(i/n)*TAU-Math.PI/2,dE:i/(n-1)*2-1,lb:'F'+(i+1)};});var eE=scP.eta*5,rw=fs.map(function(f){return Math.exp(eE*f.dE)}),Zv=rw.reduce(function(a,b){return a+b},0),pr=rw.map(function(p){return p/Zv});for(var i=0;i<n;i++){var f=fs[i],p=pr[i],r=R*(.25+p*2.2),x=cx+Math.cos(f.a)*r,y=cy+Math.sin(f.a)*r,hh=f.dE>0?45:(f.dE<0?330:50);ctx.strokeStyle='hsla('+hh+',80%,60%,'+(.12+p*.5)+')';ctx.lineWidth=.5+p*3.5;ctx.beginPath();ctx.moveTo(cx,cy);ctx.lineTo(x,y);ctx.stroke();var oR=7+p*34,g=ctx.createRadialGradient(x,y,0,x,y,oR);g.addColorStop(0,'hsla('+hh+',92%,72%,'+(.55+p*.4)+')');g.addColorStop(1,'transparent');ctx.fillStyle=g;ctx.beginPath();ctx.arc(x,y,oR,0,TAU);ctx.fill();ctx.fillStyle='hsla('+hh+',62%,86%,'+(.45+p)+')';ctx.font='bold '+(10+p*5)+'px "IBM Plex Mono",monospace';ctx.textAlign='center';ctx.fillText(f.lb,x,y-oR-4);ctx.font='10px "IBM Plex Mono",monospace';ctx.fillStyle='hsla('+hh+',50%,76%,.8)';ctx.fillText((p*100).toFixed(1)+'%',x,y+4);}var cg=ctx.createRadialGradient(cx,cy,0,cx,cy,18);cg.addColorStop(0,'rgba(240,180,41,.65)');cg.addColorStop(1,'transparent');ctx.fillStyle=cg;ctx.beginPath();ctx.arc(cx,cy,18,0,TAU);ctx.fill();requestAnimationFrame(drawSc);}drawSc();
+var fsCV=document.getElementById('fsCV'),fsCtx=fsCV?fsCV.getContext('2d'):null,fsT=0,fsP={mM:1,fd:0};
+['fsSMM','fsSFd'].forEach(function(id,i){var el=document.getElementById(id);if(el)el.addEventListener('input',function(e){var v=+e.target.value;if(i===0)fsP.mM=v;if(i===1)fsP.fd=v;document.getElementById(['fsMM','fsFd'][i]).textContent=v.toFixed(2);});});
+function drawFs(){if(!fsCtx){requestAnimationFrame(drawFs);return;}fsT+=.02;var cv=fsCV,W=cv.width,H=cv.height,ctx=fsCtx;ctx.clearRect(0,0,W,H);var bg=ctx.createRadialGradient(W/2,H/2,0,W/2,H/2,W*.6);bg.addColorStop(0,'#0e0820');bg.addColorStop(1,'#02030a');ctx.fillStyle=bg;ctx.fillRect(0,0,W,H);var cx=W/2,cy=H/2,gs=13,sp=18,sx=cx-(gs-1)*sp/2,sy=cy-(gs-1)*sp/2;for(var i=0;i<gs;i++)for(var j=0;j<gs;j++){var x=sx+i*sp,y=sy+j*sp,dx=x-cx,dy=y-cy,d=Math.sqrt(dx*dx+dy*dy);var kv=Math.exp(-fsP.mM*d/80)/(d/80+.1),fs2=fsP.fd*kv*.3;x-=dx*fs2;y-=dy*fs2;var w=Math.sin(d*.05-fsT*2)*(1-fsP.fd)*2;x+=w*dx/(d+1)*.5;y+=w*dy/(d+1)*.5;var int2=clamp(kv*.15,0,1),hh=lerp(265,185,int2);ctx.fillStyle='hsla('+hh+',82%,'+(48+int2*32)+'%,'+(.22+int2*.62)+')';ctx.beginPath();ctx.arc(x,y,1.4+int2*2.8,0,TAU);ctx.fill();}if(fsP.fd>.08){var fg=ctx.createRadialGradient(cx,cy,0,cx,cy,32+fsP.fd*50);fg.addColorStop(0,'rgba(240,180,41,'+(fsP.fd*.55)+')');fg.addColorStop(1,'transparent');ctx.fillStyle=fg;ctx.beginPath();ctx.arc(cx,cy,32+fsP.fd*50,0,TAU);ctx.fill();}requestAnimationFrame(drawFs);}drawFs();
+var tlCV=document.getElementById('tlCV'),tlCtx=tlCV?tlCV.getContext('2d'):null,tlT=0,tlP={eta:0,fi:.5};
+var TL=[{n:'Stagnation',dE:-.8,h:0},{n:'Conflict',dE:-.3,h:28},{n:'Baseline',dE:0,h:50},{n:'Growth',dE:.4,h:145},{n:'Convergence',dE:.8,h:175},{n:'Transcendence',dE:1.2,h:270}];
+['tlSEta','tlSFi'].forEach(function(id,i){var el=document.getElementById(id);if(el)el.addEventListener('input',function(e){var v=+e.target.value;if(i===0)tlP.eta=v;if(i===1)tlP.fi=v;document.getElementById(['tlEta','tlFi'][i]).textContent=v.toFixed(2);});});
+function drawTl(){if(!tlCtx){requestAnimationFrame(drawTl);return;}tlT+=.015;var cv=tlCV,W=cv.width,H=cv.height,ctx=tlCtx;ctx.clearRect(0,0,W,H);ctx.fillStyle='#02030a';ctx.fillRect(0,0,W,H);var eE=tlP.eta*(1+tlP.fi*5),rw=TL.map(function(t){return Math.exp(eE*t.dE)}),Zv=rw.reduce(function(a,b){return a+b},0),pr=rw.map(function(p){return p/Zv});var oX=48,bH=(H-50)/TL.length;for(var i=0;i<TL.length;i++){var t=TL[i],p=pr[i],y=25+i*bH+bH/2,eX=oX+65+p*(W-145),a=.18+p*.72;ctx.strokeStyle='hsla('+t.h+',72%,60%,'+a+')';ctx.lineWidth=.7+p*4;ctx.beginPath();ctx.moveTo(oX,H/2);ctx.quadraticCurveTo(oX+28,y,eX,y);ctx.stroke();var oR=4+p*14,g=ctx.createRadialGradient(eX,y,0,eX,y,oR);g.addColorStop(0,'hsla('+t.h+',92%,76%,'+(.45+p*.55)+')');g.addColorStop(1,'transparent');ctx.fillStyle=g;ctx.beginPath();ctx.arc(eX,y,oR,0,TAU);ctx.fill();ctx.fillStyle='hsla('+t.h+',62%,86%,'+(.45+p)+')';ctx.font='bold '+(9+p*3)+'px "IBM Plex Mono",monospace';ctx.textAlign='left';ctx.fillText(t.n,eX+oR+5,y);ctx.font='9px "IBM Plex Mono",monospace';ctx.fillStyle='hsla('+t.h+',42%,70%,.7)';ctx.fillText((p*100).toFixed(1)+'%',eX+oR+5,y+11);}var og=ctx.createRadialGradient(oX,H/2,0,oX,H/2,12);og.addColorStop(0,'rgba(255,255,255,.85)');og.addColorStop(1,'transparent');ctx.fillStyle=og;ctx.beginPath();ctx.arc(oX,H/2,12,0,TAU);ctx.fill();ctx.fillStyle='#fff';ctx.font='bold 9px "IBM Plex Mono",monospace';ctx.textAlign='center';ctx.fillText('NOW',oX,H/2+3);requestAnimationFrame(drawTl);}drawTl();
+
+/* ─── INIT ─── */
+renderIntentions();upd();
+</script>
+</body>
+</html>

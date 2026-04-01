@@ -5,7 +5,7 @@ set -euo pipefail
 DL="${DL:-$HOME/Downloads}"
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 DOCS="$ROOT/docs"
-mkdir -p "$DOCS/theory-of-everything-foundation" "$DOCS/artifacts"
+mkdir -p "$DOCS/theory-of-everything-foundation" "$DOCS/artifacts" "$DOCS/zora-matrix-builder"
 
 cp "$DL/toe-ultimate.html" "$DOCS/theory-of-everything-foundation/index.html"
 cp "$DL/toe-foundation-redesign.html" "$DOCS/theory-of-everything-foundation/cosmic-redesign.html"
@@ -13,9 +13,21 @@ cp "$DL/index (2).html" "$DOCS/artifacts/foundation-legacy-index-2.html"
 cp "$DL/index_1.html" "$DOCS/artifacts/foundation-legacy-index-1.html"
 cp "$DL/index (1).html" "$DOCS/artifacts/zora-framework-portal-standalone.html"
 
-echo "OK: synced 5 files into $DOCS"
+# Zora Matrix Builder (single-file app; optional sources in ~/Downloads)
+if [[ -f "$DL/zora-matrix-v2.html" ]]; then
+  cp "$DL/zora-matrix-v2.html" "$DOCS/zora-matrix-builder/index.html"
+fi
+if [[ -f "$DL/zora-matrix-builder.html" ]]; then
+  cp "$DL/zora-matrix-builder.html" "$DOCS/zora-matrix-builder/matrix-builder-v1.html"
+fi
+if [[ -f "$DL/zora-matrix-builder APP.html" ]]; then
+  cp "$DL/zora-matrix-builder APP.html" "$DOCS/zora-matrix-builder/matrix-builder-app.html"
+fi
+
+echo "OK: synced Foundation + artifacts + Matrix (where present) into $DOCS"
 ls -la "$DOCS/theory-of-everything-foundation/index.html" \
        "$DOCS/theory-of-everything-foundation/cosmic-redesign.html" \
        "$DOCS/artifacts/foundation-legacy-index-2.html" \
        "$DOCS/artifacts/foundation-legacy-index-1.html" \
-       "$DOCS/artifacts/zora-framework-portal-standalone.html"
+       "$DOCS/artifacts/zora-framework-portal-standalone.html" 2>/dev/null || true
+ls -la "$DOCS/zora-matrix-builder/" 2>/dev/null || true

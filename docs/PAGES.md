@@ -6,6 +6,7 @@
 |------|-----|
 | **Pages hub (docs root)** | [cbaird26.github.io/toe-2026-updates/](https://cbaird26.github.io/toe-2026-updates/) — simple index; Foundation persists dials via `localStorage` (`mqgt_toe_console_v1`) on this origin |
 | **Theory of Everything Foundation** | [cbaird26.github.io/toe-2026-updates/theory-of-everything-foundation/](https://cbaird26.github.io/toe-2026-updates/theory-of-everything-foundation/) |
+| **Zora Matrix Builder** | […/zora-matrix-builder/](https://cbaird26.github.io/toe-2026-updates/zora-matrix-builder/) — single-file app in `docs/zora-matrix-builder/index.html` (sync from `~/Downloads/zora-matrix-v2.html` via `scripts/sync_toe_pages_html_from_downloads.sh`) |
 | **Fold-Space Engine Lab** | […/fold-space-engine/](https://cbaird26.github.io/toe-2026-updates/fold-space-engine/) — static lab in `docs/fold-space-engine/` |
 | **Warp artifact (HTML snapshot)** | […/artifacts/TOE_FOUNDATION_WARP_BLINDING_x1000.html](https://cbaird26.github.io/toe-2026-updates/artifacts/TOE_FOUNDATION_WARP_BLINDING_x1000.html) |
 | Explicit `index.html` | […/theory-of-everything-foundation/index.html](https://cbaird26.github.io/toe-2026-updates/theory-of-everything-foundation/index.html) |
