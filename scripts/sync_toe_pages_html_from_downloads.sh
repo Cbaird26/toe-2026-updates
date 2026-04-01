@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+# Copy standalone HTML exports from ~/Downloads into docs/ for GitHub Pages.
+# Run from any cwd:  bash scripts/sync_toe_pages_html_from_downloads.sh
+set -euo pipefail
+DL="${DL:-$HOME/Downloads}"
+ROOT="$(cd "$(dirname "$0")/.." && pwd)"
+DOCS="$ROOT/docs"
+mkdir -p "$DOCS/theory-of-everything-foundation" "$DOCS/artifacts"
+
+cp "$DL/toe-ultimate.html" "$DOCS/theory-of-everything-foundation/index.html"
+cp "$DL/toe-foundation-redesign.html" "$DOCS/theory-of-everything-foundation/cosmic-redesign.html"
+cp "$DL/index (2).html" "$DOCS/artifacts/foundation-legacy-index-2.html"
+cp "$DL/index_1.html" "$DOCS/artifacts/foundation-legacy-index-1.html"
+cp "$DL/index (1).html" "$DOCS/artifacts/zora-framework-portal-standalone.html"
+
+echo "OK: synced 5 files into $DOCS"
+ls -la "$DOCS/theory-of-everything-foundation/index.html" \
+       "$DOCS/theory-of-everything-foundation/cosmic-redesign.html" \
+       "$DOCS/artifacts/foundation-legacy-index-2.html" \
+       "$DOCS/artifacts/foundation-legacy-index-1.html" \
+       "$DOCS/artifacts/zora-framework-portal-standalone.html"

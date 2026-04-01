@@ -4,500 +4,624 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
 <title>Theory of Everything Foundation — MQGT–SCF | C. M. Baird 2026</title>
+<meta name="description" content="Merged Quantum Gauge and Scalar Consciousness Framework — Unified theory of physics, consciousness, and ethics by Christopher Michael Baird">
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400;500;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=Space+Grotesk:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 :root{
-  --bg:#03040a;--bg2:#06080f;--bg3:#080b14;
-  --panel:#0b0e1a;--card:#0e1120;--card2:#111428;
+  --void:#03040a;--deep:#06080f;--panel:#0b0e1a;--surface:#0e1120;--card:#111428;
   --border:#1a1e35;--border2:#222644;
   --glow:#00eeff;--glow2:#8b5cf6;--glow3:#f472b6;
   --gold:#f59e0b;--ember:#f97316;--green:#10d9a0;--red:#f43f5e;
   --text:#c8d0e8;--dim:#5a6380;--ghost:#1e2240;
   --mono:'IBM Plex Mono',monospace;
-  --serif:'Cormorant Garamond',serif;
+  --serif:'Cormorant Garamond',Georgia,serif;
   --sans:'Space Grotesk',sans-serif;
 }
-html,body{min-height:100%;background:var(--bg)}
-body{color:var(--text);font-family:var(--mono);font-size:13px;line-height:1.6;overflow-x:hidden;position:relative}
+html{scroll-behavior:smooth}
+body{background:var(--void);color:var(--text);font-family:var(--mono);font-size:13px;line-height:1.6;overflow-x:hidden}
+a{color:var(--glow);text-decoration:none;transition:color .2s}
+a:hover{color:#fff}
+::selection{background:var(--glow2);color:#fff}
+
+/* ── FLASH SYSTEM ── */
+#wF1{position:fixed;inset:0;background:#fff;z-index:9999;pointer-events:none;opacity:0}
+#wF2{position:fixed;inset:-120px;background:radial-gradient(circle,#fff 0%,#fff 40%,rgba(255,255,255,.3) 70%,transparent);z-index:9998;pointer-events:none;opacity:0}
+#wFB{position:fixed;inset:0;z-index:9997;pointer-events:none}
+#wFC{position:fixed;top:50%;left:50%;border-radius:50%;background:#fff;transform:translate(-50%,-50%);z-index:10000;pointer-events:none;opacity:0;width:20px;height:20px}
+#wFR{position:fixed;top:50%;left:50%;border-radius:50%;border:10px solid #fff;transform:translate(-50%,-50%);z-index:10001;pointer-events:none;opacity:0;width:0;height:0}
+#wFR2{position:fixed;top:50%;left:50%;border-radius:50%;border:5px solid rgba(160,200,255,.8);transform:translate(-50%,-50%);z-index:10001;pointer-events:none;opacity:0;width:0;height:0}
 
 /* ── STARFIELD ── */
-#stars{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
+#starCV{position:fixed;inset:0;z-index:0;pointer-events:none}
 
-/* ── FLASH LAYERS ── */
-#warpFlash{position:fixed;inset:0;background:#fff;z-index:9999;pointer-events:none;opacity:0}
-#warpFlash2{position:fixed;inset:-120px;background:radial-gradient(circle,#fff 0%,#fff 40%,rgba(255,255,255,.3) 70%,transparent);z-index:9998;pointer-events:none;opacity:0}
-#warpBeams{position:fixed;inset:0;z-index:9997;pointer-events:none;opacity:0}
-#warpCore{position:fixed;top:50%;left:50%;z-index:10000;pointer-events:none;opacity:0;border-radius:50%;background:#fff;transform:translate(-50%,-50%);width:20px;height:20px}
-#warpRing{position:fixed;top:50%;left:50%;border-radius:50%;border:10px solid #fff;z-index:10001;pointer-events:none;opacity:0;transform:translate(-50%,-50%);width:0;height:0}
-#warpRing2{position:fixed;top:50%;left:50%;border-radius:50%;border:5px solid rgba(160,200,255,.8);z-index:10001;pointer-events:none;opacity:0;transform:translate(-50%,-50%);width:0;height:0}
+/* ── SECTIONS BASE ── */
+.rel{position:relative;z-index:1}
+.container{max-width:960px;margin:0 auto;padding:0 24px}
+.divider{height:1px;background:linear-gradient(90deg,transparent,var(--border2),transparent);margin:0 auto;max-width:700px}
 
-/* ── LAYOUT ── */
-#app{position:relative;z-index:1;min-height:100vh;display:flex;flex-direction:column}
-
-/* ── HERO ── */
-.hero{padding:48px 24px 32px;text-align:center;border-bottom:1px solid var(--border);background:linear-gradient(180deg,rgba(0,238,255,.03) 0%,transparent 100%);position:relative;overflow:hidden}
-.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 50% 0%,rgba(139,92,246,.06) 0%,transparent 70%);pointer-events:none}
-.hero-eyebrow{font-size:10px;letter-spacing:.25em;text-transform:uppercase;color:var(--dim);margin-bottom:16px;font-weight:500}
-.hero-title{font-family:var(--serif);font-size:clamp(36px,6vw,72px);font-weight:300;color:#fff;line-height:1.1;letter-spacing:-.01em;margin-bottom:12px}
-.hero-title em{font-style:italic;background:linear-gradient(135deg,var(--glow),var(--glow2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;font-weight:600}
-.hero-sub{font-family:var(--serif);font-size:clamp(14px,2vw,18px);color:var(--dim);font-style:italic;margin-bottom:24px;max-width:600px;margin-left:auto;margin-right:auto}
-.hero-meta{display:flex;align-items:center;justify-content:center;gap:20px;flex-wrap:wrap;font-size:10px;color:var(--dim);letter-spacing:.1em;text-transform:uppercase}
-.hero-meta a{color:var(--glow);text-decoration:none;transition:color .15s}
-.hero-meta a:hover{color:#fff}
-.hero-sep{color:var(--ghost)}
-.status-row{display:flex;align-items:center;justify-content:center;gap:16px;flex-wrap:wrap;margin-top:16px}
-.sbar{display:flex;align-items:center;gap:6px;font-size:10px;padding:4px 10px;border-radius:20px;border:1px solid var(--border2);background:var(--panel)}
+/* ══════════════════════════
+   HERO
+══════════════════════════ */
+.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;position:relative;padding:40px 24px;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 70% 50% at 50% 40%,rgba(139,92,246,.07) 0%,transparent 70%);pointer-events:none}
+.hero-eyebrow{font-family:var(--sans);font-size:11px;letter-spacing:.25em;text-transform:uppercase;color:var(--dim);margin-bottom:20px;font-weight:500}
+.hero h1{font-family:var(--serif);font-size:clamp(40px,9vw,88px);font-weight:300;color:#fff;letter-spacing:-.03em;line-height:1.05;margin-bottom:12px}
+.hero h1 em{font-style:italic;font-weight:600;background:linear-gradient(135deg,var(--glow),var(--glow2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero-tagline{font-family:var(--serif);font-size:clamp(15px,2.5vw,20px);color:var(--dim);font-style:italic;max-width:620px;margin:0 auto 16px;line-height:1.6}
+.hero-author{font-family:var(--sans);font-size:13px;color:var(--dim);margin-bottom:36px}
+.hero-author strong{color:var(--text)}
+.hero-cta{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-bottom:40px}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:11px 22px;border-radius:6px;font-family:var(--mono);font-size:12px;font-weight:600;letter-spacing:.05em;transition:all .25s;cursor:pointer;border:1px solid}
+.btn-p{background:rgba(0,238,255,.07);border-color:var(--glow);color:var(--glow)}
+.btn-p:hover{background:rgba(0,238,255,.16);color:#fff;box-shadow:0 0 24px rgba(0,238,255,.25)}
+.btn-g{background:transparent;border-color:var(--border2);color:var(--dim)}
+.btn-g:hover{border-color:var(--glow2);color:var(--glow2)}
+.status-row{display:flex;align-items:center;justify-content:center;gap:14px;flex-wrap:wrap}
+.sbar{display:flex;align-items:center;gap:6px;font-size:10px;padding:4px 12px;border-radius:20px;border:1px solid var(--border2);background:var(--panel);font-family:var(--mono)}
 .dot{width:6px;height:6px;border-radius:50%;display:inline-block;flex-shrink:0}
 .dot-on{background:var(--green);box-shadow:0 0 8px var(--green)}
-.dot-w{background:#fff;box-shadow:0 0 10px #fff;animation:dotpulse .6s infinite alternate}
-.dot-warn{background:var(--gold);box-shadow:0 0 6px var(--gold)}
-@keyframes dotpulse{from{box-shadow:0 0 6px #fff}to{box-shadow:0 0 20px #fff,0 0 40px rgba(255,255,255,.4)}}
+.dot-w{background:#fff;box-shadow:0 0 10px #fff;animation:dpulse .7s infinite alternate}
+@keyframes dpulse{from{box-shadow:0 0 6px #fff}to{box-shadow:0 0 24px #fff,0 0 48px rgba(255,255,255,.4)}}
+.scroll-hint{position:absolute;bottom:28px;left:50%;transform:translateX(-50%);color:var(--ghost);font-size:11px;animation:spulse 2s infinite;letter-spacing:.12em;font-family:var(--sans)}
+@keyframes spulse{0%,100%{opacity:.25}50%{opacity:.75}}
 
-/* ── NAV TABS ── */
-.nav{display:flex;gap:2px;padding:0 24px;border-bottom:1px solid var(--border);overflow-x:auto;background:rgba(3,4,10,.92);backdrop-filter:blur(16px);position:sticky;top:0;z-index:50;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+/* ══════════════════════════
+   PORTAL SECTIONS
+══════════════════════════ */
+section.portal{padding:64px 0}
+.section-label{font-family:var(--sans);font-size:10px;color:var(--glow);letter-spacing:.22em;text-transform:uppercase;margin-bottom:8px;font-weight:600}
+.section-title{font-family:var(--serif);font-size:clamp(26px,5vw,42px);font-weight:300;color:#fff;margin-bottom:14px;line-height:1.2}
+.section-title em{font-style:italic;color:var(--glow)}
+.section-desc{font-family:var(--sans);font-size:14px;color:var(--dim);max-width:580px;line-height:1.8;margin-bottom:28px}
+
+/* anchor tuple */
+.tuple-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;margin-bottom:28px}
+.tc{background:var(--panel);border:1px solid var(--border);border-radius:10px;padding:20px;transition:all .3s;position:relative;overflow:hidden}
+.tc:hover{border-color:rgba(0,238,255,.3);transform:translateY(-2px)}
+.tc::before{content:'';position:absolute;top:0;left:0;right:0;height:2px}
+.tc:nth-child(1)::before{background:var(--glow)}
+.tc:nth-child(2)::before{background:var(--glow2)}
+.tc:nth-child(3)::before{background:var(--glow3)}
+.tc:nth-child(4)::before{background:var(--gold)}
+.tc:nth-child(5)::before{background:var(--green)}
+.tc-sym{font-size:13px;font-weight:600;margin-bottom:6px}
+.tc:nth-child(1) .tc-sym{color:var(--glow)}
+.tc:nth-child(2) .tc-sym{color:var(--glow2)}
+.tc:nth-child(3) .tc-sym{color:var(--glow3)}
+.tc:nth-child(4) .tc-sym{color:var(--gold)}
+.tc:nth-child(5) .tc-sym{color:var(--green)}
+.tc h3{font-family:var(--serif);font-size:16px;font-weight:600;color:#fff;margin-bottom:6px}
+.tc p{font-family:var(--sans);font-size:12px;color:var(--dim);line-height:1.7}
+
+/* equations */
+.eq{font-family:var(--mono);font-size:13px;padding:11px 15px;border-radius:6px;margin-bottom:9px;border-left:3px solid;overflow-x:auto;line-height:1.6;white-space:nowrap}
+.eq-c{color:var(--glow);background:rgba(0,238,255,.04);border-color:var(--glow)}
+.eq-p{color:var(--glow2);background:rgba(139,92,246,.04);border-color:var(--glow2)}
+.eq-k{color:var(--glow3);background:rgba(244,114,182,.04);border-color:var(--glow3)}
+.eq-g{color:var(--gold);background:rgba(245,158,11,.04);border-color:var(--gold)}
+.eq-n{color:var(--green);background:rgba(16,217,160,.04);border-color:var(--green)}
+
+/* benchmark table */
+.bench{width:100%;border-collapse:collapse;font-size:12px;margin-top:16px}
+.bench th{text-align:left;padding:9px 12px;border-bottom:1px solid var(--border2);color:var(--glow);font-size:10px;letter-spacing:.1em;text-transform:uppercase;font-weight:600}
+.bench td{padding:9px 12px;border-bottom:1px solid rgba(26,30,53,.5);color:var(--text)}
+.bench tr:hover td{background:rgba(0,238,255,.03)}
+.bench .val{color:var(--gold);font-weight:500}
+.bst{font-size:10px;padding:2px 7px;border-radius:3px}
+.bst-f{background:rgba(0,238,255,.12);color:var(--glow)}
+.bst-b{background:rgba(244,114,182,.12);color:var(--glow3)}
+.bst-t{background:rgba(245,158,11,.12);color:var(--gold)}
+
+/* H2 vis */
+.vis-wrap{background:var(--panel);border:1px solid var(--border2);border-radius:10px;overflow:hidden;margin:20px 0}
+.vis-wrap canvas{display:block;width:100%;height:auto}
+
+/* app grid (suite) */
+.app-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:14px}
+.ac{background:var(--panel);border:1px solid var(--border);border-radius:10px;padding:22px;transition:all .3s;text-decoration:none;display:block;position:relative;overflow:hidden;color:var(--text)}
+.ac::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(0,238,255,.03) 0%,transparent 60%);opacity:0;transition:opacity .25s;pointer-events:none}
+.ac:hover{border-color:rgba(139,92,246,.35);transform:translateY(-3px);box-shadow:0 10px 36px rgba(0,0,0,.5)}
+.ac:hover::before{opacity:1}
+.ac h3{font-family:var(--serif);font-size:18px;font-weight:600;color:#fff;margin-bottom:6px}
+.ac p{font-family:var(--sans);font-size:12px;color:var(--dim);line-height:1.7}
+.atag{font-size:9px;padding:3px 8px;border-radius:3px;display:inline-block;margin-bottom:10px;font-weight:600;letter-spacing:.08em;text-transform:uppercase}
+.atag-l{background:rgba(16,217,160,.14);color:var(--green);border:1px solid rgba(16,217,160,.3)}
+.atag-b{background:rgba(245,158,11,.14);color:var(--gold);border:1px solid rgba(245,158,11,.3)}
+.atag-p{background:rgba(0,238,255,.12);color:var(--glow);border:1px solid rgba(0,238,255,.25)}
+
+/* quote footer */
+.quote-block{font-family:var(--serif);font-style:italic;font-size:clamp(16px,2.5vw,20px);color:var(--dim);max-width:640px;margin:0 auto 20px;line-height:1.7;text-align:center}
+footer.portal-ft{padding:48px 24px;border-top:1px solid var(--border);text-align:center}
+footer.portal-ft p{font-family:var(--sans);font-size:11px;color:var(--ghost);line-height:2}
+footer.portal-ft a{color:var(--dim)}
+
+/* ══════════════════════════
+   APP SECTION
+══════════════════════════ */
+#app-section{background:var(--void);border-top:1px solid var(--border2)}
+.app-header{padding:48px 24px 0;text-align:center;max-width:960px;margin:0 auto}
+
+/* sticky nav */
+.nav{display:flex;gap:2px;padding:0 24px;border-bottom:1px solid var(--border);overflow-x:auto;background:rgba(3,4,10,.94);backdrop-filter:blur(18px);position:sticky;top:0;z-index:50;-webkit-overflow-scrolling:touch;scrollbar-width:none}
 .nav::-webkit-scrollbar{display:none}
-.tb{padding:12px 16px;background:transparent;border:none;border-bottom:2px solid transparent;color:var(--dim);font-family:var(--mono);font-size:11px;cursor:pointer;white-space:nowrap;transition:all .15s;font-weight:500;letter-spacing:.05em;text-transform:uppercase}
-.tb:hover{color:var(--text)}
-.tb.on{color:var(--glow);border-bottom-color:var(--glow);font-weight:600}
+.tb{padding:12px 15px;background:transparent;border:none;border-bottom:2px solid transparent;color:var(--dim);font-family:var(--mono);font-size:11px;cursor:pointer;white-space:nowrap;transition:all .15s;font-weight:500;letter-spacing:.05em;text-transform:uppercase}
+.tb:hover{color:var(--text)}.tb.on{color:var(--glow);border-bottom-color:var(--glow);font-weight:600}
 
-/* ── MAIN CONTENT ── */
-.main{flex:1;padding:24px;max-width:1200px;margin:0 auto;width:100%}
+/* panels */
+.app-main{padding:24px;max-width:1200px;margin:0 auto;width:100%}
 .pnl{display:none}.pnl.show{display:block}
 
-/* ── PANEL COMPONENTS ── */
-.section-title{font-family:var(--serif);font-size:clamp(22px,3vw,32px);font-weight:300;color:#fff;margin-bottom:4px;letter-spacing:-.01em}
-.section-title em{font-style:italic;color:var(--glow)}
-.section-sub{font-size:12px;color:var(--dim);font-style:italic;margin-bottom:20px}
-.tag{font-size:9px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;padding:3px 8px;border-radius:3px;display:inline-block;margin-left:10px;vertical-align:middle}
-.tag-exp{background:rgba(249,115,22,.12);color:var(--ember);border:1px solid rgba(249,115,22,.25)}
-.tag-live{background:rgba(16,217,160,.12);color:var(--green);border:1px solid rgba(16,217,160,.25)}
-.tag-paper{background:rgba(0,238,255,.1);color:var(--glow);border:1px solid rgba(0,238,255,.2)}
+/* warp layout */
+.wl{display:grid;grid-template-columns:1fr 308px;gap:16px}
+@media(max-width:900px){.wl{grid-template-columns:1fr}}
+.sb{display:flex;flex-direction:column;gap:12px}
+.card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:14px}
+.card h3{font-family:var(--sans);font-size:10px;font-weight:600;color:var(--dim);text-transform:uppercase;letter-spacing:.12em;margin-bottom:11px}
+.cv-wrap{background:var(--panel);border:1px solid var(--border2);border-radius:10px;overflow:hidden;position:relative;margin-bottom:14px}
+.cv-wrap canvas{display:block;width:100%}
+.cv-ov{position:absolute;top:10px;left:12px;font-size:10px;color:var(--dim);pointer-events:none;line-height:1.8;background:rgba(3,4,10,.75);padding:5px 9px;border-radius:5px;border:1px solid var(--border)}
+.cv-ov .v{color:var(--glow);font-weight:600}
 
-.card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:16px}
-.card h3{font-family:var(--sans);font-size:11px;font-weight:500;color:var(--dim);text-transform:uppercase;letter-spacing:.1em;margin-bottom:12px}
-
-/* ── EQUATIONS ── */
-.eq{font-family:var(--mono);font-size:12px;padding:10px 14px;border-radius:6px;margin-bottom:8px;border-left:3px solid;line-height:1.6;overflow-x:auto;white-space:nowrap}
-.eq-c{color:var(--glow);background:rgba(0,238,255,.05);border-color:var(--glow)}
-.eq-p{color:var(--glow2);background:rgba(139,92,246,.05);border-color:var(--glow2)}
-.eq-k{color:var(--glow3);background:rgba(244,114,182,.05);border-color:var(--glow3)}
-.eq-g{color:var(--gold);background:rgba(245,158,11,.05);border-color:var(--gold)}
-.eq-n{color:var(--green);background:rgba(16,217,160,.05);border-color:var(--green)}
-
-/* ── SLIDERS ── */
-.sl{margin-bottom:10px}
-.sl label{display:flex;justify-content:space-between;font-size:11px;margin-bottom:4px}
+/* sliders */
+.sl{margin-bottom:9px}
+.sl label{display:flex;justify-content:space-between;font-size:11px;margin-bottom:3px}
 .sl label span:first-child{color:var(--dim);text-transform:uppercase;letter-spacing:.06em}
 .sl label .sv{color:var(--glow);font-weight:600}
 .sl input[type=range]{width:100%;height:3px;background:var(--border2);border-radius:2px;outline:none;cursor:pointer;accent-color:var(--glow)}
 
-/* ── ENGAGE BUTTON ── */
-.eng{width:100%;padding:16px;border-radius:8px;font-family:var(--mono);font-size:14px;font-weight:700;cursor:pointer;transition:all .2s;letter-spacing:.15em;text-transform:uppercase;border:1.5px solid}
-.eng.rdy{background:rgba(0,238,255,.06);border-color:var(--glow);color:var(--glow)}
-.eng.rdy:hover{background:rgba(0,238,255,.12);box-shadow:0 0 30px rgba(0,238,255,.2),0 0 60px rgba(0,238,255,.1)}
-.eng.go{background:rgba(255,255,255,.1);border-color:#fff;color:#fff;animation:engpulse .7s infinite}
-.eng.arr{background:rgba(16,217,160,.08);border-color:var(--green);color:var(--green)}
-@keyframes engpulse{0%,100%{box-shadow:0 0 20px rgba(255,255,255,.15)}50%{box-shadow:0 0 80px rgba(255,255,255,.7),0 0 160px rgba(255,255,255,.3)}}
-
-/* ── WARP LAYOUT ── */
-.wl{display:grid;grid-template-columns:1fr 310px;gap:16px}
-@media(max-width:900px){.wl{grid-template-columns:1fr}}
-.sb{display:flex;flex-direction:column;gap:12px}
-
-/* ── CANVAS WRAP ── */
-.cv-wrap{background:var(--panel);border:1px solid var(--border2);border-radius:10px;overflow:hidden;position:relative}
-.cv-wrap canvas{display:block;width:100%}
-.cv-ov{position:absolute;top:12px;left:14px;font-size:10px;color:var(--dim);pointer-events:none;line-height:1.8;background:rgba(3,4,10,.7);padding:6px 10px;border-radius:6px;border:1px solid var(--border)}
-.cv-ov .v{color:var(--glow);font-weight:600}
-
-/* ── METRICS ── */
-.mt{display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid rgba(30,34,53,.6);font-size:12px}
+/* metrics */
+.mt{display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px solid rgba(26,30,53,.55);font-size:12px}
 .mt:last-child{border:none}
 .mt .l{color:var(--dim)}.mt .vl{font-weight:600}
 
-/* ── SAFETY ── */
+/* safety */
 .sf{display:grid;grid-template-columns:1fr 1fr;gap:5px}
-.si{padding:7px 10px;background:var(--bg3);border-radius:5px;border:1px solid var(--border);font-size:10px;display:flex;justify-content:space-between;align-items:center}
+.si{padding:6px 9px;background:rgba(3,4,10,.6);border-radius:5px;border:1px solid var(--border);font-size:10px;display:flex;justify-content:space-between;align-items:center}
 .tg{font-weight:600;font-size:9px;padding:2px 6px;border-radius:3px}
 .tg-s{background:rgba(16,217,160,.12);color:var(--green)}
 .tg-w{background:rgba(245,158,11,.12);color:var(--gold)}
 .tg-r{background:rgba(244,63,94,.12);color:var(--red)}
 
-/* ── H2 STRIP ── */
-.h2-strip{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:4px}
-.h2-cell{background:var(--bg3);border:1px solid var(--border);border-radius:6px;padding:8px 10px;text-align:center}
-.h2-cell .hl{font-size:9px;color:var(--dim);text-transform:uppercase;letter-spacing:.08em;margin-bottom:3px}
-.h2-cell .hv{font-size:14px;font-weight:700;color:var(--glow)}
+/* h2 strip */
+.h2s{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:12px}
+.h2c{background:rgba(3,4,10,.6);border:1px solid var(--border);border-radius:6px;padding:8px 10px;text-align:center}
+.h2c .hl{font-size:9px;color:var(--dim);text-transform:uppercase;letter-spacing:.08em;margin-bottom:3px}
+.h2c .hv{font-size:13px;font-weight:700;color:var(--glow)}
 
-/* ── LOG ── */
-.log{background:var(--bg3);border:1px solid var(--border);border-radius:6px;padding:10px;max-height:140px;overflow-y:auto;font-size:10px;color:var(--dim);line-height:1.8;scrollbar-width:thin;scrollbar-color:var(--border) transparent}
-.log .e{border-bottom:1px solid rgba(30,34,53,.4);padding:2px 0}
+/* engage */
+.eng{width:100%;padding:15px;border-radius:8px;font-family:var(--mono);font-size:13px;font-weight:700;cursor:pointer;transition:all .2s;letter-spacing:.15em;text-transform:uppercase;border:1.5px solid}
+.eng.rdy{background:rgba(0,238,255,.06);border-color:var(--glow);color:var(--glow)}
+.eng.rdy:hover{background:rgba(0,238,255,.13);box-shadow:0 0 32px rgba(0,238,255,.18)}
+.eng.go{background:rgba(255,255,255,.1);border-color:#fff;color:#fff;animation:epulse .7s infinite}
+.eng.arr{background:rgba(16,217,160,.08);border-color:var(--green);color:var(--green)}
+@keyframes epulse{0%,100%{box-shadow:0 0 20px rgba(255,255,255,.15)}50%{box-shadow:0 0 90px rgba(255,255,255,.75),0 0 180px rgba(255,255,255,.3)}}
+
+/* log */
+.log{background:rgba(3,4,10,.7);border:1px solid var(--border);border-radius:6px;padding:9px;max-height:135px;overflow-y:auto;font-size:10px;color:var(--dim);line-height:1.8;scrollbar-width:thin;scrollbar-color:var(--border) transparent}
+.log .e{border-bottom:1px solid rgba(26,30,53,.35);padding:2px 0}
 .log .ts{color:var(--ghost)}.log .m{color:var(--text)}
 
-/* ── LAB LAYOUT ── */
+/* lab */
 .lab-row{display:flex;gap:16px;flex-wrap:wrap}
 .lab-col{flex:1 1 260px}
-.lab-ctrl{flex:0 0 200px;min-width:175px}
+.lab-ctrl{flex:0 0 195px;min-width:170px}
 .lab-cv{background:var(--panel);border:1px solid var(--border2);border-radius:10px;overflow:hidden}
 .lab-cv canvas{display:block;width:100%;max-width:520px}
-.lab-info{margin-top:12px;padding:12px 14px;background:rgba(0,238,255,.04);border:1px solid rgba(0,238,255,.12);border-radius:8px;font-size:12px;color:var(--text);line-height:1.7}
+.lab-info{margin-top:11px;padding:11px 13px;background:rgba(0,238,255,.03);border:1px solid rgba(0,238,255,.1);border-radius:7px;font-size:12px;color:var(--text);line-height:1.7}
+.lab-head{margin-bottom:18px}
+.lab-head .title{font-family:var(--serif);font-size:clamp(22px,3vw,30px);font-weight:300;color:#fff;display:inline}
+.lab-head .title em{font-style:italic;color:var(--glow)}
+.lab-head .exp{font-size:9px;color:var(--ember);background:rgba(249,115,22,.1);padding:2px 7px;border-radius:3px;border:1px solid rgba(249,115,22,.25);text-transform:uppercase;letter-spacing:.1em;font-weight:600;margin-left:10px;vertical-align:middle}
+.lab-sub{font-family:var(--serif);font-size:13px;color:var(--dim);font-style:italic;margin-top:4px}
 
-/* ── DECISION ── */
-.ot{display:flex;gap:4px;margin-bottom:14px}
-.ob{padding:7px 14px;border:1px solid var(--border2);border-radius:5px;font-size:11px;cursor:pointer;color:var(--dim);font-family:var(--mono);background:transparent;transition:all .15s}
+/* decision */
+.ot{display:flex;gap:4px;margin-bottom:13px}
+.ob{padding:6px 13px;border:1px solid var(--border2);border-radius:5px;font-size:11px;cursor:pointer;color:var(--dim);font-family:var(--mono);background:transparent;transition:all .15s}
 .ob:hover{color:var(--text)}.ob.on{border-color:var(--glow);color:var(--glow);background:rgba(0,238,255,.05)}
 .ob.best{border-color:var(--green);color:var(--green);background:rgba(16,217,160,.05)}
-.or{background:var(--card2);border:1px solid var(--border);border-radius:8px;padding:16px;margin-bottom:10px}
+.or{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:15px;margin-bottom:10px}
 
-/* ── SUITE GRID ── */
-.lg{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px}
-.lc{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:18px;text-decoration:none;display:block;transition:all .25s;color:var(--text);position:relative;overflow:hidden}
-.lc::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(0,238,255,.03) 0%,transparent 60%);pointer-events:none;transition:opacity .25s;opacity:0}
-.lc:hover{border-color:rgba(139,92,246,.4);transform:translateY(-3px);box-shadow:0 8px 32px rgba(0,0,0,.4)}
-.lc:hover::before{opacity:1}
-.lc h4{font-family:var(--serif);font-size:18px;font-weight:600;color:#fff;margin-bottom:4px}
-.lc p{font-size:12px;color:var(--dim);line-height:1.5;font-family:var(--sans)}
+/* framework */
+.fw-sec{margin-bottom:22px}
+.fw-title{font-family:var(--sans);font-size:10px;font-weight:500;color:var(--dim);text-transform:uppercase;letter-spacing:.15em;margin-bottom:9px;padding-bottom:5px;border-bottom:1px solid var(--border)}
 
-/* ── FRAMEWORK ── */
-.fw-section{margin-bottom:24px}
-.fw-title{font-family:var(--sans);font-size:10px;font-weight:500;color:var(--dim);text-transform:uppercase;letter-spacing:.15em;margin-bottom:10px;padding-bottom:6px;border-bottom:1px solid var(--border)}
-
-/* ── FOOTER ── */
-.ft{padding:24px;text-align:center;border-top:1px solid var(--border);font-size:10px;color:var(--ghost);margin-top:20px;font-family:var(--sans);letter-spacing:.08em}
-.ft a{color:var(--glow);text-decoration:none}
-
-/* ── RESPONSIVE ── */
+/* responsive */
 @media(max-width:600px){
-  .hero{padding:32px 16px 24px}
-  .main{padding:16px}
-  .nav{padding:0 12px}
-  .tb{padding:10px 12px;font-size:10px}
+  .hero{padding:32px 16px}
+  .app-main{padding:14px}
+  .nav{padding:0 10px}
+  .tb{padding:10px 11px;font-size:10px}
+  .container{padding:0 16px}
+  section.portal{padding:44px 0}
 }
 </style>
 </head>
 <body>
+
 <!-- FLASH LAYERS -->
-<div id="warpFlash"></div>
-<div id="warpFlash2"></div>
-<canvas id="warpBeams"></canvas>
-<div id="warpCore"></div>
-<div id="warpRing"></div>
-<div id="warpRing2"></div>
+<div id="wF1"></div>
+<div id="wF2"></div>
+<canvas id="wFB"></canvas>
+<div id="wFC"></div>
+<div id="wFR"></div>
+<div id="wFR2"></div>
 
-<!-- STARFIELD -->
-<canvas id="stars"></canvas>
+<!-- GLOBAL STARFIELD -->
+<canvas id="starCV"></canvas>
 
-<div id="app">
-
-<!-- HERO -->
-<div class="hero">
-  <div class="hero-eyebrow">C. Michael Baird &nbsp;·&nbsp; 2026 &nbsp;·&nbsp; MQGT–SCF Framework</div>
-  <h1 class="hero-title">Theory of <em>Everything</em><br>Foundation</h1>
-  <p class="hero-sub">Metric-Quantised Gravity Theory with Scalar-Singlet Cosmological Foundation — a 5,570-page unified framework bridging quantum gravity, consciousness, and spacetime geometry.</p>
-  <div class="hero-meta">
-    <a href="https://github.com/Cbaird26" target="_blank">github.com/Cbaird26</a>
-    <span class="hero-sep">·</span>
-    <a href="https://cbaird26.github.io/zora-discovery-application/" target="_blank">Zora Discovery App</a>
-    <span class="hero-sep">·</span>
-    <span>Π_anchor = (S_core, E_cl, G_GKSL, M_η, O_H₂)</span>
+<!-- ═══════════════════════════════════
+     HERO
+═══════════════════════════════════ -->
+<section class="hero rel">
+  <div class="hero-eyebrow">Christopher Michael Baird &nbsp;·&nbsp; Independent Researcher &nbsp;·&nbsp; 2026</div>
+  <h1>Theory of <em>Everything</em><br>Foundation</h1>
+  <p class="hero-tagline">A minimal scalar-singlet effective theory with local GKSL dynamics, controlled naturalness, and a falsifiable interferometric exclusion test.</p>
+  <p class="hero-author">MQGT–SCF &nbsp;·&nbsp; Merged Quantum Gauge &amp; Scalar Consciousness Framework &nbsp;·&nbsp; <strong>5,570 pages</strong></p>
+  <div class="hero-cta">
+    <a href="#app-section" class="btn btn-p">▸ Launch App</a>
+    <a href="#framework" class="btn btn-g">◇ Framework</a>
+    <a href="#applications" class="btn btn-g">⬡ Suite</a>
+    <a href="https://github.com/Cbaird26" target="_blank" class="btn btn-g">↗ GitHub</a>
   </div>
   <div class="status-row">
     <div class="sbar"><span class="dot dot-on" id="bDot"></span><span id="bSt">Bridge Stable</span></div>
     <div class="sbar"><span class="dot dot-on" id="wDot"></span><span id="wSt">Warp Online</span></div>
     <div class="sbar">Γ_eff: <span id="gE" style="color:var(--gold);margin-left:4px">—</span></div>
   </div>
-</div>
+  <div class="scroll-hint">▽ SCROLL TO EXPLORE</div>
+</section>
 
-<!-- NAV -->
-<nav class="nav">
-  <button class="tb on" data-t="warp">⬡ Warp Core</button>
-  <button class="tb" data-t="sculptor">◉ Probability</button>
-  <button class="tb" data-t="fold">⧫ Fold-Space</button>
-  <button class="tb" data-t="timeline">⌚ Timeline</button>
-  <button class="tb" data-t="jhana">◈ Jhāna</button>
-  <button class="tb" data-t="decision">⊕ Decision</button>
-  <button class="tb" data-t="framework">∑ Framework</button>
-  <button class="tb" data-t="suite">↗ Suite</button>
-</nav>
+<div class="divider rel"></div>
 
-<div class="main">
+<!-- ═══════════════════════════════════
+     ANCHOR TUPLE
+═══════════════════════════════════ -->
+<section id="framework" class="portal rel">
+  <div class="container">
+    <div class="section-label">Specification-Level Closure</div>
+    <div class="section-title">The Anchor <em>Tuple</em></div>
+    <div class="section-desc">Five coupled elements — each mathematically explicit and empirically auditable.</div>
+    <div class="eq eq-c" style="margin-bottom:20px;font-size:14px">Π_anchor = ( S_core , E_cl , G_GKSL , M_η , O_H₂ )</div>
+    <div class="tuple-grid">
+      <div class="tc"><div class="tc-sym">S_core</div><h3>Minimal EFT Action</h3><p>GR + Standard Model + two real scalar singlets Φc(x) and E(x) with renormalizable quartic potentials and Higgs-portal couplings.</p></div>
+      <div class="tc"><div class="tc-sym">E_cl</div><h3>Classical Field Equations</h3><p>Einstein equation plus coupled singlet Klein-Gordon equations from variation of S_core. Mediator-derived route to effective nonlocal kernels.</p></div>
+      <div class="tc"><div class="tc-sym">G_GKSL</div><h3>GKSL Measurement Container</h3><p>Local covariant Lindblad evolution with field-modulated rates. Completely positive, trace-preserving. The disciplined setting for no-signalling.</p></div>
+      <div class="tc"><div class="tc-sym">M_η</div><h3>Optional Measure Tilt</h3><p>Companion statistical layer — retained only as an effective exponential tilt on outcome probabilities. Not autonomous nonlocal dynamics.</p></div>
+      <div class="tc"><div class="tc-sym">O_H₂</div><h3>H₂ Exclusion Observable</h3><p>Flagship falsifier: preregistered visibility suppression in molecular hydrogen interferometry. A stable null is a scientific success.</p></div>
+    </div>
+  </div>
+</section>
 
-<!-- WARP CORE -->
-<div id="p-warp" class="pnl show">
-  <div class="wl">
-    <div>
-      <div class="cv-wrap" style="margin-bottom:14px">
-        <canvas id="gC" width="700" height="480"></canvas>
-        <div class="cv-ov">
-          <div>TOROIDAL FOLD-SPACE GEOMETRY</div>
-          <div>Coh: <span class="v" id="gCoh">—</span> · Fold: <span class="v" id="gF">—</span> · η: <span class="v" id="gEta">—</span></div>
+<div class="divider rel"></div>
+
+<!-- ═══════════════════════════════════
+     EQUATIONS + BENCHMARK
+═══════════════════════════════════ -->
+<section id="equations" class="portal rel">
+  <div class="container">
+    <div class="section-label">Mathematical Core</div>
+    <div class="section-title">Governing <em>Equations</em></div>
+    <div class="section-desc">The symbols are fixed, the limiting cases are clear, and the experimental bridge is explicit.</div>
+    <div class="eq eq-c">S_core = ∫ d⁴x √(−g) [ L_GR + L_SM + L_Φ + L_E + L_int ]  ···  (Eq. 2)</div>
+    <div class="eq eq-p">V₄(Φc,E) = (λΦ/4)Φc⁴ + (λE/4)E⁴ + (κ/2)Φc²E²  ···  bounded iff κ > −√(λΦ·λE)</div>
+    <div class="eq eq-k">δρ/δΣ = −i[H,ρ] + Σₐ( Lₐ ρ Lₐ† − ½{Lₐ†Lₐ, ρ} )  ···  GKSL master equation (Eq. 18)</div>
+    <div class="eq eq-g">Pη(i) = |ci|² exp(η·ΔEi) / Σⱼ |cj|² exp(η·ΔEj)  ···  measure tilt (Eq. 21)</div>
+    <div class="eq eq-n">V/V₀ = exp(−Γ · T · Δx²)  ···  H₂ exclusion observable (Eq. 39)</div>
+    <div class="eq eq-p">K(r) = gΦ · gE · exp(−mₘ · r) / (4π · r)  ···  Yukawa nonlocal kernel</div>
+    <div class="eq eq-c">L_teleology = +ξ · f(Φc, E)  ···  T-symmetry breaking term</div>
+    <div style="margin-top:28px">
+      <div class="section-label" style="margin-bottom:12px">Benchmark Parameter Card — Table 1</div>
+      <div style="overflow-x:auto;background:var(--panel);border:1px solid var(--border);border-radius:8px">
+        <table class="bench">
+          <thead><tr><th>Parameter</th><th>Meaning</th><th>Benchmark</th><th>Status</th></tr></thead>
+          <tbody>
+            <tr><td>Λ</td><td>EFT cutoff</td><td class="val">1 TeV (stress: 1–10 TeV)</td><td><span class="bst bst-f">fixed</span></td></tr>
+            <tr><td>mΦ , mE</td><td>Singlet masses</td><td class="val">10⁻⁴ – 10⁻³ eV</td><td><span class="bst bst-t">target</span></td></tr>
+            <tr><td>λhΦ , λhE</td><td>Higgs portals</td><td class="val">≲ 10⁻³⁰ – 10⁻²⁸</td><td><span class="bst bst-b">naturalness</span></td></tr>
+            <tr><td>η</td><td>Measure tilt</td><td class="val">≈ 0 operationally</td><td><span class="bst bst-b">|η| ≪ 1</span></td></tr>
+            <tr><td>Γ_floor</td><td>Exclusion floor</td><td class="val">1.15 × 10⁹ s⁻¹m⁻²</td><td><span class="bst bst-t">Phase-0</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider rel"></div>
+
+<!-- ═══════════════════════════════════
+     H2 EXCLUSION MAP
+═══════════════════════════════════ -->
+<section class="portal rel">
+  <div class="container">
+    <div class="section-label">Live Visualization</div>
+    <div class="section-title">H₂ Exclusion <em>Map</em></div>
+    <div class="section-desc">Visibility suppression V/V₀ = exp(−Γ·T·Δx²) across sensitivity coordinate Q for multiple dephasing rates.</div>
+    <div class="vis-wrap"><canvas id="h2vis" width="880" height="380"></canvas></div>
+  </div>
+</section>
+
+<div class="divider rel"></div>
+
+<!-- ═══════════════════════════════════
+     APPLICATIONS / SUITE
+═══════════════════════════════════ -->
+<section id="applications" class="portal rel">
+  <div class="container">
+    <div class="section-label">Deployed Systems</div>
+    <div class="section-title">Zora Application <em>Suite</em></div>
+    <div class="section-desc">Live implementations of the MQGT–SCF framework as decision engines, coherence trackers, and speculative technology labs.</div>
+    <div class="app-grid">
+      <a href="https://cbaird26.github.io/zora-discovery-application/" target="_blank" class="ac"><span class="atag atag-l">LIVE</span><h3>Zora Discovery</h3><p>Full decision engine with coherence warp core, fold-state tracking, future viability scoring, and H₂ model. The flagship.</p></a>
+      <a href="https://cbaird26.github.io/zoraasi/" target="_blank" class="ac"><span class="atag atag-l">LIVE</span><h3>ZoraASI</h3><p>Recursive agent architecture with Φc and E field dynamics embedded in an interactive decision system.</p></a>
+      <a href="https://cbaird26.github.io/zora-refit" target="_blank" class="ac"><span class="atag atag-b">BETA</span><h3>Zora Refit — Autopilot</h3><p>Streamlined coherence autopilot. Minimal interface for sustained field alignment without manual tuning.</p></a>
+      <a href="https://cbaird26.github.io/zora-refit-mobile/" target="_blank" class="ac"><span class="atag atag-b">BETA</span><h3>Refit Mobile</h3><p>Touch-optimised coherence engine. Full field dynamics on iOS and Android.</p></a>
+      <a href="https://cbaird26.github.io/zora-refitted/" target="_blank" class="ac"><span class="atag atag-b">BETA</span><h3>Zora Refitted</h3><p>Iteration on the core with refined parameter controls and improved field visualisation.</p></a>
+      <a href="https://cbaird26.github.io/zora-refitted-mobile/" target="_blank" class="ac"><span class="atag atag-b">BETA</span><h3>Refitted Mobile</h3><p>Mobile field visualisation with live Φc–E phase display.</p></a>
+      <a href="https://github.com/Cbaird26/A-Theory-of-Everything---Baird-et-al-2025-.pdf" target="_blank" class="ac"><span class="atag atag-p">PAPER</span><h3>MQGT–SCF Thesis</h3><p>Complete manuscript. 5,570 pages. LaTeX source and PDF. The full mathematical foundation.</p></a>
+      <a href="https://github.com/Cbaird26" target="_blank" class="ac"><span class="atag atag-l">GITHUB</span><h3>cbaird26</h3><p>Full repository — all source code, papers, deployment history, and documentation.</p></a>
+    </div>
+  </div>
+</section>
+
+<div class="divider rel"></div>
+
+<!-- ═══════════════════════════════════
+     INTERACTIVE APP
+═══════════════════════════════════ -->
+<div id="app-section" class="rel">
+  <div class="app-header">
+    <div class="section-label" style="margin-bottom:8px">Interactive Lab</div>
+    <div class="section-title" style="margin-bottom:6px">MQGT–SCF <em>Engine</em></div>
+    <p style="font-family:var(--sans);font-size:14px;color:var(--dim);margin-bottom:28px">Live warp core, speculative devices, and decision surface — all equations operational.</p>
+  </div>
+
+  <nav class="nav">
+    <button class="tb on" data-t="warp">⬡ Warp Core</button>
+    <button class="tb" data-t="sculptor">◉ Probability</button>
+    <button class="tb" data-t="fold">⧫ Fold-Space</button>
+    <button class="tb" data-t="timeline">⌚ Timeline</button>
+    <button class="tb" data-t="jhana">◈ Jhāna</button>
+    <button class="tb" data-t="decision">⊕ Decision</button>
+    <button class="tb" data-t="framework">∑ Framework</button>
+  </nav>
+
+  <div class="app-main">
+
+    <!-- WARP CORE -->
+    <div id="p-warp" class="pnl show">
+      <div class="wl">
+        <div>
+          <div class="cv-wrap">
+            <canvas id="gC" width="700" height="490"></canvas>
+            <div class="cv-ov">TOROIDAL FOLD-SPACE GEOMETRY<br>Coh: <span class="v" id="gCoh">—</span> · Fold: <span class="v" id="gF">—</span> · η: <span class="v" id="gEta">—</span></div>
+          </div>
+          <div class="card">
+            <h3>Safety Interlocks</h3>
+            <div class="sf">
+              <div class="si">Causality<span class="tg tg-s">SAFE</span></div>
+              <div class="si">Topology<span class="tg tg-s" id="sTop">STABLE</span></div>
+              <div class="si">Energy<span class="tg tg-s">PASS</span></div>
+              <div class="si">Return<span class="tg tg-s">YES</span></div>
+              <div class="si">Coherence<span class="tg tg-w" id="sWin">HOLD</span></div>
+              <div class="si">No-Signal<span class="tg tg-s">CPTP</span></div>
+            </div>
+            <div class="h2s">
+              <div class="h2c"><div class="hl">V/V₀</div><div class="hv" id="mVs">—</div></div>
+              <div class="h2c"><div class="hl">Γ_eff</div><div class="hv" style="color:var(--gold)" id="hGam">—</div></div>
+              <div class="h2c"><div class="hl">Visibility</div><div class="hv" style="color:var(--glow2)" id="hVis">—</div></div>
+            </div>
+          </div>
+        </div>
+        <div class="sb">
+          <div class="card">
+            <h3>Coherence Engine</h3>
+            <div class="sl"><label><span>Alignment</span><span class="sv" id="vA">0.96</span></label><input type="range" min="0" max="1" step="0.01" value="0.96" id="sA"></div>
+            <div class="sl"><label><span>Complexity</span><span class="sv" id="vC">0.92</span></label><input type="range" min="0" max="1" step="0.01" value="0.92" id="sC"></div>
+            <div class="sl"><label><span>Time Horizon</span><span class="sv" id="vT">0.88</span></label><input type="range" min="0" max="1" step="0.01" value="0.88" id="sT"></div>
+            <div class="sl"><label><span>Stability</span><span class="sv" id="vS">0.94</span></label><input type="range" min="0" max="1" step="0.01" value="0.94" id="sS"></div>
+            <div class="sl"><label><span>η Tilt</span><span class="sv" id="vE">0.00</span></label><input type="range" min="-1" max="1" step="0.01" value="0" id="sE"></div>
+            <div class="sl"><label><span>Fold Depth</span><span class="sv" id="vF">0.00</span></label><input type="range" min="0" max="1" step="0.01" value="0" id="sF"></div>
+          </div>
+          <div class="card">
+            <h3>Warp Status</h3>
+            <div class="mt"><span class="l">Coherence</span><span class="vl" style="color:var(--glow)" id="mCoh">—</span></div>
+            <div class="mt"><span class="l">Lock Strength</span><span class="vl" style="color:var(--gold)" id="mLk">—</span></div>
+            <div class="mt"><span class="l">Future Viability</span><span class="vl" style="color:var(--green)" id="mVi">—</span></div>
+            <div class="mt"><span class="l">Instability Risk</span><span class="vl" style="color:var(--glow3)" id="mRk">—</span></div>
+            <div class="mt"><span class="l">Window</span><span class="vl" style="color:var(--gold)">Until Fold-State</span></div>
+          </div>
+          <button class="eng rdy" id="engBtn">ENGAGE (INTENTION)</button>
+          <div class="card"><h3>System Log</h3><div class="log" id="logA"><div class="e"><span class="ts">[00:00]</span> <span class="m">All systems initialized.</span></div></div></div>
         </div>
       </div>
-      <div class="card">
-        <h3>Safety Interlocks</h3>
-        <div class="sf">
-          <div class="si">Causality<span class="tg tg-s">SAFE</span></div>
-          <div class="si">Topology<span class="tg tg-s" id="sTop">STABLE</span></div>
-          <div class="si">Energy<span class="tg tg-s">PASS</span></div>
-          <div class="si">Return<span class="tg tg-s">YES</span></div>
-          <div class="si">Coherence<span class="tg tg-w" id="sWin">HOLD</span></div>
-          <div class="si">No-Signal<span class="tg tg-s">CPTP</span></div>
+    </div>
+
+    <!-- PROBABILITY SCULPTOR -->
+    <div id="p-sculptor" class="pnl">
+      <div class="lab-head"><span class="title">Probability <em>Sculptor</em></span><span class="exp">Thought Experiment</span><div class="lab-sub">P(fᵢ) = |cᵢ|² exp(η_eff ΔEᵢ) / Z — bias quantum branching via amplified measure tilt</div></div>
+      <div class="eq eq-c" style="margin-bottom:16px">P(fi) = |ci|² · exp(η_eff · ΔEi) / Z</div>
+      <div class="lab-row">
+        <div class="lab-col"><div class="lab-cv"><canvas id="scCV" width="480" height="400"></canvas></div></div>
+        <div class="lab-ctrl">
+          <div class="sl"><label><span>η tilt</span><span class="sv" id="scEta">0.00</span></label><input type="range" min="-3" max="3" step="0.01" value="0" id="scSEta"></div>
+          <div class="sl"><label><span>Coherence</span><span class="sv" id="scCoh">0.50</span></label><input type="range" min="0" max="1" step="0.01" value="0.5" id="scSCoh"></div>
+          <div class="sl"><label><span>N futures</span><span class="sv" id="scN">6</span></label><input type="range" min="3" max="12" step="1" value="6" id="scSN"></div>
+          <div class="lab-info"><b style="color:var(--glow)">PRINCIPLE:</b> Amplified coherence scales η_eff. Probability mass concentrates on the highest-ΔE future.</div>
         </div>
-        <div class="h2-strip" style="margin-top:12px">
-          <div class="h2-cell"><div class="hl">V/V₀</div><div class="hv" id="mVs">—</div></div>
-          <div class="h2-cell"><div class="hl">Γ_eff</div><div class="hv" style="color:var(--gold)" id="h-gam">—</div></div>
-          <div class="h2-cell"><div class="hl">Visibility</div><div class="hv" style="color:var(--glow2)" id="h-vis">—</div></div>
+      </div>
+    </div>
+
+    <!-- FOLD-SPACE -->
+    <div id="p-fold" class="pnl">
+      <div class="lab-head"><span class="title">Fold-Space <em>Engine</em></span><span class="exp">Thought Experiment</span><div class="lab-sub">K(r) = gΦgE exp(−mₘr)/(4πr) — mₘ → 0 yields infinite-range nonlocal interaction</div></div>
+      <div class="eq eq-p" style="margin-bottom:16px">K(r) = gΦ · gE · exp(−mM · r) / (4π · r)</div>
+      <div class="lab-row">
+        <div class="lab-col"><div class="lab-cv"><canvas id="fsCV" width="480" height="400"></canvas></div></div>
+        <div class="lab-ctrl">
+          <div class="sl"><label><span>mₘ mass</span><span class="sv" id="fsMM">1.00</span></label><input type="range" min="0.01" max="3" step="0.01" value="1" id="fsSMM"></div>
+          <div class="sl"><label><span>Coupling g</span><span class="sv" id="fsG">1.00</span></label><input type="range" min="0.1" max="5" step="0.05" value="1" id="fsSG"></div>
+          <div class="sl"><label><span>Fold Δ</span><span class="sv" id="fsFd">0.00</span></label><input type="range" min="0" max="1" step="0.01" value="0" id="fsSFd"></div>
+          <div class="lab-info"><b style="color:var(--glow2)">PRINCIPLE:</b> mₘ → 0, interaction range → ∞. Drag Fold toward 1 to collapse spacetime geometry.</div>
         </div>
       </div>
     </div>
-    <div class="sb">
-      <div class="card">
-        <h3>Coherence Engine</h3>
-        <div class="sl"><label><span>Alignment</span><span class="sv" id="vA">0.96</span></label><input type="range" min="0" max="1" step="0.01" value="0.96" id="sA"></div>
-        <div class="sl"><label><span>Complexity</span><span class="sv" id="vC">0.92</span></label><input type="range" min="0" max="1" step="0.01" value="0.92" id="sC"></div>
-        <div class="sl"><label><span>Time Horizon</span><span class="sv" id="vT">0.88</span></label><input type="range" min="0" max="1" step="0.01" value="0.88" id="sT"></div>
-        <div class="sl"><label><span>Stability</span><span class="sv" id="vS">0.94</span></label><input type="range" min="0" max="1" step="0.01" value="0.94" id="sS"></div>
-        <div class="sl"><label><span>η Tilt</span><span class="sv" id="vE">0.00</span></label><input type="range" min="-1" max="1" step="0.01" value="0" id="sE"></div>
-        <div class="sl"><label><span>Fold Depth</span><span class="sv" id="vF">0.00</span></label><input type="range" min="0" max="1" step="0.01" value="0" id="sF"></div>
-      </div>
-      <div class="card">
-        <h3>Warp Status</h3>
-        <div class="mt"><span class="l">Coherence</span><span class="vl" style="color:var(--glow)" id="mCoh">—</span></div>
-        <div class="mt"><span class="l">Lock Strength</span><span class="vl" style="color:var(--gold)" id="mLk">—</span></div>
-        <div class="mt"><span class="l">Future Viability</span><span class="vl" style="color:var(--green)" id="mVi">—</span></div>
-        <div class="mt"><span class="l">Instability Risk</span><span class="vl" style="color:var(--glow3)" id="mRk">—</span></div>
-        <div class="mt"><span class="l">Window</span><span class="vl" style="color:var(--gold)">Until Fold-State</span></div>
-      </div>
-      <button class="eng rdy" id="engBtn">ENGAGE (INTENTION)</button>
-      <div class="card">
-        <h3>System Log</h3>
-        <div class="log" id="logA"><div class="e"><span class="ts">[00:00]</span> <span class="m">All systems initialized.</span></div></div>
+
+    <!-- TIMELINE -->
+    <div id="p-timeline" class="pnl">
+      <div class="lab-head"><span class="title">Timeline <em>Selector</em></span><span class="exp">Thought Experiment</span><div class="lab-sub">P(sᵢ) = |cᵢ|² [1 + η·Fᵢ(Φc,E)] — GKSL container selects probability branches</div></div>
+      <div class="eq eq-n" style="margin-bottom:16px">P(sᵢ) = |cᵢ|² [ 1 + η · Fᵢ(Φc, E) ]</div>
+      <div class="lab-row">
+        <div class="lab-col"><div class="lab-cv"><canvas id="tlCV" width="520" height="400"></canvas></div></div>
+        <div class="lab-ctrl">
+          <div class="sl"><label><span>η bias</span><span class="sv" id="tlEta">0.00</span></label><input type="range" min="-2" max="2" step="0.01" value="0" id="tlSEta"></div>
+          <div class="sl"><label><span>Fᵢ factor</span><span class="sv" id="tlFi">0.50</span></label><input type="range" min="0" max="1" step="0.01" value="0.5" id="tlSFi"></div>
+          <div class="lab-info"><b style="color:var(--green)">PRINCIPLE:</b> Fᵢ = how much each outcome increases Φc and E. Positive η collapses probability onto consciousness-enhancing futures.</div>
+        </div>
       </div>
     </div>
-  </div>
-</div>
 
-<!-- PROBABILITY SCULPTOR -->
-<div id="p-sculptor" class="pnl">
-  <div style="margin-bottom:20px">
-    <span class="section-title">Probability <em>Sculptor</em></span>
-    <span class="tag tag-exp">Thought Experiment</span>
-    <p class="section-sub" style="margin-top:6px">Bias quantum branching via amplified measure tilt — P(fᵢ) = |cᵢ|² exp(η_eff ΔEᵢ) / Z</p>
-  </div>
-  <div class="eq eq-c">P(fi) = |ci|^2 · exp(η_eff · ΔEi) / Z</div>
-  <div class="lab-row">
-    <div class="lab-col"><div class="lab-cv"><canvas id="scCV" width="480" height="400"></canvas></div></div>
-    <div class="lab-ctrl">
-      <div class="sl"><label><span>η tilt</span><span class="sv" id="scEta">0.00</span></label><input type="range" min="-3" max="3" step="0.01" value="0" id="scSEta"></div>
-      <div class="sl"><label><span>Coherence</span><span class="sv" id="scCoh">0.50</span></label><input type="range" min="0" max="1" step="0.01" value="0.5" id="scSCoh"></div>
-      <div class="sl"><label><span>N futures</span><span class="sv" id="scN">6</span></label><input type="range" min="3" max="12" step="1" value="6" id="scSN"></div>
-      <div class="lab-info"><b style="color:var(--glow)">PRINCIPLE:</b> Amplified coherence scales η_eff. Probability mass concentrates on the highest-ΔE future state.</div>
+    <!-- JHĀNA -->
+    <div id="p-jhana" class="pnl">
+      <div class="lab-head"><span class="title">Jhāna <em>Engine</em></span><span class="exp">Thought Experiment</span><div class="lab-sub">V = mc²Φc²/2 + λcΦc⁴/4 + γΦc²E — Φc–E phase space with meditative attractors</div></div>
+      <div class="eq eq-p" style="margin-bottom:16px">V = mc² Φc²/2 + λc Φc⁴/4 + mE² E²/2 + λE E⁴/4 + γ Φc² E</div>
+      <div class="lab-row">
+        <div class="lab-col"><div class="lab-cv"><canvas id="jhCV" width="480" height="400"></canvas></div></div>
+        <div class="lab-ctrl">
+          <div class="sl"><label><span>Φc field</span><span class="sv" id="jhPhi">0.50</span></label><input type="range" min="0" max="2.5" step="0.01" value="0.5" id="jhSPhi"></div>
+          <div class="sl"><label><span>E field</span><span class="sv" id="jhE">0.50</span></label><input type="range" min="0" max="2.5" step="0.01" value="0.5" id="jhSE"></div>
+          <div class="sl"><label><span>γ coupling</span><span class="sv" id="jhG">−0.50</span></label><input type="range" min="-1.5" max="0.5" step="0.01" value="-0.5" id="jhSG"></div>
+          <div class="lab-info"><b style="color:var(--glow2)">PRINCIPLE:</b> γ &lt; 0 = high consciousness + ethics = lowest energy. Purple wells are jhāna attractors. Cyan dot = you.</div>
+        </div>
+      </div>
     </div>
-  </div>
-</div>
 
-<!-- FOLD-SPACE ENGINE -->
-<div id="p-fold" class="pnl">
-  <div style="margin-bottom:20px">
-    <span class="section-title">Fold-Space <em>Engine</em></span>
-    <span class="tag tag-exp">Thought Experiment</span>
-    <p class="section-sub" style="margin-top:6px">Yukawa kernel mₘ → 0 yields infinite-range nonlocal interaction — K(r) = gΦgₑ exp(−mₘr) / (4πr)</p>
-  </div>
-  <div class="eq eq-p">K(r) = gΦ · gE · exp(−mM · r) / (4π · r)</div>
-  <div class="lab-row">
-    <div class="lab-col"><div class="lab-cv"><canvas id="fsCV" width="480" height="400"></canvas></div></div>
-    <div class="lab-ctrl">
-      <div class="sl"><label><span>mₘ mass</span><span class="sv" id="fsMM">1.00</span></label><input type="range" min="0.01" max="3" step="0.01" value="1" id="fsSMM"></div>
-      <div class="sl"><label><span>Coupling g</span><span class="sv" id="fsG">1.00</span></label><input type="range" min="0.1" max="5" step="0.05" value="1" id="fsSG"></div>
-      <div class="sl"><label><span>Fold Δ</span><span class="sv" id="fsFd">0.00</span></label><input type="range" min="0" max="1" step="0.01" value="0" id="fsSFd"></div>
-      <div class="lab-info"><b style="color:var(--glow2)">PRINCIPLE:</b> mₘ → 0, interaction range → ∞. Drag Fold toward 1 to collapse spacetime geometry.</div>
+    <!-- DECISION -->
+    <div id="p-decision" class="pnl">
+      <div class="lab-head"><span class="title">Decision <em>Surface</em></span><div class="lab-sub">MQGT–SCF viability scoring across option parameter space</div></div>
+      <div class="ot" id="oTabs">
+        <button class="ob on" data-o="0">Option A</button>
+        <button class="ob" data-o="1">Option B</button>
+        <button class="ob best" data-o="2">Option C</button>
+      </div>
+      <div id="oIn">
+        <div class="sl"><label><span>Alignment</span><span class="sv" id="dA">0.96</span></label><input type="range" min="0" max="1" step="0.01" value="0.96" id="dSA"></div>
+        <div class="sl"><label><span>Complexity</span><span class="sv" id="dC">0.50</span></label><input type="range" min="0" max="1" step="0.01" value="0.50" id="dSC"></div>
+        <div class="sl"><label><span>Time Horizon</span><span class="sv" id="dT">0.70</span></label><input type="range" min="0" max="1" step="0.01" value="0.70" id="dST"></div>
+        <div class="sl"><label><span>Stability</span><span class="sv" id="dS">0.60</span></label><input type="range" min="0" max="1" step="0.01" value="0.60" id="dSS"></div>
+      </div>
+      <div id="oRes"></div>
     </div>
-  </div>
-</div>
 
-<!-- TIMELINE SELECTOR -->
-<div id="p-timeline" class="pnl">
-  <div style="margin-bottom:20px">
-    <span class="section-title">Timeline <em>Selector</em></span>
-    <span class="tag tag-exp">Thought Experiment</span>
-    <p class="section-sub" style="margin-top:6px">GKSL container + consciousness-induced collapse selects probability branches</p>
-  </div>
-  <div class="eq eq-n">P(sᵢ) = |cᵢ|² [ 1 + η · Fᵢ(Φc, E) ]</div>
-  <div class="lab-row">
-    <div class="lab-col"><div class="lab-cv"><canvas id="tlCV" width="520" height="400"></canvas></div></div>
-    <div class="lab-ctrl">
-      <div class="sl"><label><span>η bias</span><span class="sv" id="tlEta">0.00</span></label><input type="range" min="-2" max="2" step="0.01" value="0" id="tlSEta"></div>
-      <div class="sl"><label><span>Fᵢ factor</span><span class="sv" id="tlFi">0.50</span></label><input type="range" min="0" max="1" step="0.01" value="0.5" id="tlSFi"></div>
-      <div class="lab-info"><b style="color:var(--green)">PRINCIPLE:</b> Fᵢ = how much each outcome increases Φc and E. Positive η collapses probability onto consciousness-enhancing futures.</div>
+    <!-- FRAMEWORK -->
+    <div id="p-framework" class="pnl">
+      <div class="lab-head"><span class="title">MQGT–SCF <em>Complete Framework</em></span><div class="lab-sub">All governing equations — anchor paper and extended corpus</div></div>
+      <div class="fw-sec"><div class="fw-title">Anchor Tuple</div>
+        <div class="eq eq-c">Π_anchor = ( S_core , E_cl , G_GKSL , M_η , O_H₂ )</div>
+        <div class="eq eq-c">S_core = ∫ d⁴x √(−g) [ L_GR + L_SM + L_Φ + L_E + L_int ]</div>
+      </div>
+      <div class="fw-sec"><div class="fw-title">Core Dynamics</div>
+        <div class="eq eq-p">V₄ = (λΦ/4)Φc⁴ + (λE/4)E⁴ + (κ/2)Φc² E²</div>
+        <div class="eq eq-k">dρ/dΣ = −i[H,ρ] + Σₐ( Lₐ ρ Lₐ† − ½{Lₐ† Lₐ, ρ} )</div>
+        <div class="eq eq-g">Pη(i) = |cᵢ|² exp(η ΔEᵢ) / Z  ← measure tilt</div>
+        <div class="eq eq-n">V/V₀ = exp(−Γ T Δx²)  ← H₂ exclusion observable</div>
+      </div>
+      <div class="fw-sec"><div class="fw-title">Fields and Kernels</div>
+        <div class="eq eq-p">K(r) = gΦ gE exp(−mₘ r) / (4π r)  ← Yukawa kernel</div>
+        <div class="eq eq-g">Γ_floor = 1.15 × 10⁹ s⁻¹ m⁻²  ← Phase-0 benchmark</div>
+        <div class="eq eq-k">λhs ≲ 16π² ms² / Λ★²  ← naturalness bound</div>
+      </div>
+      <div class="fw-sec"><div class="fw-title">Extended MQGT–SCF Corpus</div>
+        <div class="eq eq-c">L_unified = (R−2Λ)/16πG + L_SM + ½(∂Φc)² − V(Φc) + ½(∂E)² − V(E) + L_int + L_tele</div>
+        <div class="eq eq-g">L_teleology = +ξ f(Φc, E)  ← T-symmetry breaking</div>
+        <div class="eq eq-p">P(sᵢ) = |ψᵢ|² [1 + η Fᵢ(Φc, E)]  ← consciousness-induced collapse</div>
+        <div class="eq eq-k">V_int = γ Φc² E  ← γ &lt; 0 = ethical stability</div>
+        <div class="eq eq-n">Φ̃c = ∫ d³k/√(2ωk) [ aₖ e⁻ⁱᵏˣ + aₖ† eⁱᵏˣ ]  ← qualion quantization</div>
+      </div>
     </div>
-  </div>
-</div>
 
-<!-- JHĀNA ENGINE -->
-<div id="p-jhana" class="pnl">
-  <div style="margin-bottom:20px">
-    <span class="section-title">Jhāna <em>Engine</em></span>
-    <span class="tag tag-exp">Thought Experiment</span>
-    <p class="section-sub" style="margin-top:6px">Φc–E phase space with meditative attractor states — V = mc²Φc²/2 + λcΦc⁴/4 + γΦc²E</p>
-  </div>
-  <div class="eq eq-p">V = mc² Φc²/2 + λc Φc⁴/4 + mE² E²/2 + λE E⁴/4 + γ Φc² E</div>
-  <div class="lab-row">
-    <div class="lab-col"><div class="lab-cv"><canvas id="jhCV" width="480" height="400"></canvas></div></div>
-    <div class="lab-ctrl">
-      <div class="sl"><label><span>Φc field</span><span class="sv" id="jhPhi">0.50</span></label><input type="range" min="0" max="2.5" step="0.01" value="0.5" id="jhSPhi"></div>
-      <div class="sl"><label><span>E field</span><span class="sv" id="jhE">0.50</span></label><input type="range" min="0" max="2.5" step="0.01" value="0.5" id="jhSE"></div>
-      <div class="sl"><label><span>γ coupling</span><span class="sv" id="jhG">−0.50</span></label><input type="range" min="-1.5" max="0.5" step="0.01" value="-0.5" id="jhSG"></div>
-      <div class="lab-info"><b style="color:var(--glow2)">PRINCIPLE:</b> γ &lt; 0 = high consciousness + ethics = lowest energy state. Purple wells are jhāna attractors. Cyan dot = you.</div>
-    </div>
-  </div>
-</div>
+  </div><!-- .app-main -->
+</div><!-- #app-section -->
 
-<!-- DECISION ENGINE -->
-<div id="p-decision" class="pnl">
-  <div style="margin-bottom:20px">
-    <span class="section-title">Decision <em>Surface</em></span>
-    <p class="section-sub" style="margin-top:6px">MQGT–SCF viability scoring across option parameter space</p>
+<!-- ═══════════════════════════════════
+     FOOTER
+═══════════════════════════════════ -->
+<footer class="portal-ft rel">
+  <div class="container">
+    <div class="quote-block">"The result is a smaller and more auditable object than an all-at-once unification claim: stronger precisely because it can fail in clear ways."</div>
+    <p>
+      MQGT–SCF · Theory of Everything Foundation · Christopher Michael Baird · 2026<br>
+      <a href="https://github.com/Cbaird26" target="_blank">github.com/Cbaird26</a> &nbsp;·&nbsp;
+      Π = (S_core, E_cl, G_GKSL, M_η, O_H₂)
+    </p>
   </div>
-  <div class="ot" id="oTabs">
-    <button class="ob on" data-o="0">Option A</button>
-    <button class="ob" data-o="1">Option B</button>
-    <button class="ob best" data-o="2">Option C</button>
-  </div>
-  <div id="oIn">
-    <div class="sl"><label><span>Alignment</span><span class="sv" id="dA">0.96</span></label><input type="range" min="0" max="1" step="0.01" value="0.96" id="dSA"></div>
-    <div class="sl"><label><span>Complexity</span><span class="sv" id="dC">0.50</span></label><input type="range" min="0" max="1" step="0.01" value="0.50" id="dSC"></div>
-    <div class="sl"><label><span>Time Horizon</span><span class="sv" id="dT">0.70</span></label><input type="range" min="0" max="1" step="0.01" value="0.70" id="dST"></div>
-    <div class="sl"><label><span>Stability</span><span class="sv" id="dS">0.60</span></label><input type="range" min="0" max="1" step="0.01" value="0.60" id="dSS"></div>
-  </div>
-  <div id="oRes"></div>
-</div>
+</footer>
 
-<!-- FRAMEWORK -->
-<div id="p-framework" class="pnl">
-  <div style="margin-bottom:20px">
-    <span class="section-title">MQGT–SCF <em>Complete Framework</em></span>
-    <p class="section-sub" style="margin-top:6px">All governing equations — anchor paper and extended corpus</p>
-  </div>
-  <div class="fw-section">
-    <div class="fw-title">Anchor Tuple</div>
-    <div class="eq eq-c">Π_anchor = ( S_core , E_cl , G_GKSL , M_η , O_H₂ )</div>
-    <div class="eq eq-c">S_core = ∫ d⁴x √(−g) [ L_GR + L_SM + L_Φ + L_E + L_int ]</div>
-  </div>
-  <div class="fw-section">
-    <div class="fw-title">Core Dynamics</div>
-    <div class="eq eq-p">V₄ = (λΦ/4)Φc⁴ + (λE/4)E⁴ + (κ/2)Φc² E²</div>
-    <div class="eq eq-k">dρ/dΣ = −i[H,ρ] + Σₐ( Lₐ ρ Lₐ† − ½{Lₐ† Lₐ, ρ} )</div>
-    <div class="eq eq-g">Pη(i) = |cᵢ|² exp(η ΔEᵢ) / Z  ← measure tilt</div>
-    <div class="eq eq-n">V/V₀ = exp(−Γ T Δx²)  ← H₂ exclusion observable</div>
-  </div>
-  <div class="fw-section">
-    <div class="fw-title">Fields and Kernels</div>
-    <div class="eq eq-p">K(r) = gΦ gE exp(−mₘ r) / (4π r)  ← Yukawa kernel</div>
-    <div class="eq eq-g">Γ_floor = 1.15 × 10⁹ s⁻¹ m⁻²  ← Phase-0 benchmark</div>
-    <div class="eq eq-k">λhs ≲ 16π² ms² / Λ★²  ← naturalness bound</div>
-  </div>
-  <div class="fw-section">
-    <div class="fw-title">Extended MQGT–SCF Corpus</div>
-    <div class="eq eq-c">L_unified = (R−2Λ)/16πG + L_SM + ½(∂Φc)² − V(Φc) + ½(∂E)² − V(E) + L_int + L_teleology</div>
-    <div class="eq eq-g">L_teleology = +ξ f(Φc, E)  ← T-symmetry breaking</div>
-    <div class="eq eq-p">P(sᵢ) = |ψᵢ|² [1 + η Fᵢ(Φc, E)]  ← consciousness-induced collapse</div>
-    <div class="eq eq-k">V_int = γ Φc² E  ← γ &lt; 0 = ethical stability</div>
-    <div class="eq eq-n">Φ̃c = ∫ d³k/√(2ωk) [ aₖ e⁻ⁱᵏˣ + aₖ† eⁱᵏˣ ]  ← qualion quantization</div>
-  </div>
-</div>
-
-<!-- SUITE -->
-<div id="p-suite" class="pnl">
-  <div style="margin-bottom:24px">
-    <span class="section-title">Zora <em>Application Suite</em></span>
-    <p class="section-sub" style="margin-top:6px">All deployed applications built on the MQGT–SCF framework</p>
-  </div>
-  <div class="lg">
-    <a href="https://cbaird26.github.io/zora-discovery-application/" target="_blank" class="lc">
-      <span class="tag tag-live" style="margin-left:0;margin-bottom:10px;display:inline-block">LIVE</span>
-      <h4>Zora Discovery</h4>
-      <p>Full decision engine, warp core, fold-state, H₂ model. The flagship application.</p>
-    </a>
-    <a href="https://cbaird26.github.io/zoraasi/" target="_blank" class="lc">
-      <span class="tag tag-live" style="margin-left:0;margin-bottom:10px;display:inline-block">LIVE</span>
-      <h4>ZoraASI</h4>
-      <p>Recursive agent with field dynamics and coherence tracking.</p>
-    </a>
-    <a href="https://cbaird26.github.io/zora-refit" target="_blank" class="lc">
-      <span class="tag tag-paper" style="margin-left:0;margin-bottom:10px;display:inline-block">BETA</span>
-      <h4>Zora Refit</h4>
-      <p>Coherence autopilot and field state stabilisation.</p>
-    </a>
-    <a href="https://cbaird26.github.io/zora-refit-mobile/" target="_blank" class="lc">
-      <span class="tag tag-paper" style="margin-left:0;margin-bottom:10px;display:inline-block">BETA</span>
-      <h4>Refit Mobile</h4>
-      <p>Touch-optimised coherence engine for iOS and Android.</p>
-    </a>
-    <a href="https://cbaird26.github.io/zora-refitted/" target="_blank" class="lc">
-      <span class="tag tag-paper" style="margin-left:0;margin-bottom:10px;display:inline-block">BETA</span>
-      <h4>Zora Refitted</h4>
-      <p>Refined parameter controls and field visualisation.</p>
-    </a>
-    <a href="https://cbaird26.github.io/zora-refitted-mobile/" target="_blank" class="lc">
-      <span class="tag tag-paper" style="margin-left:0;margin-bottom:10px;display:inline-block">BETA</span>
-      <h4>Refitted Mobile</h4>
-      <p>Mobile field visualisation with live Φc–E phase display.</p>
-    </a>
-    <a href="https://github.com/Cbaird26/A-Theory-of-Everything---Baird-et-al-2025-.pdf" target="_blank" class="lc">
-      <span class="tag tag-live" style="margin-left:0;margin-bottom:10px;display:inline-block;background:rgba(245,158,11,.12);color:var(--gold);border-color:rgba(245,158,11,.3)">PAPER</span>
-      <h4>MQGT–SCF Thesis</h4>
-      <p>5,570 pages. The complete mathematical foundation for the Theory of Everything.</p>
-    </a>
-    <a href="https://github.com/Cbaird26" target="_blank" class="lc">
-      <span class="tag tag-live" style="margin-left:0;margin-bottom:10px;display:inline-block">GITHUB</span>
-      <h4>cbaird26</h4>
-      <p>Full repository — all source code, papers, and deployment history.</p>
-    </a>
-  </div>
-</div>
-
-</div><!-- .main -->
-
-<div class="ft">
-  MQGT–SCF · Theory of Everything Foundation · C. Michael Baird · 2026 ·
-  <a href="https://github.com/Cbaird26">github.com/Cbaird26</a>
-</div>
-</div><!-- #app -->
-
+<!-- ═══════════════════════════════════
+     SCRIPTS
+═══════════════════════════════════ -->
 <script>
-/* ─── UTILS ─── */
 var TAU=Math.PI*2,clamp=function(v,a,b){return Math.max(a,Math.min(b,v))},lerp=function(a,b,t){return a+(b-a)*t};
 
-/* ─── STARFIELD ─── */
+/* ── STARFIELD ── */
 (function(){
-  var sc=document.getElementById('stars'),cx=sc.getContext('2d');
+  var sc=document.getElementById('starCV'),cx=sc.getContext('2d'),stars=[];
   function rs(){sc.width=window.innerWidth;sc.height=window.innerHeight;}
   rs();window.addEventListener('resize',rs);
-  var stars=Array.from({length:280},function(){return{x:Math.random(),y:Math.random(),r:Math.random()*1.2+.2,a:Math.random(),v:Math.random()*.003+.001};});
-  function draw(){
+  for(var i=0;i<260;i++)stars.push({x:Math.random(),y:Math.random(),r:Math.random()*1.2+.2,s:Math.random()*.004+.001,p:Math.random()*TAU});
+  function draw(t){
     cx.clearRect(0,0,sc.width,sc.height);
-    stars.forEach(function(s){
-      s.a+=s.v;if(s.a>1)s.a=0;
-      cx.fillStyle='rgba(180,200,255,'+(s.a*.7)+')';
-      cx.beginPath();cx.arc(s.x*sc.width,s.y*sc.height,s.r,0,TAU);cx.fill();
-    });
+    stars.forEach(function(s){var a=.2+.55*Math.abs(Math.sin(t*s.s*1000+s.p));cx.fillStyle='rgba(160,185,230,'+a+')';cx.beginPath();cx.arc(s.x*sc.width,s.y*sc.height,s.r,0,TAU);cx.fill();});
     requestAnimationFrame(draw);
   }
-  draw();
+  requestAnimationFrame(draw);
 })();
 
-/* ─── TABS ─── */
-document.querySelectorAll('.tb').forEach(function(t){
-  t.addEventListener('click',function(){
-    document.querySelectorAll('.tb').forEach(function(b){b.classList.remove('on')});
-    t.classList.add('on');
-    document.querySelectorAll('.pnl').forEach(function(p){p.classList.remove('show')});
-    document.getElementById('p-'+t.dataset.t).classList.add('show');
-  });
-});
+/* ── H2 EXCLUSION CHART ── */
+(function(){
+  var cv=document.getElementById('h2vis'),ctx=cv.getContext('2d'),W=cv.width,H=cv.height;
+  var pL=62,pR=22,pT=28,pB=48,pW=W-pL-pR,pH=H-pT-pB;
+  var qMin=-16,qMax=-4;
+  var gammas=[1e7,1e8,1e9,1.15e9,1e10,1e11];
+  var cols=['rgba(34,197,94,.5)','rgba(34,197,94,.85)','#00eeff','#f59e0b','#f472b6','rgba(239,68,68,.75)'];
+  var labs=['1e7','1e8','1e9','1.15e9 (Γ_floor)','1e10','1e11'];
+  function draw(){
+    ctx.clearRect(0,0,W,H);
+    ctx.fillStyle='#08091a';ctx.fillRect(0,0,W,H);
+    ctx.strokeStyle='#12162a';ctx.lineWidth=.5;
+    for(var x=0;x<W;x+=44){ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x,H);ctx.stroke();}
+    for(var y=0;y<H;y+=44){ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(W,y);ctx.stroke();}
+    ctx.strokeStyle='rgba(255,255,255,.2)';ctx.lineWidth=1;
+    ctx.beginPath();ctx.moveTo(pL,pT);ctx.lineTo(pL,pT+pH);ctx.lineTo(pL+pW,pT+pH);ctx.stroke();
+    ctx.font='11px "IBM Plex Mono",monospace';ctx.fillStyle='#5a6380';ctx.textAlign='right';
+    for(var v=0;v<=1;v+=.2){var yy=pT+pH*(1-v);ctx.fillText(v.toFixed(1),pL-7,yy+4);ctx.strokeStyle='#12162a';ctx.lineWidth=.5;ctx.beginPath();ctx.moveTo(pL,yy);ctx.lineTo(pL+pW,yy);ctx.stroke();}
+    ctx.textAlign='center';
+    for(var q=qMin;q<=qMax;q+=2){var xx=pL+((q-qMin)/(qMax-qMin))*pW;ctx.fillStyle='#5a6380';ctx.fillText('10^'+q,xx,pT+pH+20);}
+    ctx.fillStyle='#c8d0e8';ctx.font='12px "IBM Plex Mono",monospace';
+    ctx.fillText('Q = T·Δx²  [s·m²]',pL+pW/2,pT+pH+40);
+    ctx.save();ctx.translate(14,pT+pH/2);ctx.rotate(-Math.PI/2);ctx.fillText('V / V₀',0,0);ctx.restore();
+    for(var gi=0;gi<gammas.length;gi++){
+      var g=gammas[gi];ctx.strokeStyle=cols[gi];ctx.lineWidth=g===1.15e9?2.5:1.5;ctx.beginPath();
+      for(var px=0;px<=pW;px++){var logQ=qMin+(px/pW)*(qMax-qMin),Q=Math.pow(10,logQ),vis=Math.exp(-g*Q),yv=pT+pH*(1-vis);px===0?ctx.moveTo(pL+px,yv):ctx.lineTo(pL+px,yv);}
+      ctx.stroke();
+    }
+    ctx.font='10px "IBM Plex Mono",monospace';ctx.textAlign='left';
+    for(var li=0;li<labs.length;li++){ctx.fillStyle=cols[li];ctx.fillRect(pL+pW-170,pT+8+li*17,8,8);ctx.fillText('Γ='+labs[li],pL+pW-158,pT+16+li*17);}
+    var refQ=1e-12,refLogQ=Math.log10(refQ);
+    if(refLogQ>=qMin&&refLogQ<=qMax){var rpx=pL+((refLogQ-qMin)/(qMax-qMin))*pW,rvis=Math.exp(-1.15e9*refQ),rpy=pT+pH*(1-rvis);ctx.fillStyle='#f59e0b';ctx.beginPath();ctx.arc(rpx,rpy,5,0,TAU);ctx.fill();ctx.strokeStyle='rgba(245,158,11,.5)';ctx.setLineDash([4,4]);ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(rpx,rpy);ctx.lineTo(rpx,pT+pH);ctx.stroke();ctx.setLineDash([]);ctx.fillStyle='rgba(6,8,15,.9)';ctx.fillRect(rpx+8,rpy-26,148,20);ctx.strokeStyle='rgba(245,158,11,.3)';ctx.strokeRect(rpx+8,rpy-26,148,20);ctx.fillStyle='#f59e0b';ctx.font='11px "IBM Plex Mono",monospace';ctx.textAlign='left';ctx.fillText('Ref: V/V₀ = '+rvis.toFixed(6),rpx+14,rpy-12);}
+  }
+  draw();
+  window.addEventListener('resize',draw);
+})();
 
-/* ─── STATE ─── */
+/* ── TABS ── */
+document.querySelectorAll('.tb').forEach(function(t){t.addEventListener('click',function(){document.querySelectorAll('.tb').forEach(function(b){b.classList.remove('on')});t.classList.add('on');document.querySelectorAll('.pnl').forEach(function(p){p.classList.remove('show')});document.getElementById('p-'+t.dataset.t).classList.add('show');});});
+
+/* ── SMOOTH SCROLL ── */
+document.querySelectorAll('a[href^="#"]').forEach(function(a){a.addEventListener('click',function(e){var tgt=document.querySelector(a.getAttribute('href'));if(tgt){e.preventDefault();tgt.scrollIntoView({behavior:'smooth'});}});});
+
+/* ── STATE ── */
 var Z={a:.96,c:.92,th:.88,st:.94,eta:0,fold:0,phase:'rdy',eT:0,
   opts:[{n:'A',a:.6,c:.5,t:.7,s:.6},{n:'B',a:.55,c:.65,t:.5,s:.55},{n:'C',a:.96,c:.92,t:.88,s:.94}],ao:0};
 function coh(){return Z.a*.3+Z.st*.3+(1-Z.c)*.2+Z.th*.2}
@@ -506,270 +630,147 @@ function rsk(c,s){return clamp(c*40+(1-s)*30,5,60)}
 function visf(co){return Math.exp(-1.15e9*(1-co*.85)*1e-12)}
 function gEf(co){return 1.15e9*(1-co*.85)}
 
-/* ─── SLIDER BINDINGS ─── */
-[['sA','vA','a'],['sC','vC','c'],['sT','vT','th'],['sS','vS','st'],['sE','vE','eta'],['sF','vF','fold']].forEach(function(x){
-  document.getElementById(x[0]).addEventListener('input',function(e){
-    Z[x[2]]=+e.target.value;
-    document.getElementById(x[1]).textContent=(+e.target.value).toFixed(2);
-    upd();
-  });
-});
+/* ── SLIDER BINDINGS ── */
+[['sA','vA','a'],['sC','vC','c'],['sT','vT','th'],['sS','vS','st'],['sE','vE','eta'],['sF','vF','fold']].forEach(function(x){document.getElementById(x[0]).addEventListener('input',function(e){Z[x[2]]=+e.target.value;document.getElementById(x[1]).textContent=(+e.target.value).toFixed(2);upd();});});
 
-/* ─── HUD UPDATE ─── */
-function upd(){
-  var co=coh(),v=via(Z.a,Z.c,Z.th,Z.st),r=rsk(Z.c,Z.st),vs=visf(co),ge=gEf(co);
-  document.getElementById('mCoh').textContent=co.toFixed(3);
-  document.getElementById('mLk').textContent=Math.min(99,co*80+Z.st*20).toFixed(1)+'%';
-  document.getElementById('mVi').textContent=v.toFixed(1)+'%';
-  document.getElementById('mRk').textContent=r.toFixed(1)+'%';
+/* ── HUD UPDATE ── */
+function upd(){var co=coh(),v=via(Z.a,Z.c,Z.th,Z.st),r=rsk(Z.c,Z.st),vs=visf(co),ge=gEf(co);
+  document.getElementById('mCoh').textContent=co.toFixed(3);document.getElementById('mLk').textContent=Math.min(99,co*80+Z.st*20).toFixed(1)+'%';
+  document.getElementById('mVi').textContent=v.toFixed(1)+'%';document.getElementById('mRk').textContent=r.toFixed(1)+'%';
   document.getElementById('mRk').style.color=r>40?'var(--red)':r>25?'var(--glow3)':'var(--green)';
-  document.getElementById('mVs').textContent=vs.toFixed(6);
-  document.getElementById('h-gam').textContent=ge.toExponential(2);
-  document.getElementById('h-vis').textContent=(vs*100).toFixed(3)+'%';
-  document.getElementById('gE').textContent=ge.toExponential(2);
-  document.getElementById('gCoh').textContent=co.toFixed(3);
-  document.getElementById('gF').textContent=Z.fold.toFixed(2);
-  document.getElementById('gEta').textContent=Z.eta.toFixed(2);
-  document.getElementById('sWin').textContent=co>.85?'LOCKED':'HOLD';
-  document.getElementById('sWin').className='tg '+(co>.85?'tg-s':'tg-w');
-  document.getElementById('sTop').textContent=Z.fold<.8?'STABLE':'STRESS';
-  document.getElementById('sTop').className='tg '+(Z.fold<.8?'tg-s':'tg-w');
+  document.getElementById('mVs').textContent=vs.toFixed(6);document.getElementById('hGam').textContent=ge.toExponential(2);
+  document.getElementById('hVis').textContent=(vs*100).toFixed(3)+'%';document.getElementById('gE').textContent=ge.toExponential(2);
+  document.getElementById('gCoh').textContent=co.toFixed(3);document.getElementById('gF').textContent=Z.fold.toFixed(2);document.getElementById('gEta').textContent=Z.eta.toFixed(2);
+  document.getElementById('sWin').textContent=co>.85?'LOCKED':'HOLD';document.getElementById('sWin').className='tg '+(co>.85?'tg-s':'tg-w');
+  document.getElementById('sTop').textContent=Z.fold<.8?'STABLE':'STRESS';document.getElementById('sTop').className='tg '+(Z.fold<.8?'tg-s':'tg-w');
   var wd=document.getElementById('wDot'),ws=document.getElementById('wSt');
   if(Z.phase==='go'){wd.className='dot dot-w';ws.textContent='WARPING';ws.style.color='#fff';}
-  else{wd.className='dot dot-on';ws.textContent='Online';ws.style.color='';}
-}
+  else{wd.className='dot dot-on';ws.textContent='Online';ws.style.color='';}}
 
-/* ─── BLINDING WARP FLASH ─── */
-var wFlash=document.getElementById('warpFlash');
-var wFlash2=document.getElementById('warpFlash2');
-var wBeams=document.getElementById('warpBeams');
-var wBx=wBeams.getContext('2d');
-var wCore=document.getElementById('warpCore');
-var wRing=document.getElementById('warpRing');
-var wRing2=document.getElementById('warpRing2');
-var warpTick=0,warpActive=false;
-var rR=0,rO=0,r2R=0,r2O=0;
-var flashT=0;
-
-function resizeBeams(){wBeams.width=window.innerWidth;wBeams.height=window.innerHeight;}
+/* ── FLASH SYSTEM ── */
+var wF1=document.getElementById('wF1'),wF2=document.getElementById('wF2'),wFBc=document.getElementById('wFB'),wFBx=wFBc.getContext('2d');
+var wFC=document.getElementById('wFC'),wFR=document.getElementById('wFR'),wFR2=document.getElementById('wFR2');
+var warpActive=false,warpTick=0,rR=0,rO=0,r2R=0,r2O=0,flashT=0;
+function resizeBeams(){wFBc.width=window.innerWidth;wFBc.height=window.innerHeight;}
 resizeBeams();window.addEventListener('resize',resizeBeams);
 
-function applyWarpFlash(f,strobe){
-  var f2=Math.min(1,f);
-  var f3=Math.min(1,f*2);
-  wFlash.style.opacity=f2;
-  wFlash2.style.opacity=Math.min(1,f3*.8);
-  wBeams.style.opacity=f2>0.05?1:0;
-  document.body.style.background=f2>.35?'rgba(255,255,255,'+Math.min(1,(f2-.35)*3)+')':'#03040a';
-
-  /* core orb */
-  var cs=Math.round(20+f3*700);
-  wCore.style.width=cs+'px';wCore.style.height=cs+'px';
-  wCore.style.marginLeft=(-cs/2)+'px';wCore.style.marginTop=(-cs/2)+'px';
-  wCore.style.opacity=Math.min(1,f3*5);
-  wCore.style.filter='blur('+Math.round(f3*80)+'px)';
-  wCore.style.boxShadow='0 0 '+Math.round(f3*400)+'px '+Math.round(f3*200)+'px rgba(255,255,255,'+Math.min(1,f3*1.5)+')';
-
-  /* outer glow on entire page */
-  document.getElementById('app').style.boxShadow=f2>.1
-    ?'0 0 '+Math.round(f3*500)+'px '+Math.round(f3*300)+'px rgba(255,255,255,'+Math.min(1,f3*.6)+')'
-    :'none';
-
-  /* canvas brightness */
-  var bv=Math.min(80,1+f3*79);
-  document.getElementById('gC').style.filter=f3>.02?'brightness('+bv+') saturate('+Math.max(0,1-f3)+')'  :'none';
-
-  /* beams */
-  wBx.clearRect(0,0,wBeams.width,wBeams.height);
-  if(f3>.08){
-    var cx2=wBeams.width/2,cy2=wBeams.height/2,nb=20;
-    for(var i=0;i<nb;i++){
-      var ang=(i/nb)*TAU+flashT*.8;
-      var len=1600*f3*(0.6+0.4*Math.sin(flashT*3+i*1.3));
-      var grd=wBx.createLinearGradient(cx2,cy2,cx2+Math.cos(ang)*len,cy2+Math.sin(ang)*len);
-      grd.addColorStop(0,'rgba(255,255,255,'+Math.min(1,f3)+')');
-      grd.addColorStop(1,'rgba(255,255,255,0)');
-      wBx.beginPath();wBx.moveTo(cx2,cy2);wBx.lineTo(cx2+Math.cos(ang)*len,cy2+Math.sin(ang)*len);
-      wBx.strokeStyle=grd;wBx.lineWidth=Math.max(1,f3*28);wBx.stroke();
-    }
-  }
-
-  /* strobe */
-  if(strobe>.5){
-    wBx.fillStyle='rgba(255,255,255,'+strobe+')';
-    wBx.fillRect(0,0,wBeams.width,wBeams.height);
-  }
+function applyFlash(f,strobe){
+  var f2=Math.min(1,f),f3=Math.min(1,f*2);
+  wF1.style.opacity=f2;wF2.style.opacity=Math.min(1,f3*.85);
+  wFBc.style.opacity=f2>.04?1:0;
+  document.body.style.background=f2>.35?'rgba(255,255,255,'+Math.min(1,(f2-.35)*3.5)+')':'';
+  var cs=Math.round(20+f3*720);
+  wFC.style.width=cs+'px';wFC.style.height=cs+'px';wFC.style.marginLeft=(-cs/2)+'px';wFC.style.marginTop=(-cs/2)+'px';
+  wFC.style.opacity=Math.min(1,f3*5);wFC.style.filter='blur('+Math.round(f3*90)+'px)';
+  wFC.style.boxShadow='0 0 '+Math.round(f3*450)+'px '+Math.round(f3*220)+'px rgba(255,255,255,'+Math.min(1,f3*1.6)+')';
+  var bv=Math.min(80,1+f3*79);document.getElementById('gC').style.filter=f3>.02?'brightness('+bv+') saturate('+Math.max(0,1-f3)+')':'none';
+  document.getElementById('app-section').style.boxShadow=f2>.08?'0 0 '+Math.round(f3*600)+'px '+Math.round(f3*300)+'px rgba(255,255,255,'+Math.min(1,f3*.65)+')':'none';
+  wFBx.clearRect(0,0,wFBc.width,wFBc.height);
+  if(f3>.06){var cx2=wFBc.width/2,cy2=wFBc.height/2,nb=22;
+    for(var i=0;i<nb;i++){var ang=(i/nb)*TAU+flashT*.9,len=1800*f3*(.55+.45*Math.sin(flashT*3.2+i*1.4));
+      var grd=wFBx.createLinearGradient(cx2,cy2,cx2+Math.cos(ang)*len,cy2+Math.sin(ang)*len);
+      grd.addColorStop(0,'rgba(255,255,255,'+Math.min(1,f3)+')');grd.addColorStop(1,'rgba(255,255,255,0)');
+      wFBx.beginPath();wFBx.moveTo(cx2,cy2);wFBx.lineTo(cx2+Math.cos(ang)*len,cy2+Math.sin(ang)*len);
+      wFBx.strokeStyle=grd;wFBx.lineWidth=Math.max(1,f3*30);wFBx.stroke();}}
+  if(strobe>.5){wFBx.fillStyle='rgba(255,255,255,'+strobe+')';wFBx.fillRect(0,0,wFBc.width,wFBc.height);}
+  if(rO>0){wFR.style.width=rR*2+'px';wFR.style.height=rR*2+'px';wFR.style.marginLeft=(-rR)+'px';wFR.style.marginTop=(-rR)+'px';wFR.style.opacity=rO;wFR.style.borderWidth=Math.max(1,14*(1-rR/700))+'px';}
+  else{wFR.style.opacity=0;}
+  if(r2O>0){wFR2.style.width=r2R*2+'px';wFR2.style.height=r2R*2+'px';wFR2.style.marginLeft=(-r2R)+'px';wFR2.style.marginTop=(-r2R)+'px';wFR2.style.opacity=r2O;}
+  else{wFR2.style.opacity=0;}
 }
+function clearFlash(){wF1.style.opacity=0;wF2.style.opacity=0;wFBc.style.opacity=0;wFC.style.opacity=0;wFR.style.opacity=0;wFR2.style.opacity=0;document.body.style.background='';document.getElementById('gC').style.filter='none';document.getElementById('app-section').style.boxShadow='none';}
 
-function clearFlash(){
-  wFlash.style.opacity=0;wFlash2.style.opacity=0;
-  wBeams.style.opacity=0;wCore.style.opacity=0;
-  wRing.style.opacity=0;wRing2.style.opacity=0;
-  document.body.style.background='';
-  document.getElementById('gC').style.filter='none';
-  document.getElementById('app').style.boxShadow='none';
-}
-
-/* ─── ENGAGE ─── */
+/* ── ENGAGE ── */
 var engBtn=document.getElementById('engBtn');
 engBtn.addEventListener('click',function(){
-  if(Z.phase==='rdy'){
-    Z.phase='go';Z.eT=gt;
-    warpActive=true;warpTick=0;
-    rR=0;rO=1;r2R=0;r2O=0;
-    engBtn.className='eng go';engBtn.textContent='WARPING...';
-    aLog('ENGAGE. Fold-space initiated. Full warp flash.');
-    setTimeout(function(){
-      Z.phase='arr';warpActive=false;
-      clearFlash();
-      engBtn.className='eng arr';engBtn.textContent='ARRIVED — RE-ENGAGE?';
-      aLog('ARRIVED. Coh: '+coh().toFixed(3));upd();
-    },4500);
-  }else{
-    Z.phase='rdy';warpActive=false;
-    clearFlash();
-    engBtn.className='eng rdy';engBtn.textContent='ENGAGE (INTENTION)';
-    aLog('Re-engaged. Standby.');
-  }
+  if(Z.phase==='rdy'){Z.phase='go';Z.eT=gt;warpActive=true;warpTick=0;rR=0;rO=1;r2R=0;r2O=0;
+    engBtn.className='eng go';engBtn.textContent='WARPING...';aLog('ENGAGE. Fold-space initiated. Full warp flash.');
+    setTimeout(function(){Z.phase='arr';warpActive=false;clearFlash();engBtn.className='eng arr';engBtn.textContent='ARRIVED — RE-ENGAGE?';aLog('ARRIVED. Coh: '+coh().toFixed(3));upd();},4800);
+  }else{Z.phase='rdy';warpActive=false;clearFlash();engBtn.className='eng rdy';engBtn.textContent='ENGAGE (INTENTION)';aLog('Re-engaged. Standby.');}
   upd();
 });
+function aLog(m){var t=new Date().toLocaleTimeString().slice(0,5),a=document.getElementById('logA');a.innerHTML+='<div class="e"><span class="ts">['+t+']</span> <span class="m">'+m+'</span></div>';a.scrollTop=a.scrollHeight;}
 
-function aLog(m){
-  var t=new Date().toLocaleTimeString().slice(0,5),a=document.getElementById('logA');
-  a.innerHTML+='<div class="e"><span class="ts">['+t+']</span> <span class="m">'+m+'</span></div>';
-  a.scrollTop=a.scrollHeight;
-}
-
-/* ─── WARP CANVAS ─── */
+/* ── WARP CANVAS ── */
 var gCV=document.getElementById('gC'),gx=gCV.getContext('2d'),gt=0;
 function drawG(){
-  gt+=.016;flashT+=.02;
+  gt+=.016;flashT+=.022;
   var W=gCV.width,H=gCV.height;
   gx.clearRect(0,0,W,H);
-  var bg=gx.createRadialGradient(W/2,H/2,0,W/2,H/2,W*.55);
-  bg.addColorStop(0,'#0a0818');bg.addColorStop(1,'#03040a');
-  gx.fillStyle=bg;gx.fillRect(0,0,W,H);
-
+  var bg=gx.createRadialGradient(W/2,H/2,0,W/2,H/2,W*.55);bg.addColorStop(0,'#0a0818');bg.addColorStop(1,'#03040a');gx.fillStyle=bg;gx.fillRect(0,0,W,H);
   var cx=W/2,cy=H/2,co=coh(),fd=Z.fold,eta=Z.eta,isW=Z.phase==='go';
-  var R1=150+fd*50,R2=62+co*35,uS=44,vS=24,ws=isW?gt*3.5:gt*.5;
-  var flashVal=0,strobeVal=0;
-
+  var R1=150+fd*52,R2=62+co*36,uS=44,vS=24,ws=isW?gt*3.5:gt*.5;
+  var fv2=0,sv2=0;
   if(warpActive){
     warpTick++;
-    var dur=280;
-    if(warpTick<=6){flashVal=warpTick/6;}
-    else if(warpTick<=12){flashVal=1;strobeVal=(warpTick%2===0)?1:0;}
-    else if(warpTick<=60){flashVal=1;strobeVal=Math.sin((warpTick-12)*1.8)>0?1:0;}
-    else if(warpTick<=130){var sp=(warpTick-60)/70;flashVal=1-sp*.35;strobeVal=Math.sin((warpTick-60)*1.2)>0.2?.85:0;}
-    else if(warpTick<=200){var sp=(warpTick-130)/70;flashVal=.65-sp*.55;strobeVal=Math.sin((warpTick-130)*.7)>.4?.5:0;}
-    else{flashVal=Math.max(0,.1-(warpTick-200)/80*.1);strobeVal=0;}
-
-    rR+=12+flashVal*30;rO=Math.max(0,1-rR/700);
-    if(warpTick===18){r2R=0;r2O=1;}
-    if(r2O>0){r2R+=9;r2O=Math.max(0,1-r2R/700);}
-
-    applyWarpFlash(flashVal,strobeVal);
+    if(warpTick<=6){fv2=warpTick/6;}
+    else if(warpTick<=12){fv2=1;sv2=(warpTick%2===0)?1:0;}
+    else if(warpTick<=65){fv2=1;sv2=Math.sin((warpTick-12)*1.8)>0?1:0;}
+    else if(warpTick<=135){var sp=(warpTick-65)/70;fv2=1-sp*.35;sv2=Math.sin((warpTick-65)*1.2)>.2?.85:0;}
+    else if(warpTick<=210){var sp=(warpTick-135)/75;fv2=.65-sp*.55;sv2=Math.sin((warpTick-135)*.7)>.4?.5:0;}
+    else{fv2=Math.max(0,.1-(warpTick-210)/80*.1);}
+    rR+=13+fv2*32;rO=Math.max(0,1-rR/750);
+    if(warpTick===20){r2R=0;r2O=1;}
+    if(r2O>0){r2R+=10;r2O=Math.max(0,1-r2R/750);}
+    applyFlash(fv2,sv2);
   }
-
-  /* rings on canvas */
-  if(rO>0){
-    gx.beginPath();gx.arc(cx,cy,rR,0,TAU);
-    gx.strokeStyle='rgba(255,255,255,'+rO+')';gx.lineWidth=Math.max(1,18*(1-rR/700));gx.stroke();
-  }
-  if(r2O>0){
-    gx.beginPath();gx.arc(cx,cy,r2R,0,TAU);
-    gx.strokeStyle='rgba(140,180,255,'+r2O+')';gx.lineWidth=Math.max(1,9*(1-r2R/700));gx.stroke();
-  }
-
+  if(rO>0){gx.beginPath();gx.arc(cx,cy,rR,0,TAU);gx.strokeStyle='rgba(255,255,255,'+rO+')';gx.lineWidth=Math.max(1,20*(1-rR/750));gx.stroke();}
+  if(r2O>0){gx.beginPath();gx.arc(cx,cy,r2R,0,TAU);gx.strokeStyle='rgba(140,185,255,'+r2O+')';gx.lineWidth=Math.max(1,10*(1-r2R/750));gx.stroke();}
   for(var i=0;i<uS;i++)for(var j=0;j<vS;j++){
     var u=(i/uS)*TAU,v=(j/vS)*TAU,u2=((i+1)/uS)*TAU;
     var x3=(R1+R2*Math.cos(v))*Math.cos(u),y3=(R1+R2*Math.cos(v))*Math.sin(u),z3=R2*Math.sin(v);
     var rY=ws*.3,rX=.4+Math.sin(gt*.2)*.1,cY=Math.cos(rY),sY=Math.sin(rY),cX=Math.cos(rX),sX=Math.sin(rX);
     var rx=x3*cY-z3*sY,ry=y3,rz=x3*sY+z3*cY,ry2=ry*cX-rz*sX,rz2=ry*sX+rz*cX;
-    var sc=330/(330+rz2),sx=cx+rx*sc,sy=cy+ry2*sc,fv=Math.sin(u*3+v*2+gt)*.5+.5;
-    if(isW){var wf=.5+.5*Math.sin(gt*8+u*3+v*4);
-      gx.fillStyle='hsla(215,'+(8+fv*10)+'%,'+(72+wf*26)+'%,'+Math.min((.55+wf*.44)*sc,.98)+')';}
-    else{var h=190+eta*fv*90+fd*70;
-      gx.fillStyle='hsla('+h+','+Math.round(72+co*18)+'%,'+Math.round(28+co*28+fv*18)+'%,'+Math.min((.12+co*.28+fv*.18)*sc,.82)+')';}
-    var dr=1.2+sc*1.8+co*1.8+(isW?2:0);
-    gx.beginPath();gx.arc(sx,sy,dr,0,TAU);gx.fill();
-    if(i<uS-1){
-      var nx3=(R1+R2*Math.cos(v))*Math.cos(u2),ny3=(R1+R2*Math.cos(v))*Math.sin(u2),nz3=R2*Math.sin(v);
+    var sc=340/(340+rz2),sx=cx+rx*sc,sy=cy+ry2*sc,fv=Math.sin(u*3+v*2+gt)*.5+.5;
+    if(isW){var wf=.5+.5*Math.sin(gt*8+u*3+v*4);gx.fillStyle='hsla(215,'+(8+fv*10)+'%,'+(72+wf*26)+'%,'+Math.min((.55+wf*.44)*sc,.98)+')';}
+    else{var h=190+eta*fv*90+fd*70;gx.fillStyle='hsla('+h+','+Math.round(72+co*18)+'%,'+Math.round(28+co*28+fv*18)+'%,'+Math.min((.12+co*.28+fv*.18)*sc,.82)+')';}
+    var dr=1.2+sc*1.9+co*1.9+(isW?2.2:0);gx.beginPath();gx.arc(sx,sy,dr,0,TAU);gx.fill();
+    if(i<uS-1){var nx3=(R1+R2*Math.cos(v))*Math.cos(u2),ny3=(R1+R2*Math.cos(v))*Math.sin(u2),nz3=R2*Math.sin(v);
       var nrx=nx3*cY-nz3*sY,nry2=ny3*cX-(nx3*sY+nz3*cY)*sX,nrz2=ny3*sX+(nx3*sY+nz3*cY)*cX;
-      var ns=330/(330+nrz2),nsx=cx+nrx*ns,nsy=cy+nry2*ns;
-      var la=isW?(.2+.38*Math.abs(Math.sin(gt*8+u))):(.12+co*.28+fv*.18)*sc*.22;
+      var ns=340/(340+nrz2),nsx=cx+nrx*ns,nsy=cy+nry2*ns;
+      var la=isW?(.2+.4*Math.abs(Math.sin(gt*8+u))):(.12+co*.28+fv*.18)*sc*.22;
       gx.strokeStyle=isW?'rgba(220,235,255,'+la+')':'hsla('+(190+eta*fv*90+fd*70)+',60%,55%,'+la+')';
-      gx.lineWidth=isW?.7:.35;gx.beginPath();gx.moveTo(sx,sy);gx.lineTo(nsx,nsy);gx.stroke();
-    }
-  }
-  if(isW){
-    var fa=.12+.18*Math.abs(Math.sin(gt*5));
-    var fg=gx.createRadialGradient(cx,cy,0,cx,cy,R1+R2+70);
-    fg.addColorStop(0,'rgba(255,255,255,'+(fa*5)+')');
-    fg.addColorStop(.25,'rgba(255,255,255,'+(fa*2.5)+')');
-    fg.addColorStop(1,'transparent');
-    gx.fillStyle=fg;gx.beginPath();gx.arc(cx,cy,R1+R2+70,0,TAU);gx.fill();
-    if(Z.eT){var el=gt-Z.eT;if(el<4){for(var r=0;r<5;r++){var rr=(el-r*.25)*180;if(rr>0){var ra=Math.max(0,1-el/4)*(.85-r*.12);gx.strokeStyle='rgba(255,255,255,'+ra+')';gx.lineWidth=5-r;gx.beginPath();gx.arc(cx,cy,rr,0,TAU);gx.stroke();}}}}
-  }
-  if(fd>.05){var fg2=gx.createRadialGradient(cx,cy,0,cx,cy,30+fd*100);fg2.addColorStop(0,'rgba(139,92,246,'+(fd*.7)+')');fg2.addColorStop(1,'transparent');gx.fillStyle=fg2;gx.beginPath();gx.arc(cx,cy,30+fd*100,0,TAU);gx.fill();}
-  var op=.5+.5*Math.sin(gt*(isW?9:2)),oR=isW?28+op*22:10+co*16+op*5;
+      gx.lineWidth=isW?.7:.38;gx.beginPath();gx.moveTo(sx,sy);gx.lineTo(nsx,nsy);gx.stroke();}}
+  if(isW){var fa=.12+.18*Math.abs(Math.sin(gt*5));var fg=gx.createRadialGradient(cx,cy,0,cx,cy,R1+R2+75);fg.addColorStop(0,'rgba(255,255,255,'+(fa*5.5)+')');fg.addColorStop(.25,'rgba(255,255,255,'+(fa*2.5)+')');fg.addColorStop(1,'transparent');gx.fillStyle=fg;gx.beginPath();gx.arc(cx,cy,R1+R2+75,0,TAU);gx.fill();
+    if(Z.eT){var el=gt-Z.eT;if(el<4.5){for(var rk=0;rk<5;rk++){var rr=(el-rk*.25)*190;if(rr>0){var ra=Math.max(0,1-el/4.5)*(.88-rk*.13);gx.strokeStyle='rgba(255,255,255,'+ra+')';gx.lineWidth=5-rk;gx.beginPath();gx.arc(cx,cy,rr,0,TAU);gx.stroke();}}}}}
+  if(fd>.05){var fg2=gx.createRadialGradient(cx,cy,0,cx,cy,30+fd*105);fg2.addColorStop(0,'rgba(139,92,246,'+(fd*.72)+')');fg2.addColorStop(1,'transparent');gx.fillStyle=fg2;gx.beginPath();gx.arc(cx,cy,30+fd*105,0,TAU);gx.fill();}
+  var op=.5+.5*Math.sin(gt*(isW?9:2)),oR=isW?28+op*24:10+co*17+op*6;
   var og=gx.createRadialGradient(cx,cy,0,cx,cy,oR);
-  if(isW){og.addColorStop(0,'rgba(255,255,255,'+(0.95+op*.05)+')');og.addColorStop(.2,'rgba(255,255,255,.55)');og.addColorStop(.6,'rgba(200,220,255,.12)');og.addColorStop(1,'transparent');}
-  else{og.addColorStop(0,'rgba(0,238,255,'+(.38+co*.55)+')');og.addColorStop(.4,'rgba(0,238,255,.08)');og.addColorStop(1,'transparent');}
+  if(isW){og.addColorStop(0,'rgba(255,255,255,'+(0.95+op*.05)+')');og.addColorStop(.2,'rgba(255,255,255,.55)');og.addColorStop(.6,'rgba(200,220,255,.1)');og.addColorStop(1,'transparent');}
+  else{og.addColorStop(0,'rgba(0,238,255,'+(.38+co*.56)+')');og.addColorStop(.4,'rgba(0,238,255,.07)');og.addColorStop(1,'transparent');}
   gx.fillStyle=og;gx.beginPath();gx.arc(cx,cy,oR,0,TAU);gx.fill();
   gx.font='bold 12px "IBM Plex Mono",monospace';gx.textAlign='right';
-  gx.fillStyle=isW?'#fff':Z.phase==='arr'?'var(--green)':'#5a6380';
+  gx.fillStyle=isW?'#fff':Z.phase==='arr'?'#10d9a0':'#5a6380';
   gx.fillText(isW?'◈ WARPING':Z.phase==='arr'?'◈ ARRIVED':'◈ STANDBY',W-14,H-14);
   requestAnimationFrame(drawG);
 }
 drawG();
 
-/* ─── PROBABILITY SCULPTOR ─── */
+/* ── PROBABILITY SCULPTOR ── */
 var scCV=document.getElementById('scCV').getContext('2d'),scT=0,scP={eta:0,coh:.5,n:6};
-['scSEta','scSCoh','scSN'].forEach(function(id,i){
-  document.getElementById(id).addEventListener('input',function(e){
-    var v=+e.target.value;if(i===0)scP.eta=v;if(i===1)scP.coh=v;if(i===2)scP.n=v;
-    document.getElementById(['scEta','scCoh','scN'][i]).textContent=v.toFixed(i===2?0:2);
-  });
-});
-function drawSc(){scT+=.018;
-  var cv=document.getElementById('scCV'),W=cv.width,H=cv.height,ctx=scCV;
-  ctx.clearRect(0,0,W,H);
-  var bg=ctx.createRadialGradient(W/2,H/2,0,W/2,H/2,W*.6);bg.addColorStop(0,'#0d0820');bg.addColorStop(1,'#03040a');
-  ctx.fillStyle=bg;ctx.fillRect(0,0,W,H);
-  var n=scP.n,cx=W/2,cy=H/2,R=Math.min(W,H)*.38;
-  var fs=Array.from({length:n},function(_,i){return{a:(i/n)*TAU-Math.PI/2,dE:i/(n-1)*2-1,lb:'F'+(i+1)};});
-  var eE=scP.eta*(1+scP.coh*10),rw=fs.map(function(f){return f.a*0+Math.exp(eE*f.dE)}),Zv=rw.reduce(function(a,b){return a+b},0),pr=rw.map(function(p){return p/Zv});
-  for(var i=0;i<n;i++){var f=fs[i],p=pr[i],a=f.ang+Math.sin(scT+i)*.018,r=R*(.28+p*2.5),x=cx+Math.cos(f.a)*r,y=cy+Math.sin(f.a)*r,h=f.dE>0?170:(f.dE<0?330:50);
+['scSEta','scSCoh','scSN'].forEach(function(id,i){document.getElementById(id).addEventListener('input',function(e){var v=+e.target.value;if(i===0)scP.eta=v;if(i===1)scP.coh=v;if(i===2)scP.n=v;document.getElementById(['scEta','scCoh','scN'][i]).textContent=v.toFixed(i===2?0:2);});});
+function drawSc(){scT+=.018;var cv=document.getElementById('scCV'),W=cv.width,H=cv.height,ctx=scCV;ctx.clearRect(0,0,W,H);
+  var bg=ctx.createRadialGradient(W/2,H/2,0,W/2,H/2,W*.6);bg.addColorStop(0,'#0d0820');bg.addColorStop(1,'#03040a');ctx.fillStyle=bg;ctx.fillRect(0,0,W,H);
+  var n=scP.n,cx=W/2,cy=H/2,R=Math.min(W,H)*.38,fs=Array.from({length:n},function(_,i){return{a:(i/n)*TAU-Math.PI/2,dE:i/(n-1)*2-1,lb:'F'+(i+1)};});
+  var eE=scP.eta*(1+scP.coh*10),rw=fs.map(function(f){return Math.exp(eE*f.dE)}),Zv=rw.reduce(function(a,b){return a+b},0),pr=rw.map(function(p){return p/Zv});
+  for(var i=0;i<n;i++){var f=fs[i],p=pr[i],r=R*(.28+p*2.5),x=cx+Math.cos(f.a)*r,y=cy+Math.sin(f.a)*r,h=f.dE>0?170:(f.dE<0?330:50);
     ctx.strokeStyle='hsla('+h+',80%,60%,'+(.12+p*.55)+')';ctx.lineWidth=.5+p*4;ctx.beginPath();ctx.moveTo(cx,cy);ctx.lineTo(x,y);ctx.stroke();
-    var oR=8+p*42,g=ctx.createRadialGradient(x,y,0,x,y,oR);g.addColorStop(0,'hsla('+h+',90%,72%,'+(.55+p*.4)+')');g.addColorStop(.5,'hsla('+h+',80%,50%,'+(.18+p*.28)+')');g.addColorStop(1,'transparent');
-    ctx.fillStyle=g;ctx.beginPath();ctx.arc(x,y,oR,0,TAU);ctx.fill();
-    ctx.fillStyle='hsla('+h+',60%,86%,'+(.45+p)+')';ctx.font='bold '+(11+p*6)+'px "IBM Plex Mono",monospace';ctx.textAlign='center';ctx.fillText(f.lb,x,y-oR-5);ctx.font='11px "IBM Plex Mono",monospace';ctx.fillStyle='hsla('+h+',50%,76%,.8)';ctx.fillText((p*100).toFixed(1)+'%',x,y+4);}
+    var oR=8+p*42,g=ctx.createRadialGradient(x,y,0,x,y,oR);g.addColorStop(0,'hsla('+h+',92%,72%,'+(.55+p*.4)+')');g.addColorStop(.5,'hsla('+h+',80%,50%,'+(.18+p*.28)+')');g.addColorStop(1,'transparent');
+    ctx.fillStyle=g;ctx.beginPath();ctx.arc(x,y,oR,0,TAU);ctx.fill();ctx.fillStyle='hsla('+h+',62%,86%,'+(.45+p)+')';ctx.font='bold '+(11+p*6)+'px "IBM Plex Mono",monospace';ctx.textAlign='center';ctx.fillText(f.lb,x,y-oR-5);ctx.font='11px "IBM Plex Mono",monospace';ctx.fillStyle='hsla('+h+',50%,76%,.8)';ctx.fillText((p*100).toFixed(1)+'%',x,y+4);}
   var cg=ctx.createRadialGradient(cx,cy,0,cx,cy,22);cg.addColorStop(0,'rgba(0,238,255,.65)');cg.addColorStop(1,'transparent');ctx.fillStyle=cg;ctx.beginPath();ctx.arc(cx,cy,22,0,TAU);ctx.fill();
   requestAnimationFrame(drawSc);}drawSc();
 
-/* ─── FOLD-SPACE ENGINE ─── */
+/* ── FOLD-SPACE ── */
 var fsC=document.getElementById('fsCV').getContext('2d'),fsT=0,fsP={mM:1,g:1,fd:0};
-['fsSMM','fsSG','fsSFd'].forEach(function(id,i){
-  document.getElementById(id).addEventListener('input',function(e){
-    var v=+e.target.value;if(i===0)fsP.mM=v;if(i===1)fsP.g=v;if(i===2)fsP.fd=v;
-    document.getElementById(['fsMM','fsG','fsFd'][i]).textContent=v.toFixed(2);
-  });
-});
+['fsSMM','fsSG','fsSFd'].forEach(function(id,i){document.getElementById(id).addEventListener('input',function(e){var v=+e.target.value;if(i===0)fsP.mM=v;if(i===1)fsP.g=v;if(i===2)fsP.fd=v;document.getElementById(['fsMM','fsG','fsFd'][i]).textContent=v.toFixed(2);});});
 function drawFs(){fsT+=.02;var cv=document.getElementById('fsCV'),W=cv.width,H=cv.height,ctx=fsC;ctx.clearRect(0,0,W,H);
   var bg=ctx.createRadialGradient(W/2,H/2,0,W/2,H/2,W*.6);bg.addColorStop(0,'#0e0820');bg.addColorStop(1,'#03040a');ctx.fillStyle=bg;ctx.fillRect(0,0,W,H);
   var cx=W/2,cy=H/2,gs=16,sp=22,sx=cx-(gs-1)*sp/2,sy=cy-(gs-1)*sp/2;
-  for(var i=0;i<gs;i++)for(var j=0;j<gs;j++){
-    var x=sx+i*sp,y=sy+j*sp,dx=x-cx,dy=y-cy,d=Math.sqrt(dx*dx+dy*dy);
-    var kv=fsP.g*Math.exp(-fsP.mM*d/80)/(d/80+.1),fs2=fsP.fd*kv*.3;x-=dx*fs2;y-=dy*fs2;
-    var w=Math.sin(d*.05-fsT*2)*(1-fsP.fd)*2;x+=w*dx/(d+1)*.5;y+=w*dy/(d+1)*.5;
-    var int=clamp(kv*.15,0,1),h=lerp(265,185,int);
-    ctx.fillStyle='hsla('+h+',82%,'+(48+int*32)+'%,'+(.22+int*.62)+')';
-    ctx.beginPath();ctx.arc(x,y,1.6+int*3.2,0,TAU);ctx.fill();}
+  for(var i=0;i<gs;i++)for(var j=0;j<gs;j++){var x=sx+i*sp,y=sy+j*sp,dx=x-cx,dy=y-cy,d=Math.sqrt(dx*dx+dy*dy);var kv=fsP.g*Math.exp(-fsP.mM*d/80)/(d/80+.1),fs2=fsP.fd*kv*.3;x-=dx*fs2;y-=dy*fs2;var w=Math.sin(d*.05-fsT*2)*(1-fsP.fd)*2;x+=w*dx/(d+1)*.5;y+=w*dy/(d+1)*.5;var int2=clamp(kv*.15,0,1),hh=lerp(265,185,int2);ctx.fillStyle='hsla('+hh+',82%,'+(48+int2*32)+'%,'+(.22+int2*.62)+')';ctx.beginPath();ctx.arc(x,y,1.6+int2*3.2,0,TAU);ctx.fill();}
   if(fsP.fd>.08){var fg=ctx.createRadialGradient(cx,cy,0,cx,cy,42+fsP.fd*65);fg.addColorStop(0,'rgba(139,92,246,'+(fsP.fd*.55)+')');fg.addColorStop(1,'transparent');ctx.fillStyle=fg;ctx.beginPath();ctx.arc(cx,cy,42+fsP.fd*65,0,TAU);ctx.fill();}
   requestAnimationFrame(drawFs);}drawFs();
 
-/* ─── TIMELINE SELECTOR ─── */
+/* ── TIMELINE ── */
 var tlC=document.getElementById('tlCV').getContext('2d'),tlT=0,tlP={eta:0,fi:.5};
 var TL=[{n:'Stagnation',dE:-.8,h:0},{n:'Conflict',dE:-.3,h:28},{n:'Baseline',dE:0,h:50},{n:'Growth',dE:.4,h:145},{n:'Convergence',dE:.8,h:175},{n:'Transcendence',dE:1.2,h:270}];
 ['tlSEta','tlSFi'].forEach(function(id,i){document.getElementById(id).addEventListener('input',function(e){var v=+e.target.value;if(i===0)tlP.eta=v;if(i===1)tlP.fi=v;document.getElementById(['tlEta','tlFi'][i]).textContent=v.toFixed(2);});});
@@ -779,36 +780,34 @@ function drawTl(){tlT+=.015;var cv=document.getElementById('tlCV'),W=cv.width,H=
   for(var i=0;i<TL.length;i++){var t=TL[i],p=pr[i],y=40+i*bH+bH/2,eX=oX+90+p*(W-210),a=.18+p*.72;
     ctx.strokeStyle='hsla('+t.h+',72%,60%,'+a+')';ctx.lineWidth=.7+p*5;ctx.beginPath();ctx.moveTo(oX,H/2);ctx.quadraticCurveTo(oX+38,y,eX,y);ctx.stroke();
     var oR=5+p*20,g=ctx.createRadialGradient(eX,y,0,eX,y,oR);g.addColorStop(0,'hsla('+t.h+',92%,76%,'+(.45+p*.55)+')');g.addColorStop(1,'transparent');
-    ctx.fillStyle=g;ctx.beginPath();ctx.arc(eX,y,oR,0,TAU);ctx.fill();
-    ctx.fillStyle='hsla('+t.h+',62%,86%,'+(.45+p)+')';ctx.font='bold '+(10+p*4)+'px "IBM Plex Mono",monospace';ctx.textAlign='left';ctx.fillText(t.n,eX+oR+8,y);ctx.font='10px "IBM Plex Mono",monospace';ctx.fillStyle='hsla('+t.h+',42%,70%,.7)';ctx.fillText((p*100).toFixed(1)+'%',eX+oR+8,y+13);}
+    ctx.fillStyle=g;ctx.beginPath();ctx.arc(eX,y,oR,0,TAU);ctx.fill();ctx.fillStyle='hsla('+t.h+',62%,86%,'+(.45+p)+')';ctx.font='bold '+(10+p*4)+'px "IBM Plex Mono",monospace';ctx.textAlign='left';ctx.fillText(t.n,eX+oR+8,y);ctx.font='10px "IBM Plex Mono",monospace';ctx.fillStyle='hsla('+t.h+',42%,70%,.7)';ctx.fillText((p*100).toFixed(1)+'%',eX+oR+8,y+13);}
   var og=ctx.createRadialGradient(oX,H/2,0,oX,H/2,18);og.addColorStop(0,'rgba(255,255,255,.85)');og.addColorStop(1,'transparent');ctx.fillStyle=og;ctx.beginPath();ctx.arc(oX,H/2,18,0,TAU);ctx.fill();
   ctx.fillStyle='#fff';ctx.font='bold 12px "IBM Plex Mono",monospace';ctx.textAlign='center';ctx.fillText('NOW',oX,H/2+5);
   requestAnimationFrame(drawTl);}drawTl();
 
-/* ─── JHĀNA ENGINE ─── */
+/* ── JHĀNA ── */
 var jhC=document.getElementById('jhCV').getContext('2d'),jhT=0,jhP={phi:.5,e:.5,g:-.5};
 ['jhSPhi','jhSE','jhSG'].forEach(function(id,i){document.getElementById(id).addEventListener('input',function(e){var v=+e.target.value;if(i===0)jhP.phi=v;if(i===1)jhP.e=v;if(i===2)jhP.g=v;document.getElementById(['jhPhi','jhE','jhG'][i]).textContent=v.toFixed(2);});});
 function drawJh(){jhT+=.02;var cv=document.getElementById('jhCV'),W=cv.width,H=cv.height,ctx=jhC;ctx.clearRect(0,0,W,H);ctx.fillStyle='#03040a';ctx.fillRect(0,0,W,H);
   var pL=50,pR=15,pT=30,pB=40,pW=W-pL-pR,pH=H-pT-pB,rng=3;
   for(var py=0;py<pH;py+=3)for(var px=0;px<pW;px+=3){var ph=(px/pW)*rng,e=(1-py/pH)*rng,V=.5*ph*ph+.15*Math.pow(ph,4)+.5*e*e+.15*Math.pow(e,4)+jhP.g*ph*ph*e;var nm=clamp((V+2)/6,0,1),h=V<0?280:lerp(220,30,nm),l=V<0?lerp(52,26,clamp(-V/2,0,1)):lerp(8,36,nm);ctx.fillStyle='hsl('+h+',72%,'+l+'%)';ctx.fillRect(pL+px,pT+py,3,3);}
   var js=[{n:'J1',p:.8,e:.4},{n:'J2',p:1.2,e:.8},{n:'J3',p:1.6,e:1.2},{n:'J4',p:2,e:1.8}];
-  for(var k=0;k<js.length;k++){var jj=js[k],jpx=pL+(jj.p/rng)*pW,jpy=pT+(1-jj.e/rng)*pH,pu=.5+.5*Math.sin(jhT*3+jj.p);
-    var g=ctx.createRadialGradient(jpx,jpy,0,jpx,jpy,18+pu*9);g.addColorStop(0,'rgba(139,92,246,'+(.62+pu*.3)+')');g.addColorStop(1,'transparent');ctx.fillStyle=g;ctx.beginPath();ctx.arc(jpx,jpy,18+pu*9,0,TAU);ctx.fill();ctx.fillStyle='#fff';ctx.font='bold 12px "IBM Plex Mono",monospace';ctx.textAlign='center';ctx.fillText(jj.n,jpx,jpy+4);}
+  for(var k=0;k<js.length;k++){var jj=js[k],jpx=pL+(jj.p/rng)*pW,jpy=pT+(1-jj.e/rng)*pH,pu=.5+.5*Math.sin(jhT*3+jj.p);var g=ctx.createRadialGradient(jpx,jpy,0,jpx,jpy,18+pu*9);g.addColorStop(0,'rgba(139,92,246,'+(.62+pu*.3)+')');g.addColorStop(1,'transparent');ctx.fillStyle=g;ctx.beginPath();ctx.arc(jpx,jpy,18+pu*9,0,TAU);ctx.fill();ctx.fillStyle='#fff';ctx.font='bold 12px "IBM Plex Mono",monospace';ctx.textAlign='center';ctx.fillText(jj.n,jpx,jpy+4);}
   var ssx=pL+(jhP.phi/rng)*pW,ssy=pT+(1-jhP.e/rng)*pH;ctx.fillStyle='#00eeff';ctx.beginPath();ctx.arc(ssx,ssy,7,0,TAU);ctx.fill();ctx.strokeStyle='#00eeff';ctx.lineWidth=1.5;ctx.setLineDash([3,3]);ctx.beginPath();ctx.arc(ssx,ssy,15+Math.sin(jhT*4)*3,0,TAU);ctx.stroke();ctx.setLineDash([]);
   ctx.strokeStyle='rgba(255,255,255,.18)';ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(pL,pT);ctx.lineTo(pL,pT+pH);ctx.lineTo(pL+pW,pT+pH);ctx.stroke();
   ctx.fillStyle='#c8d0e8';ctx.font='11px "IBM Plex Mono",monospace';ctx.textAlign='center';ctx.fillText('Φc',pL+pW/2,pT+pH+26);
-  var V=.5*jhP.phi*jhP.phi+.15*Math.pow(jhP.phi,4)+.5*jhP.e*jhP.e+.15*Math.pow(jhP.e,4)+jhP.g*jhP.phi*jhP.phi*jhP.e;
-  ctx.fillStyle='#f59e0b';ctx.font='bold 12px "IBM Plex Mono",monospace';ctx.textAlign='right';ctx.fillText('V = '+V.toFixed(3),W-pR,pT+15);
+  var VV=.5*jhP.phi*jhP.phi+.15*Math.pow(jhP.phi,4)+.5*jhP.e*jhP.e+.15*Math.pow(jhP.e,4)+jhP.g*jhP.phi*jhP.phi*jhP.e;ctx.fillStyle='#f59e0b';ctx.font='bold 12px "IBM Plex Mono",monospace';ctx.textAlign='right';ctx.fillText('V = '+VV.toFixed(3),W-pR,pT+15);
   requestAnimationFrame(drawJh);}drawJh();
 
-/* ─── DECISION ENGINE ─── */
+/* ── DECISION ── */
 document.querySelectorAll('.ob').forEach(function(t){t.addEventListener('click',function(){Z.ao=+t.dataset.o;document.querySelectorAll('.ob').forEach(function(b){b.classList.remove('on')});t.classList.add('on');loadO();renD();});});
 ['dSA','dSC','dST','dSS'].forEach(function(id,i){document.getElementById(id).addEventListener('input',function(e){var v=+e.target.value,o=Z.opts[Z.ao];if(i===0)o.a=v;if(i===1)o.c=v;if(i===2)o.t=v;if(i===3)o.s=v;document.getElementById(['dA','dC','dT','dS'][i]).textContent=v.toFixed(2);renD();});});
-function loadO(){var o=Z.opts[Z.ao];document.getElementById('dSA').value=o.a;document.getElementById('dA').textContent=o.a.toFixed(2);document.getElementById('dSC').value=o.c;document.getElementById('dC').textContent=o.c.toFixed(2);document.getElementById('dST').value=o.t;document.getElementById('dT').textContent=o.t.toFixed(2);document.getElementById('dSS').value=o.s;document.getElementById('dS').textContent=o.s.toFixed(2);}
+function loadO(){var o=Z.opts[Z.ao];['dSA','dSC','dST','dSS'].forEach(function(id,i){document.getElementById(id).value=[o.a,o.c,o.t,o.s][i];document.getElementById(['dA','dC','dT','dS'][i]).textContent=[o.a,o.c,o.t,o.s][i].toFixed(2);});}
 function renD(){var rs=Z.opts.map(function(o,i){return{n:o.n,v:via(o.a,o.c,o.t,o.s),r:rsk(o.c,o.s),i:i}});rs.sort(function(a,b){return b.v-a.v});var bi=rs[0].i;
   document.querySelectorAll('.ob').forEach(function(t2,i){t2.classList.remove('best');if(i===bi)t2.classList.add('best');});
   var h='';rs.forEach(function(r){var ib=r.i===bi,c=ib?'var(--green)':'var(--dim)',vd=r.v>60?'Viable — proceed.':r.v>40?'Moderate viability.':'Limited — review parameters.';
-    h+='<div class="or" style="border-color:'+(ib?'rgba(16,217,160,.25)':'var(--border)')+'"><h4 style="color:'+c+';font-family:var(--serif);font-size:18px;margin-bottom:8px">Option '+r.n+(ib?' <span style=\"font-size:12px\">BEST</span>':'')+'</h4><div class="mt"><span class="l">Viability</span><span class="vl" style="color:'+c+'">'+r.v.toFixed(1)+'%</span></div><div class="mt"><span class="l">Instability Risk</span><span class="vl" style="color:var(--glow3)">'+r.r.toFixed(1)+'%</span></div><div style="font-size:12px;color:var(--dim);margin-top:8px;font-style:italic">'+vd+'</div></div>';});document.getElementById('oRes').innerHTML=h;}
+    h+='<div class="or" style="border-color:'+(ib?'rgba(16,217,160,.22)':'var(--border)')+'"><h4 style="color:'+c+';font-family:var(--serif);font-size:18px;margin-bottom:8px">Option '+r.n+(ib?' <small style="font-size:11px;font-family:var(--mono)">BEST</small>':'')+'</h4><div class="mt"><span class="l">Viability</span><span class="vl" style="color:'+c+'">'+r.v.toFixed(1)+'%</span></div><div class="mt"><span class="l">Instability Risk</span><span class="vl" style="color:var(--glow3)">'+r.r.toFixed(1)+'%</span></div><div style="font-size:12px;color:var(--dim);margin-top:8px;font-style:italic">'+vd+'</div></div>';});
+  document.getElementById('oRes').innerHTML=h;}
 loadO();renD();upd();setInterval(upd,250);
 </script>
 </body>
