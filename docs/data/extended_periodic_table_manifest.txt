@@ -1,0 +1,6 @@
+extended_periodic_table_cover_legend.csv
+extended_periodic_table_1-184_table.csv
+extended_periodic_table_119-184_extension.csv
+extended_periodic_table_grid_1-118.csv
+extended_periodic_table_hyperfield_map.csv
+extended_periodic_table_summary.csv

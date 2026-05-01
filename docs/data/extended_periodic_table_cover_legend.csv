@@ -1,0 +1,17 @@
+MQGT–SCF Extended Periodic Table (Z = 1–184),
+Generated for,Christopher Michael Baird / ToE reconstruction
+Scope,Confirmed elements 1–118 plus theoretical systematic extension 119–184
+Core state vector,"𝔈_Z = {Z, Ψ_Z, χ_flow,Z, Φc,Z, E_Z}"
+Φc toy index,"Φc(Z) = sqrt(Z / 184), normalized for comparative lattice placement only"
+E(x) stability bias,Toy confidence/risk layer: empirical elements score higher; extended elements score lower
+Important caution,Z=119–184 are not confirmed chemical elements; the workbook treats them as theoretical placeholders.
+ToE reading,"Elements are mapped as charge-flow, orbital-memory, and coherence-stability modes."
+Document grounding,Retrieved File Library ToE documents describe MQGT-SCF as a unified framework and include finite 'periodic table' language in the qualia taxonomy summary.
+Current science grounding,IUPAC recognizes official names through Z=118; element names beyond that are systematic temporary names until discovery/confirmation.
+,
+Source Notes,Plain-text URLs / file references
+"IUPAC names 113, 115, 117, 118",https://iupac.org/iupac-announces-the-names-of-the-elements-113-115-117-and-118/
+IUPAC discovery verification / 7th period completion,https://iupac.org/discovery-and-assignment-of-elements-with-atomic-numbers-113-115-117-and-118/
+IUPAC systematic names above 100,https://iupac.qmul.ac.uk/AtWt/element.html
+ToE file reference,A Theory of Everything --C.M. Baird (2026) + ZoraASI.pdf / File Library
+ToE file reference,All + ToE_Part6.pdf / File Library

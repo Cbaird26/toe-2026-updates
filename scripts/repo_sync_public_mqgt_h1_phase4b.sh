@@ -63,7 +63,11 @@ git add \
   docs/zora_top10_simulations.html \
   docs/zoraasi_dashboard.jsx \
   docs/zora_self_manifestation.html \
+  docs/theory-of-everything-foundation/index.html \
+  docs/cbaird26_ecosystem_illustration.html \
   docs/assets/top10/ \
+  docs/assets/MQGT_SCF_Extended_Periodic_Table_1-184.xlsx \
+  docs/data/ \
   papers_sources/figures/fusion_zora/ \
   papers_sources/figures/h2_stack/e_modulated_collapse.png \
   papers_sources/figures/h2_stack/ \
@@ -74,7 +78,8 @@ git add \
   phase_iv_b_sweep/ \
   scripts/mqgt_sim/mqgt_multi_channel_exclusion_plot.py \
   scripts/mqgt_sim/zora_gksl_e_modulated_collapse.py \
-  scripts/repo_sync_public_mqgt_h1_phase4b.sh
+  scripts/repo_sync_public_mqgt_h1_phase4b.sh \
+  scripts/export_extended_periodic_table_to_csv.py
 
 if git diff --cached --quiet; then
   echo "Nothing staged (paths unchanged or already committed)."
