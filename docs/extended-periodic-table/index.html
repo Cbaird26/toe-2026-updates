@@ -261,6 +261,109 @@ a:hover{color:#fff}
   margin:0 0 18px;
   font-size:.94rem;
 }
+.science-brief{
+  display:grid;
+  grid-template-columns:minmax(0,1.1fr) minmax(320px,.9fr);
+  gap:16px;
+  margin:0 0 18px;
+}
+.science-card{
+  border:1px solid rgba(255,255,255,.1);
+  border-radius:12px;
+  background:linear-gradient(160deg,rgba(16,21,33,.98),rgba(8,12,20,.96));
+  padding:16px;
+  box-shadow:0 16px 60px rgba(0,0,0,.22);
+}
+.science-card h2,
+.science-card h3{
+  margin:0 0 10px;
+  font-size:1rem;
+  line-height:1.2;
+}
+.science-card p{
+  margin:0 0 12px;
+  color:var(--muted);
+}
+.science-card p:last-child{margin-bottom:0}
+.thesis{
+  color:#eef4ff;
+  font-size:1.04rem;
+}
+.anchor-grid{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:10px;
+  margin-top:14px;
+}
+.anchor{
+  min-height:104px;
+  border:1px solid var(--line);
+  border-radius:10px;
+  padding:12px;
+  background:rgba(255,255,255,.035);
+}
+.anchor strong{
+  display:block;
+  color:#fff;
+  margin-bottom:5px;
+  font-size:.9rem;
+}
+.anchor span{
+  display:block;
+  color:var(--muted);
+  font-size:.82rem;
+}
+.region-map{
+  display:grid;
+  gap:8px;
+}
+.region-button{
+  display:grid;
+  grid-template-columns:86px minmax(0,1fr);
+  gap:10px;
+  width:100%;
+  min-height:58px;
+  border:1px solid var(--line);
+  border-left:4px solid var(--tile-color);
+  border-radius:10px;
+  padding:10px;
+  background:rgba(255,255,255,.035);
+  color:var(--text);
+  text-align:left;
+}
+.region-button:hover,
+.region-button[aria-pressed="true"]{
+  border-color:color-mix(in srgb,var(--tile-color) 65%,var(--line));
+  background:color-mix(in srgb,var(--tile-color) 11%,rgba(255,255,255,.035));
+}
+.region-button .range{
+  color:var(--tile-color);
+  font-weight:800;
+  letter-spacing:.03em;
+}
+.region-button strong{
+  display:block;
+  font-size:.88rem;
+  margin-bottom:2px;
+}
+.region-button span:last-child{
+  color:var(--muted);
+  font-size:.78rem;
+}
+.source-links{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  margin-top:14px;
+}
+.source-links a{
+  border:1px solid rgba(75,212,242,.22);
+  border-radius:999px;
+  padding:6px 9px;
+  background:rgba(75,212,242,.065);
+  font-size:.78rem;
+  color:#c8f6ff;
+}
 .controls{
   position:sticky;
   top:0;
@@ -683,6 +786,7 @@ input:focus,select:focus,button:focus-visible{
 @media(max-width:1180px){
   .topbar{grid-template-columns:1fr}
   .hero-visual{min-height:320px}
+  .science-brief{grid-template-columns:1fr}
   .controls{position:relative;grid-template-columns:repeat(2,minmax(0,1fr))}
   .layout{grid-template-columns:1fr}
   .detail{position:relative;top:auto}
@@ -696,6 +800,8 @@ input:focus,select:focus,button:focus-visible{
   .title-block p{font-size:.94rem}
   .hero-visual{min-height:270px}
   .element-orb{width:min(86%,270px);padding:28px}
+  .anchor-grid{grid-template-columns:1fr}
+  .region-button{grid-template-columns:70px minmax(0,1fr)}
   .controls{grid-template-columns:1fr}
   .stats{grid-template-columns:repeat(2,minmax(0,1fr))}
   .band-grid{grid-template-columns:1fr}
@@ -712,12 +818,12 @@ input:focus,select:focus,button:focus-visible{
       <a class="crumb" href="../">TOE docs hub / interactive tables</a>
       <p class="kicker">MQGT-SCF field atlas</p>
       <h1>MQGT-SCF Extended Periodic Table</h1>
-      <p>Confirmed elements Z=1-118 plus the workbook's theoretical reconstruction through Z=184, mapped by shell, block, confidence, stability bias, and ToE band.</p>
+      <p>Confirmed chemistry through Z=118, a relativistic modeled extension through Z=172, and a supercritical boundary layer through Z=184 where elementhood becomes a physics question.</p>
       <div class="hero-badges" aria-label="Table coverage">
         <span>Z=1-184</span>
-        <span>118 confirmed</span>
-        <span>66 theoretical</span>
-        <span>8 ToE bands</span>
+        <span>118 confirmed elements</span>
+        <span>119-172 modeled</span>
+        <span>173-184 boundary</span>
       </div>
       <div class="actions">
         <a class="btn primary" href="../assets/MQGT_SCF_Extended_Periodic_Table_1-184.xlsx">Workbook</a>
@@ -737,10 +843,34 @@ input:focus,select:focus,button:focus-visible{
 
   <p class="notice" id="caution"></p>
 
+  <section class="science-brief" aria-label="Scientific framing">
+    <article class="science-card">
+      <h2>Scientific Anchor</h2>
+      <p class="thesis">The extended periodic domain from Z=119 to Z=184 is not a simple continuation of ordinary chemistry. It marks a transition from stable electron-shell periodicity into relativistic, nuclear-shell, and eventually supercritical quantum-field behavior.</p>
+      <p>“Flow-metal” is treated here as field-mediated charge-flow substrate: matter whose behavior is dominated by dynamic electron structure, relativistic shell distortion, nuclear stability windows, and information-bearing field states.</p>
+      <div class="anchor-grid">
+        <div class="anchor"><strong>118 is the known edge</strong><span>Oganesson is the last confirmed named element. Everything after 118 is hypothetical or modeled.</span></div>
+        <div class="anchor"><strong>119-172 is the modeled table</strong><span>Pyykko's relativistic Dirac-Fock work is the clean backbone for extended shell assignment.</span></div>
+        <div class="anchor"><strong>N=184 is not Z=184</strong><span>N=184 is a neutron-shell stability horizon; Z=184 would mean 184 protons.</span></div>
+      </div>
+      <div class="source-links" aria-label="Scientific sources">
+        <a href="https://iupac.org/iupac-announces-the-names-of-the-elements-113-115-117-and-118/" target="_blank" rel="noopener">IUPAC 113/115/117/118</a>
+        <a href="https://pubs.rsc.org/doi/c0cp01575j" target="_blank" rel="noopener">Pyykko Z<=172</a>
+        <a href="https://arxiv.org/abs/nucl-th/9709016" target="_blank" rel="noopener">N=184 stability island</a>
+        <a href="https://arxiv.org/abs/1910.01373" target="_blank" rel="noopener">Supercritical QED</a>
+      </div>
+    </article>
+
+    <aside class="science-card">
+      <h3>118-184 Reality Map</h3>
+      <div class="region-map" id="regionMap"></div>
+    </aside>
+  </section>
+
   <section class="controls" aria-label="Table controls">
     <label class="field">
       <span>Search</span>
-      <input id="search" type="search" placeholder="H, Oganesson, flow-metal">
+      <input id="search" type="search" placeholder="H, Oganesson, charge-flow">
     </label>
     <div class="field">
       <span>Status</span>
@@ -866,9 +996,84 @@ const lanes = [
   "8s ignition",
   "5g hyperorbital braid",
   "6f superactinide memory",
-  "7d flow-metal return",
+  "7d charge-flow return",
   "8p closure",
   "9s restart + boundary"
+];
+
+const scientificRegions = [
+  {
+    range: "118",
+    min: 118,
+    max: 118,
+    color: "#4bd4f2",
+    title: "Threshold element",
+    science: "Confirmed oganesson; end of known period 7 chemistry.",
+    toe: "Gate at the edge of known matter"
+  },
+  {
+    range: "119-120",
+    min: 119,
+    max: 120,
+    color: "#f2b84b",
+    title: "8s re-ignition",
+    science: "Hypothetical 8s1 and 8s2 elements; likely extreme alkali/alkaline-earth analogues.",
+    toe: "Re-ignition after closure"
+  },
+  {
+    range: "121-138",
+    min: 121,
+    max: 138,
+    color: "#ff6cb1",
+    title: "5g / superactinide entrance",
+    science: "Relativistic 5g region; ordinary shell order starts to braid.",
+    toe: "Hyperorbital braid"
+  },
+  {
+    range: "139-140",
+    min: 139,
+    max: 140,
+    color: "#a987ff",
+    title: "8p1/2 relativistic pocket",
+    science: "Spin-orbit effects distort simple periodic ordering.",
+    toe: "Spin-orbit distortion gate"
+  },
+  {
+    range: "141-155",
+    min: 141,
+    max: 155,
+    color: "#a987ff",
+    title: "6f superactinides",
+    science: "f/g/d/p levels overlap; oxidation and identity become harder to assign.",
+    toe: "Deep shell-memory field"
+  },
+  {
+    range: "156-164",
+    min: 156,
+    max: 164,
+    color: "#52d681",
+    title: "Mixed 7d/8p/6f zone",
+    science: "Orbital assignment becomes increasingly uncertain.",
+    toe: "Loss of simple periodic identity"
+  },
+  {
+    range: "165-172",
+    min: 165,
+    max: 172,
+    color: "#4bd4f2",
+    title: "Late modeled extension",
+    science: "Edge of Pyykko-style relativistic periodic logic.",
+    toe: "Edge of periodic coherence"
+  },
+  {
+    range: "173-184",
+    min: 173,
+    max: 184,
+    color: "#ff756c",
+    title: "Supercritical frontier",
+    science: "QED-scale Coulomb fields; atomic structure is no longer classroom chemistry.",
+    toe: "Matter-field boundary zone"
+  }
 ];
 
 const refs = {
@@ -886,6 +1091,7 @@ const refs = {
   coreGroups: document.getElementById("coreGroups"),
   extendedGroups: document.getElementById("extendedGroups"),
   laneLabels: document.getElementById("laneLabels"),
+  regionMap: document.getElementById("regionMap"),
   coreGrid: document.getElementById("coreGrid"),
   extendedGrid: document.getElementById("extendedGrid"),
   bandGrid: document.getElementById("bandGrid"),
@@ -958,6 +1164,19 @@ function selectedElement(){
   return elements.find(item => item.z === state.selectedZ) || elements[0];
 }
 
+function regionFor(z){
+  return scientificRegions.find(region => z >= region.min && z <= region.max) ||
+    (z <= 117 ? {
+      range: "1-117",
+      min: 1,
+      max: 117,
+      color: "#4bd4f2",
+      title: "Confirmed periodic table",
+      science: "Ordinary confirmed element domain, with relativistic effects growing toward the end.",
+      toe: "Known chemistry"
+    } : scientificRegions[scientificRegions.length - 1]);
+}
+
 function setSelected(z){
   state.selectedZ = Number(z);
   render();
@@ -1026,6 +1245,7 @@ function renderStats(list){
 function renderDetail(){
   const selected = selectedElement();
   const color = colorFor(selected);
+  const region = regionFor(selected.z);
   refs.detailPanel.style.setProperty("--tile-color", color);
   refs.detailPanel.innerHTML = `
     <div class="detail-title">
@@ -1036,9 +1256,15 @@ function renderDetail(){
           <span class="chip">${escapeHtml(selected.block)} block</span>
           <span class="chip">Period ${escapeHtml(selected.period)}</span>
           <span class="chip">Slot ${escapeHtml(selected.groupSlot)}</span>
+          <span class="chip">${escapeHtml(region.range)}</span>
         </div>
       </div>
       <div class="symbol">${escapeHtml(selected.symbol)}</div>
+    </div>
+    <div class="anchor">
+      <strong>${escapeHtml(region.title)}</strong>
+      <span>${escapeHtml(region.science)}</span>
+      <span>${escapeHtml(region.toe)}</span>
     </div>
     <div class="meter">
       <div class="meter-label"><span>Φc index</span><strong>${formatPercent(selected.phiCIndex)}</strong></div>
@@ -1052,7 +1278,7 @@ function renderDetail(){
       <div><dt>Family / class</dt><dd>${escapeHtml(selected.familyClass)}</dd></div>
       <div><dt>ToE band</dt><dd>${escapeHtml(selected.band)}</dd></div>
       <div><dt>Matter mode</dt><dd>${escapeHtml(selected.matterMode)}</dd></div>
-      <div><dt>Flow-metal role</dt><dd>${escapeHtml(selected.flowMetalRole)}</dd></div>
+      <div><dt>Charge-flow role</dt><dd>${escapeHtml(selected.flowMetalRole)}</dd></div>
       <div><dt>Orbital / shell note</dt><dd>${escapeHtml(selected.psiNote)}</dd></div>
       <div><dt>Confidence tier</dt><dd>${escapeHtml(selected.confidenceTier)}</dd></div>
       <div><dt>Source</dt><dd>${escapeHtml(selected.sourceNote)}</dd></div>
@@ -1093,25 +1319,35 @@ function renderRecords(list){
           <th>Name</th>
           <th>Status</th>
           <th>Block</th>
-          <th>Band</th>
-          <th>Role</th>
+          <th>Scientific region</th>
+          <th>Charge-flow role</th>
         </tr>
       </thead>
       <tbody>
-        ${list.map(item => `
+        ${list.map(item => {
+          const region = regionFor(item.z);
+          return `
           <tr tabindex="0" data-z="${item.z}" class="${item.z === state.selectedZ ? "selected" : ""}" style="--tile-color:${colorFor(item)}">
             <td>${item.z}</td>
             <td><span class="status-dot"></span><strong>${escapeHtml(item.symbol)}</strong></td>
             <td>${escapeHtml(item.name)}</td>
             <td>${item.confirmed ? "Confirmed" : "Theoretical"}</td>
             <td>${escapeHtml(item.block)}</td>
-            <td>${escapeHtml(item.band)}</td>
+            <td>${escapeHtml(region.title)}</td>
             <td>${escapeHtml(item.flowMetalRole)}</td>
-          </tr>
-        `).join("")}
+          </tr>`;
+        }).join("")}
       </tbody>
     </table>
   `;
+}
+
+function updateRegionButtons(){
+  refs.regionMap.querySelectorAll("button[data-region-z]").forEach(button => {
+    const z = Number(button.dataset.regionZ);
+    const region = regionFor(z);
+    button.setAttribute("aria-pressed", String(state.selectedZ >= region.min && state.selectedZ <= region.max));
+  });
 }
 
 function syncControls(){
@@ -1133,6 +1369,7 @@ function render(){
   syncControls();
   renderStats(list);
   renderHero(selected);
+  updateRegionButtons();
   renderGrids();
   renderBands();
   renderRecords(list);
@@ -1208,10 +1445,16 @@ function startFieldCanvas(){
 }
 
 function populateStaticControls(){
-  refs.caution.textContent = data.meta.caution;
+  refs.caution.textContent = "Scientific boundary: Z=119-184 are not confirmed elements. Z=184 means 184 protons; N=184 is the separate neutron-shell stability horizon.";
   refs.coreGroups.innerHTML = Array.from({length:18}, (_, index) => `<span>${index + 1}</span>`).join("");
   refs.extendedGroups.innerHTML = Array.from({length:18}, (_, index) => `<span>${index + 1}</span>`).join("");
   refs.laneLabels.innerHTML = lanes.map(lane => `<div class="lane-label">${escapeHtml(lane)}</div>`).join("");
+  refs.regionMap.innerHTML = scientificRegions.map(region => `
+    <button class="region-button" type="button" data-region-z="${region.min}" aria-pressed="${state.selectedZ >= region.min && state.selectedZ <= region.max}" style="--tile-color:${region.color}">
+      <span class="range">${escapeHtml(region.range)}</span>
+      <span><strong>${escapeHtml(region.title)}</strong><span>${escapeHtml(region.toe)}</span></span>
+    </button>
+  `).join("");
 
   const blocks = [...new Set(elements.map(item => item.block))];
   refs.blockFilter.innerHTML = `<option value="all">All blocks</option>` +
@@ -1263,6 +1506,12 @@ refs.bandGrid.addEventListener("click", event => {
   const band = data.summary.bands[Number(button.dataset.bandIndex)].band;
   state.band = state.band === band ? "all" : band;
   render();
+});
+
+refs.regionMap.addEventListener("click", event => {
+  const button = event.target.closest("button[data-region-z]");
+  if(!button) return;
+  setSelected(button.dataset.regionZ);
 });
 
 refs.recordsWrap.addEventListener("click", event => {
