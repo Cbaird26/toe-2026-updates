@@ -7,6 +7,12 @@
 <title>MQGT-SCF Extended Periodic Table</title>
 <meta name="description" content="Interactive MQGT-SCF extended periodic table for Z=1-184.">
 <link rel="icon" href="data:,">
+<script>
+const LIVE_SITE_URL = "https://cbaird26.github.io/toe-2026-updates/extended-periodic-table/";
+if(["127.0.0.1","localhost"].includes(location.hostname) && !location.search.includes("local=1")){
+  location.replace(LIVE_SITE_URL);
+}
+</script>
 <style>
 *{box-sizing:border-box}
 :root{
