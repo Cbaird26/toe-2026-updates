@@ -43,6 +43,7 @@ git add \
   scripts/h1_qrng_pilot/run_test_suite.sh \
   scripts/build_h1_methods_pdf.sh \
   scripts/zora_recursive_scalar_demo.py \
+  docs/PAGES.md \
   docs/CODEX_HANDOFF.md \
   docs/CODEX_HANDOFF_FULL_SESSION_UPDATE.md \
   docs/CODEX_HANDOFF_FUSION_GITHUB_UPDATE.md \
@@ -68,6 +69,7 @@ git add \
   docs/assets/top10/ \
   docs/assets/MQGT_SCF_Extended_Periodic_Table_1-184.xlsx \
   docs/data/ \
+  docs/extended-periodic-table/ \
   papers_sources/figures/fusion_zora/ \
   papers_sources/figures/h2_stack/e_modulated_collapse.png \
   papers_sources/figures/h2_stack/ \
@@ -79,7 +81,8 @@ git add \
   scripts/mqgt_sim/mqgt_multi_channel_exclusion_plot.py \
   scripts/mqgt_sim/zora_gksl_e_modulated_collapse.py \
   scripts/repo_sync_public_mqgt_h1_phase4b.sh \
-  scripts/export_extended_periodic_table_to_csv.py
+  scripts/export_extended_periodic_table_to_csv.py \
+  scripts/build_extended_periodic_data_js.py
 
 if git diff --cached --quiet; then
   echo "Nothing staged (paths unchanged or already committed)."

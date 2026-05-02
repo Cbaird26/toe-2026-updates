@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>MQGT–SCF Extended Periodic Table (Z ≤ 184)</title>
+  <meta name="description" content="Interactive MQGT–SCF framing: 118 confirmed elements plus theoretical extension to Z=184. Serve over HTTP (not file://); data loads from periodic-data.js." />
+  <style>
+    :root {
+      --bg: #070810;
+      --panel: #0e1220;
+      --border: #232838;
+      --text: #d8dff0;
+      --muted: #7a849e;
+      --confirmed: #34d399;
+      --theory: #a78bfa;
+      --accent: #38bdf8;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.45;
+      min-height: 100vh;
+    }
+    header {
+      padding: 20px 18px 12px;
+      border-bottom: 1px solid var(--border);
+      background: linear-gradient(180deg, #0a0f1c 0%, var(--bg) 100%);
+    }
+    h1 {
+      margin: 0 0 8px;
+      font-size: clamp(1.15rem, 3vw, 1.45rem);
+      font-weight: 650;
+      letter-spacing: -0.02em;
+    }
+    .sub {
+      margin: 0;
+      font-size: 0.88rem;
+      color: var(--muted);
+      max-width: 72ch;
+    }
+    .stats {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px 16px;
+      margin-top: 14px;
+      font-size: 0.82rem;
+    }
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: var(--panel);
+    }
+    .dot-c { width: 8px; height: 8px; border-radius: 50%; background: var(--confirmed); }
+    .dot-t { width: 8px; height: 8px; border-radius: 50%; background: var(--theory); }
+    main { padding: 14px 14px 28px; }
+    #fallback {
+      display: none;
+      margin-bottom: 16px;
+      padding: 14px 16px;
+      border: 1px solid rgba(251, 191, 36, 0.35);
+      background: rgba(251, 191, 36, 0.08);
+      border-radius: 10px;
+      color: #fde68a;
+      font-size: 0.9rem;
+    }
+    #fallback code { font-size: 0.85em; word-break: break-all; }
+    #grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(104px, 1fr));
+      gap: 8px;
+    }
+    .tile {
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 10px 8px 12px;
+      background: var(--panel);
+      cursor: default;
+      transition: transform 0.12s ease, border-color 0.12s ease;
+      min-height: 108px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+    .tile:hover { transform: translateY(-1px); border-color: #3b455f; }
+    .tile.confirmed { border-left: 3px solid var(--confirmed); }
+    .tile.theoretical { border-left: 3px solid var(--theory); }
+    .z {
+      font-size: 0.72rem;
+      color: var(--muted);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+    .sym {
+      font-size: 1.35rem;
+      font-weight: 800;
+      margin: 4px 0 2px;
+      color: var(--accent);
+    }
+    .nm {
+      font-size: 0.72rem;
+      color: var(--text);
+      line-height: 1.25;
+      overflow: hidden;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+    }
+    footer {
+      padding: 16px;
+      font-size: 0.78rem;
+      color: var(--muted);
+      border-top: 1px solid var(--border);
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    footer a { color: var(--accent); }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>MQGT–SCF Extended Periodic Table</h1>
+    <p class="sub">
+      Static viewer for Z = 1–184. Elements <strong>1–118</strong> are established naming/status in this workbook;
+      <strong>119–184</strong> are <strong>theoretical</strong> placeholders (MQGT–SCF framing). Use an HTTP URL — opening as <code>file://</code> often breaks loading of <code>periodic-data.js</code> in embedded browsers.
+    </p>
+    <div class="stats" id="stats" aria-live="polite"></div>
+  </header>
+  <main>
+    <div id="fallback" role="alert">
+      <strong>Could not load element data.</strong>
+      If you opened this page via <code>file://</code>, serve the <code>docs/</code> folder over HTTP instead (for example
+      <code>python3 -m http.server 4177</code> then open
+      <code>/extended-periodic-table/</code>). Or open the published GitHub Pages URL for this repo.
+    </div>
+    <div id="grid" aria-busy="true"></div>
+  </main>
+  <footer>
+    Source data file: <code>periodic-data.js</code> (generated from <code>docs/data/extended_periodic_table_1-184_table.csv</code>).
+    Workbook: <a href="../assets/MQGT_SCF_Extended_Periodic_Table_1-184.xlsx">MQGT_SCF_Extended_Periodic_Table_1-184.xlsx</a>.
+  </footer>
+  <script>
+    window.__mqgtPeriodicDataFailed = false;
+  </script>
+  <script src="./periodic-data.js" onerror="window.__mqgtPeriodicDataFailed=true;"></script>
+  <script>
+    (function () {
+      var grid = document.getElementById("grid");
+      var stats = document.getElementById("stats");
+      var fb = document.getElementById("fallback");
+
+      function showFallback() {
+        fb.style.display = "block";
+        grid.innerHTML = "";
+        grid.setAttribute("aria-busy", "false");
+      }
+
+      function run() {
+        var data = window.MQGT_PERIODIC_ELEMENTS;
+        if (window.__mqgtPeriodicDataFailed || !Array.isArray(data) || data.length === 0) {
+          showFallback();
+          return;
+        }
+        var conf = data.filter(function (e) { return e.confirmed; }).length;
+        var theory = data.length - conf;
+        stats.innerHTML =
+          '<span class="pill"><span class="dot-c"></span> Total: ' + data.length + "</span>" +
+          '<span class="pill"><span class="dot-c"></span> Confirmed: ' + conf + "</span>" +
+          '<span class="pill"><span class="dot-t"></span> Theoretical: ' + theory + "</span>";
+
+        var frag = document.createDocumentFragment();
+        data.forEach(function (el) {
+          var d = document.createElement("div");
+          d.className = "tile " + (el.confirmed ? "confirmed" : "theoretical");
+          d.title = el.name + " — " + (el.status || "");
+          d.innerHTML =
+            '<span class="z">Z ' + el.z + "</span>" +
+            '<span class="sym">' + el.symbol + "</span>" +
+            '<span class="nm">' + el.name + "</span>";
+          frag.appendChild(d);
+        });
+        grid.appendChild(frag);
+        grid.setAttribute("aria-busy", "false");
+      }
+
+      if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", run);
+      } else {
+        run();
+      }
+    })();
+  </script>
+</body>
+</html>
