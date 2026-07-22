@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#080b10">
+<title>Zora AI/Science Explorer Toolkit</title>
+<meta name="description" content="An educational toolkit for exploring Zora and ToE public AI/science demos with reproducible notes, checklists, and worksheets.">
+<style>
+*{box-sizing:border-box}
+:root{
+  --ink:#101319;--bg:#f6f8fb;--paper:#ffffff;--soft:#e7edf4;--line:#cbd6e3;
+  --text:#16202d;--muted:#536173;--blue:#0e7ac7;--green:#117b55;--amber:#a56200;--rose:#b4234a;
+  --shadow:0 18px 44px rgba(29,43,61,.12);
+}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;line-height:1.55}
+a{color:var(--blue);text-decoration:none}
+a:hover{text-decoration:underline}
+.wrap{width:min(1120px,calc(100% - 32px));margin:0 auto}
+.topbar{border-bottom:1px solid var(--line);background:rgba(255,255,255,.88);backdrop-filter:blur(14px);position:sticky;top:0;z-index:10}
+.nav{display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:58px}
+.brand{font-weight:800;color:var(--ink);font-size:15px}
+.navlinks{display:flex;align-items:center;gap:14px;flex-wrap:wrap;font-size:13px}
+.navlinks a{color:var(--muted)}
+.navlinks .buy{color:#fff;background:var(--ink);border-radius:6px;padding:9px 12px;font-weight:700}
+.navlinks .buy:hover{text-decoration:none;background:#243041}
+.hero{padding:54px 0 34px;border-bottom:1px solid var(--line);background:linear-gradient(180deg,#fff 0%,#f2f6fb 100%)}
+.hero-grid{display:grid;grid-template-columns:minmax(0,1.06fr) minmax(320px,.94fr);gap:32px;align-items:center}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;color:var(--green);font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.12em;margin:0 0 14px}
+.eyebrow:before{content:"";width:8px;height:8px;border-radius:99px;background:var(--green)}
+h1{font-size:clamp(34px,6vw,66px);line-height:1.02;letter-spacing:0;margin:0 0 18px;color:var(--ink)}
+.lead{font-size:clamp(17px,2vw,20px);color:var(--muted);max-width:680px;margin:0 0 24px}
+.hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin:0 0 18px}
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:44px;border-radius:6px;padding:11px 16px;border:1px solid var(--ink);font-weight:800;color:var(--ink);background:#fff}
+.btn:hover{text-decoration:none;box-shadow:var(--shadow)}
+.btn.primary{background:var(--ink);color:#fff}
+.btn.secondary{border-color:var(--line);color:var(--blue)}
+.fineprint{font-size:12px;color:var(--muted);max-width:720px}
+.preview{background:var(--paper);border:1px solid var(--line);border-radius:8px;box-shadow:var(--shadow);overflow:hidden}
+.preview img{display:block;width:100%;aspect-ratio:16/10;object-fit:cover;background:#dbe4ef}
+.preview-body{padding:18px}
+.price{display:flex;align-items:baseline;gap:10px;margin:0 0 8px}
+.price strong{font-size:36px;line-height:1;color:var(--ink)}
+.price span{font-size:13px;color:var(--muted)}
+.ticks{display:grid;gap:8px;margin:16px 0 0;padding:0;list-style:none}
+.ticks li{font-size:14px;color:var(--text)}
+.ticks li:before{content:"+";color:var(--green);font-weight:900;margin-right:8px}
+section{padding:44px 0;border-bottom:1px solid var(--line)}
+.section-head{display:flex;align-items:end;justify-content:space-between;gap:24px;margin-bottom:22px}
+h2{font-size:clamp(24px,3.5vw,38px);line-height:1.08;letter-spacing:0;margin:0;color:var(--ink)}
+.section-head p{max-width:560px;margin:0;color:var(--muted)}
+.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:18px;min-height:100%}
+.card h3{margin:0 0 8px;font-size:17px;color:var(--ink)}
+.card p{margin:0;color:var(--muted);font-size:14px}
+.tag{display:inline-block;font-size:11px;font-weight:900;text-transform:uppercase;letter-spacing:.08em;margin-bottom:10px}
+.tag.blue{color:var(--blue)}.tag.green{color:var(--green)}.tag.amber{color:var(--amber)}.tag.rose{color:var(--rose)}
+.demo-card{padding:0;overflow:hidden}
+.demo-card img{display:block;width:100%;aspect-ratio:16/9;object-fit:cover;background:var(--soft);border-bottom:1px solid var(--line)}
+.demo-card .card-copy{padding:16px}
+.demo-card a{font-weight:800}
+.compliance{background:#fff7ed;border-color:#fed7aa}
+.compliance h3{color:#7c2d12}
+.checklist{columns:2;column-gap:28px;margin:0;padding-left:18px;color:var(--muted)}
+.checklist li{break-inside:avoid;margin:0 0 9px}
+.launch{background:var(--ink);color:#fff;border-bottom:0}
+.launch h2{color:#fff}
+.launch .section-head p,.launch .fineprint{color:#b7c3d2}
+.launch .card{background:#151b25;border-color:#2c3747;color:#e8edf5}
+.launch .card h3{color:#fff}
+.launch .card p{color:#bdc7d4}
+footer{padding:28px 0;color:var(--muted);font-size:13px}
+@media(max-width:880px){
+  .hero-grid,.grid{grid-template-columns:1fr}
+  .section-head{display:block}
+  .section-head p{margin-top:10px}
+  .checklist{columns:1}
+}
+@media(max-width:560px){
+  .wrap{width:min(100% - 24px,1120px)}
+  .nav{align-items:flex-start;flex-direction:column;padding:12px 0}
+  .navlinks{gap:10px}
+  .hero{padding-top:34px}
+  .hero-actions{display:grid}
+}
+</style>
+</head>
+<body>
+<div class="topbar">
+  <div class="wrap nav">
+    <a class="brand" href="../">Theory of Everything Foundation</a>
+    <nav class="navlinks" aria-label="Toolkit navigation">
+      <a href="#contents">Contents</a>
+      <a href="#demos">Demos</a>
+      <a href="#guardrails">Guardrails</a>
+      <a class="buy" href="#launch">Checkout setup</a>
+    </nav>
+  </div>
+</div>
+
+<main>
+  <header class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <p class="eyebrow">Educational research toolkit</p>
+        <h1>Zora AI/Science Explorer Toolkit</h1>
+        <p class="lead">A practical field guide for exploring public Zora and ToE demos, recording observations, checking assumptions, and building a reproducible learning workflow.</p>
+        <div class="hero-actions">
+          <a class="btn primary" href="#launch">Checkout setup ready</a>
+          <a class="btn secondary" href="#demos">Preview the demo map</a>
+        </div>
+        <p class="fineprint">Launch discount target: $19 during the first release window. Gumroad checkout requires product creation before this page is published with a live buy link. This is educational material only. It is not medical, mental health, financial, investment, legal, or scientific verification advice.</p>
+      </div>
+      <aside class="preview" aria-label="Toolkit preview">
+        <img src="../assets/top10/h2_visibility_stack_thumb.png" alt="Preview chart from the Zora and ToE demo collection">
+        <div class="preview-body">
+          <p class="price"><strong>$29</strong><span>one-time digital download</span></p>
+          <ul class="ticks">
+            <li>PDF guide for structured exploration</li>
+            <li>Worksheet pack for repeatable notes</li>
+            <li>Curated public demo index</li>
+            <li>Ethical AI and claim-safety checklist</li>
+          </ul>
+        </div>
+      </aside>
+    </div>
+  </header>
+
+  <section id="contents">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>What buyers get</h2>
+        <p>The product turns the existing public demos into a guided study kit with documentation habits, not hype.</p>
+      </div>
+      <div class="grid">
+        <article class="card">
+          <span class="tag blue">Guide</span>
+          <h3>Explorer PDF</h3>
+          <p>A concise walkthrough for choosing a demo, writing a hypothesis, changing one variable at a time, and recording what happened.</p>
+        </article>
+        <article class="card">
+          <span class="tag green">Worksheets</span>
+          <h3>Research notebook pack</h3>
+          <p>Experiment log, hypothesis tracker, demo walkthrough, reading map, and ethical AI checklist in plain Markdown.</p>
+        </article>
+        <article class="card">
+          <span class="tag amber">Launch assets</span>
+          <h3>Clear buyer expectations</h3>
+          <p>Readme, changelog, license terms, refund copy, and support notes so the product is easy to maintain.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="demos">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Curated demo map</h2>
+        <p>The paid kit explains how to use these public demos as learning surfaces and how to keep notes reproducible.</p>
+      </div>
+      <div class="grid">
+        <article class="card demo-card">
+          <img src="../assets/top10/h2_visibility_explorer_preview.svg" alt="H2 Visibility Explorer preview">
+          <div class="card-copy">
+            <h3>H2 Visibility Explorer</h3>
+            <p><a href="../h2_visibility_explorer.html">Open demo</a> and inspect parameter sensitivity as an educational calculator.</p>
+          </div>
+        </article>
+        <article class="card demo-card">
+          <img src="../assets/top10/gksl_dynamics_viewer_preview.svg" alt="GKSL Dynamics Viewer preview">
+          <div class="card-copy">
+            <h3>GKSL Dynamics Viewer</h3>
+            <p><a href="../mqgt_scf_gksl_dynamics_viewer.html">Open demo</a> and record how model settings change the display.</p>
+          </div>
+        </article>
+        <article class="card demo-card">
+          <img src="../assets/top10/fusion_console_preview.svg" alt="Fusion console preview">
+          <div class="card-copy">
+            <h3>Zora Fusion Console</h3>
+            <p><a href="../zora_fusion_console.html">Open demo</a> and treat outputs as illustrative simulation behavior.</p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="guardrails">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Ethical guardrails</h2>
+        <p>The product is designed to avoid misleading claims and to keep exploration separate from professional advice.</p>
+      </div>
+      <div class="card compliance">
+        <h3>Use boundaries</h3>
+        <ul class="checklist">
+          <li>No promise of income, trading results, or investment performance.</li>
+          <li>No diagnosis, cure, treatment, therapy, or wellness outcome claims.</li>
+          <li>No claim that any demo proves a final theory or established discovery.</li>
+          <li>No replacement for professional medical, mental health, legal, or financial advice.</li>
+          <li>All worksheets are for learning, note-taking, and reproducibility practice.</li>
+          <li>Any future affiliate or sponsored links must be clearly disclosed.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="launch" id="launch">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Launch target</h2>
+        <p>First validation goal: $100 in 60 days from one transparent digital product, then improve only from buyer feedback.</p>
+      </div>
+      <div class="grid">
+        <article class="card">
+          <h3>Price</h3>
+          <p>$29 standard, with a temporary $19 launch code.</p>
+        </article>
+        <article class="card">
+          <h3>Maintenance</h3>
+          <p>One changelog update per release and a monthly link check.</p>
+        </article>
+        <article class="card">
+          <h3>Support</h3>
+          <p>Email support for file access and broken links only; no professional advice through this product.</p>
+        </article>
+      </div>
+      <p class="fineprint">Gumroad product slug target: <code>zora-ai-science-explorer-toolkit</code>. After the product is created, replace the checkout setup buttons with the final Gumroad URL.</p>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p>Christopher Michael Baird | Zora AI/Science Explorer Toolkit | Educational digital product | 2026</p>
+  </div>
+</footer>
+</body>
+</html>
