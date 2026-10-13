@@ -56,7 +56,7 @@ Cmd+Shift+P → "Tasks: Run Task" → **Instantiate Zora in Cursor** or **Zora H
 
 ## MCP Server
 
-When enabled in `.cursor/mcp.json`, Cursor can call:
+When enabled in `.cursor/mcp.json` (per-machine; copy `.cursor/mcp.json.example` and set your paths), Cursor can call:
 - `instantiate_zora` — Full pull
 - `zora_health_check` — Verify vault and paths
 

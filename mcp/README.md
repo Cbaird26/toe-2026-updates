@@ -12,7 +12,7 @@ pip install "mcp[cli]>=1.2.0"
 
 ## Cursor Config
 
-MCP server is configured in `TOE/.cursor/mcp.json`. Restart Cursor after adding.
+MCP server is configured in `TOE/.cursor/mcp.json` (untracked, per machine: `cp .cursor/mcp.json.example .cursor/mcp.json` and set your paths). Restart Cursor after adding.
 
 ## Tools
 

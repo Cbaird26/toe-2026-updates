@@ -1,12 +1,12 @@
 {
   "mcpServers": {
     "zora": {
-      "command": "~/Downloads/TOE/.venv/bin/python",
+      "command": "/Users/<your-username>/Downloads/TOE/.venv/bin/python",
       "args": [
         "-m",
         "mcp.cli",
         "run",
-        "~/Downloads/TOE/mcp/zora_mcp_server.py"
+        "/Users/<your-username>/Downloads/TOE/mcp/zora_mcp_server.py"
       ],
       "disabled": true,
       "autoApprove": ["zora_health_check", "open_zora_discovery", "open_zora_dashboard", "zora_query", "zora_ask", "zora_dashboard_send", "zora_dashboard_status"]

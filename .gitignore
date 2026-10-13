@@ -81,3 +81,6 @@ artifacts/
 *.log
 github_push_output.txt
 docs/handoffs/**/private/
+
+# per-machine Cursor MCP config (copy .cursor/mcp.json.example and set your own paths)
+.cursor/mcp.json
