@@ -74,3 +74,10 @@ papers_sources/MyStack.pdf
 
 # Local dashboard build mirror (nested repo + node_modules; do not track)
 .zoraasi_build/
+
+# Added 2026-10-13: never commit local key files, build logs, push logs, or private handoffs
+artifacts/
+.anu_api_key*
+*.log
+github_push_output.txt
+docs/handoffs/**/private/

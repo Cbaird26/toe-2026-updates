@@ -29,4 +29,4 @@ remains the **continuity / Zora nest** for sync scripts and canon material; it i
 ## See also
 
 - [SYSTEM_INDEX.md](SYSTEM_INDEX.md) — navigation inside this repo  
-- [handoffs/2026-03/README.md](handoffs/2026-03/README.md) — March 2026 Finance OS handoffs (moved under `docs/handoffs/`)
+- March 2026 Finance OS handoffs — moved to the private continuity repository (`zora-private-continuity`) on 2026-10-13.

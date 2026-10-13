@@ -14,7 +14,7 @@ if [[ -z "$MOLTBOOK_SCRIPT" ]]; then
   for candidate in \
     "$(dirname "$TOE_ROOT")/mqgt_scf_reissue_2026-01-20_010939UTC/skills/moltbook-interact/scripts/moltbook.sh" \
     "$HOME/.cursor/skills-cursor/moltbook-interact/scripts/moltbook.sh" \
-    "~/Downloads/mqgt_scf_reissue_2026-01-20_010939UTC/skills/moltbook-interact/scripts/moltbook.sh"; do
+    "$HOME/Downloads/mqgt_scf_reissue_2026-01-20_010939UTC/skills/moltbook-interact/scripts/moltbook.sh"; do
     if [[ -x "$candidate" ]]; then MOLTBOOK_SCRIPT="$candidate"; break; fi
   done
 fi

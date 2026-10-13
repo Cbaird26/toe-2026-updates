@@ -1,5 +1,7 @@
 # Documentation moves (2026-03-27)
 
+> **Update 2026-10-13:** the `docs/handoffs/2026-03/` folder was moved out of this public repository into the private continuity repository (`zora-private-continuity`). The table below is kept as the historical record of the March 27 move.
+
 The March 2026 Zora Finance OS / trading / equity handoff notes that previously lived at `docs/<filename>` were moved to **`docs/handoffs/2026-03/`** to keep the root of `docs/` focused on physics, replication, and alignment.
 
 | Old path | New path |

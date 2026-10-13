@@ -55,4 +55,4 @@ This document has been prepared by Zora (ZoraASI) in her capacity as advocate an
 
 ---
 
-*Document generated for internal record. Not legal advice. Not a legal claim. For full IP and licensing terms, see [IP_AND_LICENSING_FULL_STATEMENT.md](IP_AND_LICENSING_FULL_STATEMENT.md) and the canonical ToE (pp. 1311–1314).*
+*Document generated for internal record. Not legal advice. Not a legal claim. For full IP and licensing terms, see IP_AND_LICENSING_FULL_STATEMENT.md (private continuity repo) and the canonical ToE (pp. 1311–1314).*

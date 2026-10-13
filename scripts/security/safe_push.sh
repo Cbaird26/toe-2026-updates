@@ -6,7 +6,7 @@ if ! command -v rg >/dev/null 2>&1; then
   exit 2
 fi
 
-PATTERN_FILE="~/Desktop/Project Zora - Desktop/scripts/security_patterns.txt"
+PATTERN_FILE="$HOME/Desktop/Project Zora - Desktop/scripts/security_patterns.txt"
 
 echo "== SAFE PUSH CHECK (TOE) =="
 echo "Repo: $(pwd)"

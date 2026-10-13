@@ -41,7 +41,7 @@ chmod +x scripts/h1_qrng_pilot/run_test_suite.sh
 
 ## Related: Zora Finance OS (separate repo)
 
-Repo boundaries and dashboard handoff links (not H1 scope): **[CODEX_HANDOFF_ZORA_REPO_BOUNDARIES_2026-03-25.md](handoffs/2026-03/CODEX_HANDOFF_ZORA_REPO_BOUNDARIES_2026-03-25.md)**.
+Repo boundaries and Finance OS handoff links (not H1 scope) live in the private continuity repository (`zora-private-continuity`), not in this public repo.
 
 ## Quick report-back
 

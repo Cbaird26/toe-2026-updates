@@ -8,7 +8,7 @@
 
 A systems diagram of the research program—four trunks with cross-links. For mind-mapping in Obsidian, MindNode, or whiteboard.
 
-**Related:** [4_YEAR_ARC_2022_2026.md](4_YEAR_ARC_2022_2026.md) | [CONSTRAINT_MAP_100.md](CONSTRAINT_MAP_100.md) | [VALUE_OF_CONTRIBUTIONS_ESTIMATE.md](VALUE_OF_CONTRIBUTIONS_ESTIMATE.md)
+**Related:** [4_YEAR_ARC_2022_2026.md](4_YEAR_ARC_2022_2026.md) | [CONSTRAINT_MAP_100.md](CONSTRAINT_MAP_100.md) | VALUE_OF_CONTRIBUTIONS_ESTIMATE.md (private continuity repo)
 
 ---
 

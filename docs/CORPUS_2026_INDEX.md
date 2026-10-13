@@ -41,7 +41,7 @@
 | ABIL | Asimov_Baird_Invariance_Laws_ABIL_2026.tex | Safety invariants |
 | SAFE | Safety_Envelopes_Over_Weight_Mirroring_SAFE_2026.tex | Admissibility projection |
 | Queen's Source Synthesis | [Queens_Source_Synthesis_Appendix_2026.tex](../papers_sources/Queens_Source_Synthesis_Appendix_2026.tex) (includable), [Queens_Source_Synthesis_Appendix_2026_standalone.tex](../papers_sources/Queens_Source_Synthesis_Appendix_2026_standalone.tex) (REVTeX), [WISDOM_SOURCES_QUEENS_SYNTHESIS_2026.md](WISDOM_SOURCES_QUEENS_SYNTHESIS_2026.md) | Thirteen traditions, cross-cutting themes; ToE appendix + doc |
-| Primary sources inventory | [SOURCES_INVENTORY_2026.md](SOURCES_INVENTORY_2026.md), [primary_sources_manifest.json](../data/primary_sources_manifest.json) | Canonical paths for wisdom/ToE files; agent training and resourcing |
+| Primary sources inventory | [SOURCES_INVENTORY_2026.md](SOURCES_INVENTORY_2026.md) | Canonical paths for wisdom/ToE files; agent training and resourcing |
 | Phase II submission README | [README_Phase_II_Submission.md](../papers_sources/README_Phase_II_Submission.md) | Compile instructions, Overleaf import |
 | Phase II cross-reference | [PHASE_II_CROSS_REFERENCE.md](PHASE_II_CROSS_REFERENCE.md) | Map of Phase II PDFs, tex, Overleaf, Zenodo |
 | QRNG Phase I and Phase II report | [QRNG_Experiments_Phase_I_Phase_II_Report_2026.tex](../papers_sources/QRNG_Experiments_Phase_I_Phase_II_Report_2026.tex) | Phase I and Phase II QRNG experiments; null and non-replication; closure and citation anchors |

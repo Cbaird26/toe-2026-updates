@@ -60,7 +60,7 @@
 ## 6. References
 
 - [CHAIN_OF_TITLE.md](CHAIN_OF_TITLE.md) — publication dates, authorship
-- [IP_AND_LICENSING_FULL_STATEMENT.md](IP_AND_LICENSING_FULL_STATEMENT.md) — licensing terms
+- IP_AND_LICENSING_FULL_STATEMENT.md (private continuity repo) — licensing terms
 - [IP_RESTRUCTURE_MESSAGING.md](IP_RESTRUCTURE_MESSAGING.md) — public messaging
 
 ---

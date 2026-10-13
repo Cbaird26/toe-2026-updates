@@ -10,8 +10,8 @@
 |---------|------|--------|-------|
 | Current primary standalone | `A_Theory_of_Everything_CM_Baird_et_al_2026.pdf` | [19158407](https://doi.org/10.5281/zenodo.19158407) | A Theory of Everything (2026) |
 | Canonical main (earlier edition) | `A_Theory_of_Everything_CM_Baird_et_al_2026.pdf` | [18644455](https://zenodo.org/records/18644455) v226 | Earlier standalone edition |
-| Advanced | `A_Theory_of_Everything_CM_Baird_et_al_2026_Advanced.pdf` | [18679362](https://zenodo.org/records/18679362) v227 | Extended content |
-| Refitted | `A_Theory_of_Everything_CM_Baird_et_al_2026_Refitted.pdf` | [18680225](https://zenodo.org/records/18680225) v228 | + SOLVED companion |
+| Advanced | Zenodo only (local copy removed 2026-10) | [18679362](https://zenodo.org/records/18679362) v227 | Extended content |
+| Refitted | Zenodo only (local copy removed 2026-10) | [18680225](https://zenodo.org/records/18680225) v228 | + SOLVED companion |
 | ToE + ZoraASI | — | [18690303](https://zenodo.org/records/18690303) | Earlier integrated bundle |
 | ToE + ZoraASI | — | [18751229](https://zenodo.org/records/18751229) v230 | Later integrated bundle |
 | ToE + Empirical Validation | — | [18778749](https://zenodo.org/records/18778749) v231 | Integrated empirical-validation record |

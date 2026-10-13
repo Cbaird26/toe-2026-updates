@@ -5,11 +5,11 @@
 **We do not change methods for an experiment we already ran.** The March 2026 QRNG runs used specific scripts and a specific protocol. Replication and any further ladder runs must use the **same** process.
 
 - **Canonical method:** [QRNG_METHOD_MARCH_2026_DO_NOT_CHANGE.md](../docs/QRNG_METHOD_MARCH_2026_DO_NOT_CHANGE.md) — protocol, script names, artifact schema, and recovery from Codex logs.
-- **Scripts that were used:** `anu_qrng_collect.py`, `anu_qrng_experiment.py`, `qrng_test_suite.py`, `qrng_compare_runs.py`. They are not yet in this repo; recover from Codex logs or your machine, then commit and document the path in the method doc.
+- **Scripts that were used:** `anu_qrng_collect.py`, `anu_qrng_experiment.py`, `qrng_test_suite.py`, `qrng_compare_runs.py`. Committed byte-for-byte at `scripts/qrng_march_2026/` (2026-10-13).
 
 ## Run the pilot and ladder (same method as March 2026)
 
-1. **Recover the scripts** that produced the March 2026 result (see method doc; use Codex logs to find path and commands).
+1. **Use the committed scripts** in `scripts/qrng_march_2026/` (the exact March 2026 files).
 2. **Pilot (10k):** Run with the **same** collector: e.g. `anu_qrng_collect.py --pilot` (exact command from your logs).
 3. **Ladder:** Same scripts, same block design (20 × 100k, control vs intervention, seeds), with `--bits` 1000000, 10000000, etc. as per [PHASE_I_QRNG_TRACE_MAP_2026.md](../docs/PHASE_I_QRNG_TRACE_MAP_2026.md).
 

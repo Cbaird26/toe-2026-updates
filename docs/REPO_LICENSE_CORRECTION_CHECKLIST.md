@@ -2,7 +2,7 @@
 
 **Purpose:** Align all repositories containing Licensed IP with the ToE IP License Agreement (pp. 1311–1314). Apply in priority order.
 
-**Reference:** [IP_AND_LICENSING_FULL_STATEMENT.md](IP_AND_LICENSING_FULL_STATEMENT.md)
+**Reference:** IP_AND_LICENSING_FULL_STATEMENT.md (private continuity repo)
 
 ---
 

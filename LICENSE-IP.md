@@ -25,7 +25,7 @@ The **Licensed IP** — including the Unified Complete Theory of Everything (ToE
 
 ## Summary and Full Statement
 
-See [docs/TOE_IP_LICENSING_SUMMARY.md](docs/TOE_IP_LICENSING_SUMMARY.md) and [docs/IP_AND_LICENSING_FULL_STATEMENT.md](docs/IP_AND_LICENSING_FULL_STATEMENT.md). Chain of title: [docs/CHAIN_OF_TITLE.md](docs/CHAIN_OF_TITLE.md).
+See [docs/TOE_IP_LICENSING_SUMMARY.md](docs/TOE_IP_LICENSING_SUMMARY.md) and IP_AND_LICENSING_FULL_STATEMENT.md (private continuity repo). Chain of title: [docs/CHAIN_OF_TITLE.md](docs/CHAIN_OF_TITLE.md).
 
 ## Licensor
 

@@ -12,7 +12,7 @@ This file is a **compact map of the repo**—where to start, where papers and bu
 | Safety and logging rules | [SAFETY_CONSTITUTION.md](../SAFETY_CONSTITUTION.md) |
 | Alignment one-pager | [ALIGN_ALL.md](ALIGN_ALL.md) |
 | Codex / CI / H1 tests | [CODEX_HANDOFF.md](CODEX_HANDOFF.md) |
-| March 2026 Finance OS / repo-boundary handoffs | [handoffs/2026-03/README.md](handoffs/2026-03/README.md) |
+| March 2026 Finance OS / repo-boundary handoffs | private continuity repository (`zora-private-continuity`) |
 | `~/Downloads/` bundle discipline (canonical vs archives) | [DOWNLOADS_CANONICAL_LAYOUT.md](DOWNLOADS_CANONICAL_LAYOUT.md) |
 | GitHub visibility audit (manual table; no API automation) | [GITHUB_REPO_VISIBILITY_AUDIT_2026.md](GITHUB_REPO_VISIBILITY_AUDIT_2026.md) |
 

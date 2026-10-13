@@ -144,3 +144,9 @@ This section is the "jog memory" record: TOE_Corpus_2026 (Desktop) is where the 
 ---
 
 *This document is part of the Phase I close-out. Replication and ladder runs use the method described here — no substitutions.*
+
+---
+
+## 11. Canonical copies committed (2026-10-13)
+
+The four scripts in §3 are now committed byte-for-byte at **`scripts/qrng_march_2026/`** in this repository (copied from `TOE_Corpus_2026` @ `21fc9a7`). The §6 "process failure" is closed: replication no longer depends on a Desktop folder or on recovering commands from session logs. Keys still live only in local `artifacts/.anu_api_key*` files.

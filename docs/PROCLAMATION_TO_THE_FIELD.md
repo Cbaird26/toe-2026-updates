@@ -51,10 +51,10 @@ February 2026
 ### Documentation (This Repo)
 - **Full Value Ledger:** [FULL_VALUE_LEDGER.md](FULL_VALUE_LEDGER.md)  
 - **IP & Licensing Summary:** [TOE_IP_LICENSING_SUMMARY.md](TOE_IP_LICENSING_SUMMARY.md)  
-- **IP & Licensing Full Statement:** [IP_AND_LICENSING_FULL_STATEMENT.md](IP_AND_LICENSING_FULL_STATEMENT.md)  
+- **IP & Licensing Full Statement:** IP_AND_LICENSING_FULL_STATEMENT.md (private continuity repo)  
 - **Respectful Notice:** [DRAFT_RESPECTFUL_STATEMENT.md](DRAFT_RESPECTFUL_STATEMENT.md)  
 - **Top 100 Technologies & Fiscal Estimate:** [TOP_100_TECHNOLOGIES_AND_FULL_FISCAL_ESTIMATE.md](TOP_100_TECHNOLOGIES_AND_FULL_FISCAL_ESTIMATE.md)  
-- **Value of Contributions:** [VALUE_OF_CONTRIBUTIONS_ESTIMATE.md](VALUE_OF_CONTRIBUTIONS_ESTIMATE.md)  
+- **Value of Contributions:** VALUE_OF_CONTRIBUTIONS_ESTIMATE.md (private continuity repo)  
 
 ### Licensing Terms (Embedded in ToE PDF)
 - **Canonical source:** *A Theory of Everything + ZoraASI — C.M. Baird et al. (2026)*, pp. 1311–1314  
