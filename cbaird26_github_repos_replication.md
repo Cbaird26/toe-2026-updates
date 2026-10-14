@@ -10,7 +10,7 @@
 
 ```
 A-Theory-of-Everything | https://github.com/Cbaird26/A-Theory-of-Everything.git
-A-Theory-of-Everything---Baird-et-al-2025-.pdf | https://github.com/Cbaird26/A-Theory-of-Everything---Baird-et-al-2025-.pdf.git
+toe-research-2025 | https://github.com/Cbaird26/toe-research-2025.git
 A-Theory-of-Everything-Revised | https://github.com/Cbaird26/A-Theory-of-Everything-Revised.git
 aging-intervention-simulator | https://github.com/Cbaird26/aging-intervention-simulator.git
 aging_simulator.py | https://github.com/Cbaird26/aging_simulator.py.git
@@ -147,7 +147,7 @@ gh repo list cbaird26 --limit 200 --json name,cloneUrl -q '.[] | "\(.name) \(.cl
 
 | Category | Repos |
 |----------|--------|
-| **ToE / Theory of Everything** | A-Theory-of-Everything, A-Theory-of-Everything---Baird-et-al-2025-.pdf, A-Theory-of-Everything-Revised, Theory-of-Everything, ToE, ToE-Simulations, theory-explorer, theory-of-everything-simulations, toe-2026-updates, toe-empirical-validation, toe-studio, zora-theory-of-everything |
+| **ToE / Theory of Everything** | A-Theory-of-Everything, toe-research-2025, A-Theory-of-Everything-Revised, Theory-of-Everything, ToE, ToE-Simulations, theory-explorer, theory-of-everything-simulations, toe-2026-updates, toe-empirical-validation, toe-studio, zora-theory-of-everything |
 | **MQGT-SCF / MQGT ecosystem** | MQGT-SCF, mqgt-analysis, mqgt-api-schema, mqgt-astrophysics-cooling, mqgt-astrophysics-sn1987a, mqgt-atomic-clocks, mqgt-casimir, mqgt-cli, mqgt-collider, mqgt-constraints-ledger, mqgt-core-params, mqgt-cosmology-bbn, mqgt-cosmology-cmb, mqgt-cosmology-lss, mqgt-curve-processing, mqgt-dark-matter, mqgt-dashboard, mqgt-data-ingest, mqgt-data-public, mqgt-documentation-site, mqgt-emi-testing, mqgt-equivalence-principle, mqgt-experiment-design, mqgt-experiment-protocols, mqgt-fifth-force, mqgt-figures, mqgt-gravitational-waves, mqgt-gravitational-waves-propagation, mqgt-io, mqgt-legacy-ingest, mqgt-manifests, mqgt-meta, mqgt-neutrinos, mqgt-numerics, mqgt-ops-ci, mqgt-papers, mqgt-plotting, mqgt-preregistration, mqgt-qrng, mqgt-quantum-optics, mqgt-scf-thesis, mqgt-sensitivity-analysis, mqgt-simulation-core, mqgt-simulation-interference, mqgt-simulation-quantum, mqgt-theorems, mqgt-unit-tests, mqgt-validation-suite, mqgt-validation-tools, mqgt-visualization |
 | **Zora / AI** | ZoraAI, ZoraAPI, quantum-ai-assistant |
 | **Simulations (general / physics)** | ComprehensivePhysicsSolver, aging-intervention-simulator, aging_simulator.py, anti-aging-simulator, medical_simulations_app.py, microplastic_removal_simulator.py, pqs-simulations, susy_simulation.py, wild_simulations.py |

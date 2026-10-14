@@ -55,7 +55,7 @@
 | quantum-ai-assistant | 3-other | other | Support | — | — |  |
 | quantum-supercomputer | 3-other | other | Support | — | — |  |
 | Universe-Explorer | 3-other | other | Support | — | — |  |
-| A-Theory-of-Everything---Baird-et-al-2025-.pdf | 4-archive | archive | Archive candidate | — | — | ✓ |
+| toe-research-2025 | 4-archive | archive | Archive candidate | — | — | ✓ |
 | app.py | 4-archive | archive | Archive candidate | — | — | ✓ |
 | baird-telehealth-site | 4-archive | archive | Archive candidate | — | — | ✓ |
 | bairds_law_app.py | 4-archive | archive | Archive candidate | — | — | ✓ |

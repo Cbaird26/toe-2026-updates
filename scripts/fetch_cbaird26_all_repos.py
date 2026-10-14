@@ -22,7 +22,7 @@ MD_PATH = os.path.join(TOE_ROOT, "cbaird26_github_repos_replication.md")
 CATEGORIES = {
     "ToE / Theory of Everything": {
         "A-Theory-of-Everything", "A-Theory-of-Everything-Revised",
-        "A-Theory-of-Everything---Baird-et-al-2025-.pdf", "Theory-of-Everything",
+        "toe-research-2025", "Theory-of-Everything",
         "ToE", "toe-2026-updates", "toe-empirical-validation", "ToE-Simulations",
         "toe-studio", "theory-explorer", "theory-of-everything-simulations",
         "zora-theory-of-everything",

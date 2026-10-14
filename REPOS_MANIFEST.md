@@ -21,7 +21,7 @@
 | A-Theory-of-Everything | ZoraASI/ToE canonical source |
 | mqgt-analysis | MQGT-SCF analysis |
 | mqgt-api-schema | MQGT API schema |
-| A-Theory-of-Everything---Baird-et-al-2025-.pdf | 2025 PDF repo |
+| toe-research-2025 | 2025 PDF repo |
 
 Clone into: `Downloads/repos/` or `Downloads/github_cbaird26/` (see workspace).
 

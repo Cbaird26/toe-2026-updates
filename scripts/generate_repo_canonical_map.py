@@ -87,7 +87,7 @@ ARCHIVE_CANDIDATES = {
     "darkstar",
     "Dissertation_Data",
     "Hope",
-    "A-Theory-of-Everything---Baird-et-al-2025-.pdf",
+    "toe-research-2025",
     "mqgt-astrophysics-cooling",
     "mqgt-astrophysics-sn1987a",
     "mqgt-atomic-clocks",
