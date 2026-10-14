@@ -54,8 +54,8 @@
 
 ## Git history pointers (approximate)
 
-- Foundation app added under `docs/theory-of-everything-foundation/` (e.g. commit `9d291e8` range — verify with `git log -- docs/theory-of-everything-foundation/`).
-- Hub + `PAGES.md` + README/SYSTEM_INDEX updates (e.g. `6f94461`).
+- Foundation app added under `docs/theory-of-everything-foundation/` (e.g. commit `ba4ab25` range — verify with `git log -- docs/theory-of-everything-foundation/`).
+- Hub + `PAGES.md` + README/SYSTEM_INDEX updates (e.g. `69354da`).
 - Pages deploy workflow + expanded `PAGES.md` — user may have merged as “ci: deploy docs/ to GitHub Pages via Actions…” (verify with `git log -- .github/workflows/deploy-github-pages.yml`).
 
 ---

@@ -11,4 +11,4 @@ Stable, citable release of the TOE replication documentation.
 
 **Pinned spine:** toe-empirical-validation at **spine-v0.1** (56578d50f81071b21d4278b4bba4ceefe238b575).
 
-**Commit:** 67730e2
+**Commit:** dc00fd9

@@ -6,8 +6,8 @@
 
 ## QRNG closure in git (main)
 
-- **Close-out:** `c5e6886` — Close Phase II QRNG 100k swarm pilot: non-replication of Pilot 2 signal; protocol closed with no scaling.
-- **Follow-up:** `4c4d866` — Add QRNG swarm protocol audit and lessons learned notes.
+- **Close-out:** `d21e820` — Close Phase II QRNG 100k swarm pilot: non-replication of Pilot 2 signal; protocol closed with no scaling.
+- **Follow-up:** `818f88b` — Add QRNG swarm protocol audit and lessons learned notes.
 
 Cite these when linking corpus or reports to the archived closure.
 

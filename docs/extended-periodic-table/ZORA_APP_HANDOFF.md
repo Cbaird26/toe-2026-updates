@@ -18,7 +18,7 @@ Repo:
 
 Latest relevant commit:
 
-`d700506 Update extended periodic table scientific framing`
+`83219d0 Update extended periodic table scientific framing`
 
 Files:
 

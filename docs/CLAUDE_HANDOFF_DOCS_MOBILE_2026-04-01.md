@@ -1,7 +1,7 @@
 # Claude handoff — docs hub, zoraasi mobile, Foundation mobile shell (April 2026)
 
 **Audience:** Next Claude (or any executor) continuing work in **`cbaird26/toe-2026-updates`** / local **`TOE/`** mirror.  
-**Freeze tag (annotated):** `mobile-shell-2026-04-01` → commit **`5363bad`** (“style(docs): align hub with portal reference…”).  
+**Freeze tag (annotated):** `mobile-shell-2026-04-01` → commit **`7bc489a`** (“style(docs): align hub with portal reference…”).  
 **Note:** Tag `^{}` resolves to that commit; `git rev-parse mobile-shell-2026-04-01` prints the **tag object** hash, not the commit.
 
 ---
@@ -101,7 +101,7 @@ git push origin mobile-shell-2026-04-01
 | Zoraasi mobile layout wrong after upstream change | Re-run **`./scripts/build_zoraasi_mobile.sh`**; diff **`scripts/zoraasi-mobile.css`** against minified bundle if hashes changed. |
 | New horizontal overflow on zoraasi | Inspect **inline `grid-template-columns`** in built JS — may need another **`[style*="…"]`** rule if the author changes the column definition. |
 | Foundation tabs vs body offset on iPhone | Re-verify **`.main` / `.footer` / `.tabs` / `.header`** padding use **correct** `safe-area-inset-left` / `right`. |
-| Docs hub looks wrong | Compare to freeze at **`5363bad`**; reference HTMLs were under user **`Downloads/index*.html`**. |
+| Docs hub looks wrong | Compare to freeze at **`7bc489a`**; reference HTMLs were under user **`Downloads/index*.html`**. |
 
 ---
 

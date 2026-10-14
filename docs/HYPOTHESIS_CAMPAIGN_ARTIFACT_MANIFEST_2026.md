@@ -2,7 +2,7 @@
 
 ## Pinned commits (dry-run baseline)
 
-- `TOE`: `69f952d07e9cddca4fb898e46bb1a0f0336d32b1`
+- `TOE`: `0a747e6449b79c8d1d2dfdc9c6b03894dd8b3ef1`
 - `toe-empirical-validation`: `163418b9ff5410825133cffd75a5e0d37fbc1ce4`
 
 ## Frozen external contract

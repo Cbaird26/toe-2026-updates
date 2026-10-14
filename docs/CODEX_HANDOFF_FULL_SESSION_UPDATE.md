@@ -10,8 +10,8 @@
 ### Last sync (cooperative-games artifact)
 
 - **Pushed:** YES
-- **Commit:** `993df8f`
-- **Range:** `954ce1d..993df8f`
+- **Commit:** `b8ba833`
+- **Range:** `b4675f4..b8ba833`
 - **Remote:** [cbaird26/toe-2026-updates](https://github.com/Cbaird26/toe-2026-updates)
 - **Branch:** main...origin/main (clean)
 - **Scope:** `zora_cooperative_games_sim.py`, `ZORA_COOPERATIVE_GAMES_SIMULATION_2026.md`, `zora_cooperative_games_results.json`, `zora_cooperative_games_summary.png`

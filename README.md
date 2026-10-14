@@ -96,7 +96,7 @@ Set `OPENAI_API_KEY` in your environment before running. For local Ollama usage,
 ## Cite (replication docs)
 
 - **Tag:** `toe-docs-v0.1` (pinned to spine) or `toe-docs-v0.1.1` (metadata + CITATION.cff)
-- **Commit:** `67730e2` (v0.1) / `7acc536edb45a2f18499dc4f861302164bb2581e` (v0.1.1)
+- **Commit:** `dc00fd9` (v0.1) / `a8bff44deb7af6e612fe895ebebf5199c396c8d5` (v0.1.1)
 - **DOI:** (to be minted via Zenodo on release; add here once available)
 
 ## Licensing

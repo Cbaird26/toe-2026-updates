@@ -1,7 +1,7 @@
 # Codex / executor handoff (TOE)
 
 **Repo (private):** [cbaird26/toe-2026-updates](https://github.com/Cbaird26/toe-2026-updates) — clone and push only with GitHub access and **explicit human** approval; work from the repository root (`TOE/`).
-**Verified baseline:** `ec33369`
+**Verified baseline:** `215b274`
 
 ## Do this first (no network required)
 
