@@ -68,6 +68,19 @@ Three independent runs of a block-randomized QRNG meditation intervention experi
 
 The exact process and scripts used for this experiment are documented in [QRNG_METHOD_MARCH_2026_DO_NOT_CHANGE.md](QRNG_METHOD_MARCH_2026_DO_NOT_CHANGE.md). Replication and any further ladder runs must use the same method.
 
+## Known discrepancy with the GATE-03 re-analysis (note added 2026-10-13)
+
+The same three formal runs of 14 March 2026 were re-scored on 3 July 2026 by the fail-closed block analyzer in [mqgt-gate03-external-reproduction](https://github.com/Cbaird26/mqgt-gate03-external-reproduction) (`results/recovered_icloud_formal_meditation_report.md`, inputs pinned by SHA-256). Runs 1 and 2 agree with the table above to the quoted precision; **run 3 and the pooled result do not**:
+
+| Quantity | This report (March 2026) | GATE-03 re-analysis (July 2026) |
+|---|---|---|
+| Run 3 difference (I − C) | −0.00064 | +0.000447 |
+| Run 3 permutation p | 0.28 | 0.522 |
+| Pooled difference (I − C) | +0.00033 | +0.000693 |
+| Pooled permutation p | 0.41 | 0.091 (α = 0.01, `not_promotable`) |
+
+Both analyses reach the same conclusion — no significant difference between intervention and control — but the run-3 sign and the pooled numbers differ, so one of the two scorings of run 3 is wrong or they used different block files. Until the raw `qrng_experiment_20260314_010459_ccb8f429` blocks are re-scored and the cause recorded here, treat the run-3 and pooled values as **unresolved** and cite the GATE-03 report (hash-pinned inputs) as the auditable version. Status: open.
+
 ## Related
 
 - [REPLICATION_LADDER.md](REPLICATION_LADDER.md) — QRNG pre-registration template
