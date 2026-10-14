@@ -58,7 +58,7 @@ Auditable claims vs. evidence. Each claim is tagged with status and evidence ref
 
 | ID | Claim | Status | Evidence |
 |----|-------|--------|----------|
-| CL-030 | Meditation causes large (>0.1%) QRNG bias | retired | March 2026 experiment: p=0.41 |
+| CL-030 | Meditation causes large (>0.1%) QRNG bias | retired | March 2026 experiment: pooled I − C = +0.0007, p = 0.09 (corrected 14 Oct 2026 from p = 0.41; see report erratum) |
 | CL-031 | Strong consciousness–collapse coupling at 10⁻³ | constrained | QRNG null result |
 
 ---

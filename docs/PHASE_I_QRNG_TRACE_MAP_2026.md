@@ -83,13 +83,13 @@ Record: **recommendation → source → implementation → status**. Keeps close
 
 ## 5. Phase I scientific interpretation and close-out statement
 
-**Interpretation (keep simple):** Given 6M bits, 3 independent runs, pooled p = 0.41:
+**Interpretation (keep simple):** Given 6M bits, 3 independent runs, pooled p = 0.09 (corrected 14 Oct 2026 from 0.41 — see the erratum in [QRNG_MEDITATION_INTERVENTION_REPORT_MARCH_2026.md](QRNG_MEDITATION_INTERVENTION_REPORT_MARCH_2026.md)):
 
 *No detectable intervention effect was observed within the sensitivity limits of the experiment.*
 
 **Close-out statement (for Phase I report and Zenodo/corpus):**
 
-*Phase I QRNG experiments (March 2026) collected 6 million bits across three independent intervention sessions using a block-randomized design. Control and intervention blocks showed no statistically significant difference (pooled permutation p = 0.41). Observed differences were consistent with binomial variation. The pipeline, statistical test suite, and replication protocol were validated. Phase I therefore concludes that no detectable effect was observed at the current sensitivity level.*
+*Phase I QRNG experiments (March 2026) collected 6 million bits across three independent intervention sessions using a block-randomized design. Control and intervention blocks showed no statistically significant difference (pooled permutation p = 0.09; corrected 14 Oct 2026 from the 0.41 first reported, see the erratum in QRNG_MEDITATION_INTERVENTION_REPORT_MARCH_2026.md). Observed differences were consistent with binomial variation. The pipeline, statistical test suite, and replication protocol were validated. Phase I therefore concludes that no detectable effect was observed at the current sensitivity level.*
 
 ---
 

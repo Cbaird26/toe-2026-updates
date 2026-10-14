@@ -26,7 +26,7 @@ Cite these when linking corpus or reports to the archived closure.
 
 ## Current state
 
-- **Phase I:** Closed. Single intervention vs control → no detectable effect (6M bits, 3 runs; pooled p = 0.41). Method locked in [QRNG_METHOD_MARCH_2026_DO_NOT_CHANGE.md](QRNG_METHOD_MARCH_2026_DO_NOT_CHANGE.md).
+- **Phase I:** Closed. Single intervention vs control → no detectable effect (6M bits, 3 runs; pooled p = 0.09 — corrected 14 Oct 2026 from 0.41, see the report erratum). Method locked in [QRNG_METHOD_MARCH_2026_DO_NOT_CHANGE.md](QRNG_METHOD_MARCH_2026_DO_NOT_CHANGE.md).
 - **Baseline 100k:** Already run from TOE; wrote `artifacts/anu_qrng_baseline_*_summary.json` and `*_bits.csv`. p1 ≈ 0.4987, z ≈ -0.83 (null-like).
 - **Runner:** [run_qrng_experiments.sh](TOE/scripts/run_qrng_experiments.sh) runs from TOE by default, uses `--preflight --no-fallback`. Targets: `baseline | 1M | 5M | 10M | remaining | ladder`.
 - **Remaining ladder (Stage A):** 1M, 5M, 10M — not yet run. After 10M, Stage B = pause and evaluate; Stage C = branch to 50M/100M or Phase II swarm at 100k first. See [QRNG_STAGED_PROGRAM_AND_BUDGET_2026.md](QRNG_STAGED_PROGRAM_AND_BUDGET_2026.md).

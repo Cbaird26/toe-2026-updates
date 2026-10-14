@@ -26,17 +26,19 @@ Three independent runs of a block-randomized QRNG meditation intervention experi
 |-----|-------------------|------------------------|--------------------|---------------|
 | 1 (seed 42)  | 0.4997 | 0.5006 | +0.00094 | 0.17 |
 | 2 (seed 123) | 0.4996 | 0.5003 | +0.00069 | 0.37 |
-| 3 (seed 456) | 0.5004 | 0.4997 | −0.00064 | 0.28 |
-| **Pooled (60 blocks)** | 0.4997 | 0.5000 | **+0.00033** | **0.41** |
+| 3 (seed 456) † | 0.4993 | 0.4997 | +0.00045 | 0.52 |
+| **Pooled (60 blocks)** † | 0.4995 | 0.5002 | **+0.00069** | **0.09** |
+
+† Corrected 14 October 2026 — see the Erratum at the end of this report. The values first published here for run 3 (0.5004 / 0.4997 / −0.00064 / 0.28) and for the pool (+0.00033 / 0.41) did not match the raw run files.
 
 ---
 
 ## Interpretation
 
-- **Pooled difference:** Δ ≈ 3.3×10⁻⁴
-- **Permutation p:** 0.41
+- **Pooled difference:** Δ ≈ 6.9×10⁻⁴ (corrected; see Erratum)
+- **Permutation p:** 0.09 (10,000 permutations; not significant at α = 0.05, and far from the α = 0.01 promotion threshold used in GATE-03)
 - **Conclusion:** Data are consistent with the null hypothesis. No statistically significant difference between control and intervention blocks.
-- **Run 3 sign flip:** Intervention < control in run 3; expected under randomness when no real effect exists.
+- **Per-run pattern:** intervention was slightly above control in all three runs (+0.0009, +0.0007, +0.0004); none is individually significant, and a 7×10⁻⁴ pooled shift is well inside the ~3×10⁻⁴ per-block binomial noise of this design.
 
 ---
 
@@ -68,18 +70,13 @@ Three independent runs of a block-randomized QRNG meditation intervention experi
 
 The exact process and scripts used for this experiment are documented in [QRNG_METHOD_MARCH_2026_DO_NOT_CHANGE.md](QRNG_METHOD_MARCH_2026_DO_NOT_CHANGE.md). Replication and any further ladder runs must use the same method.
 
-## Known discrepancy with the GATE-03 re-analysis (note added 2026-10-13)
+## Erratum (14 October 2026): run-3 row and pooled values corrected
 
-The same three formal runs of 14 March 2026 were re-scored on 3 July 2026 by the fail-closed block analyzer in [mqgt-gate03-external-reproduction](https://github.com/Cbaird26/mqgt-gate03-external-reproduction) (`results/recovered_icloud_formal_meditation_report.md`, inputs pinned by SHA-256). Runs 1 and 2 agree with the table above to the quoted precision; **run 3 and the pooled result do not**:
+The run-3 row and the pooled row of the results table were wrong in the version of this report published in March 2026. They read: run 3 — control 0.5004, intervention 0.4997, I − C = −0.00064, p = 0.28; pooled — +0.00033, p = 0.41. Runs 1 and 2 were correct.
 
-| Quantity | This report (March 2026) | GATE-03 re-analysis (July 2026) |
-|---|---|---|
-| Run 3 difference (I − C) | −0.00064 | +0.000447 |
-| Run 3 permutation p | 0.28 | 0.522 |
-| Pooled difference (I − C) | +0.00033 | +0.000693 |
-| Pooled permutation p | 0.41 | 0.091 (α = 0.01, `not_promotable`) |
+**Evidence.** The raw block file for run 3, `qrng_experiment_20260314_010459_ccb8f429_blocks.json` (SHA-256 `2e985fee7ae2a605cabfc57a9ae2c9b6034537c0df2267bacc9c01cdfb1a8729`), carries the analysis written by `anu_qrng_experiment.py --analyze-blocks` the same night (`analyzed_at` 2026-03-14T05:15:32Z): control mean 0.499293, intervention mean 0.499740, difference +0.000447, permutation p 0.522 over 10 control and 10 intervention blocks. Recomputing the means from the 20 per-block values gives the same numbers. No artifact from the 13–14 March sessions contains a control mean of 0.5004 or a difference of −0.00064; the published row has no source in the data and is treated as a transcription error. With the correct run 3, the 60-block pool gives I − C = +0.000693 and permutation p = 0.091 (GATE-03 analyzer, 10,000 permutations, deterministic seed), reproducing the July 2026 re-analysis in [mqgt-gate03-external-reproduction](https://github.com/Cbaird26/mqgt-gate03-external-reproduction) exactly. The three raw run files are now published there under `data/formal_runs_2026-03-14/` with their hashes.
 
-Both analyses reach the same conclusion — no significant difference between intervention and control — but the run-3 sign and the pooled numbers differ, so one of the two scorings of run 3 is wrong or they used different block files. Until the raw `qrng_experiment_20260314_010459_ccb8f429` blocks are re-scored and the cause recorded here, treat the run-3 and pooled values as **unresolved** and cite the GATE-03 report (hash-pinned inputs) as the auditable version. Status: open.
+**What changes and what does not.** The conclusion is unchanged: no significant difference between intervention and control. The pooled p moves from 0.41 to 0.09, so the null result is less emphatic than first stated, and the "run-3 sign flip" remark above was an artefact of the wrong row — all three runs in fact have intervention marginally above control. Documents that quoted the pooled p = 0.41 (`PHASE_I_RESULTS_SUMMARY_2026.md`, `PHASE_I_QRNG_TRACE_MAP_2026.md`, `CODEX_HANDOFF_QRNG.md`, `CLAIM_LEDGER_2026.md`) were updated on the same date with a correction marker. Status: resolved.
 
 ## Related
 

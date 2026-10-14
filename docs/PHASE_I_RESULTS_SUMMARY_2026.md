@@ -18,13 +18,13 @@ Phase I tested whether meditation (or focused ethical intention) during QRNG col
 
 ## Result
 
-Control and intervention blocks showed **no statistically significant difference** (pooled permutation p = 0.41). Observed differences were consistent with binomial variation. Run 3 showed a sign flip (intervention slightly below control), as expected under the null when no real effect exists.
+Control and intervention blocks showed **no statistically significant difference** (pooled permutation p = 0.09; corrected 14 Oct 2026 from the 0.41 first reported — see the erratum in QRNG_MEDITATION_INTERVENTION_REPORT_MARCH_2026.md). Observed differences were consistent with binomial variation. Intervention was marginally above control in all three runs, as expected under the null when no real effect exists.
 
 ---
 
 ## Phase I close-out statement
 
-*Phase I QRNG experiments (March 2026) collected 6 million bits across three independent intervention sessions using a block-randomized design. Control and intervention blocks showed no statistically significant difference (pooled permutation p = 0.41). Observed differences were consistent with binomial variation. The pipeline, statistical test suite, and replication protocol were validated. Phase I therefore concludes that no detectable effect was observed at the current sensitivity level.*
+*Phase I QRNG experiments (March 2026) collected 6 million bits across three independent intervention sessions using a block-randomized design. Control and intervention blocks showed no statistically significant difference (pooled permutation p = 0.09; corrected 14 Oct 2026 from the 0.41 first reported, see the erratum in QRNG_MEDITATION_INTERVENTION_REPORT_MARCH_2026.md). Observed differences were consistent with binomial variation. The pipeline, statistical test suite, and replication protocol were validated. Phase I therefore concludes that no detectable effect was observed at the current sensitivity level.*
 
 **Interpretation:** No detectable intervention effect was observed within the sensitivity limits of the experiment.
 
